@@ -1,0 +1,7 @@
+.post-content .highlight span {
+    background: #f0f0f8 !important;
+}
+
+.post-content .highlight pre code {
+    background: #f0f0f8 !important;
+}

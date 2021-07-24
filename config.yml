@@ -1,0 +1,62 @@
+baseURL: http://example.org/
+publishDir: docs
+languageCode: en
+title: "yamate11のブログ"
+theme: "PaperMod"
+
+params:
+
+    title: "yamate11のブログ"
+    math: true
+    DateFormat: "2006-01-02"
+
+    fuseOpts:
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 10000000
+        threshold: 0.2
+#        ignoreLocation: true
+#        ignoreFieldNorm: true
+        minMatchCharLength: 0
+        keys: ["title", "permalink", "summary", "content"]
+
+    assets:
+        disableHLJS: true
+
+markup:
+    highlight:
+        codeFences: true
+        guesssyntax: true
+        # lineNos: true
+        style: monokailight
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON    # necessary for search
+
+menu:
+    main:
+        - identifier: archives
+          name: アーカイブ
+          url: /archives/
+          weight: 10
+        - identifier: search
+          name: 検索
+          url: /search/
+          weight: 20
+        - identifier: categories
+          name: categories
+          url: /categories/
+          weight: 30
+        - identifier: tags
+          name: tags
+          url: /tags/
+          weight: 40
+
+taxonomies:
+    category: categories
+    tag: tags
+    series: series
