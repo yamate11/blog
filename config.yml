@@ -1,4 +1,4 @@
-baseURL: http://example.org/
+baseURL: https://yamate11.github.io/blog/
 publishDir: docs
 languageCode: en
 title: "yamate11のブログ"
