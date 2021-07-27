@@ -3,6 +3,7 @@ publishDir: docs
 languageCode: en
 title: "yamate11のブログ"
 theme: "PaperMod"
+paginate: 5
 
 params:
 
@@ -30,7 +31,10 @@ markup:
         guesssyntax: true
         # lineNos: true
         style: monokailight
-
+    goldmark:
+        renderer:
+            unsafe: true
+    
 outputs:
     home:
         - HTML
@@ -60,3 +64,4 @@ taxonomies:
     category: categories
     tag: tags
     series: series
+

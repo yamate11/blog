@@ -5,3 +5,11 @@
 .post-content .highlight pre code {
     background: #f0f0f8 !important;
 }
+
+.post-content pre code {
+    color: #000000;
+}
+
+.post-content code {
+    font-size: .85em;
+}

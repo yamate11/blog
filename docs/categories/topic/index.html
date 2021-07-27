@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://yamate11.github.io/blog/categories/topic/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.bbeeed5e45c966b7febd227e700b69f15d1499830bfcb074b471327a844f2894.css" integrity="sha256-u&#43;7tXkXJZrf&#43;vSJ&#43;cAtp8V0UmYML/LB0tHEyeoRPKJQ=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -165,29 +165,73 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Lagrange補間</h2>
+    <h2>キーエンスプログラミングコンテスト2021 E - Greedy Ant</h2>
   </header>
   <section class="entry-content">
-    <p>Lagrange補間に関する記事です．
-要約 $$ f(x) = \sum_{i = 0}^{k}\frac{ f(i) }{ (-1)^{k - i} \; i ! \; (k - i) ! } \cdot \frac{ 1 }{ x - i } \cdot \prod_{j=0}^{k} ( x - j ) $$
-詳細 \( k \) 次多項式 $f(x)$ について，$x = 0, \ldots, k$ の値が，$f(0) = v_0, \ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\( \Omega( k^3 ) \) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．
-$I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．...</p>
+    <p>キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
+問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
+すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
+初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．...</p>
   </section>
-  <footer class="entry-footer">2021-04-22&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Lagrange補間" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/"></a>
+  <footer class="entry-footer">2021-07-22&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to キーエンスプログラミングコンテスト2021 E - Greedy Ant" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>乱数の作り方</h2>
+    <h2>桁DPのコーディング</h2>
   </header>
   <section class="entry-content">
-    <p>C&#43;&#43; での乱数の使い方のメモです．
-典型的なコード ll n; cin &gt;&gt; n; random_device rand_dev; mt19937 rng(rand_dev()); uniform_int_distribution&lt;ll&gt; dist(1, n); for (ll i = 0; i &lt; 10; i&#43;&#43;) cout &lt;&lt; dist(rng) &lt;&lt; &#34; &#34;; cout &lt;&lt; endl; クラス random_device  マニュアル オブジェクトは乱数発生器．non-deterministic な乱数を生成する． operator() を実行すると，unsigned int の乱数が返り，状態が進む． 実行は高価である可能性がある．  クラス mt19937  マニュアル 32bitメルセンヌツィッター乱数発生器 64bitメルセンヌツィッター乱数発生器 の mt19937_64 というクラスもある． o.operator() を実行すると，uint_fast32_t の乱数が返り，状態が進む． コンストラクタに seed を渡す． デフォルトコンストラクタは引数をとらず，seed = 5489u を用いる．したがって，次のように書けば，どの実行でも同じ値が生成される．  mt19937 rng; クラス uniform_int_distribution  マニュアル 乱数分布を一様分布とする．constructor に a, b を指定すると，a以上b以下の一様分布． T は int や ll など．デフォルトは int． operator() は，引数に乱数発生器を取り，一様分布を生成する． 他の乱数分布クラスとコンストラクタの例:  uniform_real_distribution&lt;double&gt; dist1(a, b); normal_distribution&lt;double&gt; dist2(mean, stddev); </p>
+    <p>桁DPのコーディングに関する記事です． N 以下の整数である条件を満たすものを数えます．
+参照 以下のoptさんの記事 をもとにして，少し追加しています:
+コーディングの方針  配るDP 上位桁を 0-padding した状態で考える  有効な桁が始まっているかどうかが必要なこともあるが，その場合にはそれを表すフラグを導入する． 0以上N以下を数えることになるので，必要なら最後に調整．   代入は1回  その桁に表れうる数 (0..9 とか 0..1 とか) をループで回し，「この数を付け加えた時の格納先」を考える 格納先の添字を表す変数を，格納元で初期化して適宜変更する．    // N は各桁数値のベクトルで表現．ds[0] が最上位桁． // もちろん，問題文の都合で string でも良い． // 本来は ds[0] を一の位にして， // ループを ds.size() - 1 から 0 まで回した方が自然かもしれない vector&lt;ll&gt;&amp; ds; // DP表は，最初の次元を上限に等しいかどうかのフラグにする． // 0 ... 上限値． 1 ... 上限値より小さいと確定 auto tbl_init = vector(2, vector(??, vector(??, 0LL))); auto tbl = tbl_init; tbl[0][?...</p>
   </section>
-  <footer class="entry-footer">2021-01-13&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 乱数の作り方" href="https://yamate11.github.io/blog/posts/2021/01-13-random/"></a>
+  <footer class="entry-footer">2021-07-06&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>距離: BFSとダイクストラ</h2>
+  </header>
+  <section class="entry-content">
+    <p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
+ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x &#43; δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] &lt; newd なら，単に捨てる そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque&lt;P&gt; deq と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue&lt;ll&gt; que と vector&lt;ll&gt; dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 &#43; 1 に確定して，そのまた successor たちを que に入れる．    </p>
+  </section>
+  <footer class="entry-footer">2021-07-03&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>policy-based data structure の tree</h2>
+  </header>
+  <section class="entry-content">
+    <p>gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
+リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
+ x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os....</p>
+  </section>
+  <footer class="entry-footer">2021-06-05&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to policy-based data structure の tree" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>燃やす埋める問題</h2>
+  </header>
+  <section class="entry-content">
+    <p>燃やす埋める問題についての記事です．
+動機 燃やす埋める問題については，一度エントリを書いた のですが，そこにはともかく理解したことを全部書いたので，コンテスト中に参照しても把握するのがたいへん，という状況になってしまっています．そこで，コンテスト中に思い出したい最小限のことだけまとめることにしました．
+考え方    問題文中に「$p$ のとき$b$を受け取る」という記載があったら，「先に $b$ を受け取る．$\neg p$ の時 $b$ を支払う」と読み替えて，すべて支払いをすると考える． グラフ全体の source ノードのラベルは True，sink ノードのラベルは False． ノード $p$ からノード $q$ への矢印に，重み $a$ がついているのは，「$p$が成り立つのに$q$が成り立たない場合，コスト $a$ を支払う」と読む． したがって，この図では，以下が表現されている  $p_8$ は成り立つ． $p_1$ が成り立たなかったら，$a_5$ 支払う． $p_7$ が成り立ったら，$a_3$ 支払う．   最小カットが，コスト最小の真偽割当．図の赤線だと，$p_1, \ldots, p_6, p_8$ を真，$p_7, p_9$ を偽にする割当に相当し，この場合のコストは$a_2 &#43; a_6$． 連言や選言のノードは，矢印を出せるか入れられるかが決まっている．下図を参照．不可の理由は，たとえば連言なら，$p$, $q$を真に，$p\land q$ を偽にできてしまうから．(矢印の根本を真にできてしまうと不当な利益がある．矢印の根本を偽にできても嬉しくない)    </p>
+  </section>
+  <footer class="entry-footer">2021-05-22&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 燃やす埋める問題" href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://yamate11.github.io/blog/categories/topic/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     <footer class="footer">
     <span>&copy; 2021 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
