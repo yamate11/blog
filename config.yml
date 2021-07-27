@@ -51,14 +51,14 @@ menu:
           name: 検索
           url: /search/
           weight: 20
-        - identifier: categories
-          name: categories
-          url: /categories/
-          weight: 30
-        - identifier: tags
-          name: tags
-          url: /tags/
-          weight: 40
+#         - identifier: categories
+#           name: categories
+#           url: /categories/
+#           weight: 30
+#         - identifier: tags
+#           name: tags
+#           url: /tags/
+#           weight: 40
 
 taxonomies:
     category: categories
