@@ -71,7 +71,7 @@
       <description>きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
 問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
 行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;amp;\cdots &amp;amp; \cdots &amp;amp; d_{ 0 } \\
-1 &amp;amp; &amp;amp; \Large{0} &amp;amp; 0 \</description>
+1 &amp;amp; &amp;amp; \Large{0} &amp;amp; 0 \\</description>
     </item>
     
     <item>

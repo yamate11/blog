@@ -10,6 +10,7 @@ params:
     title: "yamate11のブログ"
     math: true
     DateFormat: "2006-01-02"
+    env: "production"
 
     fuseOpts:
         isCaseSensitive: false

@@ -22,7 +22,7 @@ $O( k\^2 \log n )$ で求める．
 $$ A = 
 \begin{bmatrix}
 d\_{ k - 1 } &\cdots & \cdots & d\_{ 0 } \\\\
-1 &   &  \Large{0} & 0 \\\
+1 &   &  \Large{0} & 0 \\\\
    &  \ddots &  & 0\\\\
 \Large{0} & & 1 & 0 \\\\
 \end{bmatrix}
