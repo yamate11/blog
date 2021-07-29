@@ -159,5 +159,16 @@ string to_string( int value ); string to_string( long long value ); string to_st
 典型的なコード ll n; cin &amp;gt;&amp;gt; n; random_device rand_dev; mt19937 rng(rand_dev()); uniform_int_distribution&amp;lt;ll&amp;gt; dist(1, n); for (ll i = 0; i &amp;lt; 10; i++) cout &amp;lt;&amp;lt; dist(rng) &amp;lt;&amp;lt; &amp;#34; &amp;#34;; cout &amp;lt;&amp;lt; endl; クラス random_device  マニュアル  オブジェクトは乱数発生器．non-deterministic な乱数を生成する． operator() を実行すると，unsigned int の乱数が返り，状態が進む． 実行は高価である可能性がある．  クラス mt19937  マニュアル  32bitメルセンヌツィッター乱数発生器 64bitメルセンヌツィッター乱数発生器 の mt19937_64 というクラスもある． o.operator() を実行すると，uint_fast32_t の乱数が返り，状態が進む． コンストラクタに seed を渡す． デフォルトコンストラクタは引数をとらず，seed = 5489u を用いる．したがって，次のように書けば，どの実行でも同じ値が生成される．  mt19937 rng; クラス uniform_int_distribution  マニュアル  乱数分布を一様分布とする．constructor に a, b を指定すると，a以上b以下の一様分布． T は int や ll など．デフォルトは int． operator() は，引数に乱数発生器を取り，一様分布を生成する． 他の乱数分布クラスとコンストラクタの例:  uniform_real_distribution&amp;lt;double&amp;gt; dist1(a, b); normal_distribution&amp;lt;double&amp;gt; dist2(mean, stddev); </description>
     </item>
     
+    <item>
+      <title>AtCoder Regular Contest 056 D - サケノミ</title>
+      <link>https://yamate11.github.io/blog/posts/2021/01-06-sakenomi/</link>
+      <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/01-06-sakenomi/</guid>
+      <description>AtCoder Regular Contest (ARC) 056 D - サケノミ についての記事です．
+問題へのリンク  状況 解けないだけではなく，答を見てもなかなかわからなかったので，整理するために書いています．下記を参考にしています．
+ 公式解説  kmjpさんのブログ   解法 時刻 $2j+1$ にドリンクを飲むような飲み方全部に関する，時刻 $2j+1$ 時点での美味しさの総和の最大値を $x(j)$ とする． 時刻 $2i$ に全部のグラスが空だったとき，半開区間 $(2i, 2j]$ に属する時刻に注がれるドリンクの美味しさの総和を $y(i, j)$ とすると， $x(j) = \max \{ x(i) + y(i, j) \mid i &amp;lt; j \} $ である．ここで，$z(i, j) = x(i) + y(i, j)$ と書くことにする．時刻 $j$ に注がれるドリンク全体の集合を $P$ とし，$ p \in P $ に対して時刻 $2j$ の一回前にドリンク $p$ が注がれる時刻を $l_p$ とする (時刻 j が初回なら，$l_p = 0$ とする)．すると，次が成り立つ．</description>
+    </item>
+    
   </channel>
 </rss>

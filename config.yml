@@ -11,6 +11,8 @@ params:
     math: true
     DateFormat: "2006-01-02"
     env: "production"
+    disableSpecial1stPost: true
+
 
     fuseOpts:
         isCaseSensitive: false
@@ -45,13 +47,17 @@ outputs:
 menu:
     main:
         - identifier: archives
-          name: アーカイブ
+          name: 記事一覧
           url: /archives/
           weight: 10
         - identifier: search
           name: 検索
           url: /search/
           weight: 20
+        - identifier: about
+          name: 筆者
+          url: /pages/about/
+          
 #         - identifier: categories
 #           name: categories
 #           url: /categories/
