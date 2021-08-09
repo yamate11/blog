@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yamate11.github.io/blog/pages/</loc>
-    <lastmod>2021-07-28T00:00:00+00:00</lastmod>
+    <loc>https://yamate11.github.io/blog/categories/</loc>
+    <lastmod>2021-08-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/</loc>
+    <lastmod>2021-08-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/categories/topic/</loc>
+    <lastmod>2021-08-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2021-08-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/</loc>
+    <lastmod>2021-08-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/pages/</loc>
     <lastmod>2021-07-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/pages/about/</loc>
     <lastmod>2021-07-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/categories/</loc>
-    <lastmod>2021-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2021-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/categories/topic/</loc>
-    <lastmod>2021-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/</loc>
     <lastmod>2021-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/</loc>
-    <lastmod>2021-07-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/</loc>
     <lastmod>2021-06-05T00:00:00+00:00</lastmod>

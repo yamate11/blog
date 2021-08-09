@@ -8,7 +8,8 @@
 <title>距離: BFSとダイクストラ | yamate11のブログ</title>
 <meta name="keywords" content="" />
 <meta name="description" content="距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
-ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x &#43; δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] &lt; newd なら，単に捨てる そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque&lt;P&gt; deq と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue&lt;ll&gt; que と vector&lt;ll&gt; dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 &#43; 1 に確定して，そのまた successor たちを que に入れる．    ">
+記法 ノードを表すデータ型を Node とする．int や long long や pair&lt;int, int&gt; など．
+ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
@@ -49,16 +50,18 @@
 
 <meta property="og:title" content="距離: BFSとダイクストラ" />
 <meta property="og:description" content="距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
-ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x &#43; δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] &lt; newd なら，単に捨てる そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque&lt;P&gt; deq と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue&lt;ll&gt; que と vector&lt;ll&gt; dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 &#43; 1 に確定して，そのまた successor たちを que に入れる．    " />
+記法 ノードを表すデータ型を Node とする．int や long long や pair&lt;int, int&gt; など．
+ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-03T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-03T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-09T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-08-09T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="距離: BFSとダイクストラ"/>
 <meta name="twitter:description" content="距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
-ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x &#43; δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] &lt; newd なら，単に捨てる そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque&lt;P&gt; deq と vector&lt;ll&gt; dist を用いる．(using P = pair&lt;ll, ll&gt;)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue&lt;ll&gt; que と vector&lt;ll&gt; dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 &#43; 1 に確定して，そのまた successor たちを que に入れる．    "/>
+記法 ノードを表すデータ型を Node とする．int や long long や pair&lt;int, int&gt; など．
+ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ"/>
 
 
 <script type="application/ld+json">
@@ -87,15 +90,15 @@
   "@type": "BlogPosting",
   "headline": "距離: BFSとダイクストラ",
   "name": "距離: BFSとダイクストラ",
-  "description": "距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．\nダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue\u0026lt;P, vector\u0026lt;P\u0026gt;, greater\u0026lt;P\u0026gt;\u0026gt; pque と vector\u0026lt;ll\u0026gt; dist を用いる．(using P = pair\u0026lt;ll, ll\u0026gt;)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x + δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] \u0026lt; newd なら，単に捨てる そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque\u0026lt;P\u0026gt; deq と vector\u0026lt;ll\u0026gt; dist を用いる．(using P = pair\u0026lt;ll, ll\u0026gt;)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue\u0026lt;ll\u0026gt; que と vector\u0026lt;ll\u0026gt; dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 + 1 に確定して，そのまた successor たちを que に入れる．    ",
+  "description": "距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．\n記法 ノードを表すデータ型を Node とする．int や long long や pair\u0026lt;int, int\u0026gt; など．\nダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair\u0026lt;ll, Node\u0026gt;; // 距離とノード priority_queue\u0026lt;P, vector\u0026lt;P\u0026gt;, greater\u0026lt;P\u0026gt;\u0026gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector\u0026lt;ll\u0026gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map\u0026lt;Node, ll\u0026gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ",
   "keywords": [
     
   ],
-  "articleBody": "距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．\nダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． priority_queue, greater pque と vector dist を用いる．(using P = pair)  pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す． priority_queue のメソッドは，push(), pop(), top()   初期化  pque の中身は，(0, 始点) のみ dist は，始点のみ0; 他は LLONG_MAX   ループ  pque から取り出した (d, x) について，  d = distなら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる． x の successor y について，newd = x + δ(x, y) が新しい距離の候補なので以下を行う．  dist[y] そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．        0-1 BFS  前提: ノード間の距離が0または1 基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える． deque deq と vector dist を用いる．(using P = pair)  deque のメソッドは，push_back(), push_front(), pop_front(), front()   初期化  ダイクストラと同じ (ただし，pque→deq)   ループ  ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:  δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる      BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い． queue que と vector dist を用いる．  que の値はノード．「自分の距離は確定したが，successor は未処理」のもの queue のメソッドは，push(), pop(), front()   初期化  que の中身は，始点のみ dist は，始点のみ0; 他は -1 (未確定を表す)   ループ  que から取り出したノードの successor について，距離が未確定ならば，自分の距離 + 1 に確定して，そのまた successor たちを que に入れる．    ",
-  "wordCount" : "152",
+  "articleBody": "距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．\n記法 ノードを表すデータ型を Node とする．int や long long や pair など．\nダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pairll, Node; // 距離とノード priority_queueP, vectorP, greaterP pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vectorll dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，mapdist; など． dist[initial_node] = 0; // 始点の距離は0   ループ\n pque から取り出した (d, x) について，  dist[x] x の 隣接ノード y について，newd = x + δ(x, y) が y への距離の候補なので以下を行う．  dist[y] dist[y] を newd に更新する． (newd, y) を pque に入れる．        ゴール\n キューから取り出した時点で判断する． キューに入れる時点では，後からもっと短いものがくるかもしれない．    0-1 BFS  前提: ノード間の距離 δ(x,y) がどれも 0 または 1． 基本的にはダイクストラの考え方だが， 優先度付きキューの代わりに，両端キューが使える． 使用するデータと初期化  基本的には，ダイクストラと同じ． deque のメソッドは， { push | emplace | pop }_{ back | front }(), back(), front() など．    using P = pairll, Node; // 距離とノード dequeP deq; // 両端キュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． deq.emplace_back(0, initial_node); // 始点をキューに vectorll dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，mapdist; など． dist[initial_node] = 0; // 始点の距離は0   ループ\n 基本的にはダイクストラと同じ．違うのは，キューに入れるところだけ． deq から取り出した (d, x) について，  dist[x] x の 隣接ノード y について，newd = x + δ(x, y) が y への距離の候補なので以下を行う．  dist[y] dist[y] を newd に更新する． (newd, y) を deq に挿入する．  δ(x, y) = 0 なら，deq の左から挿入する． δ(x, y) = 1 なら，deq の右から挿入する．          ゴール\n ダイクストラと同じ．deq から取り出すときに判断する． (δ(x,y) = 0 なら入れるときに確定するが，気にしなくても良いであろう)    BFS  前提: ノード間の距離が全部1 ノードを初めて見たときに距離が確定する． FIFOキューには距離を入れる必要が無く，ノードだけで良い． 使用するデータと初期化  queue のメソッドは，push(), emplace(), pop(), front(), back() など．    queueNode que; // FIFOキュー  // キューに入っているノードは，  // 「自分の距離は確定したが，隣接ノードは未処理」のもの que.push(initial_node); // 始点をキューに vectorll dist(N, -1); // 距離．始点以外は未確定  // Node型 によっては，mapdist; など． dist[initial_node] = 0; // 始点の距離は0   ループ\n que から取り出したノード x の各隣接ノード y について，  dist[y] = 0 (すでに距離が確定) の場合は，単に捨てる． 未確定ならば，先に進む． dist[y] に dist[x] + 1 を設定する． y をキューに入れる．      ゴール\n dist[] に値を設定するときに判断する．    ",
+  "wordCount" : "307",
   "inLanguage": "en",
-  "datePublished": "2021-07-03T00:00:00Z",
-  "dateModified": "2021-07-03T00:00:00Z",
+  "datePublished": "2021-08-09T00:00:00Z",
+  "dateModified": "2021-08-09T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -219,85 +222,155 @@
     <h1 class="post-title">
       距離: BFSとダイクストラ
     </h1>
-    <div class="post-meta">2021-07-03&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-09&nbsp;·&nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．</p>
+<h2 id="記法">記法<a hidden class="anchor" aria-hidden="true" href="#記法">#</a></h2>
+<p>ノードを表すデータ型を Node とする．<code>int</code> や <code>long long</code> や <code>pair&lt;int, int&gt;</code>
+など．</p>
 <h2 id="ダイクストラ">ダイクストラ<a hidden class="anchor" aria-hidden="true" href="#ダイクストラ">#</a></h2>
 <ul>
 <li>前提: ノード間の距離δ(x,y)が全部非負</li>
-<li>距離の候補をキューに入れていく．あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する．</li>
-<li><code>priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque</code> と <code>vector&lt;ll&gt; dist</code> を用いる．(<code>using P = pair&lt;ll, ll&gt;</code>)
+<li>距離の候補を優先度付きキューに入れていく．
+あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する．</li>
+<li>使用するデータと初期化
 <ul>
-<li>pque の値 (d, x) は，「ノード x へ，長さ d のパスがある」ことを示す．</li>
-<li>priority_queue のメソッドは，push(), pop(), top()</li>
+<li>priority_queue のメソッドは，push(), emplace(), pop(), top() など．</li>
 </ul>
 </li>
-<li>初期化
-<ul>
-<li>pque の中身は，(0, 始点) のみ</li>
-<li>dist は，始点のみ0; 他は LLONG_MAX</li>
 </ul>
-</li>
-<li>ループ
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">using</span> <span style="color:#111">P</span> <span style="color:#f92672">=</span> <span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">Node</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>                      <span style="color:#75715e">// 距離とノード
+</span><span style="color:#75715e"></span><span style="color:#111">priority_queue</span><span style="color:#f92672">&lt;</span><span style="color:#111">P</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">P</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span> <span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#111">P</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">pque</span><span style="color:#111">;</span> <span style="color:#75715e">// 優先度付きキュー
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 値 (d, x) は，ノードxへ，長さdのパスがあることを示す．
+</span><span style="color:#75715e"></span><span style="color:#111">pque</span><span style="color:#111">.</span><span style="color:#111">emplace</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">initial_node</span><span style="color:#111">);</span>                 <span style="color:#75715e">// 始点をキューに
+</span><span style="color:#75715e"></span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">LLONG_MAX</span><span style="color:#111">);</span>                 <span style="color:#75715e">// 距離．始点以外は∞
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Node型 によっては，map&lt;Node, ll&gt; dist; など．
+</span><span style="color:#75715e"></span><span style="color:#111">dist</span><span style="color:#111">[</span><span style="color:#111">initial_node</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>                        <span style="color:#75715e">// 始点の距離は0
+</span></code></pre></div><ul>
+<li>
+<p>ループ</p>
 <ul>
 <li>pque から取り出した (d, x) について，
 <ul>
-<li>d = dist<input checked="" disabled="" type="checkbox"> なら，このdが最短であることが分かるので，先に進む．そうでなければ単に捨てる．</li>
-<li>x の successor y について，newd = x + δ(x, y) が新しい距離の候補なので以下を行う．
+<li>dist[x] &lt; d なら，もっと良い d があるということなので，単に捨てる．
+そうでなければこの d が x への最短距離であることが確定したので，
+先に進む．</li>
+<li>x の 隣接ノード y について，newd = x + δ(x, y) が
+y への距離の候補なので以下を行う．
 <ul>
-<li>dist[y] &lt; newd なら，単に捨てる</li>
-<li>そうでなければ，dist[y] を newd に更新して，(newd, y) を pque に入れる．</li>
+<li>dist[y] &lt;= newd なら，単に捨てる
+そうでなければ，先に進む．</li>
+<li>dist[y] を newd に更新する．</li>
+<li>(newd, y) を pque に入れる．</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li>
+<p>ゴール</p>
+<ul>
+<li>キューから取り出した時点で判断する．
+キューに入れる時点では，後からもっと短いものがくるかもしれない．</li>
 </ul>
 </li>
 </ul>
 <h2 id="0-1-bfs">0-1 BFS<a hidden class="anchor" aria-hidden="true" href="#0-1-bfs">#</a></h2>
 <ul>
-<li>前提: ノード間の距離が0または1</li>
-<li>基本的にはダイクストラの考え方だが，priority_queue の代わりに，deque が使える．</li>
-<li><code>deque&lt;P&gt; deq</code> と <code>vector&lt;ll&gt; dist</code> を用いる．(<code>using P = pair&lt;ll, ll&gt;</code>)
+<li>前提: ノード間の距離 δ(x,y) がどれも 0 または 1．</li>
+<li>基本的にはダイクストラの考え方だが，
+優先度付きキューの代わりに，両端キューが使える．</li>
+<li>使用するデータと初期化
 <ul>
-<li>deque のメソッドは，push_back(), push_front(), pop_front(), front()</li>
+<li>基本的には，ダイクストラと同じ．</li>
+<li>deque のメソッドは，
+{ push | emplace | pop }_{ back | front }(), back(), front() 
+など．</li>
 </ul>
 </li>
-<li>初期化
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">using</span> <span style="color:#111">P</span> <span style="color:#f92672">=</span> <span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">Node</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>                      <span style="color:#75715e">// 距離とノード
+</span><span style="color:#75715e"></span><span style="color:#111">deque</span><span style="color:#f92672">&lt;</span><span style="color:#111">P</span><span style="color:#f92672">&gt;</span> <span style="color:#111">deq</span><span style="color:#111">;</span>                                  <span style="color:#75715e">// 両端キュー
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 値 (d, x) は，ノードxへ，長さdのパスがあることを示す．
+</span><span style="color:#75715e"></span><span style="color:#111">deq</span><span style="color:#111">.</span><span style="color:#111">emplace_back</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">initial_node</span><span style="color:#111">);</span>             <span style="color:#75715e">// 始点をキューに
+</span><span style="color:#75715e"></span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">LLONG_MAX</span><span style="color:#111">);</span>                 <span style="color:#75715e">// 距離．始点以外は∞
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Node型 によっては，map&lt;Node, ll&gt; dist; など．
+</span><span style="color:#75715e"></span><span style="color:#111">dist</span><span style="color:#111">[</span><span style="color:#111">initial_node</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>                        <span style="color:#75715e">// 始点の距離は0
+</span></code></pre></div><ul>
+<li>
+<p>ループ</p>
 <ul>
-<li>ダイクストラと同じ (ただし，pque→deq)</li>
+<li>基本的にはダイクストラと同じ．違うのは，キューに入れるところだけ．</li>
+<li>deq から取り出した (d, x) について，
+<ul>
+<li>dist[x] &lt; d なら，もっと良い d があったということなので，
+単に捨てる．
+そうでなければこの d が x への最短距離であることが確定したので，
+先に進む．</li>
+<li>x の 隣接ノード y について，newd = x + δ(x, y) が
+y への距離の候補なので以下を行う．
+<ul>
+<li>dist[y] &lt;= newd なら，単に捨てる．
+そうでなければ，先に進む．</li>
+<li>dist[y] を newd に更新する．</li>
+<li>(newd, y) を deq に挿入する．
+<ul>
+<li>δ(x, y) = 0 なら，deq の左から挿入する．</li>
+<li>δ(x, y) = 1 なら，deq の右から挿入する．</li>
 </ul>
 </li>
-<li>ループ
-<ul>
-<li>ダイクストラと同じ．ただし，「(newd, y) を pque に入れる」ところは:
-<ul>
-<li>δ(x, y) = 0 ならば，deq の左から，δ(x, y) = 1 ならば，deq の右から入れる</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ゴール</p>
+<ul>
+<li>ダイクストラと同じ．deq から取り出すときに判断する．
+(δ(x,y) = 0 なら入れるときに確定するが，気にしなくても良いであろう)</li>
 </ul>
 </li>
 </ul>
 <h2 id="bfs">BFS<a hidden class="anchor" aria-hidden="true" href="#bfs">#</a></h2>
 <ul>
 <li>前提: ノード間の距離が全部1</li>
-<li>ノードを初めて見たときに距離が確定する．キューには距離を入れる必要が無く，ノードだけで良い．</li>
-<li><code>queue&lt;ll&gt; que</code> と <code>vector&lt;ll&gt; dist</code> を用いる．
+<li>ノードを初めて見たときに距離が確定する．
+FIFOキューには距離を入れる必要が無く，ノードだけで良い．</li>
+<li>使用するデータと初期化
 <ul>
-<li>que の値はノード．「自分の距離は確定したが，successor は未処理」のもの</li>
-<li>queue のメソッドは，push(), pop(), front()</li>
+<li>queue のメソッドは，push(), emplace(), pop(), front(), back() など．</li>
 </ul>
 </li>
-<li>初期化
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">queue</span><span style="color:#f92672">&lt;</span><span style="color:#111">Node</span><span style="color:#f92672">&gt;</span> <span style="color:#111">que</span><span style="color:#111">;</span>                   <span style="color:#75715e">// FIFOキュー
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// キューに入っているノードは，
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 「自分の距離は確定したが，隣接ノードは未処理」のもの
+</span><span style="color:#75715e"></span><span style="color:#111">que</span><span style="color:#111">.</span><span style="color:#111">push</span><span style="color:#111">(</span><span style="color:#111">initial_node</span><span style="color:#111">);</span>            <span style="color:#75715e">// 始点をキューに
+</span><span style="color:#75715e"></span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">);</span>            <span style="color:#75715e">// 距離．始点以外は未確定
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Node型 によっては，map&lt;Node, ll&gt; dist; など．
+</span><span style="color:#75715e"></span><span style="color:#111">dist</span><span style="color:#111">[</span><span style="color:#111">initial_node</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>            <span style="color:#75715e">// 始点の距離は0
+</span></code></pre></div><ul>
+<li>
+<p>ループ</p>
 <ul>
-<li>que の中身は，始点のみ</li>
-<li>dist は，始点のみ0; 他は -1 (未確定を表す)</li>
+<li>que から取り出したノード x の各隣接ノード y について，
+<ul>
+<li>dist[y] &gt;= 0 (すでに距離が確定) の場合は，単に捨てる．
+未確定ならば，先に進む．</li>
+<li>dist[y] に dist[x] + 1 を設定する．</li>
+<li>y をキューに入れる．</li>
 </ul>
 </li>
-<li>ループ
+</ul>
+</li>
+<li>
+<p>ゴール</p>
 <ul>
-<li>que から取り出したノードの successor について，距離が未確定ならば，自分の距離 + 1 に確定して，そのまた successor たちを que に入れる．</li>
+<li>dist[] に値を設定するときに判断する．</li>
 </ul>
 </li>
 </ul>
