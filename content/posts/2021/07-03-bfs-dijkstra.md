@@ -9,10 +9,10 @@ draft: false
 ---
 距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
 
-## 記法
+### 記法
 
-ノードを表すデータ型を Node とする．`int` や `long long` や `pair<int, int>`
-など．
+ノードを表すデータ型を `Node` とする．
+`int` や `long long` や `pair<int, int>` など．
 
 
 ## ダイクストラ

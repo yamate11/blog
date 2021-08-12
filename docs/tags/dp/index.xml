@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>DP on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/dp/</link>
+    <description>Recent content in DP on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/dp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Atcoder Beginner Contest 213 H - Stroll</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-11-stroll/</link>
+      <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/08-11-stroll/</guid>
+      <description>Atcoder Beginner Contest 213 (ABC-213) H - Stroll に関する記事です．
+問題へのリンク 解法 公式解説 を読んでもよくわからなかったのですが， Motsu_xeさんによる，オフライン・オンライン変換 の説明がわかりやすかったです． 以下の説明は，ほとんど，上の2つの記事に依っています．
+記法を定めます．
+ $f(x, i) :=$ 地点$x$に距離$i$で到達する方法の数 $p(x, y, i) :=$ 地点 $x$ と地点 $y$ を結ぶ距離 $i$ の道の数 $X := \{1, \ldots, N\}$  したがって，$f(1, T)$ が求める答です．次の関係が成り立ちます:
+ $f(1, 0) = 1$ $f(y, 0) = 0\quad(y \neq 1)$ $f(x, i) = \sum \{ f(y, j) \cdot p(x, y, i - j) \mid y \in X, j \in [0, i) \}$  最後の式は，一見，畳み込みですが，右辺にも $f$ が出てきてしまうので， ただちには FFT に渡せません．ここを 分割統治FFTなる手法で求めようという趣旨であるようです．</description>
+    </item>
+    
+  </channel>
+</rss>
