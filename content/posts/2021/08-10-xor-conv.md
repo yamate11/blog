@@ -54,7 +54,5 @@ $$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$
 アダマール変換は，定義に従って $O(n \log n)$ で計算できる．($n = 2^K$)
 
 メモリを賢く使って計算している例が 
-[kazuma8128's blog](https://kazuma8128.hatenablog.com/entry/2018/05/31/144519)
+[kazuma8128\'s blog](https://kazuma8128.hatenablog.com/entry/2018/05/31/144519)
 に載っている．
-
-
