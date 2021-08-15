@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>SCC on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/scc/</link>
+    <description>Recent content in SCC on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/scc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vector&lt;vector&lt;*&gt;&gt; は遅い</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/</link>
+      <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/</guid>
+      <description>発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．
+最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
+vector&amp;lt;vector&amp;lt;*&amp;gt; &amp;gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:
+int N, M; cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M; // N は頂点数, M は辺の数 vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; edges; for (int i = 0; i &amp;lt; M; i++) { int u, v; cin &amp;gt;&amp;gt; u &amp;gt;&amp;gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].</description>
+    </item>
+    
+  </channel>
+</rss>

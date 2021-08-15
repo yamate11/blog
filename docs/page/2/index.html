@@ -171,6 +171,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>桁DPのコーディング</h2>
+  </header>
+  <section class="entry-content">
+    <p>桁DPのコーディングに関する記事です． N 以下の整数である条件を満たすものを数えます．
+参照 以下のoptさんの記事 をもとにして，少し追加しています:
+コーディングの方針  配るDP 上位桁を 0-padding した状態で考える  有効な桁が始まっているかどうかが必要なこともあるが，その場合にはそれを表すフラグを導入する． 0以上N以下を数えることになるので，必要なら最後に調整．   代入は1回  その桁に表れうる数 (0..9 とか 0..1 とか) をループで回し，「この数を付け加えた時の格納先」を考える 格納先の添字を表す変数を，格納元で初期化して適宜変更する．    // N は各桁数値のベクトルで表現．ds[0] が最上位桁． // もちろん，問題文の都合で string でも良い． // 本来は ds[0] を一の位にして， // ループを ds.size() - 1 から 0 まで回した方が自然かもしれない vector&lt;ll&gt;&amp; ds; // DP表は，最初の次元を上限に等しいかどうかのフラグにする． // 0 ... 上限値． 1 ... 上限値より小さいと確定 auto tbl_init = vector(2, vector(??, vector(??, 0LL))); auto tbl = tbl_init; tbl[0][?...</p>
+  </section>
+  <footer class="entry-footer">2021-07-06&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>policy-based data structure の tree</h2>
   </header>
   <section class="entry-content">
@@ -220,20 +233,6 @@
   </section>
   <footer class="entry-footer">2021-04-27&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to binom(n, r) を小さい素数pに対して mod p で求める" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Lagrange補間</h2>
-  </header>
-  <section class="entry-content">
-    <p>Lagrange補間に関する記事です．
-要約 $$ f(x) = \sum_{i = 0}^{k}\frac{ f(i) }{ (-1)^{k - i} \; i ! \; (k - i) ! } \cdot \frac{ 1 }{ x - i } \cdot \prod_{j=0}^{k} ( x - j ) $$
-詳細 \( k \) 次多項式 $f(x)$ について，$x = 0, \ldots, k$ の値が，$f(0) = v_0, \ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\( \Omega( k^3 ) \) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．
-$I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．...</p>
-  </section>
-  <footer class="entry-footer">2021-04-22&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Lagrange補間" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

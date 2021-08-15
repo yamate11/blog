@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>yamate11のブログ</title>
-
+<title>SCC | yamate11のブログ</title>
+<meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/tags/scc/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -19,8 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.86.0" />
-<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/index.xml">
-<link rel="alternate" type="application/json" href="https://yamate11.github.io/blog/index.json">
+<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/tags/scc/index.xml">
 
 <script>
     MathJax = {
@@ -48,28 +47,15 @@
 
 
 
-<meta property="og:title" content="yamate11のブログ" />
+<meta property="og:title" content="SCC" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://yamate11.github.io/blog/" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/tags/scc/" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="yamate11のブログ"/>
+<meta name="twitter:title" content="SCC"/>
 <meta name="twitter:description" content=""/>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "yamate11のブログ",
-  "url": "https://yamate11.github.io/blog/",
-  "description": "",
-  "thumbnailUrl": "https://yamate11.github.io/blog/favicon.ico",
-  "sameAs": [
-      
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -168,8 +154,11 @@
     </nav>
 </header>
 <main class="main"> 
+<header class="page-header">
+  <h1>SCC</h1>
+</header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2>vector&lt;vector&lt;*&gt;&gt; は遅い</h2>
   </header>
@@ -183,69 +172,6 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
   <footer class="entry-footer">2021-08-15&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to vector は遅い" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>xor畳み込み</h2>
-  </header>
-  <section class="entry-content">
-    <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
-xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
- $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
-アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
-$$ H_0 = 1 $$
-$$ H_{k &#43; 1} = \begin{bmatrix} H_k &amp; H_k \\...</p>
-  </section>
-  <footer class="entry-footer">2021-08-12&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Atcoder Beginner Contest 213 H - Stroll</h2>
-  </header>
-  <section class="entry-content">
-    <p>Atcoder Beginner Contest 213 (ABC-213) H - Stroll に関する記事です．
-問題へのリンク 解法 公式解説 を読んでもよくわからなかったのですが， Motsu_xeさんによる，オフライン・オンライン変換 の説明がわかりやすかったです． 以下の説明は，ほとんど，上の2つの記事に依っています．
-記法を定めます．
- $f(x, i) :=$ 地点$x$に距離$i$で到達する方法の数 $p(x, y, i) :=$ 地点 $x$ と地点 $y$ を結ぶ距離 $i$ の道の数 $X := \{1, \ldots, N\}$  したがって，$f(1, T)$ が求める答です．次の関係が成り立ちます:
- $f(1, 0) = 1$ $f(y, 0) = 0\quad(y \neq 1)$ $f(x, i) = \sum \{ f(y, j) \cdot p(x, y, i - j) \mid y \in X, j \in [0, i) \}$  最後の式は，一見，畳み込みですが，右辺にも $f$ が出てきてしまうので， ただちには FFT に渡せません．ここを 分割統治FFTなる手法で求めようという趣旨であるようです．...</p>
-  </section>
-  <footer class="entry-footer">2021-08-11&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Atcoder Beginner Contest 213 H - Stroll" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>距離: BFSとダイクストラ</h2>
-  </header>
-  <section class="entry-content">
-    <p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
-記法 ノードを表すデータ型を Node とする． int や long long や pair&lt;int, int&gt; など．
-ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ...</p>
-  </section>
-  <footer class="entry-footer">2021-08-09&nbsp;·&nbsp;2021-07-03 (初版)&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>キーエンスプログラミングコンテスト2021 E - Greedy Ant</h2>
-  </header>
-  <section class="entry-content">
-    <p>キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
-問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
-すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
-初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．...</p>
-  </section>
-  <footer class="entry-footer">2021-07-22&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to キーエンスプログラミングコンテスト2021 E - Greedy Ant" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="next" href="https://yamate11.github.io/blog/page/2/">Next Page »</a>
-  </nav>
-</footer>
     </main>
     <footer class="footer">
   <span>
