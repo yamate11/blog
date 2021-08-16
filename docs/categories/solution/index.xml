@@ -6,7 +6,21 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/</guid>
+      <description>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので&amp;hellip;.
+問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという&amp;hellip; (解説を読むまでわからなかったのですけれど)
+ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
+ dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
+ 町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2  として，
+ dp[i1][j+1] := True dp[i2][j+1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．</description>
+    </item>
+    
     <item>
       <title>Atcoder Beginner Contest 213 H - Stroll</title>
       <link>https://yamate11.github.io/blog/posts/2021/08-11-stroll/</link>

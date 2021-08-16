@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>キーエンスプログラミングコンテスト2021 E - Greedy Ant | yamate11のブログ</title>
+<title>Greedy Ant - キーエンスプログラミングコンテスト2021 E | yamate11のブログ</title>
 <meta name="keywords" content="" />
 <meta name="description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="キーエンスプログラミングコンテスト2021 E - Greedy Ant" />
+<meta property="og:title" content="Greedy Ant - キーエンスプログラミングコンテスト2021 E" />
 <meta property="og:description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
@@ -60,7 +60,7 @@
 <meta property="article:modified_time" content="2021-07-22T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="キーエンスプログラミングコンテスト2021 E - Greedy Ant"/>
+<meta name="twitter:title" content="Greedy Ant - キーエンスプログラミングコンテスト2021 E"/>
 <meta name="twitter:description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
@@ -81,7 +81,7 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "キーエンスプログラミングコンテスト2021 E - Greedy Ant",
+      "name": "Greedy Ant - キーエンスプログラミングコンテスト2021 E",
       "item": "https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"
     }
   ]
@@ -91,8 +91,8 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "キーエンスプログラミングコンテスト2021 E - Greedy Ant",
-  "name": "キーエンスプログラミングコンテスト2021 E - Greedy Ant",
+  "headline": "Greedy Ant - キーエンスプログラミングコンテスト2021 E",
+  "name": "Greedy Ant - キーエンスプログラミングコンテスト2021 E",
   "description": "キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．\n問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．\nすぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)\n初期化: // 蟻の初期位置を 2n + 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n + 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k += 1 while k \u0026gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r += 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．",
   "keywords": [
     
@@ -223,7 +223,7 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      キーエンスプログラミングコンテスト2021 E - Greedy Ant
+      Greedy Ant - キーエンスプログラミングコンテスト2021 E
     </h1>
     <div class="post-meta">2021-07-22&nbsp;·&nbsp;yamate11
 </div>
