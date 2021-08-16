@@ -5,12 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>vector&lt;vector&lt;*&gt;&gt; は遅い | yamate11のブログ</title>
+<title>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない | yamate11のブログ</title>
 <meta name="keywords" content="性能, 2次元, vector, SCC, CSR" />
-<meta name="description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．
-最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+<meta name="description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
+最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
 たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
-vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:
+vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
 int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/" />
@@ -50,23 +50,23 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
 
 
 
-<meta property="og:title" content="vector&lt;vector&lt;*&gt;&gt; は遅い" />
-<meta property="og:description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．
-最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+<meta property="og:title" content="vector&lt;vector&lt;*&gt;&gt; はあんまり速くない" />
+<meta property="og:description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
+最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
 たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
-vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:
+vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
 int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u]." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-15T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-08-15T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-16T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-08-16T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="vector&lt;vector&lt;*&gt;&gt; は遅い"/>
-<meta name="twitter:description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．
-最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+<meta name="twitter:title" content="vector&lt;vector&lt;*&gt;&gt; はあんまり速くない"/>
+<meta name="twitter:description" content="発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
+最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
 たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
-vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:
+vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
 int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u]."/>
 
 
@@ -84,7 +84,7 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "vector\u003cvector\u003c*\u003e\u003e は遅い",
+      "name": "vector\u003cvector\u003c*\u003e\u003e はあんまり速くない",
       "item": "https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"
     }
   ]
@@ -94,17 +94,17 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "vector は遅い",
-  "name": "vector は遅い",
-  "description": "発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．\n最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．\nたしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．\nvector\u0026lt;vector\u0026lt;*\u0026gt; \u0026gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:\nint N, M; cin \u0026gt;\u0026gt; N \u0026gt;\u0026gt; M; // N は頂点数, M は辺の数 vector\u0026lt;pair\u0026lt;int, int\u0026gt;\u0026gt; edges; for (int i = 0; i \u0026lt; M; i++) { int u, v; cin \u0026gt;\u0026gt; u \u0026gt;\u0026gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector\u0026lt;vector\u0026lt;int\u0026gt;\u0026gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].",
+  "headline": "vector はあんまり速くない",
+  "name": "vector はあんまり速くない",
+  "description": "発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．\n最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．\nたしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．\nvector\u0026lt;vector\u0026lt;*\u0026gt; \u0026gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:\nint N, M; cin \u0026gt;\u0026gt; N \u0026gt;\u0026gt; M; // N は頂点数, M は辺の数 vector\u0026lt;pair\u0026lt;int, int\u0026gt;\u0026gt; edges; for (int i = 0; i \u0026lt; M; i++) { int u, v; cin \u0026gt;\u0026gt; u \u0026gt;\u0026gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector\u0026lt;vector\u0026lt;int\u0026gt;\u0026gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].",
   "keywords": [
     "性能", "2次元", "vector", "SCC", "CSR"
   ],
-  "articleBody": "発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． ちょっと調べてみたら，意外なところがネックだということが わかりました．\n最初は使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．\nたしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．\nvector  部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが すごく遅い，ということが分かりました． こんな感じのコードなのですが:\nint N, M; cin  N  M; // N は頂点数, M は辺の数 vectorpairint, int edges; for (int i = 0; i  M; i++) { int u, v; cin  u  v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vectorvectorint fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].push_back(v); } // (2) この，(1)から(2)までの部分で，とても時間を食っています． Tarjan のアルゴリズムを実行するのと同程度の時間がかかっているのです．\nCSR AC-library はそこをどう処理しているのか，と，見てみましたら， CSR なる構造体を使っていました． おそらく， Compressed Sparse Row のことだと思います． すべて1次元のベクトルでの処理になります．\nたとえば，{(0, 5), (0, 7), (1, 4), (2, 3), (2, 8)} を格納する場合には， まず，遷移先の {5, 7, 4, 3, 8} を vector に格納します． それで，別の vector に，{0, 2, 3, 5} を格納します． これは，0 から 2 までが，遷移元が 0 の遷移は [0, 2) に格納されており， 遷移元が1 の遷移は [2, 3) に格納されており，さらに遷移元が2の 遷移は，[3, 5) に格納されている，ということを示しています．\nちょっと上のリンクで説明されているCSRより簡略になっていますが， 考え方は同じだと思います．\n性能比較 ここで，CSR と vector を使った場合の SCC の性能比較を書くべきところですが， ちょっといろいろあってできていないので， 代わりに木DPで試してみました．\nランダムに作成した木の辺を与えて，各ノードの子孫のノードの数を 数えるというプログラムです． 木のノード数を$2\\times 10^5$ 程度にしてみると，次のようになりました:\n vector … 95ms (48ms) CSR … 45ms (31ms)  括弧内は，vector からの変換にかかった時間です． なお，標準入力から vector に読み込むには， 47ms ほどかかっています．\n…. あっと驚くというほどには違っていませんね…\n性能比較に使ったファイルです．\n ソースコード テストデータ生成スクリプト  ",
+  "articleBody": "発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．\n最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．\nたしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．\nvector  部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:\nint N, M; cin  N  M; // N は頂点数, M は辺の数 vectorpairint, int edges; for (int i = 0; i  M; i++) { int u, v; cin  u  v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vectorvectorint fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].push_back(v); } // (2) この，(1)から(2)までの部分で，結構時間を食っています． Tarjan のアルゴリズムを実行するのと同程度の時間がかかっているように見えました．\nCSR AC-library はそこをどう処理しているのか，と，見てみましたら， CSR なる構造体を使っていました． おそらく， Compressed Sparse Row のことだと思います． すべて1次元のベクトルでの処理になります．\nたとえば，{(0, 5), (0, 7), (1, 4), (2, 3), (2, 8)} を格納する場合には， まず，遷移先の {5, 7, 4, 3, 8} を vector に格納します． それで，別の vector に，{0, 2, 3, 5} を格納します． これは，遷移元が 0 の遷移先は [0, 2) に格納されており， 遷移元が1 の遷移先は [2, 3) に格納されており，遷移元が2の 遷移先は，[3, 5) に格納されている，ということを示しています．\nちょっと上のリンクで説明されているCSRより簡略になっていますが， 考え方は同じだと思います．\n性能比較 ここで，CSR と vector を使った場合の SCC の性能比較を書くべきところですが， ちょっといろいろあって，まだできていないので， 代わりに木DPで試してみました．\nランダムに作成した木の辺を与えて，各ノードの子孫のノードの数を 数えるというプログラムです． 木のノード数を$2\\times 10^5$ 程度にしてみると，次のようになりました:\n   Sとして何を使うか vector CSR     標準入力から vector への読み込み 47ms 47ms (左と同じコード)   vector から S への変換 48ms 31ms   S を使って子孫ノード数を数える 47ms 14ms    …. あっと驚くほどには違っていませんね．羊頭狗肉でした．\n下は，性能比較に使ったファイルです．\n ソースコード テストデータ生成スクリプト  ",
   "wordCount" : "182",
   "inLanguage": "en",
-  "datePublished": "2021-08-15T00:00:00Z",
-  "dateModified": "2021-08-15T00:00:00Z",
+  "datePublished": "2021-08-16T00:00:00Z",
+  "dateModified": "2021-08-16T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -226,17 +226,16 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
   <header class="post-header">
     
     <h1 class="post-title">
-      vector&lt;vector&lt;*&gt;&gt; は遅い
+      vector&lt;vector&lt;*&gt;&gt; はあんまり速くない
     </h1>
-    <div class="post-meta">2021-08-15&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-16&nbsp;·&nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><h2 id="発端">発端<a hidden class="anchor" aria-hidden="true" href="#発端">#</a></h2>
 <p>自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが，
 これが，AC-library の SCC に比べて，4倍くらい遅いのです．
-ちょっと調べてみたら，意外なところがネックだということが
-わかりました．</p>
-<p>最初は使っているアルゴリズムのせいだと思ったのです．
+どこが遅いのか調べてみたら，意外なところにもネックがありました．</p>
+<p>最初は，主に使っているアルゴリズムのせいだと思ったのです．
 深さ優先探索を2回行うアルゴリズム
 (たとえば<a href="https://manabitimes.jp/math/1250" target="_blank">ここ</a>
 を参照)
@@ -247,8 +246,8 @@ AC-library は，<a href="https://en.wikipedia.org/wiki/Tarjan%27s_strongly_conn
 書きかえました．</p>
 <p>たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．</p>
 <h2 id="vectorvector-">vector&lt;vector&lt;*&gt; &gt;<a hidden class="anchor" aria-hidden="true" href="#vectorvector-">#</a></h2>
-<p>部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところが
-すごく遅い，ということが分かりました．
+<p>部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも
+遅い，ということが分かりました．
 こんな感じのコードなのですが:</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">M</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">M</span><span style="color:#111">;</span> <span style="color:#75715e">// N は頂点数, M は辺の数
 </span><span style="color:#75715e"></span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">edges</span><span style="color:#111">;</span>
@@ -262,8 +261,8 @@ AC-library は，<a href="https://en.wikipedia.org/wiki/Tarjan%27s_strongly_conn
   <span style="color:#111">fwd</span><span style="color:#111">[</span><span style="color:#111">u</span><span style="color:#111">].</span><span style="color:#111">push_back</span><span style="color:#111">(</span><span style="color:#111">v</span><span style="color:#111">);</span>
 <span style="color:#111">}</span>
 <span style="color:#75715e">// (2)
-</span></code></pre></div><p>この，(1)から(2)までの部分で，とても時間を食っています．
-Tarjan のアルゴリズムを実行するのと同程度の時間がかかっているのです．</p>
+</span></code></pre></div><p>この，(1)から(2)までの部分で，結構時間を食っています．
+Tarjan のアルゴリズムを実行するのと同程度の時間がかかっているように見えました．</p>
 <h2 id="csr">CSR<a hidden class="anchor" aria-hidden="true" href="#csr">#</a></h2>
 <p>AC-library はそこをどう処理しているのか，と，見てみましたら，
 CSR なる構造体を使っていました．
@@ -275,28 +274,47 @@ CSR なる構造体を使っていました．
 <p>たとえば，<code>{(0, 5), (0, 7), (1, 4), (2, 3), (2, 8)}</code> を格納する場合には，
 まず，遷移先の <code>{5, 7, 4, 3, 8}</code> を <code>vector&lt;int&gt;</code> に格納します．
 それで，別の <code>vector&lt;int&gt;</code> に，<code>{0, 2, 3, 5}</code> を格納します．
-これは，0 から 2 までが，遷移元が 0 の遷移は <code>[0, 2)</code> に格納されており，
-遷移元が1 の遷移は <code>[2, 3)</code> に格納されており，さらに遷移元が2の
-遷移は，<code>[3, 5)</code> に格納されている，ということを示しています．</p>
+これは，遷移元が 0 の遷移先は <code>[0, 2)</code> に格納されており，
+遷移元が1 の遷移先は <code>[2, 3)</code> に格納されており，遷移元が2の
+遷移先は，<code>[3, 5)</code> に格納されている，ということを示しています．</p>
 <p>ちょっと上のリンクで説明されているCSRより簡略になっていますが，
 考え方は同じだと思います．</p>
 <h2 id="性能比較">性能比較<a hidden class="anchor" aria-hidden="true" href="#性能比較">#</a></h2>
 <p>ここで，CSR と <code>vector&lt;vector&lt;int&gt;&gt;</code> を使った場合の
 SCC の性能比較を書くべきところですが，
-ちょっといろいろあってできていないので，
+ちょっといろいろあって，まだできていないので，
 代わりに木DPで試してみました．</p>
 <p>ランダムに作成した木の辺を与えて，各ノードの子孫のノードの数を
 数えるというプログラムです．
 木のノード数を$2\times 10^5$ 程度にしてみると，次のようになりました:</p>
-<ul>
-<li><code>vector&lt;vector&lt;int&gt;&gt;</code> &hellip; 95ms (48ms)</li>
-<li>CSR &hellip; 45ms (31ms)</li>
-</ul>
-<p>括弧内は，<code>vector&lt;pair&lt;int, int&gt;&gt;</code> からの変換にかかった時間です．
-なお，標準入力から <code>vector&lt;pair&lt;int, int&gt;&gt;</code> に読み込むには，
-47ms ほどかかっています．</p>
-<p>&hellip;. あっと驚くというほどには違っていませんね&hellip;</p>
-<p>性能比較に使ったファイルです．</p>
+<table>
+<thead>
+<tr>
+<th>Sとして何を使うか</th>
+<th><code>vector&lt;vector&lt;int&gt;&gt;</code></th>
+<th>CSR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>標準入力から <code>vector&lt;pair&lt;int, int&gt;&gt;</code> への読み込み</td>
+<td>47ms</td>
+<td>47ms (左と同じコード)</td>
+</tr>
+<tr>
+<td><code>vector&lt;pair&lt;int, int&gt;&gt;</code> から S への変換</td>
+<td>48ms</td>
+<td>31ms</td>
+</tr>
+<tr>
+<td>S を使って子孫ノード数を数える</td>
+<td>47ms</td>
+<td>14ms</td>
+</tr>
+</tbody>
+</table>
+<p>&hellip;. あっと驚くほどには違っていませんね．羊頭狗肉でした．</p>
+<p>下は，性能比較に使ったファイルです．</p>
 <ul>
 <li><a href="./cans.cc" download>ソースコード</a></li>
 <li><a href="./gen.py" download>テストデータ生成スクリプト</a></li>
