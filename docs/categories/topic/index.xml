@@ -6,7 +6,19 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Aug 2021 10:07:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整数・実数の大小比較とfloor, ceil</title>
+      <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
+      <pubDate>Fri, 20 Aug 2021 10:07:00 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</guid>
+      <description>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
+公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &amp;lt; t \iff d &amp;lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &amp;lt; d \iff \lfloor t \rfloor &amp;lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;amp;\iff&amp;amp; t \in \{ t \mid d \leq t \} \\
+&amp;amp;\iff&amp;amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\</description>
+    </item>
+    
     <item>
       <title>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</title>
       <link>https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/</link>
@@ -126,17 +138,6 @@ $I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, 
 $$ A = \begin{bmatrix} 3 &amp;amp; -1 &amp;amp; 0 &amp;amp; -2 \\
 -1 &amp;amp; 3 &amp;amp; -1 &amp;amp; -1 \\
 0 &amp;amp; -1 &amp;amp; 2 &amp;amp; -1 \\</description>
-    </item>
-    
-    <item>
-      <title>整数・実数の不等号とfloor, ceil</title>
-      <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
-      <pubDate>Sat, 13 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</guid>
-      <description>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
-公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d &amp;lt; t \iff d &amp;lt; \lceil t \rceil$ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &amp;gt; t \iff d &amp;gt; \lfloor t \rfloor$ $d \geq t \iff d \geq \lceil t \rceil$  </description>
     </item>
     
     <item>

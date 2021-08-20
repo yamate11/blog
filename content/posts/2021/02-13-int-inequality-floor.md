@@ -1,7 +1,8 @@
 ---
 author: "yamate11"
-title: "整数・実数の不等号とfloor, ceil"
-date: "2021-02-13"
+title: "整数・実数の大小比較とfloor, ceil"
+date: "2021-08-20T10:07:00+09:00"
+date_init: "2021-02-13"
 tags: []
 categories: ["topic"]
 draft: false
@@ -14,8 +15,44 @@ draft: false
 
 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
 
-* $d < t \iff d < \lceil t \rceil$
 * $d \leq t \iff d \leq \lfloor t \rfloor$
-* $d > t \iff d > \lfloor t \rfloor$
-* $d \geq t \iff d \geq \lceil t \rceil$
+* $d < t \iff d < \lceil t \rceil$
+* $t \leq d \iff \lceil t \rceil \leq d$
+* $t < d \iff \lfloor t \rfloor < d$
+
+## 考え方
+
+\begin{eqnarray*}
+d\leq t 
+    &\iff& t \in \\{ t \mid d \leq t \\} \\\\
+    &\iff& t \in \bigcup \\{ [e, e+1) \mid e = d, d+1, \ldots \\} \\\\
+    &\iff& \bigvee \\{ t \in [e, e+1) \mid e = d, d+1, \ldots \\} \\\\
+    &\iff& \bigvee \\{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \\} \\\\
+    &\iff& d \leq \lfloor t \rfloor \hspace{20em}
+\end{eqnarray*}
+
+同様に，
+
+\begin{eqnarray*}
+d<t &\iff& t \in \\{ t \mid d < t \\} \\\\
+    &\iff& \bigvee \\{ t \in (e-1, e] \mid e = d+1, d+2, \ldots \\} \\\\
+    &\iff& \bigvee \\{ \lceil t \rceil = e \mid e = d+1, d+2, \ldots \\} \\\\
+    &\iff& d < \lceil t \rceil \hspace{20em}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+t \leq d
+    &\iff& \bigvee \\{ t \in (e-1, e] \mid e = d, d - 1, \ldots \\} \\\\
+    &\iff& \bigvee \\{ \lceil t \rceil = e \mid e = d, d - 1, \ldots \\} \\\\
+    &\iff& \lceil t \rceil \leq d \hspace{20em}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+t < d
+    &\iff& \bigvee \\{ t \in [e, e+1) \mid e = d - 1, d - 2, \ldots \\} \\\\
+    &\iff& \bigvee \\{ \lfloor t \rfloor = e \mid e = d - 1, d - 2, \ldots \\} \\\\
+    &\iff& \lfloor t \rfloor < d \hspace{20em}
+\end{eqnarray*}
+
+
 

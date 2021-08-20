@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>整数・実数の不等号とfloor, ceil | yamate11のブログ</title>
+<title>整数・実数の大小比較とfloor, ceil | yamate11のブログ</title>
 <meta name="keywords" content="" />
 <meta name="description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d &lt; t \iff d &lt; \lceil t \rceil$ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &gt; t \iff d &gt; \lfloor t \rfloor$ $d \geq t \iff d \geq \lceil t \rceil$  ">
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
+&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
@@ -48,20 +49,22 @@
 
 
 
-<meta property="og:title" content="整数・実数の不等号とfloor, ceil" />
+<meta property="og:title" content="整数・実数の大小比較とfloor, ceil" />
 <meta property="og:description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d &lt; t \iff d &lt; \lceil t \rceil$ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &gt; t \iff d &gt; \lfloor t \rfloor$ $d \geq t \iff d \geq \lceil t \rceil$  " />
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
+&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-02-13T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-02-13T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-20T10:07:00&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-20T10:07:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="整数・実数の不等号とfloor, ceil"/>
+<meta name="twitter:title" content="整数・実数の大小比較とfloor, ceil"/>
 <meta name="twitter:description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d &lt; t \iff d &lt; \lceil t \rceil$ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &gt; t \iff d &gt; \lfloor t \rfloor$ $d \geq t \iff d \geq \lceil t \rceil$  "/>
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
+&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\"/>
 
 
 <script type="application/ld+json">
@@ -78,7 +81,7 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "整数・実数の不等号とfloor, ceil",
+      "name": "整数・実数の大小比較とfloor, ceil",
       "item": "https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/"
     }
   ]
@@ -88,17 +91,17 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "整数・実数の不等号とfloor, ceil",
-  "name": "整数・実数の不等号とfloor, ceil",
-  "description": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \u0026lt; t \\iff d \u0026lt; \\lceil t \\rceil$ $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d \u0026gt; t \\iff d \u0026gt; \\lfloor t \\rfloor$ $d \\geq t \\iff d \\geq \\lceil t \\rceil$  ",
+  "headline": "整数・実数の大小比較とfloor, ceil",
+  "name": "整数・実数の大小比較とfloor, ceil",
+  "description": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d \u0026lt; t \\iff d \u0026lt; \\lceil t \\rceil$ $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t \u0026lt; d \\iff \\lfloor t \\rfloor \u0026lt; d$  考え方 \\begin{eqnarray*} d\\leq t \u0026amp;\\iff\u0026amp; t \\in \\{ t \\mid d \\leq t \\} \\\\\n\u0026amp;\\iff\u0026amp; t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\",
   "keywords": [
     
   ],
-  "articleBody": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d  t \\iff d  \\lfloor t \\rfloor$ $d \\geq t \\iff d \\geq \\lceil t \\rceil$  ",
-  "wordCount" : "45",
+  "articleBody": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t  考え方 \\begin{eqnarray*} d\\leq t \u0026\\iff\u0026 t \\in \\{ t \\mid d \\leq t \\} \\\\\n\u0026\\iff\u0026 t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ t \\in [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ \\lfloor t \\rfloor = e \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 d \\leq \\lfloor t \\rfloor \\hspace{20em} \\end{eqnarray*}\n同様に，\n\\begin{eqnarray*} d\\begin{eqnarray*} t \\leq d \u0026\\iff\u0026 \\bigvee \\{ t \\in (e-1, e] \\mid e = d, d - 1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ \\lceil t \\rceil = e \\mid e = d, d - 1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\lceil t \\rceil \\leq d \\hspace{20em} \\end{eqnarray*}\n\\begin{eqnarray*} t ",
+  "wordCount" : "265",
   "inLanguage": "en",
-  "datePublished": "2021-02-13T00:00:00Z",
-  "dateModified": "2021-02-13T00:00:00Z",
+  "datePublished": "2021-08-20T10:07:00+09:00",
+  "dateModified": "2021-08-20T10:07:00+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -220,9 +223,9 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      整数・実数の不等号とfloor, ceil
+      整数・実数の大小比較とfloor, ceil
     </h1>
-    <div class="post-meta">2021-02-13&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-20&nbsp;·&nbsp;2021-02-13 (初版)&nbsp;·&nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><h2 id="経緯">経緯<a hidden class="anchor" aria-hidden="true" href="#経緯">#</a></h2>
@@ -230,25 +233,48 @@
 <h2 id="公式">公式<a hidden class="anchor" aria-hidden="true" href="#公式">#</a></h2>
 <p>$d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．</p>
 <ul>
-<li>$d &lt; t \iff d &lt; \lceil t \rceil$</li>
 <li>$d \leq t \iff d \leq \lfloor t \rfloor$</li>
-<li>$d &gt; t \iff d &gt; \lfloor t \rfloor$</li>
-<li>$d \geq t \iff d \geq \lceil t \rceil$</li>
+<li>$d &lt; t \iff d &lt; \lceil t \rceil$</li>
+<li>$t \leq d \iff \lceil t \rceil \leq d$</li>
+<li>$t &lt; d \iff \lfloor t \rfloor &lt; d$</li>
 </ul>
+<h2 id="考え方">考え方<a hidden class="anchor" aria-hidden="true" href="#考え方">#</a></h2>
+<p>\begin{eqnarray*}
+d\leq t 
+&amp;\iff&amp; t \in \{ t \mid d \leq t \} \\<br>
+&amp;\iff&amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\<br>
+&amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em}
+\end{eqnarray*}</p>
+<p>同様に，</p>
+<p>\begin{eqnarray*}
+d&lt;t &amp;\iff&amp; t \in \{ t \mid d &lt; t \} \\<br>
+&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d+1, d+2, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d+1, d+2, \ldots \} \\<br>
+&amp;\iff&amp; d &lt; \lceil t \rceil \hspace{20em}
+\end{eqnarray*}</p>
+<p>\begin{eqnarray*}
+t \leq d
+&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d, d - 1, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d, d - 1, \ldots \} \\<br>
+&amp;\iff&amp; \lceil t \rceil \leq d \hspace{20em}
+\end{eqnarray*}</p>
+<p>\begin{eqnarray*}
+t &lt; d
+&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d - 1, d - 2, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d - 1, d - 2, \ldots \} \\<br>
+&amp;\iff&amp; \lfloor t \rfloor &lt; d \hspace{20em}
+\end{eqnarray*}</p>
 
 
   </div>
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>行列木定理</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/">
     <span class="title">Next Page »</span>
     <br>
-    <span>文字列，数値変換</span>
+    <span>Random LIS - Atcoder Regular Contest 104 E</span>
   </a>
 </nav>
 
