@@ -6,7 +6,43 @@
     <description>Recent content in Tags on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DP</title>
+      <link>https://yamate11.github.io/blog/tags/dp/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/dp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LIS</title>
+      <link>https://yamate11.github.io/blog/tags/lis/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/lis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ordered bell number</title>
+      <link>https://yamate11.github.io/blog/tags/ordered-bell-number/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/ordered-bell-number/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>期待値</title>
+      <link>https://yamate11.github.io/blog/tags/%E6%9C%9F%E5%BE%85%E5%80%A4/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/%E6%9C%9F%E5%BE%85%E5%80%A4/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>2次元</title>
       <link>https://yamate11.github.io/blog/tags/2%E6%AC%A1%E5%85%83/</link>
@@ -76,15 +112,6 @@
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://yamate11.github.io/blog/tags/%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DP</title>
-      <link>https://yamate11.github.io/blog/tags/dp/</link>
-      <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/tags/dp/</guid>
       <description></description>
     </item>
     

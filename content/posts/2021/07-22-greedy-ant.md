@@ -3,7 +3,7 @@ author: "yamate11"
 title: "Greedy Ant - キーエンスプログラミングコンテスト2021 E"
 date: "2021-07-22"
 tags: []
-categories: ["topic"]
+categories: ["solution"]
 draft: false
 ---
 
