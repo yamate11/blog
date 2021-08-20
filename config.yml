@@ -12,7 +12,7 @@ params:
     DateFormat: "2006-01-02"
     env: "production"
     disableSpecial1stPost: true
-
+    ShowPostNavLinks: true
 
     fuseOpts:
         isCaseSensitive: false
