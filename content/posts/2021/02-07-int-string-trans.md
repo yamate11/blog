@@ -1,29 +1,47 @@
 ---
 author: "yamate11"
 title: "文字列，数値変換"
-date: "2021-02-07"
+date: "2021-08-20T10:52:00+09:00"
+date_init: "2021-02-07"
 tags: []
 categories: ["topic"]
 draft: false
 ---
 
 C++ での型の変換などのいろいろな変換方法を書いておきます．
+競技プログラミング用途です．ソース冒頭に次のように書いてあるものとします．
+
+```cpp
+#include <bits/stdc++.h>
+typedef long long int ll;
+using namespace std;
+```
 
 ## 文字列→数値
 
 std::stoi, std::stoll を使う．2進数などを読みたいときは，base を指定すれば良い．
 
 ```
-int       stoi( const string& str, size_t* pos=0, int base=10 );
+int       stoi(  const string& str, size_t* pos=0, int base=10 );
 long long stoll( const string& str, size_t* pos=0, int base=10 );
 ```
 
-似たような名前で std::strtoll などがあるが，そちらは引数に const char* を取るので，stoll の方が便利だろう．
+使用例
+
+```cpp
+  string s1 = "101";
+  ll x = stoll(s1);         // x == 101
+  ll y = stoll(s1, 0, 2);   // y == 5
+```
+
+似たような名前で std::strtoll などもあるが，
+これらは引数に const char* を取る．
+const string& を引数に取る stoll などの方が便利だろう．
 
 実数への変換は，std::stod, std::stold を使う．
 
 ```
-double      stod( const string& str, size_t* pos = 0 );
+double      stod(  const string& str, size_t* pos = 0 );
 long double stold( const string& str, size_t* pos = 0 );
 ```
 
@@ -40,37 +58,44 @@ string to_string( double value );
 string to_string( long double value );
 ```
 
-16進にしたいとか8進にしたいとかだと，関数一発というわけにはいかないように思う．
+16進表記文字列にしたいとか
+8進にしたいとかいう場合には，
+1つの関数を適用して終わりというわけにはいかないように思う．
+次のような感じだろう．
 
+```cpp
+  ll value = 256;
+  stringstream ss;
+  ss << hex << value;
+  string s = ss.str();  // s == "100"
 ```
-stringstream ss;
-ss << hex << value;
-string s = ss.str()
-```
-のような感じだろうか．8進の場合には hex の代わりに oct．
 
-2進の場合は次のようにする．この場合，valueの2進表現が長さ64の文字列になる．
+8進にするときには hex の代わりに oct を用いる．
 
-```
-string s = bitset<64>(value).to_string();
+2進の場合はbitsetを用いる．
+下の例では，value2 の2進表現が長さ8の文字列になる．
+
+```cpp
+  ll value2 = 30;
+  string s2 = bitset<8>(value2).to_string(); // s2 == "00011110"
 ```
 
 ## 実数→整数
 
 普通にキャストすれば良い場合も多いが，いろいろ罠がある．
 
-```
-double d = ...;
-ll x = ll(d + 0.5);  // DANGER!!
+```cpp
+  double d = -26.001;
+  ll x = ll(d + 0.5);  // x == -25  (!!)
 ```
 
-これは，dが負の場合に機能しない．0に向かって丸められてしまうから．次のいずれかを用いる．
+これは，dが負の場合には意図したようには動作しない．
+0に向かって丸められてしまうからである．
+次を用いる．
 
-```
-double d = ...;
-ll x = ll(floor(d + 0.5));
-// または
-ll x = llround(d);
+```cpp
+  double d = -26.001;
+  ll x = llround(d);   // x == -26
 ```
 
 round関数などのsignature は以下のようになっている．
@@ -84,13 +109,17 @@ long long   llround ( double arg );
 long long   llroundl( long double arg );
 ```
 
-$10\^9 + 7$ などを書くのが面倒で
+定数の 1,000,000,007 などを書くのが面倒で，
+
+```cpp
+  const ll mod = 1e9 + 7;
 ```
-const ll mod = 1e9 + 7;
+などと書いてしまうことがある．上の例は意図したように動くようであるが，
+
+```cpp
+  const ll big1 = 1e18;
+  const ll big2 = 1e18 + 1;
 ```
-などと書いてしまうことが多い．上の例は意図したように動くようであるが，
-```
-const ll big = 1e18;
-const ll big2 = 1e18 + 1;
-```
-については，両方同じ値になってしまう．(gccの場合) double の精度は15桁くらい，long double の精度は18桁くらい．
+については，big1 も big2 も
+同じ値になってしまう．
+(gccの場合) double の精度は十進で15桁くらい，long double は18桁くらいである．

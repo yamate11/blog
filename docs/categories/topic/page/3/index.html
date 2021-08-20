@@ -160,6 +160,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Lagrange補間</h2>
+  </header>
+  <section class="entry-content">
+    <p>Lagrange補間に関する記事です．
+要約 $$ f(x) = \sum_{i = 0}^{k}\frac{ f(i) }{ (-1)^{k - i} \; i ! \; (k - i) ! } \cdot \frac{ 1 }{ x - i } \cdot \prod_{j=0}^{k} ( x - j ) $$
+詳細 \( k \) 次多項式 $f(x)$ について，$x = 0, \ldots, k$ の値が，$f(0) = v_0, \ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\( \Omega( k^3 ) \) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．
+$I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．...</p>
+  </section>
+  <footer class="entry-footer">2021-04-22&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to Lagrange補間" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>行列木定理</h2>
   </header>
   <section class="entry-content">
@@ -173,22 +187,6 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\
   </section>
   <footer class="entry-footer">2021-04-18&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 行列木定理" href="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>文字列，数値変換</h2>
-  </header>
-  <section class="entry-content">
-    <p>C&#43;&#43; での型の変換などのいろいろな変換方法を書いておきます．
-文字列→数値 std::stoi, std::stoll を使う．2進数などを読みたいときは，base を指定すれば良い．
-int stoi( const string&amp; str, size_t* pos=0, int base=10 ); long long stoll( const string&amp; str, size_t* pos=0, int base=10 ); 似たような名前で std::strtoll などがあるが，そちらは引数に const char* を取るので，stoll の方が便利だろう．
-実数への変換は，std::stod, std::stold を使う．
-double stod( const string&amp; str, size_t* pos = 0 ); long double stold( const string&amp; str, size_t* pos = 0 ); 数値→文字列 std::to_string を用いる．
-string to_string( int value ); string to_string( long long value ); string to_string( unsigned value ); string to_string( unsigned long long value ); string to_string( double value ); string to_string( long double value ); 16進にしたいとか8進にしたいとかだと，関数一発というわけにはいかないように思う．...</p>
-  </section>
-  <footer class="entry-footer">2021-02-07&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 文字列，数値変換" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 

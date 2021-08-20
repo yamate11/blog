@@ -175,6 +175,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>xor畳み込み</h2>
+  </header>
+  <section class="entry-content">
+    <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
+xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
+ $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
+アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
+$$ H_0 = 1 $$
+$$ H_{k &#43; 1} = \begin{bmatrix} H_k &amp; H_k \\...</p>
+  </section>
+  <footer class="entry-footer">2021-08-12&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Atcoder Beginner Contest 213 H - Stroll</h2>
   </header>
   <section class="entry-content">
@@ -226,19 +242,6 @@
   </section>
   <footer class="entry-footer">2021-07-06&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>policy-based data structure の tree</h2>
-  </header>
-  <section class="entry-content">
-    <p>gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
-リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
- x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os....</p>
-  </section>
-  <footer class="entry-footer">2021-06-05&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to policy-based data structure の tree" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
