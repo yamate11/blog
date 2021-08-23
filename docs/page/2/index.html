@@ -171,6 +171,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</h2>
+  </header>
+  <section class="entry-content">
+    <p>発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
+最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
+vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
+int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u]....</p>
+  </section>
+  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to vector はあんまり速くない" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</h2>
   </header>
   <section class="entry-content">
@@ -225,19 +240,6 @@
   </section>
   <footer class="entry-footer">2021-07-22&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Greedy Ant - キーエンスプログラミングコンテスト2021 E" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>桁DPのコーディング</h2>
-  </header>
-  <section class="entry-content">
-    <p>桁DPのコーディングに関する記事です． N 以下の整数である条件を満たすものを数えます．
-参照 以下のoptさんの記事 をもとにして，少し追加しています:
-コーディングの方針  配るDP 上位桁を 0-padding した状態で考える  有効な桁が始まっているかどうかが必要なこともあるが，その場合にはそれを表すフラグを導入する． 0以上N以下を数えることになるので，必要なら最後に調整．   代入は1回  その桁に表れうる数 (0..9 とか 0..1 とか) をループで回し，「この数を付け加えた時の格納先」を考える 格納先の添字を表す変数を，格納元で初期化して適宜変更する．    // N は各桁数値のベクトルで表現．ds[0] が最上位桁． // もちろん，問題文の都合で string でも良い． // 本来は ds[0] を一の位にして， // ループを ds.size() - 1 から 0 まで回した方が自然かもしれない vector&lt;ll&gt;&amp; ds; // DP表は，最初の次元を上限に等しいかどうかのフラグにする． // 0 ... 上限値． 1 ... 上限値より小さいと確定 auto tbl_init = vector(2, vector(??, vector(??, 0LL))); auto tbl = tbl_init; tbl[0][?...</p>
-  </section>
-  <footer class="entry-footer">2021-07-06&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
