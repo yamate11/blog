@@ -171,6 +171,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>xor畳み込み</h2>
+  </header>
+  <section class="entry-content">
+    <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
+xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
+ $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
+アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
+$$ H_0 = 1 $$
+$$ H_{k &#43; 1} = \begin{bmatrix} H_k &amp; H_k \\...</p>
+  </section>
+  <footer class="entry-footer">2021-08-23&nbsp;·&nbsp;2021-08-12 (初版)&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>文字列，数値変換</h2>
   </header>
   <section class="entry-content">
@@ -224,22 +240,6 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
   </section>
   <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to vector はあんまり速くない" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</h2>
-  </header>
-  <section class="entry-content">
-    <p>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….
-問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)
-ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
- dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
- 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
- dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．...</p>
-  </section>
-  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to イベント巡り (Event Hopping) - JOI 2020/2021 二次予選" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

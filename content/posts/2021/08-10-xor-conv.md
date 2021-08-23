@@ -1,7 +1,8 @@
 ---
 author: "yamate11"
 title: "xor畳み込み"
-date: "2021-08-12"
+date: "2021-08-23T12:40:00+09:00"
+date_init: "2021-08-12"
 tags: ["xor", "畳み込み", "アダマール変換"]
 categories: ["topic"]
 draft: false
@@ -56,3 +57,7 @@ $$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$
 メモリを賢く使って計算している例が 
 [kazuma8128\'s blog](https://kazuma8128.hatenablog.com/entry/2018/05/31/144519)
 に載っている．
+
+## これを使える問題
+
+[ABC212 H Nim Counting](https://atcoder.jp/contests/abc212/tasks/abc212_h)
