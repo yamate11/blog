@@ -18,7 +18,7 @@ https://atcoder.jp/contests/arc104/tasks/arc104_e
 過去問埋めで解いてみようとしましたが，全然わかりませんでした．
 [公式解説](https://atcoder.jp/contests/arc104/editorial/159) を読んでもやっぱりわからず，
 [けんちょんさんの解説](https://drken1215.hatenablog.com/entry/2020/10/06/101900) 
-で，なんとか理解することができました．
+を読んで，なんとか理解することができました．
 
 ## 解法
 
