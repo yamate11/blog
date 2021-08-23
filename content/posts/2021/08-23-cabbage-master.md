@@ -157,3 +157,8 @@ $F$ の特性関数を $\zeta_U$ で変換することで分かる．
 
 である．したがって，$h$ は，$\mu_L(p)$ で求めることができる．
 
+## ACコード
+
+https://atcoder.jp/contests/abc215/submissions/25289505
+
+
