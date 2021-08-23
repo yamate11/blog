@@ -7,11 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Cabbage Master - Atcoder Beginner Contest 215 H | yamate11のブログ</title>
 <meta name="keywords" content="" />
-<meta name="description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です． 公式解説そのままですけれど，予備知識を一応書きました．
-問題へのリンク https://atcoder.jp/contests/abc215/tasks/abc215_h 経緯 コンテスト中は，そもそもHには到達もしませんでした． コンテスト後に考えましたが，歯が立ちませんでした．
- Hall の定理は，見たことはあったけど，覚えていなかった 高速ゼータ変換や高速メビウス変換のライブラリは持っていたのですが， どう使うか知らなかった．  というわけなので，解けるはずがありませんでした．
-問題概要 正の整数$N$, $M$; 各 $i\in [1, N]$ と 各 $j \in [1, M]$ に対して 正の整数 $A_i$, $B_j$, および $C_{ij} \in \{0, 1\}$ が与えられる． ただし，任意の $j$ に対して $i$ が存在して $C_{ij} = 1$ である．
-$i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ を固定し， $D = \bigcup \{ D_i \mid i \in [1, N] \}$ と書く． $D$ の部分集合 $E$ と $i \in [1, N]$ に対して，$E_i := E \cap D_i$ とする． $E$ に関する次の条件を考える．">
+<meta name="description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
@@ -51,11 +47,7 @@ $i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ �
 
 
 <meta property="og:title" content="Cabbage Master - Atcoder Beginner Contest 215 H" />
-<meta property="og:description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です． 公式解説そのままですけれど，予備知識を一応書きました．
-問題へのリンク https://atcoder.jp/contests/abc215/tasks/abc215_h 経緯 コンテスト中は，そもそもHには到達もしませんでした． コンテスト後に考えましたが，歯が立ちませんでした．
- Hall の定理は，見たことはあったけど，覚えていなかった 高速ゼータ変換や高速メビウス変換のライブラリは持っていたのですが， どう使うか知らなかった．  というわけなので，解けるはずがありませんでした．
-問題概要 正の整数$N$, $M$; 各 $i\in [1, N]$ と 各 $j \in [1, M]$ に対して 正の整数 $A_i$, $B_j$, および $C_{ij} \in \{0, 1\}$ が与えられる． ただし，任意の $j$ に対して $i$ が存在して $C_{ij} = 1$ である．
-$i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ を固定し， $D = \bigcup \{ D_i \mid i \in [1, N] \}$ と書く． $D$ の部分集合 $E$ と $i \in [1, N]$ に対して，$E_i := E \cap D_i$ とする． $E$ に関する次の条件を考える．" />
+<meta property="og:description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-23T16:35:21&#43;09:00" />
@@ -63,11 +55,7 @@ $i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ �
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cabbage Master - Atcoder Beginner Contest 215 H"/>
-<meta name="twitter:description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です． 公式解説そのままですけれど，予備知識を一応書きました．
-問題へのリンク https://atcoder.jp/contests/abc215/tasks/abc215_h 経緯 コンテスト中は，そもそもHには到達もしませんでした． コンテスト後に考えましたが，歯が立ちませんでした．
- Hall の定理は，見たことはあったけど，覚えていなかった 高速ゼータ変換や高速メビウス変換のライブラリは持っていたのですが， どう使うか知らなかった．  というわけなので，解けるはずがありませんでした．
-問題概要 正の整数$N$, $M$; 各 $i\in [1, N]$ と 各 $j \in [1, M]$ に対して 正の整数 $A_i$, $B_j$, および $C_{ij} \in \{0, 1\}$ が与えられる． ただし，任意の $j$ に対して $i$ が存在して $C_{ij} = 1$ である．
-$i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ を固定し， $D = \bigcup \{ D_i \mid i \in [1, N] \}$ と書く． $D$ の部分集合 $E$ と $i \in [1, N]$ に対して，$E_i := E \cap D_i$ とする． $E$ に関する次の条件を考える．"/>
+<meta name="twitter:description" content="Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．"/>
 
 
 <script type="application/ld+json">
@@ -96,7 +84,7 @@ $i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ �
   "@type": "BlogPosting",
   "headline": "Cabbage Master - Atcoder Beginner Contest 215 H",
   "name": "Cabbage Master - Atcoder Beginner Contest 215 H",
-  "description": "Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です． 公式解説そのままですけれど，予備知識を一応書きました．\n問題へのリンク https://atcoder.jp/contests/abc215/tasks/abc215_h 経緯 コンテスト中は，そもそもHには到達もしませんでした． コンテスト後に考えましたが，歯が立ちませんでした．\n Hall の定理は，見たことはあったけど，覚えていなかった 高速ゼータ変換や高速メビウス変換のライブラリは持っていたのですが， どう使うか知らなかった．  というわけなので，解けるはずがありませんでした．\n問題概要 正の整数$N$, $M$; 各 $i\\in [1, N]$ と 各 $j \\in [1, M]$ に対して 正の整数 $A_i$, $B_j$, および $C_{ij} \\in \\{0, 1\\}$ が与えられる． ただし，任意の $j$ に対して $i$ が存在して $C_{ij} = 1$ である．\n$i\\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ を固定し， $D = \\bigcup \\{ D_i \\mid i \\in [1, N] \\}$ と書く． $D$ の部分集合 $E$ と $i \\in [1, N]$ に対して，$E_i := E \\cap D_i$ とする． $E$ に関する次の条件を考える．",
+  "description": "Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．",
   "keywords": [
     
   ],
@@ -228,6 +216,9 @@ $i\in [1, N]$ に対して $|D_i| = A_i$ となる互いに素な集合 $D_i$ �
     <h1 class="post-title">
       Cabbage Master - Atcoder Beginner Contest 215 H
     </h1>
+    <div class="post-description">
+      Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．
+    </div>
     <div class="post-meta">2021-08-23&nbsp;·&nbsp;yamate11
 </div>
   </header> 
