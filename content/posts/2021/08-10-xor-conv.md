@@ -61,3 +61,4 @@ $$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$
 ## これを使える問題
 
 [ABC212 H Nim Counting](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+
