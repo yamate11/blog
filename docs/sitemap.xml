@@ -2,25 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yamate11.github.io/blog/categories/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2021/08-24-snack/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/categories/solution/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/%E6%9C%80%E5%A4%A7%E6%B5%81/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/%E6%9C%80%E5%B0%8F%E3%82%AB%E3%83%83%E3%83%88/</loc>
+    <lastmod>2021-08-24T17:57:58+09:00</lastmod>
+  </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/</loc>
     <lastmod>2021-08-23T16:35:21+09:00</lastmod>
   </url><url>
-    <loc>https://yamate11.github.io/blog/categories/</loc>
-    <lastmod>2021-08-23T16:35:21+09:00</lastmod>
-  </url><url>
     <loc>https://yamate11.github.io/blog/tags/hall%E3%81%AE%E5%AE%9A%E7%90%86/</loc>
-    <lastmod>2021-08-23T16:35:21+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2021-08-23T16:35:21+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/categories/solution/</loc>
-    <lastmod>2021-08-23T16:35:21+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/tags/</loc>
-    <lastmod>2021-08-23T16:35:21+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/</loc>
     <lastmod>2021-08-23T16:35:21+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/%E3%82%BC%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B/</loc>
