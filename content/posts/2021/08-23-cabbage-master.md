@@ -9,8 +9,6 @@ description: "Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関す�
 
 ---
 
-Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．
-公式解説そのままですけれど，予備知識を一応書きました．
 
 ## 問題へのリンク
 
