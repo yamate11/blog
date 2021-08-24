@@ -64,3 +64,6 @@ $$
 であるから，$A_i$ の大きい方から $n$ 個が $X$ に属するとして良い．
 $n = 1, \ldots, N$ について計算して最小値を取れば良い．
 
+## ACコード
+
+https://atcoder.jp/contests/arc125/submissions/25313748
