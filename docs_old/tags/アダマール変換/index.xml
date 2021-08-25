@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>アダマール変換 on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/%E3%82%A2%E3%83%80%E3%83%9E%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B/</link>
+    <description>Recent content in アダマール変換 on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 23 Aug 2021 12:40:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/%E3%82%A2%E3%83%80%E3%83%9E%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>xor畳み込み</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</link>
+      <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</guid>
+      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
+xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
+ $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
+アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
+$$ H_0 = 1 $$
+$$ H_{k + 1} = \begin{bmatrix} H_k &amp;amp; H_k \\</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,16 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Aug 2021 17:57:58 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Aug 2021 06:08:51 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shorten ABC - AtCoder Regular Contest 110 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/</link>
+      <pubDate>Thu, 26 Aug 2021 06:08:51 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/</guid>
+      <description>鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．</description>
+    </item>
+    
     <item>
       <title>Snack - Atcoder Regular Contest 125 E</title>
       <link>https://yamate11.github.io/blog/posts/2021/08-24-snack/</link>

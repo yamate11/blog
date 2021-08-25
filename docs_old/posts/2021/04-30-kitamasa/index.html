@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>きたまさ法 | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
+問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n &#43; k} = d_{0} a_{n} &#43; \cdots &#43; d_{ k - 1 } a_{n &#43; k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
+行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\
+1 &amp; &amp; \Large{0} &amp; 0 \\">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="きたまさ法" />
+<meta property="og:description" content="きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
+問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n &#43; k} = d_{0} a_{n} &#43; \cdots &#43; d_{ k - 1 } a_{n &#43; k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
+行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\
+1 &amp; &amp; \Large{0} &amp; 0 \\" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-04-30T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="きたまさ法"/>
+<meta name="twitter:description" content="きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
+問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n &#43; k} = d_{0} a_{n} &#43; \cdots &#43; d_{ k - 1 } a_{n &#43; k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
+行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\
+1 &amp; &amp; \Large{0} &amp; 0 \\"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "きたまさ法",
+      "item": "https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "きたまさ法",
+  "name": "きたまさ法",
+  "description": "きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．\n問題設定 整数 $ d_0 , \\ldots, d_{ k - 1 }$ と $a_0, \\ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \\cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \\log n )$ で求める．\n行列 $$ A = \\begin{bmatrix} d_{ k - 1 } \u0026amp;\\cdots \u0026amp; \\cdots \u0026amp; d_{ 0 } \\\\\n1 \u0026amp; \u0026amp; \\Large{0} \u0026amp; 0 \\\\",
+  "keywords": [
+    
+  ],
+  "articleBody": "きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．\n問題設定 整数 $ d_0 , \\ldots, d_{ k - 1 }$ と $a_0, \\ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \\cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \\log n )$ で求める．\n行列 $$ A = \\begin{bmatrix} d_{ k - 1 } \u0026\\cdots \u0026 \\cdots \u0026 d_{ 0 } \\\\\n1 \u0026 \u0026 \\Large{0} \u0026 0 \\\\\n\u0026 \\ddots \u0026 \u0026 0\\\\\n\\Large{0} \u0026 \u0026 1 \u0026 0 \\\\\n\\end{bmatrix} $$\nとすれば，\n$$ \\begin{bmatrix} a_n \\\\\n\\vdots \\\\\na_{ n - k + 1} \\end{bmatrix} = A^{ n - k + 1 } \\begin{bmatrix} a_{ k - 1 } \\\\\n\\vdots \\\\\na_{ 0 } \\end{bmatrix} $$\nなので，$A^n$ が計算できれば良い．あるいは，$A^n$ の最上行だけでも良い． 計算量が $O( k^2 \\log n)$ で押さえられて欲しいが， 普通の行列累乗だと$O( k^3 \\log n)$ になる．\n計算 $\\newcommand{\\bsww}{\\boldsymbol{w}}$ $\\newcommand{\\bsx}{\\boldsymbol{x}}$ $\\newcommand{\\bsy}{\\boldsymbol{y}}$ $\\newcommand{\\bsdd}{\\boldsymbol{d}}$ $\\bsy_i$ たちを行ベクトルとする．$\\bsdd = [d_{ k - 1 }, \\ldots, d_0]$ とする． また，$\\text{sft}([z_0, \\ldots, z_{ k - 1 }]) = [z_1, \\ldots, z_{ k - 1 }, 0]$ とする． 計算することによって以下がわかる:\n$$ A \\left[ \\begin{array}{c} \\bsy_1 \\\\ \\bsy_2 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] = \\left[ \\begin{array}{c} * \\\\ \\bsy_1 \\\\ \\vdots \\\\ \\bsy_{ k - 1 } \\end{array}\\right] ,\\quad \\left[\\begin{array}{c} \\bsy_1 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] A = \\left[\\begin{array}{c} y_{11}\\bsdd + \\text{sft}( \\bsy_{1} ) \\\\\n\\vdots \\\\\ny_{k1}\\bsdd + \\text{sft}( \\bsy_{k} ) \\\\\n\\end{array}\\right] \\tag{1}$$\nしたがって，$ A^n $ の最下行の行ベクトルを $\\bsx(n)$ と書くと，以下が成り立つ:\n$$ A^n = \\left[\\begin{array}{c} \\bsx( n + k - 1) \\\\\n\\vdots \\\\\n\\bsx( n ) \\\\\n\\end{array}\\right] \\tag{2} $$\n(1)の右の式より， $\\bsx(n)$ の第1成分を $x$ とすると， $$ \\bsx (n + 1) = x \\bsdd + \\text{sft}( \\bsx(n) ) \\tag{3}$$ であることが分かる． また，$A^n$ の列ベクトルを $\\bsww_1^T, \\ldots, \\bsww_k^T$ とし，\n$$ \\left[\\begin{array}{c} \\bsx(2n + k - 1) \\\\\n\\vdots \\\\\n\\bsx(2n) \\\\\n\\end{array}\\right] = A^{2n} = (A^{n})^{2} = \\left[\\begin{array}{c} \\bsx(n + k - 1) \\\\\n\\vdots \\\\\n\\bsx(n) \\\\\n\\end{array}\\right] \\left[\\begin{array}{c} ~ \\\\\n\\bsww_1^T \u0026 \\cdots \u0026 \\bsww_k^T \\\\\n~ \\\\\n\\end{array}\\right] $$\nと書いて，最下行を比較すると，\n$$ \\bsx(2n) = [ \\bsx(n)\\cdot \\bsww_1, \\ldots, \\bsx(n)\\cdot \\bsww_k ] \\tag{4}$$\nである．\n以上より，次の手順で $a_n$ を計算することができる．\n $a_n = \\bsx(n - k + 1 + k - 1) \\cdot [a_{ k - 1 }, \\cdots, a_{ 0 }]$ なので，$\\bsx(n)$ が求められれば良い． $n$ を，「$+1$」 と 「$\\times 2$」 で書く．たとえば，$n = 18$ なら，$n = ((1 \\times 2 \\times 2 \\times 2) + 1) \\times 2$． この内側から順に $\\bsx(n)$ を求めていく． $+1$ のときには，(3) を適用する．この計算量は，$O(k)$ $\\times 2$ のときには，まず (3) を $k - 1$ 回適用して，$\\bsx(n), \\ldots, \\bsx(n + k - 1)$ を求める． すると(2) より $A^{n}$ が決まるので，(4) の右辺が計算できる．この計算量は，$O(k^2)$  ",
+  "wordCount" : "409",
+  "inLanguage": "en",
+  "datePublished": "2021-04-30T00:00:00Z",
+  "dateModified": "2021-04-30T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      きたまさ法
+    </h1>
+    <div class="post-meta">2021-04-30&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>きたまさ法に関する記事です．
+<a href="https://yosupo.hatenablog.com/entry/2015/03/27/025132" target="_blank">よすぽさんの記事</a>
+
+を参照して書きました．</p>
+<h2 id="問題設定">問題設定<a hidden class="anchor" aria-hidden="true" href="#問題設定">#</a></h2>
+<p>整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている．
+漸化式 $ a_{n + k} = d_{0} a_{n} + \cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を
+$O( k^2 \log n )$ で求める．</p>
+<h2 id="行列">行列<a hidden class="anchor" aria-hidden="true" href="#行列">#</a></h2>
+<p>$$ A =
+\begin{bmatrix}
+d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\<br>
+1 &amp;   &amp;  \Large{0} &amp; 0 \\<br>
+&amp;  \ddots &amp;  &amp; 0\\<br>
+\Large{0} &amp; &amp; 1 &amp; 0 \\<br>
+\end{bmatrix}
+$$</p>
+<p>とすれば，</p>
+<p>$$
+\begin{bmatrix}
+a_n \\<br>
+\vdots \\<br>
+a_{ n - k + 1}
+\end{bmatrix}
+= A^{ n - k + 1 }
+\begin{bmatrix}
+a_{ k - 1 } \\<br>
+\vdots \\<br>
+a_{  0 }
+\end{bmatrix}
+$$</p>
+<p>なので，$A^n$ が計算できれば良い．あるいは，$A^n$ の最上行だけでも良い．
+計算量が $O( k^2 \log n)$ で押さえられて欲しいが，
+普通の行列累乗だと$O( k^3 \log n)$ になる．</p>
+<h2 id="計算">計算<a hidden class="anchor" aria-hidden="true" href="#計算">#</a></h2>
+<p>$\newcommand{\bsww}{\boldsymbol{w}}$
+$\newcommand{\bsx}{\boldsymbol{x}}$
+$\newcommand{\bsy}{\boldsymbol{y}}$
+$\newcommand{\bsdd}{\boldsymbol{d}}$
+$\bsy_i$ たちを行ベクトルとする．$\bsdd = [d_{ k - 1 }, \ldots, d_0]$ とする．
+また，$\text{sft}([z_0, \ldots, z_{ k - 1 }]) = [z_1, \ldots, z_{ k - 1 }, 0]$ とする．
+計算することによって以下がわかる:</p>
+<p>$$ A \left[
+\begin{array}{c}
+\bsy_1 \\ \bsy_2 \\ \vdots \\ \bsy_k
+\end{array}\right] = \left[
+\begin{array}{c}  * \\ \bsy_1 \\ \vdots \\ \bsy_{ k - 1 }
+\end{array}\right] ,\quad
+\left[\begin{array}{c}
+\bsy_1 \\ \vdots \\ \bsy_k
+\end{array}\right] A = \left[\begin{array}{c}
+y_{11}\bsdd + \text{sft}( \bsy_{1} ) \\<br>
+\vdots \\<br>
+y_{k1}\bsdd + \text{sft}( \bsy_{k} ) \\<br>
+\end{array}\right]
+\tag{1}$$</p>
+<p>したがって，$ A^n $ の最下行の行ベクトルを $\bsx(n)$ と書くと，以下が成り立つ:</p>
+<p>$$ A^n = \left[\begin{array}{c}
+\bsx( n + k - 1) \\<br>
+\vdots \\<br>
+\bsx( n ) \\<br>
+\end{array}\right] \tag{2}
+$$</p>
+<p>(1)の右の式より， $\bsx(n)$ の第1成分を $x$ とすると，
+$$ \bsx (n + 1) = x \bsdd + \text{sft}( \bsx(n) ) \tag{3}$$ であることが分かる．
+また，$A^n$ の列ベクトルを $\bsww_1^T, \ldots, \bsww_k^T$ とし，</p>
+<p>$$ \left[\begin{array}{c}
+\bsx(2n + k - 1) \\<br>
+\vdots \\<br>
+\bsx(2n) \\<br>
+\end{array}\right]
+= A^{2n} = (A^{n})^{2} =
+\left[\begin{array}{c}
+\bsx(n + k - 1) \\<br>
+\vdots \\<br>
+\bsx(n) \\<br>
+\end{array}\right]
+\left[\begin{array}{c}
+~ \\<br>
+\bsww_1^T &amp; \cdots &amp; \bsww_k^T \\<br>
+~ \\<br>
+\end{array}\right] $$</p>
+<p>と書いて，最下行を比較すると，</p>
+<p>$$ \bsx(2n) = [ \bsx(n)\cdot \bsww_1, \ldots, \bsx(n)\cdot \bsww_k ] \tag{4}$$</p>
+<p>である．</p>
+<p>以上より，次の手順で $a_n$ を計算することができる．</p>
+<ul>
+<li>$a_n = \bsx(n - k + 1 + k - 1) \cdot [a_{ k - 1 }, \cdots, a_{ 0 }]$ なので，$\bsx(n)$ が求められれば良い．</li>
+<li>$n$ を，「$+1$」 と 「$\times 2$」 で書く．たとえば，$n = 18$ なら，$n = ((1 \times 2 \times 2 \times 2) + 1) \times 2$．
+この内側から順に $\bsx(n)$ を求めていく．</li>
+<li>$+1$ のときには，(3) を適用する．この計算量は，$O(k)$</li>
+<li>$\times 2$ のときには，まず (3) を $k - 1$ 回適用して，$\bsx(n), \ldots, \bsx(n + k - 1)$ を求める．
+すると(2) より $A^{n}$ が決まるので，(4) の右辺が計算できる．この計算量は，$O(k^2)$</li>
+</ul>
+
+
+  </div>
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>燃やす埋める問題</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>binom(n, r) を小さい素数pに対して mod p で求める</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

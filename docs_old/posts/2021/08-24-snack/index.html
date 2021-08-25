@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Snack - Atcoder Regular Contest 125 E | yamate11のブログ</title>
+<meta name="keywords" content="最小カット, 最大流" />
+<meta name="description" content="Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-24-snack/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.d517601cde99c1dd411a502654c496277f5e6dfb3e1f958691922a41c9daf11a.css" integrity="sha256-1RdgHN6Zwd1BGlAmVMSWJ39ebfs&#43;H5WGkZIqQcna8Ro=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="Snack - Atcoder Regular Contest 125 E" />
+<meta property="og:description" content="Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-24-snack/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-24T17:57:58&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-24T17:57:58&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Snack - Atcoder Regular Contest 125 E"/>
+<meta name="twitter:description" content="Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Snack - Atcoder Regular Contest 125 E",
+      "item": "https://yamate11.github.io/blog/posts/2021/08-24-snack/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Snack - Atcoder Regular Contest 125 E",
+  "name": "Snack - Atcoder Regular Contest 125 E",
+  "description": "Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．",
+  "keywords": [
+    "最小カット", "最大流"
+  ],
+  "articleBody": "問題へのリンク https://atcoder.jp/contests/arc125/tasks/arc125_e 経緯 ARC125 には参加できなかったので，バーチャルコンテストで解きました． Cまでしか解けなかったので，バーチャルコンテスト終了後に考えましたが， 全然解けませんでした．フローは考えたのですが，間に合うはずがない (それは正しい) と思って，そこから先には進めませんでした．\n問題概要 正の整数列 $(A_i \\mid i \\in [1, N]), (B_j \\mid j \\in [1, M]), (C_j \\mid j \\in [1, M]) $ が与えられる． $(D_{ij} \\mid i \\in [1, N], j \\in [1, M])$ を次を満たすように取るとき， $\\sum \\{ D_{ij} \\mid i \\in [1, N], j \\in [1, M] \\}$ の最大値を求めよ．\n $\\sum \\{ D_{ij} \\mid j \\in [1, M] \\} \\leq A_i$ $D_{ij} \\leq B_j$ $\\sum \\{ D_{ij} \\mid i \\in [1, N] \\} \\leq C_j$  制約: $N, M \\leq 2\\times 10^5$, $A_i, C_j \\leq 10^{12}$, $B_j \\leq 10^7$\n解法 次のフローの最大流問題として定式化できる．\n Source $\\to L_i$ 容量 $A_i$ $L_i \\to R_j$ 容量 $B_j$ $R_j \\to$ Sink 容量 $C_j$  容量が大きくノードが多いので，Dinic などでは解けない．\n最小カット $(A, B)$ を求める．Source $\\in A$ とする． $L_i$ たちのうち，$A$ に属するものの集合を $X$, $|X| = n$ とする． $R_j$ については，\n $R_j \\in A$ とすると，カット容量への寄与は $C_j$ $R_j \\in B$ とすると，カット容量への寄与は，$n B_j$  であるから，$(A, B)$ の最小性より，\n $C_j $C_j  n B_j$ なら $R_j \\in B$  となる必要がある．カット容量は全体として，\n$$ \\sum \\{ A_i \\mid i \\in [1, N] - X \\} + \\sum \\{ \\min(C_j, n B_j) \\mid j \\in [1, M] \\} $$\nであるから，$A_i$ の大きい方から $n$ 個が $X$ に属するとして良い． $n = 1, \\ldots, N$ について計算して最小値を取れば良い．\nACコード https://atcoder.jp/contests/arc125/submissions/25313748 ",
+  "wordCount" : "199",
+  "inLanguage": "en",
+  "datePublished": "2021-08-24T17:57:58+09:00",
+  "dateModified": "2021-08-24T17:57:58+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/08-24-snack/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Snack - Atcoder Regular Contest 125 E
+    </h1>
+    <div class="post-description">
+      Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．
+    </div>
+    <div class="post-meta">2021-08-24&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="問題へのリンク">問題へのリンク<a hidden class="anchor" aria-hidden="true" href="#問題へのリンク">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc125/tasks/arc125_e" target="_blank">https://atcoder.jp/contests/arc125/tasks/arc125_e</a>
+</p>
+<h2 id="経緯">経緯<a hidden class="anchor" aria-hidden="true" href="#経緯">#</a></h2>
+<p>ARC125 には参加できなかったので，バーチャルコンテストで解きました．
+Cまでしか解けなかったので，バーチャルコンテスト終了後に考えましたが，
+全然解けませんでした．フローは考えたのですが，間に合うはずがない
+(それは正しい) と思って，そこから先には進めませんでした．</p>
+<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p>正の整数列 $(A_i \mid i \in [1, N]),
+(B_j \mid j \in [1, M]), (C_j \mid j \in [1, M]) $
+が与えられる．
+$(D_{ij} \mid i \in [1, N], j \in [1, M])$ を次を満たすように取るとき，
+$\sum \{ D_{ij} \mid i \in [1, N], j \in [1, M] \}$ の最大値を求めよ．</p>
+<ul>
+<li>$\sum \{ D_{ij} \mid j \in [1, M] \} \leq A_i$</li>
+<li>$D_{ij} \leq B_j$</li>
+<li>$\sum \{ D_{ij} \mid i \in [1, N] \} \leq C_j$</li>
+</ul>
+<p>制約: $N, M \leq 2\times 10^5$,
+$A_i, C_j \leq 10^{12}$, $B_j \leq 10^7$</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>次のフローの最大流問題として定式化できる．</p>
+<ul>
+<li>Source $\to L_i$  容量 $A_i$</li>
+<li>$L_i \to R_j$  容量 $B_j$</li>
+<li>$R_j \to$ Sink  容量 $C_j$</li>
+</ul>
+<p>容量が大きくノードが多いので，Dinic などでは解けない．</p>
+<p>最小カット $(A, B)$ を求める．Source $\in A$ とする．
+$L_i$ たちのうち，$A$ に属するものの集合を $X$, $|X| = n$ とする．
+$R_j$ については，</p>
+<ul>
+<li>$R_j \in A$ とすると，カット容量への寄与は $C_j$</li>
+<li>$R_j \in B$ とすると，カット容量への寄与は，$n B_j$</li>
+</ul>
+<p>であるから，$(A, B)$ の最小性より，</p>
+<ul>
+<li>$C_j &lt; n B_j$ なら $R_j \in A$</li>
+<li>$C_j &gt; n B_j$ なら $R_j \in B$</li>
+</ul>
+<p>となる必要がある．カット容量は全体として，</p>
+<p>$$  \sum \{ A_i \mid i \in [1, N] - X \}
++ \sum \{ \min(C_j, n B_j) \mid j \in [1, M] \}
+$$</p>
+<p>であるから，$A_i$ の大きい方から $n$ 個が $X$ に属するとして良い．
+$n = 1, \ldots, N$ について計算して最小値を取れば良い．</p>
+<h2 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc125/submissions/25313748" target="_blank">https://atcoder.jp/contests/arc125/submissions/25313748</a>
+</p>
+
+
+  </div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E6%9C%80%E5%B0%8F%E3%82%AB%E3%83%83%E3%83%88/">最小カット</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E6%9C%80%E5%A4%A7%E6%B5%81/">最大流</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Cabbage Master - Atcoder Beginner Contest 215 H</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
