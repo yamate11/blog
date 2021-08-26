@@ -13,3 +13,9 @@
 .post-content code {
     font-size: .85em;
 }
+
+.first-entry {
+    min-height: 120px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
