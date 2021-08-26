@@ -14,6 +14,14 @@ params:
     disableSpecial1stPost: true
     ShowPostNavLinks: true
 
+    homeInfoParams:
+        title: "yamate11のブログ"
+        content: yamate11 の競技プログラミング用のblogです．
+                 コメントは<a href="https://twitter.com/_yamate11">Twitter (_yamate11)</a>へお送りください．</br>
+                 Links： <a href="https://atcoder.jp/users/yamate11">AtCoder (yamate11)</a> / 
+                 <a href="https://codeforces.com/profile/yamate11">Codeforces (yamate11)</a> /
+                 <a href="https://twitter.com/_yamate11">Twitter (_yamate11)</a>
+
     fuseOpts:
         isCaseSensitive: false
         shouldSort: true
