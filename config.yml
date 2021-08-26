@@ -4,6 +4,7 @@ languageCode: en
 title: "yamate11のブログ"
 theme: "PaperMod"
 paginate: 5
+disqusShortname: "yamate11blog"
 
 params:
 
@@ -13,6 +14,7 @@ params:
     env: "production"
     disableSpecial1stPost: true
     ShowPostNavLinks: true
+    comments: true
 
     homeInfoParams:
         title: "yamate11のブログ"
