@@ -5,8 +5,10 @@ date: "2021-08-26T06:08:51+09:00"
 # date_init: "2021-08-26"
 tags: ["DP", "文字置き換え", "数え上げ", "判定問題"]
 categories: ["solution"]
-description: "鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．"
+summary: "解説AC です．公式解説も皆さんの解説もたくさん参考にしています．"
 ---
+
+鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．
 
 ## 経緯
 

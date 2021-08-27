@@ -13,12 +13,7 @@
       <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
       
       <guid>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</guid>
-      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
-xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
- $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
-アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
-$$ H_0 = 1 $$
-$$ H_{k + 1} = \begin{bmatrix} H_k &amp;amp; H_k \\</description>
+      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</description>
     </item>
     
   </channel>

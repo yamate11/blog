@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Shorten ABC - AtCoder Regular Contest 110 E | yamate11のブログ</title>
 <meta name="keywords" content="DP, 文字置き換え, 数え上げ, 判定問題" />
-<meta name="description" content="鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．">
+<meta name="description" content="解説AC です．公式解説も皆さんの解説もたくさん参考にしています．">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.93235f966d2fa5ffd3652bb40e2440c509e63be62ce2e92373a54420ed3bf10b.css" integrity="sha256-kyNflm0vpf/TZSu0DiRAxQnmO&#43;Ys4ukjc6VEIO078Qs=" rel="preload stylesheet" as="style">
@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Shorten ABC - AtCoder Regular Contest 110 E" />
-<meta property="og:description" content="鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．" />
+<meta property="og:description" content="解説AC です．公式解説も皆さんの解説もたくさん参考にしています．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-26T06:08:51&#43;09:00" />
@@ -55,7 +55,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Shorten ABC - AtCoder Regular Contest 110 E"/>
-<meta name="twitter:description" content="鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．"/>
+<meta name="twitter:description" content="解説AC です．公式解説も皆さんの解説もたくさん参考にしています．"/>
 
 
 <script type="application/ld+json">
@@ -84,12 +84,12 @@
   "@type": "BlogPosting",
   "headline": "Shorten ABC - AtCoder Regular Contest 110 E",
   "name": "Shorten ABC - AtCoder Regular Contest 110 E",
-  "description": "鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．",
+  "description": "解説AC です．公式解説も皆さんの解説もたくさん参考にしています．",
   "keywords": [
     "DP", "文字置き換え", "数え上げ", "判定問題"
   ],
-  "articleBody": "経緯 解説AC です．公式解説も皆さんの解説もたくさん参考にしています．\n問題概要 A, B, C からなる，長さ N の文字列がある． 隣り合った異なる文字を，どちらとも違う文字で置き換える操作ができる． 操作を0回以上行ってできる文字列の数を mod $10^9 + 7$ で求めよ．\n制約: $N \\leq 10^6$\n 問題へのリンク   解法 Python 流に，文字列 s と t の連結を s+t で， 文字列sの位置p(含む)から位置q(含まない)の部分文字列をs[p:q]で表す． 文字列長1の文字列と文字を同一視する．\n与えられた文字列が1種類の文字からなるときは，答は 1 である． 以下，そうでないとする．\nA,B,Cからなる文字列 s に対する e(s) を定義する．\n e(“A”) = 1 e(“B”) = 2 e(“C”) = 3 e(s + c) = e(s) XOR e(c) (len(c) = 1)  次が成り立つ．\n 文字列 s を文字 c に変換できるための必要十分条件は，以下の 両方が成り立つことである．  e(s) = e(c) len(s) = 1 であるか，または，s が2種類以上の文字を含む．    帰納法で簡単に証明できる．次も成り立つ．\n 長さ a の文字列 s が2種類以上の文字を含むとする． s を長さ b の文字列 t に変換できる必要十分条件は， $0 = p_0  必要性は明らかなので，十分性を示す． $s[p_i:p_{i+1}]$ が1種類の文字 X しか含まない場合が問題となる． $p_{i+1} - p_i$ は奇数で，t[i] = X である． このブロックより右か左に X 以外の文字が現れるところがある． どちらでも同じなので，右に現れるとしよう． $s[p_j:p_{j+1}]$ に X 以外の文字が現れ，$i s を与えられた文字列とする． 上で示したことから，s から変換可能な長さ b の文字列 t に対して， 「左から貪欲に切っていく分割」を対応させることができる．正確には， $0 = p_0 $e(s[p_i:p_{i+1}]) = e(t[i]) \\qquad (i = 0, \\ldots, b-1)$ $e(s[p_i:q] \\neq e(t[i]) \\qquad (i = 0, …, b-1; p_i $e(s[p_b:N]) = 0$  このような分割を数えれば良い．$p_b = i$ となるような分割の数 dp[i] を，配るDPを用いて数えよう． t = 0, 1, 2, 3 と，$0 \\leq i $\\textrm{nxt}(i, t) := \\min \\{ j \\mid e(s[p:j]) = t, i  とするとき，t = 1, 2, 3 に対して，\n dp[nxt(i, t)] += dp[i]  なる計算を行えば良い．求める答は， $\\sum \\{ dp[i] \\mid 1 \\leq i \\leq N; e(s[i:N]) = 0 \\}$ である．\n$e(s[i:N]) = 0$ を満たす i は，後ろから順に $O(N)$ で決定できる． nxt(i, t) も，t = 0 も含めて後ろから順に，\n nxt(i, e(s[i])) = i + 1 nxt(i, (t XOR e(s[i])) % 4) = nxt(i + 1, t)  と計算すれば，やはり $O(N)$ で求められる． 全体として $O(N)$ で問題を解くことができた．\nACコード Fp は，mod $10^9 + 7$ を取るためのクラスです．\nint main(/* int argc, char *argv[] */) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout  setprecision(20); ll N; cin  N; string S; cin  S; if (all_of(S.begin(), S.end(), [\u0026](char t) - bool {return t == S[0];})) { cout  1  endl; return 0; } vectorll E(N); for (ll i = 0; i  N; i++) E[i] = S[i] - 'A' + 1; vector nxt(4, vectorll(N + 1)); for (ll t = 0; t  4; t++) nxt[t][N] = N + 1; for (ll i = N-1; i = 0; i--) { nxt[E[i]][i] = i + 1; for (ll t = 1; t  4; t++) nxt[E[i] ^ t][i] = nxt[t][i + 1]; } vectorFp tbl(N + 2); tbl[0] = 1; for (ll i = 0; i  N; i++) { for (ll t = 1; t  4; t++) tbl[nxt[t][i]] += tbl[i]; } vectorll accE(N + 1); for (ll i = N-1; i = 0; i--) accE[i] = E[i] ^ accE[i + 1]; Fp ans = 0; for (ll i = 1; i  N; i++) if (accE[i] == 0) ans += tbl[i]; cout  ans  endl; return 0; } ",
-  "wordCount" : "506",
+  "articleBody": "鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．\n経緯 解説AC です．公式解説も皆さんの解説もたくさん参考にしています．\n問題概要 A, B, C からなる，長さ N の文字列がある． 隣り合った異なる文字を，どちらとも違う文字で置き換える操作ができる． 操作を0回以上行ってできる文字列の数を mod $10^9 + 7$ で求めよ．\n制約: $N \\leq 10^6$\n 問題へのリンク   解法 Python 流に，文字列 s と t の連結を s+t で， 文字列sの位置p(含む)から位置q(含まない)の部分文字列をs[p:q]で表す． 文字列長1の文字列と文字を同一視する．\n与えられた文字列が1種類の文字からなるときは，答は 1 である． 以下，そうでないとする．\nA,B,Cからなる文字列 s に対する e(s) を定義する．\n e(“A”) = 1 e(“B”) = 2 e(“C”) = 3 e(s + c) = e(s) XOR e(c) (len(c) = 1)  次が成り立つ．\n 文字列 s を文字 c に変換できるための必要十分条件は，以下の 両方が成り立つことである．  e(s) = e(c) len(s) = 1 であるか，または，s が2種類以上の文字を含む．    帰納法で簡単に証明できる．次も成り立つ．\n 長さ a の文字列 s が2種類以上の文字を含むとする． s を長さ b の文字列 t に変換できる必要十分条件は， $0 = p_0  必要性は明らかなので，十分性を示す． $s[p_i:p_{i+1}]$ が1種類の文字 X しか含まない場合が問題となる． $p_{i+1} - p_i$ は奇数で，t[i] = X である． このブロックより右か左に X 以外の文字が現れるところがある． どちらでも同じなので，右に現れるとしよう． $s[p_j:p_{j+1}]$ に X 以外の文字が現れ，$i s を与えられた文字列とする． 上で示したことから，s から変換可能な長さ b の文字列 t に対して， 「左から貪欲に切っていく分割」を対応させることができる．正確には， $0 = p_0 $e(s[p_i:p_{i+1}]) = e(t[i]) \\qquad (i = 0, \\ldots, b-1)$ $e(s[p_i:q] \\neq e(t[i]) \\qquad (i = 0, …, b-1; p_i $e(s[p_b:N]) = 0$  このような分割を数えれば良い．$p_b = i$ となるような分割の数 dp[i] を，配るDPを用いて数えよう． t = 0, 1, 2, 3 と，$0 \\leq i $\\textrm{nxt}(i, t) := \\min \\{ j \\mid e(s[p:j]) = t, i  とするとき，t = 1, 2, 3 に対して，\n dp[nxt(i, t)] += dp[i]  なる計算を行えば良い．求める答は， $\\sum \\{ dp[i] \\mid 1 \\leq i \\leq N; e(s[i:N]) = 0 \\}$ である．\n$e(s[i:N]) = 0$ を満たす i は，後ろから順に $O(N)$ で決定できる． nxt(i, t) も，t = 0 も含めて後ろから順に，\n nxt(i, e(s[i])) = i + 1 nxt(i, (t XOR e(s[i])) % 4) = nxt(i + 1, t)  と計算すれば，やはり $O(N)$ で求められる． 全体として $O(N)$ で問題を解くことができた．\nACコード Fp は，mod $10^9 + 7$ を取るためのクラスです．\nint main(/* int argc, char *argv[] */) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout  setprecision(20); ll N; cin  N; string S; cin  S; if (all_of(S.begin(), S.end(), [\u0026](char t) - bool {return t == S[0];})) { cout  1  endl; return 0; } vectorll E(N); for (ll i = 0; i  N; i++) E[i] = S[i] - 'A' + 1; vector nxt(4, vectorll(N + 1)); for (ll t = 0; t  4; t++) nxt[t][N] = N + 1; for (ll i = N-1; i = 0; i--) { nxt[E[i]][i] = i + 1; for (ll t = 1; t  4; t++) nxt[E[i] ^ t][i] = nxt[t][i + 1]; } vectorFp tbl(N + 2); tbl[0] = 1; for (ll i = 0; i  N; i++) { for (ll t = 1; t  4; t++) tbl[nxt[t][i]] += tbl[i]; } vectorll accE(N + 1); for (ll i = N-1; i = 0; i--) accE[i] = E[i] ^ accE[i + 1]; Fp ans = 0; for (ll i = 1; i  N; i++) if (accE[i] == 0) ans += tbl[i]; cout  ans  endl; return 0; } ",
+  "wordCount" : "519",
   "inLanguage": "en",
   "datePublished": "2021-08-26T06:08:51+09:00",
   "dateModified": "2021-08-26T06:08:51+09:00",
@@ -216,13 +216,11 @@
     <h1 class="post-title">
       Shorten ABC - AtCoder Regular Contest 110 E
     </h1>
-    <div class="post-description">
-      鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．
-    </div>
     <div class="post-meta">2021-08-26&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><h2 id="経緯">経緯<a hidden class="anchor" aria-hidden="true" href="#経緯">#</a></h2>
+  <div class="post-content"><p>鹿島建設プログラミングコンテスト2020 (AtCoder Regular Contest 110 - ARC110) の E - Shorten ABC の解法です．</p>
+<h2 id="経緯">経緯<a hidden class="anchor" aria-hidden="true" href="#経緯">#</a></h2>
 <p>解説AC です．公式解説も皆さんの解説もたくさん参考にしています．</p>
 <h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
 <p>A, B, C からなる，長さ N の文字列がある．

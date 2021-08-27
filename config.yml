@@ -14,15 +14,20 @@ params:
     env: "production"
     disableSpecial1stPost: true
     ShowPostNavLinks: true
+    ShowCodeCopyButtons: false
+    ShowToc: false
+    TocOpen: false
     comments: true
 
     homeInfoParams:
         title: "yamate11のブログ"
-        content: yamate11 の競技プログラミング用のblogです．
-                 コメントは<a href="https://twitter.com/_yamate11">Twitter (_yamate11)</a>へお送りください．</br>
-                 Links： <a href="https://atcoder.jp/users/yamate11">AtCoder (yamate11)</a> / 
-                 <a href="https://codeforces.com/profile/yamate11">Codeforces (yamate11)</a> /
-                 <a href="https://twitter.com/_yamate11">Twitter (_yamate11)</a>
+        content: >
+            yamate11 の競技プログラミング用のblogです．
+
+            - Links：
+              [AtCoder (yamate11)](https://atcoder.jp/users/yamate11) /
+              [Codeforces (yamate11)](https://codeforces.com/profile/yamate11) /
+              [Twitter (_yamate11)](https://twitter.com/_yamate11)
 
     fuseOpts:
         isCaseSensitive: false

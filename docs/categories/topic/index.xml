@@ -13,12 +13,7 @@
       <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
       
       <guid>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</guid>
-      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
-xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \oplus y$ は $x$ と $y$ の xor とする．
- $ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $  以下では，$Z = X * Y$ と書く．
-アダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．
-$$ H_0 = 1 $$
-$$ H_{k + 1} = \begin{bmatrix} H_k &amp;amp; H_k \\</description>
+      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</description>
     </item>
     
     <item>
@@ -27,10 +22,7 @@ $$ H_{k + 1} = \begin{bmatrix} H_k &amp;amp; H_k \\</description>
       <pubDate>Fri, 20 Aug 2021 10:52:00 +0900</pubDate>
       
       <guid>https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/</guid>
-      <description>C++ での型の変換などのいろいろな変換方法を書いておきます． 競技プログラミング用途です．ソース冒頭に次のように書いてあるものとします．
-#include &amp;lt;bits/stdc++.h&amp;gt;typedef long long int ll; using namespace std; 文字列→数値 std::stoi, std::stoll を使う．2進数などを読みたいときは，base を指定すれば良い．
-int stoi( const string&amp;amp; str, size_t* pos=0, int base=10 ); long long stoll( const string&amp;amp; str, size_t* pos=0, int base=10 ); 使用例
-string s1 = &amp;#34;101&amp;#34;; ll x = stoll(s1); // x == 101  ll y = stoll(s1, 0, 2); // y == 5 似たような名前で std::strtoll などもあるが， これらは引数に const char* を取る． const string&amp;amp; を引数に取る stoll などの方が便利だろう．</description>
+      <description>C++ での型の変換などのいろいろな変換方法です．</description>
     </item>
     
     <item>

@@ -6,6 +6,7 @@ date: "2021-08-24T17:57:58+09:00"
 tags: ["最小カット", "最大流"]
 # categories: ["topic"]
 categories: ["solution"]
+summary: "解法です．公式解説そのままです．"
 description: "Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．"
 ---
 

@@ -5,6 +5,7 @@ date: "2021-08-23T16:35:21+09:00"
 # date_init: "2021-08-23"
 tags: ["Hallの定理", "ゼータ変換", "メビウス変換" ]
 categories: ["solution"]
+summary: "公式解説そのままですけれど，予備知識を一応書きました．"
 description: "Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．"
 
 ---

@@ -1,13 +1,14 @@
 ---
 author: "yamate11"
-title: "Atcoder Beginner Contest 213 H - Stroll"
+title: "Stroll - Atcoder Beginner Contest 213 H"
 date: "2021-08-11"
 tags: ["オンラインDP", "オフラインDP", "分割統治DP", "DP", "分割統治FFT", "FFT"]
 categories: ["solution"]
 draft: false
+summary: "解けませんでした．オンライン・オフライン変換を調べて書きました．"
 ---
 
-Atcoder Beginner Contest 213 (ABC-213) H - Stroll に関する記事です．
+Atcoder Beginner Contest 213 (ABC-213) H - Stroll の解法です．
 
 ## 問題へのリンク
 
@@ -102,6 +103,3 @@ solve(0, T + 1)
 
 https://atcoder.jp/contests/abc213/submissions/24966725
 
-#### keywords
-
-["オンラインDP", "オフラインDP", "分割統治DP", "DP", "分割統治FFT", "FFT"]
