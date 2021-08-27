@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Pass to Next - ARC 124 E | yamate11のブログ</title>
+<meta name="keywords" content="数え上げ, 乗算を組合せとみる, DP" />
+<meta name="description" content="解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.93235f966d2fa5ffd3652bb40e2440c509e63be62ce2e92373a54420ed3bf10b.css" integrity="sha256-kyNflm0vpf/TZSu0DiRAxQnmO&#43;Ys4ukjc6VEIO078Qs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="Pass to Next - ARC 124 E" />
+<meta property="og:description" content="解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-27T14:51:59&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-27T14:51:59&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pass to Next - ARC 124 E"/>
+<meta name="twitter:description" content="解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Pass to Next - ARC 124 E",
+      "item": "https://yamate11.github.io/blog/posts/2021/08-27-arc124e/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pass to Next - ARC 124 E",
+  "name": "Pass to Next - ARC 124 E",
+  "description": "解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．",
+  "keywords": [
+    "数え上げ", "乗算を組合せとみる", "DP"
+  ],
+  "articleBody": "AtCoder Regular Contest (ARC) 124 E - Pass to Next の解法です． コンテスト後にも解けませんでした． 公式解説 を読んだだけではわからず， laycrsさんのツイートとコード を読んで，なんとか理解しました．\n問題へのリンク https://atcoder.jp/contests/arc124/tasks/arc124_e 問題概要 1, 2, …, N の番号のついた人が円環状に並ぶ． 各人は a_i 個のボールを持っている． 0個以上 a_i 個のボールを右隣の人に一斉に渡す (1回限り)． その結果 人 i が持つボールの数を x_i とする． 有り得る $(x_i \\mid i \\in [1, N])$ 全体の集合を S とする． $\\sum \\{ \\prod \\{ x_i \\mid i \\in [1, N] \\} \\mid x \\in S \\}$ を mod 998244353 で求めよ．\n解法 (わかってしまえば，公式解説と書いていることは同じです)\n異なる渡し方が同じ $x$ を生成するための条件は，渡す個数の差が 全員同じであることであるから，「渡す個数が 0 の人が一人以上いる」 という条件をつけると，生成される $S$ には変化がなく，かつ，渡し方と $S$ が1対1に対応する．\n$x$ を一つ固定すると，$\\prod \\{ x_i \\mid i \\in [1, N] \\}$ は， 各人の操作後のボールから1つを選ぶ選び方の数と一致する．\n求める答は，以下の塗り方の数と一致する:\n 各 $i \\in [1, N] $ に対し，$a_i + 1$ 枚のカードが1列に横に並んで グループをなしており， 全体では円環上に並んでいる (グループ N の次にグループ 1 が来る)． 以下の条件を満たすように，いくつかのカードを黒く， いくつかのカードを赤く塗る．  各グループのカードのうち，ちょうど1枚を黒く塗る． 黒く塗るカードが右端のカードであるグループが1つ以上有る． どの2枚の黒いカードの間にも，赤いカードがちょうど1枚有る．    各グループの，黒いカードより右側のカードが，右隣の人に渡したボールに 対応し，黒いカードより右側のカードは，手元に残したボールに対応する． 赤いカードは，「選んだ」ボールに対応する．\nこのような塗り方を，以下の DP で数える．\n dp[i][a][b][c] := 第 $i$ グループまでを以下の条件を満たすように塗る方法の数  $a \\in \\{0, 1\\}$． $a = 0$ では，最後のグループで，黒いカードより右側に赤いカードが無いことを 仮定する． $a = 1$ では，有ることを仮定する． $b \\in \\{0, 1\\}$． $b = 0$ は，第 $i$ グループで，黒いカードよりも右に 赤いカードが無いことを示す． $b = 1$ は，有ることを示す． $c \\in \\{0, 1\\}$． $c = 0$ は，第 1 グループから第 $i$ グループまででは， 右端のカードを黒く塗ったものが無いことを示す． $c = 1$ は，有ることを示す．    遷移は下のコードを参照．\n求める答は，dp[N][0][0][1] + dp[N][1][1][1] である．\nACコード Fp binom(ll n, ll r) { // 二項係数．3までしか出てこない  if (r  0 || n  r) return 0; if (r == 0) return 1; if (r == 1) return n; if (r == 2) return Fp(n) * Fp(n - 1) / Fp(2); if (r == 3) return Fp(n) * Fp(n - 1) * Fp(n - 2) / Fp(6); assert(0); } int main(/* int argc, char *argv[] */) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout  setprecision(20); ll N; cin  N; vectorll A(N); for (ll i = 0; i  N; i++) cin  A[i]; auto tbl_init = vector(2, vector(2, vector(2, Fp(0)))); auto tbl = tbl_init; tbl[0][0][0] = tbl[1][1][0] = 1; for (ll i = 0; i  N; i++) { auto prev = move(tbl); tbl = tbl_init; for (ll a = 0; a  2; a++) { // 遷移前後でaは変わらず  for (ll b = 0; b  2; b++) { // 遷移前  for (ll b0 = 0; b0  2; b0++) { // 遷移後  for (ll c = 0; c  2; c++) { // 遷移前  for (ll c0 = 0; c0  2; c0++) { // 遷移後  // n 枚から r 枚を選んで，下の (*) で更新する．  ll n = A[i] + 1; // r は最大で 黒1, 赤2 の 3枚だが，  // グループ i-1 で選択されていたら1減じる．  // グループ i で選択しないのであれば1減じる．  ll r = 3 - b - (1 - b0); if (c \u0026\u0026 !c0) continue; // 矛盾  else if (!c \u0026\u0026 c0) { // このグループで右端を黒く塗る  if (b0) continue; // 右端より右には置けない  // 右端を黒に決めたので，n, r とも1減じる．  n--; r--; }else if (!c \u0026\u0026 !c0 \u0026\u0026 !b0) n--; // 右端は選べない  tbl[a][b0][c0] += binom(n, r) * prev[a][b][c]; // (*)  } } } } } } cout  tbl[0][0][1] + tbl[1][1][1]  endl; return 0; } Fp は，mod 998244353 を計算するための構造体です． https://atcoder.jp/contests/arc124/submissions/25361161 ",
+  "wordCount" : "465",
+  "inLanguage": "en",
+  "datePublished": "2021-08-27T14:51:59+09:00",
+  "dateModified": "2021-08-27T14:51:59+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/08-27-arc124e/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Pass to Next - ARC 124 E
+    </h1>
+    <div class="post-meta">2021-08-27&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>AtCoder Regular Contest (ARC) 124 E - Pass to Next  の解法です．
+コンテスト後にも解けませんでした．
+<a href="https://atcoder.jp/contests/arc124/editorial/2332" target="_blank">公式解説</a>
+
+を読んだだけではわからず，
+<a href="https://twitter.com/laycrs/status/1419297288631975937" target="_blank">laycrsさんのツイートとコード</a>
+
+を読んで，なんとか理解しました．</p>
+<h2 id="問題へのリンク">問題へのリンク<a hidden class="anchor" aria-hidden="true" href="#問題へのリンク">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc124/tasks/arc124_e" target="_blank">https://atcoder.jp/contests/arc124/tasks/arc124_e</a>
+</p>
+<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p>1, 2, &hellip;, N の番号のついた人が円環状に並ぶ．
+各人は a_i 個のボールを持っている．
+0個以上 a_i 個のボールを右隣の人に一斉に渡す (1回限り)．
+その結果 人 i が持つボールの数を x_i とする．
+有り得る $(x_i \mid i \in [1, N])$ 全体の集合を S とする．
+$\sum \{ \prod \{ x_i \mid i \in [1, N] \} \mid x \in S \}$ を
+mod 998244353 で求めよ．</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>(わかってしまえば，公式解説と書いていることは同じです)</p>
+<p>異なる渡し方が同じ $x$ を生成するための条件は，渡す個数の差が
+全員同じであることであるから，「渡す個数が 0 の人が一人以上いる」
+という条件をつけると，生成される $S$ には変化がなく，かつ，渡し方と
+$S$ が1対1に対応する．</p>
+<p>$x$ を一つ固定すると，$\prod \{ x_i \mid i \in [1, N] \}$ は，
+各人の操作後のボールから1つを選ぶ選び方の数と一致する．</p>
+<p>求める答は，以下の塗り方の数と一致する:</p>
+<ul>
+<li>各 $i \in [1, N] $ に対し，$a_i + 1$ 枚のカードが1列に横に並んで
+グループをなしており，
+全体では円環上に並んでいる (グループ N の次にグループ 1 が来る)．</li>
+<li>以下の条件を満たすように，いくつかのカードを黒く，
+いくつかのカードを赤く塗る．
+<ul>
+<li>各グループのカードのうち，ちょうど1枚を黒く塗る．</li>
+<li>黒く塗るカードが右端のカードであるグループが1つ以上有る．</li>
+<li>どの2枚の黒いカードの間にも，赤いカードがちょうど1枚有る．</li>
+</ul>
+</li>
+</ul>
+<p>各グループの，黒いカードより右側のカードが，右隣の人に渡したボールに
+対応し，黒いカードより右側のカードは，手元に残したボールに対応する．
+赤いカードは，「選んだ」ボールに対応する．</p>
+<p>このような塗り方を，以下の DP で数える．</p>
+<ul>
+<li><code>dp[i][a][b][c]</code> := 第 $i$ グループまでを以下の条件を満たすように塗る方法の数
+<ul>
+<li>$a \in \{0, 1\}$．
+$a = 0$ では，最後のグループで，黒いカードより右側に赤いカードが無いことを
+仮定する．
+$a = 1$ では，有ることを仮定する．</li>
+<li>$b \in \{0, 1\}$．
+$b = 0$ は，第 $i$ グループで，黒いカードよりも右に
+赤いカードが無いことを示す．
+$b = 1$ は，有ることを示す．</li>
+<li>$c \in \{0, 1\}$．
+$c = 0$ は，第 1 グループから第 $i$ グループまででは，
+右端のカードを黒く塗ったものが無いことを示す．
+$c = 1$ は，有ることを示す．</li>
+</ul>
+</li>
+</ul>
+<p>遷移は下のコードを参照．</p>
+<p>求める答は，<code>dp[N][0][0][1] + dp[N][1][1][1]</code> である．</p>
+<h2 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Fp</span> <span style="color:#75af00">binom</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">r</span><span style="color:#111">)</span> <span style="color:#111">{</span>   <span style="color:#75715e">// 二項係数．3までしか出てこない
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">r</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#111">n</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">r</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">r</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">r</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#111">n</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">r</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#111">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">r</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#111">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#111">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#ae81ff">6</span><span style="color:#111">);</span>
+  <span style="color:#111">assert</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#75715e">/* int argc, char *argv[] */</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#111">ios_base</span><span style="color:#f92672">::</span><span style="color:#111">sync_with_stdio</span><span style="color:#111">(</span><span style="color:#111">false</span><span style="color:#111">);</span>
+  <span style="color:#111">cin</span><span style="color:#111">.</span><span style="color:#111">tie</span><span style="color:#111">(</span><span style="color:#00a8c8">nullptr</span><span style="color:#111">);</span>
+  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">setprecision</span><span style="color:#111">(</span><span style="color:#ae81ff">20</span><span style="color:#111">);</span>
+
+  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span><span style="color:#111">;</span>
+  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">A</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+
+  <span style="color:#00a8c8">auto</span> <span style="color:#111">tbl_init</span> <span style="color:#f92672">=</span> <span style="color:#111">vector</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#111">Fp</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">))));</span>
+  <span style="color:#00a8c8">auto</span> <span style="color:#111">tbl</span> <span style="color:#f92672">=</span> <span style="color:#111">tbl_init</span><span style="color:#111">;</span>
+  <span style="color:#111">tbl</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">tbl</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">prev</span> <span style="color:#f92672">=</span> <span style="color:#111">move</span><span style="color:#111">(</span><span style="color:#111">tbl</span><span style="color:#111">);</span>
+    <span style="color:#111">tbl</span> <span style="color:#f92672">=</span> <span style="color:#111">tbl_init</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">a</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">a</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>             <span style="color:#75715e">// 遷移前後でaは変わらず
+</span><span style="color:#75715e"></span>      <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">b</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">b</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>           <span style="color:#75715e">// 遷移前
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">b0</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">b0</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">b0</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>      <span style="color:#75715e">// 遷移後
+</span><span style="color:#75715e"></span>          <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">c</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">c</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>       <span style="color:#75715e">// 遷移前
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">c0</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">c0</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">c0</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>  <span style="color:#75715e">// 遷移後
+</span><span style="color:#75715e"></span>              <span style="color:#75715e">// n 枚から r 枚を選んで，下の (*) で更新する．
+</span><span style="color:#75715e"></span>              <span style="color:#111">ll</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+              <span style="color:#75715e">// r は最大で 黒1, 赤2 の 3枚だが，
+</span><span style="color:#75715e"></span>              <span style="color:#75715e">// グループ i-1 で選択されていたら1減じる．
+</span><span style="color:#75715e"></span>              <span style="color:#75715e">// グループ i で選択しないのであれば1減じる．
+</span><span style="color:#75715e"></span>              <span style="color:#111">ll</span> <span style="color:#111">r</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> <span style="color:#111">b</span> <span style="color:#f92672">-</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#111">b0</span><span style="color:#111">);</span>
+              <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#111">c0</span><span style="color:#111">)</span> <span style="color:#00a8c8">continue</span><span style="color:#111">;</span>    <span style="color:#75715e">// 矛盾
+</span><span style="color:#75715e"></span>              <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#f92672">!</span><span style="color:#111">c</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">c0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+                <span style="color:#75715e">// このグループで右端を黒く塗る
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">b0</span><span style="color:#111">)</span> <span style="color:#00a8c8">continue</span><span style="color:#111">;</span>        <span style="color:#75715e">// 右端より右には置けない
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 右端を黒に決めたので，n, r とも1減じる．
+</span><span style="color:#75715e"></span>                <span style="color:#111">n</span><span style="color:#f92672">--</span><span style="color:#111">;</span>
+                <span style="color:#111">r</span><span style="color:#f92672">--</span><span style="color:#111">;</span>
+              <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#f92672">!</span><span style="color:#111">c</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#111">c0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#111">b0</span><span style="color:#111">)</span> <span style="color:#111">n</span><span style="color:#f92672">--</span><span style="color:#111">;</span> <span style="color:#75715e">// 右端は選べない
+</span><span style="color:#75715e"></span>              <span style="color:#111">tbl</span><span style="color:#111">[</span><span style="color:#111">a</span><span style="color:#111">][</span><span style="color:#111">b0</span><span style="color:#111">][</span><span style="color:#111">c0</span><span style="color:#111">]</span> <span style="color:#f92672">+=</span> <span style="color:#111">binom</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">r</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">prev</span><span style="color:#111">[</span><span style="color:#111">a</span><span style="color:#111">][</span><span style="color:#111">b</span><span style="color:#111">][</span><span style="color:#111">c</span><span style="color:#111">];</span>     <span style="color:#75715e">// (*)
+</span><span style="color:#75715e"></span>            <span style="color:#111">}</span>
+          <span style="color:#111">}</span>
+        <span style="color:#111">}</span>
+      <span style="color:#111">}</span>
+    <span style="color:#111">}</span>
+  <span style="color:#111">}</span>
+  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">tbl</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">+</span> <span style="color:#111">tbl</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Fp は，mod 998244353 を計算するための構造体です．
+<a href="https://atcoder.jp/contests/arc124/submissions/25361161" target="_blank">https://atcoder.jp/contests/arc124/submissions/25361161</a>
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E6%95%B0%E3%81%88%E4%B8%8A%E3%81%92/">数え上げ</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E4%B9%97%E7%AE%97%E3%82%92%E7%B5%84%E5%90%88%E3%81%9B%E3%81%A8%E3%81%BF%E3%82%8B/">乗算を組合せとみる</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/dp/">DP</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Shorten ABC - AtCoder Regular Contest 110 E</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread" style="margin-top: 96pt;"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+      this.page.identifier = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-27-arc124e\/';
+      this.page.title = 'Pass to Next - ARC 124 E';
+      this.page.url = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-27-arc124e\/';
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yamate11blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

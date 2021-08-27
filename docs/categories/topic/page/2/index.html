@@ -163,9 +163,7 @@
     <h2>桁DPのコーディング</h2>
   </header>
   <section class="entry-content">
-    <p>桁DPのコーディングに関する記事です． N 以下の整数である条件を満たすものを数えます．
-参照 以下のoptさんの記事 をもとにして，少し追加しています:
-コーディングの方針  配るDP 上位桁を 0-padding した状態で考える  有効な桁が始まっているかどうかが必要なこともあるが，その場合にはそれを表すフラグを導入する． 0以上N以下を数えることになるので，必要なら最後に調整．   代入は1回  その桁に表れうる数 (0..9 とか 0..1 とか) をループで回し，「この数を付け加えた時の格納先」を考える 格納先の添字を表す変数を，格納元で初期化して適宜変更する．    // N は各桁数値のベクトルで表現．ds[0] が最上位桁． // もちろん，問題文の都合で string でも良い． // 本来は ds[0] を一の位にして， // ループを ds.size() - 1 から 0 まで回した方が自然かもしれない vector&lt;ll&gt;&amp; ds; // DP表は，最初の次元を上限に等しいかどうかのフラグにする． // 0 ... 上限値． 1 ... 上限値より小さいと確定 auto tbl_init = vector(2, vector(??, vector(??, 0LL))); auto tbl = tbl_init; tbl[0][?...</p>
+    <p>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</p>
   </section>
   <footer class="entry-footer">2021-07-06&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
