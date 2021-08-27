@@ -1,6 +1,6 @@
 {{- $pc := .Site.Config.Privacy.Disqus -}}
 {{- if not $pc.Disable -}}
-{{ if .Site.DisqusShortname }}<div id="disqus_thread"></div>
+{{ if .Site.DisqusShortname }}<div id="disqus_thread" style="margin-top: 96pt;"></div>
 <script type="application/javascript">
     var disqus_config = function () {
       this.page.identifier = '{{ .Permalink }}';
@@ -8,7 +8,7 @@
       this.page.url = '{{ .Permalink  }}';
     };
     (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+        if (["localhost.x", "127.0.0.1.x"].indexOf(window.location.hostname) != -1) {
             document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
             return;
         }
