@@ -160,6 +160,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>距離: BFSとダイクストラ</h2>
+  </header>
+  <section class="entry-content">
+    <p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
+記法 ノードを表すデータ型を Node とする． int や long long や pair&lt;int, int&gt; など．
+ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ...</p>
+  </section>
+  <footer class="entry-footer">2021-08-09&nbsp;·&nbsp;2021-07-03 (初版)&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>桁DPのコーディング</h2>
   </header>
   <section class="entry-content">
@@ -207,19 +220,6 @@
   </section>
   <footer class="entry-footer">2021-04-30&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to きたまさ法" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>binom(n, r) を小さい素数pに対して mod p で求める</h2>
-  </header>
-  <section class="entry-content">
-    <p>二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
-観察 p = 3 に関していくつか書いてみると次のようになっている．
-0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:...</p>
-  </section>
-  <footer class="entry-footer">2021-04-27&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to binom(n, r) を小さい素数pに対して mod p で求める" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

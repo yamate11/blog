@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>01Sequence - ABC216 G | yamate11のブログ</title>
+<meta name="keywords" content="牛ゲー, 貪欲" />
+<meta name="description" content="公式解説とは違う (より効率の悪い) 方法で解きました．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.93235f966d2fa5ffd3652bb40e2440c509e63be62ce2e92373a54420ed3bf10b.css" integrity="sha256-kyNflm0vpf/TZSu0DiRAxQnmO&#43;Ys4ukjc6VEIO078Qs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="01Sequence - ABC216 G" />
+<meta property="og:description" content="公式解説とは違う (より効率の悪い) 方法で解きました．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-30T10:09:03&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-30T10:09:03&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="01Sequence - ABC216 G"/>
+<meta name="twitter:description" content="公式解説とは違う (より効率の悪い) 方法で解きました．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "01Sequence - ABC216 G",
+      "item": "https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "01Sequence - ABC216 G",
+  "name": "01Sequence - ABC216 G",
+  "description": "公式解説とは違う (より効率の悪い) 方法で解きました．",
+  "keywords": [
+    "牛ゲー", "貪欲"
+  ],
+  "articleBody": "AtCoder Beginner Contest 216 (ABC216) G - 01Sequence の解法です． 公式解説 によると 「牛ゲー 」で解けるとのことですが，別の (より効率が悪い) 方法で解きました．\n問題へのリンク https://atcoder.jp/contests/abc216/tasks/abc216_g 問題概要 $N$ と $(L_i, R_i, X_i)$ ($i = 1, \\ldots , M$) が与えられる． 長さ$N$の0と1からなる数列 $(A_i \\mid i \\in [1, N])$ で， 条件 $ | \\{ i \\in [L_i, R_i] \\mid A_i = 1 \\}| \\geq X_i $ を満たすもののうち， 1の数が最小のものを一つ作れ．\n制約: $ N, M \\leq 2 \\times 10^5 $\n解法 0の数の条件に書き換える．$Y_i := R_i - L_i + 1 - X_i$ として， 条件 $ | \\{ i \\in [L_i, R_i] \\mid A_i = 0 \\}| \\leq Y_i $ のもとで， 全体の0の数を最大にする．\n$S_j := \\{ i \\in [1, M] \\mid L_i \\leq j \\leq R_i \\}$　と書く．\n$A_0, A_1, \\ldots$ の順に $A_i$ の値を，貪欲に 0 を 置くように決めていくことができる．理由は以下の通り． 今，$A$ が条件を満たすとする．$i \\in S_j$ に対し，\n$ t(i, j) := | \\{ k \\in [L_i, j) \\mid A_k = 0 \\} |$\nと書く．ある $j\\in [1, N]$ について，$A_j = 1$ であり，しかも すべての $i \\in S_j$ について $t(i, j) したがって，次の構成を行えば良い: $A_0, \\ldots, A_{j-1}$ まで決めたとして，$A_j$ を定める．\n すべての $i \\in S_j$ について，$t(i, j) そうでないとき，$A_j = 1$  イベントソートを用いて，次のようにすれば良いように考えられる．\n 初期時点 $j = -1$ では，すべての $i$ に対し，その残り容量は $\\infty$ である． 時点$j$ において，  $j = L_i$ となる $i$ の残り容量を $Y_i$ に設定する． $j = R_i$ となる $i$ の残り容量を $\\infty$ に設定する． 残り容量が 0 である $i$ がある場合，  $A_i := 1$ と定める．   残り容量が 0 である $i$ がない場合，  $A_i := 0$ と定める． 全部の $i$ の残り容量を 1 減らす．      しかし，全部の残り容量を愚直に減らしていては間に合わない． 代わりに， 「自分の区間が終わるまでに，0の累積個数 $n$ がいくつ以下でなければならない」 という量 $Z_i$ を持つことにする．\n 初期時点 $j = -1$  すべての $i$ に対し，$ Z_i := \\infty $ $n := 0$   時点$j$ において，  $j = L_i$ となる $i$ に対し，$ Z_i := n + Y_i $ $j = R_i$ となる $i$ に対し，$ Z_i := \\infty $ $Z_i$ たちの最小値が $n$ である場合:  $A_i := 1$   $Z_i$ たちの最小値が $n$ より大きい場合:  $A_i := 0$ $n := n + 1$      これは，$Z_i$ を優先度キューで管理することで実装できる．\nACコード https://atcoder.jp/contests/abc216/submissions/25452502 ",
+  "wordCount" : "325",
+  "inLanguage": "en",
+  "datePublished": "2021-08-30T10:09:03+09:00",
+  "dateModified": "2021-08-30T10:09:03+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      01Sequence - ABC216 G
+    </h1>
+    <div class="post-meta">2021-08-30&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>AtCoder Beginner Contest 216 (ABC216) G - 01Sequence の解法です．
+<a href="https://atcoder.jp/contests/abc216/editorial/2474" target="_blank">公式解説</a>
+によると
+「<a href="../08-30-ushi-game">牛ゲー</a>
+」で解けるとのことですが，別の (より効率が悪い)
+方法で解きました．</p>
+<h2 id="問題へのリンク">問題へのリンク<a hidden class="anchor" aria-hidden="true" href="#問題へのリンク">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc216/tasks/abc216_g" target="_blank">https://atcoder.jp/contests/abc216/tasks/abc216_g</a>
+</p>
+<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p>$N$ と $(L_i, R_i, X_i)$ ($i = 1, \ldots , M$) が与えられる．
+長さ$N$の0と1からなる数列 $(A_i \mid i \in [1, N])$ で，
+条件 $ | \{ i \in [L_i, R_i] \mid A_i = 1 \}| \geq X_i  $
+を満たすもののうち，
+1の数が最小のものを一つ作れ．</p>
+<p>制約: $ N, M \leq 2 \times 10^5 $</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>0の数の条件に書き換える．$Y_i := R_i - L_i + 1 - X_i$ として，
+条件 $ | \{ i \in [L_i, R_i] \mid A_i = 0 \}| \leq Y_i  $ のもとで，
+全体の0の数を最大にする．</p>
+<p>$S_j := \{ i \in [1, M] \mid L_i \leq j \leq R_i \}$　と書く．</p>
+<p>$A_0, A_1, \ldots$ の順に $A_i$ の値を，貪欲に 0 を
+置くように決めていくことができる．理由は以下の通り．
+今，$A$ が条件を満たすとする．$i \in S_j$ に対し，</p>
+<p>$ t(i, j) := | \{ k \in [L_i, j) \mid A_k = 0 \} |$</p>
+<p>と書く．ある $j\in [1, N]$ について，$A_j = 1$ であり，しかも
+すべての $i \in S_j$ について $t(i, j) &lt; Y_i$
+であったとする．この次に$A$の値が0となる添字を $k$ とする，
+すなわち，$A_{k} = 0$ で，すべての $l \in [j, k)$ に対して $A_l = 1$
+とする．このとき，$A_j$ と $A_{k}$ の 0/1 を入れ替えた列も，条件を満たす．
+そのような $k$ が存在しないときは，単に $A_j$ の値を 0 にした列が
+条件を満たす．</p>
+<p>したがって，次の構成を行えば良い:
+$A_0, \ldots, A_{j-1}$ まで決めたとして，$A_j$ を定める．</p>
+<ul>
+<li>すべての $i \in S_j$ について，$t(i, j) &lt; Y_i$ のとき，$A_j = 0$</li>
+<li>そうでないとき，$A_j = 1$</li>
+</ul>
+<p>イベントソートを用いて，次のようにすれば良いように考えられる．</p>
+<ul>
+<li>初期時点 $j = -1$ では，すべての $i$ に対し，その残り容量は $\infty$ である．</li>
+<li>時点$j$ において，
+<ul>
+<li>$j = L_i$ となる $i$ の残り容量を $Y_i$ に設定する．</li>
+<li>$j = R_i$ となる $i$ の残り容量を $\infty$ に設定する．</li>
+<li>残り容量が 0 である $i$ がある場合，
+<ul>
+<li>$A_i := 1$ と定める．</li>
+</ul>
+</li>
+<li>残り容量が 0 である $i$ がない場合，
+<ul>
+<li>$A_i := 0$ と定める．</li>
+<li>全部の $i$ の残り容量を 1 減らす．</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>しかし，全部の残り容量を愚直に減らしていては間に合わない．
+代わりに，
+「自分の区間が終わるまでに，0の累積個数 $n$ がいくつ以下でなければならない」
+という量 $Z_i$ を持つことにする．</p>
+<ul>
+<li>初期時点 $j = -1$
+<ul>
+<li>すべての $i$ に対し，$ Z_i := \infty $</li>
+<li>$n := 0$</li>
+</ul>
+</li>
+<li>時点$j$ において，
+<ul>
+<li>$j = L_i$ となる $i$ に対し，$ Z_i := n + Y_i $</li>
+<li>$j = R_i$ となる $i$ に対し，$ Z_i := \infty $</li>
+<li>$Z_i$ たちの最小値が $n$ である場合:
+<ul>
+<li>$A_i := 1$</li>
+</ul>
+</li>
+<li>$Z_i$ たちの最小値が $n$ より大きい場合:
+<ul>
+<li>$A_i := 0$</li>
+<li>$n := n + 1$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>これは，$Z_i$ を優先度キューで管理することで実装できる．</p>
+<h2 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc216/submissions/25452502" target="_blank">https://atcoder.jp/contests/abc216/submissions/25452502</a>
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E7%89%9B%E3%82%B2%E3%83%BC/">牛ゲー</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E8%B2%AA%E6%AC%B2/">貪欲</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>「牛ゲー」</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Three Permutations - ABC 214 G</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread" style="margin-top: 96pt;"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+      this.page.identifier = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-30-abc216g-01sequence\/';
+      this.page.title = '01Sequence - ABC216 G';
+      this.page.url = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-30-abc216g-01sequence\/';
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yamate11blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

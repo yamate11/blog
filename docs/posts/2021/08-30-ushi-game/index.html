@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | yamate11のブログ</title>
-<meta name="keywords" content="" />
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/" />
+<title>「牛ゲー」 | yamate11のブログ</title>
+<meta name="keywords" content="牛ゲー, 最短路" />
+<meta name="description" content="「牛ゲー」なる手法のまとめです">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.93235f966d2fa5ffd3652bb40e2440c509e63be62ce2e92373a54420ed3bf10b.css" integrity="sha256-kyNflm0vpf/TZSu0DiRAxQnmO&#43;Ys4ukjc6VEIO078Qs=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -19,7 +19,6 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.86.0" />
-<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/posts/index.xml">
 
 <script>
     MathJax = {
@@ -47,14 +46,16 @@
 
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:title" content="「牛ゲー」" />
+<meta property="og:description" content="「牛ゲー」なる手法のまとめです" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-30T11:09:47&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-30T11:09:47&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="「牛ゲー」"/>
+<meta name="twitter:description" content="「牛ゲー」なる手法のまとめです"/>
 
 
 <script type="application/ld+json">
@@ -67,13 +68,52 @@
       "position":  1 ,
       "name": "Posts",
       "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "「牛ゲー」",
+      "item": "https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"
     }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "「牛ゲー」",
+  "name": "「牛ゲー」",
+  "description": "「牛ゲー」なる手法のまとめです",
+  "keywords": [
+    "牛ゲー", "最短路"
+  ],
+  "articleBody": "「牛ゲー」なる手法のまとめです． ABC216 G - 01Sequence で出てきました．\n適用できる問題 $(c_{ij} \\mid i, j \\in [1, N])$ と，$S, T \\in [1, N]$ が与えられる． 変数 $x_1, \\ldots, x_N$ に対する制約\n $x_i - x_j \\leq c_{ij}$  のもとで，$ x_T - x_S $ の最大値を求めよ．\n解法 集合 $\\{1, .., N\\}$ 上に，$i$ から $j$ に距離 $c_{ij}$ の辺がある グラフを考える． 以下のようになる (参照 ):\n 制約を満たす解がある $\\Leftrightarrow$ グラフに負閉路がない グラフに負閉路がない場合:  $ x_T - x_S $ の最大値がない (いくらでも大きくできる) $\\Leftrightarrow$ $T$ は $S$ から到達できない   グラフに負閉路がなく，$T$ が $S$ から到達できる場合  $ x_T - x_S $ の最大値は，グラフ上の $S$ から $T$ への最短路長に一致する．    最後の行が重要．特に，全部の $c_{ij}$ が非負なら， ダイクストラで解ける．\n",
+  "wordCount" : "85",
+  "inLanguage": "en",
+  "datePublished": "2021-08-30T11:09:47+09:00",
+  "dateModified": "2021-08-30T11:09:47+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -168,70 +208,87 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>Posts</h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>「牛ゲー」</h2>
-  </header>
-  <section class="entry-content">
-    <p>「牛ゲー」なる手法のまとめです</p>
-  </section>
-  <footer class="entry-footer">2021-08-30&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 「牛ゲー」" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"></a>
-</article>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      「牛ゲー」
+    </h1>
+    <div class="post-meta">2021-08-30&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>「牛ゲー」なる手法のまとめです．
+<a href="../08-30-abc216g-01sequence">ABC216 G - 01Sequence</a>
+ で出てきました．</p>
+<h2 id="適用できる問題">適用できる問題<a hidden class="anchor" aria-hidden="true" href="#適用できる問題">#</a></h2>
+<p>$(c_{ij} \mid i, j \in [1, N])$ と，$S, T \in [1, N]$ が与えられる．
+変数 $x_1, \ldots, x_N$ に対する制約</p>
+<ul>
+<li>$x_i - x_j \leq c_{ij}$</li>
+</ul>
+<p>のもとで，$ x_T - x_S $ の最大値を求めよ．</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>集合 $\{1, .., N\}$ 上に，$i$ から $j$ に距離 $c_{ij}$ の辺がある
+グラフを考える．
+以下のようになる
+(<a href="https://qiita.com/tanabe13f/items/6c723c29a121de760790" target="_blank">参照</a>
+):</p>
+<ul>
+<li>制約を満たす解がある $\Leftrightarrow$ グラフに負閉路がない</li>
+<li>グラフに負閉路がない場合:
+<ul>
+<li>$ x_T - x_S $ の最大値がない (いくらでも大きくできる)
+$\Leftrightarrow$ $T$ は $S$ から到達できない</li>
+</ul>
+</li>
+<li>グラフに負閉路がなく，$T$ が $S$ から到達できる場合
+<ul>
+<li>$ x_T - x_S $ の最大値は，グラフ上の $S$ から $T$ への最短路長に一致する．</li>
+</ul>
+</li>
+</ul>
+<p>最後の行が重要．特に，全部の $c_{ij}$ が非負なら，
+ダイクストラで解ける．</p>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>01Sequence - ABC216 G</h2>
-  </header>
-  <section class="entry-content">
-    <p>公式解説とは違う (より効率の悪い) 方法で解きました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-30&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 01Sequence - ABC216 G" href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/"></a>
-</article>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Three Permutations - ABC 214 G</h2>
-  </header>
-  <section class="entry-content">
-    <p>調べた結果分かった解法を記述します．いろいろ勉強になりました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-27&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Three Permutations - ABC 214 G" href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/"></a>
-</article>
+  </div>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Pass to Next - ARC 124 E</h2>
-  </header>
-  <section class="entry-content">
-    <p>解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．</p>
-  </section>
-  <footer class="entry-footer">2021-08-27&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Pass to Next - ARC 124 E" href="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/"></a>
-</article>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E7%89%9B%E3%82%B2%E3%83%BC/">牛ゲー</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>01Sequence - ABC216 G</span>
+  </a>
+</nav>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Shorten ABC - AtCoder Regular Contest 110 E</h2>
-  </header>
-  <section class="entry-content">
-    <p>解説AC です．公式解説も皆さんの解説もたくさん参考にしています．</p>
-  </section>
-  <footer class="entry-footer">2021-08-26&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Shorten ABC - AtCoder Regular Contest 110 E" href="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/"></a>
+  </footer><div id="disqus_thread" style="margin-top: 96pt;"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+      this.page.identifier = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-30-ushi-game\/';
+      this.page.title = '「牛ゲー」';
+      this.page.url = 'https:\/\/yamate11.github.io\/blog\/posts\/2021\/08-30-ushi-game\/';
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yamate11blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="next" href="https://yamate11.github.io/blog/posts/page/2/">Next Page »</a>
-  </nav>
-</footer>
     </main>
     <footer class="footer">
   <span>
