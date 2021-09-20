@@ -6,7 +6,16 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Sep 2021 08:11:41 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 07:14:12 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;言語・STLメモ</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/</link>
+      <pubDate>Mon, 20 Sep 2021 07:14:12 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/</guid>
+      <description>C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．</description>
+    </item>
+    
     <item>
       <title>Red and Blue Lamps - AtCoder Beginner Contest 218 H</title>
       <link>https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/</link>
