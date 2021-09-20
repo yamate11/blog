@@ -91,6 +91,8 @@ tocopen: true
 
 ## ビット処理
 
+long long に対するもの．
+
 * 1の数を数える -- `__builtin_popcountll`
 
 ```cpp
