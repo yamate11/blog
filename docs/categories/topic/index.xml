@@ -6,7 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Sep 2021 07:14:12 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Sep 2021 12:16:45 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>コーディングスタイル</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-23-coding-style/</link>
+      <pubDate>Thu, 23 Sep 2021 12:16:45 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/09-23-coding-style/</guid>
+      <description>自分のコーディングスタイルについてです</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;言語・STLメモ</title>
       <link>https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/</link>
