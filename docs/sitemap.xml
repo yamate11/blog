@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</loc>
+    <lastmod>2021-10-13T21:25:49+09:00</lastmod>
+  </url><url>
     <loc>https://yamate11.github.io/blog/categories/</loc>
-    <lastmod>2021-10-10T12:27:09+09:00</lastmod>
+    <lastmod>2021-10-13T21:25:49+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2021-10-10T12:27:09+09:00</lastmod>
+    <lastmod>2021-10-13T21:25:49+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/categories/solution/</loc>
+    <lastmod>2021-10-13T21:25:49+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2021-10-13T21:25:49+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/</loc>
     <lastmod>2021-10-10T12:27:09+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/categories/topic/</loc>
-    <lastmod>2021-10-10T12:27:09+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/</loc>
     <lastmod>2021-10-10T12:27:09+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/%E6%9C%A8/</loc>
@@ -27,9 +33,6 @@
     <lastmod>2021-10-10T12:27:09+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/10-09-abc222/</loc>
-    <lastmod>2021-10-09T23:31:47+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/categories/solution/</loc>
     <lastmod>2021-10-09T23:31:47+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2021/10-03-abc221/</loc>

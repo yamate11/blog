@@ -6,7 +6,16 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 09 Oct 2021 23:31:47 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Oct 2021 21:25:49 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>222 -- AtCoder Beginner Contest 222 G</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</link>
+      <pubDate>Wed, 13 Oct 2021 21:25:49 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</guid>
+      <description>エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．</description>
+    </item>
+    
     <item>
       <title>ABC 222 参加記</title>
       <link>https://yamate11.github.io/blog/posts/2021/10-09-abc222/</link>
