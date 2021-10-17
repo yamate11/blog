@@ -6,7 +6,24 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 13 Oct 2021 21:25:49 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Oct 2021 23:33:52 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC 223 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-17-abc223/</link>
+      <pubDate>Sun, 17 Oct 2021 23:33:52 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/10-17-abc223/</guid>
+      <description>AtCoder Beginner Contest 223 (ABC 223) に参加しました．記録です．
+問題へのリンク A -	Exact Price cout &amp;lt;&amp;lt; (X &amp;gt; 0 and X % 100 == 0 ? &amp;quot;Yes\n&amp;quot; : &amp;quot;No\n&amp;quot;;
+B -	String Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．
+$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
+C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
+以下の(1),(2),(3)が成り立つ間，(4)を実行する．
+  (1) 左の火が区間 i に時刻 p に入ろうとしている．
+  (2) 右の火が区間 j に時刻 q に入ろうとしている．
+  (3) i &amp;lt; j</description>
+    </item>
+    
     <item>
       <title>222 -- AtCoder Beginner Contest 222 G</title>
       <link>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</link>
