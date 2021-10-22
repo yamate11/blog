@@ -6,7 +6,16 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 17 Oct 2021 23:33:52 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 23:28:37 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Xor Query -- AtCoder Beginner Contest 223 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/</link>
+      <pubDate>Thu, 21 Oct 2021 23:28:37 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/</guid>
+      <description>AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．</description>
+    </item>
+    
     <item>
       <title>ABC 223 参加記</title>
       <link>https://yamate11.github.io/blog/posts/2021/10-17-abc223/</link>
