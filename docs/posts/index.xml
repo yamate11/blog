@@ -6,7 +6,17 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Oct 2021 23:37:03 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Oct 2021 19:26:39 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Max Dot -- AtCoder Regular Contest 128 C</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/</link>
+      <pubDate>Fri, 29 Oct 2021 19:26:39 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/</guid>
+      <description>AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．
+問題概要 整数N, M, Sと整数列 A = (A_1, .., A_N) が与えられる． 次の条件を満たす非負実数列 (x_1, ..., x_N) を作る: ・ 0 &amp;lt;= x_1 &amp;lt;= x_2 &amp;lt;= ... &amp;lt;= x_N &amp;lt;= M ・ x_1 + x_2 + ... + x_N = S \sum {A_i × x_i | i = 1, ..., N } の最大値を求めよ． 制約: N &amp;lt;= 5000; M,S,A_i &amp;lt;= 10^6; S &amp;lt;= NM; 問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i+1} - x_i$ ($i = 0, \ldots, N-1$) とすると， 次のように言い換えられる:</description>
+    </item>
+    
     <item>
       <title>ABC224 参加記</title>
       <link>https://yamate11.github.io/blog/posts/2021/10-23-abc224/</link>
