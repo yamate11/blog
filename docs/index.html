@@ -191,6 +191,25 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>ABC225 参加記</h2>
+  </header>
+  <section class="entry-content">
+    <p>AtCoder Beginner Contest 225 (ABC225) に参加して， ABCD 4完の 1004 位でした．冷えました．
+問題へのリンク A -	Distinct Strings 全部違えば6，2つ同じでもう一つが違えば3，全部同じなら1です．
+B -	Star or Not 最初の2行で共通している頂点を見つけて (無ければ No)， 他の全部の行にその頂点が入っているかどうかチェックします．
+C -	Calendar Validator 以下の条件をチェックします．
+ 行の先頭の値が 7 つずつ増える 行内では値が 1 つずつ増える 7 の倍数は，行末以外には現れない．  D -	Play Train 各電車について，後と前の電車の番号を覚えておきます(無ければ-1)． クエリ1, 2 では O(1) で更新できます． クエリ3では，前の電車をたどって， 先頭に到達したら，そこから後の電車を順に出力していきます． 出力する電車の合計数が $10^6$ 以下なので，これで間に合います．
+「これで間に合う」ことに気づかず，他の方法を探し続けて 時間を浪費しました．
+E -	フ 一応コードは時間内に書けたのですが，デバッグが間に合いませんでした．
+直観的には次のようにすればできます．
+ i 番目の「フ」の下端と原点を結ぶ直線と，x軸とのなす角を b[i] とする． i 番目の「フ」の左端と原点を結ぶ直線と，x軸とのなす角を e[i] とする．  すると，開区間 (b[i], e[i]) たちが交わらないようにたくさん取れ，という問題に なります．e[i] の昇順に並べ替えておいて，次のDPをします．...</p>
+  </section>
+  <footer class="entry-footer">2021-10-31&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to ABC225 参加記" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Max Dot -- AtCoder Regular Contest 128 C</h2>
   </header>
   <section class="entry-content">
@@ -300,17 +319,6 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
   </section>
   <footer class="entry-footer">2021-10-03&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC 221 参加記" href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>桁DPのコーディング</h2>
-  </header>
-  <section class="entry-content">
-    <p>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</p>
-  </section>
-  <footer class="entry-footer">2021-10-01&nbsp;·&nbsp;2021-07-06 (初版)&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
