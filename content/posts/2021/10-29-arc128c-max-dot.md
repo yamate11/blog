@@ -13,14 +13,15 @@ AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました．
 
 ## 問題概要
 
-```
-整数N, M, Sと整数列 A = (A_1, .., A_N) が与えられる．
-次の条件を満たす非負実数列 (x_1, ..., x_N) を作る:
-・  0 <= x_1 <= x_2 <= ... <= x_N <= M
-・  x_1 + x_2 + ... + x_N = S
-\sum {A_i × x_i | i = 1, ..., N } の最大値を求めよ．
-制約: N <= 5000;  M,S,A_i <= 10^6;  S <= NM;
-```
+整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる．
+次の条件を満たす非負実数列 $(x_1, ..., x_N)$ を作る:
+
+*  $0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $
+*  $x_1 + x_2 + \cdots + x_N = S$
+
+$\sum_{i=1}^{N} A_i  x_i$ の最大値を求めよ．
+
+制約: $N \leq 5000$;  $M,S,A_i \leq 10^6$;  $S \leq NM$;
 
 [問題へのリンク](https://atcoder.jp/contests/arc128/tasks/arc128_c)
 
