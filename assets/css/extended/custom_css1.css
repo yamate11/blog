@@ -1,3 +1,13 @@
+body             { font-size: 16px; }
+.post-content h2 { font-size: 26px; }
+.post-content h3 { font-size: 22px; }
+.post-content h4 { font-size: 18px; }
+.post-content h5 { font-size: 16px; }
+
+#isso-thread input { 
+    font-size: 14px;
+}
+
 .post-content .highlight span {
     background: #f0f0f8 !important;
 }
@@ -19,3 +29,5 @@
     margin-top: 12px;
     margin-bottom: 24px;
 }
+
+.MathJax { font-size: 1.1em; }

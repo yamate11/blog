@@ -12,7 +12,7 @@
 ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.93235f966d2fa5ffd3652bb40e2440c509e63be62ce2e92373a54420ed3bf10b.css" integrity="sha256-kyNflm0vpf/TZSu0DiRAxQnmO&#43;Ys4ukjc6VEIO078Qs=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -399,7 +399,7 @@ FIFOキューには距離を入れる必要が無く，ノードだけで良い�
 </script>
 <section id="isso-thread" data-isso-id="/blog/posts/2021/07-03-bfs-dijkstra/" data-title="距離: BFSとダイクストラ">
 </section>
-  
+
 
 </article>
     </main>
