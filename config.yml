@@ -3,7 +3,7 @@ publishDir: docs
 languageCode: en
 title: "yamate11のブログ"
 theme: "PaperMod"
-paginate: 10
+paginate: 15
 # disqusShortname: "yamate11blog"
 
 params:

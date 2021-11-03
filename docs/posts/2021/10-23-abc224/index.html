@@ -7,13 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>ABC224 参加記 | yamate11のブログ</title>
 <meta name="keywords" content="" />
-<meta name="description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して， ABCDE 5完 415位でした．
-A	Tires cout &lt;&lt; (S[S.size() - 2] == &#39;e&#39; ? &quot;er\n&quot; : &quot;ist\n&quot;);
-B	Mongeness 4重ループで全数探索します．
-C	Triangle? 3重ループで全数探索します．
-(x0, y0), (x1, y1), (x2, y2) を頂点とする三角形が正の面積を持つ条件は， (dx1, dy1) := (x1, y1) - (x0, y0), (dx2, dy2) := (x2, y2) - (x0, y0) として， dx1 * dy2 != dx2 * dy1 です．
-D	8 Puzzle on Graph 次のような無向グラフを考えます．
- ノードは配置全体． 配置uが配置vから一回の操作で得られるとき，uとvの間に辺がある．  初期配置から，目的とする配置までの距離を普通のBFSで求めます．">
+<meta name="description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where &#43;s Separate Digits / G - Roll or Increment">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
@@ -53,13 +47,7 @@ D	8 Puzzle on Graph 次のような無向グラフを考えます．
 
 
 <meta property="og:title" content="ABC224 参加記" />
-<meta property="og:description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して， ABCDE 5完 415位でした．
-A	Tires cout &lt;&lt; (S[S.size() - 2] == &#39;e&#39; ? &quot;er\n&quot; : &quot;ist\n&quot;);
-B	Mongeness 4重ループで全数探索します．
-C	Triangle? 3重ループで全数探索します．
-(x0, y0), (x1, y1), (x2, y2) を頂点とする三角形が正の面積を持つ条件は， (dx1, dy1) := (x1, y1) - (x0, y0), (dx2, dy2) := (x2, y2) - (x0, y0) として， dx1 * dy2 != dx2 * dy1 です．
-D	8 Puzzle on Graph 次のような無向グラフを考えます．
- ノードは配置全体． 配置uが配置vから一回の操作で得られるとき，uとvの間に辺がある．  初期配置から，目的とする配置までの距離を普通のBFSで求めます．" />
+<meta property="og:description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where &#43;s Separate Digits / G - Roll or Increment" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-23-abc224/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-10-23T23:37:03&#43;09:00" />
@@ -67,13 +55,7 @@ D	8 Puzzle on Graph 次のような無向グラフを考えます．
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC224 参加記"/>
-<meta name="twitter:description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して， ABCDE 5完 415位でした．
-A	Tires cout &lt;&lt; (S[S.size() - 2] == &#39;e&#39; ? &quot;er\n&quot; : &quot;ist\n&quot;);
-B	Mongeness 4重ループで全数探索します．
-C	Triangle? 3重ループで全数探索します．
-(x0, y0), (x1, y1), (x2, y2) を頂点とする三角形が正の面積を持つ条件は， (dx1, dy1) := (x1, y1) - (x0, y0), (dx2, dy2) := (x2, y2) - (x0, y0) として， dx1 * dy2 != dx2 * dy1 です．
-D	8 Puzzle on Graph 次のような無向グラフを考えます．
- ノードは配置全体． 配置uが配置vから一回の操作で得られるとき，uとvの間に辺がある．  初期配置から，目的とする配置までの距離を普通のBFSで求めます．"/>
+<meta name="twitter:description" content="AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where &#43;s Separate Digits / G - Roll or Increment"/>
 
 
 <script type="application/ld+json">
@@ -102,7 +84,7 @@ D	8 Puzzle on Graph 次のような無向グラフを考えます．
   "@type": "BlogPosting",
   "headline": "ABC224 参加記",
   "name": "ABC224 参加記",
-  "description": "AtCoder Beginner Contest 224 (ABC 224) に参加して， ABCDE 5完 415位でした．\nA\tTires cout \u0026lt;\u0026lt; (S[S.size() - 2] == 'e' ? \u0026quot;er\\n\u0026quot; : \u0026quot;ist\\n\u0026quot;);\nB\tMongeness 4重ループで全数探索します．\nC\tTriangle? 3重ループで全数探索します．\n(x0, y0), (x1, y1), (x2, y2) を頂点とする三角形が正の面積を持つ条件は， (dx1, dy1) := (x1, y1) - (x0, y0), (dx2, dy2) := (x2, y2) - (x0, y0) として， dx1 * dy2 != dx2 * dy1 です．\nD\t8 Puzzle on Graph 次のような無向グラフを考えます．\n ノードは配置全体． 配置uが配置vから一回の操作で得られるとき，uとvの間に辺がある．  初期配置から，目的とする配置までの距離を普通のBFSで求めます．",
+  "description": "AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where +s Separate Digits / G - Roll or Increment",
   "keywords": [
     
   ],
