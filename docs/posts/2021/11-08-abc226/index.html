@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ABC226 参加記 | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/11-08-abc226/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="ABC226 参加記" />
+<meta property="og:description" content="ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/11-08-abc226/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-08T00:47:10&#43;09:00" />
+<meta property="article:modified_time" content="2021-11-08T00:47:10&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ABC226 参加記"/>
+<meta name="twitter:description" content="ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ABC226 参加記",
+      "item": "https://yamate11.github.io/blog/posts/2021/11-08-abc226/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ABC226 参加記",
+  "name": "ABC226 参加記",
+  "description": "ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations",
+  "keywords": [
+    
+  ],
+  "articleBody": "AtCoder Beginner Contest 226 (ABC226) に参加して， ABCDE5完 922位でした．冷えました．\nA - Round decimals 難しかったです．\nstring s; cin  s; cout  (stoi(s.substr(0, s.size() - 4)) * 1000 + stoi(s.substr(s.size() - 3) + 500) / 1000  endl; B - Counting Arrays vector vec; に読み込んでおいて，sort して unique して erase して size をとりました．\nC - Martial artist 技aが技bの前提になっているとき，bからaに辺がある有向グラフを考えて， 技N からたどれる技全部について 時間を加えれば良いです．\nD - Teleportation $T := \\{(i, j) \\mid 1 \\leq i $T$を $(x_b - x_a, y_b - y_a)$ の偏角でソートして，隣り合う要素が 異なるところの数を数えれば同値類の数がわかります．\nしょうもないミスで1WA．\nE - Just one 題意を満たす向き付けができるための必要十分条件は，各連結成分について， 辺の数と頂点の数が等しいことです． 必要条件であることはあきらかです． 十分性: 連結成分のグラフは全域木と1本の辺からなります． その辺の両端をA, B として，全域木の根を A と見た時に， 子から親へ向き付け，最後に A → B の向きを付ければ，題意を満たします．\nこのとき，各連結成分上で，1つだけあるループの向きだけの自由度がありますから， 求める答は，2の連結成分数乗です．\n必要十分条件を理解するまでいろいろ迷走して 2WA．\nF - Score of Permutations 時間が足りず，コードを書いている途中で時間切れになりました．\n順列$P$を決めた時のスコアは，$P$を巡回置換の積で表した時， 各巡回置換の長さの最小公倍数になります．\ndp[n][e] := 1, 2, …, n の順列で，スコアが e であるものの数\nとします．\n1, .., n の順列のうち， n を含む巡回置換の長さが k であるものを数えます． まず，1, 2, …, n - 1 から k - 1 個をえらびます． 選んだものと n からなる k 個の巡回置換の数は $(k - 1)!$ ですから， このようなものは $\\binom{n-1}{k-1} (k-1)!$ 個あります． 残り $n - k$ 個の並び替えのスコアが e だとすると，この順列の スコアは LCM(e, k) になりますから，\n$\\textrm{dp}[n][\\textrm{LCM}(e, k)] \\;+\\!=\\; \\textrm{dp}[n - k][e] \\times \\binom{n-1}{k-1} \\times (k-1)!$\nという遷移が書けます．データはmap で持ちます．\n求める答は $\\sum_{e} e^K (\\textrm{dp}[N][e])$ で， $K$乗を $O(\\log K)$ で実行すれば間に合います．\n冷えてhighest-100を割り込みました．まあまた良い時も来るでしょう．\nyamate11さんのAtCoder Beginner Contest 226での成績：922位\nパフォーマンス：1488相当\nレーティング：1894→1859 (-35) :(#AtCoder #ABC226 https://t.co/uBE53UiuSM\n— yamate11 (@_yamate11) November 7, 2021  ",
+  "wordCount" : "226",
+  "inLanguage": "en",
+  "datePublished": "2021-11-08T00:47:10+09:00",
+  "dateModified": "2021-11-08T00:47:10+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/11-08-abc226/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      ABC226 参加記
+    </h1>
+    <div class="post-meta">2021-11-08&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>AtCoder Beginner Contest 226 (ABC226) に参加して，
+ABCDE5完 922位でした．冷えました．</p>
+<h2 id="a---round-decimals">A - Round decimals<a hidden class="anchor" aria-hidden="true" href="#a---round-decimals">#</a></h2>
+<p>難しかったです．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">string</span> <span style="color:#111">s</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">s</span><span style="color:#111">;</span>
+<span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">(</span><span style="color:#111">stoi</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">substr</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">()</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span><span style="color:#111">))</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">+</span> <span style="color:#111">stoi</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">substr</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">()</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">500</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</code></pre></div><h2 id="b---counting-arrays">B - Counting Arrays<a hidden class="anchor" aria-hidden="true" href="#b---counting-arrays">#</a></h2>
+<p><code>vector&lt;vector&lt;int&gt;&gt; vec;</code> に読み込んでおいて，sort して unique して erase して size をとりました．</p>
+<h2 id="c---martial-artist">C - Martial artist<a hidden class="anchor" aria-hidden="true" href="#c---martial-artist">#</a></h2>
+<p>技aが技bの前提になっているとき，bからaに辺がある有向グラフを考えて，
+技N からたどれる技全部について 時間を加えれば良いです．</p>
+<h2 id="d---teleportation">D - Teleportation<a hidden class="anchor" aria-hidden="true" href="#d---teleportation">#</a></h2>
+<p>$T := \{(i, j) \mid 1 \leq i &lt; j \leq N\}$ として，
+$(a,b), (c,d) \in T$ に対し，
+「$(x_b - x_a, y_b - y_a)$ と $(x_d - x_c, y_d - y_c)$ が平行である」
+という同値関係を$T$に入れた時，同値類の数の2倍が求める答です．</p>
+<p>$T$を $(x_b - x_a, y_b - y_a)$ の偏角でソートして，隣り合う要素が
+異なるところの数を数えれば同値類の数がわかります．</p>
+<p>しょうもないミスで1WA．</p>
+<h2 id="e---just-one">E - Just one<a hidden class="anchor" aria-hidden="true" href="#e---just-one">#</a></h2>
+<p>題意を満たす向き付けができるための必要十分条件は，各連結成分について，
+辺の数と頂点の数が等しいことです．
+必要条件であることはあきらかです．
+十分性: 連結成分のグラフは全域木と1本の辺からなります．
+その辺の両端をA, B として，全域木の根を A と見た時に，
+子から親へ向き付け，最後に A → B の向きを付ければ，題意を満たします．</p>
+<p>このとき，各連結成分上で，1つだけあるループの向きだけの自由度がありますから，
+求める答は，2の連結成分数乗です．</p>
+<p>必要十分条件を理解するまでいろいろ迷走して 2WA．</p>
+<h2 id="f---score-of-permutations">F - Score of Permutations<a hidden class="anchor" aria-hidden="true" href="#f---score-of-permutations">#</a></h2>
+<p>時間が足りず，コードを書いている途中で時間切れになりました．</p>
+<p>順列$P$を決めた時のスコアは，$P$を巡回置換の積で表した時，
+各巡回置換の長さの最小公倍数になります．</p>
+<p>dp[n][e] := 1, 2, &hellip;, n の順列で，スコアが e であるものの数</p>
+<p>とします．</p>
+<p>1, .., n の順列のうち，
+n を含む巡回置換の長さが k であるものを数えます．
+まず，1, 2, &hellip;, n - 1 から k - 1 個をえらびます．
+選んだものと n からなる k 個の巡回置換の数は $(k - 1)!$ ですから，
+このようなものは $\binom{n-1}{k-1} (k-1)!$ 個あります．
+残り $n - k$ 個の並び替えのスコアが e だとすると，この順列の
+スコアは LCM(e, k) になりますから，</p>
+<p>$\textrm{dp}[n][\textrm{LCM}(e, k)] \;+\!=\;
+\textrm{dp}[n - k][e] \times \binom{n-1}{k-1} \times (k-1)!$</p>
+<p>という遷移が書けます．データはmap で持ちます．</p>
+<p>求める答は $\sum_{e} e^K (\textrm{dp}[N][e])$ で，
+$K$乗を $O(\log K)$ で実行すれば間に合います．</p>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">冷えてhighest-100を割り込みました．まあまた良い時も来るでしょう．<br><br>yamate11さんのAtCoder Beginner Contest 226での成績：922位<br>パフォーマンス：1488相当<br>レーティング：1894→1859 (-35) :(<a href="https://twitter.com/hashtag/AtCoder?src=hash&amp;ref_src=twsrc%5Etfw">#AtCoder</a> <a href="https://twitter.com/hashtag/ABC226?src=hash&amp;ref_src=twsrc%5Etfw">#ABC226</a> <a href="https://t.co/uBE53UiuSM">https://t.co/uBE53UiuSM</a></p>&mdash; yamate11 (@_yamate11) <a href="https://twitter.com/_yamate11/status/1457346149929472008?ref_src=twsrc%5Etfw">November 7, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>String Cards - AtCoder Beginner Contest 225 F</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2021/11-08-abc226/" data-title="ABC226 参加記">
+</section>
+
+
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

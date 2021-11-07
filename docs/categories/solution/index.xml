@@ -6,7 +6,16 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Nov 2021 19:17:33 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Nov 2021 00:47:10 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC226 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/11-08-abc226/</link>
+      <pubDate>Mon, 08 Nov 2021 00:47:10 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/11-08-abc226/</guid>
+      <description>ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations</description>
+    </item>
+    
     <item>
       <title>String Cards - AtCoder Beginner Contest 225 F</title>
       <link>https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/</link>
