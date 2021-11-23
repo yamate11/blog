@@ -175,6 +175,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2></h2>
+  </header>
+  <section class="entry-content">
+    <p>$H\times W$ のグリッドの各マス$(i,j)$に， 1から9までの数字 $c_{ij}$ が書かれている． 以下を繰り返して文字列を作る．
+行 $i$ を選ぶ． 列 $j$ を選び，$c_{ij}$ を文字列に追加する． 行 $i$ を選び直し，$c_{ij}$ を文字列に追加する． 1に戻る．  1,2 を $N$ 回繰り返してできる文字列の種類を mod 998244353 で求めよ．
+制約: $2 \leq H,W \leq 10$, $1 \leq N \leq 300$
+時間制限: 3秒
+$S \subseteq \{1, \ldots, H\}$， $T \subseteq \{1, \ldots, W\}$ として，
+$\textrm{dp}[i][0][S] :=$ 長さ $2i$ の文字列であって，この方法で 作った時に，最後にいる可能性のある行全体の集合が $S$ となるものの数
+$\textrm{dp}[i][1][T] :=$ 長さ $2i &#43; 1$ の文字列であって，この方法で 作った時に，最後にいる可能性のある列全体の集合が $T$ となるものの数</p>
+  </section>
+  <footer class="entry-footer">2021-11-23&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to " href="https://yamate11.github.io/blog/posts/2021/11-23-test1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>ABC228 参加記</h2>
   </header>
   <section class="entry-content">
@@ -336,17 +353,6 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
   </section>
   <footer class="entry-footer">2021-10-01&nbsp;·&nbsp;2021-07-06 (初版)&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>コーディングスタイル</h2>
-  </header>
-  <section class="entry-content">
-    <p>自分のコーディングスタイルについてです</p>
-  </section>
-  <footer class="entry-footer">2021-09-23&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to コーディングスタイル" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
