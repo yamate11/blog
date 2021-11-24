@@ -12,7 +12,7 @@ summary: "解説ACです．"
 AtCoder Beginner Contest 221 - ABC 221 H - Count Multiset の解法です．
 解説ACです．
 [noshi91さんの解説](https://atcoder.jp/contests/abc221/editorial/2738) 
-を丁寧に書いただけのものです．
+をなぞっただけのものです．
 
 ## 問題概要
 
@@ -28,7 +28,7 @@ mod 998244353 で求めよ．
 * $\sum A = N$
 * 任意の正整数 $x$ について，$A$ に含まれる $x$ の個数は $M$ 以下．
 
-制約: $1 \leq M \leq 5000$
+制約: $1 \leq M \leq N \leq 5000$
 
 
 ## 解法
@@ -71,3 +71,6 @@ $k, n \in [1, N]$ に対して，次のように定義する:
     * 各分割から1ずつ取り除く
 
 これで DP ができる．
+
+そのままメモ化して計算したら TLE してしまった．
+配るDPに書き直してやっと通った．
