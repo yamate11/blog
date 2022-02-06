@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>素因数分解に要する時間 | yamate11のブログ</title>
+<meta name="keywords" content="素因数分解, 性能" />
+<meta name="description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.86.0" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="素因数分解に要する時間" />
+<meta property="og:description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-06T12:02:43&#43;09:00" />
+<meta property="article:modified_time" content="2022-02-06T12:02:43&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="素因数分解に要する時間"/>
+<meta name="twitter:description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "素因数分解に要する時間",
+      "item": "https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "素因数分解に要する時間",
+  "name": "素因数分解に要する時間",
+  "description": "素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました",
+  "keywords": [
+    "素因数分解", "性能"
+  ],
+  "articleBody": "$1$ 以上 $N$ 以下の整数をランダムに生成し， これらの素因数分解に要する時間を計測しました． 生成する個数は，100,000 個としました． 素因数分解の方法は以下の4通りです． 分解する整数を $x$ とします．\n 整数 $p = 2, 3, 4, 5, \\ldots$ で順次割ってみて， 割れたら $x := x / p$ とする．$p^2  x$ となったら打ち切り． $\\lceil\\sqrt{x}\\;\\rceil$ までの素数リストを，エラトステネスの篩で作成して， それらの素数で順次割ってみる．あとは1と同じ． 事前に $\\lceil\\sqrt{N}\\;\\rceil$ までの素数リストを， エラトステネスの篩で作成しておく． あとは2と同じ． 事前に $N$ までの整数の最小素因数リストを， 篩の方法 で作成しておく．これを用いて分解する．  結果は以下の通りでした．\n1つの整数の素因数分解に要した時間 (単位: マイクロ秒)\n   N 1e5 2e5 5e5 1e6 2e6 5e6 1e7     方法1 0.70 0.89 1.19 1.56 2.03 2.97 4.02   方法2 1.13 1.53 2.21 3.04 4.18 6.85 8.73   方法3 0.25 0.30 0.36 0.42 0.50 0.65 0.78   方法4 0.09 0.10 0.10 0.16 0.21 0.28 0.33    事前計算に要した時間 (単位: ミリ秒)\n   N 1e5 2e5 5e5 1e6 2e6 5e6 1e7     方法3 0 0 0 0 0 0 0   方法4 0 1 2 6 22 69 147    1e7 までの素数が 1e6 個あるとすると， 方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒． 1e6 までの素数が 1e4 個だと， 方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒． 15ミリ秒，方法2では30ミリ秒，方法3では 4ミリ秒，方法4では 7ミリ秒．\nランダムの平均だけではなくて，最悪時間も測りたいところですが， まあ，とりあえず．\n",
+  "wordCount" : "135",
+  "inLanguage": "en",
+  "datePublished": "2022-02-06T12:02:43+09:00",
+  "dateModified": "2022-02-06T12:02:43+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      素因数分解に要する時間
+    </h1>
+    <div class="post-meta">2022-02-06&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>$1$ 以上 $N$ 以下の整数をランダムに生成し，
+これらの素因数分解に要する時間を計測しました．
+生成する個数は，100,000 個としました．
+素因数分解の方法は以下の4通りです．
+分解する整数を $x$ とします．</p>
+<ol>
+<li>整数 $p = 2, 3, 4, 5, \ldots$ で順次割ってみて，
+割れたら $x := x / p$ とする．$p^2 &gt; x$ となったら打ち切り．</li>
+<li>$\lceil\sqrt{x}\;\rceil$ までの素数リストを，エラトステネスの篩で作成して，
+それらの素数で順次割ってみる．あとは1と同じ．</li>
+<li>事前に $\lceil\sqrt{N}\;\rceil$ までの素数リストを，
+エラトステネスの篩で作成しておく．
+あとは2と同じ．</li>
+<li>事前に $N$ までの整数の最小素因数リストを，
+<a href="https://qiita.com/rsk0315_h4x/items/ff3b542a4468679fb409" target="_blank">篩の方法</a>
+
+で作成しておく．これを用いて分解する．</li>
+</ol>
+<p>結果は以下の通りでした．</p>
+<p>1つの整数の素因数分解に要した時間 (単位: マイクロ秒)</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th style="text-align:right">1e5</th>
+<th style="text-align:right">2e5</th>
+<th style="text-align:right">5e5</th>
+<th style="text-align:right">1e6</th>
+<th style="text-align:right">2e6</th>
+<th style="text-align:right">5e6</th>
+<th style="text-align:right">1e7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法1</td>
+<td style="text-align:right">0.70</td>
+<td style="text-align:right">0.89</td>
+<td style="text-align:right">1.19</td>
+<td style="text-align:right">1.56</td>
+<td style="text-align:right">2.03</td>
+<td style="text-align:right">2.97</td>
+<td style="text-align:right">4.02</td>
+</tr>
+<tr>
+<td>方法2</td>
+<td style="text-align:right">1.13</td>
+<td style="text-align:right">1.53</td>
+<td style="text-align:right">2.21</td>
+<td style="text-align:right">3.04</td>
+<td style="text-align:right">4.18</td>
+<td style="text-align:right">6.85</td>
+<td style="text-align:right">8.73</td>
+</tr>
+<tr>
+<td>方法3</td>
+<td style="text-align:right">0.25</td>
+<td style="text-align:right">0.30</td>
+<td style="text-align:right">0.36</td>
+<td style="text-align:right">0.42</td>
+<td style="text-align:right">0.50</td>
+<td style="text-align:right">0.65</td>
+<td style="text-align:right">0.78</td>
+</tr>
+<tr>
+<td>方法4</td>
+<td style="text-align:right">0.09</td>
+<td style="text-align:right">0.10</td>
+<td style="text-align:right">0.10</td>
+<td style="text-align:right">0.16</td>
+<td style="text-align:right">0.21</td>
+<td style="text-align:right">0.28</td>
+<td style="text-align:right">0.33</td>
+</tr>
+</tbody>
+</table>
+<p>事前計算に要した時間 (単位: ミリ秒)</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th style="text-align:right">1e5</th>
+<th style="text-align:right">2e5</th>
+<th style="text-align:right">5e5</th>
+<th style="text-align:right">1e6</th>
+<th style="text-align:right">2e6</th>
+<th style="text-align:right">5e6</th>
+<th style="text-align:right">1e7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td>方法4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">22</td>
+<td style="text-align:right">69</td>
+<td style="text-align:right">147</td>
+</tr>
+</tbody>
+</table>
+<p>1e7 までの素数が 1e6 個あるとすると，
+方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒．
+1e6 までの素数が 1e4 個だと，
+方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒．
+15ミリ秒，方法2では30ミリ秒，方法3では 4ミリ秒，方法4では 7ミリ秒．</p>
+<p>ランダムの平均だけではなくて，最悪時間も測りたいところですが，
+まあ，とりあえず．</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E7%B4%A0%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3/">素因数分解</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E6%80%A7%E8%83%BD/">性能</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Dilworthの定理, Konigの定理</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2022/02-06-prime-factor-perf/" data-title="素因数分解に要する時間">
+</section>
+
+
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
