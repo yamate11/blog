@@ -6,7 +6,25 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 06 Feb 2022 12:02:43 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Feb 2022 11:48:45 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cubic? - AtCoder Beginner Contest 238 G</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/</link>
+      <pubDate>Sun, 13 Feb 2022 11:48:45 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/</guid>
+      <description>ABC238G Cubic? の解法です．公式解説と同じです．</description>
+    </item>
+    
+    <item>
+      <title>Zobrist Hash</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/</link>
+      <pubDate>Sun, 13 Feb 2022 11:32:14 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/</guid>
+      <description>ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．</description>
+    </item>
+    
     <item>
       <title>素因数分解に要する時間</title>
       <link>https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/</link>
