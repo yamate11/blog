@@ -6,7 +6,16 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Feb 2022 11:48:45 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Feb 2022 06:32:36 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>最大流・最小カット</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/</link>
+      <pubDate>Sun, 20 Feb 2022 06:32:36 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/</guid>
+      <description>最大流と最小カットについてのコンテスト用のまとめです</description>
+    </item>
+    
     <item>
       <title>Cubic? - AtCoder Beginner Contest 238 G</title>
       <link>https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/</link>
