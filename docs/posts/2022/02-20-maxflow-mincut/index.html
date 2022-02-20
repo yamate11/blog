@@ -88,8 +88,8 @@
   "keywords": [
     "最大流", "最小カット", "残余グラフ"
   ],
-  "articleBody": "最大流と最小カットについてのコンテスト用のまとめです．\n記号など   $G = (V, E, C)$: グラフ\n $V$: 頂点の集合 $E \\subseteq V \\times V$: 辺の集合．向きあり $C: E \\to \\mathbb{R}$: 容量    $e = (v, w) \\in E$ のとき，$v = e^S$, $w = e^D$ と書く． $(w, v)$ を $e^R$ と書く．\n  $f: E \\to \\mathbb{R}$ に対して，$v \\in V$ での流出量 $\\textrm{out}(v) := \\sum\\{C(e) \\mid e^S = v\\} - \\sum\\{C(e) \\mid e^D = v\\}$．\n  $s, t \\in V$ ($s \\neq t$) について， $f: E \\to \\mathbb{R}$ が $s$ から $t$ への 流量 $F$ のフローである，とは，\n $0 \\leq f(v) \\leq C(v)\\quad$ ($v \\in V$) $\\textrm{out}(v) = 0\\quad$ ($v \\in V \\setminus \\{s, t\\}$) $\\textrm{out}(s) = F$ $\\textrm{out}(t) = -F$    $G_f = (V, E', C')$: 残余グラフ\n $E' = E \\cup \\{ e^R \\mid e \\in E \\}$ $e \\in E'$ に対して， $C'(e) = C(e) - f(e) + f(e^R)\\quad$ ($e^R \\not\\in E$ ならば $f(e^R) = 0$ と解する)    最大流と最小カットの関係 $f$ が$s$から$t$への最大流の時，\n $S := \\{s\\} \\cup \\{ v \\in V \\mid \\text{ 残余グラフ } G_f \\text{ において } s \\text{ から } v \\text{ への正の流量のフローが存在する } \\}$ $T := V \\setminus S$  とする．\n $t \\not\\in T$ である． $(S, T)$ が最小カットを与える．すなわち， $s \\in S'$, $t \\in T'$ なる分割 $(S', T')$ のなかで， $\\sum\\{ u(e) \\mid e \\in E, e^S \\in S', e^D \\in T' \\}$ の最小値を与える．  ACL を用いたコード ACL (AtCoder Library) を用いてコードを書く場合には次のようになる．\n#include using namespace atcoder; ... ll N; cin  N; // 頂点は {0, ..., N-1}  mf_graphll graph(N); ll M; cin  M; REP(i, M) { cin  u  v  c; graph.add_edge(u, v, c); } // 辺の定義  ll f = graph.flow(0, N-1); cout  f  endl; // 最大流  for (const auto\u0026 e : graph.edges()) if (e.flow  0) // フローの表示  cout  e.from  \"-\"  e.to  \" flow:\"  e.flow  \" / cap:\"  e.cap  endl; vectorbool mc = graph.min_cut(0); // flow() の直後に呼ぶ．  // mc.size() == N であり，上の (残余グラフから作った) S に対して，mc[i] == true  i \\in S  ll c = 0; for (const auto\u0026 e : graph.edges()) if (mc[e.from] and not mc[e.to]) { c += e.cap; cout  e.from  \" \"  e.to  endl; // 最小カットの表示 }  assert(f == c); // 最大流 == 最小カット リンク  AtCoder Library …  Dinic法とその時間計算量 (みはつさん)   ",
-  "wordCount" : "359",
+  "articleBody": "最大流と最小カットについてのコンテスト用のまとめです．\n記号など   $G = (V, E, C)$: グラフ\n $V$: 頂点の集合 $E \\subseteq V \\times V$: 辺の集合．向きあり $C: E \\to \\mathbb{R}$: 容量    $e = (v, w) \\in E$ のとき，$v = e^S$, $w = e^D$ と書く． $(w, v)$ を $e^R$ と書く．\n  $f: E \\to \\mathbb{R}$ に対して，$v \\in V$ での流出量 $\\textrm{out}(v) := \\sum\\{C(e) \\mid e^S = v\\} - \\sum\\{C(e) \\mid e^D = v\\}$．\n  $s, t \\in V$ ($s \\neq t$) について， $f: E \\to \\mathbb{R}$ が $s$ から $t$ への 流量 $F$ のフローである，とは，\n $0 \\leq f(v) \\leq C(v)\\quad$ ($v \\in V$) $\\textrm{out}(v) = 0\\quad$ ($v \\in V \\setminus \\{s, t\\}$) $\\textrm{out}(s) = F$ $\\textrm{out}(t) = -F$    $G_f = (V, E', C')$: 残余グラフ\n $E' = E \\cup \\{ e^R \\mid e \\in E \\}$ $e \\in E'$ に対して， $C'(e) = C(e) - f(e) + f(e^R)\\quad$ ($e^R \\not\\in E$ ならば $f(e^R) = 0$ と解する)    最大流と最小カットの関係 $f$ が$s$から$t$への最大流の時，\n $S := \\{s\\} \\cup \\{ v \\in V \\mid \\text{ 残余グラフ } G_f \\text{ において } s \\text{ から } v \\text{ への正の流量のフローが存在する } \\}$ $T := V \\setminus S$  とする．\n $t \\not\\in T$ である． $(S, T)$ が最小カットを与える．すなわち， $s \\in S'$, $t \\in T'$ なる分割 $(S', T')$ のなかで， $\\sum\\{ u(e) \\mid e \\in E, e^S \\in S', e^D \\in T' \\}$ の最小値を与える．  例   図1のグラフ $G$ を考える．$f$ を，図2の赤字で与えられるフローとする． このフローの流量は4で，最大流ではない． 剰余グラフ $G_f$ を図3 に示す．もとの辺でまだ流せる量と， $f$で流している量の逆向きの流れが合わさったものになっている． ここで上の$S$を作ると $t \\in S$ であり， 図4で示した$s$から$t$に向かうフローがある．このフローを $f$ に加えた フロー $f'$ が図5であり，流量6のフローで，最大流である． $G_{f'}$ を図6に示す．$(S, T)$ も合わせて図示している． この $(S, T)$ を図1に当てはめてみると，最小カット 4 となっている．\nACL を用いたコード ACL (AtCoder Library) を用いてコードを書く場合には次のようになる．\n#include using namespace atcoder; ... ll N; cin  N; // 頂点は {0, ..., N-1}  mf_graphll graph(N); ll M; cin  M; REP(i, M) { cin  u  v  c; graph.add_edge(u, v, c); } // 辺の定義  ll f = graph.flow(0, N-1); cout  f  endl; // 最大流  for (const auto\u0026 e : graph.edges()) if (e.flow  0) // フローの表示  cout  e.from  \"-\"  e.to  \" flow:\"  e.flow  \" / cap:\"  e.cap  endl; vectorbool mc = graph.min_cut(0); // flow() の直後に呼ぶ．  // mc.size() == N であり，上の (残余グラフから作った) S に対して，mc[i] == true  i \\in S  ll c = 0; for (const auto\u0026 e : graph.edges()) if (mc[e.from] and not mc[e.to]) { c += e.cap; cout  e.from  \" \"  e.to  endl; // 最小カットの表示 }  assert(f == c); // 最大流 == 最小カット リンク  AtCoder Library …  Dinic法とその時間計算量 (みはつさん)   ",
+  "wordCount" : "391",
   "inLanguage": "en",
   "datePublished": "2022-02-20T06:32:36+09:00",
   "dateModified": "2022-02-20T06:32:36+09:00",
@@ -275,6 +275,20 @@ $s \in S'$, $t \in T'$ なる分割 $(S', T')$ のなかで，
 $\sum\{ u(e) \mid e \in E, e^S \in S', e^D \in T' \}$
 の最小値を与える．</li>
 </ul>
+<h2 id="例">例<a hidden class="anchor" aria-hidden="true" href="#例">#</a></h2>
+<figure>
+    <img loading="lazy" src="fig01.jpg" width="600px"/> 
+</figure>
+
+<p>図1のグラフ $G$ を考える．$f$ を，図2の赤字で与えられるフローとする．
+このフローの流量は4で，最大流ではない．
+剰余グラフ $G_f$ を図3 に示す．もとの辺でまだ流せる量と，
+$f$で流している量の逆向きの流れが合わさったものになっている．
+ここで上の$S$を作ると $t \in S$ であり，
+図4で示した$s$から$t$に向かうフローがある．このフローを $f$ に加えた
+フロー $f'$ が図5であり，流量6のフローで，最大流である．
+$G_{f'}$ を図6に示す．$(S, T)$ も合わせて図示している．
+この $(S, T)$ を図1に当てはめてみると，最小カット 4 となっている．</p>
 <h2 id="acl-を用いたコード">ACL を用いたコード<a hidden class="anchor" aria-hidden="true" href="#acl-を用いたコード">#</a></h2>
 <p>ACL (AtCoder Library) を用いてコードを書く場合には次のようになる．</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;atcoder/maxflow&gt;</span><span style="color:#75715e">
