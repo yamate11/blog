@@ -76,14 +76,6 @@
 </footer>
 {{- end }}
 
-<br/>
-<p style="font-size: 12px;">
-Links: 
-{{- range $index, $page := $paginator.Pages }}
-/ <a href="{{ .Permalink }}">{{ .Title | plainify }}</a>
-{{- end }}
-</p>
-
 {{- end }}{{/* end profileMode */}}
 
 {{- end }}{{- /* end main */ -}}

@@ -31,3 +31,9 @@
 <section id="isso-thread" data-isso-id="{{ .RelPermalink }}" data-title="{{ .Title }}">
 </section>
 
+<p style="font-size: 12px;">Links to Recent Posts:
+{{- range (where .Site.Pages "Section" "posts" | first 10) }}
+  / <a href="{{ .Permalink }}">{{ .Title }}</a>
+{{- end }}
+</p>
+
