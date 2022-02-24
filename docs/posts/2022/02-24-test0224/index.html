@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>素因数分解に要する時間 | yamate11のブログ</title>
-<meta name="keywords" content="素因数分解, 性能" />
-<meta name="description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました">
+<title>テスト | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="モバイルフレンドリーでないと言われたのでテスト">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-24-test0224/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -46,16 +46,16 @@
 
 
 
-<meta property="og:title" content="素因数分解に要する時間" />
-<meta property="og:description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました" />
+<meta property="og:title" content="テスト" />
+<meta property="og:description" content="モバイルフレンドリーでないと言われたのでテスト" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-06T12:02:43&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-06T12:02:43&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-24-test0224/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-24T13:09:17&#43;09:00" />
+<meta property="article:modified_time" content="2022-02-24T13:09:17&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="素因数分解に要する時間"/>
-<meta name="twitter:description" content="素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました"/>
+<meta name="twitter:title" content="テスト"/>
+<meta name="twitter:description" content="モバイルフレンドリーでないと言われたのでテスト"/>
 
 
 <script type="application/ld+json">
@@ -72,8 +72,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "素因数分解に要する時間",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/"
+      "name": "テスト",
+      "item": "https://yamate11.github.io/blog/posts/2022/02-24-test0224/"
     }
   ]
 }
@@ -82,24 +82,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "素因数分解に要する時間",
-  "name": "素因数分解に要する時間",
-  "description": "素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました",
+  "headline": "テスト",
+  "name": "テスト",
+  "description": "モバイルフレンドリーでないと言われたのでテスト",
   "keywords": [
-    "素因数分解", "性能"
+    
   ],
-  "articleBody": "$1$ 以上 $N$ 以下の整数をランダムに生成し， これらの素因数分解に要する時間を計測しました． 生成する個数は，100,000 個としました． 素因数分解の方法は以下の4通りです． 分解する整数を $x$ とします．\n 整数 $p = 2, 3, 4, 5, \\ldots$ で順次割ってみて， 割れたら $x := x / p$ とする．$p^2  x$ となったら打ち切り． $\\lceil\\sqrt{x}\\;\\rceil$ までの素数リストを，エラトステネスの篩で作成して， それらの素数で順次割ってみる．あとは1と同じ． 事前に $\\lceil\\sqrt{N}\\;\\rceil$ までの素数リストを， エラトステネスの篩で作成しておく． あとは2と同じ． 事前に $N$ までの整数の最小素因数リストを， 篩の方法 で作成しておく．これを用いて分解する．  測定用のソースファイル 結果は以下の通りでした．\n1つの整数の素因数分解に要した時間 (単位: マイクロ秒)\n   N 1e5 2e5 5e5 1e6 2e6 5e6 1e7     方法1 0.70 0.89 1.19 1.56 2.03 2.97 4.02   方法2 1.13 1.53 2.21 3.04 4.18 6.85 8.73   方法3 0.25 0.30 0.36 0.42 0.50 0.65 0.78   方法4 0.09 0.10 0.10 0.16 0.21 0.28 0.33    事前計算に要した時間 (単位: ミリ秒)\n   N 1e5 2e5 5e5 1e6 2e6 5e6 1e7     方法3 0 0 0 0 0 0 0   方法4 0 1 2 6 22 69 147    1e7 までの素数が 1e6 個あるとすると， 方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒． 1e6 までの素数が 1e4 個だと， 方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒． 15ミリ秒，方法2では30ミリ秒，方法3では 4ミリ秒，方法4では 7ミリ秒．\nランダムの平均だけではなくて，最悪時間も測りたいところですが， まあ，とりあえず．\n",
-  "wordCount" : "136",
+  "articleBody": "本文 問題\n何? どこが?\n",
+  "wordCount" : "4",
   "inLanguage": "en",
-  "datePublished": "2022-02-06T12:02:43+09:00",
-  "dateModified": "2022-02-06T12:02:43+09:00",
+  "datePublished": "2022-02-24T13:09:17+09:00",
+  "dateModified": "2022-02-24T13:09:17+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/"
+    "@id": "https://yamate11.github.io/blog/posts/2022/02-24-test0224/"
   },
   "publisher": {
     "@type": "Organization",
@@ -214,152 +214,28 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      素因数分解に要する時間
+      テスト
     </h1>
-    <div class="post-meta">2022-02-06&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-02-24&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>$1$ 以上 $N$ 以下の整数をランダムに生成し，
-これらの素因数分解に要する時間を計測しました．
-生成する個数は，100,000 個としました．
-素因数分解の方法は以下の4通りです．
-分解する整数を $x$ とします．</p>
-<ol>
-<li>整数 $p = 2, 3, 4, 5, \ldots$ で順次割ってみて，
-割れたら $x := x / p$ とする．$p^2 &gt; x$ となったら打ち切り．</li>
-<li>$\lceil\sqrt{x}\;\rceil$ までの素数リストを，エラトステネスの篩で作成して，
-それらの素数で順次割ってみる．あとは1と同じ．</li>
-<li>事前に $\lceil\sqrt{N}\;\rceil$ までの素数リストを，
-エラトステネスの篩で作成しておく．
-あとは2と同じ．</li>
-<li>事前に $N$ までの整数の最小素因数リストを，
-<a href="https://qiita.com/rsk0315_h4x/items/ff3b542a4468679fb409" target="_blank">篩の方法</a>
-
-で作成しておく．これを用いて分解する．</li>
-</ol>
-<p><a href="https://gist.github.com/yamate11/5b6209ddcb1d36f330ed2d6c0bb92c0b" target="_blank">測定用のソースファイル</a>
-</p>
-<p>結果は以下の通りでした．</p>
-<p>1つの整数の素因数分解に要した時間 (単位: マイクロ秒)</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th style="text-align:right">1e5</th>
-<th style="text-align:right">2e5</th>
-<th style="text-align:right">5e5</th>
-<th style="text-align:right">1e6</th>
-<th style="text-align:right">2e6</th>
-<th style="text-align:right">5e6</th>
-<th style="text-align:right">1e7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>方法1</td>
-<td style="text-align:right">0.70</td>
-<td style="text-align:right">0.89</td>
-<td style="text-align:right">1.19</td>
-<td style="text-align:right">1.56</td>
-<td style="text-align:right">2.03</td>
-<td style="text-align:right">2.97</td>
-<td style="text-align:right">4.02</td>
-</tr>
-<tr>
-<td>方法2</td>
-<td style="text-align:right">1.13</td>
-<td style="text-align:right">1.53</td>
-<td style="text-align:right">2.21</td>
-<td style="text-align:right">3.04</td>
-<td style="text-align:right">4.18</td>
-<td style="text-align:right">6.85</td>
-<td style="text-align:right">8.73</td>
-</tr>
-<tr>
-<td>方法3</td>
-<td style="text-align:right">0.25</td>
-<td style="text-align:right">0.30</td>
-<td style="text-align:right">0.36</td>
-<td style="text-align:right">0.42</td>
-<td style="text-align:right">0.50</td>
-<td style="text-align:right">0.65</td>
-<td style="text-align:right">0.78</td>
-</tr>
-<tr>
-<td>方法4</td>
-<td style="text-align:right">0.09</td>
-<td style="text-align:right">0.10</td>
-<td style="text-align:right">0.10</td>
-<td style="text-align:right">0.16</td>
-<td style="text-align:right">0.21</td>
-<td style="text-align:right">0.28</td>
-<td style="text-align:right">0.33</td>
-</tr>
-</tbody>
-</table>
-<p>事前計算に要した時間 (単位: ミリ秒)</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th style="text-align:right">1e5</th>
-<th style="text-align:right">2e5</th>
-<th style="text-align:right">5e5</th>
-<th style="text-align:right">1e6</th>
-<th style="text-align:right">2e6</th>
-<th style="text-align:right">5e6</th>
-<th style="text-align:right">1e7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>方法3</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-</tr>
-<tr>
-<td>方法4</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">2</td>
-<td style="text-align:right">6</td>
-<td style="text-align:right">22</td>
-<td style="text-align:right">69</td>
-<td style="text-align:right">147</td>
-</tr>
-</tbody>
-</table>
-<p>1e7 までの素数が 1e6 個あるとすると，
-方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒．
-1e6 までの素数が 1e4 個だと，
-方法1では4秒，方法2では 8秒，方法3では 0.78秒，方法4では 0.47秒．
-15ミリ秒，方法2では30ミリ秒，方法3では 4ミリ秒，方法4では 7ミリ秒．</p>
-<p>ランダムの平均だけではなくて，最悪時間も測りたいところですが，
-まあ，とりあえず．</p>
+  <div class="post-content"><!-- タイトルはキーワードがインデックスされないかもしれないので，
+     ここに書いておく -->
+<!-- AtCoder *** Contest xxx - A*C xxx F - 問題タイトル の解法です．-->
+<h2 id="本文">本文<a hidden class="anchor" aria-hidden="true" href="#本文">#</a></h2>
+<p>問題</p>
+<h2 id="何">何?<a hidden class="anchor" aria-hidden="true" href="#何">#</a></h2>
+<p>どこが?</p>
 
 
   </div>
 
   <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://yamate11.github.io/blog/tags/%E7%B4%A0%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3/">素因数分解</a></li>
-      <li><a href="https://yamate11.github.io/blog/tags/%E6%80%A7%E8%83%BD/">性能</a></li>
-    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>Zobrist Hash</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">
     <span class="title">Next Page »</span>
     <br>
-    <span>Dilworthの定理, Konigの定理</span>
+    <span>Balls in Boxes - Atcoder Beginner Contest 231 G</span>
   </a>
 </nav>
 
@@ -368,7 +244,7 @@
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-06-prime-factor-perf/" data-title="素因数分解に要する時間">
+<section id="isso-thread" data-isso-id="/blog/posts/2022/02-24-test0224/" data-title="テスト">
 </section>
 
 <p>Links to Recent Posts:
