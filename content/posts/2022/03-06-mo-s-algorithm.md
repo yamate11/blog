@@ -54,14 +54,14 @@ $\text{query}(l, r)$ が，
 
 ```cpp
     // ブロック数
-    int K = lround(sqrt(Q));
+    ll B = max(1LL, llround(1.3 * N / sqrt(Q)));  // 1.3 は適当に調整...
 
     // クエリの先読み
     using tup_t = tuple<int, int, int, int>; // ブロックID, r, l, クエリID
     vector<tup_t> qs(Q);
     for (int query_id = 0; query_id < Q; query_id++) {
       int l, r; cin >> l >> r; l--;       // 添字0開始，半開区間
-      int block_id = l / K;
+      int block_id = l / B;
       qs.emplace_back(block_id, r, l, query_id);
     }
 
