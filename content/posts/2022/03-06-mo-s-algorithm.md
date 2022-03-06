@@ -58,7 +58,7 @@ $\text{query}(l, r)$ が，
 
     // クエリの先読み
     using tup_t = tuple<int, int, int, int>; // ブロックID, r, l, クエリID
-    vector<tup_t> qs(Q);
+    vector<tup_t> qs;
     for (int query_id = 0; query_id < Q; query_id++) {
       int l, r; cin >> l >> r; l--;       // 添字0開始，半開区間
       int block_id = l / B;
@@ -94,3 +94,15 @@ $\text{query}(l, r)$ が，
 
     for (T a : ans) cout << a << "\n";   // 答の出力
 ```
+
+## 補足
+
+Codeforces の[記事](https://codeforces.com/blog/entry/61203)に，
+Hilbert curve を使うと性能があがるという報告がある．
+追試してみたが，あまり速くならない．
+左右端の拡張，縮小の回数を減らそうという趣旨なのだが，
+もとの Mo's algorithm のブロックサイズを適切に設定することによって，
+ほぼ同等の回数にすることができる．
+Hilbert curve order を計算する時間が馬鹿にならないので，トータルの
+性能としては，改善されない．
+
