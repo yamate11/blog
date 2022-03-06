@@ -53,7 +53,7 @@ $\text{query}(l, r)$ が，
 した場合，次のようなコードで計算できる．
 
 ```cpp
-    // ブロック数
+    // ブロックサイズ
     ll B = max(1LL, llround(1.3 * N / sqrt(Q)));  // 1.3 は適当に調整...
 
     // クエリの先読み
@@ -66,7 +66,14 @@ $\text{query}(l, r)$ が，
     }
 
     // 重要: ソートを忘れない!
-    sort(qs.begin(), qs.end());
+    sort(qs.begin(), qs.end(),
+         [](const tup_t& t1, const tup_t& t2) -> bool {
+           auto [block_id1, r1, _a, _b] = t1;
+           auto [block_id2, r2, _c, _d] = t2;
+           if (block_id1 != block_id2) return block_id1 < block_id2;
+           if ((block_id1 & 1) == 0) return r1 < r2;
+           else                      return r1 > r2;
+         });
 
     // メイン
     vector<T> ans(Q);
@@ -106,3 +113,7 @@ Hilbert curve を使うと性能があがるという報告がある．
 Hilbert curve order を計算する時間が馬鹿にならないので，トータルの
 性能としては，改善されない．
 
+姑息な定数倍高速化だが，
+クエリをソートする際に，$r$ の側は左→右と右→左を交互に行うのが得策．
+データにもよるだろうが，
+実験してみたところ，30%くらい比較回数を削減できた．
