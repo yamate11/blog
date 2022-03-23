@@ -7,6 +7,7 @@ tags: ["ゼータ変換", "高速ゼータ変換"]
 categories: ["topic"]
 # categories: ["solution"]
 summary: "高速ゼータ変換について，自分用にまとめた記事です．"
+draft: true
 ---
 
 (高速)ゼータ変換，(高速)メビウス変換については，
