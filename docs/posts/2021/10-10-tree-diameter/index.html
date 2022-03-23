@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     "木", "直径"
   ],
-  "articleBody": "木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．\n仮定 木の各辺に，正の重み (距離) がついているとする．\n記法  ノードの集合を $N$ と書く．辺の集合を$E$ と書く． 2ノード $a$, $b$ を結ぶパスを $p(a, b)$ と書く． $(a,b) \\in E$ のとき，辺$ab$に付された重みを $d(a,b)$ と書く． $p(a, b)$ を構成する辺に付された重みの和も， 同じ $d(a, b)$ で表す． $D := \\max\\{d(a,b) \\mid a, b \\in N\\}$ を，木の直径の長さと呼ぶ． $d(a, b) = D$ であるとき，$p(a, b)$ を，木の直径と呼ぶ．  命題1  2つのパス$\\pi_1 = p(x_1, y_1)$ および $\\pi_2 = p(x_2, y_2)$ が ともに直径であるとき， これらのパスは共通のノードを持つ．\n 証明 $\\pi_1$ と $\\pi_2$ が共通ノードを持たないと仮定して矛盾を導く． $\\pi = p(x_1, x_2)$ とする． $\\pi_1$, $\\pi_2$ と $\\pi$ との分岐点を $z_1$, $z_2$ とする． 仮定より $z_1 \\neq z_2$である． 以下が成り立つ．\n $d(x_1, z_1) + d(z_1, y_1) = D$ $d(x_2, z_2) + d(z_2, y_2) = D$ $d(x_1, z_1) + d(z_1, z_2) + d(z_2, y_2) \\leq D$ $d(x_2, z_2) + d(z_1, z_2) + d(z_1, y_1) \\leq D$  第3,4式を加えて第1,2式を代入すると $d(z_1, z_2) \\leq 0$ が得られ，矛盾が生じた．\n命題2  パス $p(a, b)$ が直径であるとき，任意の $x \\in N$ に対して， $a$ または $b$ が，木の中で $x$ から最も遠い点になる．すなわち， 任意の $w \\in N$ に対して，$d(x, w) \\leq \\max(d(x, a), d(x, b))$\n 証明 $d(x, a) \\geq d(x, b)$ として良い．$w \\in N$ が， $d(x, w)  d(x, a)$ を満たすと仮定して，矛盾を導く．\nCase1: $p(x, w)$ と $p(a, b)$ が共通部分を持つ場合\n共通部分を$p(x', w')$ とする． ただし，$x$に近い方を $x'$，$w$に近い方を $w'$ とする．\nCase1-1: $x'$と$w'$ のうち，$x'$ が $b$ 寄りで，$w'$ が $a$ 寄りの場合\n$d(x, w') + d(w', w) = d(x, w)  d(x, a) = d(x, w') + d(w', a)$ であるから，$d(w', w)  d(w', a)$ であることに 注意する． $d(w, b) = d(w, w') + d(w', x') + d(x', b)  d(a, w') + d(w', x') + d(x', b) = d(a, b) = D$ となり，直径の定義に反する．\nCase1-2: $x'$と$w'$ のうち，$x'$ が $a$ 寄りで，$w'$ が $b$ 寄りの場合\n$d(x, x') + d(x', a) = d(x, a) \\geq d(x, b) = d(x, x') + d(x', b)$ であるから，$d(x', a) \\geq d(x', b)$ である． また，$d(x, x') + d(x', w) = d(x, w)  d(x, a) = d(x, x') + d(x', a)$ であるから，$d(x', w)  d(x', a)$ である． すると，$d(a, w) = d(a, x') + d(x', w)  d(a, x') + d(x', a) \\geq d(x', b) + d(x', a) = d(a, b) = D$ となり，直径の定義に反する．\nCase2: $p(x, w)$ と $p(a, b)$ が共通部分を持たない場合\n$p(x, w)$ と $p(x, a)$ との共通部分を $p(x, x')$ とする． $p(x, a)$ と $p(b, a)$ との共通部分を $p(b', a)$ とする． $p(x, x') + p(x', w) = p(x, w)  p(x, a) = p(x, x') + p(x', b') + p(b', a)$ であるから，$p(x', w)  p(b', a)$ である． $p(b, w) = p(b, b') + b(b', x') + p(x', w)  p(b, b') + p(b', a) = p(b, a) = D$ となり，直径の定義に反する．\n命題3  $x \\in N$ をとる．$x$ からもっとも遠い点を $a$ として， $a$ からもっとも遠い点を $b$ とすると，$p(a, b)$ は，木の直径である．\n 証明 $p(c, d)$ を木の直径とする． 命題2より，$c$ もまた，$x$ から最も遠い点であるとしてよい． $p(x, a)$ と $p(x, c)$ の共通部分を $p(x, x')$ とする． $d(a, x') = d(c, x')$ である．\n$p(c, d)$ と $p(c, a)$ の共通部分を $p(c, y)$ とする．\nCase1: $y$ が $p(c, x')$ 上にある場合． このときには，$d(a, b) \\geq d(a, d) = d(a, x') + d(x', d) = d(c, x') + d(x', d) = d(c, d) = D$ となり，したがって，$p(a, b)$ は木の直径である．\nCase2: $y$ が $p(x', a)$ 上にある場合． このときには，$d(x, x') + d(x', y) + d(y, a) = d(x, a) \\geq d(x, d) = d(x, x') + d(x', y) + d(y, d)$ より，$d(y, a) \\geq d(y, d)$ である． したがって，$d(a, b) \\geq d(a, c) = d(a, y) + d(y, x') + d(x', c) \\geq d(d, y) + d(y, x') + d(x', c) = d(d, c) = D$ となり， $p(a, b)$ は木の直径である．\n命題4  木の直径の長さを $D$ とすると，次のいずれかが成り立つ．\n $c \\in N$ が存在して，すべての直径 $p(a, b)$ は $c$ を通り， $d(a, c) = d(c, b) = D/2$ である． $(c_1, c_2) \\in E$ と非負の $D_1, D_2$ が存在して， すべての直径 $p(a, b)$ は $c_1, c_2$ を通り， $D_1 + D_2 + d(c_1, c_2) = D$ が成り立ち， (必要なら$a$, $b$を入れ替えることによって) $d(a, c_1) = D_1$, $d(c_2, b) = D_2$ が成り立つ．   証明 直径 $p(a, b)$ を取る．\nCase1: $p(a, b)$ 上のノード $c$ で，$d(a, c) = d(c, b) = D/2$ となる ものが存在するとき．\n他の直径 $p(p, q)$ を取る．命題1により $p(a, b)$ と $p(p, q)$ は 共通のノードを持ち，これらは長さ0以上のパスをなす．これを $p(x, y)$ とする (xの側を a, p; y の側を b, q とする)． $c$ が $p(x, y)$ に含まれないとすると，$p(a, p)$ ないし $p(b, q)$ のいずれか の長さが $D$ より大きくなってしまう．したがって，$c$ は $p(x, y)$ に 含まれる．すなわち，$c$ は $p(p, q)$ 上にある．\nCase2: そうでないとき\n$d(a, c_1) ",
+  "articleBody": "木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．\n仮定 木の各辺に，正の重み (距離) がついているとする．\n記法  ノードの集合を $N$ と書く．辺の集合を$E$ と書く． 2ノード $a$, $b$ を結ぶパスを $p(a, b)$ と書く． $(a,b) \\in E$ のとき，辺$ab$に付された重みを $d(a,b)$ と書く． $p(a, b)$ を構成する辺に付された重みの和も， 同じ $d(a, b)$ で表す． $D := \\max\\{d(a,b) \\mid a, b \\in N\\}$ を，木の直径の長さと呼ぶ． $d(a, b) = D$ であるとき，$p(a, b)$ を，木の直径と呼ぶ．  命題1  2つのパス$\\pi_1 = p(x_1, y_1)$ および $\\pi_2 = p(x_2, y_2)$ が ともに直径であるとき， これらのパスは共通のノードを持つ．\n 証明 $\\pi_1$ と $\\pi_2$ が共通ノードを持たないと仮定して矛盾を導く． $\\pi = p(x_1, x_2)$ とする． $\\pi_1$, $\\pi_2$ と $\\pi$ との分岐点を $z_1$, $z_2$ とする． 仮定より $z_1 \\neq z_2$である． 以下が成り立つ．\n $d(x_1, z_1) + d(z_1, y_1) = D$ $d(x_2, z_2) + d(z_2, y_2) = D$ $d(x_1, z_1) + d(z_1, z_2) + d(z_2, y_2) \\leq D$ $d(x_2, z_2) + d(z_1, z_2) + d(z_1, y_1) \\leq D$  第3,4式を加えて第1,2式を代入すると $d(z_1, z_2) \\leq 0$ が得られ，矛盾が生じた．\n命題2  パス $p(a, b)$ が直径であるとき，任意の $x \\in N$ に対して， $a$ または $b$ が，木の中で $x$ から最も遠い点になる．すなわち， 任意の $w \\in N$ に対して，$d(x, w) \\leq \\max(d(x, a), d(x, b))$\n 証明 $d(x, a) \\geq d(x, b)$ として良い．$w \\in N$ が， $d(x, w)  d(x, a)$ を満たすと仮定して，矛盾を導く．\nCase1: $p(x, w)$ と $p(a, b)$ が共通部分を持つ場合\n共通部分を$p(x’, w’)$ とする． ただし，$x$に近い方を $x’$，$w$に近い方を $w’$ とする．\nCase1-1: $x’$と$w’$ のうち，$x’$ が $b$ 寄りで，$w’$ が $a$ 寄りの場合\n$d(x, w’) + d(w’, w) = d(x, w)  d(x, a) = d(x, w’) + d(w’, a)$ であるから，$d(w’, w)  d(w’, a)$ であることに 注意する． $d(w, b) = d(w, w’) + d(w’, x’) + d(x’, b)  d(a, w’) + d(w’, x’) + d(x’, b) = d(a, b) = D$ となり，直径の定義に反する．\nCase1-2: $x’$と$w’$ のうち，$x’$ が $a$ 寄りで，$w’$ が $b$ 寄りの場合\n$d(x, x’) + d(x’, a) = d(x, a) \\geq d(x, b) = d(x, x’) + d(x’, b)$ であるから，$d(x’, a) \\geq d(x’, b)$ である． また，$d(x, x’) + d(x’, w) = d(x, w)  d(x, a) = d(x, x’) + d(x’, a)$ であるから，$d(x’, w)  d(x’, a)$ である． すると，$d(a, w) = d(a, x’) + d(x’, w)  d(a, x’) + d(x’, a) \\geq d(x’, b) + d(x’, a) = d(a, b) = D$ となり，直径の定義に反する．\nCase2: $p(x, w)$ と $p(a, b)$ が共通部分を持たない場合\n$p(x, w)$ と $p(x, a)$ との共通部分を $p(x, x’)$ とする． $p(x, a)$ と $p(b, a)$ との共通部分を $p(b’, a)$ とする． $p(x, x’) + p(x’, w) = p(x, w)  p(x, a) = p(x, x’) + p(x’, b’) + p(b’, a)$ であるから，$p(x’, w)  p(b’, a)$ である． $p(b, w) = p(b, b’) + b(b’, x’) + p(x’, w)  p(b, b’) + p(b’, a) = p(b, a) = D$ となり，直径の定義に反する．\n命題3  $x \\in N$ をとる．$x$ からもっとも遠い点を $a$ として， $a$ からもっとも遠い点を $b$ とすると，$p(a, b)$ は，木の直径である．\n 証明 $p(c, d)$ を木の直径とする． 命題2より，$c$ もまた，$x$ から最も遠い点であるとしてよい． $p(x, a)$ と $p(x, c)$ の共通部分を $p(x, x’)$ とする． $d(a, x’) = d(c, x’)$ である．\n$p(c, d)$ と $p(c, a)$ の共通部分を $p(c, y)$ とする．\nCase1: $y$ が $p(c, x’)$ 上にある場合． このときには，$d(a, b) \\geq d(a, d) = d(a, x’) + d(x’, d) = d(c, x’) + d(x’, d) = d(c, d) = D$ となり，したがって，$p(a, b)$ は木の直径である．\nCase2: $y$ が $p(x’, a)$ 上にある場合． このときには，$d(x, x’) + d(x’, y) + d(y, a) = d(x, a) \\geq d(x, d) = d(x, x’) + d(x’, y) + d(y, d)$ より，$d(y, a) \\geq d(y, d)$ である． したがって，$d(a, b) \\geq d(a, c) = d(a, y) + d(y, x’) + d(x’, c) \\geq d(d, y) + d(y, x’) + d(x’, c) = d(d, c) = D$ となり， $p(a, b)$ は木の直径である．\n命題4  木の直径の長さを $D$ とすると，次のいずれかが成り立つ．\n $c \\in N$ が存在して，すべての直径 $p(a, b)$ は $c$ を通り， $d(a, c) = d(c, b) = D/2$ である． $(c_1, c_2) \\in E$ と非負の $D_1, D_2$ が存在して， すべての直径 $p(a, b)$ は $c_1, c_2$ を通り， $D_1 + D_2 + d(c_1, c_2) = D$ が成り立ち， (必要なら$a$, $b$を入れ替えることによって) $d(a, c_1) = D_1$, $d(c_2, b) = D_2$ が成り立つ．   証明 直径 $p(a, b)$ を取る．\nCase1: $p(a, b)$ 上のノード $c$ で，$d(a, c) = d(c, b) = D/2$ となる ものが存在するとき．\n他の直径 $p(p, q)$ を取る．命題1により $p(a, b)$ と $p(p, q)$ は 共通のノードを持ち，これらは長さ0以上のパスをなす．これを $p(x, y)$ とする (xの側を a, p; y の側を b, q とする)． $c$ が $p(x, y)$ に含まれないとすると，$p(a, p)$ ないし $p(b, q)$ のいずれか の長さが $D$ より大きくなってしまう．したがって，$c$ は $p(x, y)$ に 含まれる．すなわち，$c$ は $p(p, q)$ 上にある．\nCase2: そうでないとき\n$d(a, c_1) ",
   "wordCount" : "698",
   "inLanguage": "en",
   "datePublished": "2021-10-10T12:27:09+09:00",
@@ -262,27 +262,27 @@ $a$ または $b$ が，木の中で $x$ から最も遠い点になる．すな
 <p>$d(x, a) \geq d(x, b)$ として良い．$w \in N$ が，
 $d(x, w) &gt; d(x, a)$ を満たすと仮定して，矛盾を導く．</p>
 <p>Case1: $p(x, w)$ と $p(a, b)$ が共通部分を持つ場合</p>
-<p>共通部分を$p(x', w')$ とする．
-ただし，$x$に近い方を $x'$，$w$に近い方を $w'$ とする．</p>
-<p>Case1-1: $x'$と$w'$ のうち，$x'$ が $b$ 寄りで，$w'$ が $a$ 寄りの場合</p>
-<p>$d(x, w') + d(w', w) = d(x, w) &gt; d(x, a)
-= d(x, w') + d(w', a)$ であるから，$d(w', w) &gt; d(w', a)$ であることに
+<p>共通部分を$p(x&rsquo;, w&rsquo;)$ とする．
+ただし，$x$に近い方を $x&rsquo;$，$w$に近い方を $w&rsquo;$ とする．</p>
+<p>Case1-1: $x&rsquo;$と$w&rsquo;$ のうち，$x&rsquo;$ が $b$ 寄りで，$w&rsquo;$ が $a$ 寄りの場合</p>
+<p>$d(x, w&rsquo;) + d(w&rsquo;, w) = d(x, w) &gt; d(x, a)
+= d(x, w&rsquo;) + d(w&rsquo;, a)$ であるから，$d(w&rsquo;, w) &gt; d(w&rsquo;, a)$ であることに
 注意する．
-$d(w, b) = d(w, w') + d(w', x') + d(x', b) &gt; d(a, w') + d(w', x') + d(x', b)
+$d(w, b) = d(w, w&rsquo;) + d(w&rsquo;, x&rsquo;) + d(x&rsquo;, b) &gt; d(a, w&rsquo;) + d(w&rsquo;, x&rsquo;) + d(x&rsquo;, b)
 = d(a, b) = D$ となり，直径の定義に反する．</p>
-<p>Case1-2:  $x'$と$w'$ のうち，$x'$ が $a$ 寄りで，$w'$ が $b$ 寄りの場合</p>
-<p>$d(x, x') + d(x', a) = d(x, a) \geq d(x, b) = d(x, x') + d(x', b)$
-であるから，$d(x', a) \geq d(x', b)$ である．
-また，$d(x, x') + d(x', w) = d(x, w) &gt; d(x, a) = d(x, x') + d(x', a)$
-であるから，$d(x', w) &gt; d(x', a)$ である．
-すると，$d(a, w) = d(a, x') + d(x', w) &gt; d(a, x') + d(x', a) \geq
-d(x', b) + d(x', a) = d(a, b) = D$ となり，直径の定義に反する．</p>
+<p>Case1-2:  $x&rsquo;$と$w&rsquo;$ のうち，$x&rsquo;$ が $a$ 寄りで，$w&rsquo;$ が $b$ 寄りの場合</p>
+<p>$d(x, x&rsquo;) + d(x&rsquo;, a) = d(x, a) \geq d(x, b) = d(x, x&rsquo;) + d(x&rsquo;, b)$
+であるから，$d(x&rsquo;, a) \geq d(x&rsquo;, b)$ である．
+また，$d(x, x&rsquo;) + d(x&rsquo;, w) = d(x, w) &gt; d(x, a) = d(x, x&rsquo;) + d(x&rsquo;, a)$
+であるから，$d(x&rsquo;, w) &gt; d(x&rsquo;, a)$ である．
+すると，$d(a, w) = d(a, x&rsquo;) + d(x&rsquo;, w) &gt; d(a, x&rsquo;) + d(x&rsquo;, a) \geq
+d(x&rsquo;, b) + d(x&rsquo;, a) = d(a, b) = D$ となり，直径の定義に反する．</p>
 <p>Case2: $p(x, w)$ と $p(a, b)$ が共通部分を持たない場合</p>
-<p>$p(x, w)$ と $p(x, a)$ との共通部分を $p(x, x')$ とする．
-$p(x, a)$ と $p(b, a)$ との共通部分を $p(b', a)$ とする．
-$p(x, x') + p(x', w) = p(x, w) &gt; p(x, a) = p(x, x') + p(x', b') + p(b', a)$
-であるから，$p(x', w) &gt; p(b', a)$ である．
-$p(b, w) = p(b, b') + b(b', x') + p(x', w) &gt; p(b, b') + p(b', a) = p(b, a) = D$
+<p>$p(x, w)$ と $p(x, a)$ との共通部分を $p(x, x&rsquo;)$ とする．
+$p(x, a)$ と $p(b, a)$ との共通部分を $p(b&rsquo;, a)$ とする．
+$p(x, x&rsquo;) + p(x&rsquo;, w) = p(x, w) &gt; p(x, a) = p(x, x&rsquo;) + p(x&rsquo;, b&rsquo;) + p(b&rsquo;, a)$
+であるから，$p(x&rsquo;, w) &gt; p(b&rsquo;, a)$ である．
+$p(b, w) = p(b, b&rsquo;) + b(b&rsquo;, x&rsquo;) + p(x&rsquo;, w) &gt; p(b, b&rsquo;) + p(b&rsquo;, a) = p(b, a) = D$
 となり，直径の定義に反する．</p>
 <h3 id="命題3">命題3<a hidden class="anchor" aria-hidden="true" href="#命題3">#</a></h3>
 <blockquote>
@@ -292,16 +292,16 @@ $a$ からもっとも遠い点を $b$ とすると，$p(a, b)$ は，木の直�
 <h4 id="証明-2">証明<a hidden class="anchor" aria-hidden="true" href="#証明-2">#</a></h4>
 <p>$p(c, d)$ を木の直径とする．
 命題2より，$c$ もまた，$x$ から最も遠い点であるとしてよい．
-$p(x, a)$ と $p(x, c)$ の共通部分を $p(x, x')$ とする．
-$d(a, x') = d(c, x')$ である．</p>
+$p(x, a)$ と $p(x, c)$ の共通部分を $p(x, x&rsquo;)$ とする．
+$d(a, x&rsquo;) = d(c, x&rsquo;)$ である．</p>
 <p>$p(c, d)$ と $p(c, a)$ の共通部分を $p(c, y)$ とする．</p>
-<p>Case1: $y$ が $p(c, x')$ 上にある場合．
-このときには，$d(a, b) \geq d(a, d) = d(a, x') + d(x', d) = d(c, x') + d(x', d)
+<p>Case1: $y$ が $p(c, x&rsquo;)$ 上にある場合．
+このときには，$d(a, b) \geq d(a, d) = d(a, x&rsquo;) + d(x&rsquo;, d) = d(c, x&rsquo;) + d(x&rsquo;, d)
 = d(c, d) = D$ となり，したがって，$p(a, b)$ は木の直径である．</p>
-<p>Case2: $y$ が $p(x', a)$ 上にある場合．
-このときには，$d(x, x') + d(x', y) + d(y, a) = d(x, a) \geq d(x, d) = d(x, x') + d(x', y) + d(y, d)$ より，$d(y, a) \geq d(y, d)$ である．
-したがって，$d(a, b) \geq d(a, c) = d(a, y) + d(y, x') + d(x', c)
-\geq d(d, y) + d(y, x') + d(x', c) = d(d, c) = D$ となり，
+<p>Case2: $y$ が $p(x&rsquo;, a)$ 上にある場合．
+このときには，$d(x, x&rsquo;) + d(x&rsquo;, y) + d(y, a) = d(x, a) \geq d(x, d) = d(x, x&rsquo;) + d(x&rsquo;, y) + d(y, d)$ より，$d(y, a) \geq d(y, d)$ である．
+したがって，$d(a, b) \geq d(a, c) = d(a, y) + d(y, x&rsquo;) + d(x&rsquo;, c)
+\geq d(d, y) + d(y, x&rsquo;) + d(x&rsquo;, c) = d(d, c) = D$ となり，
 $p(a, b)$ は木の直径である．</p>
 <h3 id="命題4">命題4<a hidden class="anchor" aria-hidden="true" href="#命題4">#</a></h3>
 <blockquote>
@@ -364,8 +364,9 @@ $d(a, c_1) = d(p, c_1)$, $d(c_2, b) = d(c_2, q)$ であることがわかる．<
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -373,7 +374,6 @@ $d(a, c_1) = d(p, c_1)$, $d(c_2, b) = d(c_2, q)$ であることがわかる．<
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

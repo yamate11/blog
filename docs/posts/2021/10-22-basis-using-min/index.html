@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     
   ],
-  "articleBody": "自然数の集合 $N$ を，XORを加算とする， 体 $\\textrm{F}_2 = \\{0,1\\}$ 上のベクトル空間と見たときに， $x_1, .., x_n \\in Z$ が張る部分空間の基底の求め方に関する記事です． 熨斗袋さんのツイートで紹介されていた方法です:\nxor の掃き出しすごい簡単に出来るんですね\nvector basis;\nfor(int e : a){\nfor(int b : basis)\nchmin(e, e ^ b);\nif(e)\nbasis.push_back(e);\n}\nこれで数列 a の基底が basis に入る\n— 熨斗袋 (@noshi91) November 30, 2019  記法など 自然数の集合 $\\{0, 1, \\ldots…\\}$ を $N$ と書く． 以下では，$N$ を， XOR を加算とする，体 $\\textrm{F}_2 = \\{0, 1\\}$ 上の ベクトル空間と見る． $X \\subseteq N$ が張る空間を $S(X)$ と書く．\n$x \\in N \\setminus \\{0\\}$ の最上位ビットを $\\textrm{MSB}(x)$ と書く． たとえば， $\\textrm{MSB}(1) = 0$, $\\textrm{MSB}(5) = 2$． $2^{\\textrm{MSB}(x)}$ を $r(x)$ と書く．\n命題  $x_1, \\ldots, x_n \\in N$ に対し， $y_1, \\ldots, y_n \\in N$ を 次で定義する:\n $z_{i, 1} := x_i$ $z_{i,j} := \\min(z_{i,{j-1}}, \\text{XOR}(z_{i,{j-1}}, y_j))$ ($j = 2, \\ldots, i$) $y_i := z_{i,i}$  $W := \\{i \\in [1, n] \\mid y_i \\neq 0\\}$ とするとき， $\\{y_i \\mid i \\in W\\}$ および $\\{x_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\nまた，前者に関しては，$a \\in N$ のこの基底による表現 $ a = \\textrm{XOR}\\{y_i \\mid i \\in U\\}$ を，次のように計算することができる:\n $a_1 := a$ $a_{j + 1} := \\min(a_j, \\textrm{XOR}(a_j, y_j))$ ($j = 1, \\ldots, i - 1$) $U := \\{ j \\in W \\mid a_{j + 1} = \\textrm{XOR}(a_j, y_j)\\}$   証明 $i \\in W$ に対して， $M_i := \\{ \\textrm{MSB}(y_j) \\mid j \\in [1, i) \\cap W \\}$ とする．以下が帰納法で証明できる:\n $m \\in M_i$ ならば，$\\textrm{AND}(2^{\\textrm{MSB}(m)}, y_i) = 0$．  従って，$\\{y_i \\mid i \\in W\\}$ は線形独立である． また，$\\{y_i \\mid i \\in [1, j) \\cap W\\}$ が， $\\{x_1, x_2, \\ldots, x_j\\}$ を生成することも帰納法で証明できる．\n従って， $\\{y_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\n$y_i$ は，$\\{x_j \\mid j \\in [1, i] \\cap W\\}$ の線形結合で書けるので， $\\{x_i \\mid i \\in W \\}$ は，$S(\\{x_1, \\ldots, x_n\\})$ を生成する． $x_i$ たちが線形独立でないと仮定すると， $x_i = \\textrm{XOR}(\\{x_j \\mid j \\in J\\})$ となる $i \\in W$ と $J \\subseteq [1, i) \\cap W$ がとれる．しかし，すると $\\textrm{XOR}(\\{x_j \\mid j \\in J\\}) = \\textrm{XOR}(\\{y_j \\mid j \\in J'\\})$ となる $J' \\subseteq [1, i) \\cap W$ がとれる．$y_i$ の構成を考えると，$j \\in J'$ のとき， $z_{i,j} = x_i + \\textrm{XOR}(\\{y_j \\mid j \\in J'\\})$, そうでないとき $z_{i,j} = z_{i, j-1}$ となり，したがって，$y_i = 0$ となり， 矛盾する．(終)\n",
+  "articleBody": "自然数の集合 $N$ を，XORを加算とする， 体 $\\textrm{F}_2 = \\{0,1\\}$ 上のベクトル空間と見たときに， $x_1, .., x_n \\in Z$ が張る部分空間の基底の求め方に関する記事です． 熨斗袋さんのツイートで紹介されていた方法です:\nxor の掃き出しすごい簡単に出来るんですね\nvector basis;\nfor(int e : a){\nfor(int b : basis)\nchmin(e, e ^ b);\nif(e)\nbasis.push_back(e);\n}\nこれで数列 a の基底が basis に入る\n— 熨斗袋 (@noshi91) November 30, 2019  記法など 自然数の集合 $\\{0, 1, \\ldots…\\}$ を $N$ と書く． 以下では，$N$ を， XOR を加算とする，体 $\\textrm{F}_2 = \\{0, 1\\}$ 上の ベクトル空間と見る． $X \\subseteq N$ が張る空間を $S(X)$ と書く．\n$x \\in N \\setminus \\{0\\}$ の最上位ビットを $\\textrm{MSB}(x)$ と書く． たとえば， $\\textrm{MSB}(1) = 0$, $\\textrm{MSB}(5) = 2$． $2^{\\textrm{MSB}(x)}$ を $r(x)$ と書く．\n命題  $x_1, \\ldots, x_n \\in N$ に対し， $y_1, \\ldots, y_n \\in N$ を 次で定義する:\n $z_{i, 1} := x_i$ $z_{i,j} := \\min(z_{i,{j-1}}, \\text{XOR}(z_{i,{j-1}}, y_j))$ ($j = 2, \\ldots, i$) $y_i := z_{i,i}$  $W := \\{i \\in [1, n] \\mid y_i \\neq 0\\}$ とするとき， $\\{y_i \\mid i \\in W\\}$ および $\\{x_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\nまた，前者に関しては，$a \\in N$ のこの基底による表現 $ a = \\textrm{XOR}\\{y_i \\mid i \\in U\\}$ を，次のように計算することができる:\n $a_1 := a$ $a_{j + 1} := \\min(a_j, \\textrm{XOR}(a_j, y_j))$ ($j = 1, \\ldots, i - 1$) $U := \\{ j \\in W \\mid a_{j + 1} = \\textrm{XOR}(a_j, y_j)\\}$   証明 $i \\in W$ に対して， $M_i := \\{ \\textrm{MSB}(y_j) \\mid j \\in [1, i) \\cap W \\}$ とする．以下が帰納法で証明できる:\n $m \\in M_i$ ならば，$\\textrm{AND}(2^{\\textrm{MSB}(m)}, y_i) = 0$．  従って，$\\{y_i \\mid i \\in W\\}$ は線形独立である． また，$\\{y_i \\mid i \\in [1, j) \\cap W\\}$ が， $\\{x_1, x_2, \\ldots, x_j\\}$ を生成することも帰納法で証明できる．\n従って， $\\{y_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\n$y_i$ は，$\\{x_j \\mid j \\in [1, i] \\cap W\\}$ の線形結合で書けるので， $\\{x_i \\mid i \\in W \\}$ は，$S(\\{x_1, \\ldots, x_n\\})$ を生成する． $x_i$ たちが線形独立でないと仮定すると， $x_i = \\textrm{XOR}(\\{x_j \\mid j \\in J\\})$ となる $i \\in W$ と $J \\subseteq [1, i) \\cap W$ がとれる．しかし，すると $\\textrm{XOR}(\\{x_j \\mid j \\in J\\}) = \\textrm{XOR}(\\{y_j \\mid j \\in J’\\})$ となる $J’ \\subseteq [1, i) \\cap W$ がとれる．$y_i$ の構成を考えると，$j \\in J’$ のとき， $z_{i,j} = x_i + \\textrm{XOR}(\\{y_j \\mid j \\in J’\\})$, そうでないとき $z_{i,j} = z_{i, j-1}$ となり，したがって，$y_i = 0$ となり， 矛盾する．(終)\n",
   "wordCount" : "328",
   "inLanguage": "en",
   "datePublished": "2021-10-22T14:03:51+09:00",
@@ -276,9 +276,9 @@ $x_i$ たちが線形独立でないと仮定すると，
 $x_i = \textrm{XOR}(\{x_j \mid j \in J\})$ となる $i \in W$ と
 $J \subseteq [1, i) \cap W$ がとれる．しかし，すると
 $\textrm{XOR}(\{x_j \mid j \in J\}) =
-\textrm{XOR}(\{y_j \mid j \in J'\})$ となる $J' \subseteq [1, i) \cap W$
-がとれる．$y_i$ の構成を考えると，$j \in J'$ のとき，
-$z_{i,j} = x_i + \textrm{XOR}(\{y_j \mid j \in J'\})$,
+\textrm{XOR}(\{y_j \mid j \in J&rsquo;\})$ となる $J&rsquo; \subseteq [1, i) \cap W$
+がとれる．$y_i$ の構成を考えると，$j \in J&rsquo;$ のとき，
+$z_{i,j} = x_i + \textrm{XOR}(\{y_j \mid j \in J&rsquo;\})$,
 そうでないとき $z_{i,j} = z_{i, j-1}$ となり，したがって，$y_i = 0$ となり，
 矛盾する．(終)</p>
 
@@ -308,8 +308,9 @@ $z_{i,j} = x_i + \textrm{XOR}(\{y_j \mid j \in J'\})$,
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -317,7 +318,6 @@ $z_{i,j} = x_i + \textrm{XOR}(\{y_j \mid j \in J'\})$,
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

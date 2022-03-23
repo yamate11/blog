@@ -9,7 +9,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
-0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:">
+ 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
@@ -20,7 +20,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -51,7 +51,7 @@
 <meta property="og:title" content="binom(n, r) を小さい素数pに対して mod p で求める" />
 <meta property="og:description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
-0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:" />
+ 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-04-27T00:00:00&#43;00:00" />
@@ -61,7 +61,7 @@
 <meta name="twitter:title" content="binom(n, r) を小さい素数pに対して mod p で求める"/>
 <meta name="twitter:description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
-0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:"/>
+ 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:"/>
 
 
 <script type="application/ld+json">
@@ -90,11 +90,11 @@
   "@type": "BlogPosting",
   "headline": "binom(n, r) を小さい素数pに対して mod p で求める",
   "name": "binom(n, r) を小さい素数pに対して mod p で求める",
-  "description": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:",
+  "description": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:",
   "keywords": [
     
   ],
-  "articleBody": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:\n  例: p = 3 例として $p = 3$ の場合には， 上の図から，以下のように計算できる．ただし，$q $$ \\begin{eqnarray} % \\binom00 \u0026=\u0026 1 \\\\\n% \\binom{3^k + q}{r} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{q}{r}} \u0026 \\text{if }\\; 0 \\leq r \\leq q \\\\\n\\displaystyle{\\binom{q}{r - 3^k}} \u0026 \\text{if }\\; 3^k \\leq r \\\\\n0 \u0026 \\text{if }\\; q 列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． $$ \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\\ns(3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ s(q) \\\\\ns(2\\cdot 3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ 2 \\cdot s(q) ⧺ z ⧺ s(q) \\end{eqnarray} $$ ただし，$z$ は，$0$ を $3^k - q - 1$ 個並べた列．\nbinom(n, r) 一般に，小さい素数$p$ に対しては，以下のようになる．\n$n = c\\cdot p^k + q$，$1 \\leq c $$ \\begin{eqnarray} \\binom{0}{0} \u0026=\u0026 1 \\\\\n\\binom{n}{r} = \\binom{c\\cdot p^k + q}{d\\cdot p^k + t} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{c}{d}\\binom{q}{t}} \u0026 \\text{if }\\; 0 \\leq t \\leq q \\\\\n0 \u0026 \\text{if }\\; q $\\binom{n}{r}$ の時間計算量は $O(\\log n)$．\n列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． 記号は上と同様． $$ \\newcommand{\\mybinom}[2]{\\displaystyle{\\binom{#1}{#2}}} \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\\ns(n) = s(c\\cdot p^k + q) \u0026=\u0026 \\mybinom{c}{0}s(q) ⧺ z ⧺ \\mybinom{c}{1}s(q) ⧺ z ⧺ \\cdots ⧺ \\mybinom{c}{c}s(q) \\\\\n\\end{eqnarray} $$ $z$は，$0$ を $p^k - q - 1$ 個並べた列． $s(n)$ の時間計算量は $O(n)$．\nAtCoder AtCoder ARC117 C - Tricolor Pyramid で，上の手順が使える．ただし，解説 の方法の方が思いつきやすいし，(列を求めるだけだから) 計算量は同じ．\n",
+  "articleBody": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:\n  例: p = 3 例として $p = 3$ の場合には， 上の図から，以下のように計算できる．ただし，$q $$ \\begin{eqnarray} % \\binom00 \u0026=\u0026 1 \\\\ % \\binom{3^k + q}{r} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{q}{r}} \u0026 \\text{if }\\; 0 \\leq r \\leq q \\\\ \\displaystyle{\\binom{q}{r - 3^k}} \u0026 \\text{if }\\; 3^k \\leq r \\\\ 0 \u0026 \\text{if }\\; q 列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． $$ \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ s(q) \\\\ s(2\\cdot 3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ 2 \\cdot s(q) ⧺ z ⧺ s(q) \\end{eqnarray} $$ ただし，$z$ は，$0$ を $3^k - q - 1$ 個並べた列．\nbinom(n, r) 一般に，小さい素数$p$ に対しては，以下のようになる．\n$n = c\\cdot p^k + q$，$1 \\leq c $$ \\begin{eqnarray} \\binom{0}{0} \u0026=\u0026 1 \\\\ \\binom{n}{r} = \\binom{c\\cdot p^k + q}{d\\cdot p^k + t} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{c}{d}\\binom{q}{t}} \u0026 \\text{if }\\; 0 \\leq t \\leq q \\\\ 0 \u0026 \\text{if }\\; q $\\binom{n}{r}$ の時間計算量は $O(\\log n)$．\n列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． 記号は上と同様． $$ \\newcommand{\\mybinom}[2]{\\displaystyle{\\binom{#1}{#2}}} \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(n) = s(c\\cdot p^k + q) \u0026=\u0026 \\mybinom{c}{0}s(q) ⧺ z ⧺ \\mybinom{c}{1}s(q) ⧺ z ⧺ \\cdots ⧺ \\mybinom{c}{c}s(q) \\\\ \\end{eqnarray} $$ $z$は，$0$ を $p^k - q - 1$ 個並べた列． $s(n)$ の時間計算量は $O(n)$．\nAtCoder AtCoder ARC117 C - Tricolor Pyramid で，上の手順が使える．ただし，解説 の方法の方が思いつきやすいし，(列を求めるだけだから) 計算量は同じ．\n",
   "wordCount" : "477",
   "inLanguage": "en",
   "datePublished": "2021-04-27T00:00:00Z",
@@ -228,23 +228,23 @@
   <div class="post-content"><p>二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．</p>
 <h2 id="観察">観察<a hidden class="anchor" aria-hidden="true" href="#観察">#</a></h2>
 <p>p = 3 に関していくつか書いてみると次のようになっている．</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  0                1
-  1               1 1
-  2              1 2 1
- 10             1 0 0 1
- 11            1 1 0 1 1
- 12           1 2 1 1 2 1
- 20          1 0 0 2 0 0 1
- 21         1 1 0 2 2 0 1 1
- 22        1 2 1 2 1 2 1 2 1
-100       1 0 0 0 0 0 0 0 0 1
-101      1 1 0 0 0 0 0 0 0 1 1
-102     1 2 1 0 0 0 0 0 0 1 2 1
-110    1 0 0 1 0 0 0 0 0 1 0 0 1
-111   1 1 0 1 1 0 0 0 0 1 1 0 1 1
-112  1 2 1 1 2 1 0 0 0 1 2 1 1 2 1
-120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1
-</code></pre></div><p>こんな感じの構造になっている:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  0                1
+</span></span><span style="display:flex;"><span>  1               1 1
+</span></span><span style="display:flex;"><span>  2              1 2 1
+</span></span><span style="display:flex;"><span> 10             1 0 0 1
+</span></span><span style="display:flex;"><span> 11            1 1 0 1 1
+</span></span><span style="display:flex;"><span> 12           1 2 1 1 2 1
+</span></span><span style="display:flex;"><span> 20          1 0 0 2 0 0 1
+</span></span><span style="display:flex;"><span> 21         1 1 0 2 2 0 1 1
+</span></span><span style="display:flex;"><span> 22        1 2 1 2 1 2 1 2 1
+</span></span><span style="display:flex;"><span>100       1 0 0 0 0 0 0 0 0 1
+</span></span><span style="display:flex;"><span>101      1 1 0 0 0 0 0 0 0 1 1
+</span></span><span style="display:flex;"><span>102     1 2 1 0 0 0 0 0 0 1 2 1
+</span></span><span style="display:flex;"><span>110    1 0 0 1 0 0 0 0 0 1 0 0 1
+</span></span><span style="display:flex;"><span>111   1 1 0 1 1 0 0 0 0 1 1 0 1 1
+</span></span><span style="display:flex;"><span>112  1 2 1 1 2 1 0 0 0 1 2 1 1 2 1
+</span></span><span style="display:flex;"><span>120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1
+</span></span></code></pre></div><p>こんな感じの構造になっている:</p>
 <figure>
     <img loading="lazy" src="fig1.png" width="270em"/> 
 </figure>
@@ -256,26 +256,26 @@
 \begin{eqnarray}
 %
 \binom00 &amp;=&amp; 1
-\\<br>
+\\
 %
 \binom{3^k + q}{r} 
 &amp;=&amp; 
 \begin{cases}
-\displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\<br>
-\displaystyle{\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \\<br>
-0 &amp; \text{if }\; q &lt; r &lt; 3^k \\<br>
+\displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\
+\displaystyle{\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \\
+0 &amp; \text{if }\; q &lt; r &lt; 3^k \\
 \end{cases}
-\\<br>
+\\
 %
 \binom{2\cdot 3^k + q}{r} 
 &amp;=&amp; 
 \begin{cases}
-\displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\<br>
-\displaystyle{2\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \leq 2\cdot 3^k + q \\<br>
-\displaystyle{\binom{q}{r - 2\cdot 3^k}} &amp; \text{if }\; 2\cdot 3^k \leq r \\<br>
-0 &amp; \text{if }\; q &lt; r &lt; 3^k,\; 3^k + q &lt; r &lt; 2\cdot 3^k \\<br>
+\displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\
+\displaystyle{2\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \leq 2\cdot 3^k + q \\
+\displaystyle{\binom{q}{r - 2\cdot 3^k}} &amp; \text{if }\; 2\cdot 3^k \leq r \\
+0 &amp; \text{if }\; q &lt; r &lt; 3^k,\; 3^k + q &lt; r &lt; 2\cdot 3^k \\
 \end{cases}
-\\<br>
+\\
 %
 \end{eqnarray}
 $$</p>
@@ -283,9 +283,9 @@ $$</p>
 $$
 \begin{eqnarray}
 s(0) &amp;=&amp; [1] 
-\\<br>
+\\
 s(3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ s(q) 
-\\<br>
+\\
 s(2\cdot 3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ 2 \cdot s(q) ⧺ z ⧺ s(q) 
 \end{eqnarray}
 $$
@@ -296,15 +296,15 @@ $$
 <p>$$
 \begin{eqnarray}
 \binom{0}{0} &amp;=&amp; 1
-\\<br>
+\\
 \binom{n}{r} = 
 \binom{c\cdot p^k + q}{d\cdot p^k + t} 
 &amp;=&amp; 
 \begin{cases}
-\displaystyle{\binom{c}{d}\binom{q}{t}} &amp; \text{if }\; 0 \leq t \leq q \\<br>
-0 &amp; \text{if }\; q &lt; t \\<br>
+\displaystyle{\binom{c}{d}\binom{q}{t}} &amp; \text{if }\; 0 \leq t \leq q \\
+0 &amp; \text{if }\; q &lt; t \\
 \end{cases}
-\\<br>
+\\
 \end{eqnarray}
 $$</p>
 <p>$\binom{n}{r}$ の時間計算量は $O(\log n)$．</p>
@@ -314,11 +314,11 @@ $$
 \newcommand{\mybinom}[2]{\displaystyle{\binom{#1}{#2}}}
 \begin{eqnarray}
 s(0) &amp;=&amp; [1] 
-\\<br>
+\\
 s(n) = s(c\cdot p^k + q) 
 &amp;=&amp;
 \mybinom{c}{0}s(q) ⧺ z ⧺ \mybinom{c}{1}s(q)  ⧺ z ⧺ \cdots ⧺ \mybinom{c}{c}s(q) 
-\\<br>
+\\
 \end{eqnarray}
 $$
 $z$は，$0$ を $p^k - q - 1$ 個並べた列．
@@ -354,8 +354,9 @@ $s(n)$ の時間計算量は $O(n)$．</p>
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -363,7 +364,6 @@ $s(n)$ の時間計算量は $O(n)$．</p>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

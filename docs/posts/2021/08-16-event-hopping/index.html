@@ -23,7 +23,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -103,7 +103,7 @@
   "keywords": [
     
   ],
-  "articleBody": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\n dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，\n 町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2  として，\n dp[i1][j+1] := True dp[i2][j+1] := True  と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．\n実は，回数を全部見る必要がなくて，各々のイベントに参加するまでに， 最も多くの回数のイベントに参加してきた方法だけ考えれば十分です． ただし，「ある時点までに多くの回数のイベントに参加した方が， 最終的なイベント参加回数が多い」ということは言えません． 次のような例があります．\n $D = 1$, $K = 100$ $S_1 = 1$, $P_1 = 1$ $S_2 = 1000$, $P_2 = 2$ $S_3 = 1150$, $P_3 = 1$ $S_4 = 1151$, $P_4 = 1$  町 1 から出発して イベント 1 に参加した直後に 2 に移る (方法A) と， イベント2 の直前に，今まで参加した回数は 1 です． 一方，町2から出発する (方法B) と，イベント2の直前に， 今まで参加した回数は 0 で，方法Aの方が多いです． しかし，方法B の方は，このあと イベント2, 3, 4 に参加して最終の回数が3回にできますが， 方法Aは，最終的に2回しか参加できません．\nしかし，以下は成り立ちます:\n補題 各イベント $i$ に対し，そのイベントに参加する前に参加できるイベント数の 最大値を $M(i)$ とする． 求める答を $X$ とする． 条件を満たしてイベントに参加していく方法 $e_0, \\ldots, e_{X-1}$ であって， 任意の $j = 0, \\ldots, X-1$ に対して，$M(e_j) = j$ となるものが存在する．\n補題が言えれば，DP として，以下のものをとれます:\n dp[i] := $M(i)$  遷移としては，$dp[i]$ が計算できたらば，上で述べた i1 と i2 を取って，\n dp[i1] := max(dp[i1], dp[i] + 1) dp[i2] := max(dp[i2], dp[i] + 1)  とすれば良いです．(仮想的に，十分遅く行われるN番目のイベントを考えて) dp[N] が求める答となります．このDPは，$O(N\\log N)$ で実行できます．\n補題の証明です．帰謬法によることにして，そのような方法がないとすると， $X$を達成するどの方法についても $M(e_j)  j$ となる $j$ があります． 各方法 $\\alpha$ についてそのような $j$ の最大値を$j_\\alpha$ とし， その最小値を与える $\\alpha$ を取ります． すなわち，$M(e_{j_\\alpha})  j_\\alpha$ です． イベント $e_{j_\\alpha}$ が行われる町を $p$ として， イベント $e_{j_\\alpha + 1}$ が行われる町を $q$ とすると， $ p \\neq q $ であることに注意します． $M(e_{j_\\alpha})$ を与える方法$\\beta$ をとり， $\\beta$の$j_\\alpha$番目のイベント $e$ までの部分を $\\beta'$ とします． イベント $e$ が $q$ で行われる場合には，$\\beta'$ の後に， $q$ に $e_{j_\\alpha + 1}$ まで残り続けて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． イベント $e$ が $p$ で行われる場合には，$\\beta'$ の直後に$q$に 移り，その後$e_{j_\\alpha + 1}$ まで $q$ にいて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． いずれの場合にも，$\\gamma$ は $X$ を達成する方法であり， $j_\\gamma ACコード https://atcoder.jp/contests/joi2021yo2/submissions/25099364 ",
+  "articleBody": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\n dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，\n 町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2  として，\n dp[i1][j+1] := True dp[i2][j+1] := True  と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．\n実は，回数を全部見る必要がなくて，各々のイベントに参加するまでに， 最も多くの回数のイベントに参加してきた方法だけ考えれば十分です． ただし，「ある時点までに多くの回数のイベントに参加した方が， 最終的なイベント参加回数が多い」ということは言えません． 次のような例があります．\n $D = 1$, $K = 100$ $S_1 = 1$, $P_1 = 1$ $S_2 = 1000$, $P_2 = 2$ $S_3 = 1150$, $P_3 = 1$ $S_4 = 1151$, $P_4 = 1$  町 1 から出発して イベント 1 に参加した直後に 2 に移る (方法A) と， イベント2 の直前に，今まで参加した回数は 1 です． 一方，町2から出発する (方法B) と，イベント2の直前に， 今まで参加した回数は 0 で，方法Aの方が多いです． しかし，方法B の方は，このあと イベント2, 3, 4 に参加して最終の回数が3回にできますが， 方法Aは，最終的に2回しか参加できません．\nしかし，以下は成り立ちます:\n補題 各イベント $i$ に対し，そのイベントに参加する前に参加できるイベント数の 最大値を $M(i)$ とする． 求める答を $X$ とする． 条件を満たしてイベントに参加していく方法 $e_0, \\ldots, e_{X-1}$ であって， 任意の $j = 0, \\ldots, X-1$ に対して，$M(e_j) = j$ となるものが存在する．\n補題が言えれば，DP として，以下のものをとれます:\n dp[i] := $M(i)$  遷移としては，$dp[i]$ が計算できたらば，上で述べた i1 と i2 を取って，\n dp[i1] := max(dp[i1], dp[i] + 1) dp[i2] := max(dp[i2], dp[i] + 1)  とすれば良いです．(仮想的に，十分遅く行われるN番目のイベントを考えて) dp[N] が求める答となります．このDPは，$O(N\\log N)$ で実行できます．\n補題の証明です．帰謬法によることにして，そのような方法がないとすると， $X$を達成するどの方法についても $M(e_j)  j$ となる $j$ があります． 各方法 $\\alpha$ についてそのような $j$ の最大値を$j_\\alpha$ とし， その最小値を与える $\\alpha$ を取ります． すなわち，$M(e_{j_\\alpha})  j_\\alpha$ です． イベント $e_{j_\\alpha}$ が行われる町を $p$ として， イベント $e_{j_\\alpha + 1}$ が行われる町を $q$ とすると， $ p \\neq q $ であることに注意します． $M(e_{j_\\alpha})$ を与える方法$\\beta$ をとり， $\\beta$の$j_\\alpha$番目のイベント $e$ までの部分を $\\beta’$ とします． イベント $e$ が $q$ で行われる場合には，$\\beta’$ の後に， $q$ に $e_{j_\\alpha + 1}$ まで残り続けて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． イベント $e$ が $p$ で行われる場合には，$\\beta’$ の直後に$q$に 移り，その後$e_{j_\\alpha + 1}$ まで $q$ にいて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． いずれの場合にも，$\\gamma$ は $X$ を達成する方法であり， $j_\\gamma ACコード https://atcoder.jp/contests/joi2021yo2/submissions/25099364 ",
   "wordCount" : "278",
   "inLanguage": "en",
   "datePublished": "2021-08-16T00:00:00Z",
@@ -308,11 +308,11 @@ $X$を達成するどの方法についても $M(e_j) &gt; j$ となる $j$ が�
 イベント $e_{j_\alpha + 1}$ が行われる町を $q$ とすると，
 $ p \neq q $ であることに注意します．
 $M(e_{j_\alpha})$ を与える方法$\beta$ をとり，
-$\beta$の$j_\alpha$番目のイベント $e$ までの部分を $\beta'$ とします．
-イベント $e$ が $q$ で行われる場合には，$\beta'$ の後に，
+$\beta$の$j_\alpha$番目のイベント $e$ までの部分を $\beta&rsquo;$ とします．
+イベント $e$ が $q$ で行われる場合には，$\beta&rsquo;$ の後に，
 $q$ に $e_{j_\alpha + 1}$ まで残り続けて，その後 $\alpha$ と
 同じに振る舞う方法を $\gamma$ とします．
-イベント $e$ が $p$ で行われる場合には，$\beta'$ の直後に$q$に
+イベント $e$ が $p$ で行われる場合には，$\beta&rsquo;$ の直後に$q$に
 移り，その後$e_{j_\alpha + 1}$ まで $q$ にいて，その後 $\alpha$ と
 同じに振る舞う方法を $\gamma$ とします．
 いずれの場合にも，$\gamma$ は $X$ を達成する方法であり，
@@ -347,8 +347,9 @@ $j_\gamma &lt; j_\alpha$ となり，矛盾しました．</p>
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -356,7 +357,6 @@ $j_\gamma &lt; j_\alpha$ となり，矛盾しました．</p>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

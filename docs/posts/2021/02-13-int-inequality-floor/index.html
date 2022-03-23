@@ -9,8 +9,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
-&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\">
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\ &amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ t \in [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
@@ -21,7 +20,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -52,8 +51,7 @@
 <meta property="og:title" content="整数・実数の大小比較とfloor, ceil" />
 <meta property="og:description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
-&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\" />
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\ &amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ t \in [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-20T10:07:00&#43;09:00" />
@@ -63,8 +61,7 @@
 <meta name="twitter:title" content="整数・実数の大小比較とfloor, ceil"/>
 <meta name="twitter:description" content="経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
 公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
-&amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\"/>
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\ &amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ t \in [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}"/>
 
 
 <script type="application/ld+json">
@@ -93,11 +90,11 @@
   "@type": "BlogPosting",
   "headline": "整数・実数の大小比較とfloor, ceil",
   "name": "整数・実数の大小比較とfloor, ceil",
-  "description": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d \u0026lt; t \\iff d \u0026lt; \\lceil t \\rceil$ $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t \u0026lt; d \\iff \\lfloor t \\rfloor \u0026lt; d$  考え方 \\begin{eqnarray*} d\\leq t \u0026amp;\\iff\u0026amp; t \\in \\{ t \\mid d \\leq t \\} \\\\\n\u0026amp;\\iff\u0026amp; t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\",
+  "description": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d \u0026lt; t \\iff d \u0026lt; \\lceil t \\rceil$ $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t \u0026lt; d \\iff \\lfloor t \\rfloor \u0026lt; d$  考え方 \\begin{eqnarray*} d\\leq t \u0026amp;\\iff\u0026amp; t \\in \\{ t \\mid d \\leq t \\} \\\\ \u0026amp;\\iff\u0026amp; t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026amp;\\iff\u0026amp; \\bigvee \\{ t \\in [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026amp;\\iff\u0026amp; \\bigvee \\{ \\lfloor t \\rfloor = e \\mid e = d, d+1, \\ldots \\} \\\\ \u0026amp;\\iff\u0026amp; d \\leq \\lfloor t \\rfloor \\hspace{20em} \\end{eqnarray*}",
   "keywords": [
     
   ],
-  "articleBody": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t  考え方 \\begin{eqnarray*} d\\leq t \u0026\\iff\u0026 t \\in \\{ t \\mid d \\leq t \\} \\\\\n\u0026\\iff\u0026 t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ t \\in [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ \\lfloor t \\rfloor = e \\mid e = d, d+1, \\ldots \\} \\\\\n\u0026\\iff\u0026 d \\leq \\lfloor t \\rfloor \\hspace{20em} \\end{eqnarray*}\n同様に，\n\\begin{eqnarray*} d\\begin{eqnarray*} t \\leq d \u0026\\iff\u0026 \\bigvee \\{ t \\in (e-1, e] \\mid e = d, d - 1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\bigvee \\{ \\lceil t \\rceil = e \\mid e = d, d - 1, \\ldots \\} \\\\\n\u0026\\iff\u0026 \\lceil t \\rceil \\leq d \\hspace{20em} \\end{eqnarray*}\n\\begin{eqnarray*} t ",
+  "articleBody": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n $d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t  考え方 \\begin{eqnarray*} d\\leq t \u0026\\iff\u0026 t \\in \\{ t \\mid d \\leq t \\} \\\\ \u0026\\iff\u0026 t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\bigvee \\{ t \\in [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\bigvee \\{ \\lfloor t \\rfloor = e \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 d \\leq \\lfloor t \\rfloor \\hspace{20em} \\end{eqnarray*}\n同様に，\n\\begin{eqnarray*} d\\begin{eqnarray*} t \\leq d \u0026\\iff\u0026 \\bigvee \\{ t \\in (e-1, e] \\mid e = d, d - 1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\bigvee \\{ \\lceil t \\rceil = e \\mid e = d, d - 1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\lceil t \\rceil \\leq d \\hspace{20em} \\end{eqnarray*}\n\\begin{eqnarray*} t ",
   "wordCount" : "265",
   "inLanguage": "en",
   "datePublished": "2021-08-20T10:07:00+09:00",
@@ -241,29 +238,29 @@
 <h2 id="考え方">考え方<a hidden class="anchor" aria-hidden="true" href="#考え方">#</a></h2>
 <p>\begin{eqnarray*}
 d\leq t 
-&amp;\iff&amp; t \in \{ t \mid d \leq t \} \\<br>
-&amp;\iff&amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\<br>
-&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\<br>
-&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\<br>
+&amp;\iff&amp; t \in \{ t \mid d \leq t \} \\
+&amp;\iff&amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\
+&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\
+&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\
 &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em}
 \end{eqnarray*}</p>
 <p>同様に，</p>
 <p>\begin{eqnarray*}
-d&lt;t &amp;\iff&amp; t \in \{ t \mid d &lt; t \} \\<br>
-&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d+1, d+2, \ldots \} \\<br>
-&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d+1, d+2, \ldots \} \\<br>
+d&lt;t &amp;\iff&amp; t \in \{ t \mid d &lt; t \} \\
+&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d+1, d+2, \ldots \} \\
+&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d+1, d+2, \ldots \} \\
 &amp;\iff&amp; d &lt; \lceil t \rceil \hspace{20em}
 \end{eqnarray*}</p>
 <p>\begin{eqnarray*}
 t \leq d
-&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d, d - 1, \ldots \} \\<br>
-&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d, d - 1, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ t \in (e-1, e] \mid e = d, d - 1, \ldots \} \\
+&amp;\iff&amp; \bigvee \{ \lceil t \rceil = e \mid e = d, d - 1, \ldots \} \\
 &amp;\iff&amp; \lceil t \rceil \leq d \hspace{20em}
 \end{eqnarray*}</p>
 <p>\begin{eqnarray*}
 t &lt; d
-&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d - 1, d - 2, \ldots \} \\<br>
-&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d - 1, d - 2, \ldots \} \\<br>
+&amp;\iff&amp; \bigvee \{ t \in [e, e+1) \mid e = d - 1, d - 2, \ldots \} \\
+&amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d - 1, d - 2, \ldots \} \\
 &amp;\iff&amp; \lfloor t \rfloor &lt; d \hspace{20em}
 \end{eqnarray*}</p>
 
@@ -293,8 +290,9 @@ t &lt; d
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -302,7 +300,6 @@ t &lt; d
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

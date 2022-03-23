@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     "DP", "円環DP", "順列", "包除原理"
   ],
-  "articleBody": "AtCoder Beginner Contest 214 - ABC 214 G - Three Permutations の解法です．\n解説ACです． 公式解説 も参考になりましたが，それだけでは解答は作れませんでした． kmjpさんのブログ が助けになりました．ありがとうございます．\n問題へのリンク https://atcoder.jp/contests/abc214/tasks/abc214_g 問題概要 $1, \\ldots, N$ の順列の全体を $\\textrm{Perm}$ と書く． $p, q \\in \\text{Perm}$ が与えられる． 条件「$x = p(i)$ または $x = q(i)$」を，$\\text{Coi}(x, i)$ と書く ことにする． $r \\in \\text{Perm}$ に対して， $C(r) := \\{ i \\in [1, N] \\mid \\text{Coi}(r(i), i) \\}$ とする． 集合 $\\{r \\in \\text{Perm} \\mid C(r) = \\varnothing \\}$ の要素数を mod $10^9 + 7$ で求めよ．\n解法 $r \\in \\text{Perm}$， $X \\subseteq [1, N]$， $k \\in [0, N]$ に対して，次のように書くことにする:\n $S(X) := \\{r \\in\\text{Perm} \\mid X \\subseteq C(r) \\}$ $R_k := \\sum \\{ |S(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ $r \\downarrow X := r$ の定義域を $X$ に制限したもの $\\text{Perm}'(X) := \\{ r \\downarrow X \\mid r \\in \\text{Perm} \\}$ $S'(X) := \\{ r \\downarrow X \\mid r \\in S(X) \\} = \\{r' \\in \\text{Perm}'(X) \\mid \\forall i \\in X.\\; \\text{Coi}(r'(i), i) \\} $  包除原理により，求める答は $N! - \\sum_{k=1}^{N} (-1)^{k - 1} R_k$ となるから，各$k$ に対する $R_k$ を求めれば良い． また，$|S(X)| = |S'(X)| \\times (N - |X|)!$ であるから， $\\sum\\{ |S'(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ を求めれば良い．\n集合 $[1, N]$ 上で，すべての $(p_i, q_i)$ を 結んだグラフを考える．どの頂点も次数は2以下である． 連結成分は，自己ループか，サイクルかのいずれかである． 連結成分全体の集合を $\\mathcal{Z}$ と書く． $Z\\in \\mathcal{Z}$ に対して， $Z$内にある辺に対応する番号の集合を $I(Z) := \\{ i \\in [1, N] \\mid p(i), q(i) \\in Z \\}$ と書く． $S'(X)$ の要素 $r$ は，各連結成分$Z$に， $\\sum_{Z \\in \\mathcal{Z}} t_Z = |X|$ となるように非負整数 $t_Z$ を 割り当てて，$Z$から$t_Z$本の辺に対して端点を選択することによって 決まる．正確には，\n $Q(Z, t) := \\{ r \\in S'(Y) \\mid Y \\subseteq I(Z), \\; |Y| = t \\}$ $Q(t) := \\{ ((Z, r_Z) \\mid Z \\in \\mathcal{Z} ) \\mid r_Z \\in Q(Z, t_Z),\\; \\sum_{Z \\in \\mathcal{Z}} t_Z = t\\}$ $\\rho_t : \\bigcup \\{ S'(X) \\mid |X| = t \\} \\to Q(t), \\; \\rho(r) = ( r \\downarrow I(Z) \\mid Z \\in \\mathcal{Z} )$  と書いたときに，$\\rho_t$ が全単射を与える．したがって， $|Q(t)|$ を求めれば良い．\nまず，$|Q(Z, t)|$ を求めよう．これは，$t$ にはもちろん依存するが， $Z$ に関しては，そのサイズ $s = |Z|$ にしか依存しないのは明らかであるので， $|Q(Z, t)|$ を $f(s, t)$ と書くことにする．\nまず，あきらかに，$ f(1, 1) = 1$であり，$t  1$ のとき，$f (1, t) = 0$ である． $s = 2$ については，DP で求める． $Z$ が円環状になっているので，次のように構成する． $I(Z)$ を $\\{ x_1, x_2, \\ldots, x_s \\}$ と， $q(x_{i}) = p(x_{i+1})$ が成り立つように列挙する．\n dp1[i][t][a][b] := 次を満たす r の数: ($a, b \\in \\{0, 1, 2\\}$)  $ \\text{dom}(r) \\subseteq \\{ x_1, \\ldots, x_i \\} $ $ t = |\\text{dom}(r)| $ a = 0: $x_s \\not\\in \\text{dom}(r)$ と矛盾しない． a = 1: $r(x_s) = p(x_s)$ と矛盾しない． a = 2: $r(x_s) = q(x_s)$ と矛盾しない． b = 0: $x_i \\not\\in \\text{dom}(r)$ b = 1: $r(x_i) = p(x_i)$ b = 2: $r(x_i) = q(x_i)$   初期値  dp1[0][0][a][0] = 1 (a = 0,1,2) dp1[0][1][a][1] = 1 (a = 0,1) dp1[0][1][a][2] = 1 (a = 0,1,2)   遷移  dp1[i+1][t][a][0] += dp[i][a][b] (b = 0,1,2) dp1[i+1][t+1][a][1] += dp[i][a][b] (b = 0,1) dp1[i+1][t+1][a][2] += dp[i][a][1] (b = 0,1,2)    DP実行後，$f(s, t) = dp1[s][t][0][0] + dp1[s][t][1][1] + dp1[s][t][2][2]$ で，$f$ が決定できる． 計算を振り返ってみると，$s$ ごとに別々にDPを実行する必要はなく， 1回のDPを $\\max(|Z|)$ まで実行することで， すべての必要な $f(s, t)$ を計算することができる． このDPの計算量は $O(N)$ である．\nこの準備のもとで，$|Q(t)|$ は，次のDPで求めることができる．\n $\\text{dp2}[i][t] := |\\{ ((j, r_j \\mid j \\leq i) \\mid r_j \\in Q(Z, t_j),\\; \\sum_{j\\leq i}t_j = t \\} |$ 遷移: $\\text{dp2}[i][t] = \\sum_{s  このDP実行終了後，$u := |\\mathcal{Z}|$ として， $|Q(t)| = \\text{dp2}[u][t]$ である． 計算量が心配になるが，遷移の式に現れる積の計算の回数は， $|Z_i| = a_i$ として， $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + …+ (a_1 + … + a_{u-1}) * a_u \\leq (a_1 + … + a_u)^2 = N^2$ なので，$O(N^2)$ である．\nACコード https://atcoder.jp/contests/abc214/submissions/25379311 ",
+  "articleBody": "AtCoder Beginner Contest 214 - ABC 214 G - Three Permutations の解法です．\n解説ACです． 公式解説 も参考になりましたが，それだけでは解答は作れませんでした． kmjpさんのブログ が助けになりました．ありがとうございます．\n問題へのリンク https://atcoder.jp/contests/abc214/tasks/abc214_g 問題概要 $1, \\ldots, N$ の順列の全体を $\\textrm{Perm}$ と書く． $p, q \\in \\text{Perm}$ が与えられる． 条件「$x = p(i)$ または $x = q(i)$」を，$\\text{Coi}(x, i)$ と書く ことにする． $r \\in \\text{Perm}$ に対して， $C(r) := \\{ i \\in [1, N] \\mid \\text{Coi}(r(i), i) \\}$ とする． 集合 $\\{r \\in \\text{Perm} \\mid C(r) = \\varnothing \\}$ の要素数を mod $10^9 + 7$ で求めよ．\n解法 $r \\in \\text{Perm}$， $X \\subseteq [1, N]$， $k \\in [0, N]$ に対して，次のように書くことにする:\n $S(X) := \\{r \\in\\text{Perm} \\mid X \\subseteq C(r) \\}$ $R_k := \\sum \\{ |S(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ $r \\downarrow X := r$ の定義域を $X$ に制限したもの $\\text{Perm}’(X) := \\{ r \\downarrow X \\mid r \\in \\text{Perm} \\}$ $S’(X) := \\{ r \\downarrow X \\mid r \\in S(X) \\} = \\{r’ \\in \\text{Perm}’(X) \\mid \\forall i \\in X.\\; \\text{Coi}(r’(i), i) \\} $  包除原理により，求める答は $N! - \\sum_{k=1}^{N} (-1)^{k - 1} R_k$ となるから，各$k$ に対する $R_k$ を求めれば良い． また，$|S(X)| = |S’(X)| \\times (N - |X|)!$ であるから， $\\sum\\{ |S’(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ を求めれば良い．\n集合 $[1, N]$ 上で，すべての $(p_i, q_i)$ を 結んだグラフを考える．どの頂点も次数は2以下である． 連結成分は，自己ループか，サイクルかのいずれかである． 連結成分全体の集合を $\\mathcal{Z}$ と書く． $Z\\in \\mathcal{Z}$ に対して， $Z$内にある辺に対応する番号の集合を $I(Z) := \\{ i \\in [1, N] \\mid p(i), q(i) \\in Z \\}$ と書く． $S’(X)$ の要素 $r$ は，各連結成分$Z$に， $\\sum_{Z \\in \\mathcal{Z}} t_Z = |X|$ となるように非負整数 $t_Z$ を 割り当てて，$Z$から$t_Z$本の辺に対して端点を選択することによって 決まる．正確には，\n $Q(Z, t) := \\{ r \\in S’(Y) \\mid Y \\subseteq I(Z), \\; |Y| = t \\}$ $Q(t) := \\{ ((Z, r_Z) \\mid Z \\in \\mathcal{Z} ) \\mid r_Z \\in Q(Z, t_Z),\\; \\sum_{Z \\in \\mathcal{Z}} t_Z = t\\}$ $\\rho_t : \\bigcup \\{ S’(X) \\mid |X| = t \\} \\to Q(t), \\; \\rho(r) = ( r \\downarrow I(Z) \\mid Z \\in \\mathcal{Z} )$  と書いたときに，$\\rho_t$ が全単射を与える．したがって， $|Q(t)|$ を求めれば良い．\nまず，$|Q(Z, t)|$ を求めよう．これは，$t$ にはもちろん依存するが， $Z$ に関しては，そのサイズ $s = |Z|$ にしか依存しないのは明らかであるので， $|Q(Z, t)|$ を $f(s, t)$ と書くことにする．\nまず，あきらかに，$ f(1, 1) = 1$であり，$t  1$ のとき，$f (1, t) = 0$ である． $s = 2$ については，DP で求める． $Z$ が円環状になっているので，次のように構成する． $I(Z)$ を $\\{ x_1, x_2, \\ldots, x_s \\}$ と， $q(x_{i}) = p(x_{i+1})$ が成り立つように列挙する．\n dp1[i][t][a][b] := 次を満たす r の数: ($a, b \\in \\{0, 1, 2\\}$)  $ \\text{dom}(r) \\subseteq \\{ x_1, \\ldots, x_i \\} $ $ t = |\\text{dom}(r)| $ a = 0: $x_s \\not\\in \\text{dom}(r)$ と矛盾しない． a = 1: $r(x_s) = p(x_s)$ と矛盾しない． a = 2: $r(x_s) = q(x_s)$ と矛盾しない． b = 0: $x_i \\not\\in \\text{dom}(r)$ b = 1: $r(x_i) = p(x_i)$ b = 2: $r(x_i) = q(x_i)$   初期値  dp1[0][0][a][0] = 1 (a = 0,1,2) dp1[0][1][a][1] = 1 (a = 0,1) dp1[0][1][a][2] = 1 (a = 0,1,2)   遷移  dp1[i+1][t][a][0] += dp[i][a][b] (b = 0,1,2) dp1[i+1][t+1][a][1] += dp[i][a][b] (b = 0,1) dp1[i+1][t+1][a][2] += dp[i][a][1] (b = 0,1,2)    DP実行後，$f(s, t) = dp1[s][t][0][0] + dp1[s][t][1][1] + dp1[s][t][2][2]$ で，$f$ が決定できる． 計算を振り返ってみると，$s$ ごとに別々にDPを実行する必要はなく， 1回のDPを $\\max(|Z|)$ まで実行することで， すべての必要な $f(s, t)$ を計算することができる． このDPの計算量は $O(N)$ である．\nこの準備のもとで，$|Q(t)|$ は，次のDPで求めることができる．\n $\\text{dp2}[i][t] := |\\{ ((j, r_j \\mid j \\leq i) \\mid r_j \\in Q(Z, t_j),\\; \\sum_{j\\leq i}t_j = t \\} |$ 遷移: $\\text{dp2}[i][t] = \\sum_{s  このDP実行終了後，$u := |\\mathcal{Z}|$ として， $|Q(t)| = \\text{dp2}[u][t]$ である． 計算量が心配になるが，遷移の式に現れる積の計算の回数は， $|Z_i| = a_i$ として， $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + …+ (a_1 + … + a_{u-1}) * a_u \\leq (a_1 + … + a_u)^2 = N^2$ なので，$O(N^2)$ である．\nACコード https://atcoder.jp/contests/abc214/submissions/25379311 ",
   "wordCount" : "545",
   "inLanguage": "en",
   "datePublished": "2021-08-27T19:04:12+09:00",
@@ -247,16 +247,16 @@ $X \subseteq [1, N]$， $k \in [0, N]$ に対して，次のように書くこ�
 <li>$S(X) := \{r \in\text{Perm} \mid X \subseteq C(r) \}$</li>
 <li>$R_k := \sum \{ |S(X)| \mid X \subseteq [1, N],\; |X| = k \}$</li>
 <li>$r \downarrow X := r$ の定義域を $X$ に制限したもの</li>
-<li>$\text{Perm}'(X) := \{ r \downarrow X \mid r \in \text{Perm} \}$</li>
-<li>$S'(X) := \{ r \downarrow X \mid r \in S(X) \}
-= \{r' \in \text{Perm}'(X) \mid \forall i \in X.\;
-\text{Coi}(r'(i), i) \} $</li>
+<li>$\text{Perm}&rsquo;(X) := \{ r \downarrow X \mid r \in \text{Perm} \}$</li>
+<li>$S&rsquo;(X) := \{ r \downarrow X \mid r \in S(X) \}
+= \{r&rsquo; \in \text{Perm}&rsquo;(X) \mid \forall i \in X.\;
+\text{Coi}(r&rsquo;(i), i) \} $</li>
 </ul>
 <p>包除原理により，求める答は
 $N! - \sum_{k=1}^{N} (-1)^{k - 1} R_k$
 となるから，各$k$ に対する $R_k$ を求めれば良い．
-また，$|S(X)| = |S'(X)| \times (N - |X|)!$ であるから，
-$\sum\{ |S'(X)| \mid X \subseteq [1, N],\; |X| = k \}$
+また，$|S(X)| = |S&rsquo;(X)| \times (N - |X|)!$ であるから，
+$\sum\{ |S&rsquo;(X)| \mid X \subseteq [1, N],\; |X| = k \}$
 を求めれば良い．</p>
 <p>集合 $[1, N]$ 上で，すべての $(p_i, q_i)$ を
 結んだグラフを考える．どの頂点も次数は2以下である．
@@ -265,15 +265,15 @@ $\sum\{ |S'(X)| \mid X \subseteq [1, N],\; |X| = k \}$
 $Z\in \mathcal{Z}$ に対して，
 $Z$内にある辺に対応する番号の集合を
 $I(Z) := \{ i \in [1, N] \mid p(i), q(i) \in Z \}$ と書く．
-$S'(X)$ の要素 $r$ は，各連結成分$Z$に，
+$S&rsquo;(X)$ の要素 $r$ は，各連結成分$Z$に，
 $\sum_{Z \in \mathcal{Z}} t_Z = |X|$ となるように非負整数 $t_Z$ を
 割り当てて，$Z$から$t_Z$本の辺に対して端点を選択することによって
 決まる．正確には，</p>
 <ul>
-<li>$Q(Z, t) := \{ r \in S'(Y) \mid Y \subseteq I(Z), \; |Y| = t \}$</li>
+<li>$Q(Z, t) := \{ r \in S&rsquo;(Y) \mid Y \subseteq I(Z), \; |Y| = t \}$</li>
 <li>$Q(t) := \{ ((Z, r_Z) \mid Z \in \mathcal{Z} )
 \mid r_Z \in Q(Z, t_Z),\; \sum_{Z \in \mathcal{Z}} t_Z = t\}$</li>
-<li>$\rho_t : \bigcup \{ S'(X) \mid |X| = t \}  \to Q(t), \;
+<li>$\rho_t : \bigcup \{ S&rsquo;(X) \mid |X| = t \}  \to Q(t), \;
 \rho(r) = ( r \downarrow I(Z) \mid Z \in \mathcal{Z} )$</li>
 </ul>
 <p>と書いたときに，$\rho_t$ が全単射を与える．したがって，
@@ -369,8 +369,9 @@ $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + &hellip;+ (a_1 + &hellip; + a_{u-1}) * a_
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -378,7 +379,6 @@ $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + &hellip;+ (a_1 + &hellip; + a_{u-1}) * a_
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

@@ -21,7 +21,7 @@ $I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, 
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -97,7 +97,7 @@ $I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, 
   "keywords": [
     
   ],
-  "articleBody": "Lagrange補間に関する記事です．\n要約 $$ f(x) = \\sum_{i = 0}^{k}\\frac{ f(i) }{ (-1)^{k - i} \\; i ! \\; (k - i) ! } \\cdot \\frac{ 1 }{ x - i } \\cdot \\prod_{j=0}^{k} ( x - j ) $$\n詳細 \\( k \\) 次多項式 $f(x)$ について，$x = 0, \\ldots, k$ の値が，$f(0) = v_0, \\ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\\( \\Omega( k^3 ) \\) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．\n$I = \\{0, \\ldots, k\\}$, $I_i = I \\setminus \\{ i \\}$ とする．$i = 0, \\ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．\n$$g_i(x) = \\frac{ \\prod \\{ x - j \\mid j \\in I_i \\} }{ \\prod \\{ i - j \\mid j \\in I_i \\} } $$\n$j = 0, \\ldots, k$ について，\n$$ g_i (j) = \\begin{cases} 1 \u0026 \\text{ if } i =j \\\\\n0 \u0026 \\text{ if } i \\neq j \\end{cases}$$\nであることに注意すると，\n$$ f(x) = \\sum_{i = 0}^{k} g_i(x)v_i $$\nとなることがわかる (左右両辺とも $k$ 次多項式で，$k+1$ 個の値が一致する)．\n$ g_i(x) $ の分母を $c_i$ と書くと，\n$$ c_i = (-1)^{k - i} \\; i ! \\; (k - i) ! $$\nであるから，これらは，事前に $k$ までの階乗を $O(k)$ で計算しておけば，$O(1)$ で求められる．\n$g_i(x)$ の分子は，\n$$ \\frac{1}{x - i}\\cdot\\prod_{j=0}^{k} (x-j) $$\nであるから，まず $\\prod_{j=0}^{k} (x-j)$ を $O(k^2)$ で計算しておけば，各$i$について$O(k)$で，全体で$O(k^2)$で 計算できる．\nAtCoder AtCoder ABC137 F - Polynomial Construction は， Lagrange補間を用いて解ける． ただし，解説 に書かれている方法の方が簡単．\n",
+  "articleBody": "Lagrange補間に関する記事です．\n要約 $$ f(x) = \\sum_{i = 0}^{k}\\frac{ f(i) }{ (-1)^{k - i} \\; i ! \\; (k - i) ! } \\cdot \\frac{ 1 }{ x - i } \\cdot \\prod_{j=0}^{k} ( x - j ) $$\n詳細 \\( k \\) 次多項式 $f(x)$ について，$x = 0, \\ldots, k$ の値が，$f(0) = v_0, \\ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\\( \\Omega( k^3 ) \\) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．\n$I = \\{0, \\ldots, k\\}$, $I_i = I \\setminus \\{ i \\}$ とする．$i = 0, \\ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．\n$$g_i(x) = \\frac{ \\prod \\{ x - j \\mid j \\in I_i \\} }{ \\prod \\{ i - j \\mid j \\in I_i \\} } $$\n$j = 0, \\ldots, k$ について，\n$$ g_i (j) = \\begin{cases} 1 \u0026 \\text{ if } i =j \\\\ 0 \u0026 \\text{ if } i \\neq j \\end{cases}$$\nであることに注意すると，\n$$ f(x) = \\sum_{i = 0}^{k} g_i(x)v_i $$\nとなることがわかる (左右両辺とも $k$ 次多項式で，$k+1$ 個の値が一致する)．\n$ g_i(x) $ の分母を $c_i$ と書くと，\n$$ c_i = (-1)^{k - i} \\; i ! \\; (k - i) ! $$\nであるから，これらは，事前に $k$ までの階乗を $O(k)$ で計算しておけば，$O(1)$ で求められる．\n$g_i(x)$ の分子は，\n$$ \\frac{1}{x - i}\\cdot\\prod_{j=0}^{k} (x-j) $$\nであるから，まず $\\prod_{j=0}^{k} (x-j)$ を $O(k^2)$ で計算しておけば，各$i$について$O(k)$で，全体で$O(k^2)$で 計算できる．\nAtCoder AtCoder ABC137 F - Polynomial Construction は， Lagrange補間を用いて解ける． ただし，解説 に書かれている方法の方が簡単．\n",
   "wordCount" : "211",
   "inLanguage": "en",
   "datePublished": "2021-04-22T00:00:00Z",
@@ -246,7 +246,7 @@ $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ �
 $$</p>
 <p>$j = 0, \ldots, k$ について，</p>
 <p>$$ g_i (j) = \begin{cases}
-1 &amp; \text{ if } i =j \\<br>
+1 &amp; \text{ if } i =j \\
 0 &amp; \text{ if } i \neq j
 \end{cases}$$</p>
 <p>であることに注意すると，</p>
@@ -294,8 +294,9 @@ Lagrange補間を用いて解ける．
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -303,7 +304,6 @@ Lagrange補間を用いて解ける．
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

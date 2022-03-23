@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     "分割数", "DP"
   ],
-  "articleBody": "AtCoder Beginner Contest 221 - ABC 221 H - Count Multiset の解法です． 解説ACです． noshi91さんの解説 をなぞっただけのものです．\n問題概要 問題へのリンク 正整数 $N$, $M$ が与えられる． $k = 1, 2, \\ldots, N$ について， $N$ の サイズ $k$ の分割で，多重度が $M$ 以下のものの個数， すなわち，以下を満たす多重集合 $A$ の個数を， mod 998244353 で求めよ．\n $|A| = k$ $\\sum A = N$ 任意の正整数 $x$ について，$A$ に含まれる $x$ の個数は $M$ 以下．  制約: $1 \\leq M \\leq N \\leq 5000$\n解法 $k, n \\in [1, N]$ に対して，次のように定義する:\n $S(k, n)$: $n$ のサイズ $k$ の分割で，多重度が $M$ 以下のもの全体 $T(k, n)$: $S(k, n)$ のうち，最小要素が 2 以上のもの全体 $U(k, n) := S(k, n) \\setminus T(k, n)$: $S(k, n)$ のうち，最小要素が 1 であるもの全体 $V(k, n)$: $S(k, n)$ のうち，1 の多重度が $M$ であるもの全体 $s(k, n) := |S(k, n)|$, $t(k, n) := |T(k, n)|$, $u(k, n) := |U(k, n)|$, $v(k, n) := |V(k, n)|$.  以下が成り立つ．\n $ s(k, n) = t(k, n) + u(k, n) $  自明   $ t(k, n) = \\begin{cases} 0 \u0026 \\text{ if } 2k  n \\\\\ns(k, n-k) \u0026 \\text{ if } 2k \\leq n \\\\\n\\end{cases} $  各分割から1ずつ取り除く   $ u(k, n) = \\begin{cases} 0 \u0026 \\text{ if } n 要素 1 を一つ取り除く   $ v(k, n) = \\begin{cases} 1 \u0026 \\text{ if } k = M = n \\\\\n0 \u0026 \\text{ else if } n \\leq k \\text{ or } k \\leq M \\\\\ns(k - M, n - k) \u0026 \\text{ otherwise } \\\\\n\\end{cases} $  各分割から1ずつ取り除く    これで DP ができる．\nそのままメモ化して計算したら TLE してしまった． 配るDPに書き直してやっと通った．\n",
+  "articleBody": "AtCoder Beginner Contest 221 - ABC 221 H - Count Multiset の解法です． 解説ACです． noshi91さんの解説 をなぞっただけのものです．\n問題概要 問題へのリンク 正整数 $N$, $M$ が与えられる． $k = 1, 2, \\ldots, N$ について， $N$ の サイズ $k$ の分割で，多重度が $M$ 以下のものの個数， すなわち，以下を満たす多重集合 $A$ の個数を， mod 998244353 で求めよ．\n $|A| = k$ $\\sum A = N$ 任意の正整数 $x$ について，$A$ に含まれる $x$ の個数は $M$ 以下．  制約: $1 \\leq M \\leq N \\leq 5000$\n解法 $k, n \\in [1, N]$ に対して，次のように定義する:\n $S(k, n)$: $n$ のサイズ $k$ の分割で，多重度が $M$ 以下のもの全体 $T(k, n)$: $S(k, n)$ のうち，最小要素が 2 以上のもの全体 $U(k, n) := S(k, n) \\setminus T(k, n)$: $S(k, n)$ のうち，最小要素が 1 であるもの全体 $V(k, n)$: $S(k, n)$ のうち，1 の多重度が $M$ であるもの全体 $s(k, n) := |S(k, n)|$, $t(k, n) := |T(k, n)|$, $u(k, n) := |U(k, n)|$, $v(k, n) := |V(k, n)|$.  以下が成り立つ．\n $ s(k, n) = t(k, n) + u(k, n) $  自明   $ t(k, n) = \\begin{cases} 0 \u0026 \\text{ if } 2k  n \\\\ s(k, n-k) \u0026 \\text{ if } 2k \\leq n \\\\ \\end{cases} $  各分割から1ずつ取り除く   $ u(k, n) = \\begin{cases} 0 \u0026 \\text{ if } n 要素 1 を一つ取り除く   $ v(k, n) = \\begin{cases} 1 \u0026 \\text{ if } k = M = n \\\\ 0 \u0026 \\text{ else if } n \\leq k \\text{ or } k \\leq M \\\\ s(k - M, n - k) \u0026 \\text{ otherwise } \\\\ \\end{cases} $  各分割から1ずつ取り除く    これで DP ができる．\nそのままメモ化して計算したら TLE してしまった． 配るDPに書き直してやっと通った．\n",
   "wordCount" : "275",
   "inLanguage": "en",
   "datePublished": "2021-11-24T19:31:33+09:00",
@@ -260,8 +260,8 @@ $v(k, n) := |V(k, n)|$.</li>
 </li>
 <li>$ t(k, n) =
 \begin{cases}
-0 &amp; \text{ if } 2k &gt; n \\<br>
-s(k, n-k) &amp; \text{ if } 2k \leq n \\<br>
+0 &amp; \text{ if } 2k &gt; n \\
+s(k, n-k) &amp; \text{ if } 2k \leq n \\
 \end{cases} $
 <ul>
 <li>各分割から1ずつ取り除く</li>
@@ -269,9 +269,9 @@ s(k, n-k) &amp; \text{ if } 2k \leq n \\<br>
 </li>
 <li>$ u(k, n) =
 \begin{cases}
-0 &amp; \text{ if } n &lt; k \text{ or } k = 1 &lt; n \\<br>
-1 &amp; \text{ if } k = n = 1 \\<br>
-s(k - 1, n - 1) - v(k - 1, n - 1) &amp; \text{ otherwise } \\<br>
+0 &amp; \text{ if } n &lt; k \text{ or } k = 1 &lt; n \\
+1 &amp; \text{ if } k = n = 1 \\
+s(k - 1, n - 1) - v(k - 1, n - 1) &amp; \text{ otherwise } \\
 \end{cases} $
 <ul>
 <li>要素 1 を一つ取り除く</li>
@@ -279,9 +279,9 @@ s(k - 1, n - 1) - v(k - 1, n - 1) &amp; \text{ otherwise } \\<br>
 </li>
 <li>$ v(k, n) =
 \begin{cases}
-1 &amp; \text{ if } k = M = n \\<br>
-0 &amp; \text{ else if } n \leq k \text{ or } k \leq M \\<br>
-s(k - M, n - k) &amp; \text{ otherwise } \\<br>
+1 &amp; \text{ if } k = M = n \\
+0 &amp; \text{ else if } n \leq k \text{ or } k \leq M \\
+s(k - M, n - k) &amp; \text{ otherwise } \\
 \end{cases} $
 <ul>
 <li>各分割から1ずつ取り除く</li>
@@ -322,8 +322,9 @@ s(k - M, n - k) &amp; \text{ otherwise } \\<br>
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -331,7 +332,6 @@ s(k - M, n - k) &amp; \text{ otherwise } \\<br>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

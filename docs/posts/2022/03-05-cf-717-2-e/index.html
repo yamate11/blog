@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     "包除原理"
   ],
-  "articleBody": "Codeforces Round 717 (Div.2) E - Baby Ehab Plays with Permutations の解法です． 公式解説 と同じ，というか その一部分です．\n以下，次のように書きます．\n $1..n$ の順列を $S(n)$ と書く．自然に $S(n) \\subseteq S(n + 1)$ とみなす． $S(n)$ の要素であって，ちょうど $j$ 個の互換の積で表せるものの 集合を，$X(n, j)$ と書く． $F(n, j) := |X(n, j)|$  問題概要 整数$n$, $k$ が与えられる． $j = 1, \\ldots, k$ について，$F(n, j)$ を mod $10^9 + 7$ で求めよ．\n制約: $2 \\leq n \\leq 10^9$, $1 \\leq k \\leq 200$\n問題へのリンク 解法 次のように定義する．\n 順列 $p$ に対し，その互換の積の表記に現れる互換の数の最小値を $s(p)$ と書く． $Y(n, j) := \\{p \\in S(n) \\mid s(p) = j \\}$ $G(n, j) := |Y(n, j)|$  すると，次が成り立つ．\n$$F(n, j) = G(n, j) + G(n, j - 2) + \\cdots + G(n, j \\% 2)$$\n$s$ の計算を考えるために， $p \\in S(n) \\setminus \\{id\\}$ のとき，$p(i) \\neq i$ となる $i$ の 最大値を $i_0$ として，$p' := p\\cdot (i_0, p(i_0))$ とすると，\n $s(id) = 0$ $p(j) \\neq j$ となる $j$ の最大のものを $j_0$ として， $q := p\\cdot(j_0, p(j_0))$ とすれば，$s(p) := s(q) + 1$  である．これを踏まえると，$p \\in Y(n, j)$ とすると，\n $p(n) = n$ の場合は，$p \\in Y(n - 1, j)$ $p(n)  となることがわかるから，$G$ は次のように計算できる:\n\\begin{align*} G(n, 0) \u0026= 1 \\\\\nG(n, j) \u0026= 0\\quad (n これで答は求められるが，この計算方法では $\\Omega(nk + k^2)$ なので間に合わない． そこで，$j$ が小さい時，$p \\in Y(n, j)$ に対して，$p$ が動かす数は たかだか $2j$ 個しかないことに着目する．\n\\begin{align*} Z(n, j) \u0026:= \\{p \\in Y(n, j) \\mid \\text{ すべての } i = 1, \\ldots, n \\text{ に対して } p(i) \\neq i \\} \\\\\nH(n, j) \u0026:= |Z(n, j)| \\end{align*}\nとすれば，\n$$G(n, j) = \\sum_{i = 0}^{2j} \\binom{n}{i}H(i, j)$$\nである．$H$ は，包除原理で求められる:\n$$H(i, j) = \\sum_{r = 0}^{i} (-1)^r \\binom{i}{r} G(i - r, j)$$\n全体として $O(k^3)$ で計算できた．\n実装 ACコード ",
+  "articleBody": "Codeforces Round 717 (Div.2) E - Baby Ehab Plays with Permutations の解法です． 公式解説 と同じ，というか その一部分です．\n以下，次のように書きます．\n $1..n$ の順列を $S(n)$ と書く．自然に $S(n) \\subseteq S(n + 1)$ とみなす． $S(n)$ の要素であって，ちょうど $j$ 個の互換の積で表せるものの 集合を，$X(n, j)$ と書く． $F(n, j) := |X(n, j)|$  問題概要 整数$n$, $k$ が与えられる． $j = 1, \\ldots, k$ について，$F(n, j)$ を mod $10^9 + 7$ で求めよ．\n制約: $2 \\leq n \\leq 10^9$, $1 \\leq k \\leq 200$\n問題へのリンク 解法 次のように定義する．\n 順列 $p$ に対し，その互換の積の表記に現れる互換の数の最小値を $s(p)$ と書く． $Y(n, j) := \\{p \\in S(n) \\mid s(p) = j \\}$ $G(n, j) := |Y(n, j)|$  すると，次が成り立つ．\n$$F(n, j) = G(n, j) + G(n, j - 2) + \\cdots + G(n, j \\% 2)$$\n$s$ の計算を考えるために， $p \\in S(n) \\setminus \\{id\\}$ のとき，$p(i) \\neq i$ となる $i$ の 最大値を $i_0$ として，$p’ := p\\cdot (i_0, p(i_0))$ とすると，\n $s(id) = 0$ $p(j) \\neq j$ となる $j$ の最大のものを $j_0$ として， $q := p\\cdot(j_0, p(j_0))$ とすれば，$s(p) := s(q) + 1$  である．これを踏まえると，$p \\in Y(n, j)$ とすると，\n $p(n) = n$ の場合は，$p \\in Y(n - 1, j)$ $p(n)  となることがわかるから，$G$ は次のように計算できる:\n\\begin{align*} G(n, 0) \u0026= 1 \\\\ G(n, j) \u0026= 0\\quad (n これで答は求められるが，この計算方法では $\\Omega(nk + k^2)$ なので間に合わない． そこで，$j$ が小さい時，$p \\in Y(n, j)$ に対して，$p$ が動かす数は たかだか $2j$ 個しかないことに着目する．\n\\begin{align*} Z(n, j) \u0026:= \\{p \\in Y(n, j) \\mid \\text{ すべての } i = 1, \\ldots, n \\text{ に対して } p(i) \\neq i \\} \\\\ H(n, j) \u0026:= |Z(n, j)| \\end{align*}\nとすれば，\n$$G(n, j) = \\sum_{i = 0}^{2j} \\binom{n}{i}H(i, j)$$\nである．$H$ は，包除原理で求められる:\n$$H(i, j) = \\sum_{r = 0}^{i} (-1)^r \\binom{i}{r} G(i - r, j)$$\n全体として $O(k^3)$ で計算できた．\n実装 ACコード ",
   "wordCount" : "282",
   "inLanguage": "en",
   "datePublished": "2022-03-05T08:03:44+09:00",
@@ -248,7 +248,7 @@ $s(p)$ と書く．</li>
 <p>$$F(n, j) = G(n, j) + G(n, j - 2) + \cdots + G(n, j \% 2)$$</p>
 <p>$s$ の計算を考えるために，
 $p \in S(n) \setminus \{id\}$ のとき，$p(i) \neq i$ となる $i$ の
-最大値を $i_0$ として，$p' := p\cdot (i_0, p(i_0))$
+最大値を $i_0$ として，$p&rsquo; := p\cdot (i_0, p(i_0))$
 とすると，</p>
 <ul>
 <li>$s(id) = 0$</li>
@@ -258,12 +258,12 @@ $q := p\cdot(j_0, p(j_0))$ とすれば，$s(p) := s(q) + 1$</li>
 <p>である．これを踏まえると，$p \in Y(n, j)$ とすると，</p>
 <ul>
 <li>$p(n) = n$ の場合は，$p \in Y(n - 1, j)$</li>
-<li>$p(n) &lt; n$ の場合は，$p' \in Y(n - 1, j - 1)$</li>
+<li>$p(n) &lt; n$ の場合は，$p&rsquo; \in Y(n - 1, j - 1)$</li>
 </ul>
 <p>となることがわかるから，$G$ は次のように計算できる:</p>
 <p>\begin{align*}
-G(n, 0) &amp;= 1 \\<br>
-G(n, j) &amp;= 0\quad  (n &lt; j) \\<br>
+G(n, 0) &amp;= 1 \\
+G(n, j) &amp;= 0\quad  (n &lt; j) \\
 G(n, j) &amp;= G(n - 1, j) + (n - 1) G(n - 1, j - 1)
 \end{align*}</p>
 <p>これで答は求められるが，この計算方法では $\Omega(nk + k^2)$ なので間に合わない．
@@ -271,7 +271,7 @@ G(n, j) &amp;= G(n - 1, j) + (n - 1) G(n - 1, j - 1)
 たかだか $2j$ 個しかないことに着目する．</p>
 <p>\begin{align*}
 Z(n, j) &amp;:= \{p \in Y(n, j) \mid \text{ すべての }
-i = 1, \ldots, n \text{ に対して } p(i) \neq i \} \\<br>
+i = 1, \ldots, n \text{ に対して } p(i) \neq i \} \\
 H(n, j) &amp;:= |Z(n, j)|
 \end{align*}</p>
 <p>とすれば，</p>
@@ -312,8 +312,9 @@ H(n, j) &amp;:= |Z(n, j)|
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -321,7 +322,6 @@ H(n, j) &amp;:= |Z(n, j)|
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

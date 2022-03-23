@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -88,7 +88,7 @@
   "keywords": [
     "xor", "畳み込み", "アダマール変換"
   ],
-  "articleBody": "xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \\oplus y$ は $x$ と $y$ の xor とする．\n $ Z_k = \\sum \\{ X_i Y_j \\mid i \\oplus j = k \\} $  以下では，$Z = X * Y$ と書く．\nアダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．\n$$ H_0 = 1 $$\n$$ H_{k + 1} = \\begin{bmatrix} H_k \u0026 H_k \\\\\nH_k \u0026 -H_k \\end{bmatrix} $$\n本来は，正規化のために定数倍するが， ここでは，結果を整数にするためにそうしていない．\n$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．\n畳み込みとアダマール変換 以下が成り立つことが，計算することで容易に分かる．\n$$ (H_K X) (H_K Y) = H_K (X * Y) $$\nただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．\n$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$\nアダマール変換は，定義に従って $O(n \\log n)$ で計算できる．($n = 2^K$)\nメモリを賢く使って計算している例が kazuma8128's blog に載っている．\nこれを使える問題 ABC212 H Nim Counting ",
+  "articleBody": "xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \\oplus y$ は $x$ と $y$ の xor とする．\n $ Z_k = \\sum \\{ X_i Y_j \\mid i \\oplus j = k \\} $  以下では，$Z = X * Y$ と書く．\nアダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．\n$$ H_0 = 1 $$\n$$ H_{k + 1} = \\begin{bmatrix} H_k \u0026 H_k \\\\ H_k \u0026 -H_k \\end{bmatrix} $$\n本来は，正規化のために定数倍するが， ここでは，結果を整数にするためにそうしていない．\n$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．\n畳み込みとアダマール変換 以下が成り立つことが，計算することで容易に分かる．\n$$ (H_K X) (H_K Y) = H_K (X * Y) $$\nただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．\n$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$\nアダマール変換は，定義に従って $O(n \\log n)$ で計算できる．($n = 2^K$)\nメモリを賢く使って計算している例が kazuma8128's blog に載っている．\nこれを使える問題 ABC212 H Nim Counting ",
   "wordCount" : "127",
   "inLanguage": "en",
   "datePublished": "2021-08-23T12:40:00+09:00",
@@ -238,7 +238,7 @@ H_0 = 1
 $$</p>
 <p>$$
 H_{k + 1} = \begin{bmatrix}
-H_k &amp; H_k \\<br>
+H_k &amp; H_k \\
 H_k &amp; -H_k
 \end{bmatrix}
 $$</p>
@@ -290,8 +290,9 @@ $$</p>
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
@@ -299,7 +300,6 @@ $$</p>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
 </p>
 
 

@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>テスト | yamate11のブログ</title>
-<meta name="keywords" content="" />
-<meta name="description" content="モバイルフレンドリーでないと言われたのでテスト">
+<title>ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換 | yamate11のブログ</title>
+<meta name="keywords" content="ゼータ変換, 高速ゼータ変換" />
+<meta name="description" content="高速ゼータ変換について，自分用にまとめた記事です．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-24-test0224/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.94.2" />
 
 <script>
     MathJax = {
@@ -46,16 +46,16 @@
 
 
 
-<meta property="og:title" content="テスト" />
-<meta property="og:description" content="モバイルフレンドリーでないと言われたのでテスト" />
+<meta property="og:title" content="ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換" />
+<meta property="og:description" content="高速ゼータ変換について，自分用にまとめた記事です．" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-24-test0224/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-24T13:09:17&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-24T13:09:17&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-22T19:59:40&#43;09:00" />
+<meta property="article:modified_time" content="2022-03-22T19:59:40&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="テスト"/>
-<meta name="twitter:description" content="モバイルフレンドリーでないと言われたのでテスト"/>
+<meta name="twitter:title" content="ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換"/>
+<meta name="twitter:description" content="高速ゼータ変換について，自分用にまとめた記事です．"/>
 
 
 <script type="application/ld+json">
@@ -72,8 +72,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "テスト",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-24-test0224/"
+      "name": "ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換",
+      "item": "https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/"
     }
   ]
 }
@@ -82,24 +82,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "テスト",
-  "name": "テスト",
-  "description": "モバイルフレンドリーでないと言われたのでテスト",
+  "headline": "ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換",
+  "name": "ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換",
+  "description": "高速ゼータ変換について，自分用にまとめた記事です．",
   "keywords": [
-    
+    "ゼータ変換", "高速ゼータ変換"
   ],
-  "articleBody": "本文 問題\n何? どこが?\n",
-  "wordCount" : "4",
+  "articleBody": "(高速)ゼータ変換，(高速)メビウス変換については， 良い記事がたくさんありますので，1つ足してもしょうがないのですが， 自分用にまとめました．\nゼータ変換，メビウス変換 $F$ を有限集合とする．その冪集合を $\\mathcal{P}(F)$ と書く．\n$M$ を加群として， 関数 $f: \\mathcal{P}(F) \\to M$ に対して，そのゼータ変換 $\\zeta(f): \\mathcal{P}(F) \\to M$ を， $\\zeta(f)(X) = \\sum_{Y \\subseteq X}f(Y)$ で定義する．あるいは， $\\zeta(f)(X) = \\sum_{Y \\supseteq X}f(Y)$ で定義することもある． $f$ のメビウス変換を，上の2つのゼータ変換の定義に応じて， $\\mu(f)(X) = \\sum_{Y \\subseteq X}(-1)^{|X - Y|}f(Y)$ あるいは $\\mu(f)(X) = \\sum_{Y \\supseteq X}(-1)^{|Y - X|}f(Y)$ で定義する．\n定理1  $\\zeta$ と $\\mu$ は互いに他の逆変換である．\n 高速ゼータ変換，高速メビウス変換 $x \\in \\mathbb{N}$ に対して $\\bar{x} := \\{0, 1, \\ldots, x-1\\}$ と書く． 簡単のため $F = \\bar{n}$ とする．\n次のDPを用いて，ゼータ変換を高速に計算することができる．\n定義が$\\zeta(f)(X) = \\sum_{Y \\subseteq X}f(Y)$の場合，\n $\\newcommand{\\dp}{\\text{dp}} \\dp[i][X] := \\sum \\{ f(Y) \\mid Y \\subseteq X \\text{ and } Y \\cap (\\bar{n} \\setminus \\bar{i}) = X \\cap (\\bar{n} \\setminus \\bar{i}) \\}$  要するに，$Y \\in \\mathcal{P}(F)$ であって，\n $i$以上のところでは $X$ と一致していて， $i$ 未満のところでは$X$の部分集合になっている  ようなものに対する $f(Y)$ の和，ということである． すると，求める値は $\\zeta(f)(X) = \\dp[n][X]$ であり，遷移は次のようになる:\n $\\dp[0][X] = f(X)$ $\\dp[i][X] = \\begin{cases} \\dp[i - 1][X] \u0026 \\text{ if } i \\not\\in X \\\\ \\dp[i - 1][X] + \\dp[i - 1][X \\setminus \\{i\\}] \u0026 \\text{ if } i \\in X \\\\ \\end{cases} $  定義が$\\zeta(f)(X) = \\sum_{Y \\supseteq X}f(Y)$の場合も同様． 変えるところは，定義が\n $\\newcommand{\\dp}{\\text{dp}} \\dp[i][X] := \\sum \\{ f(Y) \\mid Y \\supseteq X \\text{ and } Y \\cap (\\bar{n} \\setminus \\bar{i}) = X \\cap (\\bar{n} \\setminus \\bar{i}) \\}$  となることと，次の遷移．\n $\\dp[i][X] = \\begin{cases} \\dp[i - 1][X] \u0026 \\text{ if } i \\in X \\\\ \\dp[i - 1][X] + \\dp[i - 1][X \\cup \\{i\\}] \u0026 \\text{ if } i \\not\\in X \\\\ \\end{cases} $  メビウス変換も式の形はほぼ同じだから，同じようなDPで計算できる．\n $\\dp[i][X] = \\begin{cases} \\dp[i - 1][X] \u0026 \\text{ if } i \\not\\in X \\\\ \\dp[i - 1][X] + \\dp[i - 1][X \\setminus \\{i\\}] \u0026 \\text{ if } i \\in X \\\\ \\end{cases} $  今後の課題 定理1の証明を書く．\nたぶん，約数に関する話もまとめなくてはいけないだろうが， 今はまとめるほど理解していない．\n上の，冪集合として書いている話はlatticeにできるのだろうが， そのとき「高速」パートがどうなるかわかっていない．\n",
+  "wordCount" : "262",
   "inLanguage": "en",
-  "datePublished": "2022-02-24T13:09:17+09:00",
-  "dateModified": "2022-02-24T13:09:17+09:00",
+  "datePublished": "2022-03-22T19:59:40+09:00",
+  "dateModified": "2022-03-22T19:59:40+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-24-test0224/"
+    "@id": "https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/"
   },
   "publisher": {
     "@type": "Organization",
@@ -214,28 +214,103 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      テスト
+      ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換
     </h1>
-    <div class="post-meta">2022-02-24&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-03-22&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><!-- タイトルはキーワードがインデックスされないかもしれないので，
-     ここに書いておく -->
-<!-- AtCoder *** Contest xxx - A*C xxx F - 問題タイトル の解法です．-->
-<h2 id="本文">本文<a hidden class="anchor" aria-hidden="true" href="#本文">#</a></h2>
-<p>問題</p>
-<h2 id="何">何?<a hidden class="anchor" aria-hidden="true" href="#何">#</a></h2>
-<p>どこが?</p>
+  <div class="post-content"><p>(高速)ゼータ変換，(高速)メビウス変換については，
+良い記事がたくさんありますので，1つ足してもしょうがないのですが，
+自分用にまとめました．</p>
+<h2 id="ゼータ変換メビウス変換">ゼータ変換，メビウス変換<a hidden class="anchor" aria-hidden="true" href="#ゼータ変換メビウス変換">#</a></h2>
+<p>$F$ を有限集合とする．その冪集合を $\mathcal{P}(F)$ と書く．</p>
+<p>$M$ を加群として，
+関数 $f: \mathcal{P}(F) \to M$ に対して，そのゼータ変換
+$\zeta(f): \mathcal{P}(F) \to M$ を，
+$\zeta(f)(X) = \sum_{Y \subseteq X}f(Y)$
+で定義する．あるいは，
+$\zeta(f)(X) = \sum_{Y \supseteq X}f(Y)$
+で定義することもある．
+$f$ のメビウス変換を，上の2つのゼータ変換の定義に応じて，
+$\mu(f)(X) = \sum_{Y \subseteq X}(-1)^{|X - Y|}f(Y)$
+あるいは
+$\mu(f)(X) = \sum_{Y \supseteq X}(-1)^{|Y - X|}f(Y)$
+で定義する．</p>
+<h3 id="定理1">定理1<a hidden class="anchor" aria-hidden="true" href="#定理1">#</a></h3>
+<blockquote>
+<p>$\zeta$ と $\mu$ は互いに他の逆変換である．</p>
+</blockquote>
+<h2 id="高速ゼータ変換高速メビウス変換">高速ゼータ変換，高速メビウス変換<a hidden class="anchor" aria-hidden="true" href="#高速ゼータ変換高速メビウス変換">#</a></h2>
+<p>$x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く．
+簡単のため $F = \bar{n}$ とする．</p>
+<p>次のDPを用いて，ゼータ変換を高速に計算することができる．</p>
+<p>定義が$\zeta(f)(X) = \sum_{Y \subseteq X}f(Y)$の場合，</p>
+<ul>
+<li>$\newcommand{\dp}{\text{dp}}
+\dp[i][X] := \sum \{ f(Y) \mid Y \subseteq X \text{ and }
+Y \cap (\bar{n} \setminus \bar{i}) = X \cap (\bar{n} \setminus \bar{i}) \}$</li>
+</ul>
+<p>要するに，$Y \in \mathcal{P}(F)$ であって，</p>
+<ul>
+<li>$i$以上のところでは $X$ と一致していて，</li>
+<li>$i$ 未満のところでは$X$の部分集合になっている</li>
+</ul>
+<p>ようなものに対する $f(Y)$ の和，ということである．
+すると，求める値は $\zeta(f)(X) = \dp[n][X]$ であり，遷移は次のようになる:</p>
+<ul>
+<li>$\dp[0][X] = f(X)$</li>
+<li>$\dp[i][X] =
+\begin{cases}
+\dp[i - 1][X] &amp; \text{ if } i \not\in X \\
+\dp[i - 1][X] + \dp[i - 1][X \setminus \{i\}] &amp; \text{ if } i \in X \\
+\end{cases}
+$</li>
+</ul>
+<p>定義が$\zeta(f)(X) = \sum_{Y \supseteq X}f(Y)$の場合も同様．
+変えるところは，定義が</p>
+<ul>
+<li>$\newcommand{\dp}{\text{dp}}
+\dp[i][X] := \sum \{ f(Y) \mid Y \supseteq X \text{ and }
+Y \cap (\bar{n} \setminus \bar{i}) = X \cap (\bar{n} \setminus \bar{i}) \}$</li>
+</ul>
+<p>となることと，次の遷移．</p>
+<ul>
+<li>$\dp[i][X] =
+\begin{cases}
+\dp[i - 1][X] &amp; \text{ if } i \in X \\
+\dp[i - 1][X] + \dp[i - 1][X \cup \{i\}] &amp; \text{ if } i \not\in X \\
+\end{cases}
+$</li>
+</ul>
+<p>メビウス変換も式の形はほぼ同じだから，同じようなDPで計算できる．</p>
+<ul>
+<li>$\dp[i][X] =
+\begin{cases}
+\dp[i - 1][X] &amp; \text{ if } i \not\in X \\
+\dp[i - 1][X] + \dp[i - 1][X \setminus \{i\}] &amp; \text{ if } i \in X \\
+\end{cases}
+$</li>
+</ul>
+<h2 id="今後の課題">今後の課題<a hidden class="anchor" aria-hidden="true" href="#今後の課題">#</a></h2>
+<p>定理1の証明を書く．</p>
+<p>たぶん，約数に関する話もまとめなくてはいけないだろうが，
+今はまとめるほど理解していない．</p>
+<p>上の，冪集合として書いている話はlatticeにできるのだろうが，
+そのとき「高速」パートがどうなるかわかっていない．</p>
 
 
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%BC%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B/">ゼータ変換</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E9%AB%98%E9%80%9F%E3%82%BC%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B/">高速ゼータ変換</a></li>
+    </ul>
 <nav class="paginav">
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">
     <span class="title">Next Page »</span>
     <br>
-    <span>Balls in Boxes - Atcoder Beginner Contest 231 G</span>
+    <span>Mo&#39;s algorithm メモ</span>
   </a>
 </nav>
 
@@ -244,20 +319,20 @@
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-24-test0224/" data-title="テスト">
+<section id="isso-thread" data-isso-id="/blog/posts/2022/03-22-fast-zeta/" data-title="ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換">
 </section>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-24-test0224/">テスト</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">最大流・最小カット</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">Cubic? - AtCoder Beginner Contest 238 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">Zobrist Hash</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">素因数分解に要する時間</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">Dilworthの定理, Konigの定理</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/01-09-divide-a-sequence/">Divide A Sequence - AtCoder Beginner Contest 234 G</a>
 </p>
 
 
