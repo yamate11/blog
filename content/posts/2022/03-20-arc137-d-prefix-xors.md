@@ -24,6 +24,8 @@ $A_i$ を同時に $A_1 \oplus A_2 \oplus \cdots \oplus A_i$ で置き換える�
 
 制約: $1 \leq N, M \leq 10^6$; $0 \leq A_i < 2^{30}$
 
+[問題へのリンク](https://atcoder.jp/contests/arc137/tasks/arc137_d)
+
 ## 解法
 
 ### 実験
