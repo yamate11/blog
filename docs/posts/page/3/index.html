@@ -175,6 +175,17 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;言語・STLメモ</h2>
+  </header>
+  <section class="entry-content">
+    <p>C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．</p>
+  </section>
+  <footer class="entry-footer">2021-09-20&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;言語・STLメモ" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Red and Blue Lamps - AtCoder Beginner Contest 218 H</h2>
   </header>
   <section class="entry-content">
@@ -331,21 +342,6 @@
   <footer class="entry-footer">2021-08-19&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Random LIS - Atcoder Regular Contest 104 E" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</h2>
-  </header>
-  <section class="entry-content">
-    <p>発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
-最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
-たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
-vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
-int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) {  int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) {  fwd[u]....</p>
-  </section>
-  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to vector はあんまり速くない" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://yamate11.github.io/blog/posts/page/2/">« Prev Page</a>
@@ -356,6 +352,7 @@ int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt
 <br/>
 <p>
 Links:
+/ <a href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/">C&#43;&#43;言語・STLメモ</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/">Red and Blue Lamps - AtCoder Beginner Contest 218 H</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/">Shapes -- AtCoder Beginner Contest 218 C</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/09-05-abc217-h-snuketoon/">Snuketoon - ABC217 H</a>
@@ -370,7 +367,6 @@ Links:
 / <a href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/">文字列，数値変換</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/">整数・実数の大小比較とfloor, ceil</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/">Random LIS - Atcoder Regular Contest 104 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/">vector はあんまり速くない</a>
 </p>
     </main>
     <footer class="footer">
