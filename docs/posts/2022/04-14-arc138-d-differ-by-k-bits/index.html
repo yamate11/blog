@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Differ by K bits - Atcoder Regular Contest 138 D | yamate11のブログ</title>
+<meta name="keywords" content="XOR, グレイコード" />
+<meta name="description" content="公式解説とは少しだけ異なる解法です">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.94.2" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="Differ by K bits - Atcoder Regular Contest 138 D" />
+<meta property="og:description" content="公式解説とは少しだけ異なる解法です" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-14T08:22:15&#43;09:00" />
+<meta property="article:modified_time" content="2022-04-14T08:22:15&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Differ by K bits - Atcoder Regular Contest 138 D"/>
+<meta name="twitter:description" content="公式解説とは少しだけ異なる解法です"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Differ by K bits - Atcoder Regular Contest 138 D",
+      "item": "https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Differ by K bits - Atcoder Regular Contest 138 D",
+  "name": "Differ by K bits - Atcoder Regular Contest 138 D",
+  "description": "公式解説とは少しだけ異なる解法です",
+  "keywords": [
+    "XOR", "グレイコード"
+  ],
+  "articleBody": "Atcoder Regular Contest 138 (大和証券プログラミングコンテスト 2022 Spring) - ARC 138 D - Differ by K bits の解法です． 公式解説 を読んで，きれいに解けるのにびっくりしてしまいました． ここに書くのはもっと泥臭いです．\n問題概要 整数 $N$, $K$ が与えられる． $0, 1, \\ldots, 2^N - 1$ の順列 $P_0, P_1, \\ldots, P_{2^N - 1}$ で， 隣接項が 2進表記でちょうど$K$桁だけ異なるものが存在するかどうか判定し， 存在する場合には1つ構成せよ．\n制約: $1 \\leq K \\leq N \\leq 18$\n問題へのリンク 解法 $N = 1$ の場合には，$K = 1$ であり，$P_i = i$ という解がある． 以下，$N \\geq 2$ とする．\n$K = N$ の場合は，あきらかに解はない． また，$K$ が偶数の場合には，ビットカウントが奇数になる数が作れないので， 解はない． $K まず，$n = K + 1$ とする． グレイコード を1つおきに反転すれば良い．具体的には， $Q_i := i \\oplus \\textrm{sftR}(i)$ とすると，$(Q_i)_i$ は順列になり，隣接項は2進表記で1桁だけ異なる． ただし，$\\oplus$ は XOR で，sftR は右ビットシフト． したがって，\n$$ P_i := \\begin{cases} Q_i \u0026 \\text{ $i$ が偶数の時}\\\\ \\textrm{flip}(Q_i) \u0026 \\text{ $i$ が奇数の時} \\end{cases} $$\nが解となる．ただし，flip は，末尾nビットのビット反転．\nあとは，$n$ を1つずつ増やしていく．\n 順列の前半 ($i 後半の先頭 ($i = 2^n$) は， 前半の最後の数の $K-1$ ビットを反転させた上で， 最上位ビットを立てる． 後半の残りは，前半の対応する場所と同じビットを反転する．  具体的には，$(Q_i)_i$ を $n$ に対する解であるとして， $n + 1$ に対する解 $(P_i)_i$ は次のようになる．\n$$ P_i := \\begin{cases} Q_i \u0026 (i 2^n) \\end{cases} $$\n実装  ll N, K; cin  N  K;  if (N == 1) { cout  \"Yes\\n0 1\\n\"; return 0; }  if (K == N or K % 2 == 0) { cout  \"No\\n\"; return 0; }  vectorll ans(1LL  N);  ll n = K + 1;  ll mask = (1LL  n) - 1;  REP(i, 1LL  n) {  ll x = i ^ (i  1);  ans[i] = i % 2 == 0 ? x : (x ^ mask);  }  for (; n  N; n++) {  ll j0 = 1LL  n;  ans[j0] = ans[j0 - 1] ^ ((1LL  (K - 1)) - 1) ^ j0;  REP(i, j0 - 1) ans[j0 + i + 1] = ans[j0 + i] ^ ans[i] ^ ans[i + 1];  }  cout  \"Yes\\n\";  for (ll a : ans) cout  a  \" \";  cout  endl; ACコード ",
+  "wordCount" : "350",
+  "inLanguage": "en",
+  "datePublished": "2022-04-14T08:22:15+09:00",
+  "dateModified": "2022-04-14T08:22:15+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Differ by K bits - Atcoder Regular Contest 138 D
+    </h1>
+    <div class="post-meta">2022-04-14&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>Atcoder Regular Contest 138
+(大和証券プログラミングコンテスト 2022 Spring) - ARC 138 D -
+Differ by K bits の解法です．
+<a href="https://atcoder.jp/contests/arc138/editorial/3741" target="_blank">公式解説</a>
+
+を読んで，きれいに解けるのにびっくりしてしまいました．
+ここに書くのはもっと泥臭いです．</p>
+<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p>整数 $N$, $K$ が与えられる．
+$0, 1, \ldots, 2^N - 1$ の順列
+$P_0, P_1, \ldots, P_{2^N - 1}$ で，
+隣接項が 2進表記でちょうど$K$桁だけ異なるものが存在するかどうか判定し，
+存在する場合には1つ構成せよ．</p>
+<p>制約: $1 \leq K \leq N \leq 18$</p>
+<p><a href="https://atcoder.jp/contests/arc138/tasks/arc138_d" target="_blank">問題へのリンク</a>
+</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>$N = 1$ の場合には，$K = 1$ であり，$P_i = i$ という解がある．
+以下，$N \geq 2$ とする．</p>
+<p>$K = N$ の場合は，あきらかに解はない．
+また，$K$ が偶数の場合には，ビットカウントが奇数になる数が作れないので，
+解はない．
+$K &lt; N$ かつ $K$ が奇数の場合には，
+$n = K + 1, K + 2, \ldots, N$ の順に解を構成することができる．</p>
+<p>まず，$n = K + 1$ とする．
+<a href="https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%AC%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%89" target="_blank">グレイコード</a>
+を1つおきに反転すれば良い．具体的には，
+$Q_i := i \oplus \textrm{sftR}(i)$
+とすると，$(Q_i)_i$ は順列になり，隣接項は2進表記で1桁だけ異なる．
+ただし，$\oplus$ は XOR で，sftR は右ビットシフト．
+したがって，</p>
+<p>$$
+P_i :=
+\begin{cases}
+Q_i &amp; \text{ $i$ が偶数の時}\\
+\textrm{flip}(Q_i) &amp; \text{ $i$ が奇数の時}
+\end{cases}
+$$</p>
+<p>が解となる．ただし，flip は，末尾nビットのビット反転．</p>
+<p>あとは，$n$ を1つずつ増やしていく．</p>
+<ul>
+<li>順列の前半 ($i &lt; 2^n$) は，1つ前の数列をそのまま用いる．</li>
+<li>後半の先頭 ($i = 2^n$) は，
+前半の最後の数の $K-1$ ビットを反転させた上で，
+最上位ビットを立てる．</li>
+<li>後半の残りは，前半の対応する場所と同じビットを反転する．</li>
+</ul>
+<p>具体的には，$(Q_i)_i$ を $n$ に対する解であるとして，
+$n + 1$ に対する解 $(P_i)_i$ は次のようになる．</p>
+<p>$$
+P_i :=
+\begin{cases}
+Q_i &amp; (i &lt; 2^n) \\
+Q_{2^n - 1} \oplus (2^{K - 1} - 1) \oplus 2^n &amp; (i = 2^n) \\
+Q_{i - 1} \oplus (Q_{i - 2^n - 1} \oplus Q_{i - 2^n}) &amp; (i &gt; 2^n)
+\end{cases}
+$$</p>
+<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">K</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">K</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">N</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;Yes</span><span style="color:#8045ff">\n</span><span style="color:#d88200">0 1</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">K</span> <span style="color:#f92672">==</span> <span style="color:#111">N</span> <span style="color:#111">or</span> <span style="color:#111">K</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;No</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">ans</span><span style="color:#111">(</span><span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">N</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#111">K</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">mask</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">n</span><span style="color:#111">)</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">n</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ll</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">^</span> <span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#111">x</span> <span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#111">x</span> <span style="color:#f92672">^</span> <span style="color:#111">mask</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">for</span> <span style="color:#111">(;</span> <span style="color:#111">n</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">n</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ll</span> <span style="color:#111">j0</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">n</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">j0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">j0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">^</span> <span style="color:#111">((</span><span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">(</span><span style="color:#111">K</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">))</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#f92672">^</span> <span style="color:#111">j0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">j0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">j0</span> <span style="color:#f92672">+</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">j0</span> <span style="color:#f92672">+</span> <span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">^</span> <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">^</span> <span style="color:#111">ans</span><span style="color:#111">[</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;Yes</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">a</span> <span style="color:#111">:</span> <span style="color:#111">ans</span><span style="color:#111">)</span> <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">a</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34; &#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span></code></pre></div><p><a href="https://atcoder.jp/contests/arc138/submissions/30954663" target="_blank">ACコード</a>
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/xor/">xor</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%B0%E3%83%AC%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%89/">グレイコード</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Small Multiple - Atcoder Beginner Contest 077 D</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/" data-title="Differ by K bits - Atcoder Regular Contest 138 D">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">Differ by K bits - Atcoder Regular Contest 138 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/">Small Multiple - Atcoder Beginner Contest 077 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/">Prefix XORs - AtCoder Regular Contest 137 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">Balls in Boxes - Atcoder Beginner Contest 231 G</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">Predilection - Atcoder Beginner Contest 230 F</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">最大流・最小カット</a>
+</p>
+
+
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

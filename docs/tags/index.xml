@@ -6,7 +6,25 @@
     <description>Recent content in Tags on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Apr 2022 09:58:31 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Apr 2022 08:22:15 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>xor</title>
+      <link>https://yamate11.github.io/blog/tags/xor/</link>
+      <pubDate>Thu, 14 Apr 2022 08:22:15 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/xor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>グレイコード</title>
+      <link>https://yamate11.github.io/blog/tags/%E3%82%B0%E3%83%AC%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%89/</link>
+      <pubDate>Thu, 14 Apr 2022 08:22:15 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/tags/%E3%82%B0%E3%83%AC%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%89/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>0-1BFS</title>
       <link>https://yamate11.github.io/blog/tags/0-1bfs/</link>
@@ -283,15 +301,6 @@
       <pubDate>Mon, 23 Aug 2021 16:35:21 +0900</pubDate>
       
       <guid>https://yamate11.github.io/blog/tags/%E3%83%A1%E3%83%93%E3%82%A6%E3%82%B9%E5%A4%89%E6%8F%9B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>xor</title>
-      <link>https://yamate11.github.io/blog/tags/xor/</link>
-      <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/tags/xor/</guid>
       <description></description>
     </item>
     
