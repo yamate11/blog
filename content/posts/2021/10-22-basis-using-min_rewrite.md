@@ -7,6 +7,7 @@ tags: []
 categories: ["topic"]
 # categories: ["solution"]
 summary: "Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方"
+draft: true
 ---
 
 自然数の集合 $\mathbb{N}$ を，XORを加算とする，
@@ -15,6 +16,63 @@ $x_1, .., x_n \in \mathbb{N}$ が張る部分空間の基底の求め方に関�
 熨斗袋さんのツイートで紹介されていた方法です:
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">xor の掃き出しすごい簡単に出来るんですね<br><br>vector&lt;int&gt; basis;<br>for(int e : a){<br> for(int b : basis)<br> chmin(e, e ^ b);<br> if(e)<br> basis.push_back(e);<br>}<br><br>これで数列 a の基底が basis に入る</p>&mdash; 熨斗袋 (@noshi91) <a href="https://twitter.com/noshi91/status/1200702280128856064?ref_src=twsrc%5Etfw">November 30, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+この記事では，これで基底が求められていることなどを書きます．
+
+### コード
+
+上のツイートと本質的に変わりませんが，次のようなコードにしておきます．
+
+```cpp
+using vector<int> = VI;
+
+int residual(const VI& bs, int t) {
+  for (int b : bs) if (t ^ b < t) t = t ^ b;
+  return t; }
+
+pair<VI, VI> get_basis(const VI& vec) {
+  VI B1, B2;
+  for (int x : vec) {
+    int b = residual(B1, x);
+    if (b != 0) {
+      B1.push_back(b);
+      B2.push_back(x); }}
+  return { B1, B2 }; }
+```
+
+以下が成り立ちます．
+
+* `auto [B1, B2] = get_basis(vec);` を実行すると，
+  B1 も B2 も，vec が張るベクトル空間の基底になる．
+  B2 は vec の部分集合になっている．
+  (基底がほしいだけなら，B2 は作らなくても良い)
+* 非負intの x に対し，基底 B1 に関する係数列 c 
+  $x = \bigoplus_{i} c[i]B[i]$ が，次のコードで計算される．
+  ($\oplus$ はXORのこと．c[i] = 0 または c[i] = 1)
+
+```cpp
+VI repr(int x) {
+  VI c;
+  for (int b : B1) {
+    if (x ^ b < x) { c.push_back(1); x = x ^ b; }
+    else           { c.push_back(0);            } }
+  return c; }
+```
+
+### 例
+
+どのようになっているか，例で見てみます．以下では，2進表記をしています．
+
+$X = \\{x_1 = 01010, x_2 = 10011, x_3 = 11001, x_4 =  \\}$
+
+まず，$b_1 := x_1 = 01010$．
+B1 = B2 = { 01010 }．
+
+次に，$t := a_2 = 10011$ とします．
+$t$ と $t \oplus y_1 = 11001$ を比較して$t$ の方が小さいので，
+residual(
+
 
 
 ### 記法など
