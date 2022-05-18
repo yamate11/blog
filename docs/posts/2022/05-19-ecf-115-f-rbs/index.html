@@ -5,15 +5,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Max Dot -- AtCoder Regular Contest 128 C | yamate11のブログ</title>
+<title>RBS - Educational Codeforces Round 115 F | yamate11のブログ</title>
 <meta name="keywords" content="" />
-<meta name="description" content="AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．
-問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, &hellip;, x_N)$ を作る:
- $0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $ $x_1 &#43; x_2 &#43; \cdots &#43; x_N = S$  $\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．
-制約: $N \leq 5000$; $M,S,A_i \leq 10^6$; $S \leq NM$;
-問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i&#43;1} - x_i$ ($i = 0, \ldots, N-1$) とすると， 次のように言い換えられる:">
+<meta name="description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
+問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
+$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
+制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
+解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
+$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -50,24 +51,26 @@
 
 
 
-<meta property="og:title" content="Max Dot -- AtCoder Regular Contest 128 C" />
-<meta property="og:description" content="AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．
-問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, &hellip;, x_N)$ を作る:
- $0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $ $x_1 &#43; x_2 &#43; \cdots &#43; x_N = S$  $\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．
-制約: $N \leq 5000$; $M,S,A_i \leq 10^6$; $S \leq NM$;
-問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i&#43;1} - x_i$ ($i = 0, \ldots, N-1$) とすると， 次のように言い換えられる:" />
+<meta property="og:title" content="RBS - Educational Codeforces Round 115 F" />
+<meta property="og:description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
+問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
+$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
+制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
+解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
+$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-29T19:26:39&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-29T19:26:39&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-19T00:12:09&#43;09:00" />
+<meta property="article:modified_time" content="2022-05-19T00:12:09&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Max Dot -- AtCoder Regular Contest 128 C"/>
-<meta name="twitter:description" content="AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．
-問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, &hellip;, x_N)$ を作る:
- $0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $ $x_1 &#43; x_2 &#43; \cdots &#43; x_N = S$  $\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．
-制約: $N \leq 5000$; $M,S,A_i \leq 10^6$; $S \leq NM$;
-問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i&#43;1} - x_i$ ($i = 0, \ldots, N-1$) とすると， 次のように言い換えられる:"/>
+<meta name="twitter:title" content="RBS - Educational Codeforces Round 115 F"/>
+<meta name="twitter:description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
+問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
+$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
+制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
+解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
+$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．"/>
 
 
 <script type="application/ld+json">
@@ -84,8 +87,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Max Dot -- AtCoder Regular Contest 128 C",
-      "item": "https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/"
+      "name": "RBS - Educational Codeforces Round 115 F",
+      "item": "https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/"
     }
   ]
 }
@@ -94,24 +97,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Max Dot -- AtCoder Regular Contest 128 C",
-  "name": "Max Dot -- AtCoder Regular Contest 128 C",
-  "description": "AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．\n問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, \u0026hellip;, x_N)$ を作る:\n $0 \\leq x_1 \\leq x_2 \\leq \\cdots \\leq x_N \\leq M $ $x_1 + x_2 + \\cdots + x_N = S$  $\\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．\n制約: $N \\leq 5000$; $M,S,A_i \\leq 10^6$; $S \\leq NM$;\n問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i+1} - x_i$ ($i = 0, \\ldots, N-1$) とすると， 次のように言い換えられる:",
+  "headline": "RBS - Educational Codeforces Round 115 F",
+  "name": "RBS - Educational Codeforces Round 115 F",
+  "description": "Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．\n問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \\in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\\verb!\u0026quot;()()()))\u0026quot;!) = 3$, $f(\\verb!\u0026quot;(()())((\u0026quot;!) = 1$．\n$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．\n制約: $ 1 \\leq n \\leq 20$，与えられる文字列の長さの和は $4\\times 10^5$ 以下． 制限時間3秒．\n解法 0-index で記述する． $\\bar{n} := \\{0, \\ldots, n-1\\}$ とする．\n$s \\in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \\in S$ で，全ての $i \u0026lt; |s|$ に対して $g(s) \\geq 0$ であるものの集合を $L$ と書く．$D := S \\setminus L$．",
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．\n問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, …, x_N)$ を作る:\n $0 \\leq x_1 \\leq x_2 \\leq \\cdots \\leq x_N \\leq M $ $x_1 + x_2 + \\cdots + x_N = S$  $\\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．\n制約: $N \\leq 5000$; $M,S,A_i \\leq 10^6$; $S \\leq NM$;\n問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i+1} - x_i$ ($i = 0, \\ldots, N-1$) とすると， 次のように言い換えられる:\n 求める最大値: $\\sum_{i = 0}^{N-1} B_i y_i$． ただし，$B_i := \\sum_{j = i + 1}^{N} A_j$． 満たすべき条件:  $y_i \\geq 0$ $y_0 + \\cdots + y_{N-1} \\leq M$ $N \\cdot y_0 + (N-1) \\cdot y_1 + \\cdots + 1\\cdot y_{N-1} = S$    さらに，$z_i := (N - i)\\cdot y_i$ とすると， 次のように言い換えられる:\n 求める最大値: $\\sum_{i = 0}^{N-1} C_i z_i$． ただし，$C_i := B_i / (N - i)$． 満たすべき条件:  $z_i \\geq 0$ $\\displaystyle\\frac{z_0}{N} + \\displaystyle\\frac{z_1}{N - 1} + \\cdots + \\displaystyle\\frac{z_{N-1}}{1} \\leq M$ $z_0 + z_1 + \\cdots + z_{N-1} = S$    $C_i$ たちの最大値を与える $i$ を $I$ と書く (複数あったら 一番小さいものを取る)． もし，$\\displaystyle\\frac{S}{N - I} \\leq M$ であれば， $z_I = S$, $z_i = 0 \\;(i \\neq I)$ とすることで，最大値が実現できる． 以下，そうでないとする．\n最大値を与える $(x_i)$ を取り，対応する $(y_i)$, $(z_i)$ を取る． もし，$i  I$ かつ $z_i  0$ なる $i$ があったとすると，$z_{I}$ を $z_i$ だけ増やして，$z_i$ を $0$ に変えると， 条件を満たしたまま，値が増加してしまう．したがって， $i  I$ ならば $z_i = 0$．すなわち， $x_{I + 1} = x_{I + 2} = \\cdots x_{N}$ である．\nここで，$x_{I + 1} (N - I) (M - x_{I + 1})  0$ であるので，$0 = x_{i-1} 0$ をとって，$x_i$ を $\\varepsilon$ 減らし， $x_{I+1}$ を $\\varepsilon$ 増やすことによって，条件を満たしたまま 値を大きくすることができてしまう．したがって，$x_{I+1} = M$ で なければならない．\n以上により，もとの問題は，次の2条件を満たす列において， $\\sum_{i = 1}^{I} A_i x_i$ の最大値を求める問題に帰着された．\n $0 \\leq x_1 \\leq x_2 \\leq \\cdots \\leq x_I \\leq M$ $x_1 + x_2 + \\cdots + x_I = S - M(N - I)$  これを繰り返せば良い．計算量は $O(N^2)$．\nACコード 提出 ",
-  "wordCount" : "332",
+  "articleBody": "Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．\n問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \\in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\\verb!\"()()()))\"!) = 3$, $f(\\verb!\"(()())((\"!) = 1$．\n$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．\n制約: $ 1 \\leq n \\leq 20$，与えられる文字列の長さの和は $4\\times 10^5$ 以下． 制限時間3秒．\n解法 0-index で記述する． $\\bar{n} := \\{0, \\ldots, n-1\\}$ とする．\n$s \\in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \\in S$ で，全ての $i $x \\subseteq \\bar{n}$ に対し， $\\{ s_i \\mid i \\in x \\}$ を並び替えて連結して得られる文字列 の集合を $P(x)$ と書く． $P(x)$ の要素 $s$ について，$g(s)$ の値は全て等しい．この値を $b(x)$ と書く． $\\newcommand{\\live}{\\text{live}}\\newcommand{\\dead}{\\text{dead}}$\n $\\live[ x ] := \\max \\{ f(s) \\mid s \\in P(x) \\cap L \\}$ $\\dead[ x ] := \\max \\{ f(s) \\mid s \\in P(x) \\cap D \\}$  ただし，$\\max \\varnothing = -\\infty$．\nすると，求める値は $\\max( \\text{live}[\\bar{n}], \\text{dead}[\\bar{n}] )$ である．\nこれをDPで求める．初期化:\n $\\live[ \\varnothing ] = 0$ $\\dead[ \\varnothing ] = -\\infty$  遷移は次のようになる．\n $\\text{updMax}(\\dead[ x \\cup \\{k\\} ], \\dead[ x ])$ $b(x) + g(s_k) $b(x) + g(s_k) \\geq 0$ のとき， $\\text{updMax}(\\live[x \\cup \\{k\\} ], \\live[ x ] + h(s_k, b(x)))$  ここで，$h(s, b)$ は，$s$ において $g(i) = -b$ かつ すべての $j 計算量は $O(n2^n)$\n実装 ACコード ",
+  "wordCount" : "228",
   "inLanguage": "en",
-  "datePublished": "2021-10-29T19:26:39+09:00",
-  "dateModified": "2021-10-29T19:26:39+09:00",
+  "datePublished": "2022-05-19T00:12:09+09:00",
+  "dateModified": "2022-05-19T00:12:09+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/"
+    "@id": "https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/"
   },
   "publisher": {
     "@type": "Organization",
@@ -226,80 +229,65 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Max Dot -- AtCoder Regular Contest 128 C
+      RBS - Educational Codeforces Round 115 F
     </h1>
-    <div class="post-meta">2021-10-29&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-05-19&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました．
-公式解説より，多少行間が埋まっていると思います．</p>
+  <div class="post-content"><!-- タイトルはキーワードがインデックスされないかもしれないので，
+     ここに書いておく -->
+<p>Educational Codeforces Round 115 F. RBS の解法です．
+解説ACです．</p>
 <h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
-<p>整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる．
-次の条件を満たす非負実数列 $(x_1, &hellip;, x_N)$ を作る:</p>
-<ul>
-<li>$0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $</li>
-<li>$x_1 + x_2 + \cdots + x_N = S$</li>
-</ul>
-<p>$\sum_{i=1}^{N} A_i  x_i$ の最大値を求めよ．</p>
-<p>制約: $N \leq 5000$;  $M,S,A_i \leq 10^6$;  $S \leq NM$;</p>
-<p><a href="https://atcoder.jp/contests/arc128/tasks/arc128_c" target="_blank">問題へのリンク</a>
+<p><a href="https://codeforces.com/contest/1598/problem/F" target="_blank">問題へのリンク</a>
 </p>
+<p>文字 <code>(</code> と <code>)</code> のみからなる空でない文字列全体の集合を $S$ とする．
+$s \in S$ に対し，$s$ の空でない prefix であって，
+括弧の対応が取れているものの数を $f(s)$ と書くことにする．
+例えば $f(\verb!&quot;()()()))&quot;!) = 3$,
+$f(\verb!&quot;(()())((&quot;!) = 1$．</p>
+<p>$S$ の要素が $n$ 個与えられる．
+これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の
+最大値を求めよ．</p>
+<p>制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下．
+制限時間3秒．</p>
 <h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
-<p>$x_0 := 0$ として，$y_i := x_{i+1} - x_i$ ($i = 0, \ldots, N-1$) とすると，
-次のように言い換えられる:</p>
+<p>0-index で記述する．
+$\bar{n} := \{0, \ldots, n-1\}$ とする．</p>
+<p>$s \in S$ に対し，現れる <code>(</code> の数から <code>)</code> の数を引いたものを $g(s)$ と書く．
+$s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を
+$L$ と書く．$D := S \setminus L$．</p>
+<p>$x \subseteq \bar{n}$ に対し，
+$\{ s_i \mid i \in x \}$ を並び替えて連結して得られる文字列
+の集合を $P(x)$ と書く．
+$P(x)$ の要素 $s$ について，$g(s)$ の値は全て等しい．この値を $b(x)$ と書く．
+$\newcommand{\live}{\text{live}}\newcommand{\dead}{\text{dead}}$</p>
 <ul>
-<li>求める最大値: $\sum_{i = 0}^{N-1} B_i y_i$．
-ただし，$B_i := \sum_{j = i + 1}^{N} A_j$．</li>
-<li>満たすべき条件:
+<li>$\live[ x ] := \max \{ f(s) \mid s \in P(x) \cap L \}$</li>
+<li>$\dead[ x ] := \max \{ f(s) \mid s \in P(x) \cap D \}$</li>
+</ul>
+<p>ただし，$\max \varnothing = -\infty$．</p>
+<p>すると，求める値は $\max( \text{live}[\bar{n}], \text{dead}[\bar{n}] )$
+である．</p>
+<p>これをDPで求める．初期化:</p>
 <ul>
-<li>$y_i \geq 0$</li>
-<li>$y_0 + \cdots + y_{N-1} \leq M$</li>
-<li>$N \cdot y_0 + (N-1) \cdot y_1 + \cdots + 1\cdot y_{N-1} = S$</li>
+<li>$\live[ \varnothing ] = 0$</li>
+<li>$\dead[ \varnothing ] = -\infty$</li>
 </ul>
-</li>
-</ul>
-<p>さらに，$z_i := (N - i)\cdot y_i$ とすると，
-次のように言い換えられる:</p>
+<p>遷移は次のようになる．</p>
 <ul>
-<li>求める最大値: $\sum_{i = 0}^{N-1} C_i z_i$．
-ただし，$C_i := B_i / (N - i)$．</li>
-<li>満たすべき条件:
-<ul>
-<li>$z_i \geq 0$</li>
-<li>$\displaystyle\frac{z_0}{N} + \displaystyle\frac{z_1}{N - 1} + \cdots +
-\displaystyle\frac{z_{N-1}}{1} \leq M$</li>
-<li>$z_0 + z_1 + \cdots + z_{N-1} = S$</li>
+<li>$\text{updMax}(\dead[ x \cup \{k\} ], \dead[ x ])$</li>
+<li>$b(x) + g(s_k) &lt; 0$ のとき，
+$\text{updMax}(\dead[x \cup \{k\} ], \live[ x ] + h(s_k, b(x)))$</li>
+<li>$b(x) + g(s_k) \geq 0$ のとき，
+$\text{updMax}(\live[x \cup \{k\} ], \live[ x ] + h(s_k, b(x)))$</li>
 </ul>
-</li>
-</ul>
-<p>$C_i$ たちの最大値を与える $i$ を $I$ と書く (複数あったら
-一番小さいものを取る)．
-もし，$\displaystyle\frac{S}{N - I} \leq M$ であれば，
-$z_I = S$, $z_i = 0 \;(i \neq I)$ とすることで，最大値が実現できる．
-以下，そうでないとする．</p>
-<p>最大値を与える $(x_i)$ を取り，対応する $(y_i)$, $(z_i)$ を取る．
-もし，$i &gt; I$ かつ $z_i &gt; 0$ なる
-$i$ があったとすると，$z_{I}$ を $z_i$ だけ増やして，$z_i$ を $0$ に変えると，
-条件を満たしたまま，値が増加してしまう．したがって，
-$i &gt; I$ ならば $z_i = 0$．すなわち，
-$x_{I + 1} = x_{I + 2} = \cdots x_{N}$ である．</p>
-<p>ここで，$x_{I + 1} &lt; M$ だと仮定する．
-$x_1 + \cdots x_I = S - (x_{I + 1} + \cdots x_N)
-= S - (N - I) x_{I + 1} &gt; (N - I) (M - x_{I + 1}) &gt; 0$
-であるので，$0 = x_{i-1} &lt; x_i$ となる $i \leq I$ が存在する．
-小さな $\varepsilon &gt; 0$ をとって，$x_i$ を $\varepsilon$ 減らし，
-$x_{I+1}$ を $\varepsilon$ 増やすことによって，条件を満たしたまま
-値を大きくすることができてしまう．したがって，$x_{I+1} = M$ で
-なければならない．</p>
-<p>以上により，もとの問題は，次の2条件を満たす列において，
-$\sum_{i = 1}^{I} A_i x_i$ の最大値を求める問題に帰着された．</p>
-<ul>
-<li>$0 \leq x_1 \leq x_2 \leq \cdots \leq x_I \leq M$</li>
-<li>$x_1 + x_2 + \cdots + x_I = S - M(N - I)$</li>
-</ul>
-<p>これを繰り返せば良い．計算量は $O(N^2)$．</p>
-<h2 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h2>
-<p><a href="https://atcoder.jp/contests/arc128/submissions/26866202" target="_blank">提出</a>
+<p>ここで，$h(s, b)$ は，$s$ において $g(i) = -b$ かつ すべての
+$j &lt; i$ に対して $g(j) \geq -b$ であるような $i$ の数であり，
+これらは前計算で求めておくことができる．</p>
+<p>計算量は $O(n2^n)$</p>
+<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
+<p><a href="https://codeforces.com/contest/1598/submission/157580538" target="_blank">ACコード</a>
 </p>
 
 
@@ -307,15 +295,10 @@ $\sum_{i = 1}^{I} A_i x_i$ の最大値を求める問題に帰着された．</
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>ABC225 参加記</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">
     <span class="title">Next Page »</span>
     <br>
-    <span>ABC224 参加記</span>
+    <span>Differ by K bits - Atcoder Regular Contest 138 D</span>
   </a>
 </nav>
 
@@ -324,7 +307,7 @@ $\sum_{i = 1}^{I} A_i x_i$ の最大値を求める問題に帰着された．</
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2021/10-29-arc128c-max-dot/" data-title="Max Dot -- AtCoder Regular Contest 128 C">
+<section id="isso-thread" data-isso-id="/blog/posts/2022/05-19-ecf-115-f-rbs/" data-title="RBS - Educational Codeforces Round 115 F">
 </section>
 
 <p>Links to Recent Posts:

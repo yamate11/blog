@@ -6,7 +6,21 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Apr 2022 08:22:15 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 May 2022 00:12:09 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RBS - Educational Codeforces Round 115 F</title>
+      <link>https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/</link>
+      <pubDate>Thu, 19 May 2022 00:12:09 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/</guid>
+      <description>Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
+問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&amp;quot;()()()))&amp;quot;!) = 3$, $f(\verb!&amp;quot;(()())((&amp;quot;!) = 1$．
+$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
+制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
+解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
+$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &amp;lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．</description>
+    </item>
+    
     <item>
       <title>Differ by K bits - Atcoder Regular Contest 138 D</title>
       <link>https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/</link>
