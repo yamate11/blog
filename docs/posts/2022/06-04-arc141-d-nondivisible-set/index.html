@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Zobrist Hash | yamate11のブログ</title>
-<meta name="keywords" content="ハッシュ" />
-<meta name="description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．">
+<title>Non-divisible Set - Atcoder Regular Contest 141 D | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="解説ACです">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -46,16 +46,16 @@
 
 
 
-<meta property="og:title" content="Zobrist Hash" />
-<meta property="og:description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．" />
+<meta property="og:title" content="Non-divisible Set - Atcoder Regular Contest 141 D" />
+<meta property="og:description" content="解説ACです" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-13T11:32:14&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-13T11:32:14&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-04T18:12:34&#43;09:00" />
+<meta property="article:modified_time" content="2022-06-04T18:12:34&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Zobrist Hash"/>
-<meta name="twitter:description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．"/>
+<meta name="twitter:title" content="Non-divisible Set - Atcoder Regular Contest 141 D"/>
+<meta name="twitter:description" content="解説ACです"/>
 
 
 <script type="application/ld+json">
@@ -72,8 +72,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Zobrist Hash",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"
+      "name": "Non-divisible Set - Atcoder Regular Contest 141 D",
+      "item": "https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/"
     }
   ]
 }
@@ -82,24 +82,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Zobrist Hash",
-  "name": "Zobrist Hash",
-  "description": "ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．",
+  "headline": "Non-divisible Set - Atcoder Regular Contest 141 D",
+  "name": "Non-divisible Set - Atcoder Regular Contest 141 D",
+  "description": "解説ACです",
   "keywords": [
-    "ハッシュ"
+    
   ],
-  "articleBody": "ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．\nネタ元 Wikipedia Zobrist Hash とは 以下では，ビットごとの XOR を $\\oplus$ と書く．\n固定された有限集合 $S$ の部分集合 に対するハッシュ． $R$ を2冪の大きな数 (たとえば $2^{63}$) として， あらかじめ各 $x \\in S$ に対して区間$[0, R)$ から一様乱数により $r(x)$ を選んでおく． $X \\subseteq S$のハッシュ値 を，$h(X) := \\bigoplus \\{ r(x) \\mid x \\in X\\}$ で定める．\n性質  $h(Y) = h(X) \\oplus h(X \\setminus Y) \\oplus h(Y \\setminus X)$．  したがって，$h(X)$ がわかっていれば， $h(X \\cup \\{x\\})$ や，$h(X \\setminus \\{x\\})$ を $O(1)$ で計算できる．   衝突確率．$X, Y \\subseteq S$, $X \\neq Y$, $\\{d_1, d_2, \\ldots, d_k\\} := (X \\setminus Y) \\cup (Y \\setminus X)$ とする．衝突する条件は，$r(d_1) = \\bigoplus \\{ r(d_j) \\mid j = 2, \\ldots, k \\}$ であるから，この確率は $1/R$ である．  使用例 ABC238 G - Cubic? ",
-  "wordCount" : "110",
+  "articleBody": "AtCoder Regular Contest 141 - ARC 141 D - Non-divisible Set の解法です．解説ACです．\n問題概要 問題へのリンク $1 \\leq M \\leq N \\leq 2M$ であるような整数$N, M$ と， 整数の集合 $S = \\{ A_1, \\ldots, A_N \\}$ が与えられる． ここで，$1 \\leq A_1 制約: $M \\leq 3\\times 10^5$\n解法 公式解説 そのままです．\n$S$ の要素を，$M$ 個のグループ $G_1, \\ldots, G_M$ に分ける: $x \\in S$ に対して $x = 2^k y, \\quad y = 2j - 1$ と書いたときに，$x$ は $G_j$ に属することとする． $1 \\leq j \\leq M$ となることに注意．\n題意を満たす部分集合としては，各グループから要素を1つずつ選んでこなければならない． 同じグループに属する2つの数は倍数の関係にあり，グループは全部で$M$個だからである． さらに，$j l$ となることである．\nそこで，各グループ$G_j$で，使える最小の値 $L[j]$ と最大の値 $U[j]$ を，次のように定義する．\n$$ L[j] = \\begin{cases} \\min G_j \u0026 3(2j - 1) \\geq 2M \\text{の時} \\\\ \\min \\{ 2^k(2j - 1) \\in G_j \\mid k  k_0 \\} \u0026 \\text{ow} \\\\ \\end{cases} $$\n$$ U[j] = \\begin{cases} \\max G_j \u0026 j = 1 \\text{の時} \\\\ \\max \\{ 2^k(2j - 1) \\in G_j \\mid k ここに，$k_0 := \\max \\{ L[i] \\mid j $2^k(2j - 1) \\in G_j$ を含む部分集合が存在する条件は，$L[j] \\leq k \\leq U[j]$ となることである．\n実装 ACコード ",
+  "wordCount" : "251",
   "inLanguage": "en",
-  "datePublished": "2022-02-13T11:32:14+09:00",
-  "dateModified": "2022-02-13T11:32:14+09:00",
+  "datePublished": "2022-06-04T18:12:34+09:00",
+  "dateModified": "2022-06-04T18:12:34+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"
+    "@id": "https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/"
   },
   "publisher": {
     "@type": "Organization",
@@ -214,53 +214,63 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Zobrist Hash
+      Non-divisible Set - Atcoder Regular Contest 141 D
     </h1>
-    <div class="post-meta">2022-02-13&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-06-04&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．</p>
-<h2 id="ネタ元">ネタ元<a hidden class="anchor" aria-hidden="true" href="#ネタ元">#</a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Zobrist_hashing" target="_blank">Wikipedia</a>
+  <div class="post-content"><p>AtCoder Regular Contest 141 - ARC 141 D - Non-divisible Set の解法です．解説ACです．</p>
+<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc141/tasks/arc141_d" target="_blank">問題へのリンク</a>
 </p>
-<h2 id="zobrist-hash-とは">Zobrist Hash とは<a hidden class="anchor" aria-hidden="true" href="#zobrist-hash-とは">#</a></h2>
-<p>以下では，ビットごとの XOR を $\oplus$ と書く．</p>
-<p>固定された有限集合 $S$ の部分集合 に対するハッシュ．
-$R$ を2冪の大きな数 (たとえば $2^{63}$) として，
-あらかじめ各 $x \in S$ に対して区間$[0, R)$ から一様乱数により $r(x)$ を選んでおく．
-$X \subseteq S$のハッシュ値 を，$h(X) := \bigoplus \{ r(x) \mid x \in X\}$
-で定める．</p>
-<h2 id="性質">性質<a hidden class="anchor" aria-hidden="true" href="#性質">#</a></h2>
-<ul>
-<li>$h(Y) = h(X) \oplus h(X \setminus Y) \oplus h(Y \setminus X)$．
-<ul>
-<li>したがって，$h(X)$ がわかっていれば，
-$h(X \cup \{x\})$ や，$h(X \setminus \{x\})$ を $O(1)$ で計算できる．</li>
-</ul>
-</li>
-<li>衝突確率．$X, Y \subseteq S$, $X \neq Y$, $\{d_1, d_2, \ldots, d_k\} := (X \setminus Y) \cup (Y \setminus X)$ とする．衝突する条件は，$r(d_1) = \bigoplus \{ r(d_j) \mid j = 2, \ldots, k \}$ であるから，この確率は $1/R$ である．</li>
-</ul>
-<h2 id="使用例">使用例<a hidden class="anchor" aria-hidden="true" href="#使用例">#</a></h2>
-<p><a href="../02-13-abc238-g-cubic/">ABC238 G - Cubic?</a>
+<p>$1 \leq M \leq N \leq 2M$ であるような整数$N, M$ と，
+整数の集合 $S = \{ A_1, \ldots, A_N \}$ が与えられる．
+ここで，$1 \leq A_1 &lt; \cdots &lt; A_N \leq 2M$ である．
+各 $i = 1, 2, \ldots, N$ に対して，$A_i$を含む要素数$M$の$S$の部分集合$T$で，
+任意の$a, b \in T$ ($a \neq b$) に対して $b$ が $a$ の倍数でないものが存在するかどうか，判定せよ．</p>
+<p>制約: $M \leq 3\times 10^5$</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc141/editorial/4015" target="_blank">公式解説</a>
+ そのままです．</p>
+<p>$S$ の要素を，$M$ 個のグループ $G_1, \ldots, G_M$ に分ける:
+$x \in S$ に対して $x = 2^k y, \quad y = 2j - 1$ と書いたときに，$x$ は $G_j$ に属することとする．
+$1 \leq j \leq M$ となることに注意．</p>
+<p>題意を満たす部分集合としては，各グループから要素を1つずつ選んでこなければならない．
+同じグループに属する2つの数は倍数の関係にあり，グループは全部で$M$個だからである．
+さらに，$j &lt; i$ のときに，
+$2^k(2j - 1) \in G_j$ と $2^l(2i - 1) \in G_i$ が同時にに部分集合に属することができる条件は，
+$2i - 1$ が $2j - 1$ の倍数でないか，$k &gt; l$ となることである．</p>
+<p>そこで，各グループ$G_j$で，使える最小の値 $L[j]$ と最大の値 $U[j]$ を，次のように定義する．</p>
+<p>$$
+L[j] =
+\begin{cases}
+\min G_j &amp; 3(2j - 1) \geq 2M \text{の時} \\
+\min \{ 2^k(2j - 1) \in G_j \mid k &gt; k_0 \} &amp; \text{ow} \\
+\end{cases}
+$$</p>
+<p>$$
+U[j] =
+\begin{cases}
+\max G_j &amp; j = 1 \text{の時} \\
+\max \{ 2^k(2j - 1) \in G_j \mid k &lt; k_1 \} &amp; \text{ow} \\
+\end{cases}
+$$</p>
+<p>ここに，$k_0 := \max \{ L[i] \mid j &lt; i &lt; M, \quad 2i - 1 は 2j - 1 の倍数 \}$，
+$k_1 := \min \{ U[i] \mid 1 \leq i &lt; j, \quad 2i - 1 は 2j - 1 の約数 \}$．</p>
+<p>$2^k(2j - 1) \in G_j$ を含む部分集合が存在する条件は，$L[j] \leq k \leq U[j]$ となることである．</p>
+<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc141/submissions/32194628" target="_blank">ACコード</a>
 </p>
 
 
   </div>
 
   <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://yamate11.github.io/blog/tags/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5/">ハッシュ</a></li>
-    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>Cubic? - AtCoder Beginner Contest 238 G</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">
     <span class="title">Next Page »</span>
     <br>
-    <span>素因数分解に要する時間</span>
+    <span>Mo&#39;s algorithm メモ</span>
   </a>
 </nav>
 
@@ -269,7 +279,7 @@ $h(X \cup \{x\})$ や，$h(X \setminus \{x\})$ を $O(1)$ で計算できる．<
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-13-zobrist-hash/" data-title="Zobrist Hash">
+<section id="isso-thread" data-isso-id="/blog/posts/2022/06-04-arc141-d-nondivisible-set/" data-title="Non-divisible Set - Atcoder Regular Contest 141 D">
 </section>
 
 <p>Links to Recent Posts:
