@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>インタラクティブな問題に対するソーススケルトン | yamate11のブログ</title>
+<meta name="keywords" content="interactive" />
+<meta name="description" content="インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．
+先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．
+ということで，軽く実行できるようにしたい．
+ポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．
+典型的な実装はこんな感じ．二分探索数当てゲームを想定．
+bool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); }  ll ask_i(ll x) {  cout &lt;&lt; &#34;?">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/" />
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.94.2" />
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="インタラクティブな問題に対するソーススケルトン" />
+<meta property="og:description" content="インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．
+先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．
+ということで，軽く実行できるようにしたい．
+ポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．
+典型的な実装はこんな感じ．二分探索数当てゲームを想定．
+bool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); }  ll ask_i(ll x) {  cout &lt;&lt; &#34;?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-07T16:15:45&#43;09:00" />
+<meta property="article:modified_time" content="2022-08-07T16:15:45&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="インタラクティブな問題に対するソーススケルトン"/>
+<meta name="twitter:description" content="インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．
+先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．
+ということで，軽く実行できるようにしたい．
+ポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．
+典型的な実装はこんな感じ．二分探索数当てゲームを想定．
+bool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); }  ll ask_i(ll x) {  cout &lt;&lt; &#34;?"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "インタラクティブな問題に対するソーススケルトン",
+      "item": "https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "インタラクティブな問題に対するソーススケルトン",
+  "name": "インタラクティブな問題に対するソーススケルトン",
+  "description": "インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．\n先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．\nということで，軽く実行できるようにしたい．\nポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．\n典型的な実装はこんな感じ．二分探索数当てゲームを想定．\nbool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); }  ll ask_i(ll x) {  cout \u0026lt;\u0026lt; \u0026#34;?",
+  "keywords": [
+    "interactive"
+  ],
+  "articleBody": "インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．\n先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．\nということで，軽く実行できるようにしたい．\nポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．\n典型的な実装はこんな感じ．二分探索数当てゲームを想定．\nbool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); }  ll ask_i(ll x) {  cout  \"? \"  x  endl;  string s; cin  s;  if (s == \"SMALL\") return -1;  else if (s == \"LARGE\") return 1;  else if (s == \"EQUAL\") return 0;  else assert(0); }  void answer_i(ll x) {  cout  \"! \"  x  endl; } #endif solve() 関数では，初期入力を受け取ったのち，ask() と answer() を 使って解を組み立てる．\nll L, R; void solve() {  cin  L  R;  if (judge) read_judge();   ll lo = L, hi = R;  while (true) {  ll mid = (lo + hi) / 2;  ll resp = ask(mid);  if (resp == 0) { answer(mid); return; }  else if (resp  0) { lo = mid; }  else { hi = mid; }  } } 自動テストに関して．本来の入力の後に問題情報を， 渡すようにするので，それを読む関数 read_judge() を，適切な位置に 置いておく(上の solve() 関数参照)．\nvoid read_judge() {  cin  expected; } 自動テストでは，ask() 関数と answer() 関数を差し替えて， 自動テストに適した形にする．つまり，ask() は，追加情報を参照して， 適切な答を作成して返す．また，answer() は，不正解の場合には 異常終了するようにする．\nll ask_judge(ll x) {  if (x  expected) return -1;  else if (x == expected) return 0;  else return 1; }  void answer_judge(ll x) {  if (x == expected) return;  else exit(1); } 自動テストのときには，./cans の引数に judge を与えるようにする． int main(int argc, char *argv[]) { // … if (stcmp(argv[1], “judge”) == 0) { judge = true; }\nsolve(); // multiple-question のときには，ここでループ． }\ncmpNaive を使用するときには，コマンドとして cmpNaive -i -e -p './cans judge' のように使う．ソースコードは これ以上書き直す必要は無い (naive関数は不要)．\nたとえば Codeforces R.#449 Ithea Plays with Chtholly のように，先に相手側から質問が来て，こちらはそれに答える，というタイプの ものもある．最後のこちらの答を入力したら， 直ちにプログラムを終了せよ，とか指示される． この場合は，\n 最初の質問までを初期入力と考える． こちらの n 番目の答を ask() で渡して，その戻り値として，相手の n + 1 番目の 質問を得る． こちらの最後の答は answer() で渡す．  というふうにすれば良いであろう．\n",
+  "wordCount" : "304",
+  "inLanguage": "en",
+  "datePublished": "2022-08-07T16:15:45+09:00",
+  "dateModified": "2022-08-07T16:15:45+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      インタラクティブな問題に対するソーススケルトン
+    </h1>
+    <div class="post-meta">2022-08-07&nbsp;·&nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>インタラクティブな問題がたまに出題される．
+特別扱いする必要があるか，ということだが，
+何も考えずに書いてしまうとデバッグが難しい，ということがあるので，
+やはり形式を整えておきたい感じである．</p>
+<p>先日の <a href="https://codeforces.com/contest/1713/problem/D" target="_blank">Codeforces R.812 (Div 2) Tournament Countdown</a>
+ で，TLE というめにあった．
+virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが
+良くなかったのではないかと思う．</p>
+<p>ということで，軽く実行できるようにしたい．</p>
+<p>ポイントとしては，ask() 関数と answer() 関数を用意する．
+これらで，問と答の入出力部分をラップする．
+実装するときには，ask_i() と answer_i() という名前で書く．
+通常はこちらを ask(), answer() として使い，
+自動テストのと期には ask_judge(), answer_judge() に切り替える．</p>
+<p>典型的な実装はこんな感じ．二分探索数当てゲームを想定．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">bool</span> <span style="color:#111">judge</span> <span style="color:#f92672">=</span> <span style="color:#111">false</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#75af00">ask</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">judge</span> <span style="color:#f92672">?</span> <span style="color:#111">ask_judge</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">:</span> <span style="color:#111">ask_i</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">);</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#75af00">answer</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">judge</span><span style="color:#111">)</span> <span style="color:#111">answer_judge</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">);</span> <span style="color:#00a8c8">else</span> <span style="color:#111">answer_i</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">);</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#75af00">ask_i</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;? &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">x</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">string</span> <span style="color:#111">s</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">s</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">s</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;SMALL&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">s</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;LARGE&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">s</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;EQUAL&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span> <span style="color:#111">assert</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#75af00">answer_i</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;! &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">x</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><p>solve() 関数では，初期入力を受け取ったのち，ask() と answer() を
+使って解を組み立てる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">L</span><span style="color:#111">,</span> <span style="color:#111">R</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#75af00">solve</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">L</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">R</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">judge</span><span style="color:#111">)</span> <span style="color:#111">read_judge</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">lo</span> <span style="color:#f92672">=</span> <span style="color:#111">L</span><span style="color:#111">,</span> <span style="color:#111">hi</span> <span style="color:#f92672">=</span> <span style="color:#111">R</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ll</span> <span style="color:#111">mid</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">lo</span> <span style="color:#f92672">+</span> <span style="color:#111">hi</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">ll</span> <span style="color:#111">resp</span> <span style="color:#f92672">=</span> <span style="color:#111">ask</span><span style="color:#111">(</span><span style="color:#111">mid</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">resp</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">answer</span><span style="color:#111">(</span><span style="color:#111">mid</span><span style="color:#111">);</span> <span style="color:#00a8c8">return</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">resp</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">lo</span> <span style="color:#f92672">=</span> <span style="color:#111">mid</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">else</span> <span style="color:#111">{</span> <span style="color:#111">hi</span> <span style="color:#f92672">=</span> <span style="color:#111">mid</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>自動テストに関して．本来の入力の後に問題情報を，
+渡すようにするので，それを読む関数 read_judge() を，適切な位置に
+置いておく(上の solve() 関数参照)．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#75af00">read_judge</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">expected</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>自動テストでは，ask() 関数と answer() 関数を差し替えて，
+自動テストに適した形にする．つまり，ask() は，追加情報を参照して，
+適切な答を作成して返す．また，answer() は，不正解の場合には
+異常終了するようにする．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#75af00">ask_judge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">x</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">expected</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">x</span> <span style="color:#f92672">==</span> <span style="color:#111">expected</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#75af00">answer_judge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">x</span> <span style="color:#f92672">==</span> <span style="color:#111">expected</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">else</span>               <span style="color:#111">exit</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>自動テストのときには，./cans の引数に judge を与えるようにする．
+int main(int argc, char *argv[]) {
+// &hellip;
+if (stcmp(argv[1], &ldquo;judge&rdquo;) == 0) { judge = true; }</p>
+<p>solve();  // multiple-question のときには，ここでループ．
+}</p>
+<p>cmpNaive を使用するときには，コマンドとして
+<code>cmpNaive -i -e -p './cans judge'</code> のように使う．ソースコードは
+これ以上書き直す必要は無い (naive関数は不要)．</p>
+<p>たとえば
+<a href="https://codeforces.com/problemset/problem/896/B" target="_blank">Codeforces R.#449 Ithea Plays with Chtholly</a>
+
+のように，先に相手側から質問が来て，こちらはそれに答える，というタイプの
+ものもある．最後のこちらの答を入力したら，
+直ちにプログラムを終了せよ，とか指示される．
+この場合は，</p>
+<ul>
+<li>最初の質問までを初期入力と考える．</li>
+<li>こちらの n 番目の答を ask() で渡して，その戻り値として，相手の n + 1 番目の
+質問を得る．</li>
+<li>こちらの最後の答は answer() で渡す．</li>
+</ul>
+<p>というふうにすれば良いであろう．</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/interactive/">interactive</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>燃やす埋める問題</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2022/08-07-interactive-skelton/" data-title="インタラクティブな問題に対するソーススケルトン">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/">インタラクティブな問題に対するソーススケルトン</a>
+  / <a href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/">燃やす埋める問題</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/">Non-divisible Set - Atcoder Regular Contest 141 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/">RBS - Educational Codeforces Round 115 F</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">Differ by K bits - Atcoder Regular Contest 138 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/">Small Multiple - Atcoder Beginner Contest 077 D</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/">Prefix XORs - AtCoder Regular Contest 137 D</a>
+</p>
+
+
+</article>
+    </main>
+    <footer class="footer">
+  <span>
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+  </span>
+  <br/>
+  <span>
+    <a rel="license"
+       href="http://creativecommons.org/publicdomain/zero/1.0/">
+      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
+           alt="CC0" style="display: inline;" />
+    </a>
+    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
+  </span>
+  <br/>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
