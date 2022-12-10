@@ -78,6 +78,7 @@ $r = 1, 2, 4, 8, \ldots$ に対して格納されている．
 ただし，`DoublingCur<ll>` のように，テンプレートパラメタを明示的に
 与える必要がある．
 
+
 keywords: doubling
 
 
