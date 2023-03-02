@@ -16,9 +16,11 @@ summary: "二項係数に関する公式です．"
 \\\\
 & r\binom{n}{r} = n\binom{n-1}{r-1}
 \\\\
-& \binom{n}{r} + \binom{n}{r + 1} = \binom{n
+& \binom{n}{r} + \binom{n}{r + 1} = \binom{n+1}{r + 1}
 \\\\
 & \sum_{i=r}^{n}\binom{i}{r} = \binom{n+1}{r+1}
+\\\\
+& \sum_{i=0}^{c}\binom{a}{i}\binom{b}{c-i} = \binom{a+b}{c}
 \\\\
 \end{eqnarray}
 
@@ -26,5 +28,7 @@ summary: "二項係数に関する公式です．"
 
 * (1) 二項定理
 * (2) 上で $a = b = 1$
-* (3)  定義に従って展開
-* (5)  Hockey Stick Identity
+* (3) 定義に従って展開
+* (4) パスカルの三角形の作り方
+* (5) Hockey Stick Identity
+* (6) a + b から c をとるとき，a から i とったとすれば，残りは b からとっている．
