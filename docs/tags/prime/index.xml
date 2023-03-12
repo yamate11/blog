@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>prime on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/prime/</link>
+    <description>Recent content in prime on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 12 Mar 2023 09:10:33 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/prime/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>素数以外の mod</title>
+      <link>https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/</link>
+      <pubDate>Sun, 12 Mar 2023 09:10:33 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/</guid>
+      <description>mod ライブラリで素数以外の法に関してできること</description>
+    </item>
+    
+  </channel>
+</rss>
