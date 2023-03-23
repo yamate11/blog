@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "整数・実数の大小比較とfloor, ceil"
-date: "2021-08-20T10:07:00+09:00"
+date: "2023-03-23T18:36:00+09:00"
 date_init: "2021-02-13"
 tags: []
 categories: ["topic"]
@@ -53,6 +53,39 @@ t < d
     &\iff& \bigvee \\{ \lfloor t \rfloor = e \mid e = d - 1, d - 2, \ldots \\} \\\\
     &\iff& \lfloor t \rfloor < d \hspace{20em}
 \end{eqnarray*}
+
+## 追記
+
+(追記: 2023/03/23)
+
+これを使う場面として良くあるのが，正の整数 $a$, $b$, $c$ について
+$ab \leq c$ などであるかどうかを判定したいが，
+$ab$ が long long に収まらないかもしれない，
+というとき．
+$ab \leq c \iff a \leq c/b \iff a \leq \lfloor c/b \rfloor$
+などとして，判定すれば良い．
+
+なお，この目的のためには，GCC の拡張
+__builtin_smulll_overflow も使える (Signed - MULtiplication - Long Long)．
+形式は，
+
+```cpp
+bool __builtin_smulll_overflow(long long a, long long b, long long* res)
+```
+
+で，`a * b` が long long でオーバーフローする時は true が返る．
+オーバーフローしない時には false が返り，`*res` に積が設定される．
+たとえば上記の判定は:
+
+```cpp
+if (long long ab; not __builtin_smulll_overflow(a, b, &ab) and ab <= c) {
+  ...
+}
+```
+
+などと実現できる．
+
+
 
 
 

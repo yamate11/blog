@@ -6,7 +6,18 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 12 Mar 2023 09:10:33 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Mar 2023 18:36:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整数・実数の大小比較とfloor, ceil</title>
+      <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
+      <pubDate>Thu, 23 Mar 2023 18:36:00 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</guid>
+      <description>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
+公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
+ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &amp;lt; t \iff d &amp;lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &amp;lt; d \iff \lfloor t \rfloor &amp;lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;amp;\iff&amp;amp; t \in \{ t \mid d \leq t \} \\ &amp;amp;\iff&amp;amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}</description>
+    </item>
+    
     <item>
       <title>素数以外の mod</title>
       <link>https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/</link>
@@ -539,17 +550,6 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
       
       <guid>https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/</guid>
       <description>C++ での型の変換などのいろいろな変換方法です．</description>
-    </item>
-    
-    <item>
-      <title>整数・実数の大小比較とfloor, ceil</title>
-      <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
-      <pubDate>Fri, 20 Aug 2021 10:07:00 +0900</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</guid>
-      <description>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
-公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
- $d \leq t \iff d \leq \lfloor t \rfloor$ $d &amp;lt; t \iff d &amp;lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &amp;lt; d \iff \lfloor t \rfloor &amp;lt; d$  考え方 \begin{eqnarray*} d\leq t &amp;amp;\iff&amp;amp; t \in \{ t \mid d \leq t \} \\ &amp;amp;\iff&amp;amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}</description>
     </item>
     
     <item>
