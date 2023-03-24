@@ -88,8 +88,8 @@
   "keywords": [
     
   ],
-  "articleBody": "エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．\n問題概要 整数 K が与えられる． 数列 2, 22, 222, 2222, .... に，初めて K の倍数が現れるのは何項目か? 現れなければ -1 と答えよ．T個のケースが与えられる． 制約: T 問題へのリンク 予備知識 フェルマーの小定理  整数 $a$ が素数 $p$ と互いに素ならば， $a^{p - 1} \\equiv 1 \\text{ (mod } p \\text{)}$．\n 証明 $a^p \\equiv a$ を言えば良い．帰納法． $a^p = (a - 1 + 1)^p = (a-1)^p + 1 + \\sum_{r = 1}^{p-1}\\binom{p}{r}(a-1)^r \\equiv (a-1)^p + 1 \\equiv a - 1 + 1 = a$．(終)\nオイラーの$\\varphi$関数 正の整数 $n$ に対し，$n$ と互いに素である $n$ 以下の正の整数の 個数を $\\varphi(n)$ とする．\n命題  $n$ の素因数分解を $\\prod_{k=1}^{d}p_k^{e_k}$ とするとき， $\\varphi(n) = \\prod_{k=1}^{d}(p_k^{e_k} - p_k^{e_k - 1})$\n 証明 素数 $p$ に対して $\\varphi(p^e) = p^e - p^{e-1}$ であることと， $m, n$が互いに素であるとき $\\varphi(mn) = \\varphi(m)\\varphi(n)$ であることを言えば良い．前半は明らか． 後半: $t$ と互いに素である $t$ 以下の正の整数の集合を $P(t)$ とする． $x \\in P(mn)$ に対して $(x \\% m, x \\% n) \\in P(m)\\times P(n)$ を対応させる写像が1対1, onto になる (中国剰余定理)．(終)\nオイラーの定理  $a$ と $n$ が互いに素ならば， $a^{\\varphi(n)} \\equiv 1 \\text{ (mod } n \\text{)}$\n 証明 $X = \\{ ax \\% n \\mid x \\in P(n) \\}$ とすると， $X \\subseteq P(n)$ と $|X| = |P(n)|$ より，$X = P(n)$． したがって，$d := \\prod_{x \\in P(n)} x$ とすれば， $a^{\\varphi(n)} d \\equiv d$．$d$ と $n$ は互いに素なので， $a^{\\varphi(n)} \\equiv 1$．(終)\n解法 数列の第 n 項は，$2 (10^n - 1) / 9$ と書ける． $K$ が奇数のとき，$\\alpha = 9K$，$K$ が偶数の時，$\\alpha = 9K/2$ とすると， $2 (10^n - 1) / 9 \\equiv 0$ (mod $K$) $\\iff 2 (10^n - 1) \\equiv 0$ (mod $9K$) $\\iff 10^n \\equiv 1$ (mod $\\alpha$)．\nここで，$\\alpha$ が 2か5で割り切れる場合には，$10^n$ は mod $\\alpha$ で 1 にはなり得ない． そうでない場合， $10^n \\equiv 1$ となる正の $n$ の最小値を取る． $n = q\\varphi(\\alpha) + r$, $0 \\leq r 計算量は，$\\varphi(\\alpha)$ を求めるために $K$ を素因数分解 するところで，$O(\\sqrt{K})$ と，約数列挙が $O(\\sqrt{K})$ で，合わせて $O(\\sqrt{K})$．\nACコード https://atcoder.jp/contests/abc222/submissions/26539813 keywords: Fermat Fermat’s theorem Euler phi function\n",
-  "wordCount" : "302",
+  "articleBody": "エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．\n問題概要 整数 K が与えられる． 数列 2, 22, 222, 2222, .... に，初めて K の倍数が現れるのは何項目か? 現れなければ -1 と答えよ．T個のケースが与えられる． 制約: T 問題へのリンク 予備知識 フェルマーの小定理  整数 $a$ が素数 $p$ と互いに素ならば， $a^{p - 1} \\equiv 1 \\text{ (mod } p \\text{)}$．\n 証明 $a^p \\equiv a$ を言えば良い．帰納法． $a^p = (a - 1 + 1)^p = (a-1)^p + 1 + \\sum_{r = 1}^{p-1}\\binom{p}{r}(a-1)^r \\equiv (a-1)^p + 1 \\equiv a - 1 + 1 = a$．(終)\nオイラーの$\\varphi$関数 正の整数 $n$ に対し，$n$ と互いに素である $n$ 以下の正の整数の 個数を $\\varphi(n)$ とする．\n命題  $n$ の素因数分解を $\\prod_{k=1}^{d}p_k^{e_k}$ とするとき， $\\varphi(n) = \\prod_{k=1}^{d}(p_k^{e_k} - p_k^{e_k - 1})$\n 証明 素数 $p$ に対して $\\varphi(p^e) = p^e - p^{e-1}$ であることと， $m, n$が互いに素であるとき $\\varphi(mn) = \\varphi(m)\\varphi(n)$ であることを言えば良い．前半は明らか． 後半: $t$ と互いに素である $t$ 以下の正の整数の集合を $P(t)$ とする． $x \\in P(mn)$ に対して $(x \\% m, x \\% n) \\in P(m)\\times P(n)$ を対応させる写像が1対1, onto になる (中国剰余定理)．(終)\nオイラーの定理  $a$ と $n$ が互いに素ならば， $a^{\\varphi(n)} \\equiv 1 \\text{ (mod } n \\text{)}$\n 証明 $X = \\{ ax \\% n \\mid x \\in P(n) \\}$ とすると， $X \\subseteq P(n)$ と $|X| = |P(n)|$ より，$X = P(n)$． したがって，$d := \\prod_{x \\in P(n)} x$ とすれば， $a^{\\varphi(n)} d \\equiv d$．$d$ と $n$ は互いに素なので， $a^{\\varphi(n)} \\equiv 1$．(終)\n解法 数列の第 n 項は，$2 (10^n - 1) / 9$ と書ける． $K$ が奇数のとき，$\\alpha = 9K$，$K$ が偶数の時，$\\alpha = 9K/2$ とすると， $2 (10^n - 1) / 9 \\equiv 0$ (mod $K$) $\\iff 2 (10^n - 1) \\equiv 0$ (mod $9K$) $\\iff 10^n \\equiv 1$ (mod $\\alpha$)．\nここで，$\\alpha$ が 2か5で割り切れる場合には，$10^n$ は mod $\\alpha$ で 1 にはなり得ない． そうでない場合， $10^n \\equiv 1$ となる正の $n$ の最小値を取る． $n = q\\varphi(\\alpha) + r$, $0 \\leq r $\\varphi(\\alpha) = qn + r$, $0 \\leq r ご指摘 くださいました @kumakumaaaaa__ さん，ありがとうございました．)\n計算量は，$\\varphi(\\alpha)$ を求めるために $K$ を素因数分解 するところで，$O(\\sqrt{K})$ と，約数列挙が $O(\\sqrt{K})$ で，合わせて $O(\\sqrt{K})$．\nACコード https://atcoder.jp/contests/abc222/submissions/26539813 keywords: Fermat Fermat’s theorem Euler phi function\n",
+  "wordCount" : "318",
   "inLanguage": "en",
   "datePublished": "2021-10-13T21:25:49+09:00",
   "dateModified": "2021-10-13T21:25:49+09:00",
@@ -273,10 +273,16 @@ $\iff 2 (10^n - 1) \equiv 0$ (mod $9K$) $\iff 10^n \equiv 1$ (mod $\alpha$)．</
 で 1 にはなり得ない．
 そうでない場合，
 $10^n \equiv 1$ となる正の $n$ の最小値を取る．
-$n = q\varphi(\alpha) + r$, $0 \leq r &lt; \varphi(\alpha)$ とすると，
+<del>$n = q\varphi(\alpha) + r$, $0 \leq r &lt; \varphi(\alpha)$</del>
+$\varphi(\alpha) = qn + r$, $0 \leq r &lt; n$
+とすると，
 オイラーの定理より
 $10^r \equiv 1$ となるので，最小性より $r = 0$．
-すなわち，$n$ は $\varphi(\alpha)$ の約数．これを全探索すれば良い．</p>
+すなわち，$n$ は $\varphi(\alpha)$ の約数．これを全探索すれば良い．
+(2023.03.25 追記．間違っていた数式を修正しました．
+<a href="https://twitter.com/kumakumaaaaa__/status/1639151906445750273" target="_blank">ご指摘</a>
+
+くださいました @kumakumaaaaa__ さん，ありがとうございました．)</p>
 <p>計算量は，$\varphi(\alpha)$ を求めるために $K$ を素因数分解
 するところで，$O(\sqrt{K})$ と，約数列挙が $O(\sqrt{K})$ で，合わせて
 $O(\sqrt{K})$．</p>
