@@ -64,7 +64,7 @@ auto f = [&](ll i) -> ll { return i * i % N; };
 auto m = [&](ll i) -> M { return M(i * i * i); };
 
 DoublingFRel d1(R, N, f);
-DoublingCur<M> d2(d1, m);
+DoublingCum<M> d2(d1, m);
 ll r = 12345, i = 54321;
 cout << d2.val(r, i);  // \sum { m( f^{(j)}(i) ) | j = 0, 1, ..., r-1 }
 
