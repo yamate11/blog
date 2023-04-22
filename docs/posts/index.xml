@@ -6,7 +6,16 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 Mar 2023 18:36:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Apr 2023 18:29:42 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>インタラクティブ問題のデバッグ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/</link>
+      <pubDate>Fri, 21 Apr 2023 18:29:42 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/</guid>
+      <description>インタラクティブ問題のデバッグ方法</description>
+    </item>
+    
     <item>
       <title>整数・実数の大小比較とfloor, ceil</title>
       <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
