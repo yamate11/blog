@@ -6,7 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 21 Apr 2023 18:29:42 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Apr 2023 00:18:06 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ネストした vector の順序と性能</title>
+      <link>https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/</link>
+      <pubDate>Wed, 26 Apr 2023 00:18:06 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/</guid>
+      <description>ネストしたベクトルは，添字を並べる順序で性能が変わるが，どのように並べれば良いかはよくわからない．</description>
+    </item>
+    
     <item>
       <title>インタラクティブ問題のデバッグ</title>
       <link>https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/</link>
