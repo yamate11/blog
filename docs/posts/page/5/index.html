@@ -175,6 +175,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</h2>
+  </header>
+  <section class="entry-content">
+    <p>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….
+問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)
+ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
+ dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
+ 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
+ dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．...</p>
+  </section>
+  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to イベント巡り (Event Hopping) - JOI 2020/2021 二次予選" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Stroll - Atcoder Beginner Contest 213 H</h2>
   </header>
   <section class="entry-content">
@@ -326,6 +342,7 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
 <br/>
 <p>
 Links:
+/ <a href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/">イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/">Stroll - Atcoder Beginner Contest 213 H</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/">距離: BFSとダイクストラ</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/">Greedy Ant - キーエンスプログラミングコンテスト2021 E</a>

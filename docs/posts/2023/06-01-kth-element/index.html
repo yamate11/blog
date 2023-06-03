@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Zobrist Hash | yamate11のブログ</title>
-<meta name="keywords" content="ハッシュ" />
-<meta name="description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．">
+<title>K番目... | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="K番目の要素の二分探索による求め方と，ベクトルのt付近の要素">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -46,16 +46,16 @@
 
 
 
-<meta property="og:title" content="Zobrist Hash" />
-<meta property="og:description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．" />
+<meta property="og:title" content="K番目..." />
+<meta property="og:description" content="K番目の要素の二分探索による求め方と，ベクトルのt付近の要素" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-13T11:32:14&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-13T11:32:14&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-01T09:47:15&#43;09:00" />
+<meta property="article:modified_time" content="2023-06-01T09:47:15&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Zobrist Hash"/>
-<meta name="twitter:description" content="ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．"/>
+<meta name="twitter:title" content="K番目..."/>
+<meta name="twitter:description" content="K番目の要素の二分探索による求め方と，ベクトルのt付近の要素"/>
 
 
 <script type="application/ld+json">
@@ -72,8 +72,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Zobrist Hash",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"
+      "name": "K番目...",
+      "item": "https://yamate11.github.io/blog/posts/2023/06-01-kth-element/"
     }
   ]
 }
@@ -82,24 +82,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Zobrist Hash",
-  "name": "Zobrist Hash",
-  "description": "ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．",
+  "headline": "K番目...",
+  "name": "K番目...",
+  "description": "K番目の要素の二分探索による求め方と，ベクトルのt付近の要素",
   "keywords": [
-    "ハッシュ"
+    
   ],
-  "articleBody": "ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．\nネタ元 Wikipedia Zobrist Hash とは 以下では，ビットごとの XOR を $\\oplus$ と書く．\n固定された有限集合 $S$ の部分集合 に対するハッシュ． $R$ を2冪の大きな数 (たとえば $2^{63}$) として， あらかじめ各 $x \\in S$ に対して区間$[0, R)$ から一様乱数により $r(x)$ を選んでおく． $X \\subseteq S$のハッシュ値 を，$h(X) := \\bigoplus \\{ r(x) \\mid x \\in X\\}$ で定める．\n性質  $h(Y) = h(X) \\oplus h(X \\setminus Y) \\oplus h(Y \\setminus X)$．  したがって，$h(X)$ がわかっていれば， $h(X \\cup \\{x\\})$ や，$h(X \\setminus \\{x\\})$ を $O(1)$ で計算できる．   衝突確率．$X, Y \\subseteq S$, $X \\neq Y$, $\\{d_1, d_2, \\ldots, d_k\\} := (X \\setminus Y) \\cup (Y \\setminus X)$ とする．衝突する条件は，$r(d_1) = \\bigoplus \\{ r(d_j) \\mid j = 2, \\ldots, k \\}$ であるから，この確率は $1/R$ である．  使用例 ABC238 G - Cubic? ",
-  "wordCount" : "110",
+  "articleBody": "K 番目の要素 (non explicit) explicit ではない集合 $X$ の，小さい方から $K$ 番目の要素を，二分探索で求める． ただし，$1 \\leq K \\leq |X|$ とする．\n$K$ 番目の要素は， 「$X_i \\leq t$ となる $i$ が $K$ 個以上となる最小の $t$」であるから， $\\text{binsearch}(\\lambda t.\\; | \\{i : X_i \\leq t \\} | \\geq K, \\max(X), \\min(X) - 1)$ で求められる．\nauto check = [\u0026](ll t) - bool {  return \"the number of i such that X[i] = t\"; }; ll ans = binsearch_ill(check, \"max of X\", \"min of X\" - 1); 言い換えると， 「$X_i auto check = [\u0026](ll t) - bool {  return \"the number of i such that X[i] ; }; ll ans = binsearch_ill(check, \"min of X\", \"max of X\" + 1); ベクトル v の t 付近の要素 $v$ の要素は整数型とする．\n基本は次のこと:\n $v_i lower_bound(ALL(v), t) - v.begin() である．\n $v_i \\leq t$ については，$v_i t$ や $v_i \\geq t$ については，$|v|$ から引けば良い．\nまた，添字の値については次の通り．\n $v_i $v_i \\leq t$ となる最大の $i$ の値も同様． $v_i  t$ となる最小の $i$ の値は，もちろん， upper_bound(ALL(v)) - v.begin() である． $v_i \\geq t$ となる最小の $i$ の値は，もちろん， lower_bound(ALL(v)) - v.begin() である．  keywords: k-th element, binary search, lower_bound, upper_bound\n",
+  "wordCount" : "216",
   "inLanguage": "en",
-  "datePublished": "2022-02-13T11:32:14+09:00",
-  "dateModified": "2022-02-13T11:32:14+09:00",
+  "datePublished": "2023-06-01T09:47:15+09:00",
+  "dateModified": "2023-06-01T09:47:15+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"
+    "@id": "https://yamate11.github.io/blog/posts/2023/06-01-kth-element/"
   },
   "publisher": {
     "@type": "Organization",
@@ -214,53 +214,62 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Zobrist Hash
+      K番目...
     </h1>
-    <div class="post-meta">2022-02-13&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-06-01&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．</p>
-<h2 id="ネタ元">ネタ元<a hidden class="anchor" aria-hidden="true" href="#ネタ元">#</a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Zobrist_hashing" target="_blank">Wikipedia</a>
-</p>
-<h2 id="zobrist-hash-とは">Zobrist Hash とは<a hidden class="anchor" aria-hidden="true" href="#zobrist-hash-とは">#</a></h2>
-<p>以下では，ビットごとの XOR を $\oplus$ と書く．</p>
-<p>固定された有限集合 $S$ の部分集合 に対するハッシュ．
-$R$ を2冪の大きな数 (たとえば $2^{63}$) として，
-あらかじめ各 $x \in S$ に対して区間$[0, R)$ から一様乱数により $r(x)$ を選んでおく．
-$X \subseteq S$のハッシュ値 を，$h(X) := \bigoplus \{ r(x) \mid x \in X\}$
-で定める．</p>
-<h2 id="性質">性質<a hidden class="anchor" aria-hidden="true" href="#性質">#</a></h2>
+  <div class="post-content"><h2 id="k-番目の要素-non-explicit">K 番目の要素 (non explicit)<a hidden class="anchor" aria-hidden="true" href="#k-番目の要素-non-explicit">#</a></h2>
+<p>explicit ではない集合 $X$ の，小さい方から $K$ 番目の要素を，二分探索で求める．
+ただし，$1 \leq K \leq |X|$ とする．</p>
+<p>$K$ 番目の要素は，
+「$X_i \leq t$ となる $i$ が $K$ 個以上となる最小の $t$」であるから，
+$\text{binsearch}(\lambda t.\; | \{i : X_i \leq t \} | \geq K,
+\max(X), \min(X) - 1)$
+で求められる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">t</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;the number of i such that X[i] &gt;= t&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#111">binsearch_i</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;max of X&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;min of X&#34;</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>言い換えると，
+「$X_i &lt; t$ となる $i$ が $K$ 個未満となる最大の $t$」でもあるから，
+$\text{binsearch}(\lambda t.\; | \{i : X_i &lt; t \} | &lt; K,
+\min(X), \max(X) + 1)$
+でも求められる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">t</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;the number of i such that X[i] &lt; t&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#111">binsearch_i</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;min of X&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;max of X&#34;</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h2 id="ベクトル-v-の-t-付近の要素">ベクトル v の t 付近の要素<a hidden class="anchor" aria-hidden="true" href="#ベクトル-v-の-t-付近の要素">#</a></h2>
+<p>$v$ の要素は整数型とする．</p>
+<p>基本は次のこと:</p>
+<blockquote>
+<p>$v_i &lt; t$ となる $i$ の個数は，
+<code>lower_bound(ALL(v), t) - v.begin()</code> である．</p>
+</blockquote>
+<p>$v_i \leq t$ については，$v_i &lt; t + 1$ と言い換えれば良いし，
+$v_i &gt; t$ や $v_i \geq t$ については，$|v|$ から引けば良い．</p>
+<p>また，添字の値については次の通り．</p>
 <ul>
-<li>$h(Y) = h(X) \oplus h(X \setminus Y) \oplus h(Y \setminus X)$．
-<ul>
-<li>したがって，$h(X)$ がわかっていれば，
-$h(X \cup \{x\})$ や，$h(X \setminus \{x\})$ を $O(1)$ で計算できる．</li>
+<li>$v_i &lt; t$ となる最大の $i$ の値は，(上の個数 - 1) である．
+存在しない場合には当然 -1 になる．</li>
+<li>$v_i \leq t$ となる最大の $i$ の値も同様．</li>
+<li>$v_i &gt; t$ となる最小の $i$ の値は，もちろん，
+<code>upper_bound(ALL(v)) - v.begin()</code> である．</li>
+<li>$v_i \geq t$ となる最小の $i$ の値は，もちろん，
+<code>lower_bound(ALL(v)) - v.begin()</code> である．</li>
 </ul>
-</li>
-<li>衝突確率．$X, Y \subseteq S$, $X \neq Y$, $\{d_1, d_2, \ldots, d_k\} := (X \setminus Y) \cup (Y \setminus X)$ とする．衝突する条件は，$r(d_1) = \bigoplus \{ r(d_j) \mid j = 2, \ldots, k \}$ であるから，この確率は $1/R$ である．</li>
-</ul>
-<h2 id="使用例">使用例<a hidden class="anchor" aria-hidden="true" href="#使用例">#</a></h2>
-<p><a href="../02-13-abc238-g-cubic/">ABC238 G - Cubic?</a>
-</p>
+<p>keywords: k-th element, binary search, lower_bound, upper_bound</p>
 
 
   </div>
 
   <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://yamate11.github.io/blog/tags/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5/">ハッシュ</a></li>
-    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>Cubic? - AtCoder Beginner Contest 238 G</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/">
     <span class="title">Next Page »</span>
     <br>
-    <span>素因数分解に要する時間</span>
+    <span>ネストした vector の順序と性能</span>
   </a>
 </nav>
 
@@ -269,7 +278,7 @@ $h(X \cup \{x\})$ や，$h(X \setminus \{x\})$ を $O(1)$ で計算できる．<
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-13-zobrist-hash/" data-title="Zobrist Hash">
+<section id="isso-thread" data-isso-id="/blog/posts/2023/06-01-kth-element/" data-title="K番目...">
 </section>
 
 <p>Links to Recent Posts:
