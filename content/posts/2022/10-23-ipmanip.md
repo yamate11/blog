@@ -19,6 +19,8 @@ categories: ["topic"]
     * 16進にする
 * dec
     * 10進にする
+* fixed
+    * 固定小数点表示にする
     
 
 
