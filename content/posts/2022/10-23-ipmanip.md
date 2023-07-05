@@ -21,6 +21,7 @@ categories: ["topic"]
     * 10進にする
 * fixed
     * 固定小数点表示にする
-    
+* scientific
+    * 浮動小数点表示にする
 
 
