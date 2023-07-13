@@ -9,7 +9,14 @@
 <meta name="keywords" content="" />
 <meta name="description" content="デバッグに失敗した，ないし，長時間かかった間違いの記録
 ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
-無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．">
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+ 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
@@ -51,17 +58,31 @@ ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
 <meta property="og:title" content="誤りの記録" />
 <meta property="og:description" content="デバッグに失敗した，ないし，長時間かかった間違いの記録
 ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
-無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．" />
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+ 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-07-05T09:03:15&#43;09:00" />
-<meta property="article:modified_time" content="2023-07-05T09:03:15&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-07-10T00:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2023-07-10T00:00:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="誤りの記録"/>
 <meta name="twitter:description" content="デバッグに失敗した，ないし，長時間かかった間違いの記録
 ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
-無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．"/>
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+ 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  "/>
 
 
 <script type="application/ld+json">
@@ -90,15 +111,15 @@ ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
   "@type": "BlogPosting",
   "headline": "誤りの記録",
   "name": "誤りの記録",
-  "description": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．",
+  "description": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ",
   "keywords": [
     
   ],
-  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\n",
-  "wordCount" : "32",
+  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ",
+  "wordCount" : "65",
   "inLanguage": "en",
-  "datePublished": "2023-07-05T09:03:15+09:00",
-  "dateModified": "2023-07-05T09:03:15+09:00",
+  "datePublished": "2023-07-10T00:00:00+09:00",
+  "dateModified": "2023-07-10T00:00:00+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -222,7 +243,7 @@ ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
     <h1 class="post-title">
       誤りの記録
     </h1>
-    <div class="post-meta">2023-07-05&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-07-10&nbsp;·&nbsp;2023-07-05T09:03:15+09:00 (初版)&nbsp;·&nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>デバッグに失敗した，ないし，長時間かかった間違いの記録</p>
@@ -236,6 +257,20 @@ dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) と�
 全体から 除いた辺の分を引く．
 $(u, v)$ と $(v, u)$ の両方を引かなければならないところ，
 $(u, v)$ しか引かなかった．</p>
+<h3 id="abc279f-box">ABC279F BOX<a hidden class="anchor" aria-hidden="true" href="#abc279f-box">#</a></h3>
+<p>2023/07/05 あさかつ</p>
+<p>タイプミス</p>
+<p>正:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">rx</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#111">and</span> <span style="color:#111">ry</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span></code></pre></div><p>誤:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">rx</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#111">and</span> <span style="color:#111">ry</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span></code></pre></div><h3 id="arc164b">ARC164B<a hidden class="anchor" aria-hidden="true" href="#arc164b">#</a></h3>
+<p>2023/07/09 コンテスト</p>
+<p>誤読．</p>
+<ul>
+<li>正: 木の好きな頂点を選んで出発できる</li>
+<li>誤: 木の根から出発する</li>
+</ul>
 
 
   </div>
