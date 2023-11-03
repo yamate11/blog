@@ -1,21 +1,21 @@
 ---
 author: "yamate11"
-title: "Zobrist Hash"
+title: "Zobrist Hashing"
 date: "2022-02-13T11:32:14+09:00"
 # date_init: "2022-02-13"
 tags: ["ハッシュ"]
 categories: ["topic"]
 # categories: ["solution"]
-summary: "ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．"
+summary: "ABC238 G Cubic? を解くのに使うことができる Zobrist Hashing に関する記事です．"
 ---
 
-ABC238 G Cubic? を解くのに使うことができる Zobrist Hash に関する記事です．
+ABC238 G Cubic? を解くのに使うことができる Zobrist Hashing に関する記事です．
 
 ## ネタ元
 
 [Wikipedia](https://en.wikipedia.org/wiki/Zobrist_hashing)
 
-## Zobrist Hash とは
+## Zobrist Hashing とは
 
 以下では，ビットごとの XOR を $\oplus$ と書く．
 
