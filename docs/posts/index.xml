@@ -6,20 +6,11 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Sep 2023 18:13:58 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>二重連結</title>
-      <link>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</link>
-      <pubDate>Tue, 05 Sep 2023 18:13:58 +0900</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</guid>
-      <description>無向グラフの二重連結に関して，辺二重連結，橋，点二重連結，関節点，block-cut tree などに関するまとめです</description>
-    </item>
-    
+    <lastBuildDate>Sun, 05 Nov 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>誤りの記録</title>
       <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
-      <pubDate>Wed, 02 Aug 2023 00:00:00 +0900</pubDate>
+      <pubDate>Sun, 05 Nov 2023 00:00:00 +0900</pubDate>
       
       <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
       <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
@@ -32,6 +23,15 @@ if (rx == -1 and ry == -1) { 誤:
 if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 誤読．
  正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
+    </item>
+    
+    <item>
+      <title>二重連結</title>
+      <link>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</link>
+      <pubDate>Tue, 05 Sep 2023 18:13:58 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</guid>
+      <description>無向グラフの二重連結に関して，辺二重連結，橋，点二重連結，関節点，block-cut tree などに関するまとめです</description>
     </item>
     
     <item>

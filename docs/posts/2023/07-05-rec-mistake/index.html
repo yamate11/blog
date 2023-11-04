@@ -68,8 +68,8 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
  正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-08-02T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2023-08-02T00:00:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-11-05T00:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2023-11-05T00:00:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="誤りの記録"/>
@@ -115,11 +115,11 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   "keywords": [
     
   ],
-  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ\n宣言を間違えた．\n正:\nvector A(M, Fp(0)); 誤:\nvectorll A(M, Fp(0)); ABC318C Blue Spring  「周遊セット」を買う枚数 $x$ を全探索する問題． ちゃんと考えると，買う枚数の候補は $0$ 枚以上 $\\displaystyle\\left\\lceil \\frac{N}{D} \\right\\rceil$ 枚以下，とわかる． コンテスト中で焦っていたので，面倒だから $0$ 枚以上 $N$ 枚以下で いいや，と考えた．($N$は十分小さいのでこれでも間に合う) ところが，それを REP(x, 0, N) とコーディングしてしまった． もちろん，REP(x, 0, N + 1) でなければならない．  ARC167B Product of Divisors A が整数であって，$ k \\leq A / 2$ を満たす整数 k の最大値を求めよ， という形になった．当然，A の偶奇で場合分けが必要なのだが， A が偶数と思い込んでしまった．\n",
-  "wordCount" : "129",
+  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ\n宣言を間違えた．\n正:\nvector A(M, Fp(0)); 誤:\nvectorll A(M, Fp(0)); ABC318C Blue Spring  「周遊セット」を買う枚数 $x$ を全探索する問題． ちゃんと考えると，買う枚数の候補は $0$ 枚以上 $\\displaystyle\\left\\lceil \\frac{N}{D} \\right\\rceil$ 枚以下，とわかる． コンテスト中で焦っていたので，面倒だから $0$ 枚以上 $N$ 枚以下で いいや，と考えた．($N$は十分小さいのでこれでも間に合う) ところが，それを REP(x, 0, N) とコーディングしてしまった． もちろん，REP(x, 0, N + 1) でなければならない．  ARC167B Product of Divisors A が整数であって，$ k \\leq A / 2$ を満たす整数 k の最大値を求めよ， という形になった．当然，A の偶奇で場合分けが必要なのだが， A が偶数と思い込んでしまった．\nABC237E Maximize Rating DP表を埋めるとき，本来は，あり得ないところ (スタート地点から遷移してこないところ) は，マークしておいて計算しないようにすべき． それをサボって，適当な計算をしてしまっていた．\n",
+  "wordCount" : "136",
   "inLanguage": "en",
-  "datePublished": "2023-08-02T00:00:00+09:00",
-  "dateModified": "2023-08-02T00:00:00+09:00",
+  "datePublished": "2023-11-05T00:00:00+09:00",
+  "dateModified": "2023-11-05T00:00:00+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -243,7 +243,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
     <h1 class="post-title">
       誤りの記録
     </h1>
-    <div class="post-meta">2023-08-02&nbsp;·&nbsp;2023-07-05T09:03:15+09:00 (初版)&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-11-05&nbsp;·&nbsp;2023-07-05T09:03:15+09:00 (初版)&nbsp;·&nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>デバッグに失敗した，ないし，長時間かかった間違いの記録</p>
@@ -292,21 +292,19 @@ $\displaystyle\left\lceil \frac{N}{D} \right\rceil$ 枚以下，とわかる．<
 <p>A が整数であって，$ k \leq A / 2$ を満たす整数 k の最大値を求めよ，
 という形になった．当然，A の偶奇で場合分けが必要なのだが，
 A が偶数と思い込んでしまった．</p>
+<h3 id="abc237e-maximize-rating">ABC237E Maximize Rating<a hidden class="anchor" aria-hidden="true" href="#abc237e-maximize-rating">#</a></h3>
+<p>DP表を埋めるとき，本来は，あり得ないところ (スタート地点から遷移してこないところ) は，マークしておいて計算しないようにすべき．
+それをサボって，適当な計算をしてしまっていた．</p>
 
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>二重連結</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
     <span class="title">Next Page »</span>
     <br>
-    <span>Return to 1 - Atcoder Beginner Contest 306 G</span>
+    <span>二重連結</span>
   </a>
 </nav>
 
@@ -320,8 +318,8 @@ A が偶数と思い込んでしまった．</p>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
-  / <a href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">二重連結</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">誤りの記録</a>
+  / <a href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">二重連結</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/">Return to 1 - Atcoder Beginner Contest 306 G</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/">約数の個数</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目...</a>
