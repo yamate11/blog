@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-## 実数
+## 浮動小数点数
 
 cpp_bin_floatなんちゃら，という型が使えます．
 
