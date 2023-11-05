@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>多倍長 on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/%E5%A4%9A%E5%80%8D%E9%95%B7/</link>
+    <description>Recent content in 多倍長 on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 05 Nov 2023 16:37:09 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/tags/%E5%A4%9A%E5%80%8D%E9%95%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>boost の多倍長計算</title>
+      <link>https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/</link>
+      <pubDate>Sun, 05 Nov 2023 16:37:09 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/</guid>
+      <description>AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &amp;lt;boost/multiprecision/cpp_int.hpp&amp;gt; // 整数を使う時#include &amp;lt;boost/multiprecision/cpp_bin_float.hpp&amp;gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&amp;lt;typename T&amp;gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b &amp;gt; 0) {  if (b &amp;amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b &amp;gt;&amp;gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin &amp;gt;&amp;gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo + 1) * (lo + 1);  cpp_int th = power(cpp_int(100), s.</description>
+    </item>
+    
+  </channel>
+</rss>
