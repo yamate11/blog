@@ -6,7 +6,17 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 05 Nov 2023 16:37:09 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Nov 2023 12:14:18 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bookmarks</title>
+      <link>https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/</link>
+      <pubDate>Sun, 12 Nov 2023 12:14:18 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/</guid>
+      <description>他サイトへのリンクを並べる
+ Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  </description>
+    </item>
+    
     <item>
       <title>boost の多倍長計算</title>
       <link>https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/</link>

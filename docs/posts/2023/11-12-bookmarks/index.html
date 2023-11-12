@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>xor畳み込み | yamate11のブログ</title>
-<meta name="keywords" content="xor, 畳み込み, アダマール変換" />
-<meta name="description" content="高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．">
+<title>Bookmarks | yamate11のブログ</title>
+<meta name="keywords" content="" />
+<meta name="description" content="他サイトへのリンクを並べる
+ Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -46,16 +47,18 @@
 
 
 
-<meta property="og:title" content="xor畳み込み" />
-<meta property="og:description" content="高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．" />
+<meta property="og:title" content="Bookmarks" />
+<meta property="og:description" content="他サイトへのリンクを並べる
+ Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-23T12:40:00&#43;09:00" />
-<meta property="article:modified_time" content="2021-08-23T12:40:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-12T12:14:18&#43;09:00" />
+<meta property="article:modified_time" content="2023-11-12T12:14:18&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="xor畳み込み"/>
-<meta name="twitter:description" content="高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．"/>
+<meta name="twitter:title" content="Bookmarks"/>
+<meta name="twitter:description" content="他サイトへのリンクを並べる
+ Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  "/>
 
 
 <script type="application/ld+json">
@@ -72,8 +75,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "xor畳み込み",
-      "item": "https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"
+      "name": "Bookmarks",
+      "item": "https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/"
     }
   ]
 }
@@ -82,24 +85,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "xor畳み込み",
-  "name": "xor畳み込み",
-  "description": "高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．",
+  "headline": "Bookmarks",
+  "name": "Bookmarks",
+  "description": "他サイトへのリンクを並べる\n Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  ",
   "keywords": [
-    "xor", "畳み込み", "アダマール変換"
+    
   ],
-  "articleBody": "xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \\oplus y$ は $x$ と $y$ の xor とする．\n $ Z_k = \\sum \\{ X_i Y_j \\mid i \\oplus j = k \\} $  以下では，$Z = X * Y$ と書く．\nアダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．\n$$ H_0 = 1 $$\n$$ H_{k + 1} = \\begin{bmatrix} H_k \u0026 H_k \\\\ H_k \u0026 -H_k \\end{bmatrix} $$\n本来は，正規化のために定数倍するが， ここでは，結果を整数にするためにそうしていない．\n$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．\n畳み込みとアダマール変換 以下が成り立つことが，計算することで容易に分かる．\n$$ (H_K X) (H_K Y) = H_K (X * Y) $$\nただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．\n$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$\nアダマール変換は，定義に従って $O(n \\log n)$ で計算できる．($n = 2^K$)\nメモリを賢く使って計算している例が kazuma8128's blog に載っている．\nこれを使える問題 ABC212 H Nim Counting ",
-  "wordCount" : "127",
+  "articleBody": "他サイトへのリンクを並べる\n Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と， ラベル付き木のランダム生成の話が書いてある．  ",
+  "wordCount" : "10",
   "inLanguage": "en",
-  "datePublished": "2021-08-23T12:40:00+09:00",
-  "dateModified": "2021-08-23T12:40:00+09:00",
+  "datePublished": "2023-11-12T12:14:18+09:00",
+  "dateModified": "2023-11-12T12:14:18+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"
+    "@id": "https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/"
   },
   "publisher": {
     "@type": "Organization",
@@ -214,70 +217,29 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      xor畳み込み
+      Bookmarks
     </h1>
-    <div class="post-description">
-      高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．
-    </div>
-    <div class="post-meta">2021-08-23&nbsp;·&nbsp;2021-08-12 (初版)&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-11-12&nbsp;·&nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><h2 id="xor畳み込み">xor畳み込み<a hidden class="anchor" aria-hidden="true" href="#xor畳み込み">#</a></h2>
-<p>長さ $2^K$ の数列 $X$, $Y$ があるとき，
-これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める．
-ただし，$x \oplus y$ は $x$ と $y$ の xor とする．</p>
+  <div class="post-content"><p>他サイトへのリンクを並べる</p>
 <ul>
-<li>$ Z_k = \sum \{ X_i Y_j \mid i \oplus j = k \} $</li>
-</ul>
-<p>以下では，$Z = X * Y$ と書く．</p>
-<h2 id="アダマール変換">アダマール変換<a hidden class="anchor" aria-hidden="true" href="#アダマール変換">#</a></h2>
-<p>長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される
-1次変換である．</p>
-<p>$$
-H_0 = 1
-$$</p>
-<p>$$
-H_{k + 1} = \begin{bmatrix}
-H_k &amp; H_k \\
-H_k &amp; -H_k
-\end{bmatrix}
-$$</p>
-<p>本来は，正規化のために定数倍するが，
-ここでは，結果を整数にするためにそうしていない．</p>
-<p>$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．</p>
-<h2 id="畳み込みとアダマール変換">畳み込みとアダマール変換<a hidden class="anchor" aria-hidden="true" href="#畳み込みとアダマール変換">#</a></h2>
-<p>以下が成り立つことが，計算することで容易に分かる．</p>
-<p>$$ (H_K X) (H_K Y) = H_K (X * Y) $$</p>
-<p>ただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．</p>
-<p>$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$</p>
-<p>アダマール変換は，定義に従って $O(n \log n)$ で計算できる．($n = 2^K$)</p>
-<p>メモリを賢く使って計算している例が 
-<a href="https://kazuma8128.hatenablog.com/entry/2018/05/31/144519" target="_blank">kazuma8128&#39;s blog</a>
+<li><a href="https://kyopro.hateblo.jp/entry/2019/01/16/200456" target="_blank">Prüfer sequence</a>
 
-に載っている．</p>
-<h2 id="これを使える問題">これを使える問題<a hidden class="anchor" aria-hidden="true" href="#これを使える問題">#</a></h2>
-<p><a href="https://atcoder.jp/contests/abc212/tasks/abc212_h" target="_blank">ABC212 H Nim Counting</a>
-</p>
+プリューファー列 (ラベル付き木の列挙に使う) の紹介．
+ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$ と，
+ラベル付き木のランダム生成の話が書いてある．</li>
+</ul>
 
 
   </div>
 
   <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://yamate11.github.io/blog/tags/xor/">xor</a></li>
-      <li><a href="https://yamate11.github.io/blog/tags/%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF/">畳み込み</a></li>
-      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%A2%E3%83%80%E3%83%9E%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B/">アダマール変換</a></li>
-    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/">
-    <span class="title">« Prev Page</span>
-    <br>
-    <span>Cabbage Master - Atcoder Beginner Contest 215 H</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/">
     <span class="title">Next Page »</span>
     <br>
-    <span>文字列，数値変換</span>
+    <span>boost の多倍長計算</span>
   </a>
 </nav>
 
@@ -286,7 +248,7 @@ $$</p>
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2021/08-10-xor-conv/" data-title="xor畳み込み">
+<section id="isso-thread" data-isso-id="/blog/posts/2023/11-12-bookmarks/" data-title="Bookmarks">
 </section>
 
 <p>Links to Recent Posts:
