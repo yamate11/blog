@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, follow">
-<title>Categories | yamate11のブログ</title>
+<title>セグメント木 | yamate11のブログ</title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/categories/" />
+<link rel="canonical" href="https://yamate11.github.io/blog/tags/%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E6%9C%A8/" />
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.3666e6d71b9ceaf63eac2c4ee03be74c59f42d690e75d145d89d7103c82c5eac.css" integrity="sha256-Nmbm1xuc6vY&#43;rCxO4DvnTFn0LWkOddFF2J1xA8gsXqw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.94.2" />
-<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/categories/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/tags/%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E6%9C%A8/index.xml">
 
 <script>
     MathJax = {
@@ -47,13 +47,13 @@
 
 
 
-<meta property="og:title" content="Categories" />
+<meta property="og:title" content="セグメント木" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://yamate11.github.io/blog/categories/" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/tags/%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E6%9C%A8/" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:title" content="セグメント木"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -153,22 +153,32 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Categories</h1>
+  <h1>セグメント木</h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://yamate11.github.io/blog/categories/mod/">mod <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://yamate11.github.io/blog/categories/solution/">solution <sup><strong><sup>40</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://yamate11.github.io/blog/categories/topic/">topic <sup><strong><sup>38</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>セグメント木ライブラリ</h2>
+  </header>
+  <section class="entry-content">
+    <p>自作セグメント木ライブラリの使い方についての自分用のメモです．
+AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので…
+使用法 値の型を DAT, 更新演算の型を OP とする．
+基本のセグメント木 作成  auto st = make_seg_tree(unit_dat, add, init_vec);  unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル  初期ベクトル設定は，分けても良い:
+ auto st = make_seg_tree(unit_dat, add);  st.set_data(init_vec); 値の設定  st.update(i, x); $i$ 番目の値として $x$ を設定する． 1点しか設定できないので，2引数であることに注意．
+値の取得  DAT x = st.query(il, ir);  DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．...</p>
+  </section>
+  <footer class="entry-footer">2023-12-03&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to セグメント木ライブラリ" href="https://yamate11.github.io/blog/posts/2023/12-03-sement-tree-lib/"></a>
+</article>
+
+<br/>
+<p>
+Links:
+/ <a href="https://yamate11.github.io/blog/posts/2023/12-03-sement-tree-lib/">セグメント木ライブラリ</a>
+</p>
     </main>
     <footer class="footer">
   <span>
