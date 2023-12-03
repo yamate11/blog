@@ -14,7 +14,7 @@ params:
     env: "production"
     disableSpecial1stPost: true
     ShowPostNavLinks: true
-    ShowCodeCopyButtons: false
+    ShowCodeCopyButtons: true
     ShowToc: false
     TocOpen: false
     comments: true
@@ -49,6 +49,7 @@ markup:
         guesssyntax: true
         # lineNos: true
         style: monokailight
+        # style: monokailight
     goldmark:
         renderer:
             unsafe: true
