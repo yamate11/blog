@@ -88,8 +88,8 @@
   "keywords": [
     
   ],
-  "articleBody": "ローリングハッシュライブラリの使い方についての自分用のメモです\nローリングハッシュ 使用法 オブジェクトの生成 通常は，次のようにする．\nRollingHash rh; これは，string を対象としたものになり，mod は $2^{61} - 1$ である． base は，1000 以上 $2^{60}$ 未満の範囲でランダムに選択される．\nbase を指定する場合には，次のようにする．\nRollingHash rh(base); 次のコードは，base をランダム選択にするが， 選択範囲が min_base 以上 $2^{60}$ 未満になる．\nRollingHash rh(0, min_base); ハッシュテーブルの生成 ハッシュを計算する前に，ハッシュテーブルを生成する必要がある． 文字列 s に対するハッシュテーブルは，次のように生成できる:\nstring s = \"Hello, world.\"; vectoru64 hs = rh.hashes(s); hs には，vector 型で，サイズ s.size() + 1 のベクトルが設定される． (u64 は unsigned long long のこと)． hs の i 番目の要素 hs[i] は，sの先頭から i 文字の部分文字列 s.substr(0, i) のハッシュ値である． 特に，s のハッシュ値は hs.back() である．\nハッシュ値の計算 s の部分文字列のハッシュ値は，get メソッドで取得できる． 位置 start から始まる長さ len の部分文字列を取得するコードは，次の通り．\nu64 h = rh.get(hs, start, len); 連結文字列のハッシュ値 文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき， s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:\nu64 h = rh.hash_concat(h1, h2, s2.size()); keywords keywords: rolling hash\n",
-  "wordCount" : "120",
+  "articleBody": "ローリングハッシュライブラリの使い方についての自分用のメモです\nローリングハッシュ 使用法 オブジェクトの生成 通常は，次のようにする．\nRollingHash rh; これは，string を対象としたものになり，mod は $2^{61} - 1$ である． base は，1000 以上 $2^{60}$ 未満の範囲でランダムに選択される．\nbase を指定する場合には，次のようにする．\nRollingHash rh(base); 次のコードは，base をランダム選択にするが， 選択範囲が min_base 以上 $2^{60}$ 未満になる．\nRollingHash rh(0, min_base); ハッシュテーブルの生成 ハッシュを計算する前に，ハッシュテーブルを生成する必要がある． 文字列 s に対するハッシュテーブルは，次のように生成できる:\nstring s = \"Hello, world.\"; vectoru64 hs = rh.hashes(s); hs には，vector 型で，サイズ s.size() + 1 のベクトルが設定される． (u64 は unsigned long long のこと)． hs の i 番目の要素 hs[i] は，sの先頭から i 文字の部分文字列 s.substr(0, i) のハッシュ値である． 特に，s のハッシュ値は hs.back() である．\nハッシュ値の計算 s の部分文字列のハッシュ値は，get メソッドで取得できる． 位置 start から始まる長さ len の部分文字列を取得するコードは，次の通り．\nu64 h = rh.get(hs, start, len); 連結文字列のハッシュ値 文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき， s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:\nu64 h = rh.hash_concat(h1, h2, s2.size()); 一般のベクトルに対するハッシュ 文字列に限らず，一般のベクトル vector に対してもハッシュを計算できる (正確には，operator [] が定義されていれば良い)． この場合，ベクトルの各要素に対するハッシュ値を定義する必要がある． これは，u64 (*)(const T\u0026) 型の関数ポインタを， コンストラクタの第3引数に渡すことで実現する:\nRollingHashT rh(0, min_base, func); 関数ポインタしかサポートしていない．クロージャは渡せない．\nなお，func として nullptr を渡すこともできて， その場合には単に u64 へのキャストになる．\nkeywords keywords: rolling hash\n",
+  "wordCount" : "145",
   "inLanguage": "en",
   "datePublished": "2023-12-09T16:28:56+09:00",
   "dateModified": "2023-12-09T16:28:56+09:00",
@@ -250,7 +250,17 @@ s.substr(0, i) のハッシュ値である．
 <p>文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき，
 s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">u64</span> <span style="color:#111">h</span> <span style="color:#f92672">=</span> <span style="color:#111">rh</span><span style="color:#111">.</span><span style="color:#111">hash_concat</span><span style="color:#111">(</span><span style="color:#111">h1</span><span style="color:#111">,</span> <span style="color:#111">h2</span><span style="color:#111">,</span> <span style="color:#111">s2</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">());</span>
-</span></span></code></pre></div><h2 id="keywords">keywords<a hidden class="anchor" aria-hidden="true" href="#keywords">#</a></h2>
+</span></span></code></pre></div><h4 id="一般のベクトルに対するハッシュ">一般のベクトルに対するハッシュ<a hidden class="anchor" aria-hidden="true" href="#一般のベクトルに対するハッシュ">#</a></h4>
+<p>文字列に限らず，一般のベクトル vector<T> に対してもハッシュを計算できる
+(正確には，<code>operator []</code> が定義されていれば良い)．
+この場合，ベクトルの各要素に対するハッシュ値を定義する必要がある．
+これは，<code>u64 (*)(const T&amp;)</code> 型の関数ポインタを，
+コンストラクタの第3引数に渡すことで実現する:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">RollingHash</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">rh</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">min_base</span><span style="color:#111">,</span> <span style="color:#111">func</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>関数ポインタしかサポートしていない．クロージャは渡せない．</p>
+<p>なお，func として nullptr を渡すこともできて，
+その場合には単に u64 へのキャストになる．</p>
+<h2 id="keywords">keywords<a hidden class="anchor" aria-hidden="true" href="#keywords">#</a></h2>
 <p>keywords: rolling hash</p>
 
 
