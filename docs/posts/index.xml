@@ -18,10 +18,10 @@
     
     <item>
       <title>セグメント木ライブラリ</title>
-      <link>https://yamate11.github.io/blog/posts/2023/12-03-sement-tree-lib/</link>
+      <link>https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/</link>
       <pubDate>Sun, 03 Dec 2023 12:21:00 +0900</pubDate>
       
-      <guid>https://yamate11.github.io/blog/posts/2023/12-03-sement-tree-lib/</guid>
+      <guid>https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/</guid>
       <description>自作セグメント木ライブラリの使い方についての自分用のメモです．
 AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&amp;hellip;
 使用法 値の型を DAT, 更新演算の型を OP とする．

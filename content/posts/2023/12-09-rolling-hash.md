@@ -64,4 +64,16 @@ s の部分文字列のハッシュ値は，get メソッドで取得できる�
 u64 h = rh.get(hs, start, len);
 ```
 
+#### 連結文字列のハッシュ値
+
+文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき，
+s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:
+
+```cpp
+u64 h = rh.hash_concat(h1, h2, s2.size());
+```
+
+
+## keywords
+
 keywords: rolling hash
