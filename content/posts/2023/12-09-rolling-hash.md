@@ -60,7 +60,7 @@ RollingHash rh;
 ```
 
 これは，string を対象としたものになり，mod は $2^{61} - 1$ である．
-base は，1000 以上 $2^{60}$ 未満の範囲でランダムに選択される．
+base は，1000 以上 $2^{59}$ 未満の範囲でランダムに選択される．
 
 base を指定する場合には，次のようにする．
 
@@ -112,19 +112,23 @@ u64 h = rh.hash_concat(h1, h2, s2.size());
 
 文字列に限らず，ベクトル `vector<T>` に対してもハッシュを計算できる
 (正確にはベクトルでなくても，`operator []` が定義されていれば良い)．
-この場合，`T` の各要素に対するハッシュ値を定義する必要がある．
-これは，`u64 (*)(const T&)` 型の関数ポインタを，
-コンストラクタの第3引数に渡すことで実現する．
-`func(t)` の値は 0 以上 $2^{61} - 1$ 未満でなければならない．
+この場合，`T` の各要素に対するハッシュ値が計算できる必要があるので，
+それを実行する関数 conv を渡して RollingHashGen オブジェクトを作成する:
+`conv(t)` の値は 0 以上 $2^{61} - 1$ 未満でなければならない．
 
 ```cpp
-RollingHash<T> rh(0, min_base, func);
+auto rh = make_rolling_hash_gen<T>(0, min_base, conv);
 ```
 
-関数ポインタしかサポートしていない．クロージャは渡せない．
+T の要素に対するハッシュ値が，
+T から u64 へのキャストで良い場合には，次のように定義することもできる．
 
-なお，func として nullptr を渡すこともできて，
-その場合には単に u64 へのキャストになる．
+```cpp
+RollingHashGen<T, nullptr_t> rh(0, min_base);        
+```
+
+なお，上で述べた，文字列を対象とした RollingHash 型は，
+`RollingHashGen<char, nullptr_t>` の別名として定義されている．
 
 #### mod $2^{61} - 1$ 演算
 
@@ -138,16 +142,10 @@ $a \times b \mod (2^{61} - 1)$ の値を計算することができる:
 ```cpp
 RollingHash rh;
 u64 a, b;
-rh.add_mod(a, b);  // a + b
-rh.subt_mod(a, b); // a - b
-rh.mul_mod(a, b);  // a * b
-rh.mod - a;        // -a
-```
-
-これらは，static メンバ関数なので，次のように呼び出すこともできる:
-
-```cpp
-RollingHash<char>::add_mod(a, b);
+rh_add(a, b);  // a + b
+rh_subt(a, b); // a - b
+rh_mul(a, b);  // a * b
+rh_prime - a;  // -a
 ```
 
 ## コード
