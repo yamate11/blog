@@ -6,7 +6,25 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 09 Dec 2023 16:28:56 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Dec 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>誤りの記録</title>
+      <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
+      <pubDate>Sun, 24 Dec 2023 00:00:00 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
+      <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
+ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+ 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
+    </item>
+    
     <item>
       <title>ローリングハッシュライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/</link>
@@ -51,24 +69,6 @@ AtCoder Library にセグメント木はありますが， それができる前
 #include &amp;lt;boost/multiprecision/cpp_int.hpp&amp;gt; // 整数を使う時#include &amp;lt;boost/multiprecision/cpp_bin_float.hpp&amp;gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
 例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
 template&amp;lt;typename T&amp;gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b &amp;gt; 0) {  if (b &amp;amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b &amp;gt;&amp;gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin &amp;gt;&amp;gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo + 1) * (lo + 1);  cpp_int th = power(cpp_int(100), s.</description>
-    </item>
-    
-    <item>
-      <title>誤りの記録</title>
-      <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
-      <pubDate>Sun, 05 Nov 2023 00:00:00 +0900</pubDate>
-      
-      <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
-      <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
-ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
-無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
-ABC279F BOX 2023/07/05 あさかつ
-タイプミス
-正:
-if (rx == -1 and ry == -1) { 誤:
-if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
-誤読．
- 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
     </item>
     
     <item>
