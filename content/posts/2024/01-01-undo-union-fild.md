@@ -27,3 +27,5 @@ sz = uf.gsize(i);    // i が属するグループの要素数
 
 ## ソース
 
+[ソース](https://github.com/yamate11/compprog/blob/main/clib/UndoUnionFind.cc)
+

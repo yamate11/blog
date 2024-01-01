@@ -6,7 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Jan 2024 11:48:37 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Jan 2024 12:09:02 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Offline Dynamic Connectivity</title>
+      <link>https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/</link>
+      <pubDate>Mon, 01 Jan 2024 12:09:02 +0900</pubDate>
+      
+      <guid>https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/</guid>
+      <description>オフライン動的連結ライブラリです</description>
+    </item>
+    
     <item>
       <title>Undo付きUnionFind</title>
       <link>https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/</link>
