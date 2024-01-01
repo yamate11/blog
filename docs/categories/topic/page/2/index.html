@@ -160,6 +160,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>全方位木ライブラリ</h2>
+  </header>
+  <section class="entry-content">
+    <p>全方位木ライブラリ使用法のメモ
+このライブラリで解ける問題 $\mathcal{M} = (M, \oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．
+根付き木 $T$ に対して， $g : (M \times T \times T) \to M$ から次のように帰納的に定義される 関数 $f : T \to M$ を考える:
+ $f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
+ $f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $  ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．...</p>
+  </section>
+  <footer class="entry-footer">2022-08-17&nbsp;·&nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 全方位木ライブラリ" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>インタラクティブな問題に対するソーススケルトン</h2>
   </header>
   <section class="entry-content">
@@ -318,17 +333,6 @@ bool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll
   <footer class="entry-footer">2021-08-30&nbsp;·&nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 「牛ゲー」" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>xor畳み込み</h2>
-  </header>
-  <section class="entry-content">
-    <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</p>
-  </section>
-  <footer class="entry-footer">2021-08-23&nbsp;·&nbsp;2021-08-12 (初版)&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://yamate11.github.io/blog/categories/topic/">« Prev Page</a>
@@ -339,6 +343,7 @@ bool judge = false;  ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll
 <br/>
 <p>
 Links:
+/ <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
 / <a href="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/">インタラクティブな問題に対するソーススケルトン</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/">燃やす埋める問題</a>
 / <a href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">Mo&#39;s algorithm メモ</a>
@@ -353,7 +358,6 @@ Links:
 / <a href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/">コーディングスタイル</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/">C&#43;&#43;言語・STLメモ</a>
 / <a href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/">「牛ゲー」</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/">xor畳み込み</a>
 </p>
     </main>
     <footer class="footer">
