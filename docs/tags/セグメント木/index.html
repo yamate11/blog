@@ -163,8 +163,7 @@
     <h2>セグメント木ライブラリ</h2>
   </header>
   <section class="entry-content">
-    <p>自作セグメント木ライブラリの使い方についての自分用のメモです．
-AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので…
+    <p>自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので…
 使用法 値の型を DAT, 更新演算の型を OP とする．
 基本のセグメント木 作成  auto st = make_seg_tree(unit_dat, add, init_vec);  unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル  初期ベクトル設定は，分けても良い:
  auto st = make_seg_tree(unit_dat, add);  st.set_data(init_vec); 値の設定  st.update(i, x); $i$ 番目の値として $x$ を設定する． 1点しか設定できないので，2引数であることに注意．
