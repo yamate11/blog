@@ -123,7 +123,7 @@ Unionfind 構造で merge を行い，
 
 [コード](https://github.com/yamate11/compprog/blob/main/clib/offDynConn.cc)
 
-このコードは
+このコードは，
 [Undo付きUnionFind](https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/)
 に依存しています．
 
