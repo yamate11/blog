@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;言語・STLメモ | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-20T07:14:12&#43;09:00" />
-<meta property="article:modified_time" content="2021-09-20T07:14:12&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-09-20T07:14:12+09:00" />
+<meta property="article:modified_time" content="2021-09-20T07:14:12+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C&#43;&#43;言語・STLメモ"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "stream の書式関連 参照: https://www.cs.fsu.edu/~myers/c++/notes/formatting.html  stringstream は，str() メンバ関数で文字列になる．   stringstream ss;  ss  100; assert(ss.str() == \"100\");  16進表記は hex．10進表記(にもどす)は dec．大文字/小文字は [no]uppercase．   stringstream ss;  ss  hex  253  uppercase  254  nouppercase  255;  ss  dec  100;  assert(ss.str() == \"fdFEff100\");  小数点以下の桁数は setprecision で制御   stringstream ss;  double x = 1.0 / 3.0;  ss  x  \" \"  setprecision(20)  x;  assert(ss.str() == \"0.333333 0.33333333333333331483\");  0詰めは setfill, 表示幅は，setw で制御   stringstream ss, ss1;  ss  setw(4)  10  \",\"  setw(4)  (int)1e8;  assert(ss.str() == \" 10,100000000\");  ss1  setfill('0')  setw(4)  10  \",\"  setw(4)  (int)1e8;  assert(ss1.str() == \"0010,100000000\");  ほとんどの manipulator は sticky (効果が持続) だが， setw は例外．   stringstream ss1, ss2;  ss1  hex  100  \" \"  200;  assert(ss1.str() == \"64 c8\");  ss2  setw(4)  5  6;  assert(ss2.str() == \" 56\"); 例外  型宣言: struct Exc : exception {}; 投げる: throw Exc(); 受ける: try { ... } catch(const Exc\u0026 e) { ... }  使用例\n struct Exc : exception {};  auto all_non_zero = [\u0026](string s) - bool {  auto dfs = [\u0026](auto f, size_t i) - void {  if (i == s.size()) return;  if (s[i] == '0') throw Exc();  f(f, i + 1);  };  try {  dfs(dfs, 0);  return true;  }catch (const Exc\u0026 e) {  return false;  }  };  assert(all_non_zero(\"11111\"));  assert(! all_non_zero(\"11101101\")); ビット処理 long long に対するもの．\n 1の数を数える – __builtin_popcountll   assert(__builtin_popcountll(0xF) == 4);  assert(__builtin_popcountll(0x100030007000F000) == 10);  右端の0の数 – __builtin_ctzll  Count Trailing Zero であろう． __builtin_ctzll(x) は，x の LSB の添字に等しい． 引数は0ではいけない．     assert(__builtin_ctzll(0x1) == 0);  assert(__builtin_ctzll(0x8) == 3);  assert(__builtin_ctzll(1LL63) == 63);  左端の0の数 – __builtin_clzll  Count Leading Zero であろう． __builtin_clzll(x) は，63 - (x の MSB の添字) に等しい 引数は0ではいけない．     assert(__builtin_clzll(0x1) == 63);  assert(__builtin_clzll(1LL62) == 1); vector での 重複の削除 Unix の， sort | uniq に相当する操作\n vectorint vec({10, 2, 5, 7, 5, 2, 5});  sort(vec.begin(), vec.end());  vec.erase(unique(vec.begin(), vec.end()), vec.end());  assert(vec == vectorint({2, 5, 7, 10})); イタレータ iterator は，「要素を指す」と考えるより「要素と要素の間を指す」 と考えた方が話が分かりやすい．\n vectorint vec({2, 4, 5, 5, 5, 6, 10, 12});  auto it1 = lower_bound(vec.begin(), vec.end(), 5);  auto it2 = upper_bound(vec.begin(), vec.end(), 5);  auto it3 = lower_bound(vec.begin(), vec.end(), 11);  auto it4 = upper_bound(vec.begin(), vec.end(), 11); 逆方向イタレータ reverse_iterator(it) で， it の指している「要素間の位置」は変わらずに，方向だけが反転する． 上図で，5以下の要素を並べるコード:\n stringstream ss;  vectorint vec({2, 4, 5, 5, 5, 6, 10, 12});  auto itN = upper_bound(vec.begin(), vec.end(), 5);  for (auto itR = reverse_iteratordecltype(itN)(itN);  itR != vec.rend(); itR++) {  ss  *itR;  }  assert(ss.str() == \"55542\"); set や map などに対しても，同様のことができる．\n stringstream ss;  multisetint is({2, 4, 5, 5, 5, 6, 10, 12});  auto itN = is.upper_bound(5);  for (auto itR = reverse_iteratordecltype(itN)(itN);  itR != is.rend(); itR++) {  ss  *itR;  }  cout  ss.str()  endl;  assert(ss.str() == \"55542\"); set や priority queue の比較関数 集合 (set) のテンプレートの第2引数が比較クラスになる． イタレータが降順に動いていってほしい場合，次のように書けば良い．\nsetT, greaterT ss; 一般の比較関数 fn を書きたいときには，次のようにする．\nsetT, decltype(fn) ss(fn); 優先度付きキューを普通に次のように書くと降順になる:\npriority_queueT pque; 昇順にしたいときには，次のように書く:\npriority_queueT, vectorT, greaterT pque; 一般の比較関数 fn を書きたいときには，次のようにする． 指定した比較関数の「大きい」順に取り出される． つまり，fn(x, y) が真の時には，yがxより先に取り出される．\npriority_queueT, vectorT, decltype(fn) pque(fn); 例:\n using Pair = pairint, int;  auto comp = [\u0026](Pair x, Pair y) - bool {  if (x.first != y.first) return x.first  y.first;  else return x.second  y.second;  };  priority_queuePair, vectorPair, decltype(comp) pque(comp);   pque.emplace(2, 1); pque.emplace(3, 5), pque.emplace(3, 9);  Pair p;  p = pque.top(); pque.pop(); assert(p == Pair(3, 5));  p = pque.top(); pque.pop(); assert(p == Pair(3, 9));  p = pque.top(); pque.pop(); assert(p == Pair(2, 1)); ",
+  "articleBody": "stream の書式関連 参照: https://www.cs.fsu.edu/~myers/c++/notes/formatting.html stringstream は，str() メンバ関数で文字列になる． stringstream ss; ss \u003c\u003c 100; assert(ss.str() == \"100\"); 16進表記は hex．10進表記(にもどす)は dec．大文字/小文字は [no]uppercase． stringstream ss; ss \u003c\u003c hex \u003c\u003c 253 \u003c\u003c uppercase \u003c\u003c 254 \u003c\u003c nouppercase \u003c\u003c 255; ss \u003c\u003c dec \u003c\u003c 100; assert(ss.str() == \"fdFEff100\"); 小数点以下の桁数は setprecision で制御 stringstream ss; double x = 1.0 / 3.0; ss \u003c\u003c x \u003c\u003c \" \" \u003c\u003c setprecision(20) \u003c\u003c x; assert(ss.str() == \"0.333333 0.33333333333333331483\"); 0詰めは setfill, 表示幅は，setw で制御 stringstream ss, ss1; ss \u003c\u003c setw(4) \u003c\u003c 10 \u003c\u003c \",\" \u003c\u003c setw(4) \u003c\u003c (int)1e8; assert(ss.str() == \" 10,100000000\"); ss1 \u003c\u003c setfill('0') \u003c\u003c setw(4) \u003c\u003c 10 \u003c\u003c \",\" \u003c\u003c setw(4) \u003c\u003c (int)1e8; assert(ss1.str() == \"0010,100000000\"); ほとんどの manipulator は sticky (効果が持続) だが， setw は例外． stringstream ss1, ss2; ss1 \u003c\u003c hex \u003c\u003c 100 \u003c\u003c \" \" \u003c\u003c 200; assert(ss1.str() == \"64 c8\"); ss2 \u003c\u003c setw(4) \u003c\u003c 5 \u003c\u003c 6; assert(ss2.str() == \" 56\"); 例外 型宣言: struct Exc : exception {}; 投げる: throw Exc(); 受ける: try { ... } catch(const Exc\u0026 e) { ... } 使用例\nstruct Exc : exception {}; auto all_non_zero = [\u0026](string s) -\u003e bool { auto dfs = [\u0026](auto f, size_t i) -\u003e void { if (i == s.size()) return; if (s[i] == '0') throw Exc(); f(f, i + 1); }; try { dfs(dfs, 0); return true; }catch (const Exc\u0026 e) { return false; } }; assert(all_non_zero(\"11111\")); assert(! all_non_zero(\"11101101\")); ビット処理 long long に対するもの．\n1の数を数える – __builtin_popcountll assert(__builtin_popcountll(0xF) == 4); assert(__builtin_popcountll(0x100030007000F000) == 10); 右端の0の数 – __builtin_ctzll Count Trailing Zero であろう． __builtin_ctzll(x) は，x の LSB の添字に等しい． 引数は0ではいけない． assert(__builtin_ctzll(0x1) == 0); assert(__builtin_ctzll(0x8) == 3); assert(__builtin_ctzll(1LL\u003c\u003c63) == 63); 左端の0の数 – __builtin_clzll Count Leading Zero であろう． __builtin_clzll(x) は，63 - (x の MSB の添字) に等しい 引数は0ではいけない． assert(__builtin_clzll(0x1) == 63); assert(__builtin_clzll(1LL\u003c\u003c62) == 1); vector での 重複の削除 Unix の， sort | uniq に相当する操作\nvector\u003cint\u003e vec({10, 2, 5, 7, 5, 2, 5}); sort(vec.begin(), vec.end()); vec.erase(unique(vec.begin(), vec.end()), vec.end()); assert(vec == vector\u003cint\u003e({2, 5, 7, 10})); イタレータ iterator は，「要素を指す」と考えるより「要素と要素の間を指す」 と考えた方が話が分かりやすい．\nvector\u003cint\u003e vec({2, 4, 5, 5, 5, 6, 10, 12}); auto it1 = lower_bound(vec.begin(), vec.end(), 5); auto it2 = upper_bound(vec.begin(), vec.end(), 5); auto it3 = lower_bound(vec.begin(), vec.end(), 11); auto it4 = upper_bound(vec.begin(), vec.end(), 11); 逆方向イタレータ reverse_iterator(it) で， it の指している「要素間の位置」は変わらずに，方向だけが反転する． 上図で，5以下の要素を並べるコード:\nstringstream ss; vector\u003cint\u003e vec({2, 4, 5, 5, 5, 6, 10, 12}); auto itN = upper_bound(vec.begin(), vec.end(), 5); for (auto itR = reverse_iterator\u003cdecltype(itN)\u003e(itN); itR != vec.rend(); itR++) { ss \u003c\u003c *itR; } assert(ss.str() == \"55542\"); set や map などに対しても，同様のことができる．\nstringstream ss; multiset\u003cint\u003e is({2, 4, 5, 5, 5, 6, 10, 12}); auto itN = is.upper_bound(5); for (auto itR = reverse_iterator\u003cdecltype(itN)\u003e(itN); itR != is.rend(); itR++) { ss \u003c\u003c *itR; } cout \u003c\u003c ss.str() \u003c\u003c endl; assert(ss.str() == \"55542\"); set や priority queue の比較関数 集合 (set) のテンプレートの第2引数が比較クラスになる． イタレータが降順に動いていってほしい場合，次のように書けば良い．\nset\u003cT, greater\u003cT\u003e\u003e ss; 一般の比較関数 fn を書きたいときには，次のようにする．\nset\u003cT, decltype(fn)\u003e\u003e ss(fn); 優先度付きキューを普通に次のように書くと降順になる:\npriority_queue\u003cT\u003e pque; 昇順にしたいときには，次のように書く:\npriority_queue\u003cT, vector\u003cT\u003e, greater\u003cT\u003e\u003e pque; 一般の比較関数 fn を書きたいときには，次のようにする． 指定した比較関数の「大きい」順に取り出される． つまり，fn(x, y) が真の時には，yがxより先に取り出される．\npriority_queue\u003cT, vector\u003cT\u003e, decltype(fn)\u003e pque(fn); 例:\nusing Pair = pair\u003cint, int\u003e; auto comp = [\u0026](Pair x, Pair y) -\u003e bool { if (x.first != y.first) return x.first \u003c y.first; else return x.second \u003e y.second; }; priority_queue\u003cPair, vector\u003cPair\u003e, decltype(comp)\u003e pque(comp); pque.emplace(2, 1); pque.emplace(3, 5), pque.emplace(3, 9); Pair p; p = pque.top(); pque.pop(); assert(p == Pair(3, 5)); p = pque.top(); pque.pop(); assert(p == Pair(3, 9)); p = pque.top(); pque.pop(); assert(p == Pair(2, 1)); ",
   "wordCount" : "526",
   "inLanguage": "en",
   "datePublished": "2021-09-20T07:14:12+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -219,13 +217,14 @@
     <div class="post-description">
       C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．
     </div>
-    <div class="post-meta">2021-09-20&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-09-20&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> <div class="toc">
     <details  open>
         <summary accesskey="c" title="(Alt + C)">
-            <div class="details">Table of Contents</div>
+            <span class="details">Table of Contents</span>
         </summary>
+
         <div class="inner"><ul>
                 <li>
                     <a href="#stream-%e3%81%ae%e6%9b%b8%e5%bc%8f%e9%96%a2%e9%80%a3" aria-label="stream の書式関連">stream の書式関連</a></li>
@@ -410,12 +409,12 @@ it の指している「要素間の位置」は変わらずに，方向だけ�
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>コーディングスタイル</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Red and Blue Lamps - AtCoder Beginner Contest 218 H</span>
   </a>
@@ -445,36 +444,28 @@ it の指している「要素間の位置」は変わらずに，方向だけ�
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -528,12 +519,12 @@ it の指している「要素間の位置」は変わらずに，方向だけ�
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

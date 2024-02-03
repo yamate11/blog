@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ABC 221 参加記 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="ABC221に参加して，ABCDEF 6完2ペナルティでした．その記録です．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="ABC221に参加して，ABCDEF 6完2ペナルティでした．その記録です．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-03-abc221/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-03T18:00:39&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-03T18:00:39&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-03T18:00:39+09:00" />
+<meta property="article:modified_time" content="2021-10-03T18:00:39+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC 221 参加記"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest (ABC221) に参加して， ABCDEF 6完2ペナルティ 238位でした．その記録です．\nA - Seismic magnitude scales $32^{B-A}$ が答です．\nB - typo S = T か，または， 隣り合う2文字を入れ替えてみて T と一致すれば Yes, そうでなければ No です．\n「隣り合う」というのを見落として1WA．良く読まなくちゃ．\nC - Select Mul $N$の桁数を $t$ として，2つに分離する方法が $2^t$ くらいあります (実際には両者1つ以上必要なので，$2^t - 2$)．これらを全部探索します． 2つに分けたら，各々降順ソートして掛け合わせます．\nD - Online games イベントソートです．\n ユーザが x 日目にログインした … $(x, 1)$ ユーザが y 日目にログアウトした … $(y, -1)$  これらを昇順にソートして，順に見ます．現在のログイン数を表す 変数 num に，一つ前に見た組の日付を表す変数 prev を使い， $(z, c)$ を見たら，次を実行します:\nanswer[num] += z - prev; num += c; prev = z; E - LEQ 解法 $i したがって，求める答は\n$$ \\sum_i \\frac{1}{2^{i+1}} \\sum \\{ 2^{j} \\mid i となりますから， $i$ の大きい方から順に，和をセグメント木で求めていけば良いです． 座標圧縮が必要です．\n経緯 $i$ を大きい方から見ていくということは考えていたのですが， $i$ が減るたびに，\n 今ある値を全部2倍して， A_i のところに 1 を追加する  という操作をしなくてはならず，これはできないよな，と思って 上の解法に至るまでだいぶ時間を使いました．終了後，それは 遅延セグメント木でできる，という指摘がありました．\nEは遅延セグ木で区間和、全体二倍、一点+1をしました。\n— keijak (@keijak) October 2, 2021  F - Diameter set 解法 木の直径などに関しては以下が成り立ちます． maguroflyさんのまとめ がわかりやすい．\n 任意の点$x$に対し，$x$ から $y$ が最遠で，$y$ から $z$ が最遠であるとき， $y$ と $z$ を結ぶパスが直径パスになる． 最遠点までの距離が最小の点を中心と呼ぶことにすると，  直径$d$が偶数の時，中心がちょうど1つ存在する． これは，任意の直径パス $y$ – $z$ に対して，パス上にあって $y$ から 距離 $d$ の点である． 直径$d$が奇数の時，中心がちょうど2つ存在する． これは，任意の直径パス $y$ – $z$ に対して，パス上にあって $y$ から 距離 $(d - 1) / 2$ と $(d + 1) / 2$ の点である．    直径$d$が奇数の時には，各中心を根とする (もう一つの中心と反対方向の) 部分木の，深さ$(d - 1) / 2$ の点の数を $m$, $n$ とすれば， 答は $mn$ になります．\n直径$d$が偶数の時には，中心に隣接する点の集合を $A$ として， 各 $a \\in A$ を根とする (中心と反対方向の) 部分木の， 深さ $d/2 - 1$ の点の集合を $L_a$ と書くことにすれば， 各 $L_a$ から 1点または 0点を選んで赤く塗ることができます． ただし，全体として，部分木を2個以上選ばなくてはなりません． したがって答は，$m_a = |L_a|$ として， $\\prod_a (m_a + 1) - \\sum_a m_a - 1$ です．\n経緯 サンプルが通ったのが，終了5分前． 提出したらWAの山で，だめかなと思ったのですが， 偶然バグが見つかって，終了15秒前に通せました．ラッキー．\n",
+  "articleBody": "AtCoder Beginner Contest (ABC221) に参加して， ABCDEF 6完2ペナルティ 238位でした．その記録です．\nA - Seismic magnitude scales $32^{B-A}$ が答です．\nB - typo S = T か，または， 隣り合う2文字を入れ替えてみて T と一致すれば Yes, そうでなければ No です．\n「隣り合う」というのを見落として1WA．良く読まなくちゃ．\nC - Select Mul $N$の桁数を $t$ として，2つに分離する方法が $2^t$ くらいあります (実際には両者1つ以上必要なので，$2^t - 2$)．これらを全部探索します． 2つに分けたら，各々降順ソートして掛け合わせます．\nD - Online games イベントソートです．\nユーザが x 日目にログインした … $(x, 1)$ ユーザが y 日目にログアウトした … $(y, -1)$ これらを昇順にソートして，順に見ます．現在のログイン数を表す 変数 num に，一つ前に見た組の日付を表す変数 prev を使い， $(z, c)$ を見たら，次を実行します:\nanswer[num] += z - prev; num += c; prev = z; E - LEQ 解法 $i \u003c j$ で $A_i \\leq A_j$ となっていたら， $i$ で始まって $j$ で終わる部分列 $2^{j - i - 1}$ 個は条件を満たします．これ以外に条件を満たす部分列はありません．\nしたがって，求める答は\n$$ \\sum_i \\frac{1}{2^{i+1}} \\sum \\{ 2^{j} \\mid i \u003c j \\text{ and } A_i \\leq A_j \\} $$\nとなりますから， $i$ の大きい方から順に，和をセグメント木で求めていけば良いです． 座標圧縮が必要です．\n経緯 $i$ を大きい方から見ていくということは考えていたのですが， $i$ が減るたびに，\n今ある値を全部2倍して， A_i のところに 1 を追加する という操作をしなくてはならず，これはできないよな，と思って 上の解法に至るまでだいぶ時間を使いました．終了後，それは 遅延セグメント木でできる，という指摘がありました．\nEは遅延セグ木で区間和、全体二倍、一点+1をしました。\n— keijak (@keijak) October 2, 2021 F - Diameter set 解法 木の直径などに関しては以下が成り立ちます． maguroflyさんのまとめ がわかりやすい．\n任意の点$x$に対し，$x$ から $y$ が最遠で，$y$ から $z$ が最遠であるとき， $y$ と $z$ を結ぶパスが直径パスになる． 最遠点までの距離が最小の点を中心と呼ぶことにすると， 直径$d$が偶数の時，中心がちょうど1つ存在する． これは，任意の直径パス $y$ – $z$ に対して，パス上にあって $y$ から 距離 $d$ の点である． 直径$d$が奇数の時，中心がちょうど2つ存在する． これは，任意の直径パス $y$ – $z$ に対して，パス上にあって $y$ から 距離 $(d - 1) / 2$ と $(d + 1) / 2$ の点である． 直径$d$が奇数の時には，各中心を根とする (もう一つの中心と反対方向の) 部分木の，深さ$(d - 1) / 2$ の点の数を $m$, $n$ とすれば， 答は $mn$ になります．\n直径$d$が偶数の時には，中心に隣接する点の集合を $A$ として， 各 $a \\in A$ を根とする (中心と反対方向の) 部分木の， 深さ $d/2 - 1$ の点の集合を $L_a$ と書くことにすれば， 各 $L_a$ から 1点または 0点を選んで赤く塗ることができます． ただし，全体として，部分木を2個以上選ばなくてはなりません． したがって答は，$m_a = |L_a|$ として， $\\prod_a (m_a + 1) - \\sum_a m_a - 1$ です．\n経緯 サンプルが通ったのが，終了5分前． 提出したらWAの山で，だめかなと思ったのですが， 偶然バグが見つかって，終了15秒前に通せました．ラッキー．\n",
   "wordCount" : "252",
   "inLanguage": "en",
   "datePublished": "2021-10-03T18:00:39+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       ABC 221 参加記
     </h1>
-    <div class="post-meta">2021-10-03&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-03&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest (ABC221) に参加して，
@@ -307,12 +305,12 @@ $\prod_a (m_a + 1) - \sum_a m_a - 1$
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-09-abc222/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ABC 222 参加記</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>桁DPのコーディング</span>
   </a>
@@ -342,36 +340,28 @@ $\prod_a (m_a + 1) - \sum_a m_a - 1$
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -425,12 +415,12 @@ $\prod_a (m_a + 1) - \sum_a m_a - 1$
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

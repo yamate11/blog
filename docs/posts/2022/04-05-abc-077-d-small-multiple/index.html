@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Small Multiple - Atcoder Beginner Contest 077 D | yamate11のブログ</title>
-<meta name="keywords" content="0-1BFS" />
+<meta name="keywords" content="0-1BFS">
 <meta name="description" content="公式解説の行間を埋めました．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="公式解説の行間を埋めました．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-05T09:58:31&#43;09:00" />
-<meta property="article:modified_time" content="2022-04-05T09:58:31&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-04-05T09:58:31+09:00" />
+<meta property="article:modified_time" content="2022-04-05T09:58:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Small Multiple - Atcoder Beginner Contest 077 D"/>
@@ -88,8 +123,8 @@
   "keywords": [
     "0-1BFS"
   ],
-  "articleBody": "Atcoder Beginner Contest 077 - ABC 077 D - Small Multiple の解法です． 公式解説 の通りですが， 少し丁寧に書きました．\n問題概要 2以上の整数 $K$ が与えられる． $K$ の倍数である正の整数について， 十進表記の各桁の和としてありうる最小の値を求めよ．\n制約: $K \\leq 10^5$\n問題へのリンク 解法 整数 $t$ の十進表記を $t = \\sum_{i=0}^{m} d_i 10^i$ としたとき， 各桁の和を $f(t) = \\sum_{i=0}^{m} d_i$ で表す．次が成り立つのは明らか．\n $f(t + 1) \\leq f(t) + 1$ $d_0 \\not= 9$ のとき，$f(t + 1) = f(t) + 1$ $f(10t) = f(t)$  補題1  非負整数列 $a_0, a_1, \\ldots$ が次を満たすとする:\n $a_0 = 0$ 各 $i$ について， $a_{i + 1} = a_i + 1$ または $a_{i + 1} = 10 a_i$  非負整数列 $b_0, b_1, \\ldots$ を，次で定義する:\n $b_0 = 0$ $a_{i + 1} = a_i + 1$ のとき，$b_{i + 1} = b_i + 1$ $a_{i + 1} = 10 a_i$ のとき，$b_{i + 1} = b_i$  このとき，$f(a_i) \\leq b_i$ である．\n 証明 簡単な帰納法．(終)\n補題2  正の整数 $t$ に対し，整数列 $a_0, a_1, …, a_m$ で，次を満たすものが取れる:\n $m  0$ $a_0 = 0$ 各 $i$ について， $a_{i + 1} = a_i + 1$ または $a_{i + 1} = 10 a_i$ $a_m = t$ 補題1で定義する列 $b_0, b_1, \\ldots, b_m$ について，$f(a_m) = b_m$   証明 $t = 10s$ のときには，$s$ に対する列の後ろに $t$ を追加すれば良い． $t = 10s + k\\quad(1 \\leq k \\leq 9)$ のときには，$t - 1$ に対する 列の後ろに $t$ を追加すれば良い．(終)\nノードが $0, 1, \\ldots, K-1$ からなる重み付き有向グラフを考える: $\\newcommand{\\foo}{\\;(\\textrm{mod}~K)}$\n $x$ から $x + 1 \\foo$ に，重み 1 の辺がある． $x$ から $10x \\foo$ に，重み 0 の辺がある．  補題1の条件を満たす整数列 $a_0, a_1, \\ldots, a_m$ と $b_0, b_1, \\ldots, b_m$ に対して， $a_0\\foo, a_1\\foo, \\ldots, a_m\\foo$ は，このグラフのパスになり， その重みは $b_m$ である． したがって，補題1, 2 より，ノード 0 から ノード 0 に至る長さ 2 以上の パスのうち最も短いものの重みが求める答となる．\n0-1 BFS により，計算量 $O(K)$ で求められる．\nACコード #include #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i #define REP2R(i, a, b) for (ll i = (a); i = (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end() #define SIZE(v) ((ll)((v).size()))  int main() {  ios_base::sync_with_stdio(false);  cin.tie(nullptr);  cout  setprecision(20);   ll K; cin  K;  using sta = pairll, ll;  dequesta deq;  const ll big = 1e10;  vectorll dist(K, big);  dist[1] = 1;  deq.emplace_back(1, 1);  while (not deq.empty()) {  auto [d, n] = deq.front(); deq.pop_front();  if (dist[n]  d) continue;  if (n == 0) {  cout  d  endl;  return 0;  }  ll y = (n + 1) % K;  if (d + 1  dist[y]) {  dist[y] = d + 1;  deq.emplace_back(d + 1, y);  }  y = (10 * n) % K;  if (d  dist[y]) {  dist[y] = d;  deq.emplace_front(d, y);  }  }   return 0; } ",
-  "wordCount" : "411",
+  "articleBody": "Atcoder Beginner Contest 077 - ABC 077 D - Small Multiple の解法です． 公式解説 の通りですが， 少し丁寧に書きました．\n問題概要 2以上の整数 $K$ が与えられる． $K$ の倍数である正の整数について， 十進表記の各桁の和としてありうる最小の値を求めよ．\n制約: $K \\leq 10^5$\n問題へのリンク 解法 整数 $t$ の十進表記を $t = \\sum_{i=0}^{m} d_i 10^i$ としたとき， 各桁の和を $f(t) = \\sum_{i=0}^{m} d_i$ で表す．次が成り立つのは明らか．\n$f(t + 1) \\leq f(t) + 1$ $d_0 \\not= 9$ のとき，$f(t + 1) = f(t) + 1$ $f(10t) = f(t)$ 補題1 非負整数列 $a_0, a_1, \\ldots$ が次を満たすとする:\n$a_0 = 0$ 各 $i$ について， $a_{i + 1} = a_i + 1$ または $a_{i + 1} = 10 a_i$ 非負整数列 $b_0, b_1, \\ldots$ を，次で定義する:\n$b_0 = 0$ $a_{i + 1} = a_i + 1$ のとき，$b_{i + 1} = b_i + 1$ $a_{i + 1} = 10 a_i$ のとき，$b_{i + 1} = b_i$ このとき，$f(a_i) \\leq b_i$ である．\n証明 簡単な帰納法．(終)\n補題2 正の整数 $t$ に対し，整数列 $a_0, a_1, …, a_m$ で，次を満たすものが取れる:\n$m \u003e 0$ $a_0 = 0$ 各 $i$ について， $a_{i + 1} = a_i + 1$ または $a_{i + 1} = 10 a_i$ $a_m = t$ 補題1で定義する列 $b_0, b_1, \\ldots, b_m$ について，$f(a_m) = b_m$ 証明 $t = 10s$ のときには，$s$ に対する列の後ろに $t$ を追加すれば良い． $t = 10s + k\\quad(1 \\leq k \\leq 9)$ のときには，$t - 1$ に対する 列の後ろに $t$ を追加すれば良い．(終)\nノードが $0, 1, \\ldots, K-1$ からなる重み付き有向グラフを考える: $\\newcommand{\\foo}{\\;(\\textrm{mod}~K)}$\n$x$ から $x + 1 \\foo$ に，重み 1 の辺がある． $x$ から $10x \\foo$ に，重み 0 の辺がある． 補題1の条件を満たす整数列 $a_0, a_1, \\ldots, a_m$ と $b_0, b_1, \\ldots, b_m$ に対して， $a_0\\foo, a_1\\foo, \\ldots, a_m\\foo$ は，このグラフのパスになり， その重みは $b_m$ である． したがって，補題1, 2 より，ノード 0 から ノード 0 に至る長さ 2 以上の パスのうち最も短いものの重みが求める答となる．\n0-1 BFS により，計算量 $O(K)$ で求められる．\nACコード #include #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i \u003c (b); i++) #define REP2R(i, a, b) for (ll i = (a); i \u003e= (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end() #define SIZE(v) ((ll)((v).size())) int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout \u003c\u003c setprecision(20); ll K; cin \u003e\u003e K; using sta = pair\u003cll, ll\u003e; deque\u003csta\u003e deq; const ll big = 1e10; vector\u003cll\u003e dist(K, big); dist[1] = 1; deq.emplace_back(1, 1); while (not deq.empty()) { auto [d, n] = deq.front(); deq.pop_front(); if (dist[n] \u003c d) continue; if (n == 0) { cout \u003c\u003c d \u003c\u003c endl; return 0; } ll y = (n + 1) % K; if (d + 1 \u003c dist[y]) { dist[y] = d + 1; deq.emplace_back(d + 1, y); } y = (10 * n) % K; if (d \u003c dist[y]) { dist[y] = d; deq.emplace_front(d, y); } } return 0; } ",
+  "wordCount" : "413",
   "inLanguage": "en",
   "datePublished": "2022-04-05T09:58:31+09:00",
   "dateModified": "2022-04-05T09:58:31+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Small Multiple - Atcoder Beginner Contest 077 D
     </h1>
-    <div class="post-meta">2022-04-05&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-04-05&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>Atcoder Beginner Contest 077 - ABC 077 D - Small Multiple の解法です．
@@ -339,12 +337,12 @@ $a_0\foo, a_1\foo, \ldots, a_m\foo$ は，このグラフのパスになり，
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Differ by K bits - Atcoder Regular Contest 138 D</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</span>
   </a>
@@ -374,36 +372,28 @@ $a_0\foo, a_1\foo, \ldots, a_m\foo$ は，このグラフのパスになり，
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -457,12 +447,12 @@ $a_0\foo, a_1\foo, \ldots, a_m\foo$ は，このグラフのパスになり，
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

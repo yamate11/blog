@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>policy-based data structure の tree | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
-リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
- x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt;  pair_t,  null_type,  less&lt;pair_t&gt;,  rb_tree_tag,  tree_order_statistics_node_update  &gt;; 例: string から int へのマップ using ordered_map = tree&lt;  string,  int,  less&lt;string&gt;,  rb_tree_tag,  tree_order_statistics_node_update &gt;; 機能の呼び出し  ordered_set os;  os.">
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os.">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -20,8 +20,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,18 +85,18 @@
 
 <meta property="og:title" content="policy-based data structure の tree" />
 <meta property="og:description" content="gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
-リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
- x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt;  pair_t,  null_type,  less&lt;pair_t&gt;,  rb_tree_tag,  tree_order_statistics_node_update  &gt;; 例: string から int へのマップ using ordered_map = tree&lt;  string,  int,  less&lt;string&gt;,  rb_tree_tag,  tree_order_statistics_node_update &gt;; 機能の呼び出し  ordered_set os;  os." />
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-05T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-06-05T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-06-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-06-05T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="policy-based data structure の tree"/>
 <meta name="twitter:description" content="gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
-リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
- x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt;  pair_t,  null_type,  less&lt;pair_t&gt;,  rb_tree_tag,  tree_order_statistics_node_update  &gt;; 例: string から int へのマップ using ordered_map = tree&lt;  string,  int,  less&lt;string&gt;,  rb_tree_tag,  tree_order_statistics_node_update &gt;; 機能の呼び出し  ordered_set os;  os."/>
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os."/>
 
 
 <script type="application/ld+json">
@@ -90,12 +125,12 @@
   "@type": "BlogPosting",
   "headline": "policy-based data structure の tree",
   "name": "policy-based data structure の tree",
-  "description": "gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．\nリンク  Policy-based Data Structure (GCC online docs) Codeforces admant\u0026#39;s blog   まとめ 以下の操作ができる set や map\n x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include \u0026lt;ext/pb_ds/assoc_container.hpp\u0026gt;#include \u0026lt;ext/pb_ds/tree_policy.hpp\u0026gt;using namespace __gnu_pbds; 型の定義 例: pair\u0026lt;int, int\u0026gt; の集合 using pair_t = pair\u0026lt;int, int\u0026gt;; using ordered_set = tree\u0026lt;  pair_t,  null_type,  less\u0026lt;pair_t\u0026gt;,  rb_tree_tag,  tree_order_statistics_node_update  \u0026gt;; 例: string から int へのマップ using ordered_map = tree\u0026lt;  string,  int,  less\u0026lt;string\u0026gt;,  rb_tree_tag,  tree_order_statistics_node_update \u0026gt;; 機能の呼び出し  ordered_set os;  os.",
+  "description": "gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．\nリンク Policy-based Data Structure (GCC online docs) Codeforces admant\u0026#39;s blog まとめ 以下の操作ができる set や map\nx を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include \u0026lt;ext/pb_ds/assoc_container.hpp\u0026gt; #include \u0026lt;ext/pb_ds/tree_policy.hpp\u0026gt; using namespace __gnu_pbds; 型の定義 例: pair\u0026lt;int, int\u0026gt; の集合 using pair_t = pair\u0026lt;int, int\u0026gt;; using ordered_set = tree\u0026lt; pair_t, null_type, less\u0026lt;pair_t\u0026gt;, rb_tree_tag, tree_order_statistics_node_update \u0026gt;; 例: string から int へのマップ using ordered_map = tree\u0026lt; string, int, less\u0026lt;string\u0026gt;, rb_tree_tag, tree_order_statistics_node_update \u0026gt;; 機能の呼び出し ordered_set os; os.",
   "keywords": [
     
   ],
-  "articleBody": "gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．\nリンク  Policy-based Data Structure (GCC online docs) Codeforces admant's blog   まとめ 以下の操作ができる set や map\n x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include #include using namespace __gnu_pbds; 型の定義 例: pairの集合 using pair_t = pairint, int; using ordered_set = tree  pair_t,  null_type,  lesspair_t,  rb_tree_tag,  tree_order_statistics_node_update  ; 例: string から int へのマップ using ordered_map = tree  string,  int,  lessstring,  rb_tree_tag,  tree_order_statistics_node_update ; 機能の呼び出し  ordered_set os;  os.insert(pair_t(0,0));  os.insert(pair_t(1,0));  os.insert(pair_t(1,1));  os.insert(pair_t(2,0));  os.insert(pair_t(2,1));  // order_of_key: 指定した値よりも小さい要素の数  assert(os.order_of_key(pair_t(-1,0)) == 0);  assert(os.order_of_key(pair_t(0,0)) == 0);  assert(os.order_of_key(pair_t(0,1)) == 1);  assert(os.order_of_key(pair_t(1,0)) == 1);  assert(os.order_of_key(pair_t(1,1)) == 2);  assert(os.order_of_key(pair_t(100,0)) == 5);  // find_by_order: 指定した位置の要素へのイテレータ  assert(*os.find_by_order(0) == pair_t(0,0));  assert(*os.find_by_order(2) == pair_t(1,1));  assert(*os.find_by_order(4) == pair_t(2,1));  assert(os.find_by_order(5) == os.end()); 注意  必ずしも速くないらしい．Fenwick tree なり segment tree の倍くらい遅いというレポートがある multiset や multimap に相当する機能はない (リンク )  ",
-  "wordCount" : "129",
+  "articleBody": "gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．\nリンク Policy-based Data Structure (GCC online docs) Codeforces admant's blog まとめ 以下の操作ができる set や map\nx を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include #include using namespace __gnu_pbds; 型の定義 例: pair の集合 using pair_t = pair\u003cint, int\u003e; using ordered_set = tree\u003c pair_t, null_type, less\u003cpair_t\u003e, rb_tree_tag, tree_order_statistics_node_update \u003e; 例: string から int へのマップ using ordered_map = tree\u003c string, int, less\u003cstring\u003e, rb_tree_tag, tree_order_statistics_node_update \u003e; 機能の呼び出し ordered_set os; os.insert(pair_t(0,0)); os.insert(pair_t(1,0)); os.insert(pair_t(1,1)); os.insert(pair_t(2,0)); os.insert(pair_t(2,1)); // order_of_key: 指定した値よりも小さい要素の数 assert(os.order_of_key(pair_t(-1,0)) == 0); assert(os.order_of_key(pair_t(0,0)) == 0); assert(os.order_of_key(pair_t(0,1)) == 1); assert(os.order_of_key(pair_t(1,0)) == 1); assert(os.order_of_key(pair_t(1,1)) == 2); assert(os.order_of_key(pair_t(100,0)) == 5); // find_by_order: 指定した位置の要素へのイテレータ assert(*os.find_by_order(0) == pair_t(0,0)); assert(*os.find_by_order(2) == pair_t(1,1)); assert(*os.find_by_order(4) == pair_t(2,1)); assert(os.find_by_order(5) == os.end()); 注意 必ずしも速くないらしい．Fenwick tree なり segment tree の倍くらい遅いというレポートがある multiset や multimap に相当する機能はない (リンク ) ",
+  "wordCount" : "131",
   "inLanguage": "en",
   "datePublished": "2021-06-05T00:00:00Z",
   "dateModified": "2021-06-05T00:00:00Z",
@@ -130,56 +165,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -193,7 +191,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -222,7 +220,7 @@
     <h1 class="post-title">
       policy-based data structure の tree
     </h1>
-    <div class="post-meta">2021-06-05&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-06-05&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．</p>
@@ -295,12 +293,12 @@
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Greedy Ant - キーエンスプログラミングコンテスト2021 E</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>きたまさ法</span>
   </a>
@@ -330,36 +328,28 @@
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -413,12 +403,12 @@
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

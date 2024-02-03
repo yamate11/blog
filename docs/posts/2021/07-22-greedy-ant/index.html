@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Greedy Ant - キーエンスプログラミングコンテスト2021 E | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
-初期化: // 蟻の初期位置を 2n &#43; 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k &#43;= 1  while k &gt; 0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r &#43;= 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．">
+初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -21,8 +21,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -53,18 +88,18 @@
 <meta property="og:description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
-初期化: // 蟻の初期位置を 2n &#43; 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k &#43;= 1  while k &gt; 0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r &#43;= 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．" />
+初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-22T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-22T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-07-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-22T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Greedy Ant - キーエンスプログラミングコンテスト2021 E"/>
 <meta name="twitter:description" content="キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
-初期化: // 蟻の初期位置を 2n &#43; 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k &#43;= 1  while k &gt; 0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r &#43;= 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．"/>
+初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．"/>
 
 
 <script type="application/ld+json">
@@ -93,11 +128,11 @@
   "@type": "BlogPosting",
   "headline": "Greedy Ant - キーエンスプログラミングコンテスト2021 E",
   "name": "Greedy Ant - キーエンスプログラミングコンテスト2021 E",
-  "description": "キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．\n問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．\nすぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)\n初期化: // 蟻の初期位置を 2n + 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n + 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k += 1  while k \u0026gt; 0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r += 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．",
+  "description": "キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．\n問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．\nすぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)\n初期化: // 蟻の初期位置を 2n + 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n + 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k += 1 while k \u0026gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r += 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．",
   "keywords": [
     
   ],
-  "articleBody": "キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．\n問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．\nすぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)\n初期化: // 蟻の初期位置を 2n + 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n + 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k += 1  while k  0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r += 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．\nf(l, r, k) = max( none(l, r, k)  , a[l] + f(l - 1, r, k - 1)  , a[r] + f(l, r + 1, k - 1)  ) ただし，a[l]  a[r] のとき，none(l, r, k) = f(l - 1, r, k + 1) そうでないとき， none(l, r, k) = f(l, r + 1, k + 1) f(n, n + 1, 1) が求める答です． fは，メモ化再帰で計算でき，時間計算量は O(N^3)です．\n経緯 コンテスト中も解けず，復習でも答を思い出せませんでした．blogに書くことで覚えられるか???\n",
+  "articleBody": "キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．\n問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．\nすぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)\n初期化: // 蟻の初期位置を 2n + 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n + 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k += 1 while k \u003e 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r += 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．\nf(l, r, k) = max( none(l, r, k) , a[l] + f(l - 1, r, k - 1) , a[r] + f(l, r + 1, k - 1) ) ただし，a[l] \u003e a[r] のとき，none(l, r, k) = f(l - 1, r, k + 1) そうでないとき， none(l, r, k) = f(l, r + 1, k + 1) f(n, n + 1, 1) が求める答です． fは，メモ化再帰で計算でき，時間計算量は O(N^3)です．\n経緯 コンテスト中も解けず，復習でも答を思い出せませんでした．blogに書くことで覚えられるか???\n",
   "wordCount" : "160",
   "inLanguage": "en",
   "datePublished": "2021-07-22T00:00:00Z",
@@ -133,56 +168,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -196,7 +194,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -225,7 +223,7 @@
     <h1 class="post-title">
       Greedy Ant - キーエンスプログラミングコンテスト2021 E
     </h1>
-    <div class="post-meta">2021-07-22&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-07-22&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．</p>
@@ -275,12 +273,12 @@ fは，メモ化再帰で計算でき，時間計算量は O(N^3)です．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>距離: BFSとダイクストラ</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>policy-based data structure の tree</span>
   </a>
@@ -310,36 +308,28 @@ fは，メモ化再帰で計算でき，時間計算量は O(N^3)です．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -393,12 +383,12 @@ fは，メモ化再帰で計算でき，時間計算量は O(N^3)です．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

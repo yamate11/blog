@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ローリングハッシュライブラリ | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="ローリングハッシュライブラリの使い方についての自分用のメモです">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="ローリングハッシュライブラリの使い方についての自分用のメモです" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-12-09T16:28:56&#43;09:00" />
-<meta property="article:modified_time" content="2023-12-09T16:28:56&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-12-09T16:28:56+09:00" />
+<meta property="article:modified_time" content="2023-12-09T16:28:56+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ローリングハッシュライブラリ"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "ローリングハッシュライブラリの使い方についての自分用のメモです\nローリングハッシュ ローリングハッシュには，2つのパラメタ base と mod がある． 文字列を base 進の数値とみなして，その mod を法とした値をハッシュ値とする．\nたとえば，base = 200, mod = 10007 の場合，文字列 “abc” のハッシュ値は， $(97 * 200^2 + 98 * 200 + 99) \\mod 10007 = 6976$ である． (文字 ‘a’ の ASCII コードは 97 であった)\nこのライブラリでは，上の計算例が示すように， 末尾文字が1の位で，先頭文字が base の s.size() - 1 乗の位としている．\n安全な運用のためには，以下を守る必要がある:\n mod は，大きな素数とする．(固定しても問題無い) base は，ランダムに取る． 可能な場合，base は，1文字のハッシュ値より大きく取る． 上の例のように，1文字のハッシュ値を ASCII コードにとるならば， base は 128 以上に取る．  このライブラリでは， keymoon 氏の記事 にしたがって，mod = $2^{61} - 1$ にとっている． この mod を使うと，積が高速に計算できる．\n使用法 以下，u64 は unsigned long long のこととする．\nハッシュ値の計算は，次の段取りによる:\n まず，RollingHash オブジェクト rh を作成する． 文字列 s およびその部分文字列についてハッシュ値を計算したいとして， hs = rh.hashes(s); によって，ハッシュテーブル hs を作成する． hs は，長さが s.size() + 1 の vector オブジェクトである． ハッシュ値は次の通り:  s の位置 i から始まる長さ k の部分文字列のハッシュ値: rh.get(hs, i, k) ただし，s の先頭 k 文字からなる部分文字列のハッシュ値は，hs[k] でも求められる． したがって，s のハッシュ値は，hs.back() でも求められる．    オブジェクトの生成 通常は，次のようにする．\nRollingHash rh; これは，string を対象としたものになり，mod は $2^{61} - 1$ である． base は，1000 以上 $2^{59}$ 未満の範囲でランダムに選択される．\nbase を指定する場合には，次のようにする．\nRollingHash rh(base); 次のコードは，base をランダム選択にするが， 選択範囲が min_base 以上 $2^{60}$ 未満になる．\nRollingHash rh(0, min_base); ハッシュテーブルの生成 ハッシュを計算する前に，ハッシュテーブルを生成する必要がある． 文字列 s に対するハッシュテーブルは，次のように生成できる:\nstring s = \"Hello, world.\"; vectoru64 hs = rh.hashes(s); hs には，vector 型で，サイズ s.size() + 1 のベクトルが設定される． hs の i 番目の要素 hs[i] は，sの先頭から i 文字の部分文字列 s.substr(0, i) のハッシュ値である． 特に，s のハッシュ値は hs.back() である．\nハッシュ値の計算 s の部分文字列のハッシュ値は，get メソッドで取得できる． 位置 start から始まる長さ len の部分文字列を取得するコードは，次の通り．\nu64 h = rh.get(hs, start, len); 連結文字列のハッシュ値 文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき， s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:\nu64 h = rh.hash_concat(h1, h2, s2.size()); 一般のベクトルに対するハッシュ 文字列に限らず，ベクトル vector に対してもハッシュを計算できる (正確にはベクトルでなくても，operator [] が定義されていれば良い)． この場合，T の各要素に対するハッシュ値が計算できる必要があるので， それを実行する関数 conv を渡して RollingHashGen オブジェクトを作成する: conv(t) の値は 0 以上 $2^{61} - 1$ 未満でなければならない．\nauto rh = make_rolling_hash_genT(0, min_base, conv); T の要素に対するハッシュ値が， T から u64 へのキャストで良い場合には，次のように定義することもできる．\nRollingHashGenT, nullptr_t rh(0, min_base); なお，上で述べた，文字列を対象とした RollingHash 型は， RollingHashGen の別名として定義されている．\nmod $2^{61} - 1$ 演算 0 以上 $2^{61} - 1$ 未満の u64 型の a, b に対し， $a + b \\mod (2^{61} - 1)$， $a - b \\mod (2^{61} - 1)$， $a \\times b \\mod (2^{61} - 1)$ の値を計算することができる: ハッシュ値をセグメント木で計算する場合など， 自前で計算が必要になったときには，これらの関数が有効であろう．\nRollingHash rh; u64 a, b; rh_add(a, b); // a + b rh_subt(a, b); // a - b rh_mul(a, b); // a * b rh_prime - a; // -a コード コードへのリンク keywords keywords: rolling hash\n",
+  "articleBody": "ローリングハッシュライブラリの使い方についての自分用のメモです\nローリングハッシュ ローリングハッシュには，2つのパラメタ base と mod がある． 文字列を base 進の数値とみなして，その mod を法とした値をハッシュ値とする．\nたとえば，base = 200, mod = 10007 の場合，文字列 “abc” のハッシュ値は， $(97 * 200^2 + 98 * 200 + 99) \\mod 10007 = 6976$ である． (文字 ‘a’ の ASCII コードは 97 であった)\nこのライブラリでは，上の計算例が示すように， 末尾文字が1の位で，先頭文字が base の s.size() - 1 乗の位としている．\n安全な運用のためには，以下を守る必要がある:\nmod は，大きな素数とする．(固定しても問題無い) base は，ランダムに取る． 可能な場合，base は，1文字のハッシュ値より大きく取る． 上の例のように，1文字のハッシュ値を ASCII コードにとるならば， base は 128 以上に取る． このライブラリでは， keymoon 氏の記事 にしたがって，mod = $2^{61} - 1$ にとっている． この mod を使うと，積が高速に計算できる．\n使用法 以下，u64 は unsigned long long のこととする．\nハッシュ値の計算は，次の段取りによる:\nまず，RollingHash オブジェクト rh を作成する． 文字列 s およびその部分文字列についてハッシュ値を計算したいとして， hs = rh.hashes(s); によって，ハッシュテーブル hs を作成する． hs は，長さが s.size() + 1 の vector オブジェクトである． ハッシュ値は次の通り: s の位置 i から始まる長さ k の部分文字列のハッシュ値: rh.get(hs, i, k) ただし，s の先頭 k 文字からなる部分文字列のハッシュ値は，hs[k] でも求められる． したがって，s のハッシュ値は，hs.back() でも求められる． オブジェクトの生成 通常は，次のようにする．\nRollingHash rh; これは，string を対象としたものになり，mod は $2^{61} - 1$ である． base は，1000 以上 $2^{59}$ 未満の範囲でランダムに選択される．\nbase を指定する場合には，次のようにする．\nRollingHash rh(base); 次のコードは，base をランダム選択にするが， 選択範囲が min_base 以上 $2^{60}$ 未満になる．\nRollingHash rh(0, min_base); ハッシュテーブルの生成 ハッシュを計算する前に，ハッシュテーブルを生成する必要がある． 文字列 s に対するハッシュテーブルは，次のように生成できる:\nstring s = \"Hello, world.\"; vector\u003cu64\u003e hs = rh.hashes(s); hs には，vector 型で，サイズ s.size() + 1 のベクトルが設定される． hs の i 番目の要素 hs[i] は，sの先頭から i 文字の部分文字列 s.substr(0, i) のハッシュ値である． 特に，s のハッシュ値は hs.back() である．\nハッシュ値の計算 s の部分文字列のハッシュ値は，get メソッドで取得できる． 位置 start から始まる長さ len の部分文字列を取得するコードは，次の通り．\nu64 h = rh.get(hs, start, len); 連結文字列のハッシュ値 文字列 s1 のハッシュ値が h1 で，文字列 s2 のハッシュ値が h2 のとき， s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:\nu64 h = rh.hash_concat(h1, h2, s2.size()); 一般のベクトルに対するハッシュ 文字列に限らず，ベクトル vector に対してもハッシュを計算できる (正確にはベクトルでなくても，operator [] が定義されていれば良い)． この場合，T の各要素に対するハッシュ値が計算できる必要があるので， それを実行する関数 conv を渡して RollingHashGen オブジェクトを作成する: conv(t) の値は 0 以上 $2^{61} - 1$ 未満でなければならない．\nauto rh = make_rolling_hash_gen\u003cT\u003e(0, min_base, conv); T の要素に対するハッシュ値が， T から u64 へのキャストで良い場合には，次のように定義することもできる．\nRollingHashGen\u003cT, nullptr_t\u003e rh(0, min_base); なお，上で述べた，文字列を対象とした RollingHash 型は， RollingHashGen の別名として定義されている．\nmod $2^{61} - 1$ 演算 0 以上 $2^{61} - 1$ 未満の u64 型の a, b に対し， $a + b \\mod (2^{61} - 1)$， $a - b \\mod (2^{61} - 1)$， $a \\times b \\mod (2^{61} - 1)$ の値を計算することができる: ハッシュ値をセグメント木で計算する場合など， 自前で計算が必要になったときには，これらの関数が有効であろう．\nRollingHash rh; u64 a, b; rh_add(a, b); // a + b rh_subt(a, b); // a - b rh_mul(a, b); // a * b rh_prime - a; // -a コード コードへのリンク keywords keywords: rolling hash\n",
   "wordCount" : "348",
   "inLanguage": "en",
   "datePublished": "2023-12-09T16:28:56+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       ローリングハッシュライブラリ
     </h1>
-    <div class="post-meta">2023-12-09&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-12-09&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>ローリングハッシュライブラリの使い方についての自分用のメモです</p>
@@ -321,12 +319,12 @@ $a \times b \mod (2^{61} - 1)$ の値を計算することができる:
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>誤りの記録</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>セグメント木ライブラリ</span>
   </a>
@@ -356,36 +354,28 @@ $a \times b \mod (2^{61} - 1)$ の値を計算することができる:
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -439,12 +429,12 @@ $a \times b \mod (2^{61} - 1)$ の値を計算することができる:
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Return to 1 - Atcoder Beginner Contest 306 G | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="ABC306G Return to 1 の解法です">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="ABC306G Return to 1 の解法です" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-18T12:14:05&#43;09:00" />
-<meta property="article:modified_time" content="2023-06-18T12:14:05&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-06-18T12:14:05+09:00" />
+<meta property="article:modified_time" content="2023-06-18T12:14:05+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Return to 1 - Atcoder Beginner Contest 306 G"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "Atcoder Beginner Contest 306 - ABC 306 G - Return to 1 の解法です．\n問題概要 問題へのリンク $N$ 頂点 $M$ 辺の有向グラフがある． 頂点 $1$ から辺をたどることをちょうど $10^{10^{100}}$ 回繰り返して 頂点 $1$ に戻ってくることが可能か判定せよ． テストケース $T$ 個．\n制約: $T \\leq 2 \\times 10^5$． $N$ の総和と $M$ の総和は $2 \\times 10^5$ 以下．\nコンテスト中の経緯 まず，強連結成分分解をして，頂点1を含む強連結成分のみを 考えれば良い．\n頂点 1 から出発して戻ってくるサイクルの長さ全部の集合を $C$， $C$ の最大公約数を $g$ とする． $10^{10^{100}}$ は十分大きいので， $g \\mid 10^{10^{100}}$ であることが， $10^{10^{100}}$ が $C$ の要素の非負整数倍の和で表せることと同値になる． $g \\mid 10^{10^{100}}$ は，もちろん， $g$ が $2$ と $5$ 以外の素因数を持たないことと同値である．\nということで，$g$ を求めれば良いのだが，$C$ は 巨大な集合なので直接には求められない． なんらかの $C$ の部分集合で，最大公約数が $g$ と等しくなるようなものを 求めるのだろうと思った．すべての辺について， それを使うサイクルは少なくとも 1 回は評価しないといけないであろうという ことで，根拠薄弱だが，次のような集合を取ってみることにした．\n$C’ := \\{ \\text{dist}(1, x) + 1 + \\text{dist}(y, 1) \\mid (x, y) $ はグラフの辺 $\\}$\nここで，$\\text{dist}(x, y)$ は，2頂点 $x$, $y$ 間の距離である． $\\text{GCD}(C’)$ が $2$ と $5$ 以外の素因数を持たないかどうかで Yes / No を答えるようにした．\nダメ元で提出してみたが，ジャッジが詰まっていて， コンテスト終了までに結果が返ってこなかった． 結局このつまりが原因で ABC306 は unrated になった． コンテスト終了後に TLE が帰ってきたが，最初の強連結成分分解で， 頂点 $1$ が単独成分になる場合の考慮漏れだった． これを直したら AC になった．\n証明 コンテスト後， 公式解説 を見たら，想定解法は上の解法と少し似ていた． それを読んでしばらく考えたところ，上の解法も正当であることがわかった．\n 主張1 任意の辺 $(x, y)$ に対して， $g \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$．\n  主張2 $a$ を正の整数とする． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ であれば， 頂点1からの任意のサイクルの長さは，$a$ の倍数である．\n 主張1, 2 から，$C$ と $C’$ の公約数の集合が一致することがわかるので， $g = \\text{GCD}(C’)$ である．\n(主張1の証明) 頂点$1$から頂点$x$への最短パスと辺$(x, y)$ と 頂点 $y$ から頂点 $1$ への最短パスをつなぐと，長さ $\\text{dist}(1, x) + 1 + \\text{dist}(y, 1)$ のサイクルになる． $g$ はこういうものたちの公約数であった．(終)\n(主張2の証明) 正の整数 $a$ をとる． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ と仮定する． このとき，$1 = x_1, x_2, x_3, \\ldots$ が頂点1を出発するパスであれば， $\\text{dist}(1, x_i) \\equiv i - 1 \\pmod a,\\quad \\text{dist}(x_i, 1) \\equiv 1 - i \\pmod a$ であることを帰納法で示す． これが示せれば，$x_k = 1$ であれば $k \\equiv 1 \\pmod a$ である． つまり，サイクルの長さは $a$ の倍数である．\n$i = 1$ は自明．$i$までOKとすると， 辺 $(x_i, x_{i + 1})$ に関して， $\\text{dist}(1, x_i) + 1 + \\text{dist}(x_{i + 1}, 1) \\equiv 0$ だから， 帰納法の仮定より $\\text{dist}(x_{i + 1}, 1) \\equiv i$．\n$\\text{dist}(1, x_{i + 1})$ については， もし $x_{i + 1} = 1$ なら $i \\equiv 0, \\quad\\text{dist}(1, x_{i + 1}) = 0 \\equiv i$ でOKなので，$x_{i + 1} \\neq 1$ とする．$x_{i + 1}$ から $1$ への 最短パス上で，$x_{i + 1}$ の隣の点を $y$ とすると， $0 \\equiv \\text{dist}(1, x_{i + 1}) + 1 + \\text{dist}(y, 1) \\equiv \\text{dist}(1, x_{i + 1}) + 1 + (i - 1)$ より， $\\text{dist}(1, x_{i + 1}) \\equiv i$．(終)\nまあ，証明はできたものの，公式解説の方法の方がずっと良い．\nACコード 提出したコード ",
+  "articleBody": "Atcoder Beginner Contest 306 - ABC 306 G - Return to 1 の解法です．\n問題概要 問題へのリンク $N$ 頂点 $M$ 辺の有向グラフがある． 頂点 $1$ から辺をたどることをちょうど $10^{10^{100}}$ 回繰り返して 頂点 $1$ に戻ってくることが可能か判定せよ． テストケース $T$ 個．\n制約: $T \\leq 2 \\times 10^5$． $N$ の総和と $M$ の総和は $2 \\times 10^5$ 以下．\nコンテスト中の経緯 まず，強連結成分分解をして，頂点1を含む強連結成分のみを 考えれば良い．\n頂点 1 から出発して戻ってくるサイクルの長さ全部の集合を $C$， $C$ の最大公約数を $g$ とする． $10^{10^{100}}$ は十分大きいので， $g \\mid 10^{10^{100}}$ であることが， $10^{10^{100}}$ が $C$ の要素の非負整数倍の和で表せることと同値になる． $g \\mid 10^{10^{100}}$ は，もちろん， $g$ が $2$ と $5$ 以外の素因数を持たないことと同値である．\nということで，$g$ を求めれば良いのだが，$C$ は 巨大な集合なので直接には求められない． なんらかの $C$ の部分集合で，最大公約数が $g$ と等しくなるようなものを 求めるのだろうと思った．すべての辺について， それを使うサイクルは少なくとも 1 回は評価しないといけないであろうという ことで，根拠薄弱だが，次のような集合を取ってみることにした．\n$C’ := \\{ \\text{dist}(1, x) + 1 + \\text{dist}(y, 1) \\mid (x, y) $ はグラフの辺 $\\}$\nここで，$\\text{dist}(x, y)$ は，2頂点 $x$, $y$ 間の距離である． $\\text{GCD}(C’)$ が $2$ と $5$ 以外の素因数を持たないかどうかで Yes / No を答えるようにした．\nダメ元で提出してみたが，ジャッジが詰まっていて， コンテスト終了までに結果が返ってこなかった． 結局このつまりが原因で ABC306 は unrated になった． コンテスト終了後に TLE が帰ってきたが，最初の強連結成分分解で， 頂点 $1$ が単独成分になる場合の考慮漏れだった． これを直したら AC になった．\n証明 コンテスト後， 公式解説 を見たら，想定解法は上の解法と少し似ていた． それを読んでしばらく考えたところ，上の解法も正当であることがわかった．\n主張1 任意の辺 $(x, y)$ に対して， $g \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$．\n主張2 $a$ を正の整数とする． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ であれば， 頂点1からの任意のサイクルの長さは，$a$ の倍数である．\n主張1, 2 から，$C$ と $C’$ の公約数の集合が一致することがわかるので， $g = \\text{GCD}(C’)$ である．\n(主張1の証明) 頂点$1$から頂点$x$への最短パスと辺$(x, y)$ と 頂点 $y$ から頂点 $1$ への最短パスをつなぐと，長さ $\\text{dist}(1, x) + 1 + \\text{dist}(y, 1)$ のサイクルになる． $g$ はこういうものたちの公約数であった．(終)\n(主張2の証明) 正の整数 $a$ をとる． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ と仮定する． このとき，$1 = x_1, x_2, x_3, \\ldots$ が頂点1を出発するパスであれば， $\\text{dist}(1, x_i) \\equiv i - 1 \\pmod a,\\quad \\text{dist}(x_i, 1) \\equiv 1 - i \\pmod a$ であることを帰納法で示す． これが示せれば，$x_k = 1$ であれば $k \\equiv 1 \\pmod a$ である． つまり，サイクルの長さは $a$ の倍数である．\n$i = 1$ は自明．$i$までOKとすると， 辺 $(x_i, x_{i + 1})$ に関して， $\\text{dist}(1, x_i) + 1 + \\text{dist}(x_{i + 1}, 1) \\equiv 0$ だから， 帰納法の仮定より $\\text{dist}(x_{i + 1}, 1) \\equiv i$．\n$\\text{dist}(1, x_{i + 1})$ については， もし $x_{i + 1} = 1$ なら $i \\equiv 0, \\quad\\text{dist}(1, x_{i + 1}) = 0 \\equiv i$ でOKなので，$x_{i + 1} \\neq 1$ とする．$x_{i + 1}$ から $1$ への 最短パス上で，$x_{i + 1}$ の隣の点を $y$ とすると， $0 \\equiv \\text{dist}(1, x_{i + 1}) + 1 + \\text{dist}(y, 1) \\equiv \\text{dist}(1, x_{i + 1}) + 1 + (i - 1)$ より， $\\text{dist}(1, x_{i + 1}) \\equiv i$．(終)\nまあ，証明はできたものの，公式解説の方法の方がずっと良い．\nACコード 提出したコード ",
   "wordCount" : "360",
   "inLanguage": "en",
   "datePublished": "2023-06-18T12:14:05+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Return to 1 - Atcoder Beginner Contest 306 G
     </h1>
-    <div class="post-meta">2023-06-18&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-06-18&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>Atcoder Beginner Contest 306 - ABC 306 G - Return to 1 の解法です．</p>
@@ -310,12 +308,12 @@ $\text{dist}(1, x_{i + 1}) \equiv i$．(終)</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>二重連結</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>約数の個数</span>
   </a>
@@ -345,36 +343,28 @@ $\text{dist}(1, x_{i + 1}) \equiv i$．(終)</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -428,12 +418,12 @@ $\text{dist}(1, x_{i + 1}) \equiv i$．(終)</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

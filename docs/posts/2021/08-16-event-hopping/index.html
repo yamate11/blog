@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので&hellip;.
 問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという&hellip; (解説を読むまでわからなかったのですけれど)
 ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
- dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
- 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
- dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．">
+dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，
+町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2 として，
+dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -23,8 +23,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -55,22 +90,22 @@
 <meta property="og:description" content="JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので&hellip;.
 問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという&hellip; (解説を読むまでわからなかったのですけれど)
 ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
- dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
- 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
- dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．" />
+dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，
+町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2 として，
+dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-16T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-08-16T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-16T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="イベント巡り (Event Hopping) - JOI 2020/2021 二次予選"/>
 <meta name="twitter:description" content="JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので&hellip;.
 問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという&hellip; (解説を読むまでわからなかったのですけれど)
 ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
- dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
- 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
- dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．"/>
+dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，
+町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2 として，
+dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．"/>
 
 
 <script type="application/ld+json">
@@ -99,11 +134,11 @@
   "@type": "BlogPosting",
   "headline": "イベント巡り (Event Hopping) - JOI 2020/2021 二次予選",
   "name": "イベント巡り (Event Hopping) - JOI 2020\/2021 二次予選",
-  "description": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので\u0026hellip;.\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという\u0026hellip; (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\n dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，\n 町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2  として，\n dp[i1][j+1] := True dp[i2][j+1] := True  と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．",
+  "description": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので\u0026hellip;.\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという\u0026hellip; (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\ndp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，\n町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2 として，\ndp[i1][j+1] := True dp[i2][j+1] := True と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．",
   "keywords": [
     
   ],
-  "articleBody": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\n dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，\n 町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2  として，\n dp[i1][j+1] := True dp[i2][j+1] := True  と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．\n実は，回数を全部見る必要がなくて，各々のイベントに参加するまでに， 最も多くの回数のイベントに参加してきた方法だけ考えれば十分です． ただし，「ある時点までに多くの回数のイベントに参加した方が， 最終的なイベント参加回数が多い」ということは言えません． 次のような例があります．\n $D = 1$, $K = 100$ $S_1 = 1$, $P_1 = 1$ $S_2 = 1000$, $P_2 = 2$ $S_3 = 1150$, $P_3 = 1$ $S_4 = 1151$, $P_4 = 1$  町 1 から出発して イベント 1 に参加した直後に 2 に移る (方法A) と， イベント2 の直前に，今まで参加した回数は 1 です． 一方，町2から出発する (方法B) と，イベント2の直前に， 今まで参加した回数は 0 で，方法Aの方が多いです． しかし，方法B の方は，このあと イベント2, 3, 4 に参加して最終の回数が3回にできますが， 方法Aは，最終的に2回しか参加できません．\nしかし，以下は成り立ちます:\n補題 各イベント $i$ に対し，そのイベントに参加する前に参加できるイベント数の 最大値を $M(i)$ とする． 求める答を $X$ とする． 条件を満たしてイベントに参加していく方法 $e_0, \\ldots, e_{X-1}$ であって， 任意の $j = 0, \\ldots, X-1$ に対して，$M(e_j) = j$ となるものが存在する．\n補題が言えれば，DP として，以下のものをとれます:\n dp[i] := $M(i)$  遷移としては，$dp[i]$ が計算できたらば，上で述べた i1 と i2 を取って，\n dp[i1] := max(dp[i1], dp[i] + 1) dp[i2] := max(dp[i2], dp[i] + 1)  とすれば良いです．(仮想的に，十分遅く行われるN番目のイベントを考えて) dp[N] が求める答となります．このDPは，$O(N\\log N)$ で実行できます．\n補題の証明です．帰謬法によることにして，そのような方法がないとすると， $X$を達成するどの方法についても $M(e_j)  j$ となる $j$ があります． 各方法 $\\alpha$ についてそのような $j$ の最大値を$j_\\alpha$ とし， その最小値を与える $\\alpha$ を取ります． すなわち，$M(e_{j_\\alpha})  j_\\alpha$ です． イベント $e_{j_\\alpha}$ が行われる町を $p$ として， イベント $e_{j_\\alpha + 1}$ が行われる町を $q$ とすると， $ p \\neq q $ であることに注意します． $M(e_{j_\\alpha})$ を与える方法$\\beta$ をとり， $\\beta$の$j_\\alpha$番目のイベント $e$ までの部分を $\\beta’$ とします． イベント $e$ が $q$ で行われる場合には，$\\beta’$ の後に， $q$ に $e_{j_\\alpha + 1}$ まで残り続けて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． イベント $e$ が $p$ で行われる場合には，$\\beta’$ の直後に$q$に 移り，その後$e_{j_\\alpha + 1}$ まで $q$ にいて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． いずれの場合にも，$\\gamma$ は $X$ を達成する方法であり， $j_\\gamma ACコード https://atcoder.jp/contests/joi2021yo2/submissions/25099364 ",
+  "articleBody": "JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….\n問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)\nソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．\ndp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，\n町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2 として，\ndp[i1][j+1] := True dp[i2][j+1] := True と設定することになります．でも，これは $\\Omega(N^2)$ なので，間に合いません．\n実は，回数を全部見る必要がなくて，各々のイベントに参加するまでに， 最も多くの回数のイベントに参加してきた方法だけ考えれば十分です． ただし，「ある時点までに多くの回数のイベントに参加した方が， 最終的なイベント参加回数が多い」ということは言えません． 次のような例があります．\n$D = 1$, $K = 100$ $S_1 = 1$, $P_1 = 1$ $S_2 = 1000$, $P_2 = 2$ $S_3 = 1150$, $P_3 = 1$ $S_4 = 1151$, $P_4 = 1$ 町 1 から出発して イベント 1 に参加した直後に 2 に移る (方法A) と， イベント2 の直前に，今まで参加した回数は 1 です． 一方，町2から出発する (方法B) と，イベント2の直前に， 今まで参加した回数は 0 で，方法Aの方が多いです． しかし，方法B の方は，このあと イベント2, 3, 4 に参加して最終の回数が3回にできますが， 方法Aは，最終的に2回しか参加できません．\nしかし，以下は成り立ちます:\n補題 各イベント $i$ に対し，そのイベントに参加する前に参加できるイベント数の 最大値を $M(i)$ とする． 求める答を $X$ とする． 条件を満たしてイベントに参加していく方法 $e_0, \\ldots, e_{X-1}$ であって， 任意の $j = 0, \\ldots, X-1$ に対して，$M(e_j) = j$ となるものが存在する．\n補題が言えれば，DP として，以下のものをとれます:\ndp[i] := $M(i)$ 遷移としては，$dp[i]$ が計算できたらば，上で述べた i1 と i2 を取って，\ndp[i1] := max(dp[i1], dp[i] + 1) dp[i2] := max(dp[i2], dp[i] + 1) とすれば良いです．(仮想的に，十分遅く行われるN番目のイベントを考えて) dp[N] が求める答となります．このDPは，$O(N\\log N)$ で実行できます．\n補題の証明です．帰謬法によることにして，そのような方法がないとすると， $X$を達成するどの方法についても $M(e_j) \u003e j$ となる $j$ があります． 各方法 $\\alpha$ についてそのような $j$ の最大値を$j_\\alpha$ とし， その最小値を与える $\\alpha$ を取ります． すなわち，$M(e_{j_\\alpha}) \u003e j_\\alpha$ です． イベント $e_{j_\\alpha}$ が行われる町を $p$ として， イベント $e_{j_\\alpha + 1}$ が行われる町を $q$ とすると， $ p \\neq q $ であることに注意します． $M(e_{j_\\alpha})$ を与える方法$\\beta$ をとり， $\\beta$の$j_\\alpha$番目のイベント $e$ までの部分を $\\beta’$ とします． イベント $e$ が $q$ で行われる場合には，$\\beta’$ の後に， $q$ に $e_{j_\\alpha + 1}$ まで残り続けて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． イベント $e$ が $p$ で行われる場合には，$\\beta’$ の直後に$q$に 移り，その後$e_{j_\\alpha + 1}$ まで $q$ にいて，その後 $\\alpha$ と 同じに振る舞う方法を $\\gamma$ とします． いずれの場合にも，$\\gamma$ は $X$ を達成する方法であり， $j_\\gamma \u003c j_\\alpha$ となり，矛盾しました．\nACコード https://atcoder.jp/contests/joi2021yo2/submissions/25099364 ",
   "wordCount" : "278",
   "inLanguage": "en",
   "datePublished": "2021-08-16T00:00:00Z",
@@ -139,56 +174,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -202,7 +200,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -231,7 +229,7 @@
     <h1 class="post-title">
       イベント巡り (Event Hopping) - JOI 2020/2021 二次予選
     </h1>
-    <div class="post-meta">2021-08-16&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-16&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です．
@@ -327,12 +325,12 @@ $j_\gamma &lt; j_\alpha$ となり，矛盾しました．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Stroll - Atcoder Beginner Contest 213 H</span>
   </a>
@@ -362,36 +360,28 @@ $j_\gamma &lt; j_\alpha$ となり，矛盾しました．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -445,12 +435,12 @@ $j_\gamma &lt; j_\alpha$ となり，矛盾しました．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

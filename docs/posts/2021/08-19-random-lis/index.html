@@ -6,14 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Random LIS - Atcoder Regular Contest 104 E | yamate11のブログ</title>
-<meta name="keywords" content="ordered bell number, DP, LIS, 期待値" />
+<meta name="keywords" content="ordered bell number, DP, LIS, 期待値">
 <meta name="description" content="Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
 問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
 解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
- 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．">
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, .">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -21,8 +22,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -53,18 +89,20 @@
 <meta property="og:description" content="Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
 問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
 解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
- 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．" />
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-19T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-08-19T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-19T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Random LIS - Atcoder Regular Contest 104 E"/>
 <meta name="twitter:description" content="Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
 問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
 解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
- 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．"/>
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, ."/>
 
 
 <script type="application/ld+json">
@@ -93,11 +131,11 @@
   "@type": "BlogPosting",
   "headline": "Random LIS - Atcoder Regular Contest 104 E",
   "name": "Random LIS - Atcoder Regular Contest 104 E",
-  "description": "Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．\n問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．\n解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．\n 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N \u0026lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．",
+  "description": "Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．\n問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．\n解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．\n全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N \u0026lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．\n$\\{0, 1\\} \\cup \\{A_i + 1\\mid i = 1, \\ldots, N\\}$ を昇順にソートして $p_0, p_1, .",
   "keywords": [
     "ordered bell number", "DP", "LIS", "期待値"
   ],
-  "articleBody": "Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．\n問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．\n解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．\n 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N $\\{0, 1\\} \\cup \\{A_i + 1\\mid i = 1, \\ldots, N\\}$ を昇順にソートして $p_0, p_1, .., p_M$ とし，$P_i$ を整数の半開区間 $[p_i, p_{i+1})$ とする．\nパターンを1つとる．パターン中に現れる数が $0, 1, \\ldots, D-1$ だとする． 各 $d \\in [0, D)$ について，これが現れる位置を $q_1, \\ldots, q_k$ としたとき，$\\min(A_{q_1}, \\ldots, A_{q_k})$ を $B_d$ とする． たとえば，パターン 2 2 2 0 1 1 については，$B_0 = A_3$, $B_1 = \\min(A_4, A_5)$, $B_2 = \\min(A_0, A_1, A_2)$ である． すると，パターンに属する数列の数は，数列 $( x_d | d \\in [0, D) )$ であって $x_d \\in [1, B_d + 1)$ を満たすものの数に等しいので，これを数えることにする．\n動的計画法による． 「長さ i の列 $( x_d | d \\in [0, i) )$ で $x_d \\in [1, B_d + 1)$ を満たし，$ x_{i-1} \\in P_j $ であるもの」の集合を $S_{i,j}$ とし，dp[i][j] を，$S_{i,j}$ の要素の数とする． 普通に dp[i][j] → dp[i+1][j’] の遷移を書こうとすると， j = j’ の時にうまくいかない． そこで，次のことに注目する: 長さ i の列 $(x_d \\mid d \\in [0, i) )$ について，次の2つは同値である．\n $( x_d \\mid d \\in [0, i) ) \\in S_{i,j}$ $k $(x_d \\mid d \\in [0, k) ) \\in S_{k, u}$ 各 $e \\in [k, i)$ に対して，$B_e + 1 \\geq p_{j+1}$ $i - k \\leq p_{j+1} - p_j$    そこで，以下のように遷移を定義することができる:\n dp[i][j] ← dp[k][u] * binom(p[j+1] - p[j], i - k)  where  * i  k and  * j  u and  * i - k  * forall e in [k, i). B[e] + 1 = p[j+1] ACコード https://atcoder.jp/contests/arc104/submissions/25160111 ",
+  "articleBody": "Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．\n問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．\n解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．\n全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N \u003c= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．\n$\\{0, 1\\} \\cup \\{A_i + 1\\mid i = 1, \\ldots, N\\}$ を昇順にソートして $p_0, p_1, .., p_M$ とし，$P_i$ を整数の半開区間 $[p_i, p_{i+1})$ とする．\nパターンを1つとる．パターン中に現れる数が $0, 1, \\ldots, D-1$ だとする． 各 $d \\in [0, D)$ について，これが現れる位置を $q_1, \\ldots, q_k$ としたとき，$\\min(A_{q_1}, \\ldots, A_{q_k})$ を $B_d$ とする． たとえば，パターン 2 2 2 0 1 1 については，$B_0 = A_3$, $B_1 = \\min(A_4, A_5)$, $B_2 = \\min(A_0, A_1, A_2)$ である． すると，パターンに属する数列の数は，数列 $( x_d | d \\in [0, D) )$ であって $x_d \\in [1, B_d + 1)$ を満たすものの数に等しいので，これを数えることにする．\n動的計画法による． 「長さ i の列 $( x_d | d \\in [0, i) )$ で $x_d \\in [1, B_d + 1)$ を満たし，$ x_{i-1} \\in P_j $ であるもの」の集合を $S_{i,j}$ とし，dp[i][j] を，$S_{i,j}$ の要素の数とする． 普通に dp[i][j] → dp[i+1][j’] の遷移を書こうとすると， j = j’ の時にうまくいかない． そこで，次のことに注目する: 長さ i の列 $(x_d \\mid d \\in [0, i) )$ について，次の2つは同値である．\n$( x_d \\mid d \\in [0, i) ) \\in S_{i,j}$ $k \u003c i$, $u \u003c j$ が存在して，以下が成り立つ． $(x_d \\mid d \\in [0, k) ) \\in S_{k, u}$ 各 $e \\in [k, i)$ に対して，$B_e + 1 \\geq p_{j+1}$ $i - k \\leq p_{j+1} - p_j$ そこで，以下のように遷移を定義することができる:\ndp[i][j] ← dp[k][u] * binom(p[j+1] - p[j], i - k) where * i \u003e k and * j \u003e u and * i - k \u003c= p[j+1] - p[j] and * forall e in [k, i). B[e] + 1 \u003e= p[j+1] ACコード https://atcoder.jp/contests/arc104/submissions/25160111 ",
   "wordCount" : "285",
   "inLanguage": "en",
   "datePublished": "2021-08-19T00:00:00Z",
@@ -133,56 +171,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -196,7 +197,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -225,7 +226,7 @@
     <h1 class="post-title">
       Random LIS - Atcoder Regular Contest 104 E
     </h1>
-    <div class="post-meta">2021-08-19&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-19&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．</p>
@@ -310,12 +311,12 @@ j = j&rsquo; の時にうまくいかない．
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>文字列，数値変換</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</span>
   </a>
@@ -345,36 +346,28 @@ j = j&rsquo; の時にうまくいかない．
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -428,12 +421,12 @@ j = j&rsquo; の時にうまくいかない．
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

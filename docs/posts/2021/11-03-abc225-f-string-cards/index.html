@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>String Cards - AtCoder Beginner Contest 225 F | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="解法です．公式解説ほぼそのままです．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="解法です．公式解説ほぼそのままです．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-11-03T19:17:33&#43;09:00" />
-<meta property="article:modified_time" content="2021-11-03T19:17:33&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-11-03T19:17:33+09:00" />
+<meta property="article:modified_time" content="2021-11-03T19:17:33+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="String Cards - AtCoder Beginner Contest 225 F"/>
@@ -88,8 +123,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Atcoder Beginner Contest 225 F String Cards の解法です．公式解説ほぼそのままです．\n問題概要 問題へのリンク 小文字からなる文字列の列 $(S_i)_{i = 1}^N$ がある． $K$個を選んで任意の順で連結して得られる文字列のうち， 辞書順最小のものを求めよ．\n制約: $K \\leq N \\leq 50$, $ | S_i | \\leq 50$\n経緯 コンテスト中には解く時間が無く， 終了後に何時間かかけて，先頭から1文字ずつ決めていく解を実装 して，一応解けたのですが，公式解説を見たら，簡単に解く方法が載っていました．\n予備知識 $K = N$ の場合は，次で求められるのだそうです:\n文字列の集合に，$s \\prec t \\iff s + t ちょっと注釈が必要で，$\\prec$ は順序にはなります (後述) が， 全順序ではない（たとえば，$s = \\texttt{abc}$，$t = \\texttt{abcabc}$） ので，$ (s_i)_i $ が「昇順」だというのは，$s_i \\nsucc s_{i+1}$ を 意味します．\n命題  $\\prec$ は順序である．\n 公式解説で，鮮やかな証明が紹介されていました．\n証明 非反射律は明らかなので，推移律が成り立つことを言えば良い． $s + t 命題  $K = N$ の場合，連結文字列のうち，辞書順最小のものは， 順序 $\\prec$ の「昇順」に連結されている．\n 証明 そうでないとすると，その組を入れ替えると辞書順がより小さくなる．(終)\n命題  どのような列も，昇順に並べることができる．\n 証明 列の長さに関する簡単な帰納法．ここで，順序であることを使う．(終)\n解法 まず，$(S_i)_i$ を，$\\prec$ に関して昇順に並べておきます．\n$dp[p][q] := (S_i)_{i=p}^{N}$ から $q$ 個選んで連結して得られる 辞書順最小の文字列\nとします．上の議論から，$q$ 個を選んだら， 並べる順は，全体の順と同一である必要があります．\n$dp[p][q] := \\min(S_p + dp[p + 1][q - 1], dp[p + 1][q]) $\nであることが言えます． 辞書順最小の文字列 $t$ が $S_p$ を含まない場合には，当然，それは $dp[p + 1][q]$ に一致します． $t = S_p + t’$ である場合には，任意に $(S_i)_{i=p+1}^{N}$ から $q-1$ 個を選んで連結した文字列 $w$ に対し，$t \\preceq S_p + w$ ですから， $t’ \\preceq w$ となります．すなわち，$t’ = dp[p + 1][q-1]$ が成り立ちます． $dp[1][K]$ が求める答で，計算量は $|S_i|$ の最大値を $A$ として， $O(NKA + NA\\log N)$ です．\nなお，公式解説にたくさん嘘解法が紹介されています….\nACコード #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i #define REP2R(i, a, b) for (ll i = (a); i = (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end()  int main() {  ios_base::sync_with_stdio(false);  cin.tie(nullptr);   ll N, K; cin  N  K;  vectorstring S(N); REP(i, N) cin  S[i];  sort(ALL(S), [\u0026](const string\u0026 s, const string\u0026 t) - bool { return s + t  t + s; });  string bigs(1, char('z' + 1));  vector tbl(N + 1, vectorstring(K + 1, bigs));  REP(i, N + 1) tbl[i][0] = \"\";  REP2R(i, N-1, 0) REP2(j, 1, min(K, N - i) + 1) tbl[i][j] = min(tbl[i+1][j], S[i] + tbl[i+1][j-1]);  cout  tbl[0][K]  endl;   return 0; } ",
-  "wordCount" : "353",
+  "articleBody": "Atcoder Beginner Contest 225 F String Cards の解法です．公式解説ほぼそのままです．\n問題概要 問題へのリンク 小文字からなる文字列の列 $(S_i)_{i = 1}^N$ がある． $K$個を選んで任意の順で連結して得られる文字列のうち， 辞書順最小のものを求めよ．\n制約: $K \\leq N \\leq 50$, $ | S_i | \\leq 50$\n経緯 コンテスト中には解く時間が無く， 終了後に何時間かかけて，先頭から1文字ずつ決めていく解を実装 して，一応解けたのですが，公式解説を見たら，簡単に解く方法が載っていました．\n予備知識 $K = N$ の場合は，次で求められるのだそうです:\n文字列の集合に，$s \\prec t \\iff s + t \u003c t + s$ で 順序を入れる時，この順序の昇順に連結したものが最小． ただし，$s + t$ は文字列の連結，$s \u003c t$ は通常の順序．\nちょっと注釈が必要で，$\\prec$ は順序にはなります (後述) が， 全順序ではない（たとえば，$s = \\texttt{abc}$，$t = \\texttt{abcabc}$） ので，$ (s_i)_i $ が「昇順」だというのは，$s_i \\nsucc s_{i+1}$ を 意味します．\n命題 $\\prec$ は順序である．\n公式解説で，鮮やかな証明が紹介されていました．\n証明 非反射律は明らかなので，推移律が成り立つことを言えば良い． $s + t \u003c t + s$ とする．$s + t$ と $t + s$ の長さは同じなので， 文字列 $x$ を26進の数値とみなした値を $v(x)$ と書き， 2^{|x|} を $l(x)$ と書くと， $s + t \u003c t + s \\iff v(s)l(t) + v(t) \u003c v(t)l(s) + v(s)\\iff v(s) - v(s) / l(s) \u003c v(t) - v(t) / l(t)$ となる． つまり，文字列から計算される値の比較で大小が決まるので，推移律が成り立つ． (終)\n命題 $K = N$ の場合，連結文字列のうち，辞書順最小のものは， 順序 $\\prec$ の「昇順」に連結されている．\n証明 そうでないとすると，その組を入れ替えると辞書順がより小さくなる．(終)\n命題 どのような列も，昇順に並べることができる．\n証明 列の長さに関する簡単な帰納法．ここで，順序であることを使う．(終)\n解法 まず，$(S_i)_i$ を，$\\prec$ に関して昇順に並べておきます．\n$dp[p][q] := (S_i)_{i=p}^{N}$ から $q$ 個選んで連結して得られる 辞書順最小の文字列\nとします．上の議論から，$q$ 個を選んだら， 並べる順は，全体の順と同一である必要があります．\n$dp[p][q] := \\min(S_p + dp[p + 1][q - 1], dp[p + 1][q]) $\nであることが言えます． 辞書順最小の文字列 $t$ が $S_p$ を含まない場合には，当然，それは $dp[p + 1][q]$ に一致します． $t = S_p + t’$ である場合には，任意に $(S_i)_{i=p+1}^{N}$ から $q-1$ 個を選んで連結した文字列 $w$ に対し，$t \\preceq S_p + w$ ですから， $t’ \\preceq w$ となります．すなわち，$t’ = dp[p + 1][q-1]$ が成り立ちます． $dp[1][K]$ が求める答で，計算量は $|S_i|$ の最大値を $A$ として， $O(NKA + NA\\log N)$ です．\nなお，公式解説にたくさん嘘解法が紹介されています….\nACコード #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i \u003c (b); i++) #define REP2R(i, a, b) for (ll i = (a); i \u003e= (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end() int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); ll N, K; cin \u003e\u003e N \u003e\u003e K; vector\u003cstring\u003e S(N); REP(i, N) cin \u003e\u003e S[i]; sort(ALL(S), [\u0026](const string\u0026 s, const string\u0026 t) -\u003e bool { return s + t \u003c t + s; }); string bigs(1, char('z' + 1)); vector tbl(N + 1, vector\u003cstring\u003e(K + 1, bigs)); REP(i, N + 1) tbl[i][0] = \"\"; REP2R(i, N-1, 0) REP2(j, 1, min(K, N - i) + 1) tbl[i][j] = min(tbl[i+1][j], S[i] + tbl[i+1][j-1]); cout \u003c\u003c tbl[0][K] \u003c\u003c endl; return 0; } ",
+  "wordCount" : "354",
   "inLanguage": "en",
   "datePublished": "2021-11-03T19:17:33+09:00",
   "dateModified": "2021-11-03T19:17:33+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       String Cards - AtCoder Beginner Contest 225 F
     </h1>
-    <div class="post-meta">2021-11-03&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-11-03&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>Atcoder Beginner Contest 225 F String Cards の解法です．公式解説ほぼそのままです．</p>
@@ -315,12 +313,12 @@ $O(NKA + NA\log N)$ です．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/11-08-abc226/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ABC226 参加記</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ABC225 参加記</span>
   </a>
@@ -350,36 +348,28 @@ $O(NKA + NA\log N)$ です．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -433,12 +423,12 @@ $O(NKA + NA\log N)$ です．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

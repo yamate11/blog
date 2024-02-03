@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Xor Query -- AtCoder Beginner Contest 223 H | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-21T23:28:37&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-21T23:28:37&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-21T23:28:37+09:00" />
+<meta property="article:modified_time" content="2021-10-21T23:28:37+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Xor Query -- AtCoder Beginner Contest 223 H"/>
@@ -88,8 +123,8 @@
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．\n問題概要 正の整数 N と長さN の正の整数列 A = (A_i)_{iQ個のクエリを処理せよ．クエリでは，(L, R, X) が与えられるので， A_L, A_{L+1}, ..., A_R から1つ以上を選んでそれらの XOR を X に できるかどうか判定する． 制約: N TL: 3sec 問題へのリンク 解法 $A_i$ や $X_i$ を，$\\textrm{F}_2$ のベクトルと見る．\n$(A_{i}, A_{i-1}, \\ldots, A_1)$ が張る空間の基底 $B_i = (A_{j_p} \\mid p = 1, 2, .., m_i)$ を次のように選ぶ\n $B_0 = $空リスト $B_i’$ を，$B_{i-1}$ の先頭に $A_i$ を追加したものとするとき， $B_i$ は，予備知識 に記載した方法で$B_i’$ から選んだ基底．  この場合，$B_i = (A_{j_1}, \\ldots, A_{j_{m_i}})$ は， $A_i, A_{i-1}, \\ldots, A_1$ が張る空間の基底で， $i = j_1  j_2  \\cdots  j_{m_i}$ となっており，$j_k \\geq j  j_{k+1}$ のとき，$A_j$ は，$A_{j_1}, \\ldots, A_{j_k}$ が張る空間に属する．\nクエリ $(L, R, X)$ は，次のように処理できる: $B_R = (A_{j_1}, \\ldots, A_{j_m})$ とする． $X$ が $(A_{j_1}, \\ldots, A_{j_k})$ が張る空間に属するような 最小の $k$ を，予備知識 に記載した方法で決定する． $L \\leq {j_k}$ なら「Yes」を，そうでなければ「No」を出力する．\n$A_i$ などのビット数を$p$として，$B_i$ の決定は $O(p^2)$ で， $k$ の決定は $O(p)$ でできるので，全体の計算量は $O(p^2 N + pQ)$ である．\n一般に，$x$ が $y_1, \\ldots, y_m$ が張る空間に属するかどうかは， 熨斗袋さんの方法で $O(m)$ で計算できるので， 上の手続きの計算量は， $O(p^2 (N + Q))$ である．\nACコード #include #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i #define REP2R(i, a, b) for (ll i = (a); i = (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end() #define SIZE(v) ((ll)((v).size()))  int main(/* int argc, char *argv[] */) {  ios_base::sync_with_stdio(false);  cin.tie(nullptr);  cout  setprecision(20);   auto func1 = [\u0026](ll x, const auto\u0026 v) - pairll, ll {  REP(j, SIZE(v)) if ((x = min(x, x ^ v[j].second)) == 0) return {j, 0};  return {-1, x};  };   ll N, Q; cin  N  Q;  vectorll A(N); REP(i, N) cin  A[i];  using sta = pairll, ll;  vectorvectorsta B(N);   REP(i, N) {  B[i].emplace_back(i, A[i]);  if (i == 0) continue;  ll sz = SIZE(B[i - 1]);  ll j0 = [\u0026]() - ll {  REP(j, sz) {  auto [p, y] = B[i - 1][j];  auto [k, x] = func1(y, B[i]);  if (k  0) B[i].emplace_back(p, x);  else return j + 1;  }  return sz;  }();  REP2(j, j0, sz) B[i].push_back(B[i - 1][j]);  }   REP(i, Q) {  ll l, r, x; cin  l  r  x; l--; r--;  auto [j, dummy] = func1(x, B[r]);  cout  (j = 0 \u0026\u0026 l  B[r][j].first ? \"Yes\\n\" : \"No\\n\");  }  return 0; } ",
-  "wordCount" : "381",
+  "articleBody": "AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．\n問題概要 正の整数 N と長さN の正の整数列 A = (A_i)_{i\u003c=N} が与えられる． Q個のクエリを処理せよ．クエリでは，(L, R, X) が与えられるので， A_L, A_{L+1}, ..., A_R から1つ以上を選んでそれらの XOR を X に できるかどうか判定する． 制約: N \u003c= 4e5, Q \u003c= 2e5, 1 \u003c= A_i,X_i \u003c 2^60, TL: 3sec 問題へのリンク 解法 $A_i$ や $X_i$ を，$\\textrm{F}_2$ のベクトルと見る．\n$(A_{i}, A_{i-1}, \\ldots, A_1)$ が張る空間の基底 $B_i = (A_{j_p} \\mid p = 1, 2, .., m_i)$ を次のように選ぶ\n$B_0 = $空リスト $B_i’$ を，$B_{i-1}$ の先頭に $A_i$ を追加したものとするとき， $B_i$ は，予備知識 に記載した方法で$B_i’$ から選んだ基底． この場合，$B_i = (A_{j_1}, \\ldots, A_{j_{m_i}})$ は， $A_i, A_{i-1}, \\ldots, A_1$ が張る空間の基底で， $i = j_1 \u003e j_2 \u003e \\cdots \u003e j_{m_i}$ となっており，$j_k \\geq j \u003e j_{k+1}$ のとき，$A_j$ は，$A_{j_1}, \\ldots, A_{j_k}$ が張る空間に属する．\nクエリ $(L, R, X)$ は，次のように処理できる: $B_R = (A_{j_1}, \\ldots, A_{j_m})$ とする． $X$ が $(A_{j_1}, \\ldots, A_{j_k})$ が張る空間に属するような 最小の $k$ を，予備知識 に記載した方法で決定する． $L \\leq {j_k}$ なら「Yes」を，そうでなければ「No」を出力する．\n$A_i$ などのビット数を$p$として，$B_i$ の決定は $O(p^2)$ で， $k$ の決定は $O(p)$ でできるので，全体の計算量は $O(p^2 N + pQ)$ である．\n一般に，$x$ が $y_1, \\ldots, y_m$ が張る空間に属するかどうかは， 熨斗袋さんの方法で $O(m)$ で計算できるので， 上の手続きの計算量は， $O(p^2 (N + Q))$ である．\nACコード #include #include typedef long long int ll; using namespace std; #define REP2(i, a, b) for (ll i = (a); i \u003c (b); i++) #define REP2R(i, a, b) for (ll i = (a); i \u003e= (b); i--) #define REP(i, b) REP2(i, 0, b) #define ALL(coll) (coll).begin(), (coll).end() #define SIZE(v) ((ll)((v).size())) int main(/* int argc, char *argv[] */) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout \u003c\u003c setprecision(20); auto func1 = [\u0026](ll x, const auto\u0026 v) -\u003e pair\u003cll, ll\u003e { REP(j, SIZE(v)) if ((x = min(x, x ^ v[j].second)) == 0) return {j, 0}; return {-1, x}; }; ll N, Q; cin \u003e\u003e N \u003e\u003e Q; vector\u003cll\u003e A(N); REP(i, N) cin \u003e\u003e A[i]; using sta = pair\u003cll, ll\u003e; vector\u003cvector\u003csta\u003e\u003e B(N); REP(i, N) { B[i].emplace_back(i, A[i]); if (i == 0) continue; ll sz = SIZE(B[i - 1]); ll j0 = [\u0026]() -\u003e ll { REP(j, sz) { auto [p, y] = B[i - 1][j]; auto [k, x] = func1(y, B[i]); if (k \u003c 0) B[i].emplace_back(p, x); else return j + 1; } return sz; }(); REP2(j, j0, sz) B[i].push_back(B[i - 1][j]); } REP(i, Q) { ll l, r, x; cin \u003e\u003e l \u003e\u003e r \u003e\u003e x; l--; r--; auto [j, dummy] = func1(x, B[r]); cout \u003c\u003c (j \u003e= 0 \u0026\u0026 l \u003c= B[r][j].first ? \"Yes\\n\" : \"No\\n\"); } return 0; } ",
+  "wordCount" : "383",
   "inLanguage": "en",
   "datePublished": "2021-10-21T23:28:37+09:00",
   "dateModified": "2021-10-21T23:28:37+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Xor Query -- AtCoder Beginner Contest 223 H
     </h1>
-    <div class="post-meta">2021-10-21&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-21&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．</p>
@@ -312,12 +310,12 @@ $O(p^2 (N + Q))$ である．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>XORに関する基底</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ABC 223 参加記</span>
   </a>
@@ -347,36 +345,28 @@ $O(p^2 (N + Q))$ である．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -430,12 +420,12 @@ $O(p^2 (N + Q))$ である．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

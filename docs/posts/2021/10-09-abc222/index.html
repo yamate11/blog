@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ABC 222 参加記 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="ABC222 に参加して，ABCDE 5完 498位でした．参加記です．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-09-abc222/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-09-abc222/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="ABC222 に参加して，ABCDE 5完 498位でした．参加記です．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-09-abc222/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-09T23:31:47&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-09T23:31:47&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-09T23:31:47+09:00" />
+<meta property="article:modified_time" content="2021-10-09T23:31:47+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC 222 参加記"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） (ABC 222) に参加して，ABCDE 5完498位でした．参加記です．\n問題へのリンク 思ったよりも冷えなかった．よかった (よくない)．\nyamate11さんのエクサウィザーズプログラミングコンテスト2021での成績：498位\nパフォーマンス：1818相当\nレーティング：1963→1949 (-14) :(#AtCoder #エクサウィザーズプログラミングコンテスト2021（ABC222） https://t.co/ajMzOdKgza\n— yamate11 (@_yamate11) October 9, 2021  A - Four Digits 文字列として読み込んで，(4 - 長さ) 個の 0 を出力した後に出力．\n%04d という書式指定は浮かんだんですけど，printf の使い方に自信が持てず， 止めました．\nB\tFailing Grade 言われたとおりに数えます．\nC\tSwiss-System Tournament シミュレーションします．\nD\tBetween Two Arrays DPをします．\ndp[i][j] = $c_i$ の値が $j$ 以下であって条件を満たす列 $(c_1, \\ldots, c_i)$ の数．\nE\tRed and Blue Tree 色の塗り方にかかわらず，各辺を通る回数は決まっているので，まず， この回数を求めます．2頂点を結ぶ最短経路は，LCA を使って求められます．\n回数が決まったら，DPをします．\ndp[e][k] = 辺 1, …, e を塗る方法で，そこまでの赤の回数と青の回数の 差が k であるような塗り方の数．\nk の取り得る範囲は - (M * (N - 1)) 以上 (M * (N - 1)) 以下なので， 計算量は $O(MN^2)$ となります．危ないかな，と思いましたが 280ms でセーフ．\n求める答は dp[N-1][K] なのですが，|K| が M * (N-1) より大きいときには 0 にすることが必要です．そういうサンプルを入れてくれてあったので 助かりました．全然気がついていなかったので，サンプルが無かったら 相当悩んだと思います．\nG\t222 Eまで49'11\" で，私としては相当速く解けた感じです． もしGが解ければラッキー，と思って考え始めましたが， 歯が立ちませんでした．15分くらい考えて降参． この辺の判断が遅いんですよね．\nF\tExpensive Expense twitter で，みなさん，全方位木DP と言っています． チラッと考えはしたのですが，以下の方針で解ける，と思って実装を始めました． 結局間に合いませんでした．(コンテスト後に一応ACしました．) やっぱり全方位木DPで行くべきでしたでしょうか．\nDFSの行きがけ順に街を並べて，$1 = s(1), \\ldots, s(N)$ とします． 街 $i$ の子孫の s-添字は区間になります． つまり，$i$ の子孫は， $\\{ s(j) \\mid j \\in [b(i), e(i)) \\}$ と書くことができます．\n最大値の問合せと和の更新ができる， ノード数 $N$ の遅延セグメント木を用意します． 初期状態では，ノード $i$ には，$E_{1, i}$ を設定しておきます． DFSで，セグメント木を更新していき，DFSで街$j$を見ているときには， ノード $i$ に $E_{j, i}$ が保持されるようにします．このためには， 木を$p$ から $q$ に下がるときに，\n 全体に $C_r$ を加える．($r$ は，$p$ と $q$ を結ぶ道の番号) $q$ の子孫には，$-2C_r$ を加える．(上と合わせて $C_r$ を減じたことになる)  を行います．ここで，\n セグメント木のノード $q$ には $D_q$ が設定されているので， $-D_q$ を加えて 0 にする． 全体の最大値を求める．  とすることで，$q$ における値が求められます．\n$q$から$p$ に戻るときに，上の逆を行って， セグメント木の値を元に戻します．\n",
+  "articleBody": "エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） (ABC 222) に参加して，ABCDE 5完498位でした．参加記です．\n問題へのリンク 思ったよりも冷えなかった．よかった (よくない)．\nyamate11さんのエクサウィザーズプログラミングコンテスト2021での成績：498位\nパフォーマンス：1818相当\nレーティング：1963→1949 (-14) :(#AtCoder #エクサウィザーズプログラミングコンテスト2021（ABC222） https://t.co/ajMzOdKgza\n— yamate11 (@_yamate11) October 9, 2021 A - Four Digits 文字列として読み込んで，(4 - 長さ) 個の 0 を出力した後に出力．\n%04d という書式指定は浮かんだんですけど，printf の使い方に自信が持てず， 止めました．\nB\tFailing Grade 言われたとおりに数えます．\nC\tSwiss-System Tournament シミュレーションします．\nD\tBetween Two Arrays DPをします．\ndp[i][j] = $c_i$ の値が $j$ 以下であって条件を満たす列 $(c_1, \\ldots, c_i)$ の数．\nE\tRed and Blue Tree 色の塗り方にかかわらず，各辺を通る回数は決まっているので，まず， この回数を求めます．2頂点を結ぶ最短経路は，LCA を使って求められます．\n回数が決まったら，DPをします．\ndp[e][k] = 辺 1, …, e を塗る方法で，そこまでの赤の回数と青の回数の 差が k であるような塗り方の数．\nk の取り得る範囲は - (M * (N - 1)) 以上 (M * (N - 1)) 以下なので， 計算量は $O(MN^2)$ となります．危ないかな，と思いましたが 280ms でセーフ．\n求める答は dp[N-1][K] なのですが，|K| が M * (N-1) より大きいときには 0 にすることが必要です．そういうサンプルを入れてくれてあったので 助かりました．全然気がついていなかったので，サンプルが無かったら 相当悩んだと思います．\nG\t222 Eまで49'11\" で，私としては相当速く解けた感じです． もしGが解ければラッキー，と思って考え始めましたが， 歯が立ちませんでした．15分くらい考えて降参． この辺の判断が遅いんですよね．\nF\tExpensive Expense twitter で，みなさん，全方位木DP と言っています． チラッと考えはしたのですが，以下の方針で解ける，と思って実装を始めました． 結局間に合いませんでした．(コンテスト後に一応ACしました．) やっぱり全方位木DPで行くべきでしたでしょうか．\nDFSの行きがけ順に街を並べて，$1 = s(1), \\ldots, s(N)$ とします． 街 $i$ の子孫の s-添字は区間になります． つまり，$i$ の子孫は， $\\{ s(j) \\mid j \\in [b(i), e(i)) \\}$ と書くことができます．\n最大値の問合せと和の更新ができる， ノード数 $N$ の遅延セグメント木を用意します． 初期状態では，ノード $i$ には，$E_{1, i}$ を設定しておきます． DFSで，セグメント木を更新していき，DFSで街$j$を見ているときには， ノード $i$ に $E_{j, i}$ が保持されるようにします．このためには， 木を$p$ から $q$ に下がるときに，\n全体に $C_r$ を加える．($r$ は，$p$ と $q$ を結ぶ道の番号) $q$ の子孫には，$-2C_r$ を加える．(上と合わせて $C_r$ を減じたことになる) を行います．ここで，\nセグメント木のノード $q$ には $D_q$ が設定されているので， $-D_q$ を加えて 0 にする． 全体の最大値を求める． とすることで，$q$ における値が求められます．\n$q$から$p$ に戻るときに，上の逆を行って， セグメント木の値を元に戻します．\n",
   "wordCount" : "197",
   "inLanguage": "en",
   "datePublished": "2021-10-09T23:31:47+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       ABC 222 参加記
     </h1>
-    <div class="post-meta">2021-10-09&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-09&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222）
@@ -288,12 +286,12 @@ $-D_q$ を加えて 0 にする．</li>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>木の直径</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ABC 221 参加記</span>
   </a>
@@ -323,36 +321,28 @@ $-D_q$ を加えて 0 にする．</li>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -406,12 +396,12 @@ $-D_q$ を加えて 0 にする．</li>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

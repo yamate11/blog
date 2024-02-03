@@ -6,18 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ABC 223 参加記 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92&#39;59&quot; 259位でした．記録です．
 問題へのリンク A -	Exact Price cout &lt;&lt; (X &gt; 0 and X % 100 == 0 ? &quot;Yes\n&quot; : &quot;No\n&quot;;
 B -	String Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．
 $O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
 C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
 以下の(1),(2),(3)が成り立つ間，(4)を実行する．
-  (1) 左の火が区間 i に時刻 p に入ろうとしている．
-  (2) 右の火が区間 j に時刻 q に入ろうとしている．">
+(1) 左の火が区間 i に時刻 p に入ろうとしている．
+(2) 右の火が区間 j に時刻 q に入ろうとしている．
+(3) i &lt; j">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -25,8 +26,43 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -60,12 +96,13 @@ B -	String Shifting 回数に制限はないので，全部左シフトだとし
 $O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
 C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
 以下の(1),(2),(3)が成り立つ間，(4)を実行する．
-  (1) 左の火が区間 i に時刻 p に入ろうとしている．
-  (2) 右の火が区間 j に時刻 q に入ろうとしている．" />
+(1) 左の火が区間 i に時刻 p に入ろうとしている．
+(2) 右の火が区間 j に時刻 q に入ろうとしている．
+(3) i &lt; j" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-17-abc223/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-17T23:33:52&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-17T23:33:52&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-17T23:33:52+09:00" />
+<meta property="article:modified_time" content="2021-10-17T23:33:52+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC 223 参加記"/>
@@ -75,8 +112,9 @@ B -	String Shifting 回数に制限はないので，全部左シフトだとし
 $O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
 C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
 以下の(1),(2),(3)が成り立つ間，(4)を実行する．
-  (1) 左の火が区間 i に時刻 p に入ろうとしている．
-  (2) 右の火が区間 j に時刻 q に入ろうとしている．"/>
+(1) 左の火が区間 i に時刻 p に入ろうとしている．
+(2) 右の火が区間 j に時刻 q に入ろうとしている．
+(3) i &lt; j"/>
 
 
 <script type="application/ld+json">
@@ -105,11 +143,11 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
   "@type": "BlogPosting",
   "headline": "ABC 223 参加記",
   "name": "ABC 223 参加記",
-  "description": "AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92'59\u0026quot; 259位でした．記録です．\n問題へのリンク A -\tExact Price cout \u0026lt;\u0026lt; (X \u0026gt; 0 and X % 100 == 0 ? \u0026quot;Yes\\n\u0026quot; : \u0026quot;No\\n\u0026quot;;\nB -\tString Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．\n$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())\nC -\tDoukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．\n以下の(1),(2),(3)が成り立つ間，(4)を実行する．\n  (1) 左の火が区間 i に時刻 p に入ろうとしている．\n  (2) 右の火が区間 j に時刻 q に入ろうとしている．",
+  "description": "AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92'59\u0026quot; 259位でした．記録です．\n問題へのリンク A -\tExact Price cout \u0026lt;\u0026lt; (X \u0026gt; 0 and X % 100 == 0 ? \u0026quot;Yes\\n\u0026quot; : \u0026quot;No\\n\u0026quot;;\nB -\tString Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．\n$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())\nC -\tDoukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．\n以下の(1),(2),(3)が成り立つ間，(4)を実行する．\n(1) 左の火が区間 i に時刻 p に入ろうとしている．\n(2) 右の火が区間 j に時刻 q に入ろうとしている．\n(3) i \u0026lt; j",
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92'59\" 259位でした．記録です．\n問題へのリンク A -\tExact Price cout 0 and X % 100 == 0 ? \"Yes\\n\" : \"No\\n\";\nB -\tString Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．\n$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())\nC -\tDoukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．\n以下の(1),(2),(3)が成り立つ間，(4)を実行する．\n  (1) 左の火が区間 i に時刻 p に入ろうとしている．\n  (2) 右の火が区間 j に時刻 q に入ろうとしている．\n  (3) i  (4) p p += A[i] / B[i]; i++; そうでなければ， q += A[j] / B[j]; j--;\n  このループを抜けると，左右の火が時間差 p-q で同じ区間 i に 入ろうとしているので，どこで出会うか計算できる．\nD -\tRestricted Permutation 各 i = 1, …, N に対して，2つの集合 prv, nxt を用意します． 気分は次の通りです．\n prv[i] … i よりも先に来なければならない数 nxt[i] … i よりも後に来なければならない数  実際には，各 $(A_i, B_i)$ に対して，$A_i$ を $\\text{prv}[B_i]$ に， $B_i$ を $\\text{nxt}[A_i]$ に入れます．\n答を左から書いていくことにして，prv[i] が空なら，i を書くことができます． 辞書順最小にしたいので，priority queue を使います．\n 最初の状態で prv[i] が空である i を全部キューに入れておきます． キューがからでない間ループ:  キューから i を取り出して出力します． nxt[i] の要素 j に対して，  prv[j] から i を取り除きます． prv[j] が空になったら，j をキューに入れます．      このままだと，同じ j が複数回キューに入ってしまう可能性があります． キューに入れる前に重複チェックが必要です．これを忘れて， また，直し方を間違えて，2 ペナルティーでした．もったいない….\nE -\tPlacing Rectangles 3つの長方形の配置は以下のいずれか (ということを無証明で通してしまいました)\n 3つ縦に並ぶ 3つ横に並ぶ 横2行で，1行に1個，もう1行に2個． 縦2列で，1列に1個，もう1列に2個．  各々の場合について，A, B, C が X, Y に入るかどうか判定します．\nF -\tParenthesis Checking ( を 1 に，) を -1 に置き換えて，位置 i までの累積和を $S_i$ と すると，括弧列が全体として正しいための 必要十分条件は，$S_N = 0$ かつ すべての $i$ について $S_i \\geq 0$ であることです． したがって，位置 l から 位置 r までの括弧列が正しいための条件は， 下の両方が成り立つことです．\n $S_{l-1} = S_r$ すべての $i \\in [l, r]$ に対して，$S_i \\geq S_r$  これは，次のように言い換えられます:\n $S_{l-1} = S_r$ かつ $\\min\\{S_i \\mid i \\in [l, r]\\} = S_r$  また，位置$l$と$r$の文字を入れ替えたときには，$S$ は次のように変わります:\n 両方が同じ文字なら，変化無し ( と ) の場合には，$i \\in [l, r-1]$ について，$S_i$ が 2 減る． ) と ( の場合には，$i \\in [l, r-1]$ について，$S_i$ が 2 増える．  したがって，$S_i$ の値を，区間加算と区間最小値取得ができる セグメント木で管理することで答が得られます．\nG -\tVertex Deletion E が解けた時点で残り40分でした． F と G の問題文をざっと読んで，G は解けそうになく (そもそもマッチングという ことばが分からない (ので検索した))，F は解けそうだったので，F に 行きました．結果的には， G は 40分あれば解けたことがわかったので失敗だったのですが， すぐには方針が思いつかなかったのでやむを得ないですかねえ．うーむ．\n最小マッチングというのは，pairwise に頂点を共有しない辺の集合 $X$ で 要素数最小のもの，ということが検索して分かったので，それで考えます． グラフは木ですから，$X$ は，葉から順に貪欲に取っていけば良いです (ということにすぐ思い当たれば G に行けたかもしれない．未練たらしい…)\n正確には次のようになるでしょうか: 適当に根を考えたとき， $X$ に入っている辺の両端の頂点のうち，根に近い方の点からなる集合を $Y$ とします．$Y$ は次の条件を満たすとして良いです: 頂点 $v$ に関し，\n $v$ の子がすべて $Y$ に属していれば $v$ は $Y$ に属さない． $v$ の子で $Y$ に属していないものがあれば，$v$ は $Y$ に属する．  上の条件は当然で，下の条件はもし満たしていなければ， 満たすように $X$ を (要素数を変えずに) 変更することができます． 上の条件から，根 $r$ を決めたときに $Y$ は確定します．これを $Y_r$ と 書くことにします． $r$ が $Y_r$ に属するときには，$r$ とその辺を取り除いてしまうと 最小マッチングが減り，$r$ が $Y_r$ に属さなければ，最小マッチングは 減りません．ということで，各$r$に対して $r \\in Y_r$ かどうかを判定すれば よいことになりました．\n$r \\in Y_r$ かどうかは， $f(p) = \\bigvee \\{ \\neg f(q) \\mid q \\text{ は } p \\text{ の子 }\\}$ と，子の値からモノイド演算で定義した $f(r)$ の値として決定できますから， 全方位木DPで求めることができます．\nH -\tXor Query 問題も読めませんでした． あとで解説ACしました ．\n微減ですんだからOK... という気持ちには今日はなれないなあ．残念．\nyamate11さんのAtCoder Beginner Contest 223での成績：259位\nパフォーマンス：1916相当\nレーティング：1949→1946 (-3) :(#AtCoder #ABC223 https://t.co/61p9VRUfwY\n— yamate11 (@_yamate11) October 17, 2021  ",
+  "articleBody": "AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92'59\" 259位でした．記録です．\n問題へのリンク A -\tExact Price cout \u003c\u003c (X \u003e 0 and X % 100 == 0 ? \"Yes\\n\" : \"No\\n\";\nB -\tString Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．\n$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())\nC -\tDoukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．\n以下の(1),(2),(3)が成り立つ間，(4)を実行する．\n(1) 左の火が区間 i に時刻 p に入ろうとしている．\n(2) 右の火が区間 j に時刻 q に入ろうとしている．\n(3) i \u003c j\n(4) p \u003c q なら，p += A[i] / B[i]; i++; そうでなければ， q += A[j] / B[j]; j--;\nこのループを抜けると，左右の火が時間差 p-q で同じ区間 i に 入ろうとしているので，どこで出会うか計算できる．\nD -\tRestricted Permutation 各 i = 1, …, N に対して，2つの集合 prv, nxt を用意します． 気分は次の通りです．\nprv[i] … i よりも先に来なければならない数 nxt[i] … i よりも後に来なければならない数 実際には，各 $(A_i, B_i)$ に対して，$A_i$ を $\\text{prv}[B_i]$ に， $B_i$ を $\\text{nxt}[A_i]$ に入れます．\n答を左から書いていくことにして，prv[i] が空なら，i を書くことができます． 辞書順最小にしたいので，priority queue を使います．\n最初の状態で prv[i] が空である i を全部キューに入れておきます． キューがからでない間ループ: キューから i を取り出して出力します． nxt[i] の要素 j に対して， prv[j] から i を取り除きます． prv[j] が空になったら，j をキューに入れます． このままだと，同じ j が複数回キューに入ってしまう可能性があります． キューに入れる前に重複チェックが必要です．これを忘れて， また，直し方を間違えて，2 ペナルティーでした．もったいない….\nE -\tPlacing Rectangles 3つの長方形の配置は以下のいずれか (ということを無証明で通してしまいました)\n3つ縦に並ぶ 3つ横に並ぶ 横2行で，1行に1個，もう1行に2個． 縦2列で，1列に1個，もう1列に2個． 各々の場合について，A, B, C が X, Y に入るかどうか判定します．\nF -\tParenthesis Checking ( を 1 に，) を -1 に置き換えて，位置 i までの累積和を $S_i$ と すると，括弧列が全体として正しいための 必要十分条件は，$S_N = 0$ かつ すべての $i$ について $S_i \\geq 0$ であることです． したがって，位置 l から 位置 r までの括弧列が正しいための条件は， 下の両方が成り立つことです．\n$S_{l-1} = S_r$ すべての $i \\in [l, r]$ に対して，$S_i \\geq S_r$ これは，次のように言い換えられます:\n$S_{l-1} = S_r$ かつ $\\min\\{S_i \\mid i \\in [l, r]\\} = S_r$ また，位置$l$と$r$の文字を入れ替えたときには，$S$ は次のように変わります:\n両方が同じ文字なら，変化無し ( と ) の場合には，$i \\in [l, r-1]$ について，$S_i$ が 2 減る． ) と ( の場合には，$i \\in [l, r-1]$ について，$S_i$ が 2 増える． したがって，$S_i$ の値を，区間加算と区間最小値取得ができる セグメント木で管理することで答が得られます．\nG -\tVertex Deletion E が解けた時点で残り40分でした． F と G の問題文をざっと読んで，G は解けそうになく (そもそもマッチングという ことばが分からない (ので検索した))，F は解けそうだったので，F に 行きました．結果的には， G は 40分あれば解けたことがわかったので失敗だったのですが， すぐには方針が思いつかなかったのでやむを得ないですかねえ．うーむ．\n最小マッチングというのは，pairwise に頂点を共有しない辺の集合 $X$ で 要素数最小のもの，ということが検索して分かったので，それで考えます． グラフは木ですから，$X$ は，葉から順に貪欲に取っていけば良いです (ということにすぐ思い当たれば G に行けたかもしれない．未練たらしい…)\n正確には次のようになるでしょうか: 適当に根を考えたとき， $X$ に入っている辺の両端の頂点のうち，根に近い方の点からなる集合を $Y$ とします．$Y$ は次の条件を満たすとして良いです: 頂点 $v$ に関し，\n$v$ の子がすべて $Y$ に属していれば $v$ は $Y$ に属さない． $v$ の子で $Y$ に属していないものがあれば，$v$ は $Y$ に属する． 上の条件は当然で，下の条件はもし満たしていなければ， 満たすように $X$ を (要素数を変えずに) 変更することができます． 上の条件から，根 $r$ を決めたときに $Y$ は確定します．これを $Y_r$ と 書くことにします． $r$ が $Y_r$ に属するときには，$r$ とその辺を取り除いてしまうと 最小マッチングが減り，$r$ が $Y_r$ に属さなければ，最小マッチングは 減りません．ということで，各$r$に対して $r \\in Y_r$ かどうかを判定すれば よいことになりました．\n$r \\in Y_r$ かどうかは， $f(p) = \\bigvee \\{ \\neg f(q) \\mid q \\text{ は } p \\text{ の子 }\\}$ と，子の値からモノイド演算で定義した $f(r)$ の値として決定できますから， 全方位木DPで求めることができます．\nH -\tXor Query 問題も読めませんでした． あとで解説ACしました ．\n微減ですんだからOK... という気持ちには今日はなれないなあ．残念．\nyamate11さんのAtCoder Beginner Contest 223での成績：259位\nパフォーマンス：1916相当\nレーティング：1949→1946 (-3) :(#AtCoder #ABC223 https://t.co/61p9VRUfwY\n— yamate11 (@_yamate11) October 17, 2021 ",
   "wordCount" : "395",
   "inLanguage": "en",
   "datePublished": "2021-10-17T23:33:52+09:00",
@@ -145,56 +183,19 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -208,7 +209,7 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -237,7 +238,7 @@ C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしま
     <h1 class="post-title">
       ABC 223 参加記
     </h1>
-    <div class="post-meta">2021-10-17&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-17&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 223 (ABC 223) に参加して，
@@ -377,12 +378,12 @@ $f(p) = \bigvee \{ \neg f(q) \mid q \text{ は } p \text{ の子 }\}$
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Xor Query -- AtCoder Beginner Contest 223 H</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>222 -- AtCoder Beginner Contest 222 G</span>
   </a>
@@ -412,36 +413,28 @@ $f(p) = \bigvee \{ \neg f(q) \mid q \text{ は } p \text{ の子 }\}$
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -495,12 +488,12 @@ $f(p) = \bigvee \{ \neg f(q) \mid q \text{ は } p \text{ の子 }\}$
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

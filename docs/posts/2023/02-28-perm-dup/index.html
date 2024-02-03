@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>順列組合せ | yamate11のブログ</title>
-<meta name="keywords" content="Perm" />
+<meta name="keywords" content="Perm">
 <meta name="description" content="順列組合せ・重複ありなし ライブラリに関するメモです．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="順列組合せ・重複ありなし ライブラリに関するメモです．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-02-28T17:14:24&#43;09:00" />
-<meta property="article:modified_time" content="2023-02-28T17:14:24&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-02-28T17:14:24+09:00" />
+<meta property="article:modified_time" content="2023-02-28T17:14:24+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="順列組合せ"/>
@@ -88,7 +123,7 @@
   "keywords": [
     "Perm"
   ],
-  "articleBody": "順列組合せ (重複有り無し) を生成するライブラリ Perm に関するメモです．\nstruct 4つの struct がある．名前がおかしいのは歴史的理由による．\n IntPerm 順列 IntComb 組合せ IntDupPerm 重複順列 IntDupComb 重複組合せ  constructor IntPerm ip(m, n); IntComp ic(m, n); IntDupPerm idp(m, n); IntDupComb idc(m, n); これらはいずれも，$[0, m)$ の数からなる長さ $n$ のリストを生成する．\nこのライブラリでは，「順列」と「組合せ」の違いは， 後者は昇順にソートされている，ということである．\nIntPerm $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れない ものを列挙する．\nたとえば ip(4, 2) は，次を生成する:\n[0,1], [0,2], [0,3], [0,4], [1,0], [1,1], [1,2], [1,3], [2,0], [2,1], [2,2], [2,3], [3,0], [3,1], [3,2], [3,3] IntComb $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れず， 昇順ソートされているものを列挙する．\nたとえば，ic(4, 2) は，次を生成する:\n[0,1], [0,2], [0,3], [0,4], [1,2], [1,3], [2,3] IntDupPerm $[0, m)$ からなる長さ $n$ のリストを列挙する．\nたとえば idp(4, 2) は，次を生成する:\n[0,0], [0,1], [0,2], [0,3], [1,0], [1,1], [1,2], [1,3], [2,0], [2,1], [2,2], [2,3], [3,0], [3,1], [3,2], [3,3] IntDupComb $[0, m)$ からなる長さ $n$ のリストで，昇順ソートされているものを列挙する．\nたとえば idc(4, 2) は，次を生成する:\n[0,0], [0,1], [0,2], [0,3], [1,1], [1,2], [1,3], [2,2], [2,3], [3,3] 生成 obj.get() が true を返す間，新しいリストが生成される． リストの i 番目の要素は，obj.at() である．\nwhile (ip.get()) {  for (int i = 0; i  2; i++) cout  ip.at(i)  \" \"; } 注意1 obj.get() が false を返すときには，内部状態は初期値に戻るので， そのまま次のラウンドを実行することができる．\n注意2  $n \\geq 0, r \\geq 0$ でないときには，何も生成しない． IntPerm と IntComb は，$r \\leq n$ でないときには，何も生成しない． IntDupPerm と IntDupComb は，$n = r = 0$ のときに， 何も生成しないのでは なく，空リスト [] を生成する． これは，ことによると適切でないかもしれない． ($0^0 = 1$ になるし，$H(n, r) \\neq C(n+r-1, r)$ になるから) $n = 0$ かつ $r \\neq 0$ の場合には，何も生成しない．  デバッグ用 const vector\u0026 obj.vec_view(); を使えば，DLOG に渡せる．\n忘れやすい利用シーン ボールと仕切りの重複組合せ 区別されない $a$ 個のボールを 区別される $b$ 個の箱に入れる方法は， IntDupComb(b, a) が列挙するリストと対応付けられる． リスト $[x_1, …, x_a]$ は，ボール $1$ が箱 $x_1$に，ボール $2$ が箱 $x_2$に， …, ボール $a$ が箱 $x_a$ に入っていることを意味している． (ボールを区別しないことは，入る箱を昇順にして良いことと対応している．) したがって，各箱に入っているボールの数は，次のように求められる．\nIntDupComb idc(b, a); while (idc.next()) {  vectorll numBalls(b);  REP(i, 0, a) numBalls[idc.at(i)]++;  // 箱 j にはボールが numBalls[j] 個入っている } ",
+  "articleBody": "順列組合せ (重複有り無し) を生成するライブラリ Perm に関するメモです．\nstruct 4つの struct がある．名前がおかしいのは歴史的理由による．\nIntPerm 順列 IntComb 組合せ IntDupPerm 重複順列 IntDupComb 重複組合せ constructor IntPerm ip(m, n); IntComp ic(m, n); IntDupPerm idp(m, n); IntDupComb idc(m, n); これらはいずれも，$[0, m)$ の数からなる長さ $n$ のリストを生成する．\nこのライブラリでは，「順列」と「組合せ」の違いは， 後者は昇順にソートされている，ということである．\nIntPerm $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れない ものを列挙する．\nたとえば ip(4, 2) は，次を生成する:\n[0,1], [0,2], [0,3], [0,4], [1,0], [1,1], [1,2], [1,3], [2,0], [2,1], [2,2], [2,3], [3,0], [3,1], [3,2], [3,3] IntComb $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れず， 昇順ソートされているものを列挙する．\nたとえば，ic(4, 2) は，次を生成する:\n[0,1], [0,2], [0,3], [0,4], [1,2], [1,3], [2,3] IntDupPerm $[0, m)$ からなる長さ $n$ のリストを列挙する．\nたとえば idp(4, 2) は，次を生成する:\n[0,0], [0,1], [0,2], [0,3], [1,0], [1,1], [1,2], [1,3], [2,0], [2,1], [2,2], [2,3], [3,0], [3,1], [3,2], [3,3] IntDupComb $[0, m)$ からなる長さ $n$ のリストで，昇順ソートされているものを列挙する．\nたとえば idc(4, 2) は，次を生成する:\n[0,0], [0,1], [0,2], [0,3], [1,1], [1,2], [1,3], [2,2], [2,3], [3,3] 生成 obj.get() が true を返す間，新しいリストが生成される． リストの i 番目の要素は，obj.at() である．\nwhile (ip.get()) { for (int i = 0; i \u003c 2; i++) cout \u003c\u003c ip.at(i) \u003c\u003c \" \"; } 注意1 obj.get() が false を返すときには，内部状態は初期値に戻るので， そのまま次のラウンドを実行することができる．\n注意2 $n \\geq 0, r \\geq 0$ でないときには，何も生成しない． IntPerm と IntComb は，$r \\leq n$ でないときには，何も生成しない． IntDupPerm と IntDupComb は，$n = r = 0$ のときに， 何も生成しないのでは なく，空リスト [] を生成する． これは，ことによると適切でないかもしれない． ($0^0 = 1$ になるし，$H(n, r) \\neq C(n+r-1, r)$ になるから) $n = 0$ かつ $r \\neq 0$ の場合には，何も生成しない． デバッグ用 const vector\u0026 obj.vec_view(); を使えば，DLOG に渡せる．\n忘れやすい利用シーン ボールと仕切りの重複組合せ 区別されない $a$ 個のボールを 区別される $b$ 個の箱に入れる方法は， IntDupComb(b, a) が列挙するリストと対応付けられる． リスト $[x_1, …, x_a]$ は，ボール $1$ が箱 $x_1$に，ボール $2$ が箱 $x_2$に， …, ボール $a$ が箱 $x_a$ に入っていることを意味している． (ボールを区別しないことは，入る箱を昇順にして良いことと対応している．) したがって，各箱に入っているボールの数は，次のように求められる．\nIntDupComb idc(b, a); while (idc.next()) { vector\u003cll\u003e numBalls(b); REP(i, 0, a) numBalls[idc.at(i)]++; // 箱 j にはボールが numBalls[j] 個入っている } ",
   "wordCount" : "262",
   "inLanguage": "en",
   "datePublished": "2023-02-28T17:14:24+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       順列組合せ
     </h1>
-    <div class="post-meta">2023-02-28&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-02-28&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>順列組合せ (重複有り無し) を生成するライブラリ Perm に関するメモです．</p>
@@ -299,12 +297,12 @@ IntDupComb(b, a) が列挙するリストと対応付けられる．
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>素数以外の mod</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ダブリングライブラリ</span>
   </a>
@@ -334,36 +332,28 @@ IntDupComb(b, a) が列挙するリストと対応付けられる．
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -417,12 +407,12 @@ IntDupComb(b, a) が列挙するリストと対応付けられる．
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

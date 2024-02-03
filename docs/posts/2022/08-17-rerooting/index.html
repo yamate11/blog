@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>全方位木ライブラリ | yamate11のブログ</title>
-<meta name="keywords" content="全方位木" />
+<meta name="keywords" content="全方位木">
 <meta name="description" content="全方位木ライブラリ使用法のメモ
 このライブラリで解ける問題 $\mathcal{M} = (M, \oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．
 根付き木 $T$ に対して， $g : (M \times T \times T) \to M$ から次のように帰納的に定義される 関数 $f : T \to M$ を考える:
- $f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
- $f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $  ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．">
+$f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $ 単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
+$f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $ ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -22,8 +22,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -54,20 +89,20 @@
 <meta property="og:description" content="全方位木ライブラリ使用法のメモ
 このライブラリで解ける問題 $\mathcal{M} = (M, \oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．
 根付き木 $T$ に対して， $g : (M \times T \times T) \to M$ から次のように帰納的に定義される 関数 $f : T \to M$ を考える:
- $f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
- $f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $  ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．" />
+$f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $ 単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
+$f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $ ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-08-17T16:39:04&#43;09:00" />
-<meta property="article:modified_time" content="2022-08-17T16:39:04&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-08-17T16:39:04+09:00" />
+<meta property="article:modified_time" content="2022-08-17T16:39:04+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="全方位木ライブラリ"/>
 <meta name="twitter:description" content="全方位木ライブラリ使用法のメモ
 このライブラリで解ける問題 $\mathcal{M} = (M, \oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．
 根付き木 $T$ に対して， $g : (M \times T \times T) \to M$ から次のように帰納的に定義される 関数 $f : T \to M$ を考える:
- $f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
- $f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $  ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．"/>
+$f(n) = \bigoplus \{ g(f(c), n, c) \mid c \in C(n) \} $ 単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．
+$f_r(n) = \bigoplus \{ g(f_r(c), n, c) \mid c \in C_r(n) \} $ ここで，$F : T \to M$ を，$F(n) := f_n(n)$ で定義する．"/>
 
 
 <script type="application/ld+json">
@@ -96,11 +131,11 @@
   "@type": "BlogPosting",
   "headline": "全方位木ライブラリ",
   "name": "全方位木ライブラリ",
-  "description": "全方位木ライブラリ使用法のメモ\nこのライブラリで解ける問題 $\\mathcal{M} = (M, \\oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．\n根付き木 $T$ に対して， $g : (M \\times T \\times T) \\to M$ から次のように帰納的に定義される 関数 $f : T \\to M$ を考える:\n $f(n) = \\bigoplus \\{ g(f(c), n, c) \\mid c \\in C(n) \\} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．\n $f_r(n) = \\bigoplus \\{ g(f_r(c), n, c) \\mid c \\in C_r(n) \\} $  ここで，$F : T \\to M$ を，$F(n) := f_n(n)$ で定義する．",
+  "description": "全方位木ライブラリ使用法のメモ\nこのライブラリで解ける問題 $\\mathcal{M} = (M, \\oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．\n根付き木 $T$ に対して， $g : (M \\times T \\times T) \\to M$ から次のように帰納的に定義される 関数 $f : T \\to M$ を考える:\n$f(n) = \\bigoplus \\{ g(f(c), n, c) \\mid c \\in C(n) \\} $ 単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．\n$f_r(n) = \\bigoplus \\{ g(f_r(c), n, c) \\mid c \\in C_r(n) \\} $ ここで，$F : T \\to M$ を，$F(n) := f_n(n)$ で定義する．",
   "keywords": [
     "全方位木"
   ],
-  "articleBody": "全方位木ライブラリ使用法のメモ\nこのライブラリで解ける問題 $\\mathcal{M} = (M, \\oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．\n根付き木 $T$ に対して， $g : (M \\times T \\times T) \\to M$ から次のように帰納的に定義される 関数 $f : T \\to M$ を考える:\n $f(n) = \\bigoplus \\{ g(f(c), n, c) \\mid c \\in C(n) \\} $  単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．\n $f_r(n) = \\bigoplus \\{ g(f_r(c), n, c) \\mid c \\in C_r(n) \\} $  ここで，$F : T \\to M$ を，$F(n) := f_n(n)$ で定義する．\nこのライブラリでは，$\\mathcal{M}$ と $g$ を与えて， $F$ の各ノードでの値が計算できる．\n注意  計算量は $O(|T|)$． 実装では左からの和と右からの和を利用しているので， 逆演算が定義されていなくても計算できる (が，重い)． $F$ 自体が問題の答となるとは限らなくて，さらにそこから もうひと計算する必要があることもある． g を適用して，モノイド演算が実施できるような形にするところがポイント  例題 ABC160F - Distributing Integers   木が与えられる．各頂点 $k$ につき，次の問題を解け\n 頂点 $k$ に 1 を書き，残りの頂点には，既に書き込まれた頂点に 隣接する頂点に 2, 3, … の数を書く． このように書ける方法の数を$\\mod 10^9 + 7$ で求めよ．   全方位木を使うには，\n 頂点を1つ固定した問題が，木DPで解けて， その木DPの際に，各ノードの処理がモノイド演算でできること  が必要．ということで，まず，$k$ を固定した問題を 木DPで解く方法を考える．\n 1 は根に書くと決まっている． 根の子供が $c_1, c_2, c_3$ として，その部分木の数を $m_1, m_2, m_3$ とする． 2 ～ N を，この3つに割り振る方法を決めると，各 部分木の小問題では，$1$ から $m_1$ の問題が解けていればそれで決まる．  具体的には，上の場合，\n$$f(1) = \\binom{N - 1}{m_1}f(c_1)\\binom{m_1}{m_2}f(c_2)\\binom{m_3}{m_3}f(c_3) = (N - 1)!\\prod\\frac{f(c_i)}{m_i}$$\nとなる．一般も同じ．少し変形して，\n$$ \\frac{f(n)}{(m_n - 1) !} = \\prod \\frac{f(c)}{m_c} $$\nより，$\\hat{f}(n) := f(n) / (m_n - 1)!$ と置いて，\n$$ \\hat{f}(n) = \\prod \\hat{f}(c)\\cdot\\frac{1}{m_c} $$\nとなるので，モノイド演算は積，単位元1，$g(\\alpha, n, c) := \\alpha / m_c$で $\\hat{f}$が計算でき，したがって $f$ が求められる．\n例題 EDPC V Subtree   木と正整数 $M$ が与えられる． 全頂点を白黒に塗り分けるに塗り分け，任意の2つの異なる黒頂点a,bに関して， a から b へのパスが全部黒で塗られているようにする 各頂点$v$について，上を満たして $v$ が黒く塗られる塗り方の数を $\\mod M$ で求めよ．\n ここでは，白く塗られる塗り方の数も問われているものだと仮定して， 解を考える．\n3つの条件を考える．\n B(n): n は黒く塗られ，n の子孫は条件を満たす． W(n): n は白く塗られ，n の子孫は条件を満たす． A(n): n および n の子孫はすべて白く塗られている．  ノードの集合Xについて，次のように定める．\n P(X): 全ての $c \\in X$ について B(c) または A(c) Q(X): 全ての $c \\in X$ について B(c) または W(c) であり， たかだか1つを除いて A(c) である．  これらは，n が塗れるかどうかの条件に関係する．具体的には:\n n が黒く塗れるための条件は，P(C(n))． n が白く塗れるための条件は，Q(C(n))．  $P(X)$, $Q(X)$, $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数を $\\alpha_1, \\beta_1, \\alpha_2, \\beta_2$ とするとき， $P(X \\cup \\{c\\})$, $Q(X \\cup \\{c\\})$, を満たす塗り方の数は $(\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$ である． そこで，\n $(\\alpha_1, \\beta_1) \\oplus (\\alpha_2, \\beta_2) := (\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$  で，モノイド演算を定義する．単位元は $(1, 1)$ である．\nまた，$c$ を黒，白で塗る方法の数を $\\alpha$, $\\beta$ とするとき， $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数は， $\\alpha + 1$, $\\alpha + \\beta$ である．そこで，\n $g((\\alpha, \\beta), n, c)) = (\\alpha + 1, \\alpha + \\beta)$  で，$g$ を定義する．\n",
+  "articleBody": "全方位木ライブラリ使用法のメモ\nこのライブラリで解ける問題 $\\mathcal{M} = (M, \\oplus, e)$ を可換モノイドとする． 根付き木 $T$ に関し，ノード $x$ の親を $p(x)$， ノード $x$ の子の集合を $C(x)$ と書く．\n根付き木 $T$ に対して， $g : (M \\times T \\times T) \\to M$ から次のように帰納的に定義される 関数 $f : T \\to M$ を考える:\n$f(n) = \\bigoplus \\{ g(f(c), n, c) \\mid c \\in C(n) \\} $ 単に $f$ と書いたが，どこを根とするかによって異なる関数が 定義できている．明示的に根 $r$ を示すと次のようになる．\n$f_r(n) = \\bigoplus \\{ g(f_r(c), n, c) \\mid c \\in C_r(n) \\} $ ここで，$F : T \\to M$ を，$F(n) := f_n(n)$ で定義する．\nこのライブラリでは，$\\mathcal{M}$ と $g$ を与えて， $F$ の各ノードでの値が計算できる．\n注意 計算量は $O(|T|)$． 実装では左からの和と右からの和を利用しているので， 逆演算が定義されていなくても計算できる (が，重い)． $F$ 自体が問題の答となるとは限らなくて，さらにそこから もうひと計算する必要があることもある． g を適用して，モノイド演算が実施できるような形にするところがポイント 例題 ABC160F - Distributing Integers 木が与えられる．各頂点 $k$ につき，次の問題を解け\n頂点 $k$ に 1 を書き，残りの頂点には，既に書き込まれた頂点に 隣接する頂点に 2, 3, … の数を書く． このように書ける方法の数を$\\mod 10^9 + 7$ で求めよ． 全方位木を使うには，\n頂点を1つ固定した問題が，木DPで解けて， その木DPの際に，各ノードの処理がモノイド演算でできること が必要．ということで，まず，$k$ を固定した問題を 木DPで解く方法を考える．\n1 は根に書くと決まっている． 根の子供が $c_1, c_2, c_3$ として，その部分木の数を $m_1, m_2, m_3$ とする． 2 ～ N を，この3つに割り振る方法を決めると，各 部分木の小問題では，$1$ から $m_1$ の問題が解けていればそれで決まる． 具体的には，上の場合，\n$$f(1) = \\binom{N - 1}{m_1}f(c_1)\\binom{m_1}{m_2}f(c_2)\\binom{m_3}{m_3}f(c_3) = (N - 1)!\\prod\\frac{f(c_i)}{m_i}$$\nとなる．一般も同じ．少し変形して，\n$$ \\frac{f(n)}{(m_n - 1) !} = \\prod \\frac{f(c)}{m_c} $$\nより，$\\hat{f}(n) := f(n) / (m_n - 1)!$ と置いて，\n$$ \\hat{f}(n) = \\prod \\hat{f}(c)\\cdot\\frac{1}{m_c} $$\nとなるので，モノイド演算は積，単位元1，$g(\\alpha, n, c) := \\alpha / m_c$で $\\hat{f}$が計算でき，したがって $f$ が求められる．\n例題 EDPC V Subtree 木と正整数 $M$ が与えられる． 全頂点を白黒に塗り分けるに塗り分け，任意の2つの異なる黒頂点a,bに関して， a から b へのパスが全部黒で塗られているようにする 各頂点$v$について，上を満たして $v$ が黒く塗られる塗り方の数を $\\mod M$ で求めよ．\nここでは，白く塗られる塗り方の数も問われているものだと仮定して， 解を考える．\n3つの条件を考える．\nB(n): n は黒く塗られ，n の子孫は条件を満たす． W(n): n は白く塗られ，n の子孫は条件を満たす． A(n): n および n の子孫はすべて白く塗られている． ノードの集合Xについて，次のように定める．\nP(X): 全ての $c \\in X$ について B(c) または A(c) Q(X): 全ての $c \\in X$ について B(c) または W(c) であり， たかだか1つを除いて A(c) である． これらは，n が塗れるかどうかの条件に関係する．具体的には:\nn が黒く塗れるための条件は，P(C(n))． n が白く塗れるための条件は，Q(C(n))． $P(X)$, $Q(X)$, $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数を $\\alpha_1, \\beta_1, \\alpha_2, \\beta_2$ とするとき， $P(X \\cup \\{c\\})$, $Q(X \\cup \\{c\\})$, を満たす塗り方の数は $(\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$ である． そこで，\n$(\\alpha_1, \\beta_1) \\oplus (\\alpha_2, \\beta_2) := (\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$ で，モノイド演算を定義する．単位元は $(1, 1)$ である．\nまた，$c$ を黒，白で塗る方法の数を $\\alpha$, $\\beta$ とするとき， $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数は， $\\alpha + 1$, $\\alpha + \\beta$ である．そこで，\n$g((\\alpha, \\beta), n, c)) = (\\alpha + 1, \\alpha + \\beta)$ で，$g$ を定義する．\n",
   "wordCount" : "321",
   "inLanguage": "en",
   "datePublished": "2022-08-17T16:39:04+09:00",
@@ -136,56 +171,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -199,7 +197,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -228,7 +226,7 @@
     <h1 class="post-title">
       全方位木ライブラリ
     </h1>
-    <div class="post-meta">2022-08-17&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-08-17&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>全方位木ライブラリ使用法のメモ</p>
@@ -355,12 +353,12 @@ $\alpha + 1$, $\alpha + \beta$ である．そこで，</p>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/10-23-ipmanip/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>よく使う iomanip の modifier</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>インタラクティブな問題に対するソーススケルトン</span>
   </a>
@@ -390,36 +388,28 @@ $\alpha + 1$, $\alpha + \beta$ である．そこで，</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -473,12 +463,12 @@ $\alpha + 1$, $\alpha + \beta$ である．そこで，</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

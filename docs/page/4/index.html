@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+	<meta name="generator" content="Hugo 0.122.0"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,8 +10,8 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,10 +19,45 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
 <link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/index.xml">
 <link rel="alternate" type="application/json" href="https://yamate11.github.io/blog/index.json">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -83,56 +119,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -146,7 +145,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -171,232 +170,223 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ABC224 参加記</h2>
+    <h2 class="entry-hint-parent">ABC224 参加記
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where &#43;s Separate Digits / G - Roll or Increment</p>
-  </section>
-  <footer class="entry-footer">2021-10-23&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC224 参加記" href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>XORに関する基底</h2>
+    <h2 class="entry-hint-parent">XORに関する基底
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方</p>
-  </section>
-  <footer class="entry-footer">2021-10-22&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to XORに関する基底" href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Xor Query -- AtCoder Beginner Contest 223 H</h2>
+    <h2 class="entry-hint-parent">Xor Query -- AtCoder Beginner Contest 223 H
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．</p>
-  </section>
-  <footer class="entry-footer">2021-10-21&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-21&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Xor Query -- AtCoder Beginner Contest 223 H" href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ABC 223 参加記</h2>
+    <h2 class="entry-hint-parent">ABC 223 参加記
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92&#39;59&#34; 259位でした．記録です．
 問題へのリンク A -	Exact Price cout &lt;&lt; (X &gt; 0 and X % 100 == 0 ? &#34;Yes\n&#34; : &#34;No\n&#34;;
 B -	String Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．
 $O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
 C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
 以下の(1),(2),(3)が成り立つ間，(4)を実行する．
-  (1) 左の火が区間 i に時刻 p に入ろうとしている．
-  (2) 右の火が区間 j に時刻 q に入ろうとしている．...</p>
-  </section>
-  <footer class="entry-footer">2021-10-17&nbsp;·&nbsp;yamate11</footer>
+(1) 左の火が区間 i に時刻 p に入ろうとしている．
+(2) 右の火が区間 j に時刻 q に入ろうとしている．
+(3) i &lt; j...</p>
+  </div>
+  <footer class="entry-footer">2021-10-17&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC 223 参加記" href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>222 -- AtCoder Beginner Contest 222 G</h2>
+    <h2 class="entry-hint-parent">222 -- AtCoder Beginner Contest 222 G
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．</p>
-  </section>
-  <footer class="entry-footer">2021-10-13&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-13&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 222 -- AtCoder Beginner Contest 222 G" href="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>木の直径</h2>
+    <h2 class="entry-hint-parent">木の直径
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．</p>
-  </section>
-  <footer class="entry-footer">2021-10-10&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-10&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 木の直径" href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ABC 222 参加記</h2>
+    <h2 class="entry-hint-parent">ABC 222 参加記
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>ABC222 に参加して，ABCDE 5完 498位でした．参加記です．</p>
-  </section>
-  <footer class="entry-footer">2021-10-09&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-09&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC 222 参加記" href="https://yamate11.github.io/blog/posts/2021/10-09-abc222/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ABC 221 参加記</h2>
+    <h2 class="entry-hint-parent">ABC 221 参加記
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>ABC221に参加して，ABCDEF 6完2ペナルティでした．その記録です．</p>
-  </section>
-  <footer class="entry-footer">2021-10-03&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-03&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC 221 参加記" href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>桁DPのコーディング</h2>
+    <h2 class="entry-hint-parent">桁DPのコーディング
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</p>
-  </section>
-  <footer class="entry-footer">2021-10-01&nbsp;·&nbsp;2021-07-06 (初版)&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-10-01&amp;nbsp;·&amp;nbsp;2021-07-06 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>コーディングスタイル</h2>
+    <h2 class="entry-hint-parent">コーディングスタイル
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>自分のコーディングスタイルについてです</p>
-  </section>
-  <footer class="entry-footer">2021-09-23&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-09-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to コーディングスタイル" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;言語・STLメモ</h2>
+    <h2 class="entry-hint-parent">C&#43;&#43;言語・STLメモ
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．</p>
-  </section>
-  <footer class="entry-footer">2021-09-20&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-09-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;言語・STLメモ" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Red and Blue Lamps - AtCoder Beginner Contest 218 H</h2>
+    <h2 class="entry-hint-parent">Red and Blue Lamps - AtCoder Beginner Contest 218 H
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>公式解説にある貪欲法の証明を詳しく書きました．</p>
-  </section>
-  <footer class="entry-footer">2021-09-13&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-09-13&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Red and Blue Lamps - AtCoder Beginner Contest 218 H" href="https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Shapes -- AtCoder Beginner Contest 218 C</h2>
+    <h2 class="entry-hint-parent">Shapes -- AtCoder Beginner Contest 218 C
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>重実装への対処は，どうしたらよいのでしょうか?</p>
-  </section>
-  <footer class="entry-footer">2021-09-12&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-09-12&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Shapes -- AtCoder Beginner Contest 218 C" href="https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Snuketoon - ABC217 H</h2>
+    <h2 class="entry-hint-parent">Snuketoon - ABC217 H
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>slope trick というのは忘れていましたが，そもそもHまで到達しませんでした．この記事は公式解説そのままです．</p>
-  </section>
-  <footer class="entry-footer">2021-09-05&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-09-05&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Snuketoon - ABC217 H" href="https://yamate11.github.io/blog/posts/2021/09-05-abc217-h-snuketoon/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>「牛ゲー」</h2>
+    <h2 class="entry-hint-parent">「牛ゲー」
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>「牛ゲー」なる手法のまとめです</p>
-  </section>
-  <footer class="entry-footer">2021-08-30&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 「牛ゲー」" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://yamate11.github.io/blog/page/3/">« Prev Page</a>
-    <a class="next" href="https://yamate11.github.io/blog/page/5/">Next Page »</a>
+    <a class="prev" href="https://yamate11.github.io/blog/page/3/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="https://yamate11.github.io/blog/page/5/">Next&nbsp;&nbsp;»
+    </a>
   </nav>
 </footer>
-
-<br/>
-<p>
-Links:
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/">ABC224 参加記</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/">XORに関する基底</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/">Xor Query -- AtCoder Beginner Contest 223 H</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/">ABC 223 参加記</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/">222 -- AtCoder Beginner Contest 222 G</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/">木の直径</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-09-abc222/">ABC 222 参加記</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/10-03-abc221/">ABC 221 参加記</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/">コーディングスタイル</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/">C&#43;&#43;言語・STLメモ</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/">Red and Blue Lamps - AtCoder Beginner Contest 218 H</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/">Shapes -- AtCoder Beginner Contest 218 C</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/09-05-abc217-h-snuketoon/">Snuketoon - ABC217 H</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/">「牛ゲー」</a>
-</p>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

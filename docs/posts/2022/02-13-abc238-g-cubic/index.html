@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Cubic? - AtCoder Beginner Contest 238 G | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="ABC238G Cubic? の解法です．公式解説と同じです．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="ABC238G Cubic? の解法です．公式解説と同じです．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-13T11:48:45&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-13T11:48:45&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-02-13T11:48:45+09:00" />
+<meta property="article:modified_time" content="2022-02-13T11:48:45+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cubic? - AtCoder Beginner Contest 238 G"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 238 - ABC 238 G - Cubic? の解法です． 公式解説 と本質的に同じです．\n問題概要 長さ$N$の数列$A$が与えられる．$Q$個の質問に答えよ\n $i$番目の質問: $L_i$, $R_i$ が与えられる．$A_{L_i} \\times \\cdots \\times A_{R_i}$ は立方数か?  制約: $N, Q \\leq 2\\times 10^5$, $A_i \\leq 10^6$\n問題へのリンク 経緯 コンテストでは，時間内には解けませんでした． 終了後に，Mo のアルゴリズムが適用できると気づいて，解けました． 公式解説を読んでみたら，ハッシュで解けると書いてありました． Twitter で，Zobrist Hash というものがあると 指摘されて いて，調べました．\n解法 全部の $A_i$ を素因数分解しておく (40msくらいでできる．別記事 参照)． これらの素因数分解に現れる素数全体の集合を $P$ とし， $S := \\{ (p, i) \\mid p \\in P \\textrm{, } i \\in \\{1, 2\\} \\}$ とする． $S$ の Zobrist Hash $h$ を考える． Zobrist Hash については，別記事 参照．\n正の整数 $a$ を素因数分解して， 冪の部分をすべて3で割ったあまりで置き換えて得られる素冪のうち， $1$ を除いた集合を$f(a)$ と書くことにする． たとえば，$f(7^5\\times 13^{6} \\times 17^{40}) := \\{7^2, 17^1\\}$．\n$B_i := f(A_1 \\times A_2 \\times \\cdots \\times A_i)$ とする． $2\\times3\\times5\\times7\\times11\\times13\\times172\\times10^5$ であるから， $|(B_{i + 1} \\setminus B_{i}) \\cup (B_i \\setminus B_{i + 1})|$ はたかだか $6$ である．そこで，$B_i$ たちをすべて決定することができる．\n$C_i := h(B_i)$ として，$i$ 番目の質問には， $C_{L_i-1} == C_{R_i}$ であるかどうかを答える． WAとなる確率はたかだか $QT / V$ (ここで，$T$ はテストケースの数， $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ に とっておけば十分小さい．\n実装 提出コード ",
+  "articleBody": "AtCoder Beginner Contest 238 - ABC 238 G - Cubic? の解法です． 公式解説 と本質的に同じです．\n問題概要 長さ$N$の数列$A$が与えられる．$Q$個の質問に答えよ\n$i$番目の質問: $L_i$, $R_i$ が与えられる．$A_{L_i} \\times \\cdots \\times A_{R_i}$ は立方数か? 制約: $N, Q \\leq 2\\times 10^5$, $A_i \\leq 10^6$\n問題へのリンク 経緯 コンテストでは，時間内には解けませんでした． 終了後に，Mo のアルゴリズムが適用できると気づいて，解けました． 公式解説を読んでみたら，ハッシュで解けると書いてありました． Twitter で，Zobrist Hash というものがあると 指摘されて いて，調べました．\n解法 全部の $A_i$ を素因数分解しておく (40msくらいでできる．別記事 参照)． これらの素因数分解に現れる素数全体の集合を $P$ とし， $S := \\{ (p, i) \\mid p \\in P \\textrm{, } i \\in \\{1, 2\\} \\}$ とする． $S$ の Zobrist Hash $h$ を考える． Zobrist Hash については，別記事 参照．\n正の整数 $a$ を素因数分解して， 冪の部分をすべて3で割ったあまりで置き換えて得られる素冪のうち， $1$ を除いた集合を$f(a)$ と書くことにする． たとえば，$f(7^5\\times 13^{6} \\times 17^{40}) := \\{7^2, 17^1\\}$．\n$B_i := f(A_1 \\times A_2 \\times \\cdots \\times A_i)$ とする． $2\\times3\\times5\\times7\\times11\\times13\\times17\u003e2\\times10^5$ であるから， $|(B_{i + 1} \\setminus B_{i}) \\cup (B_i \\setminus B_{i + 1})|$ はたかだか $6$ である．そこで，$B_i$ たちをすべて決定することができる．\n$C_i := h(B_i)$ として，$i$ 番目の質問には， $C_{L_i-1} == C_{R_i}$ であるかどうかを答える． WAとなる確率はたかだか $QT / V$ (ここで，$T$ はテストケースの数， $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ に とっておけば十分小さい．\n実装 提出コード ",
   "wordCount" : "146",
   "inLanguage": "en",
   "datePublished": "2022-02-13T11:48:45+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Cubic? - AtCoder Beginner Contest 238 G
     </h1>
-    <div class="post-meta">2022-02-13&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-02-13&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 238 - ABC 238 G - Cubic? の解法です．
@@ -273,12 +271,12 @@ $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ �
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>最大流・最小カット</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Zobrist Hashing</span>
   </a>
@@ -308,36 +306,28 @@ $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ �
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -391,12 +381,12 @@ $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ �
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

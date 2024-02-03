@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>行列木定理 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．
 定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \ldots, N$ とする． 対称 $N\times N$ 行列 $A = (a_{ij})$ を，次で定める:
- $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$  このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
-例   上のグラフでは，
+$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
+例 上のグラフでは，
 $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; -1 \\ 0 &amp; -1 &amp; 2 &amp; -1 \\ -2 &amp; -1 &amp; -1 &amp; 4 \end{bmatrix} $$">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -22,8 +22,43 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -53,20 +88,20 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
 <meta property="og:title" content="行列木定理" />
 <meta property="og:description" content="行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．
 定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \ldots, N$ とする． 対称 $N\times N$ 行列 $A = (a_{ij})$ を，次で定める:
- $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$  このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
-例   上のグラフでは，
+$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
+例 上のグラフでは，
 $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; -1 \\ 0 &amp; -1 &amp; 2 &amp; -1 \\ -2 &amp; -1 &amp; -1 &amp; 4 \end{bmatrix} $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-04-18T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-04-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-18T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="行列木定理"/>
 <meta name="twitter:description" content="行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．
 定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \ldots, N$ とする． 対称 $N\times N$ 行列 $A = (a_{ij})$ を，次で定める:
- $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$  このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
-例   上のグラフでは，
+$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
+例 上のグラフでは，
 $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; -1 \\ 0 &amp; -1 &amp; 2 &amp; -1 \\ -2 &amp; -1 &amp; -1 &amp; 4 \end{bmatrix} $$"/>
 
 
@@ -96,11 +131,11 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
   "@type": "BlogPosting",
   "headline": "行列木定理",
   "name": "行列木定理",
-  "description": "行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．\n定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \\ldots, N$ とする． 対称 $N\\times N$ 行列 $A = (a_{ij})$ を，次で定める:\n $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \\text{と} j \\text{を結ぶ辺の数} )$  このとき，A のすべての余因子は等しく，G の全域木の数と一致する．\n例   上のグラフでは，\n$$ A = \\begin{bmatrix} 3 \u0026amp; -1 \u0026amp; 0 \u0026amp; -2 \\\\ -1 \u0026amp; 3 \u0026amp; -1 \u0026amp; -1 \\\\ 0 \u0026amp; -1 \u0026amp; 2 \u0026amp; -1 \\\\ -2 \u0026amp; -1 \u0026amp; -1 \u0026amp; 4 \\end{bmatrix} $$",
+  "description": "行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．\n定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \\ldots, N$ とする． 対称 $N\\times N$ 行列 $A = (a_{ij})$ を，次で定める:\n$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \\text{と} j \\text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．\n例 上のグラフでは，\n$$ A = \\begin{bmatrix} 3 \u0026amp; -1 \u0026amp; 0 \u0026amp; -2 \\\\ -1 \u0026amp; 3 \u0026amp; -1 \u0026amp; -1 \\\\ 0 \u0026amp; -1 \u0026amp; 2 \u0026amp; -1 \\\\ -2 \u0026amp; -1 \u0026amp; -1 \u0026amp; 4 \\end{bmatrix} $$",
   "keywords": [
     
   ],
-  "articleBody": "行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．\n定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \\ldots, N$ とする． 対称 $N\\times N$ 行列 $A = (a_{ij})$ を，次で定める:\n $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \\text{と} j \\text{を結ぶ辺の数} )$  このとき，A のすべての余因子は等しく，G の全域木の数と一致する．\n例   上のグラフでは，\n$$ A = \\begin{bmatrix} 3 \u0026 -1 \u0026 0 \u0026 -2 \\\\ -1 \u0026 3 \u0026 -1 \u0026 -1 \\\\ 0 \u0026 -1 \u0026 2 \u0026 -1 \\\\ -2 \u0026 -1 \u0026 -1 \u0026 4 \\end{bmatrix} $$\n$(4,4)-$余因子行列は\n$$ M_{4,4} = \\begin{bmatrix} 3 \u0026 -1 \u0026 0 \\\\ -1 \u0026 3 \u0026 -1 \\\\ 0 \u0026 -1 \u0026 2\n\\end{bmatrix} $$\nこの行列式の値 13 が，グラフの全域木の数である．\n",
+  "articleBody": "行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．\n定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \\ldots, N$ とする． 対称 $N\\times N$ 行列 $A = (a_{ij})$ を，次で定める:\n$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \\text{と} j \\text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．\n例 上のグラフでは，\n$$ A = \\begin{bmatrix} 3 \u0026 -1 \u0026 0 \u0026 -2 \\\\ -1 \u0026 3 \u0026 -1 \u0026 -1 \\\\ 0 \u0026 -1 \u0026 2 \u0026 -1 \\\\ -2 \u0026 -1 \u0026 -1 \u0026 4 \\end{bmatrix} $$\n$(4,4)-$余因子行列は\n$$ M_{4,4} = \\begin{bmatrix} 3 \u0026 -1 \u0026 0 \\\\ -1 \u0026 3 \u0026 -1 \\\\ 0 \u0026 -1 \u0026 2\n\\end{bmatrix} $$\nこの行列式の値 13 が，グラフの全域木の数である．\n",
   "wordCount" : "106",
   "inLanguage": "en",
   "datePublished": "2021-04-18T00:00:00Z",
@@ -136,56 +171,19 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -199,7 +197,7 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -228,7 +226,7 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
     <h1 class="post-title">
       行列木定理
     </h1>
-    <div class="post-meta">2021-04-18&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-04-18&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>行列木定理についての記事です．
@@ -253,11 +251,11 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
 3 &amp; -1 &amp; 0 &amp; -2 \\
 -1 &amp; 3 &amp; -1 &amp; -1 \\
 0 &amp; -1 &amp; 2 &amp; -1 \\
--2 &amp; -1 &amp; -1 &amp; 4 
+-2 &amp; -1 &amp; -1 &amp; 4
 \end{bmatrix}
 $$</p>
 <p>$(4,4)-$余因子行列は</p>
-<p>$$ M_{4,4} = 
+<p>$$ M_{4,4} =
 \begin{bmatrix}
 3 &amp; -1 &amp; 0  \\
 -1 &amp; 3 &amp; -1  \\
@@ -272,12 +270,12 @@ $$</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Lagrange補間</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/01-18-goodbye-souvenir/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>CodeForces Round #431 (Div.2) E - Goodbye Souvenir</span>
   </a>
@@ -307,36 +305,28 @@ $$</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -390,12 +380,12 @@ $$</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

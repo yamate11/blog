@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>binom(n, r) を小さい素数pに対して mod p で求める | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
- 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:">
+0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -20,8 +20,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -51,17 +86,17 @@
 <meta property="og:title" content="binom(n, r) を小さい素数pに対して mod p で求める" />
 <meta property="og:description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
- 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:" />
+0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-27T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-04-27T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-27T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="binom(n, r) を小さい素数pに対して mod p で求める"/>
 <meta name="twitter:description" content="二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
 観察 p = 3 に関していくつか書いてみると次のようになっている．
- 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:"/>
+0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:"/>
 
 
 <script type="application/ld+json">
@@ -90,11 +125,11 @@
   "@type": "BlogPosting",
   "headline": "binom(n, r) を小さい素数pに対して mod p で求める",
   "name": "binom(n, r) を小さい素数pに対して mod p で求める",
-  "description": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:",
+  "description": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:",
   "keywords": [
     
   ],
-  "articleBody": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n 0 1  1 1 1  2 1 2 1  10 1 0 0 1  11 1 1 0 1 1  12 1 2 1 1 2 1  20 1 0 0 2 0 0 1  21 1 1 0 2 2 0 1 1  22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:\n  例: p = 3 例として $p = 3$ の場合には， 上の図から，以下のように計算できる．ただし，$q $$ \\begin{eqnarray} % \\binom00 \u0026=\u0026 1 \\\\ % \\binom{3^k + q}{r} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{q}{r}} \u0026 \\text{if }\\; 0 \\leq r \\leq q \\\\ \\displaystyle{\\binom{q}{r - 3^k}} \u0026 \\text{if }\\; 3^k \\leq r \\\\ 0 \u0026 \\text{if }\\; q 列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． $$ \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ s(q) \\\\ s(2\\cdot 3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ 2 \\cdot s(q) ⧺ z ⧺ s(q) \\end{eqnarray} $$ ただし，$z$ は，$0$ を $3^k - q - 1$ 個並べた列．\nbinom(n, r) 一般に，小さい素数$p$ に対しては，以下のようになる．\n$n = c\\cdot p^k + q$，$1 \\leq c $$ \\begin{eqnarray} \\binom{0}{0} \u0026=\u0026 1 \\\\ \\binom{n}{r} = \\binom{c\\cdot p^k + q}{d\\cdot p^k + t} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{c}{d}\\binom{q}{t}} \u0026 \\text{if }\\; 0 \\leq t \\leq q \\\\ 0 \u0026 \\text{if }\\; q $\\binom{n}{r}$ の時間計算量は $O(\\log n)$．\n列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． 記号は上と同様． $$ \\newcommand{\\mybinom}[2]{\\displaystyle{\\binom{#1}{#2}}} \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(n) = s(c\\cdot p^k + q) \u0026=\u0026 \\mybinom{c}{0}s(q) ⧺ z ⧺ \\mybinom{c}{1}s(q) ⧺ z ⧺ \\cdots ⧺ \\mybinom{c}{c}s(q) \\\\ \\end{eqnarray} $$ $z$は，$0$ を $p^k - q - 1$ 個並べた列． $s(n)$ の時間計算量は $O(n)$．\nAtCoder AtCoder ARC117 C - Tricolor Pyramid で，上の手順が使える．ただし，解説 の方法の方が思いつきやすいし，(列を求めるだけだから) 計算量は同じ．\n",
+  "articleBody": "二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．\n観察 p = 3 に関していくつか書いてみると次のようになっている．\n0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:\n例: p = 3 例として $p = 3$ の場合には， 上の図から，以下のように計算できる．ただし，$q \u003c 3^k$．\n$$ \\begin{eqnarray} % \\binom00 \u0026=\u0026 1 \\\\ % \\binom{3^k + q}{r} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{q}{r}} \u0026 \\text{if }\\; 0 \\leq r \\leq q \\\\ \\displaystyle{\\binom{q}{r - 3^k}} \u0026 \\text{if }\\; 3^k \\leq r \\\\ 0 \u0026 \\text{if }\\; q \u003c r \u003c 3^k \\\\ \\end{cases} \\\\ % \\binom{2\\cdot 3^k + q}{r} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{q}{r}} \u0026 \\text{if }\\; 0 \\leq r \\leq q \\\\ \\displaystyle{2\\binom{q}{r - 3^k}} \u0026 \\text{if }\\; 3^k \\leq r \\leq 2\\cdot 3^k + q \\\\ \\displaystyle{\\binom{q}{r - 2\\cdot 3^k}} \u0026 \\text{if }\\; 2\\cdot 3^k \\leq r \\\\ 0 \u0026 \\text{if }\\; q \u003c r \u003c 3^k,\\; 3^k + q \u003c r \u003c 2\\cdot 3^k \\\\ \\end{cases} \\\\ % \\end{eqnarray} $$\n列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． $$ \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ s(q) \\\\ s(2\\cdot 3^k + q) \u0026=\u0026 s(q) ⧺ z ⧺ 2 \\cdot s(q) ⧺ z ⧺ s(q) \\end{eqnarray} $$ ただし，$z$ は，$0$ を $3^k - q - 1$ 個並べた列．\nbinom(n, r) 一般に，小さい素数$p$ に対しては，以下のようになる．\n$n = c\\cdot p^k + q$，$1 \\leq c \u003c p$，$q \u003c p^k$，$r = d\\cdot p^k + t$，$0 \\leq d \u003c p$，$t \u003c p^k$ とすると，\n$$ \\begin{eqnarray} \\binom{0}{0} \u0026=\u0026 1 \\\\ \\binom{n}{r} = \\binom{c\\cdot p^k + q}{d\\cdot p^k + t} \u0026=\u0026 \\begin{cases} \\displaystyle{\\binom{c}{d}\\binom{q}{t}} \u0026 \\text{if }\\; 0 \\leq t \\leq q \\\\ 0 \u0026 \\text{if }\\; q \u003c t \\\\ \\end{cases} \\\\ \\end{eqnarray} $$\n$\\binom{n}{r}$ の時間計算量は $O(\\log n)$．\n列 $s(n) := [\\binom{n}{r} \\mid 0 \\leq r \\leq n]$ が必要ならば，以下のように計算できる． 記号は上と同様． $$ \\newcommand{\\mybinom}[2]{\\displaystyle{\\binom{#1}{#2}}} \\begin{eqnarray} s(0) \u0026=\u0026 [1] \\\\ s(n) = s(c\\cdot p^k + q) \u0026=\u0026 \\mybinom{c}{0}s(q) ⧺ z ⧺ \\mybinom{c}{1}s(q) ⧺ z ⧺ \\cdots ⧺ \\mybinom{c}{c}s(q) \\\\ \\end{eqnarray} $$ $z$は，$0$ を $p^k - q - 1$ 個並べた列． $s(n)$ の時間計算量は $O(n)$．\nAtCoder AtCoder ARC117 C - Tricolor Pyramid で，上の手順が使える．ただし，解説 の方法の方が思いつきやすいし，(列を求めるだけだから) 計算量は同じ．\n",
   "wordCount" : "477",
   "inLanguage": "en",
   "datePublished": "2021-04-27T00:00:00Z",
@@ -130,56 +165,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -193,7 +191,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -222,7 +220,7 @@
     <h1 class="post-title">
       binom(n, r) を小さい素数pに対して mod p で求める
     </h1>
-    <div class="post-meta">2021-04-27&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-04-27&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．</p>
@@ -258,8 +256,8 @@
 \binom00 &amp;=&amp; 1
 \\
 %
-\binom{3^k + q}{r} 
-&amp;=&amp; 
+\binom{3^k + q}{r}
+&amp;=&amp;
 \begin{cases}
 \displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\
 \displaystyle{\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \\
@@ -267,8 +265,8 @@
 \end{cases}
 \\
 %
-\binom{2\cdot 3^k + q}{r} 
-&amp;=&amp; 
+\binom{2\cdot 3^k + q}{r}
+&amp;=&amp;
 \begin{cases}
 \displaystyle{\binom{q}{r}} &amp; \text{if }\; 0 \leq r \leq q \\
 \displaystyle{2\binom{q}{r - 3^k}} &amp; \text{if }\; 3^k \leq r \leq 2\cdot 3^k + q \\
@@ -282,11 +280,11 @@ $$</p>
 <p>列 $s(n) := [\binom{n}{r} \mid 0 \leq r \leq n]$ が必要ならば，以下のように計算できる．
 $$
 \begin{eqnarray}
-s(0) &amp;=&amp; [1] 
+s(0) &amp;=&amp; [1]
 \\
-s(3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ s(q) 
+s(3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ s(q)
 \\
-s(2\cdot 3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ 2 \cdot s(q) ⧺ z ⧺ s(q) 
+s(2\cdot 3^k + q) &amp;=&amp; s(q) ⧺ z ⧺ 2 \cdot s(q) ⧺ z ⧺ s(q)
 \end{eqnarray}
 $$
 ただし，$z$ は，$0$ を $3^k - q - 1$ 個並べた列．</p>
@@ -297,9 +295,9 @@ $$
 \begin{eqnarray}
 \binom{0}{0} &amp;=&amp; 1
 \\
-\binom{n}{r} = 
-\binom{c\cdot p^k + q}{d\cdot p^k + t} 
-&amp;=&amp; 
+\binom{n}{r} =
+\binom{c\cdot p^k + q}{d\cdot p^k + t}
+&amp;=&amp;
 \begin{cases}
 \displaystyle{\binom{c}{d}\binom{q}{t}} &amp; \text{if }\; 0 \leq t \leq q \\
 0 &amp; \text{if }\; q &lt; t \\
@@ -313,11 +311,11 @@ $$</p>
 $$
 \newcommand{\mybinom}[2]{\displaystyle{\binom{#1}{#2}}}
 \begin{eqnarray}
-s(0) &amp;=&amp; [1] 
+s(0) &amp;=&amp; [1]
 \\
-s(n) = s(c\cdot p^k + q) 
+s(n) = s(c\cdot p^k + q)
 &amp;=&amp;
-\mybinom{c}{0}s(q) ⧺ z ⧺ \mybinom{c}{1}s(q)  ⧺ z ⧺ \cdots ⧺ \mybinom{c}{c}s(q) 
+\mybinom{c}{0}s(q) ⧺ z ⧺ \mybinom{c}{1}s(q)  ⧺ z ⧺ \cdots ⧺ \mybinom{c}{c}s(q)
 \\
 \end{eqnarray}
 $$
@@ -334,12 +332,12 @@ $s(n)$ の時間計算量は $O(n)$．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>きたまさ法</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Lagrange補間</span>
   </a>
@@ -369,36 +367,28 @@ $s(n)$ の時間計算量は $O(n)$．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -452,12 +442,12 @@ $s(n)$ の時間計算量は $O(n)$．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

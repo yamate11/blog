@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>222 -- AtCoder Beginner Contest 222 G | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-13T21:25:49&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-13T21:25:49&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-13T21:25:49+09:00" />
+<meta property="article:modified_time" content="2021-10-13T21:25:49+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="222 -- AtCoder Beginner Contest 222 G"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．\n問題概要 整数 K が与えられる． 数列 2, 22, 222, 2222, .... に，初めて K の倍数が現れるのは何項目か? 現れなければ -1 と答えよ．T個のケースが与えられる． 制約: T 問題へのリンク 予備知識 フェルマーの小定理  整数 $a$ が素数 $p$ と互いに素ならば， $a^{p - 1} \\equiv 1 \\text{ (mod } p \\text{)}$．\n 証明 $a^p \\equiv a$ を言えば良い．帰納法． $a^p = (a - 1 + 1)^p = (a-1)^p + 1 + \\sum_{r = 1}^{p-1}\\binom{p}{r}(a-1)^r \\equiv (a-1)^p + 1 \\equiv a - 1 + 1 = a$．(終)\nオイラーの$\\varphi$関数 正の整数 $n$ に対し，$n$ と互いに素である $n$ 以下の正の整数の 個数を $\\varphi(n)$ とする．\n命題  $n$ の素因数分解を $\\prod_{k=1}^{d}p_k^{e_k}$ とするとき， $\\varphi(n) = \\prod_{k=1}^{d}(p_k^{e_k} - p_k^{e_k - 1})$\n 証明 素数 $p$ に対して $\\varphi(p^e) = p^e - p^{e-1}$ であることと， $m, n$が互いに素であるとき $\\varphi(mn) = \\varphi(m)\\varphi(n)$ であることを言えば良い．前半は明らか． 後半: $t$ と互いに素である $t$ 以下の正の整数の集合を $P(t)$ とする． $x \\in P(mn)$ に対して $(x \\% m, x \\% n) \\in P(m)\\times P(n)$ を対応させる写像が1対1, onto になる (中国剰余定理)．(終)\nオイラーの定理  $a$ と $n$ が互いに素ならば， $a^{\\varphi(n)} \\equiv 1 \\text{ (mod } n \\text{)}$\n 証明 $X = \\{ ax \\% n \\mid x \\in P(n) \\}$ とすると， $X \\subseteq P(n)$ と $|X| = |P(n)|$ より，$X = P(n)$． したがって，$d := \\prod_{x \\in P(n)} x$ とすれば， $a^{\\varphi(n)} d \\equiv d$．$d$ と $n$ は互いに素なので， $a^{\\varphi(n)} \\equiv 1$．(終)\n解法 数列の第 n 項は，$2 (10^n - 1) / 9$ と書ける． $K$ が奇数のとき，$\\alpha = 9K$，$K$ が偶数の時，$\\alpha = 9K/2$ とすると， $2 (10^n - 1) / 9 \\equiv 0$ (mod $K$) $\\iff 2 (10^n - 1) \\equiv 0$ (mod $9K$) $\\iff 10^n \\equiv 1$ (mod $\\alpha$)．\nここで，$\\alpha$ が 2か5で割り切れる場合には，$10^n$ は mod $\\alpha$ で 1 にはなり得ない． そうでない場合， $10^n \\equiv 1$ となる正の $n$ の最小値を取る． $n = q\\varphi(\\alpha) + r$, $0 \\leq r $\\varphi(\\alpha) = qn + r$, $0 \\leq r ご指摘 くださいました @kumakumaaaaa__ さん，ありがとうございました．)\n計算量は，$\\varphi(\\alpha)$ を求めるために $K$ を素因数分解 するところで，$O(\\sqrt{K})$ と，約数列挙が $O(\\sqrt{K})$ で，合わせて $O(\\sqrt{K})$．\nACコード https://atcoder.jp/contests/abc222/submissions/26539813 keywords: Fermat Fermat’s theorem Euler phi function\n",
+  "articleBody": "エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．\n問題概要 整数 K が与えられる． 数列 2, 22, 222, 2222, .... に，初めて K の倍数が現れるのは何項目か? 現れなければ -1 と答えよ．T個のケースが与えられる． 制約: T \u003c= 200, K \u003c= 10^8 問題へのリンク 予備知識 フェルマーの小定理 整数 $a$ が素数 $p$ と互いに素ならば， $a^{p - 1} \\equiv 1 \\text{ (mod } p \\text{)}$．\n証明 $a^p \\equiv a$ を言えば良い．帰納法． $a^p = (a - 1 + 1)^p = (a-1)^p + 1 + \\sum_{r = 1}^{p-1}\\binom{p}{r}(a-1)^r \\equiv (a-1)^p + 1 \\equiv a - 1 + 1 = a$．(終)\nオイラーの$\\varphi$関数 正の整数 $n$ に対し，$n$ と互いに素である $n$ 以下の正の整数の 個数を $\\varphi(n)$ とする．\n命題 $n$ の素因数分解を $\\prod_{k=1}^{d}p_k^{e_k}$ とするとき， $\\varphi(n) = \\prod_{k=1}^{d}(p_k^{e_k} - p_k^{e_k - 1})$\n証明 素数 $p$ に対して $\\varphi(p^e) = p^e - p^{e-1}$ であることと， $m, n$が互いに素であるとき $\\varphi(mn) = \\varphi(m)\\varphi(n)$ であることを言えば良い．前半は明らか． 後半: $t$ と互いに素である $t$ 以下の正の整数の集合を $P(t)$ とする． $x \\in P(mn)$ に対して $(x \\% m, x \\% n) \\in P(m)\\times P(n)$ を対応させる写像が1対1, onto になる (中国剰余定理)．(終)\nオイラーの定理 $a$ と $n$ が互いに素ならば， $a^{\\varphi(n)} \\equiv 1 \\text{ (mod } n \\text{)}$\n証明 $X = \\{ ax \\% n \\mid x \\in P(n) \\}$ とすると， $X \\subseteq P(n)$ と $|X| = |P(n)|$ より，$X = P(n)$． したがって，$d := \\prod_{x \\in P(n)} x$ とすれば， $a^{\\varphi(n)} d \\equiv d$．$d$ と $n$ は互いに素なので， $a^{\\varphi(n)} \\equiv 1$．(終)\n解法 数列の第 n 項は，$2 (10^n - 1) / 9$ と書ける． $K$ が奇数のとき，$\\alpha = 9K$，$K$ が偶数の時，$\\alpha = 9K/2$ とすると， $2 (10^n - 1) / 9 \\equiv 0$ (mod $K$) $\\iff 2 (10^n - 1) \\equiv 0$ (mod $9K$) $\\iff 10^n \\equiv 1$ (mod $\\alpha$)．\nここで，$\\alpha$ が 2か5で割り切れる場合には，$10^n$ は mod $\\alpha$ で 1 にはなり得ない． そうでない場合， $10^n \\equiv 1$ となる正の $n$ の最小値を取る． $n = q\\varphi(\\alpha) + r$, $0 \\leq r \u003c \\varphi(\\alpha)$ $\\varphi(\\alpha) = qn + r$, $0 \\leq r \u003c n$ とすると， オイラーの定理より $10^r \\equiv 1$ となるので，最小性より $r = 0$． すなわち，$n$ は $\\varphi(\\alpha)$ の約数．これを全探索すれば良い． (2023.03.25 追記: 間違っていた数式を修正しました． ご指摘 くださいました @kumakumaaaaa__ さん，ありがとうございました．)\n計算量は，$\\varphi(\\alpha)$ を求めるために $K$ を素因数分解 するところで，$O(\\sqrt{K})$ と，約数列挙が $O(\\sqrt{K})$ で，合わせて $O(\\sqrt{K})$．\nACコード https://atcoder.jp/contests/abc222/submissions/26539813 keywords: Fermat Fermat’s theorem Euler phi function\n",
   "wordCount" : "319",
   "inLanguage": "en",
   "datePublished": "2021-10-13T21:25:49+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       222 -- AtCoder Beginner Contest 222 G
     </h1>
-    <div class="post-meta">2021-10-13&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-13&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．</p>
@@ -297,12 +295,12 @@ $O(\sqrt{K})$．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-17-abc223/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ABC 223 参加記</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>木の直径</span>
   </a>
@@ -332,36 +330,28 @@ $O(\sqrt{K})$．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -415,12 +405,12 @@ $O(\sqrt{K})$．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

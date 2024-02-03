@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+	<meta name="generator" content="Hugo 0.122.0"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,8 +10,8 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,10 +19,45 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
 <link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/index.xml">
 <link rel="alternate" type="application/json" href="https://yamate11.github.io/blog/index.json">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -83,56 +119,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -146,7 +145,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -171,244 +170,236 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>01Sequence - ABC216 G</h2>
+    <h2 class="entry-hint-parent">01Sequence - ABC216 G
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>公式解説とは違う (より効率の悪い) 方法で解きました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-30&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 01Sequence - ABC216 G" href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Three Permutations - ABC 214 G</h2>
+    <h2 class="entry-hint-parent">Three Permutations - ABC 214 G
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>調べた結果分かった解法を記述します．いろいろ勉強になりました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-27&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-27&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Three Permutations - ABC 214 G" href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Pass to Next - ARC 124 E</h2>
+    <h2 class="entry-hint-parent">Pass to Next - ARC 124 E
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．</p>
-  </section>
-  <footer class="entry-footer">2021-08-27&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-27&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Pass to Next - ARC 124 E" href="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Shorten ABC - AtCoder Regular Contest 110 E</h2>
+    <h2 class="entry-hint-parent">Shorten ABC - AtCoder Regular Contest 110 E
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>解説AC です．公式解説も皆さんの解説もたくさん参考にしています．</p>
-  </section>
-  <footer class="entry-footer">2021-08-26&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-26&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Shorten ABC - AtCoder Regular Contest 110 E" href="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Snack - Atcoder Regular Contest 125 E</h2>
+    <h2 class="entry-hint-parent">Snack - Atcoder Regular Contest 125 E
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>解法です．公式解説そのままです．</p>
-  </section>
-  <footer class="entry-footer">2021-08-24&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-24&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Snack - Atcoder Regular Contest 125 E" href="https://yamate11.github.io/blog/posts/2021/08-24-snack/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cabbage Master - Atcoder Beginner Contest 215 H</h2>
+    <h2 class="entry-hint-parent">Cabbage Master - Atcoder Beginner Contest 215 H
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>公式解説そのままですけれど，予備知識を一応書きました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-23&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Cabbage Master - Atcoder Beginner Contest 215 H" href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>xor畳み込み</h2>
+    <h2 class="entry-hint-parent">xor畳み込み
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</p>
-  </section>
-  <footer class="entry-footer">2021-08-23&nbsp;·&nbsp;2021-08-12 (初版)&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-23&amp;nbsp;·&amp;nbsp;2021-08-12 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>文字列，数値変換</h2>
+    <h2 class="entry-hint-parent">文字列，数値変換
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>C&#43;&#43; での型の変換などのいろいろな変換方法です．</p>
-  </section>
-  <footer class="entry-footer">2021-08-20&nbsp;·&nbsp;2021-02-07 (初版)&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-20&amp;nbsp;·&amp;nbsp;2021-02-07 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 文字列，数値変換" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Random LIS - Atcoder Regular Contest 104 E</h2>
+    <h2 class="entry-hint-parent">Random LIS - Atcoder Regular Contest 104 E
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
 問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
 解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
- 全パターンを列挙する． 各パターンについて，  LISの長さを求める． そのパターンに属する数列の数を数える．    グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．...</p>
-  </section>
-  <footer class="entry-footer">2021-08-19&nbsp;·&nbsp;yamate11</footer>
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, ....</p>
+  </div>
+  <footer class="entry-footer">2021-08-19&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Random LIS - Atcoder Regular Contest 104 E" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</h2>
+    <h2 class="entry-hint-parent">vector&lt;vector&lt;*&gt;&gt; はあんまり速くない
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
 最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
 たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
 vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
-int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) {  int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定  edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) {  fwd[u]....</p>
-  </section>
-  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to vector はあんまり速くない" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
+int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定 edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u]....</p>
+  </div>
+  <footer class="entry-footer">2021-08-16&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to vector" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</h2>
+    <h2 class="entry-hint-parent">イベント巡り (Event Hopping) - JOI 2020/2021 二次予選
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので….
 問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという… (解説を読むまでわからなかったのですけれど)
 ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
- dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False)  遷移としては，dp[i][j] = True となる j について，
- 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2  として，
- dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True  と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．...</p>
-  </section>
-  <footer class="entry-footer">2021-08-16&nbsp;·&nbsp;yamate11</footer>
+dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，
+町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2 として，
+dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．...</p>
+  </div>
+  <footer class="entry-footer">2021-08-16&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to イベント巡り (Event Hopping) - JOI 2020/2021 二次予選" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Stroll - Atcoder Beginner Contest 213 H</h2>
+    <h2 class="entry-hint-parent">Stroll - Atcoder Beginner Contest 213 H
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>解けませんでした．オンライン・オフライン変換を調べて書きました．</p>
-  </section>
-  <footer class="entry-footer">2021-08-11&nbsp;·&nbsp;yamate11</footer>
+  </div>
+  <footer class="entry-footer">2021-08-11&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Stroll - Atcoder Beginner Contest 213 H" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>距離: BFSとダイクストラ</h2>
+    <h2 class="entry-hint-parent">距離: BFSとダイクストラ
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
 記法 ノードを表すデータ型を Node とする． int や long long や pair&lt;int, int&gt; など．
-ダイクストラ  前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化  priority_queue のメソッドは，push(), emplace(), pop(), top() など．    using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー  // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞  // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0   ループ...</p>
-  </section>
-  <footer class="entry-footer">2021-08-09&nbsp;·&nbsp;2021-07-03 (初版)&nbsp;·&nbsp;yamate11</footer>
+ダイクストラ 前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化 priority_queue のメソッドは，push(), emplace(), pop(), top() など． using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞ // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0 ループ
+pque から取り出した (d, x) について， dist[x] &lt; d なら，もっと良い d があるということなので，単に捨てる． そうでなければこの d が x への最短距離であることが確定したので， 先に進む． x の 隣接ノード y について，newd = x &#43; δ(x, y) が y への距離の候補なので以下を行う． dist[y] &lt;= newd なら，単に捨てる そうでなければ，先に進む． dist[y] を newd に更新する． (newd, y) を pque に入れる． ゴール...</p>
+  </div>
+  <footer class="entry-footer">2021-08-09&amp;nbsp;·&amp;nbsp;2021-07-03 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Greedy Ant - キーエンスプログラミングコンテスト2021 E</h2>
+    <h2 class="entry-hint-parent">Greedy Ant - キーエンスプログラミングコンテスト2021 E
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
 問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
-初期化: // 蟻の初期位置を 2n &#43; 1 とする．  l := n // 蟻に最も近い左の飴の位置が 2l  r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r  k := 0 // すぬけ君の「スキップ」回数 ループ:  k &#43;= 1  while k &gt; 0:  match すぬけ君の選択():  case なし: break  case 左: すぬけ君が 2l の飴を取る; l -= 1  case 右: すぬけ君が 2r の飴を取る; r &#43;= 1  k -= 1  蟻が，2l, 2r の飴のおいしい方を取る  取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．...</p>
-  </section>
-  <footer class="entry-footer">2021-07-22&nbsp;·&nbsp;yamate11</footer>
+初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．...</p>
+  </div>
+  <footer class="entry-footer">2021-07-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Greedy Ant - キーエンスプログラミングコンテスト2021 E" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>policy-based data structure の tree</h2>
+    <h2 class="entry-hint-parent">policy-based data structure の tree
+    </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
-リンク  Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog   まとめ 以下の操作ができる set や map
- x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する  先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt;#include &lt;ext/pb_ds/tree_policy.hpp&gt;using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt;  pair_t,  null_type,  less&lt;pair_t&gt;,  rb_tree_tag,  tree_order_statistics_node_update  &gt;; 例: string から int へのマップ using ordered_map = tree&lt;  string,  int,  less&lt;string&gt;,  rb_tree_tag,  tree_order_statistics_node_update &gt;; 機能の呼び出し  ordered_set os;  os....</p>
-  </section>
-  <footer class="entry-footer">2021-06-05&nbsp;·&nbsp;yamate11</footer>
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os....</p>
+  </div>
+  <footer class="entry-footer">2021-06-05&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to policy-based data structure の tree" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://yamate11.github.io/blog/page/4/">« Prev Page</a>
-    <a class="next" href="https://yamate11.github.io/blog/page/6/">Next Page »</a>
+    <a class="prev" href="https://yamate11.github.io/blog/page/4/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="https://yamate11.github.io/blog/page/6/">Next&nbsp;&nbsp;»
+    </a>
   </nav>
 </footer>
-
-<br/>
-<p>
-Links:
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/">01Sequence - ABC216 G</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/">Three Permutations - ABC 214 G</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/">Pass to Next - ARC 124 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/">Shorten ABC - AtCoder Regular Contest 110 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-24-snack/">Snack - Atcoder Regular Contest 125 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/">Cabbage Master - Atcoder Beginner Contest 215 H</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/">xor畳み込み</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/">文字列，数値変換</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/">Random LIS - Atcoder Regular Contest 104 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/">vector はあんまり速くない</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/">イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/">Stroll - Atcoder Beginner Contest 213 H</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/">距離: BFSとダイクストラ</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/">Greedy Ant - キーエンスプログラミングコンテスト2021 E</a>
-/ <a href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/">policy-based data structure の tree</a>
-</p>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

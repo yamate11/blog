@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Prefix XORs - AtCoder Regular Contest 137 D | yamate11のブログ</title>
-<meta name="keywords" content="ゼータ変換, 高速ゼータ変換, リュカの定理" />
+<meta name="keywords" content="ゼータ変換, 高速ゼータ変換, リュカの定理">
 <meta name="description" content="AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．
 問題概要 長さ$N$の整数列 $A = (A_1, \ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \ldots, M$ について，$A(N, k)$ を求めよ．
 操作: 各$i = 1, 2, \ldots, N$ について， $A_i$ を同時に $A_1 \oplus A_2 \oplus \cdots \oplus A_i$ で置き換える．
 制約: $1 \leq N, M \leq 10^6$; $0 \leq A_i &lt; 2^{30}$
 問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \in \{0, 1\}$ をとって， $A(i, k) = \bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \bigoplus_{m=1}^{i} b(i - m, k) A_m = \bigoplus \{ A_{i - j} \mid b(j, k) = 1; j = 0, \ldots, i-1 \}$ だから， 各 $k = 1, 2, \ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -22,8 +22,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -58,8 +93,8 @@
 問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \in \{0, 1\}$ をとって， $A(i, k) = \bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \bigoplus_{m=1}^{i} b(i - m, k) A_m = \bigoplus \{ A_{i - j} \mid b(j, k) = 1; j = 0, \ldots, i-1 \}$ だから， 各 $k = 1, 2, \ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-03-20T00:57:31&#43;09:00" />
-<meta property="article:modified_time" content="2022-03-20T00:57:31&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-03-20T00:57:31+09:00" />
+<meta property="article:modified_time" content="2022-03-20T00:57:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Prefix XORs - AtCoder Regular Contest 137 D"/>
@@ -100,7 +135,7 @@
   "keywords": [
     "ゼータ変換", "高速ゼータ変換", "リュカの定理"
   ],
-  "articleBody": "AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．\n問題概要 長さ$N$の整数列 $A = (A_1, \\ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \\ldots, M$ について，$A(N, k)$ を求めよ．\n操作: 各$i = 1, 2, \\ldots, N$ について， $A_i$ を同時に $A_1 \\oplus A_2 \\oplus \\cdots \\oplus A_i$ で置き換える．\n制約: $1 \\leq N, M \\leq 10^6$; $0 \\leq A_i 問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \\ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \\in \\{0, 1\\}$ をとって， $A(i, k) = \\bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \\bigoplus_{m=1}^{i} b(i - m, k) A_m = \\bigoplus \\{ A_{i - j} \\mid b(j, k) = 1; j = 0, \\ldots, i-1 \\}$ だから， 各 $k = 1, 2, \\ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．\n計算してみると，$b(j, k)$ は次のようになっている:\n 0 11111111111111111111111111111111  1 10101010101010101010101010101010  10 11001100110011001100110011001100  11 10001000100010001000100010001000  100 11110000111100001111000011110000  101 10100000101000001010000010100000  110 11000000110000001100000011000000  111 10000000100000001000000010000000 1000 11111111000000001111111100000000 1001 10101010000000001010101000000000 1010 11001100000000001100110000000000 1011 10001000000000001000100000000000 1100 11110000000000001111000000000000 左端は，k - 1 の値の2進表示．スペースの直後が j = 0 の値, その次が j = 1 の値，その次が j = 2 の値，… である．\nたとえば，$k - 1 = 6 = 110_2$ のとき，$b(k, j) = 1$ となる$j$ は， $0, 1, 8, 9, 16, 17, 24, 25, \\ldots$ であり，2進表記では次のようになる:\n00000 00001 01000 01001 10000 10001 11000 11001 (下から) 2ビット目と3ビット目は 0 であり，他の ビットは任意に取れる．0 に固定されているビットは，$k - 1 = 110_2$ の 立っているビットである． 他の$k$についても，すべてそのような関係が成立している．つまり， $\\newcommand{\\band}{\\;\\\u0026\\;} b(j, k) = 1 \\iff j \\band (k-1) = 0$ である (\u0026は，ビットごとの AND)．\n証明 帰納法でも証明できるような気がするが， 公式解説 に従って リュカの定理を使う．\nリュカの定理  $p$ を素数，$m$, $n$ を非負整数とする． $m$ と $n$ を $p$進法で表記して $m = m_k p^k + m_{k-1} p^{k-1} + \\cdots + m_1 p + m_0$， $n = n_k p^k + n_{k-1} p^{k-1} + \\cdots + n_1 p + n_0$ とするとき， $$ \\binom{m}{n} \\equiv \\prod_{i=0}^{k} \\binom{m_i}{n_i} \\qquad (\\text{mod } p)$$ である．ただし，$x リュカの定理の証明 (Wikipedia) $|M| = m$ なる集合 $M$ をとり，このサイズ $n$ の部分集合の数を mod p で求めれば良い． $M$ を，$m_k$ 個の サイズ $p^k$ の部分集合，…，$m_0$ 個のサイズ1の部分集合 に分割する．分割した各部分を円環状に並べておく． 置換 $\\pi: M \\to M$ を，$\\pi(x)$ を，自分が属する円環の右隣の要素， として定義する． $N \\subseteq M$, $|N| = n$ となる $N$ を考える． サイズ $p^i$ の円環で，$N$ の要素と $M\\setminus N$ の要素の両方を含むものが あったとする．そのような最大の $i$ をとると，\n $N, \\pi(N), \\pi^2(N), \\ldots, \\pi^{p^i - 1}(N)$ は全て異なる． これらのうち一つを $N’$ とすると， $\\{N, \\pi(N), \\ldots, \\pi^{p^i - 1}(N)\\}$ と $\\{N’, \\pi(N’), \\ldots, \\pi^{p^i - 1}(N’)\\}$ は，集合として一致する．  したがって，そのような $N$ の個数は $p$ の倍数である． ゆえに，$\\binom{m}{n}$ は， いくつかの円環の和で表せるようなサイズ$n$の部分集合の個数と mod p で等しい． サイズが $n$ になるように選ぶためには， サイズ$p^k$ の円環を $n_k$ 個，$\\ldots$，サイズ1の円環を$n_0$個， それぞれ選ぶ必要がある． (終)\n$b(j, k) = 1 \\iff j \\band (k - 1) = 0$ の証明 $b$ の計算方法を見れば， $b(j, k) \\equiv \\binom{j + k - 1}{j}\\quad(\\text{mod} 2)$ であることが分かる． したがって，リュカの定理によって，$b(j, k) = 0$ となるための条件は， $j$ の2進表記が 1 で，$j + k-1$ の2進表記が 0 となるような桁が存在する ことであり，これは，$j$と $k-1$ の2進表記がともに1となる桁が存在することと 同値である． (終)\n計算方法 高速ゼータ変換 の要領で計算する．具体的には以下の通り:\n$M$ のビット長を $L$ とする．$k \\in\\{ 1, 2, \\ldots, M\\}$ であった． $t \\in \\{0, 1, \\ldots, L\\}$ とし， $j \\in \\{0, 1, \\ldots, N-1 \\}$に対し， $j \\sim^t k$ を，次の条件が成り立つこととして定義する:\n 第0ビットから第$t - 1$ ビットまでは，$j$ と $k-1$ の両方が1になることはない． 第$t$ビットから第$L-1$ビットまでは，$j$ と $k-1$ は一致する．  $f(t, k)$ を，$\\oplus \\{ A_{N - j} \\mid j \\sim^{t} k;\\; j = 0, \\ldots, 2^L - 1\\}$ で定義する．定義より， $f(L, k)$ が求める $A(N, k)$ である．\nこれは，次のように計算できる．\n $f(0, k) = \\oplus \\{ A_{N - j} \\mid j \\band (2^L - 1) = k - 1 \\}$ $k \\band 2^t \\neq 0$ のとき: $f(t + 1, k) = f(t, k \\band (\\sim 2^t))$ $k \\band 2^t = 0$ のとき: $f(t + 1, k) = f(t, k) \\oplus f(t, k \\;|\\; 2^t)$  実装 主要部分:\nint main() {   ll N, M; cin  N  M;  vectorll A(N);  REP(i, N) cin  A[i];  ll L = 64 - __builtin_clzll(M);  vectorll vec(1LL  L);  REP(j, N) vec[j \u0026 ((1LL  L) - 1)] ^= A[N-1 - j];  REP(t, L) {  REP(k, 1LL  L) {  if (k  t \u0026 1) continue;  ll k0 = k;  ll k1 = k | (1LL  t);  ll v0 = vec[k0];  ll v1 = vec[k1];  vec[k0] = v0 ^ v1;  vec[k1] = v0;  }  }  REP(k, M) cout  vec[k]  \" \";  cout  endl;  return 0; } 全体: 提出 #30396276 ",
+  "articleBody": "AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．\n問題概要 長さ$N$の整数列 $A = (A_1, \\ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \\ldots, M$ について，$A(N, k)$ を求めよ．\n操作: 各$i = 1, 2, \\ldots, N$ について， $A_i$ を同時に $A_1 \\oplus A_2 \\oplus \\cdots \\oplus A_i$ で置き換える．\n制約: $1 \\leq N, M \\leq 10^6$; $0 \\leq A_i \u003c 2^{30}$\n問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \\ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \\in \\{0, 1\\}$ をとって， $A(i, k) = \\bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \\bigoplus_{m=1}^{i} b(i - m, k) A_m = \\bigoplus \\{ A_{i - j} \\mid b(j, k) = 1; j = 0, \\ldots, i-1 \\}$ だから， 各 $k = 1, 2, \\ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．\n計算してみると，$b(j, k)$ は次のようになっている:\n0 11111111111111111111111111111111 1 10101010101010101010101010101010 10 11001100110011001100110011001100 11 10001000100010001000100010001000 100 11110000111100001111000011110000 101 10100000101000001010000010100000 110 11000000110000001100000011000000 111 10000000100000001000000010000000 1000 11111111000000001111111100000000 1001 10101010000000001010101000000000 1010 11001100000000001100110000000000 1011 10001000000000001000100000000000 1100 11110000000000001111000000000000 左端は，k - 1 の値の2進表示．スペースの直後が j = 0 の値, その次が j = 1 の値，その次が j = 2 の値，… である．\nたとえば，$k - 1 = 6 = 110_2$ のとき，$b(k, j) = 1$ となる$j$ は， $0, 1, 8, 9, 16, 17, 24, 25, \\ldots$ であり，2進表記では次のようになる:\n00000 00001 01000 01001 10000 10001 11000 11001 (下から) 2ビット目と3ビット目は 0 であり，他の ビットは任意に取れる．0 に固定されているビットは，$k - 1 = 110_2$ の 立っているビットである． 他の$k$についても，すべてそのような関係が成立している．つまり， $\\newcommand{\\band}{\\;\\\u0026\\;} b(j, k) = 1 \\iff j \\band (k-1) = 0$ である (\u0026は，ビットごとの AND)．\n証明 帰納法でも証明できるような気がするが， 公式解説 に従って リュカの定理を使う．\nリュカの定理 $p$ を素数，$m$, $n$ を非負整数とする． $m$ と $n$ を $p$進法で表記して $m = m_k p^k + m_{k-1} p^{k-1} + \\cdots + m_1 p + m_0$， $n = n_k p^k + n_{k-1} p^{k-1} + \\cdots + n_1 p + n_0$ とするとき， $$ \\binom{m}{n} \\equiv \\prod_{i=0}^{k} \\binom{m_i}{n_i} \\qquad (\\text{mod } p)$$ である．ただし，$x \u003c y$ のとき，$\\binom{x}{y} = 0$ とする．\nリュカの定理の証明 (Wikipedia) $|M| = m$ なる集合 $M$ をとり，このサイズ $n$ の部分集合の数を mod p で求めれば良い． $M$ を，$m_k$ 個の サイズ $p^k$ の部分集合，…，$m_0$ 個のサイズ1の部分集合 に分割する．分割した各部分を円環状に並べておく． 置換 $\\pi: M \\to M$ を，$\\pi(x)$ を，自分が属する円環の右隣の要素， として定義する． $N \\subseteq M$, $|N| = n$ となる $N$ を考える． サイズ $p^i$ の円環で，$N$ の要素と $M\\setminus N$ の要素の両方を含むものが あったとする．そのような最大の $i$ をとると，\n$N, \\pi(N), \\pi^2(N), \\ldots, \\pi^{p^i - 1}(N)$ は全て異なる． これらのうち一つを $N’$ とすると， $\\{N, \\pi(N), \\ldots, \\pi^{p^i - 1}(N)\\}$ と $\\{N’, \\pi(N’), \\ldots, \\pi^{p^i - 1}(N’)\\}$ は，集合として一致する． したがって，そのような $N$ の個数は $p$ の倍数である． ゆえに，$\\binom{m}{n}$ は， いくつかの円環の和で表せるようなサイズ$n$の部分集合の個数と mod p で等しい． サイズが $n$ になるように選ぶためには， サイズ$p^k$ の円環を $n_k$ 個，$\\ldots$，サイズ1の円環を$n_0$個， それぞれ選ぶ必要がある． (終)\n$b(j, k) = 1 \\iff j \\band (k - 1) = 0$ の証明 $b$ の計算方法を見れば， $b(j, k) \\equiv \\binom{j + k - 1}{j}\\quad(\\text{mod} 2)$ であることが分かる． したがって，リュカの定理によって，$b(j, k) = 0$ となるための条件は， $j$ の2進表記が 1 で，$j + k-1$ の2進表記が 0 となるような桁が存在する ことであり，これは，$j$と $k-1$ の2進表記がともに1となる桁が存在することと 同値である． (終)\n計算方法 高速ゼータ変換 の要領で計算する．具体的には以下の通り:\n$M$ のビット長を $L$ とする．$k \\in\\{ 1, 2, \\ldots, M\\}$ であった． $t \\in \\{0, 1, \\ldots, L\\}$ とし， $j \\in \\{0, 1, \\ldots, N-1 \\}$に対し， $j \\sim^t k$ を，次の条件が成り立つこととして定義する:\n第0ビットから第$t - 1$ ビットまでは，$j$ と $k-1$ の両方が1になることはない． 第$t$ビットから第$L-1$ビットまでは，$j$ と $k-1$ は一致する． $f(t, k)$ を，$\\oplus \\{ A_{N - j} \\mid j \\sim^{t} k;\\; j = 0, \\ldots, 2^L - 1\\}$ で定義する．定義より， $f(L, k)$ が求める $A(N, k)$ である．\nこれは，次のように計算できる．\n$f(0, k) = \\oplus \\{ A_{N - j} \\mid j \\band (2^L - 1) = k - 1 \\}$ $k \\band 2^t \\neq 0$ のとき: $f(t + 1, k) = f(t, k \\band (\\sim 2^t))$ $k \\band 2^t = 0$ のとき: $f(t + 1, k) = f(t, k) \\oplus f(t, k \\;|\\; 2^t)$ 実装 主要部分:\nint main() { ll N, M; cin \u003e\u003e N \u003e\u003e M; vector\u003cll\u003e A(N); REP(i, N) cin \u003e\u003e A[i]; ll L = 64 - __builtin_clzll(M); vector\u003cll\u003e vec(1LL \u003c\u003c L); REP(j, N) vec[j \u0026 ((1LL \u003c\u003c L) - 1)] ^= A[N-1 - j]; REP(t, L) { REP(k, 1LL \u003c\u003c L) { if (k \u003e\u003e t \u0026 1) continue; ll k0 = k; ll k1 = k | (1LL \u003c\u003c t); ll v0 = vec[k0]; ll v1 = vec[k1]; vec[k0] = v0 ^ v1; vec[k1] = v0; } } REP(k, M) cout \u003c\u003c vec[k] \u003c\u003c \" \"; cout \u003c\u003c endl; return 0; } 全体: 提出 #30396276 ",
   "wordCount" : "679",
   "inLanguage": "en",
   "datePublished": "2022-03-20T00:57:31+09:00",
@@ -136,56 +171,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -199,7 +197,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -228,7 +226,7 @@
     <h1 class="post-title">
       Prefix XORs - AtCoder Regular Contest 137 D
     </h1>
-    <div class="post-meta">2022-03-20&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-03-20&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Regular Contest 137 D - Prefix XORs の解法です．
@@ -395,12 +393,12 @@ $f(t + 1, k) = f(t, k) \oplus f(t, k \;|\; 2^t)$</li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</span>
   </a>
@@ -430,36 +428,28 @@ $f(t + 1, k) = f(t, k) \oplus f(t, k \;|\; 2^t)$</li>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -513,12 +503,12 @@ $f(t + 1, k) = f(t, k) \oplus f(t, k \;|\; 2^t)$</li>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

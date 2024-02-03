@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>約数の個数 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="nまでの約数の個数の表と，求めるためのコード">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="nまでの約数の個数の表と，求めるためのコード" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-03T16:16:36&#43;09:00" />
-<meta property="article:modified_time" content="2023-06-03T16:16:36&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-06-03T16:16:36+09:00" />
+<meta property="article:modified_time" content="2023-06-03T16:16:36+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="約数の個数"/>
@@ -88,8 +123,8 @@
   "keywords": [
     
   ],
-  "articleBody": "$n$ 以下の整数での，約数の個数の最大値を計算しておく．たとえば，$n = 10$ のときには，6 と 8 がおのおの 1,2,3,6 および 1,2,4,8 と，4個の約数を持ち，これが最大．$n=100$なら，たとえば72が12個の約数 1,2,3,4,6,8,9,12,18,24,36,72 を持つ．\n結果    $n$ 個数     $10$ 4   $10^2$ 12   $10^3$ 32   $10^4$ 64   $10^5$ 128   $10^6$ 240   $10^7$ 448   $10^8$ 768   $10^9$ 1344   $10^{10}$ 2304   $10^{11}$ 4032   $ 10^{12}$ 6720    たとえば $n \\leq 10^5$ なら，$n$ の約数全体を二重ループで回しても 20,000回くらいで終わる，とかがわかる．\nコード #include #include using namespace std;  // Prime numbers up to 100. // Note that their product is larger than 2^64. vectorint primes({2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,  47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97});  // Returns the maximum number of divisors of number s such that // t * s // to primes[i] int num_div(long long int n, long long int t, int i) {  int p = primes[i];  int ret = 1;  int r = 1;  long long int q = p; // q = p ^ r  while (t * q  n) {  ret = max(ret, (r + 1) * num_div(n, t * q, i + 1));  q *= p;  r++;  }  return ret; }  // Returns 10^n long long int pow10(int n) {  long long int ret = 1;  while (n--  0) ret *= 10;  return ret; }  int main(/* int argc, char *argv[] */) {  for (int k = 1; k  12; k++) {  cout  \"10^\"  k  \" \"  num_div(pow10(k), 1, 0)  endl;  }  return 0; } EDIT (2020/08/22): 単独でコンパイルできるようにコードを修正．\n",
-  "wordCount" : "257",
+  "articleBody": "$n$ 以下の整数での，約数の個数の最大値を計算しておく．たとえば，$n = 10$ のときには，6 と 8 がおのおの 1,2,3,6 および 1,2,4,8 と，4個の約数を持ち，これが最大．$n=100$なら，たとえば72が12個の約数 1,2,3,4,6,8,9,12,18,24,36,72 を持つ．\n結果 $n$ 個数 $10$ 4 $10^2$ 12 $10^3$ 32 $10^4$ 64 $10^5$ 128 $10^6$ 240 $10^7$ 448 $10^8$ 768 $10^9$ 1344 $10^{10}$ 2304 $10^{11}$ 4032 $ 10^{12}$ 6720 たとえば $n \\leq 10^5$ なら，$n$ の約数全体を二重ループで回しても 20,000回くらいで終わる，とかがわかる．\nコード #include #include using namespace std; // Prime numbers up to 100. // Note that their product is larger than 2^64. vector\u003cint\u003e primes({2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}); // Returns the maximum number of divisors of number s such that // t * s \u003c= n and all prime divisors of s are greater than or equal // to primes[i] int num_div(long long int n, long long int t, int i) { int p = primes[i]; int ret = 1; int r = 1; long long int q = p; // q = p ^ r while (t * q \u003c= n) { ret = max(ret, (r + 1) * num_div(n, t * q, i + 1)); q *= p; r++; } return ret; } // Returns 10^n long long int pow10(int n) { long long int ret = 1; while (n-- \u003e 0) ret *= 10; return ret; } int main(/* int argc, char *argv[] */) { for (int k = 1; k \u003c= 12; k++) { cout \u003c\u003c \"10^\" \u003c\u003c k \u003c\u003c \" \" \u003c\u003c num_div(pow10(k), 1, 0) \u003c\u003c endl; } return 0; } EDIT (2020/08/22): 単独でコンパイルできるようにコードを修正．\n",
+  "wordCount" : "259",
   "inLanguage": "en",
   "datePublished": "2023-06-03T16:16:36+09:00",
   "dateModified": "2023-06-03T16:16:36+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       約数の個数
     </h1>
-    <div class="post-meta">2023-06-03&nbsp;·&nbsp;2019-12-01 (初版)&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-06-03&amp;nbsp;·&amp;nbsp;2019-12-01 (初版)&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>$n$ 以下の整数での，約数の個数の最大値を計算しておく．たとえば，$n = 10$ のときには，6 と 8 がおのおの 1,2,3,6 および 1,2,4,8 と，4個の約数を持ち，これが最大．$n=100$なら，たとえば72が12個の約数 1,2,3,4,6,8,9,12,18,24,36,72 を持つ．</p>
@@ -327,12 +325,12 @@
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Return to 1 - Atcoder Beginner Contest 306 G</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>K番目...</span>
   </a>
@@ -362,36 +360,28 @@
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -445,12 +435,12 @@
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

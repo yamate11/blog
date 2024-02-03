@@ -1,0 +1,240 @@
+#!/usr/bin/env python3
+
+import os, subprocess, webbrowser, time, re, datetime, sys
+from subprocess import Popen, PIPE, DEVNULL
+
+topdir = f'{os.environ["HOME"]}/proj/yamate11blog/blog'
+port = '5080'
+
+class MyExc(Exception):
+    pass
+
+hugo_proc = [];
+
+# def get_hugo_procs():
+#     ret = []
+#     cp = subprocess.run(['ps', '-W'], encoding='utf-8', stdout=PIPE)
+#     for line in cp.stdout.splitlines():
+#         if re.search(r'\\hugo\.exe$', line):
+#             pid = line.split()[0]
+#             ret.append(pid)
+#     return ret
+
+# def rec_hugo():
+#     procs = get_hugo_procs()
+#     if not procs:
+#         return []
+#     print('''Other hugo processes are running.
+#    [C]ontinue.
+#    [T]erminate this script.
+#    [K]ill other hugo processes.
+# ''')
+#     while True:
+#         x = None
+#         while not x:
+#             x = input('Select --> ').upper()
+#         if x[0] == 'C':
+#             return procs
+#         elif x[0] == 'T':
+#             sys.exit(0)
+#         else:
+#             for pid in procs:
+#                 cp = subprocess.run(['/usr/bin/kill', '-f', pid])
+#                 if cp.returncode != 0:
+#                     print('Failed to kill processed.')
+#                     sys.exit(1)
+#             return []
+            
+
+# def kill_hugo(all_pids, other_pids):
+#     for pid in all_pids:
+#         if pid in other_pids:
+#             continue
+#         subprocess.run(['/usr/bin/kill', '-f', pid])
+
+# Returns (slug, year, month, day) in a content (.md) file
+def infoFromFile(fPath):
+    with open(fPath, encoding='UTF-8') as fp:
+        part = 0
+        (slug, year, month, day) = (None, None, None, None)
+        for lineNR in fp:
+            line = lineNR.strip()
+            if line == '---':
+                part += 1
+                continue
+            if part == 0:
+                continue
+            if part >= 2:
+                return (slug, year, month, day)
+            mo = re.match(r'slug:\s*(.*)', line)
+            if mo:
+                slug = mo[1]
+            mo = re.match(r'date:\s*(\d+)\D(\d+)\D(\d+)', line)
+            if mo:
+                (year, month, day) = (mo[1], mo[2], mo[3])
+
+# Returns the directory of a content (.md) file
+def contDir(year):
+    return f'content/posts/{year}'
+
+# Returns the path of a content (.md) file
+def contFile(year, slug):
+    cDir=contDir(year)
+    for f in os.listdir(cDir):
+        fPath = f'{cDir}/{f}'
+        (fSlug, _, _, _) = infoFromFile(fPath)
+        if slug == fSlug:
+            return fPath
+    raise MyExc(f'Cannot find content with slug={slug}'
+                f' in {cDir}')
+    
+# Returns (isPublic, year, slug) from a location
+#   At the moment, location is the file path in the 'public' directory
+#   created by hugo, but it should be able to extends to content (.md)
+#   file location.
+def parseLoc(loc):
+    mo1 = re.search(r'/priv/(\d+)/\d+/\d+\-([^/]+)', loc)
+    if mo1:
+        return (False, mo1[1], mo1[2])
+    mo2 = re.search(r'/public/(\d+)/\d+/\d+\-([^/]+)', loc)
+    if mo2:
+        return (True, mo2[1], mo2[2])
+    raise MyExc(f'Failed to parse {loc}')
+
+def emacsclient(cFile):
+    cp = subprocess.run(['emacsclient', '-n', cFile])
+    if cp.returncode != 0:
+        raise MyExc('Failed to connect emacs server')
+
+def new_article():
+    now = datetime.datetime.now().replace(microsecond=0).astimezone()
+    cDir = contDir(now.year)
+    if not os.path.exists(cDir):
+        os.mkdir(cDir)
+    while True:
+        slug = input('Slug: ').strip()
+        if not slug:
+            return None
+        if not all([c.isalnum() or c == '-' for c in slug]):
+            print('ERROR: Each char in slug should be an alphanumeric'
+                  ' or a hyphen.')
+            continue
+        break
+    cFile = f'{cDir}/{now.month:02d}-{now.day:02d}-{slug}.md'
+    if os.path.exists(cFile):
+        raise MyExc(f'ERROR: file exists: {cFile}')
+    with open(cFile, 'w', encoding='UTF-8') as wfp:
+        print(f'''---
+author: "yamate11"
+title: ""
+date: "{now.isoformat()}"
+# date_init: "{now.year}-{now.month:02d}-{now.day:02d}"
+tags: []
+# categories: ["topic"]
+# categories: ["solution"]
+# summary: "要約を書いておく．ここには問題タイトル等は不要" 
+---
+
+<!-- タイトルはキーワードがインデックスされないかもしれないので，
+     ここに書いておく -->
+<!-- AtCoder *** Contest xxx - A*C xxx F - 問題タイトル の解法です．-->
+
+''', file=wfp)
+    emacsclient(cFile)
+
+def edit_existing():
+    emacsclient('content/posts')
+
+def browser(url):
+    try:
+        webbrowser.open(url)
+    except (OSError, MyExc) as e:
+        print(str(e))
+
+def browser_local():
+    browser(f'http://localhost:{port}/blog')
+
+def browser_public():
+    browser(f'https://yamate11.github.io/blog')
+
+def myrun(cmd):
+    cp = subprocess.run(cmd, encoding='utf-8', stdout=subprocess.PIPE,
+                        stderr=subprocess.STDOUT)
+    if cp.returncode != 0:
+        msg = f'''ERROR: Failed to execute command: {" ".join(cmd)}
+{cp.stdout}
+'''
+        raise MyExc(msg)
+
+def transfer():
+    ts = datetime.datetime.now().\
+        replace(microsecond=0).astimezone().isoformat()
+    try:
+        print('Wait while processing ... ', end='', flush=True)
+        myrun(['hugo'])
+        lockf = '.git/index.lock'
+        if os.path.exists(lockf):
+            time.sleep(2)
+            if os.path.exists(lockf):
+                os.unlink(lockf)
+        myrun(['git', 'add', '--all'])
+        myrun(['git', 'commit', '-m', ts])
+        myrun(['git', 'push'])
+        print('done.\nTransfer succeeded.')
+    except MyExc as e:
+        print('done.\n' + str(e))
+    input('Hit ENTER key ---->')
+
+def confirm_quit():
+    x = input('really quit? ([Y]es/[N]o) --> ').upper()
+    return x and x[0] == 'Y'
+
+def main_loop():
+    while True:
+        print('''
+An empty return cancels the current selection.
+Menu:
+  [N]ew article
+  edit [E]xisting article in emacs
+  open local site in [B]rowser
+  open [P]ublic site in browser
+  [T]ransfer
+  [Q]uit
+''')
+        try:
+            x = None
+            while not x:
+                x = input('Select --> ').upper()
+            if (x[0] == 'Q'):
+                return
+            elif (x[0] == 'T'):
+                transfer()
+            elif (x[0] == 'B'):
+                browser_local()
+            elif (x[0] == 'P'):
+                browser_public()
+            elif (x[0] == 'N'):
+                new_article()
+            elif (x[0] == 'E'):
+                edit_existing()
+        except (OSError, MyExc) as e:
+            print(str(e))
+        except KeyboardInterrupt:
+            print()
+            return
+
+def main():
+    # other_pids = rec_hugo();
+    os.chdir(topdir)
+    with Popen(['hugo', 'server', '-p', port], stdout=DEVNULL) as proc:
+        try:
+            # all_pids = get_hugo_procs()
+            while True:
+                main_loop()
+                if confirm_quit():
+                    return
+        finally:
+            proc.terminate()
+            # kill_hugo(all_pids, other_pids)
+
+main()

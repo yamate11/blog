@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>コーディングスタイル | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="自分のコーディングスタイルについてです">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="自分のコーディングスタイルについてです" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-23T12:16:45&#43;09:00" />
-<meta property="article:modified_time" content="2021-09-23T12:16:45&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-09-23T12:16:45+09:00" />
+<meta property="article:modified_time" content="2021-09-23T12:16:45+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="コーディングスタイル"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "競技プログラミングのコードは，基本的には C++ で書いています． とても Python の方が書きやすいときには Python で書くこともありますが， ほとんどありません．\nいろいろな方がコーディングスタイルの話をされていて，参考にしました． ほとんど，今すぐ出てこないのですが， 競技プログラミングを始めた頃， koturnさんの記事 はとても勉強になりました．また， kimiyuki さんの記事 に書かれていることは，実施するようにしたことが多いです． (していないこともたくさんあります．) 以下，上記記事と多少重複しているところもあります．\n整数型は long long 整数型は，基本的には long long を使います． 例外はおおむね次のような感じです．\n bool で済む大きな vector で，スペースを節約したいとき (boolを使う) 64ビットフルに使うビット配列として用いるとき (unsigned long long を使う) ライブラリの中 (int や size_t も使う)  つまり，ループ変数なんかも，long long で回しています． int にすると必要な領域が半分になる，とか，ループがひょっとして 多少遅いかもしれない，とか思わないこともありませんが， ともかく「int を使わない」のを原則とすることで， うっかりオーバーフローをしてしまうのを避けようとしています．\nソース中では実際には，先頭に次の定義を置いて，ll と表記しています．\nusing ll = long long; また，基本的には，符号付きの変数を使います． たとえば (1) のようにと書くと警告が出ますが， (2) のように書き足してしのぎます． これは， これは，符号無し変数を使って，うっかり (3) の用に書いてしまう 間違いが怖いからです．\nfor (ll i = 0; i  vec.size(); i++) ... // (1) for (ll i = 0; i  (ll)vec.size(); i++) ... // (2) for (size_t i = N - 1; i = 0; i--) .... // (3) ラムダ関数を使う 一部の処理をくくり出したいことが当然ありますが， 普通の関数(?)ではなく，ラムダ関数を使います．若干乱暴かもしれませんが， [\u0026] を指定することで，その時点で有効な値を全部キャプチャしてしまいます．\nラムダ関数を使わないと， たとえば，入力に N, M, K がパラメータとして与えられている場合に， よく，以下のようなコードになります．\nint func(ll x, ll N, ll M, ll K, vectorvectorll\u0026 A) {  ... }  int main() {  ll N, M, K; cin  N  M  K;  vectorvectorll A(N);  for (ll i = 0; i  N; i++) cin  A[i];  ...  int t1 = func(x1, N, M, K, A);  int t2 = func(x2, N, M, K, A); } この，func の引数に N, M, K, A たちを渡すのが面倒に感じるのです． おうおうにして，int func (ll x) { くらいで書き始めて， 書いていくうちに，「あ，Nが要る」「あ，Aも要る」と書き足していく ことになりがちです． ちゃんと設計して書かないのがいかん，という批判は当然あると思いますが， 現実としてそうなので…．\nラムダ関数を使えば以下のように書けるのでらくちんです．\nint main() {  ll N, M, K; cin  N  M  K;  vectorvectorll A(N);  for (ll i = 0; i  N; i++) cin  A[i];  ...  auto func = [\u0026](ll x) - ll {  ... // N, M, K, A その他にアクセスできる．変更も可．  };  ll t1 = func(x1, N, M, K, A);  ll t2 = func(x2, N, M, K, A); } よく最後のセミコロンを書き忘れてコンパイルやり直しますが．\n再帰関数はちょっと書き方がトリッキーですが， 慣れれば手が勝手に動きます(?)．\n ...  auto dfs = [\u0026](auto f, ll node) - void {  // 引数の先頭に auto f と書いておく  // 再帰関数の時には復帰値型 (この場合は void) が省略不可  ...  for (ll child : children[node]) {  f(f, child); // 再帰呼び出し  }  };  dfs(dfs, 0); // 関数 dfs の呼び出し．f には dfs 自身を渡す．  ... めったにありませんが，相互再帰の例:\n auto isOdd_rep = [\u0026](auto f, ll x) - bool {  if (x == 0) return false;  return ! f(f, x - 1); // f には isEven を入れて呼んでいる．  };  auto isEven_rep = [\u0026](auto f, ll x) - bool {  if (x == 0) return true;  return ! isOdd_rep(f, x - 1); // ここは isOdd_rep を呼ぶ．  };  auto isOdd = [\u0026](ll x) - bool { return isOdd_rep( isEven_rep, x); }  auto isEven = [\u0026](ll x) - bool { return isEven_rep(isEven_rep, x); }   assert(isOdd(5) == true);  assert(isEven(6) == true); もちろん，isOdd などを定義せずに，直接 isOdd_rep(isEven_rep, 5) などと呼び出しても良いです．\nデバッグ出力 ときどき，「デバッグ用の printf を消し忘れてWA」という話を聞きます． 私は注意力散漫なので，なにかしないと絶対やってしまうにきまっているので， 対策しています．\n コンパイルは，必ず make で行う． ソースファイル名は固定 (cans.cc にしている)． Makefile を次のように書いておく:  単に make を実行すると，識別子 DEBUG の値が真で， 識別子 _GLIBCXX_DEBUG が定義 された状態でコンパイルされる．その他，-g と -O0 も指定される． make DEBUG=  で実行すると，上記識別子は定義されず，-O2 で コンパイルされる．   デバッグ用のライブラリを用意する:  識別子 DEBUG の値が真ならば，DLOGK() などのマクロが 定義される．DLOGK(e) などと呼び出すと，「e」という文字列と eの値が，標準エラー出力に出力される． 識別子 DEBUG が定義されていない状況では，デバッグ出力は 行われない．    識別子 _GLIBCXX_DEBUG は，C++ の STL をデバッグモードで動かすことを 指示するものです．これが定義されていると，vector のサイズを超えた アクセスなどがエラーとして報告されて，便利です． gdb を使えばソース上の位置などもわかります．\nこうしておくと，ソースを修正することなく， 手元では，デバッグ出力などが見えますし，提出先では DEBUG という識別子は定義されていないので，出力されません． また，標準エラー出力に出力しているので，想定回答との比較を行う プログラムで標準出力だけを見るようにすれば，デバッグ出力があっても (速度を除けば)問題無く機能します．速度に問題がある場合には make clean; make DEBUG=  でコンパイルし直します．\nあまりきれいじゃないかもしれませんが，コードです:\nMakefile (GNU make用):\nCXX := g++  ifeq ($(DEBUG),)  DEBUGFLAGS := -O2 else  DEBUGFLAGS := -g -O0 -D_GLIBCXX_DEBUG -DDEBUG=1  ifneq ($(DEBUG_LIB),)  DEBUGFLAGS := $(DEBUGFLAGS) -DDEBUG_LIB=1  endif endif  WARNINGS := -Wall -Wno-format-security -Wshadow -fconcepts CXXFLAGS := -std=gnu++17 $(DEBUGFLAGS) $(WARNINGS) CXXFLAGS := $(CXXFLAGS) -I/full/path/to/ac-library  all: cans  clean: \t$(RM) cans.o cans DLOGKなどの定義\ntemplate class Head void dbgLog(bool with_nl, Head\u0026\u0026 head) {  cerr  head;  if (with_nl) cerr  endl; }  template class Head, class... Tail void dbgLog(bool with_nl, Head\u0026\u0026 head, Tail\u0026\u0026... tail) {  cerr  head  \" \";  dbgLog(with_nl, forwardTail(tail)...); }  #if DEBUG  #define DLOG(...) dbgLog(true, __VA_ARGS__) #else  #define DLOG(...) #endif  #define DUP1(E1) #E1 \"=\", E1 #define DUP2(E1,E2) DUP1(E1), DUP1(E2) #define DUP3(E1,...) DUP1(E1), DUP2(__VA_ARGS__) #define DUP4(E1,...) DUP1(E1), DUP3(__VA_ARGS__) #define DUP5(E1,...) DUP1(E1), DUP4(__VA_ARGS__) #define DUP6(E1,...) DUP1(E1), DUP5(__VA_ARGS__) #define DUP7(E1,...) DUP1(E1), DUP6(__VA_ARGS__) #define DUP8(E1,...) DUP1(E1), DUP7(__VA_ARGS__) #define DUP9(E1,...) DUP1(E1), DUP8(__VA_ARGS__) #define DUP10(E1,...) DUP1(E1), DUP9(__VA_ARGS__) #define DUP11(E1,...) DUP1(E1), DUP10(__VA_ARGS__) #define DUP12(E1,...) DUP1(E1), DUP11(__VA_ARGS__) #define GET_MACRO(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,NAME,...) NAME #define DUP(...) GET_MACRO(__VA_ARGS__, DUP12, DUP11, DUP10, DUP9, DUP\\ 8, DUP7, DUP6, DUP5, DUP4, DUP3, DUP2, DUP1)(__VA_ARGS__) #define DLOGK(...) DLOG(DUP(__VA_ARGS__)) #define DLOGKL(lab, ...) DLOG(lab, DUP(__VA_ARGS__)) ",
+  "articleBody": "競技プログラミングのコードは，基本的には C++ で書いています． とても Python の方が書きやすいときには Python で書くこともありますが， ほとんどありません．\nいろいろな方がコーディングスタイルの話をされていて，参考にしました． ほとんど，今すぐ出てこないのですが， 競技プログラミングを始めた頃， koturnさんの記事 はとても勉強になりました．また， kimiyuki さんの記事 に書かれていることは，実施するようにしたことが多いです． (していないこともたくさんあります．) 以下，上記記事と多少重複しているところもあります．\n整数型は long long 整数型は，基本的には long long を使います． 例外はおおむね次のような感じです．\nbool で済む大きな vector で，スペースを節約したいとき (boolを使う) 64ビットフルに使うビット配列として用いるとき (unsigned long long を使う) ライブラリの中 (int や size_t も使う) つまり，ループ変数なんかも，long long で回しています． int にすると必要な領域が半分になる，とか，ループがひょっとして 多少遅いかもしれない，とか思わないこともありませんが， ともかく「int を使わない」のを原則とすることで， うっかりオーバーフローをしてしまうのを避けようとしています．\nソース中では実際には，先頭に次の定義を置いて，ll と表記しています．\nusing ll = long long; また，基本的には，符号付きの変数を使います． たとえば (1) のようにと書くと警告が出ますが， (2) のように書き足してしのぎます． これは， これは，符号無し変数を使って，うっかり (3) の用に書いてしまう 間違いが怖いからです．\nfor (ll i = 0; i \u003c vec.size(); i++) ... // (1) for (ll i = 0; i \u003c (ll)vec.size(); i++) ... // (2) for (size_t i = N - 1; i \u003e= 0; i--) .... // (3) ラムダ関数を使う 一部の処理をくくり出したいことが当然ありますが， 普通の関数(?)ではなく，ラムダ関数を使います．若干乱暴かもしれませんが， [\u0026] を指定することで，その時点で有効な値を全部キャプチャしてしまいます．\nラムダ関数を使わないと， たとえば，入力に N, M, K がパラメータとして与えられている場合に， よく，以下のようなコードになります．\nint func(ll x, ll N, ll M, ll K, vector\u003cvector\u003cll\u003e\u003e\u0026 A) { ... } int main() { ll N, M, K; cin \u003e\u003e N \u003e\u003e M \u003e\u003e K; vector\u003cvector\u003cll\u003e\u003e A(N); for (ll i = 0; i \u003c N; i++) cin \u003e\u003e A[i]; ... int t1 = func(x1, N, M, K, A); int t2 = func(x2, N, M, K, A); } この，func の引数に N, M, K, A たちを渡すのが面倒に感じるのです． おうおうにして，int func (ll x) { くらいで書き始めて， 書いていくうちに，「あ，Nが要る」「あ，Aも要る」と書き足していく ことになりがちです． ちゃんと設計して書かないのがいかん，という批判は当然あると思いますが， 現実としてそうなので…．\nラムダ関数を使えば以下のように書けるのでらくちんです．\nint main() { ll N, M, K; cin \u003e\u003e N \u003e\u003e M \u003e\u003e K; vector\u003cvector\u003cll\u003e\u003e A(N); for (ll i = 0; i \u003c N; i++) cin \u003e\u003e A[i]; ... auto func = [\u0026](ll x) -\u003e ll { ... // N, M, K, A その他にアクセスできる．変更も可． }; ll t1 = func(x1, N, M, K, A); ll t2 = func(x2, N, M, K, A); } よく最後のセミコロンを書き忘れてコンパイルやり直しますが．\n再帰関数はちょっと書き方がトリッキーですが， 慣れれば手が勝手に動きます(?)．\n... auto dfs = [\u0026](auto f, ll node) -\u003e void { // 引数の先頭に auto f と書いておく // 再帰関数の時には復帰値型 (この場合は void) が省略不可 ... for (ll child : children[node]) { f(f, child); // 再帰呼び出し } }; dfs(dfs, 0); // 関数 dfs の呼び出し．f には dfs 自身を渡す． ... めったにありませんが，相互再帰の例:\nauto isOdd_rep = [\u0026](auto f, ll x) -\u003e bool { if (x == 0) return false; return ! f(f, x - 1); // f には isEven を入れて呼んでいる． }; auto isEven_rep = [\u0026](auto f, ll x) -\u003e bool { if (x == 0) return true; return ! isOdd_rep(f, x - 1); // ここは isOdd_rep を呼ぶ． }; auto isOdd = [\u0026](ll x) -\u003e bool { return isOdd_rep( isEven_rep, x); } auto isEven = [\u0026](ll x) -\u003e bool { return isEven_rep(isEven_rep, x); } assert(isOdd(5) == true); assert(isEven(6) == true); もちろん，isOdd などを定義せずに，直接 isOdd_rep(isEven_rep, 5) などと呼び出しても良いです．\nデバッグ出力 ときどき，「デバッグ用の printf を消し忘れてWA」という話を聞きます． 私は注意力散漫なので，なにかしないと絶対やってしまうにきまっているので， 対策しています．\nコンパイルは，必ず make で行う． ソースファイル名は固定 (cans.cc にしている)． Makefile を次のように書いておく: 単に make を実行すると，識別子 DEBUG の値が真で， 識別子 _GLIBCXX_DEBUG が定義 された状態でコンパイルされる．その他，-g と -O0 も指定される． make DEBUG= で実行すると，上記識別子は定義されず，-O2 で コンパイルされる． デバッグ用のライブラリを用意する: 識別子 DEBUG の値が真ならば，DLOGK() などのマクロが 定義される．DLOGK(e) などと呼び出すと，「e」という文字列と eの値が，標準エラー出力に出力される． 識別子 DEBUG が定義されていない状況では，デバッグ出力は 行われない． 識別子 _GLIBCXX_DEBUG は，C++ の STL をデバッグモードで動かすことを 指示するものです．これが定義されていると，vector のサイズを超えた アクセスなどがエラーとして報告されて，便利です． gdb を使えばソース上の位置などもわかります．\nこうしておくと，ソースを修正することなく， 手元では，デバッグ出力などが見えますし，提出先では DEBUG という識別子は定義されていないので，出力されません． また，標準エラー出力に出力しているので，想定回答との比較を行う プログラムで標準出力だけを見るようにすれば，デバッグ出力があっても (速度を除けば)問題無く機能します．速度に問題がある場合には make clean; make DEBUG= でコンパイルし直します．\nあまりきれいじゃないかもしれませんが，コードです:\nMakefile (GNU make用):\nCXX := g++ ifeq ($(DEBUG),) DEBUGFLAGS := -O2 else DEBUGFLAGS := -g -O0 -D_GLIBCXX_DEBUG -DDEBUG=1 ifneq ($(DEBUG_LIB),) DEBUGFLAGS := $(DEBUGFLAGS) -DDEBUG_LIB=1 endif endif WARNINGS := -Wall -Wno-format-security -Wshadow -fconcepts CXXFLAGS := -std=gnu++17 $(DEBUGFLAGS) $(WARNINGS) CXXFLAGS := $(CXXFLAGS) -I/full/path/to/ac-library all: cans clean: $(RM) cans.o cans DLOGKなどの定義\ntemplate \u003cclass Head\u003e void dbgLog(bool with_nl, Head\u0026\u0026 head) { cerr \u003c\u003c head; if (with_nl) cerr \u003c\u003c endl; } template \u003cclass Head, class... Tail\u003e void dbgLog(bool with_nl, Head\u0026\u0026 head, Tail\u0026\u0026... tail) { cerr \u003c\u003c head \u003c\u003c \" \"; dbgLog(with_nl, forward\u003cTail\u003e(tail)...); } #if DEBUG #define DLOG(...) dbgLog(true, __VA_ARGS__) #else #define DLOG(...) #endif #define DUP1(E1) #E1 \"=\", E1 #define DUP2(E1,E2) DUP1(E1), DUP1(E2) #define DUP3(E1,...) DUP1(E1), DUP2(__VA_ARGS__) #define DUP4(E1,...) DUP1(E1), DUP3(__VA_ARGS__) #define DUP5(E1,...) DUP1(E1), DUP4(__VA_ARGS__) #define DUP6(E1,...) DUP1(E1), DUP5(__VA_ARGS__) #define DUP7(E1,...) DUP1(E1), DUP6(__VA_ARGS__) #define DUP8(E1,...) DUP1(E1), DUP7(__VA_ARGS__) #define DUP9(E1,...) DUP1(E1), DUP8(__VA_ARGS__) #define DUP10(E1,...) DUP1(E1), DUP9(__VA_ARGS__) #define DUP11(E1,...) DUP1(E1), DUP10(__VA_ARGS__) #define DUP12(E1,...) DUP1(E1), DUP11(__VA_ARGS__) #define GET_MACRO(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,NAME,...) NAME #define DUP(...) GET_MACRO(__VA_ARGS__, DUP12, DUP11, DUP10, DUP9, DUP\\ 8, DUP7, DUP6, DUP5, DUP4, DUP3, DUP2, DUP1)(__VA_ARGS__) #define DLOGK(...) DLOG(DUP(__VA_ARGS__)) #define DLOGKL(lab, ...) DLOG(lab, DUP(__VA_ARGS__)) ",
   "wordCount" : "639",
   "inLanguage": "en",
   "datePublished": "2021-09-23T12:16:45+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       コーディングスタイル
     </h1>
-    <div class="post-meta">2021-09-23&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-09-23&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>競技プログラミングのコードは，基本的には C++ で書いています．
@@ -426,12 +424,12 @@ DEBUG という識別子は定義されていないので，出力されませ�
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>桁DPのコーディング</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>C&#43;&#43;言語・STLメモ</span>
   </a>
@@ -461,36 +459,28 @@ DEBUG という識別子は定義されていないので，出力されませ�
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -544,12 +534,12 @@ DEBUG という識別子は定義されていないので，出力されませ�
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

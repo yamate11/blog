@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on yamate11のブログ</title>
     <link>https://yamate11.github.io/blog/pages/</link>
     <description>Recent content in Pages on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 23 Mar 2022 08:47:00 +0900</lastBuildDate><atom:link href="https://yamate11.github.io/blog/pages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Mar 2022 08:47:00 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>このサイトについて</title>
       <link>https://yamate11.github.io/blog/pages/about/</link>
       <pubDate>Wed, 23 Mar 2022 08:47:00 +0900</pubDate>
-      
       <guid>https://yamate11.github.io/blog/pages/about/</guid>
       <description>筆者 筆者 (yamate11) の競プロ用のブログです．
 2018年頃から AtCoder に参加しています． IDは yamate11． 2022年3月現在ではレーティングは1800台． 青に3年間くらい居続けていて，なかなか黄色になれません． 精進が足りないということはわかっていますけれども&amp;hellip;． 現状はこちら ．
@@ -19,6 +19,5 @@ CodeForces にも ID yamate11 で参加していますが，こちらはあま�
 Twitter は， _yamate11 です．
 Powered by Hugo and PaperMod</description>
     </item>
-    
   </channel>
 </rss>

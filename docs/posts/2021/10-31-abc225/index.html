@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ABC225 参加記 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-31-abc225/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-31T10:24:27&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-31T10:24:27&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-31T10:24:27+09:00" />
+<meta property="article:modified_time" content="2021-10-31T10:24:27+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC225 参加記"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 225 (ABC225) に参加して， ABCD 4完の 1004 位でした．冷えました．\n問題へのリンク A -\tDistinct Strings 全部違えば6，2つ同じでもう一つが違えば3，全部同じなら1です．\nB -\tStar or Not 最初の2行で共通している頂点を見つけて (無ければ No)， 他の全部の行にその頂点が入っているかどうかチェックします．\nC -\tCalendar Validator 以下の条件をチェックします．\n 行の先頭の値が 7 つずつ増える 行内では値が 1 つずつ増える 7 の倍数は，行末以外には現れない．  D -\tPlay Train 各電車について，後と前の電車の番号を覚えておきます(無ければ-1)． クエリ1, 2 では O(1) で更新できます． クエリ3では，前の電車をたどって， 先頭に到達したら，そこから後の電車を順に出力していきます． 出力する電車の合計数が $10^6$ 以下なので，これで間に合います．\n「これで間に合う」ことに気づかず，他の方法を探し続けて 時間を浪費しました．\nE -\tフ 一応コードは時間内に書けたのですが，デバッグが間に合いませんでした．\n直観的には次のようにすればできます．\n i 番目の「フ」の下端と原点を結ぶ直線と，x軸とのなす角を b[i] とする． i 番目の「フ」の左端と原点を結ぶ直線と，x軸とのなす角を e[i] とする．  すると，開区間 (b[i], e[i]) たちが交わらないようにたくさん取れ，という問題に なります．e[i] の昇順に並べ替えておいて，次のDPをします．\ndp[i] = i 番目の区間まで見たときに，重ならないようにとれる区間の数の最大値\ndp[i-1] まで決定したとすると， e[j] 実際には誤差が怖いので整数で計算します． 2つの半直線 (0,0) - (x1,y1) と (0,0) - (x2,y2) が x 軸となす角度の 大小だけ決定できれば良く，それは，x1 * y2 と y1 * x2 の大小を比較すれば わかります．\n大きく冷えました．来週頑張ります．\nyamate11さんのUNICORNプログラミングコンテスト2021(AtCoder Beginner Contest 225)での成績：1004位\nパフォーマンス：1425相当\nレーティング：1936→1894 (-42) :(#AtCoder #UNICORNプログラミングコンテスト2021(ABC225) https://t.co/5DrH4KnAj9\n— yamate11 (@_yamate11) October 30, 2021  ",
+  "articleBody": "AtCoder Beginner Contest 225 (ABC225) に参加して， ABCD 4完の 1004 位でした．冷えました．\n問題へのリンク A -\tDistinct Strings 全部違えば6，2つ同じでもう一つが違えば3，全部同じなら1です．\nB -\tStar or Not 最初の2行で共通している頂点を見つけて (無ければ No)， 他の全部の行にその頂点が入っているかどうかチェックします．\nC -\tCalendar Validator 以下の条件をチェックします．\n行の先頭の値が 7 つずつ増える 行内では値が 1 つずつ増える 7 の倍数は，行末以外には現れない． D -\tPlay Train 各電車について，後と前の電車の番号を覚えておきます(無ければ-1)． クエリ1, 2 では O(1) で更新できます． クエリ3では，前の電車をたどって， 先頭に到達したら，そこから後の電車を順に出力していきます． 出力する電車の合計数が $10^6$ 以下なので，これで間に合います．\n「これで間に合う」ことに気づかず，他の方法を探し続けて 時間を浪費しました．\nE -\tフ 一応コードは時間内に書けたのですが，デバッグが間に合いませんでした．\n直観的には次のようにすればできます．\ni 番目の「フ」の下端と原点を結ぶ直線と，x軸とのなす角を b[i] とする． i 番目の「フ」の左端と原点を結ぶ直線と，x軸とのなす角を e[i] とする． すると，開区間 (b[i], e[i]) たちが交わらないようにたくさん取れ，という問題に なります．e[i] の昇順に並べ替えておいて，次のDPをします．\ndp[i] = i 番目の区間まで見たときに，重ならないようにとれる区間の数の最大値\ndp[i-1] まで決定したとすると， e[j] \u003c= b[i] なる最大の j を二分探索で取って， dp[i] := max(dp[j] + 1, dp[i-1]) で dp[i] が決定できます． dp[N] が求める答です．計算量は O(N log N)．\n実際には誤差が怖いので整数で計算します． 2つの半直線 (0,0) - (x1,y1) と (0,0) - (x2,y2) が x 軸となす角度の 大小だけ決定できれば良く，それは，x1 * y2 と y1 * x2 の大小を比較すれば わかります．\n大きく冷えました．来週頑張ります．\nyamate11さんのUNICORNプログラミングコンテスト2021(AtCoder Beginner Contest 225)での成績：1004位\nパフォーマンス：1425相当\nレーティング：1936→1894 (-42) :(#AtCoder #UNICORNプログラミングコンテスト2021(ABC225) https://t.co/5DrH4KnAj9\n— yamate11 (@_yamate11) October 30, 2021 ",
   "wordCount" : "138",
   "inLanguage": "en",
   "datePublished": "2021-10-31T10:24:27+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       ABC225 参加記
     </h1>
-    <div class="post-meta">2021-10-31&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-31&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 225 (ABC225) に参加して，
@@ -269,12 +267,12 @@ dp[N] が求める答です．計算量は O(N log N)．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>String Cards - AtCoder Beginner Contest 225 F</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Max Dot -- AtCoder Regular Contest 128 C</span>
   </a>
@@ -304,36 +302,28 @@ dp[N] が求める答です．計算量は O(N log N)．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -387,12 +377,12 @@ dp[N] が求める答です．計算量は O(N log N)．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

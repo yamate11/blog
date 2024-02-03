@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Three Permutations - ABC 214 G | yamate11のブログ</title>
-<meta name="keywords" content="DP, 円環DP, 順列, 包除原理" />
+<meta name="keywords" content="DP, 円環DP, 順列, 包除原理">
 <meta name="description" content="調べた結果分かった解法を記述します．いろいろ勉強になりました．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="調べた結果分かった解法を記述します．いろいろ勉強になりました．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-27T19:04:12&#43;09:00" />
-<meta property="article:modified_time" content="2021-08-27T19:04:12&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-08-27T19:04:12+09:00" />
+<meta property="article:modified_time" content="2021-08-27T19:04:12+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Three Permutations - ABC 214 G"/>
@@ -88,7 +123,7 @@
   "keywords": [
     "DP", "円環DP", "順列", "包除原理"
   ],
-  "articleBody": "AtCoder Beginner Contest 214 - ABC 214 G - Three Permutations の解法です．\n解説ACです． 公式解説 も参考になりましたが，それだけでは解答は作れませんでした． kmjpさんのブログ が助けになりました．ありがとうございます．\n問題へのリンク https://atcoder.jp/contests/abc214/tasks/abc214_g 問題概要 $1, \\ldots, N$ の順列の全体を $\\textrm{Perm}$ と書く． $p, q \\in \\text{Perm}$ が与えられる． 条件「$x = p(i)$ または $x = q(i)$」を，$\\text{Coi}(x, i)$ と書く ことにする． $r \\in \\text{Perm}$ に対して， $C(r) := \\{ i \\in [1, N] \\mid \\text{Coi}(r(i), i) \\}$ とする． 集合 $\\{r \\in \\text{Perm} \\mid C(r) = \\varnothing \\}$ の要素数を mod $10^9 + 7$ で求めよ．\n解法 $r \\in \\text{Perm}$， $X \\subseteq [1, N]$， $k \\in [0, N]$ に対して，次のように書くことにする:\n $S(X) := \\{r \\in\\text{Perm} \\mid X \\subseteq C(r) \\}$ $R_k := \\sum \\{ |S(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ $r \\downarrow X := r$ の定義域を $X$ に制限したもの $\\text{Perm}’(X) := \\{ r \\downarrow X \\mid r \\in \\text{Perm} \\}$ $S’(X) := \\{ r \\downarrow X \\mid r \\in S(X) \\} = \\{r’ \\in \\text{Perm}’(X) \\mid \\forall i \\in X.\\; \\text{Coi}(r’(i), i) \\} $  包除原理により，求める答は $N! - \\sum_{k=1}^{N} (-1)^{k - 1} R_k$ となるから，各$k$ に対する $R_k$ を求めれば良い． また，$|S(X)| = |S’(X)| \\times (N - |X|)!$ であるから， $\\sum\\{ |S’(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ を求めれば良い．\n集合 $[1, N]$ 上で，すべての $(p_i, q_i)$ を 結んだグラフを考える．どの頂点も次数は2以下である． 連結成分は，自己ループか，サイクルかのいずれかである． 連結成分全体の集合を $\\mathcal{Z}$ と書く． $Z\\in \\mathcal{Z}$ に対して， $Z$内にある辺に対応する番号の集合を $I(Z) := \\{ i \\in [1, N] \\mid p(i), q(i) \\in Z \\}$ と書く． $S’(X)$ の要素 $r$ は，各連結成分$Z$に， $\\sum_{Z \\in \\mathcal{Z}} t_Z = |X|$ となるように非負整数 $t_Z$ を 割り当てて，$Z$から$t_Z$本の辺に対して端点を選択することによって 決まる．正確には，\n $Q(Z, t) := \\{ r \\in S’(Y) \\mid Y \\subseteq I(Z), \\; |Y| = t \\}$ $Q(t) := \\{ ((Z, r_Z) \\mid Z \\in \\mathcal{Z} ) \\mid r_Z \\in Q(Z, t_Z),\\; \\sum_{Z \\in \\mathcal{Z}} t_Z = t\\}$ $\\rho_t : \\bigcup \\{ S’(X) \\mid |X| = t \\} \\to Q(t), \\; \\rho(r) = ( r \\downarrow I(Z) \\mid Z \\in \\mathcal{Z} )$  と書いたときに，$\\rho_t$ が全単射を与える．したがって， $|Q(t)|$ を求めれば良い．\nまず，$|Q(Z, t)|$ を求めよう．これは，$t$ にはもちろん依存するが， $Z$ に関しては，そのサイズ $s = |Z|$ にしか依存しないのは明らかであるので， $|Q(Z, t)|$ を $f(s, t)$ と書くことにする．\nまず，あきらかに，$ f(1, 1) = 1$であり，$t  1$ のとき，$f (1, t) = 0$ である． $s = 2$ については，DP で求める． $Z$ が円環状になっているので，次のように構成する． $I(Z)$ を $\\{ x_1, x_2, \\ldots, x_s \\}$ と， $q(x_{i}) = p(x_{i+1})$ が成り立つように列挙する．\n dp1[i][t][a][b] := 次を満たす r の数: ($a, b \\in \\{0, 1, 2\\}$)  $ \\text{dom}(r) \\subseteq \\{ x_1, \\ldots, x_i \\} $ $ t = |\\text{dom}(r)| $ a = 0: $x_s \\not\\in \\text{dom}(r)$ と矛盾しない． a = 1: $r(x_s) = p(x_s)$ と矛盾しない． a = 2: $r(x_s) = q(x_s)$ と矛盾しない． b = 0: $x_i \\not\\in \\text{dom}(r)$ b = 1: $r(x_i) = p(x_i)$ b = 2: $r(x_i) = q(x_i)$   初期値  dp1[0][0][a][0] = 1 (a = 0,1,2) dp1[0][1][a][1] = 1 (a = 0,1) dp1[0][1][a][2] = 1 (a = 0,1,2)   遷移  dp1[i+1][t][a][0] += dp[i][a][b] (b = 0,1,2) dp1[i+1][t+1][a][1] += dp[i][a][b] (b = 0,1) dp1[i+1][t+1][a][2] += dp[i][a][1] (b = 0,1,2)    DP実行後，$f(s, t) = dp1[s][t][0][0] + dp1[s][t][1][1] + dp1[s][t][2][2]$ で，$f$ が決定できる． 計算を振り返ってみると，$s$ ごとに別々にDPを実行する必要はなく， 1回のDPを $\\max(|Z|)$ まで実行することで， すべての必要な $f(s, t)$ を計算することができる． このDPの計算量は $O(N)$ である．\nこの準備のもとで，$|Q(t)|$ は，次のDPで求めることができる．\n $\\text{dp2}[i][t] := |\\{ ((j, r_j \\mid j \\leq i) \\mid r_j \\in Q(Z, t_j),\\; \\sum_{j\\leq i}t_j = t \\} |$ 遷移: $\\text{dp2}[i][t] = \\sum_{s  このDP実行終了後，$u := |\\mathcal{Z}|$ として， $|Q(t)| = \\text{dp2}[u][t]$ である． 計算量が心配になるが，遷移の式に現れる積の計算の回数は， $|Z_i| = a_i$ として， $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + …+ (a_1 + … + a_{u-1}) * a_u \\leq (a_1 + … + a_u)^2 = N^2$ なので，$O(N^2)$ である．\nACコード https://atcoder.jp/contests/abc214/submissions/25379311 ",
+  "articleBody": "AtCoder Beginner Contest 214 - ABC 214 G - Three Permutations の解法です．\n解説ACです． 公式解説 も参考になりましたが，それだけでは解答は作れませんでした． kmjpさんのブログ が助けになりました．ありがとうございます．\n問題へのリンク https://atcoder.jp/contests/abc214/tasks/abc214_g 問題概要 $1, \\ldots, N$ の順列の全体を $\\textrm{Perm}$ と書く． $p, q \\in \\text{Perm}$ が与えられる． 条件「$x = p(i)$ または $x = q(i)$」を，$\\text{Coi}(x, i)$ と書く ことにする． $r \\in \\text{Perm}$ に対して， $C(r) := \\{ i \\in [1, N] \\mid \\text{Coi}(r(i), i) \\}$ とする． 集合 $\\{r \\in \\text{Perm} \\mid C(r) = \\varnothing \\}$ の要素数を mod $10^9 + 7$ で求めよ．\n解法 $r \\in \\text{Perm}$， $X \\subseteq [1, N]$， $k \\in [0, N]$ に対して，次のように書くことにする:\n$S(X) := \\{r \\in\\text{Perm} \\mid X \\subseteq C(r) \\}$ $R_k := \\sum \\{ |S(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ $r \\downarrow X := r$ の定義域を $X$ に制限したもの $\\text{Perm}’(X) := \\{ r \\downarrow X \\mid r \\in \\text{Perm} \\}$ $S’(X) := \\{ r \\downarrow X \\mid r \\in S(X) \\} = \\{r’ \\in \\text{Perm}’(X) \\mid \\forall i \\in X.\\; \\text{Coi}(r’(i), i) \\} $ 包除原理により，求める答は $N! - \\sum_{k=1}^{N} (-1)^{k - 1} R_k$ となるから，各$k$ に対する $R_k$ を求めれば良い． また，$|S(X)| = |S’(X)| \\times (N - |X|)!$ であるから， $\\sum\\{ |S’(X)| \\mid X \\subseteq [1, N],\\; |X| = k \\}$ を求めれば良い．\n集合 $[1, N]$ 上で，すべての $(p_i, q_i)$ を 結んだグラフを考える．どの頂点も次数は2以下である． 連結成分は，自己ループか，サイクルかのいずれかである． 連結成分全体の集合を $\\mathcal{Z}$ と書く． $Z\\in \\mathcal{Z}$ に対して， $Z$内にある辺に対応する番号の集合を $I(Z) := \\{ i \\in [1, N] \\mid p(i), q(i) \\in Z \\}$ と書く． $S’(X)$ の要素 $r$ は，各連結成分$Z$に， $\\sum_{Z \\in \\mathcal{Z}} t_Z = |X|$ となるように非負整数 $t_Z$ を 割り当てて，$Z$から$t_Z$本の辺に対して端点を選択することによって 決まる．正確には，\n$Q(Z, t) := \\{ r \\in S’(Y) \\mid Y \\subseteq I(Z), \\; |Y| = t \\}$ $Q(t) := \\{ ((Z, r_Z) \\mid Z \\in \\mathcal{Z} ) \\mid r_Z \\in Q(Z, t_Z),\\; \\sum_{Z \\in \\mathcal{Z}} t_Z = t\\}$ $\\rho_t : \\bigcup \\{ S’(X) \\mid |X| = t \\} \\to Q(t), \\; \\rho(r) = ( r \\downarrow I(Z) \\mid Z \\in \\mathcal{Z} )$ と書いたときに，$\\rho_t$ が全単射を与える．したがって， $|Q(t)|$ を求めれば良い．\nまず，$|Q(Z, t)|$ を求めよう．これは，$t$ にはもちろん依存するが， $Z$ に関しては，そのサイズ $s = |Z|$ にしか依存しないのは明らかであるので， $|Q(Z, t)|$ を $f(s, t)$ と書くことにする．\nまず，あきらかに，$ f(1, 1) = 1$であり，$t \u003e 1$ のとき，$f (1, t) = 0$ である． $s \u003e= 2$ については，DP で求める． $Z$ が円環状になっているので，次のように構成する． $I(Z)$ を $\\{ x_1, x_2, \\ldots, x_s \\}$ と， $q(x_{i}) = p(x_{i+1})$ が成り立つように列挙する．\ndp1[i][t][a][b] := 次を満たす r の数: ($a, b \\in \\{0, 1, 2\\}$) $ \\text{dom}(r) \\subseteq \\{ x_1, \\ldots, x_i \\} $ $ t = |\\text{dom}(r)| $ a = 0: $x_s \\not\\in \\text{dom}(r)$ と矛盾しない． a = 1: $r(x_s) = p(x_s)$ と矛盾しない． a = 2: $r(x_s) = q(x_s)$ と矛盾しない． b = 0: $x_i \\not\\in \\text{dom}(r)$ b = 1: $r(x_i) = p(x_i)$ b = 2: $r(x_i) = q(x_i)$ 初期値 dp1[0][0][a][0] = 1 (a = 0,1,2) dp1[0][1][a][1] = 1 (a = 0,1) dp1[0][1][a][2] = 1 (a = 0,1,2) 遷移 dp1[i+1][t][a][0] += dp[i][a][b] (b = 0,1,2) dp1[i+1][t+1][a][1] += dp[i][a][b] (b = 0,1) dp1[i+1][t+1][a][2] += dp[i][a][1] (b = 0,1,2) DP実行後，$f(s, t) = dp1[s][t][0][0] + dp1[s][t][1][1] + dp1[s][t][2][2]$ で，$f$ が決定できる． 計算を振り返ってみると，$s$ ごとに別々にDPを実行する必要はなく， 1回のDPを $\\max(|Z|)$ まで実行することで， すべての必要な $f(s, t)$ を計算することができる． このDPの計算量は $O(N)$ である．\nこの準備のもとで，$|Q(t)|$ は，次のDPで求めることができる．\n$\\text{dp2}[i][t] := |\\{ ((j, r_j \\mid j \\leq i) \\mid r_j \\in Q(Z, t_j),\\; \\sum_{j\\leq i}t_j = t \\} |$ 遷移: $\\text{dp2}[i][t] = \\sum_{s \u003c t} (\\text{dp2}[i-1][s] \\times f(|Z_i|, t - s))$ このDP実行終了後，$u := |\\mathcal{Z}|$ として， $|Q(t)| = \\text{dp2}[u][t]$ である． 計算量が心配になるが，遷移の式に現れる積の計算の回数は， $|Z_i| = a_i$ として， $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + …+ (a_1 + … + a_{u-1}) * a_u \\leq (a_1 + … + a_u)^2 = N^2$ なので，$O(N^2)$ である．\nACコード https://atcoder.jp/contests/abc214/submissions/25379311 ",
   "wordCount" : "545",
   "inLanguage": "en",
   "datePublished": "2021-08-27T19:04:12+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Three Permutations - ABC 214 G
     </h1>
-    <div class="post-meta">2021-08-27&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-08-27&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 214 - ABC 214 G - Three Permutations の解法です．</p>
@@ -349,12 +347,12 @@ $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + &hellip;+ (a_1 + &hellip; + a_{u-1}) * a_
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>01Sequence - ABC216 G</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/08-27-arc124e/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Pass to Next - ARC 124 E</span>
   </a>
@@ -384,36 +382,28 @@ $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + &hellip;+ (a_1 + &hellip; + a_{u-1}) * a_
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -467,12 +457,12 @@ $a_1 + a_1 * a_2 + (a_1 + a_2) * a_3 + &hellip;+ (a_1 + &hellip; + a_{u-1}) * a_
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

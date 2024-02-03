@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>インタラクティブ問題のデバッグ | yamate11のブログ</title>
-<meta name="keywords" content="インタラクティブ" />
+<meta name="keywords" content="インタラクティブ">
 <meta name="description" content="インタラクティブ問題のデバッグ方法">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="インタラクティブ問題のデバッグ方法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-04-21T18:29:42&#43;09:00" />
-<meta property="article:modified_time" content="2023-04-21T18:29:42&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-04-21T18:29:42+09:00" />
+<meta property="article:modified_time" content="2023-04-21T18:29:42+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="インタラクティブ問題のデバッグ"/>
@@ -88,7 +123,7 @@
   "keywords": [
     "インタラクティブ"
   ],
-  "articleBody": "インタラクティブ問題を解くスタイルについての，自分用のメモ． いろいろ試行したが，現状 (2023年4月現在) はこれになっている．\nrunning example  長さ $N$ のソート済みの整数列 $P_1, \\ldots, P_N$ が隠されている． $N$ と $x$ が最初に与えられる． 「$i$ 番目の整数は何か」との質問を，たかだか 10 回おこなって，$P_i = x$ となる $i$ を答えよ． 存在しない場合には -1 と答えよ．\n 質問の形式: ? i 答の形式: ! i  制約: $N \\leq 1000$，$P_i コーディング 特別なサポートは行っていない．\n質問用の関数と解答用の関数は用意しておくと良い．\nll ask(ll i) {  cout  \"? \"  i + 1  endl; // 0-index 等はここで調整  ll x; cin  x;  return x; }  void fin(ll i) {  cout  \"! \"  (i = 0 ? i + 1 : -1)  endl;  exit(0); } main 関数は，ask() と fin() を使って書く．\nint main(/* int argc, char *argv[] */) {  ios_base::sync_with_stdio(false);  cin.tie(nullptr);  cout  setprecision(20);   ll N, x; cin  N  x;  ll lo = -1, hi = N;  while (true) {  if (lo + 1 == hi) fin(-1);  ll mid = (lo + hi) / 2;  ll y = ask(mid);  if (y  x) lo = mid;  else if (x  y) hi = mid;  else if (x == y) fin(mid);  }   return 0; } ジャッジプログラム デバッグするとなると，やはりジャッジプログラムが必要になると思われる． ジャッジプログラムを動作させるスクリプト interun を作ってある． この環境で動かすためには，ジャッジプログラムは次のように作成する．\n 問題を標準入力から読み込む．  問題のフォーマットは自分で適当に決める． 問題ファイルを din_x.txt として用意する．   解答プログラムとのやりとりも，標準入出力を使う． ユーザに読ませたい出力は，行頭に # を置いて (標準エラー出力ではなく) 標準出力に出す． judge という名前で実行するようにしておくと良い (オプションで指定も可能)  次を定義しておくと良い．\nvoid ac() {  cout  \"# AC\"  endl;  exit(0); }  void wa(string msg = \"\") {  cout  \"# WA: \"  msg  endl;  exit(1); } main を書く．正解したら ac() を，不正解なら wa() を呼ぶ．\nint main() {  ll N, x, ans; cin  N  x  ans; // 解答も与えられると想定  vectorll P(N); REP(i, 0, N) cin  P[i];  cout  N  \" \"  x  endl;  ll cnt = 0;  while (true) {  string tp; cin  tp;  if (tp == \"?\") {  if (cnt++ = 10) wa(\"Exceeds Limit\");  ll i; cin  i;  cout  P[i - 1]  endl;  }else if (tp == \"!\") {  ll i; cin  i;  if (i == ans) ac(); else wa();  }else assert(0);  } } # で始まる出力は，ユーザ向けである． interun は，両プログラムのやりとりをログファイル (デフォルト a.log) に出力するので，誤答の場合に渡された値などは必ずしも出力しなくても良い．\n実行 din_?.txt ファイルを用意する． ここでは，正解もファイルに書き込まれているという想定としているが， ジャッジプログラムの作り方によっては不要にもできる．\n5 30 4 1 10 15 30 100 実行する:\n$ interrun cans, judge, a.log の名前は interun のオプションで変更できる．\ncmpNaive デバッグ時の cmpNaive では，解答プログラム cans と ジャッジプログラム judge は別プロセスとの想定である． スレッド対応はしていない．\n$ cmpNaive -e -i -p $AtCoderTop/clib/tool/interun interun は，judge プログラムと同じ終了コードを返すので， -e (終了コードでの判定), -i (独立プロセス) を指定して， interun の実行を指定して cmpNaive を実行すれば良い． interun にオプションを指定したいときには次のようにする:\n$ cmpNaive -e -i -p \"$AtcoderTop/clib/tool/interun -j ./my_judge\" keyword: interactive\n",
+  "articleBody": "インタラクティブ問題を解くスタイルについての，自分用のメモ． いろいろ試行したが，現状 (2023年4月現在) はこれになっている．\nrunning example 長さ $N$ のソート済みの整数列 $P_1, \\ldots, P_N$ が隠されている． $N$ と $x$ が最初に与えられる． 「$i$ 番目の整数は何か」との質問を，たかだか 10 回おこなって，$P_i = x$ となる $i$ を答えよ． 存在しない場合には -1 と答えよ．\n質問の形式: ? i 答の形式: ! i 制約: $N \\leq 1000$，$P_i \u003c P_j (i \u003c j)$，\nコーディング 特別なサポートは行っていない．\n質問用の関数と解答用の関数は用意しておくと良い．\nll ask(ll i) { cout \u003c\u003c \"? \" \u003c\u003c i + 1 \u003c\u003c endl; // 0-index 等はここで調整 ll x; cin \u003e\u003e x; return x; } void fin(ll i) { cout \u003c\u003c \"! \" \u003c\u003c (i \u003e= 0 ? i + 1 : -1) \u003c\u003c endl; exit(0); } main 関数は，ask() と fin() を使って書く．\nint main(/* int argc, char *argv[] */) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout \u003c\u003c setprecision(20); ll N, x; cin \u003e\u003e N \u003e\u003e x; ll lo = -1, hi = N; while (true) { if (lo + 1 == hi) fin(-1); ll mid = (lo + hi) / 2; ll y = ask(mid); if (y \u003c x) lo = mid; else if (x \u003c y) hi = mid; else if (x == y) fin(mid); } return 0; } ジャッジプログラム デバッグするとなると，やはりジャッジプログラムが必要になると思われる． ジャッジプログラムを動作させるスクリプト interun を作ってある． この環境で動かすためには，ジャッジプログラムは次のように作成する．\n問題を標準入力から読み込む． 問題のフォーマットは自分で適当に決める． 問題ファイルを din_x.txt として用意する． 解答プログラムとのやりとりも，標準入出力を使う． ユーザに読ませたい出力は，行頭に # を置いて (標準エラー出力ではなく) 標準出力に出す． judge という名前で実行するようにしておくと良い (オプションで指定も可能) 次を定義しておくと良い．\nvoid ac() { cout \u003c\u003c \"# AC\" \u003c\u003c endl; exit(0); } void wa(string msg = \"\") { cout \u003c\u003c \"# WA: \" \u003c\u003c msg \u003c\u003c endl; exit(1); } main を書く．正解したら ac() を，不正解なら wa() を呼ぶ．\nint main() { ll N, x, ans; cin \u003e\u003e N \u003e\u003e x \u003e\u003e ans; // 解答も与えられると想定 vector\u003cll\u003e P(N); REP(i, 0, N) cin \u003e\u003e P[i]; cout \u003c\u003c N \u003c\u003c \" \" \u003c\u003c x \u003c\u003c endl; ll cnt = 0; while (true) { string tp; cin \u003e\u003e tp; if (tp == \"?\") { if (cnt++ \u003e= 10) wa(\"Exceeds Limit\"); ll i; cin \u003e\u003e i; cout \u003c\u003c P[i - 1] \u003c\u003c endl; }else if (tp == \"!\") { ll i; cin \u003e\u003e i; if (i == ans) ac(); else wa(); }else assert(0); } } # で始まる出力は，ユーザ向けである． interun は，両プログラムのやりとりをログファイル (デフォルト a.log) に出力するので，誤答の場合に渡された値などは必ずしも出力しなくても良い．\n実行 din_?.txt ファイルを用意する． ここでは，正解もファイルに書き込まれているという想定としているが， ジャッジプログラムの作り方によっては不要にもできる．\n5 30 4 1 10 15 30 100 実行する:\n$ interrun \u003c din_1.txt cans, judge, a.log の名前は interun のオプションで変更できる．\ncmpNaive デバッグ時の cmpNaive では，解答プログラム cans と ジャッジプログラム judge は別プロセスとの想定である． スレッド対応はしていない．\n$ cmpNaive -e -i -p $AtCoderTop/clib/tool/interun interun は，judge プログラムと同じ終了コードを返すので， -e (終了コードでの判定), -i (独立プロセス) を指定して， interun の実行を指定して cmpNaive を実行すれば良い． interun にオプションを指定したいときには次のようにする:\n$ cmpNaive -e -i -p \"$AtcoderTop/clib/tool/interun -j ./my_judge\" keyword: interactive\n",
   "wordCount" : "391",
   "inLanguage": "en",
   "datePublished": "2023-04-21T18:29:42+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       インタラクティブ問題のデバッグ
     </h1>
-    <div class="post-meta">2023-04-21&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-04-21&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>インタラクティブ問題を解くスタイルについての，自分用のメモ．
@@ -343,12 +341,12 @@ interun にオプションを指定したいときには次のようにする:</
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ネストした vector の順序と性能</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>整数・実数の大小比較とfloor, ceil</span>
   </a>
@@ -378,36 +376,28 @@ interun にオプションを指定したいときには次のようにする:</
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -461,12 +451,12 @@ interun にオプションを指定したいときには次のようにする:</
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

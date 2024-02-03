@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Differ by K bits - Atcoder Regular Contest 138 D | yamate11のブログ</title>
-<meta name="keywords" content="XOR, グレイコード" />
+<meta name="keywords" content="XOR, グレイコード">
 <meta name="description" content="公式解説とは少しだけ異なる解法です">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="公式解説とは少しだけ異なる解法です" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-14T08:22:15&#43;09:00" />
-<meta property="article:modified_time" content="2022-04-14T08:22:15&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-04-14T08:22:15+09:00" />
+<meta property="article:modified_time" content="2022-04-14T08:22:15+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Differ by K bits - Atcoder Regular Contest 138 D"/>
@@ -88,7 +123,7 @@
   "keywords": [
     "XOR", "グレイコード"
   ],
-  "articleBody": "Atcoder Regular Contest 138 (大和証券プログラミングコンテスト 2022 Spring) - ARC 138 D - Differ by K bits の解法です． 公式解説 を読んで，きれいに解けるのにびっくりしてしまいました． ここに書くのはもっと泥臭いです．\n問題概要 整数 $N$, $K$ が与えられる． $0, 1, \\ldots, 2^N - 1$ の順列 $P_0, P_1, \\ldots, P_{2^N - 1}$ で， 隣接項が 2進表記でちょうど$K$桁だけ異なるものが存在するかどうか判定し， 存在する場合には1つ構成せよ．\n制約: $1 \\leq K \\leq N \\leq 18$\n問題へのリンク 解法 $N = 1$ の場合には，$K = 1$ であり，$P_i = i$ という解がある． 以下，$N \\geq 2$ とする．\n$K = N$ の場合は，あきらかに解はない． また，$K$ が偶数の場合には，ビットカウントが奇数になる数が作れないので， 解はない． $K まず，$n = K + 1$ とする． グレイコード を1つおきに反転すれば良い．具体的には， $Q_i := i \\oplus \\textrm{sftR}(i)$ とすると，$(Q_i)_i$ は順列になり，隣接項は2進表記で1桁だけ異なる． ただし，$\\oplus$ は XOR で，sftR は右ビットシフト． したがって，\n$$ P_i := \\begin{cases} Q_i \u0026 \\text{ $i$ が偶数の時}\\\\ \\textrm{flip}(Q_i) \u0026 \\text{ $i$ が奇数の時} \\end{cases} $$\nが解となる．ただし，flip は，末尾nビットのビット反転．\nあとは，$n$ を1つずつ増やしていく．\n 順列の前半 ($i 後半の先頭 ($i = 2^n$) は， 前半の最後の数の $K-1$ ビットを反転させた上で， 最上位ビットを立てる． 後半の残りは，前半の対応する場所と同じビットを反転する．  具体的には，$(Q_i)_i$ を $n$ に対する解であるとして， $n + 1$ に対する解 $(P_i)_i$ は次のようになる．\n$$ P_i := \\begin{cases} Q_i \u0026 (i 2^n) \\end{cases} $$\n実装  ll N, K; cin  N  K;  if (N == 1) { cout  \"Yes\\n0 1\\n\"; return 0; }  if (K == N or K % 2 == 0) { cout  \"No\\n\"; return 0; }  vectorll ans(1LL  N);  ll n = K + 1;  ll mask = (1LL  n) - 1;  REP(i, 1LL  n) {  ll x = i ^ (i  1);  ans[i] = i % 2 == 0 ? x : (x ^ mask);  }  for (; n  N; n++) {  ll j0 = 1LL  n;  ans[j0] = ans[j0 - 1] ^ ((1LL  (K - 1)) - 1) ^ j0;  REP(i, j0 - 1) ans[j0 + i + 1] = ans[j0 + i] ^ ans[i] ^ ans[i + 1];  }  cout  \"Yes\\n\";  for (ll a : ans) cout  a  \" \";  cout  endl; ACコード ",
+  "articleBody": "Atcoder Regular Contest 138 (大和証券プログラミングコンテスト 2022 Spring) - ARC 138 D - Differ by K bits の解法です． 公式解説 を読んで，きれいに解けるのにびっくりしてしまいました． ここに書くのはもっと泥臭いです．\n問題概要 整数 $N$, $K$ が与えられる． $0, 1, \\ldots, 2^N - 1$ の順列 $P_0, P_1, \\ldots, P_{2^N - 1}$ で， 隣接項が 2進表記でちょうど$K$桁だけ異なるものが存在するかどうか判定し， 存在する場合には1つ構成せよ．\n制約: $1 \\leq K \\leq N \\leq 18$\n問題へのリンク 解法 $N = 1$ の場合には，$K = 1$ であり，$P_i = i$ という解がある． 以下，$N \\geq 2$ とする．\n$K = N$ の場合は，あきらかに解はない． また，$K$ が偶数の場合には，ビットカウントが奇数になる数が作れないので， 解はない． $K \u003c N$ かつ $K$ が奇数の場合には， $n = K + 1, K + 2, \\ldots, N$ の順に解を構成することができる．\nまず，$n = K + 1$ とする． グレイコード を1つおきに反転すれば良い．具体的には， $Q_i := i \\oplus \\textrm{sftR}(i)$ とすると，$(Q_i)_i$ は順列になり，隣接項は2進表記で1桁だけ異なる． ただし，$\\oplus$ は XOR で，sftR は右ビットシフト． したがって，\n$$ P_i := \\begin{cases} Q_i \u0026 \\text{ $i$ が偶数の時}\\\\ \\textrm{flip}(Q_i) \u0026 \\text{ $i$ が奇数の時} \\end{cases} $$\nが解となる．ただし，flip は，末尾nビットのビット反転．\nあとは，$n$ を1つずつ増やしていく．\n順列の前半 ($i \u003c 2^n$) は，1つ前の数列をそのまま用いる． 後半の先頭 ($i = 2^n$) は， 前半の最後の数の $K-1$ ビットを反転させた上で， 最上位ビットを立てる． 後半の残りは，前半の対応する場所と同じビットを反転する． 具体的には，$(Q_i)_i$ を $n$ に対する解であるとして， $n + 1$ に対する解 $(P_i)_i$ は次のようになる．\n$$ P_i := \\begin{cases} Q_i \u0026 (i \u003c 2^n) \\\\ Q_{2^n - 1} \\oplus (2^{K - 1} - 1) \\oplus 2^n \u0026 (i = 2^n) \\\\ Q_{i - 1} \\oplus (Q_{i - 2^n - 1} \\oplus Q_{i - 2^n}) \u0026 (i \u003e 2^n) \\end{cases} $$\n実装 ll N, K; cin \u003e\u003e N \u003e\u003e K; if (N == 1) { cout \u003c\u003c \"Yes\\n0 1\\n\"; return 0; } if (K == N or K % 2 == 0) { cout \u003c\u003c \"No\\n\"; return 0; } vector\u003cll\u003e ans(1LL \u003c\u003c N); ll n = K + 1; ll mask = (1LL \u003c\u003c n) - 1; REP(i, 1LL \u003c\u003c n) { ll x = i ^ (i \u003e\u003e 1); ans[i] = i % 2 == 0 ? x : (x ^ mask); } for (; n \u003c N; n++) { ll j0 = 1LL \u003c\u003c n; ans[j0] = ans[j0 - 1] ^ ((1LL \u003c\u003c (K - 1)) - 1) ^ j0; REP(i, j0 - 1) ans[j0 + i + 1] = ans[j0 + i] ^ ans[i] ^ ans[i + 1]; } cout \u003c\u003c \"Yes\\n\"; for (ll a : ans) cout \u003c\u003c a \u003c\u003c \" \"; cout \u003c\u003c endl; ACコード ",
   "wordCount" : "350",
   "inLanguage": "en",
   "datePublished": "2022-04-14T08:22:15+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Differ by K bits - Atcoder Regular Contest 138 D
     </h1>
-    <div class="post-meta">2022-04-14&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-04-14&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>Atcoder Regular Contest 138
@@ -308,12 +306,12 @@ $$</p>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>RBS - Educational Codeforces Round 115 F</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Small Multiple - Atcoder Beginner Contest 077 D</span>
   </a>
@@ -343,36 +341,28 @@ $$</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -426,12 +416,12 @@ $$</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

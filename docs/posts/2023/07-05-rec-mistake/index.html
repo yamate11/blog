@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>誤りの記録 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="デバッグに失敗した，ないし，長時間かかった間違いの記録
 ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
 無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
@@ -16,10 +16,10 @@ ABC279F BOX 2023/07/05 あさかつ
 if (rx == -1 and ry == -1) { 誤:
 if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 誤読．
- 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ">
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -27,8 +27,43 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -65,11 +100,11 @@ ABC279F BOX 2023/07/05 あさかつ
 if (rx == -1 and ry == -1) { 誤:
 if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 誤読．
- 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ" />
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-12-24T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2023-12-24T00:00:00&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-12-24T00:00:00+09:00" />
+<meta property="article:modified_time" content="2023-12-24T00:00:00+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="誤りの記録"/>
@@ -82,7 +117,7 @@ ABC279F BOX 2023/07/05 あさかつ
 if (rx == -1 and ry == -1) { 誤:
 if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 誤読．
- 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ"/>
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ"/>
 
 
 <script type="application/ld+json">
@@ -111,11 +146,11 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   "@type": "BlogPosting",
   "headline": "誤りの記録",
   "name": "誤りの記録",
-  "description": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ",
+  "description": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ",
   "keywords": [
     
   ],
-  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する  ABC222E Red and Blue Tree 2023/08/02 あさかつ\n宣言を間違えた．\n正:\nvector A(M, Fp(0)); 誤:\nvectorll A(M, Fp(0)); ABC318C Blue Spring  「周遊セット」を買う枚数 $x$ を全探索する問題． ちゃんと考えると，買う枚数の候補は $0$ 枚以上 $\\displaystyle\\left\\lceil \\frac{N}{D} \\right\\rceil$ 枚以下，とわかる． コンテスト中で焦っていたので，面倒だから $0$ 枚以上 $N$ 枚以下で いいや，と考えた．($N$は十分小さいのでこれでも間に合う) ところが，それを REP(x, 0, N) とコーディングしてしまった． もちろん，REP(x, 0, N + 1) でなければならない．  ARC167B Product of Divisors A が整数であって，$ k \\leq A / 2$ を満たす整数 k の最大値を求めよ， という形になった．当然，A の偶奇で場合分けが必要なのだが， A が偶数と思い込んでしまった．\nABC237E Maximize Rating DP表を埋めるとき，本来は，あり得ないところ (スタート地点から遷移してこないところ) は，マークしておいて計算しないようにすべき． それをサボって，適当な計算をしてしまっていた．\nABC334F Christmas Present 2 遅延セグメント木で，query の演算は double の最小値で， 作用の演算として，区間加算と1点代入をやりたかった． 遅延セグメント木の OP としては加算にしておいて， p を代入したいところでは，query で値 v を取ってきて -v + p を加算すればよい， と思ってコードを書いた．\n最小値演算の単位元は 1e18 とかしておいた． ところが，query でとってくる値がその 1e18 付近の値 (もっと大きいこともあった) になっていて，ぐちゃぐちゃになった．\n対処として，格納する値は 1e15 くらいにして通すことはできたが，あまり良くない． 加算と代入の両方ができるように OP を定義すべきであった．相手が最小値だから， 両方無理なく定義できる．\nなお，問題としては，実はセグメント木は不要だった．\n",
+  "articleBody": "デバッグに失敗した，ないし，長時間かかった間違いの記録\nABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ\n無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．\nABC279F BOX 2023/07/05 あさかつ\nタイプミス\n正:\nif (rx == -1 and ry == -1) { 誤:\nif (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト\n誤読．\n正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ\n宣言を間違えた．\n正:\nvector A(M, Fp(0)); 誤:\nvector\u003cll\u003e A(M, Fp(0)); ABC318C Blue Spring 「周遊セット」を買う枚数 $x$ を全探索する問題． ちゃんと考えると，買う枚数の候補は $0$ 枚以上 $\\displaystyle\\left\\lceil \\frac{N}{D} \\right\\rceil$ 枚以下，とわかる． コンテスト中で焦っていたので，面倒だから $0$ 枚以上 $N$ 枚以下で いいや，と考えた．($N$は十分小さいのでこれでも間に合う) ところが，それを REP(x, 0, N) とコーディングしてしまった． もちろん，REP(x, 0, N + 1) でなければならない． ARC167B Product of Divisors A が整数であって，$ k \\leq A / 2$ を満たす整数 k の最大値を求めよ， という形になった．当然，A の偶奇で場合分けが必要なのだが， A が偶数と思い込んでしまった．\nABC237E Maximize Rating DP表を埋めるとき，本来は，あり得ないところ (スタート地点から遷移してこないところ) は，マークしておいて計算しないようにすべき． それをサボって，適当な計算をしてしまっていた．\nABC334F Christmas Present 2 遅延セグメント木で，query の演算は double の最小値で， 作用の演算として，区間加算と1点代入をやりたかった． 遅延セグメント木の OP としては加算にしておいて， p を代入したいところでは，query で値 v を取ってきて -v + p を加算すればよい， と思ってコードを書いた．\n最小値演算の単位元は 1e18 とかしておいた． ところが，query でとってくる値がその 1e18 付近の値 (もっと大きいこともあった) になっていて，ぐちゃぐちゃになった．\n対処として，格納する値は 1e15 くらいにして通すことはできたが，あまり良くない． 加算と代入の両方ができるように OP を定義すべきであった．相手が最小値だから， 両方無理なく定義できる．\nなお，問題としては，実はセグメント木は不要だった．\n",
   "wordCount" : "175",
   "inLanguage": "en",
   "datePublished": "2023-12-24T00:00:00+09:00",
@@ -151,56 +186,19 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -214,7 +212,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -243,7 +241,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
     <h1 class="post-title">
       誤りの記録
     </h1>
-    <div class="post-meta">2023-12-24&nbsp;·&nbsp;2023-07-05T09:03:15+09:00 (初版)&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-12-24&amp;nbsp;·&amp;nbsp;2023-07-05T09:03:15&#43;09:00 (初版)&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>デバッグに失敗した，ないし，長時間かかった間違いの記録</p>
@@ -315,12 +313,12 @@ p を代入したいところでは，query で値 v を取ってきて -v + p �
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Undo付きUnionFind</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ローリングハッシュライブラリ</span>
   </a>
@@ -350,36 +348,28 @@ p を代入したいところでは，query で値 v を取ってきて -v + p �
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -433,12 +423,12 @@ p を代入したいところでは，query で値 v を取ってきて -v + p �
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

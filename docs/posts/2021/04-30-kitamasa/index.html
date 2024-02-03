@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>きたまさ法 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
 問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n &#43; k} = d_{0} a_{n} &#43; \cdots &#43; d_{ k - 1 } a_{n &#43; k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
 行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\ 1 &amp; &amp; \Large{0} &amp; 0 \\ &amp; \ddots &amp; &amp; 0\\ \Large{0} &amp; &amp; 1 &amp; 0 \\ \end{bmatrix} $$">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -20,8 +20,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -54,8 +89,8 @@
 行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\ 1 &amp; &amp; \Large{0} &amp; 0 \\ &amp; \ddots &amp; &amp; 0\\ \Large{0} &amp; &amp; 1 &amp; 0 \\ \end{bmatrix} $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-04-30T00:00:00&#43;00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-04-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-30T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="きたまさ法"/>
@@ -94,7 +129,7 @@
   "keywords": [
     
   ],
-  "articleBody": "きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．\n問題設定 整数 $ d_0 , \\ldots, d_{ k - 1 }$ と $a_0, \\ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \\cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \\log n )$ で求める．\n行列 $$ A = \\begin{bmatrix} d_{ k - 1 } \u0026\\cdots \u0026 \\cdots \u0026 d_{ 0 } \\\\ 1 \u0026 \u0026 \\Large{0} \u0026 0 \\\\ \u0026 \\ddots \u0026 \u0026 0\\\\ \\Large{0} \u0026 \u0026 1 \u0026 0 \\\\ \\end{bmatrix} $$\nとすれば，\n$$ \\begin{bmatrix} a_n \\\\ \\vdots \\\\ a_{ n - k + 1} \\end{bmatrix} = A^{ n - k + 1 } \\begin{bmatrix} a_{ k - 1 } \\\\ \\vdots \\\\ a_{ 0 } \\end{bmatrix} $$\nなので，$A^n$ が計算できれば良い．あるいは，$A^n$ の最上行だけでも良い． 計算量が $O( k^2 \\log n)$ で押さえられて欲しいが， 普通の行列累乗だと$O( k^3 \\log n)$ になる．\n計算 $\\newcommand{\\bsww}{\\boldsymbol{w}}$ $\\newcommand{\\bsx}{\\boldsymbol{x}}$ $\\newcommand{\\bsy}{\\boldsymbol{y}}$ $\\newcommand{\\bsdd}{\\boldsymbol{d}}$ $\\bsy_i$ たちを行ベクトルとする．$\\bsdd = [d_{ k - 1 }, \\ldots, d_0]$ とする． また，$\\text{sft}([z_0, \\ldots, z_{ k - 1 }]) = [z_1, \\ldots, z_{ k - 1 }, 0]$ とする． 計算することによって以下がわかる:\n$$ A \\left[ \\begin{array}{c} \\bsy_1 \\\\ \\bsy_2 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] = \\left[ \\begin{array}{c} * \\\\ \\bsy_1 \\\\ \\vdots \\\\ \\bsy_{ k - 1 } \\end{array}\\right] ,\\quad \\left[\\begin{array}{c} \\bsy_1 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] A = \\left[\\begin{array}{c} y_{11}\\bsdd + \\text{sft}( \\bsy_{1} ) \\\\ \\vdots \\\\ y_{k1}\\bsdd + \\text{sft}( \\bsy_{k} ) \\\\ \\end{array}\\right] \\tag{1}$$\nしたがって，$ A^n $ の最下行の行ベクトルを $\\bsx(n)$ と書くと，以下が成り立つ:\n$$ A^n = \\left[\\begin{array}{c} \\bsx( n + k - 1) \\\\ \\vdots \\\\ \\bsx( n ) \\\\ \\end{array}\\right] \\tag{2} $$\n(1)の右の式より， $\\bsx(n)$ の第1成分を $x$ とすると， $$ \\bsx (n + 1) = x \\bsdd + \\text{sft}( \\bsx(n) ) \\tag{3}$$ であることが分かる． また，$A^n$ の列ベクトルを $\\bsww_1^T, \\ldots, \\bsww_k^T$ とし，\n$$ \\left[\\begin{array}{c} \\bsx(2n + k - 1) \\\\ \\vdots \\\\ \\bsx(2n) \\\\ \\end{array}\\right] = A^{2n} = (A^{n})^{2} = \\left[\\begin{array}{c} \\bsx(n + k - 1) \\\\ \\vdots \\\\ \\bsx(n) \\\\ \\end{array}\\right] \\left[\\begin{array}{c} ~ \\\\ \\bsww_1^T \u0026 \\cdots \u0026 \\bsww_k^T \\\\ ~ \\\\ \\end{array}\\right] $$\nと書いて，最下行を比較すると，\n$$ \\bsx(2n) = [ \\bsx(n)\\cdot \\bsww_1, \\ldots, \\bsx(n)\\cdot \\bsww_k ] \\tag{4}$$\nである．\n以上より，次の手順で $a_n$ を計算することができる．\n $a_n = \\bsx(n - k + 1 + k - 1) \\cdot [a_{ k - 1 }, \\cdots, a_{ 0 }]$ なので，$\\bsx(n)$ が求められれば良い． $n$ を，「$+1$」 と 「$\\times 2$」 で書く．たとえば，$n = 18$ なら，$n = ((1 \\times 2 \\times 2 \\times 2) + 1) \\times 2$． この内側から順に $\\bsx(n)$ を求めていく． $+1$ のときには，(3) を適用する．この計算量は，$O(k)$ $\\times 2$ のときには，まず (3) を $k - 1$ 回適用して，$\\bsx(n), \\ldots, \\bsx(n + k - 1)$ を求める． すると(2) より $A^{n}$ が決まるので，(4) の右辺が計算できる．この計算量は，$O(k^2)$  ",
+  "articleBody": "きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．\n問題設定 整数 $ d_0 , \\ldots, d_{ k - 1 }$ と $a_0, \\ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \\cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \\log n )$ で求める．\n行列 $$ A = \\begin{bmatrix} d_{ k - 1 } \u0026\\cdots \u0026 \\cdots \u0026 d_{ 0 } \\\\ 1 \u0026 \u0026 \\Large{0} \u0026 0 \\\\ \u0026 \\ddots \u0026 \u0026 0\\\\ \\Large{0} \u0026 \u0026 1 \u0026 0 \\\\ \\end{bmatrix} $$\nとすれば，\n$$ \\begin{bmatrix} a_n \\\\ \\vdots \\\\ a_{ n - k + 1} \\end{bmatrix} = A^{ n - k + 1 } \\begin{bmatrix} a_{ k - 1 } \\\\ \\vdots \\\\ a_{ 0 } \\end{bmatrix} $$\nなので，$A^n$ が計算できれば良い．あるいは，$A^n$ の最上行だけでも良い． 計算量が $O( k^2 \\log n)$ で押さえられて欲しいが， 普通の行列累乗だと$O( k^3 \\log n)$ になる．\n計算 $\\newcommand{\\bsww}{\\boldsymbol{w}}$ $\\newcommand{\\bsx}{\\boldsymbol{x}}$ $\\newcommand{\\bsy}{\\boldsymbol{y}}$ $\\newcommand{\\bsdd}{\\boldsymbol{d}}$ $\\bsy_i$ たちを行ベクトルとする．$\\bsdd = [d_{ k - 1 }, \\ldots, d_0]$ とする． また，$\\text{sft}([z_0, \\ldots, z_{ k - 1 }]) = [z_1, \\ldots, z_{ k - 1 }, 0]$ とする． 計算することによって以下がわかる:\n$$ A \\left[ \\begin{array}{c} \\bsy_1 \\\\ \\bsy_2 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] = \\left[ \\begin{array}{c} * \\\\ \\bsy_1 \\\\ \\vdots \\\\ \\bsy_{ k - 1 } \\end{array}\\right] ,\\quad \\left[\\begin{array}{c} \\bsy_1 \\\\ \\vdots \\\\ \\bsy_k \\end{array}\\right] A = \\left[\\begin{array}{c} y_{11}\\bsdd + \\text{sft}( \\bsy_{1} ) \\\\ \\vdots \\\\ y_{k1}\\bsdd + \\text{sft}( \\bsy_{k} ) \\\\ \\end{array}\\right] \\tag{1}$$\nしたがって，$ A^n $ の最下行の行ベクトルを $\\bsx(n)$ と書くと，以下が成り立つ:\n$$ A^n = \\left[\\begin{array}{c} \\bsx( n + k - 1) \\\\ \\vdots \\\\ \\bsx( n ) \\\\ \\end{array}\\right] \\tag{2} $$\n(1)の右の式より， $\\bsx(n)$ の第1成分を $x$ とすると， $$ \\bsx (n + 1) = x \\bsdd + \\text{sft}( \\bsx(n) ) \\tag{3}$$ であることが分かる． また，$A^n$ の列ベクトルを $\\bsww_1^T, \\ldots, \\bsww_k^T$ とし，\n$$ \\left[\\begin{array}{c} \\bsx(2n + k - 1) \\\\ \\vdots \\\\ \\bsx(2n) \\\\ \\end{array}\\right] = A^{2n} = (A^{n})^{2} = \\left[\\begin{array}{c} \\bsx(n + k - 1) \\\\ \\vdots \\\\ \\bsx(n) \\\\ \\end{array}\\right] \\left[\\begin{array}{c} ~ \\\\ \\bsww_1^T \u0026 \\cdots \u0026 \\bsww_k^T \\\\ ~ \\\\ \\end{array}\\right] $$\nと書いて，最下行を比較すると，\n$$ \\bsx(2n) = [ \\bsx(n)\\cdot \\bsww_1, \\ldots, \\bsx(n)\\cdot \\bsww_k ] \\tag{4}$$\nである．\n以上より，次の手順で $a_n$ を計算することができる．\n$a_n = \\bsx(n - k + 1 + k - 1) \\cdot [a_{ k - 1 }, \\cdots, a_{ 0 }]$ なので，$\\bsx(n)$ が求められれば良い． $n$ を，「$+1$」 と 「$\\times 2$」 で書く．たとえば，$n = 18$ なら，$n = ((1 \\times 2 \\times 2 \\times 2) + 1) \\times 2$． この内側から順に $\\bsx(n)$ を求めていく． $+1$ のときには，(3) を適用する．この計算量は，$O(k)$ $\\times 2$ のときには，まず (3) を $k - 1$ 回適用して，$\\bsx(n), \\ldots, \\bsx(n + k - 1)$ を求める． すると(2) より $A^{n}$ が決まるので，(4) の右辺が計算できる．この計算量は，$O(k^2)$ ",
   "wordCount" : "409",
   "inLanguage": "en",
   "datePublished": "2021-04-30T00:00:00Z",
@@ -130,56 +165,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -193,7 +191,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -222,7 +220,7 @@
     <h1 class="post-title">
       きたまさ法
     </h1>
-    <div class="post-meta">2021-04-30&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-04-30&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>きたまさ法に関する記事です．
@@ -326,12 +324,12 @@ $$ \bsx (n + 1) = x \bsdd + \text{sft}( \bsx(n) ) \tag{3}$$ であることが�
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>policy-based data structure の tree</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>binom(n, r) を小さい素数pに対して mod p で求める</span>
   </a>
@@ -361,36 +359,28 @@ $$ \bsx (n + 1) = x \bsdd + \text{sft}( \bsx(n) ) \tag{3}$$ であることが�
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -444,12 +434,12 @@ $$ \bsx (n + 1) = x \bsdd + \text{sft}( \bsx(n) ) \tag{3}$$ であることが�
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

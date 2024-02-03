@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>boost の多倍長計算 | yamate11のブログ</title>
-<meta name="keywords" content="多倍長" />
+<meta name="keywords" content="多倍長">
 <meta name="description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
 ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
-#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時#include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
 例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
-template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b &gt; 0) {  if (b &amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b &gt;&gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin &gt;&gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1);  cpp_int th = power(cpp_int(100), s.">
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s.">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -22,8 +22,43 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -53,21 +88,21 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
 <meta property="og:title" content="boost の多倍長計算" />
 <meta property="og:description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
 ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
-#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時#include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
 例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
-template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b &gt; 0) {  if (b &amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b &gt;&gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin &gt;&gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1);  cpp_int th = power(cpp_int(100), s." />
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-11-05T16:37:09&#43;09:00" />
-<meta property="article:modified_time" content="2023-11-05T16:37:09&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-11-05T16:37:09+09:00" />
+<meta property="article:modified_time" content="2023-11-05T16:37:09+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="boost の多倍長計算"/>
 <meta name="twitter:description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
 ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
-#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時#include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
 例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
-template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b &gt; 0) {  if (b &amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b &gt;&gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin &gt;&gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1);  cpp_int th = power(cpp_int(100), s."/>
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s."/>
 
 
 <script type="application/ld+json">
@@ -96,12 +131,12 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
   "@type": "BlogPosting",
   "headline": "boost の多倍長計算",
   "name": "boost の多倍長計算",
-  "description": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include \u0026lt;boost/multiprecision/cpp_int.hpp\u0026gt; // 整数を使う時#include \u0026lt;boost/multiprecision/cpp_bin_float.hpp\u0026gt; // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplate\u0026lt;typename T\u0026gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b \u0026gt; 0) {  if (b \u0026amp; 1LL) rv *= twoPow;  twoPow *= twoPow;  b \u0026gt;\u0026gt;= 1;  }  return rv; }  cpp_int solve() {  string s; cin \u0026gt;\u0026gt; s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo + 1) * (lo + 1);  cpp_int th = power(cpp_int(100), s.",
+  "description": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include \u0026lt;boost/multiprecision/cpp_int.hpp\u0026gt; // 整数を使う時 #include \u0026lt;boost/multiprecision/cpp_bin_float.hpp\u0026gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplate\u0026lt;typename T\u0026gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b \u0026gt; 0) { if (b \u0026amp; 1LL) rv *= twoPow; twoPow *= twoPow; b \u0026gt;\u0026gt;= 1; } return rv; } cpp_int solve() { string s; cin \u0026gt;\u0026gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo + 1) * (lo + 1); cpp_int th = power(cpp_int(100), s.",
   "keywords": [
     "多倍長"
   ],
-  "articleBody": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include  // 整数を使う時#include  // 浮動小数点数を使う時using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplatetypename T T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while (b  0) {  if (b \u0026 1LL) rv *= twoPow;  twoPow *= twoPow;  b = 1;  }  return rv; }  cpp_int solve() {  string s; cin  s;  cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換  cpp_int lo2 = lo * lo;  cpp_int hi2 = (lo + 1) * (lo + 1);  cpp_int th = power(cpp_int(100), s.size());  while (true) {  cpp_int p = lo2 / th;  cpp_int q1 = th * p;  if (lo2  q1 \u0026\u0026 q1  hi2) return p;  cpp_int q2 = th * (p+1);  if (lo2  q2 \u0026\u0026 q2  hi2) return p+1;  th /= 100;  } }  int main(int argc, char *argv[]) {  ios_base::sync_with_stdio(false);  cin.tie(nullptr);  cout  solve()  endl;  return 0; } 浮動小数点数 cpp_bin_floatなんちゃら，という型が使えます．\n cpp_bin_float_quad … 4倍精度浮動小数点数 (仮数113ビット，指数15ビット) cpp_bin_float_50 … 精度50桁 (十進で)．指数部は整数 (だいたい INT_MIN から INT_MAX まで．正確には少し狭い．) cpp_bin_float_100 … 精度100桁 (十進で)．指数部は上と同じ  もっと必要な場合 (どんな場合だろうか?)，自分で定義できます．精度200桁で指数部に long long を使いたい場合:\nusing mydouble = numbercpp_bin_float200, digit_base_10, void, long long; mydouble x = 10; cout  setprecision(205); for (ll i = 0; i  32; i++) {  x = x * x;  cout  x  endl; } 例 こんなんでいいのかどうかわかりませんが，パナソニックプログラミングコンテスト2020 の C - Sqrt Inequality は，以下で通ります．\n#include #include using namespace std; using namespace boost::multiprecision; using mydouble = cpp_bin_float_100;  int main(int argc, char *argv[]) {  mydouble err(\"1e-80\");  mydouble a, b, c; cin  a  b  c;  cout  (sqrt(a) + sqrt(b) + err  sqrt(c) ? \"Yes\" : \"No\")  endl;  return 0; } ",
-  "wordCount" : "282",
+  "articleBody": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include // 整数を使う時 #include // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplate\u003ctypename T\u003e T power(T a, ll b) { T twoPow = a; T rv = 1; while (b \u003e 0) { if (b \u0026 1LL) rv *= twoPow; twoPow *= twoPow; b \u003e\u003e= 1; } return rv; } cpp_int solve() { string s; cin \u003e\u003e s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo + 1) * (lo + 1); cpp_int th = power(cpp_int(100), s.size()); while (true) { cpp_int p = lo2 / th; cpp_int q1 = th * p; if (lo2 \u003c= q1 \u0026\u0026 q1 \u003c hi2) return p; cpp_int q2 = th * (p+1); if (lo2 \u003c= q2 \u0026\u0026 q2 \u003c hi2) return p+1; th /= 100; } } int main(int argc, char *argv[]) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout \u003c\u003c solve() \u003c\u003c endl; return 0; } 浮動小数点数 cpp_bin_floatなんちゃら，という型が使えます．\ncpp_bin_float_quad … 4倍精度浮動小数点数 (仮数113ビット，指数15ビット) cpp_bin_float_50 … 精度50桁 (十進で)．指数部は整数 (だいたい INT_MIN から INT_MAX まで．正確には少し狭い．) cpp_bin_float_100 … 精度100桁 (十進で)．指数部は上と同じ もっと必要な場合 (どんな場合だろうか?)，自分で定義できます．精度200桁で指数部に long long を使いたい場合:\nusing mydouble = number\u003ccpp_bin_float\u003c200, digit_base_10, void, long long\u003e\u003e; mydouble x = 10; cout \u003c\u003c setprecision(205); for (ll i = 0; i \u003c 32; i++) { x = x * x; cout \u003c\u003c x \u003c\u003c endl; } 例 こんなんでいいのかどうかわかりませんが，パナソニックプログラミングコンテスト2020 の C - Sqrt Inequality は，以下で通ります．\n#include #include using namespace std; using namespace boost::multiprecision; using mydouble = cpp_bin_float_100; int main(int argc, char *argv[]) { mydouble err(\"1e-80\"); mydouble a, b, c; cin \u003e\u003e a \u003e\u003e b \u003e\u003e c; cout \u003c\u003c (sqrt(a) + sqrt(b) + err \u003c sqrt(c) ? \"Yes\" : \"No\") \u003c\u003c endl; return 0; } ",
+  "wordCount" : "286",
   "inLanguage": "en",
   "datePublished": "2023-11-05T16:37:09+09:00",
   "dateModified": "2023-11-05T16:37:09+09:00",
@@ -136,56 +171,19 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -199,7 +197,7 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -228,14 +226,14 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
     <h1 class="post-title">
       boost の多倍長計算
     </h1>
-    <div class="post-meta">2023-11-05&nbsp;·&nbsp;2020-03-16 (初版)&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-11-05&amp;nbsp;·&amp;nbsp;2020-03-16 (初版)&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．</p>
 <h2 id="ヘッダ部分">ヘッダ部分<a hidden class="anchor" aria-hidden="true" href="#ヘッダ部分">#</a></h2>
 <p>先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_int.hpp&gt;           // 整数を使う時</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_bin_float.hpp&gt;     // 浮動小数点数を使う時</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_int.hpp&gt;</span><span style="color:#75715e">           </span><span style="color:#75715e">// 整数を使う時
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_bin_float.hpp&gt;</span><span style="color:#75715e">     </span><span style="color:#75715e">// 浮動小数点数を使う時
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">boost</span><span style="color:#f92672">::</span><span style="color:#111">multiprecision</span><span style="color:#111">;</span>
 </span></span></code></pre></div><h2 id="整数">整数<a hidden class="anchor" aria-hidden="true" href="#整数">#</a></h2>
 <p>多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．</p>
@@ -317,12 +315,12 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Bookmarks</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>二重連結</span>
   </a>
@@ -352,36 +350,28 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -435,12 +425,12 @@ template&lt;typename T&gt; T power(T a, ll b) {  T twoPow = a;  T rv = 1;  while
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>K番目... | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="K番目の要素の二分探索による求め方と，ベクトルのt付近の要素">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="K番目の要素の二分探索による求め方と，ベクトルのt付近の要素" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-01T09:47:15&#43;09:00" />
-<meta property="article:modified_time" content="2023-06-01T09:47:15&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2023-06-01T09:47:15+09:00" />
+<meta property="article:modified_time" content="2023-06-01T09:47:15+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="K番目..."/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "K 番目の要素 (non explicit) explicit ではない集合 $X$ の，小さい方から $K$ 番目の要素を，二分探索で求める． ただし，$1 \\leq K \\leq |X|$ とする．\n$K$ 番目の要素は， 「$X_i \\leq t$ となる $i$ が $K$ 個以上となる最小の $t$」であるから， $\\text{binsearch}(\\lambda t.\\; | \\{i : X_i \\leq t \\} | \\geq K, \\max(X), \\min(X) - 1)$ で求められる．\nauto check = [\u0026](ll t) - bool {  return \"the number of i such that X[i] = t\"; }; ll ans = binsearch_ill(check, \"max of X\", \"min of X\" - 1); 言い換えると， 「$X_i auto check = [\u0026](ll t) - bool {  return \"the number of i such that X[i] ; }; ll ans = binsearch_ill(check, \"min of X\", \"max of X\" + 1); ベクトル v の t 付近の要素 $v$ の要素は整数型とする．\n基本は次のこと:\n $v_i lower_bound(ALL(v), t) - v.begin() である．\n $v_i \\leq t$ については，$v_i t$ や $v_i \\geq t$ については，$|v|$ から引けば良い．\nまた，添字の値については次の通り．\n $v_i $v_i \\leq t$ となる最大の $i$ の値も同様． $v_i  t$ となる最小の $i$ の値は，もちろん， upper_bound(ALL(v)) - v.begin() である． $v_i \\geq t$ となる最小の $i$ の値は，もちろん， lower_bound(ALL(v)) - v.begin() である．  keywords: k-th element, binary search, lower_bound, upper_bound\n",
+  "articleBody": "K 番目の要素 (non explicit) explicit ではない集合 $X$ の，小さい方から $K$ 番目の要素を，二分探索で求める． ただし，$1 \\leq K \\leq |X|$ とする．\n$K$ 番目の要素は， 「$X_i \\leq t$ となる $i$ が $K$ 個以上となる最小の $t$」であるから， $\\text{binsearch}(\\lambda t.\\; | \\{i : X_i \\leq t \\} | \\geq K, \\max(X), \\min(X) - 1)$ で求められる．\nauto check = [\u0026](ll t) -\u003e bool { return \"the number of i such that X[i] \u003e= t\"; }; ll ans = binsearch_i\u003cll\u003e(check, \"max of X\", \"min of X\" - 1); 言い換えると， 「$X_i \u003c t$ となる $i$ が $K$ 個未満となる最大の $t$」でもあるから， $\\text{binsearch}(\\lambda t.\\; | \\{i : X_i \u003c t \\} | \u003c K, \\min(X), \\max(X) + 1)$ でも求められる．\nauto check = [\u0026](ll t) -\u003e bool { return \"the number of i such that X[i] \u003c t\"; }; ll ans = binsearch_i\u003cll\u003e(check, \"min of X\", \"max of X\" + 1); ベクトル v の t 付近の要素 $v$ の要素は整数型とする．\n基本は次のこと:\n$v_i \u003c t$ となる $i$ の個数は， lower_bound(ALL(v), t) - v.begin() である．\n$v_i \\leq t$ については，$v_i \u003c t + 1$ と言い換えれば良いし， $v_i \u003e t$ や $v_i \\geq t$ については，$|v|$ から引けば良い．\nまた，添字の値については次の通り．\n$v_i \u003c t$ となる最大の $i$ の値は，(上の個数 - 1) である． 存在しない場合には当然 -1 になる． $v_i \\leq t$ となる最大の $i$ の値も同様． $v_i \u003e t$ となる最小の $i$ の値は，もちろん， upper_bound(ALL(v)) - v.begin() である． $v_i \\geq t$ となる最小の $i$ の値は，もちろん， lower_bound(ALL(v)) - v.begin() である． keywords: k-th element, binary search, lower_bound, upper_bound\n",
   "wordCount" : "216",
   "inLanguage": "en",
   "datePublished": "2023-06-01T09:47:15+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       K番目...
     </h1>
-    <div class="post-meta">2023-06-01&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2023-06-01&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><h2 id="k-番目の要素-non-explicit">K 番目の要素 (non explicit)<a hidden class="anchor" aria-hidden="true" href="#k-番目の要素-non-explicit">#</a></h2>
@@ -267,12 +265,12 @@ $v_i &gt; t$ や $v_i \geq t$ については，$|v|$ から引けば良い．</
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>約数の個数</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>ネストした vector の順序と性能</span>
   </a>
@@ -302,36 +300,28 @@ $v_i &gt; t$ や $v_i \geq t$ については，$|v|$ から引けば良い．</
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -385,12 +375,12 @@ $v_i &gt; t$ や $v_i \geq t$ については，$|v|$ から引けば良い．</
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

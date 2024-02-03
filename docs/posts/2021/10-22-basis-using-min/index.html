@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>XORに関する基底 | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-10-22T14:03:51&#43;09:00" />
-<meta property="article:modified_time" content="2021-10-22T14:03:51&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2021-10-22T14:03:51+09:00" />
+<meta property="article:modified_time" content="2021-10-22T14:03:51+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="XORに関する基底"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "自然数の集合 $\\mathbb{N}$ を，XORを加算とする， 体 $\\textrm{F}_2 = \\{0,1\\}$ 上のベクトル空間と見たときに， $x_1, .., x_n \\in \\mathbb{N}$ が張る部分空間の基底の求め方に関する記事です． 熨斗袋さんのツイートで紹介されていた方法です:\nxor の掃き出しすごい簡単に出来るんですね\nvector basis;\nfor(int e : a){\nfor(int b : basis)\nchmin(e, e ^ b);\nif(e)\nbasis.push_back(e);\n}\nこれで数列 a の基底が basis に入る\n— 熨斗袋 (@noshi91) November 30, 2019  記法など 自然数の集合 $\\{0, 1, \\ldots…\\}$ を $\\mathbb{N}$ と書く． 自然数のビットごとのXOR演算を $\\oplus$ と書く． $\\mathbb{N}$ を， $\\oplus$ を加算とする，体 $\\textrm{F}_2 = \\{0, 1\\}$ 上の ベクトル空間と見る． $X \\subseteq \\mathbb{N}$ が張る空間を $S(X)$ と書く． 自然数$a, b$ に対して，閉区間，半開区間を $[a, b]$, $[a, b)$ などと書く．\n$x \\in N \\setminus \\{0\\}$ に対して， $2^t \\leq x 命題  $x_1, \\ldots, x_n \\in \\mathbb{N}$ に対し， $y_1, \\ldots, y_n \\in \\mathbb{N}$ を 次で定義する:\n $z_{i, 1} := x_i$ $z_{i,j + 1} := \\min(z_{i,j}, \\;\\; z_{i,j} \\oplus y_j)$ $\\quad (j = 1, \\ldots, i - 1)$ $y_i := z_{i,i}$  $W := \\{i \\in [1, n] \\mid y_i \\neq 0\\}$ とするとき， $Y := \\{y_i \\mid i \\in W\\}$ および $X := \\{x_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\nまた，前者に関しては，$a \\in \\mathbb{N}$ に対して， $c_1, \\ldots, c_n \\in \\{0, 1\\}$ を以下のように定めると， $ a = \\bigoplus_{i = 1}^{n} c_i y_i$ が成り立つ．\n $a_1 := a$ $a_{j + 1} := \\min(a_j,\\; a_j \\oplus y_j)$ ($j = 1, \\ldots, n$) $a_{j + 1} = a_j$ のとき，$c_j = 0$， $a_{j + 1}   証明 $y_i$ は，$x_i$ および $y_1, \\ldots, y_{i-1}$ の一部の和であるから， $x_i$ は，$y_1, \\ldots, y_i$ の一部の和である．すなわち， $\\{y_1, \\ldots, y_n\\}$ は，$\\{x_1, \\ldots, x_n\\}$ を生成する． したがって，$Y$ は$\\{x_1, \\ldots, x_n\\}$ を生成する．\n次に，$i, j \\in W$, $i  j$ として，$t = \\text{MSB}(y_j)$ とすると， $y_i$ の第$t$ビットは 0 である． なぜなら，$z_{i, j}$ の第 $t$ ビットが 0 であっても 1 であっても， 最小値を作ることから，$z_{i, j+1}$ の第 $t$ ビットは 0 になる． この後の $k = j + 1$なる $z_{i, k}$においては，帰納法の仮定により， $y_{k-1}$ の第 $t$ ビットは 0 であるから，$z_{i, k}$ の第 $t$ ビットは 0のまま変化しない．\nこのことから，$\\{y_i \\mid i \\in W\\}$ は線形独立である． これらのいくつかの線形結合が 0 であるとし， その最も若い番号を $j$ とすると， 第 $\\text{MSB}(y_j)$ ビットを比較して，$y_j$ の係数が 0 であることがわかる． 以下同様である．\n従って，$Y$は， $S(\\{x_1, \\ldots, x_n\\})$ の基底となる．\nまた，$y_i = x_i \\oplus c_1 y_1 \\oplus \\cdots \\oplus c_{i-1} y_{i-1}$ ($c_j \\in \\{0, 1\\}$) と書けるから， $x_i = c_1 y_1 \\oplus \\cdots \\oplus c_{i-1} y_{i-1} \\oplus y_i$ である．つまり，$X$ は，基底 $Y$ から「基本変形」を繰り返して得られる集合 であるので，$X$も基底になる．(終)\n",
+  "articleBody": "自然数の集合 $\\mathbb{N}$ を，XORを加算とする， 体 $\\textrm{F}_2 = \\{0,1\\}$ 上のベクトル空間と見たときに， $x_1, .., x_n \\in \\mathbb{N}$ が張る部分空間の基底の求め方に関する記事です． 熨斗袋さんのツイートで紹介されていた方法です:\nxor の掃き出しすごい簡単に出来るんですね\nvector basis;\nfor(int e : a){\nfor(int b : basis)\nchmin(e, e ^ b);\nif(e)\nbasis.push_back(e);\n}\nこれで数列 a の基底が basis に入る\n— 熨斗袋 (@noshi91) November 30, 2019 記法など 自然数の集合 $\\{0, 1, \\ldots…\\}$ を $\\mathbb{N}$ と書く． 自然数のビットごとのXOR演算を $\\oplus$ と書く． $\\mathbb{N}$ を， $\\oplus$ を加算とする，体 $\\textrm{F}_2 = \\{0, 1\\}$ 上の ベクトル空間と見る． $X \\subseteq \\mathbb{N}$ が張る空間を $S(X)$ と書く． 自然数$a, b$ に対して，閉区間，半開区間を $[a, b]$, $[a, b)$ などと書く．\n$x \\in N \\setminus \\{0\\}$ に対して， $2^t \\leq x \u003c 2^{t + 1}$ を満たす $t \\in \\mathbb{N}$ を $\\textrm{MSB}(x)$ と書く． たとえば， $\\textrm{MSB}(1) = 0$, $\\textrm{MSB}(5) = 2$ である．\n命題 $x_1, \\ldots, x_n \\in \\mathbb{N}$ に対し， $y_1, \\ldots, y_n \\in \\mathbb{N}$ を 次で定義する:\n$z_{i, 1} := x_i$ $z_{i,j + 1} := \\min(z_{i,j}, \\;\\; z_{i,j} \\oplus y_j)$ $\\quad (j = 1, \\ldots, i - 1)$ $y_i := z_{i,i}$ $W := \\{i \\in [1, n] \\mid y_i \\neq 0\\}$ とするとき， $Y := \\{y_i \\mid i \\in W\\}$ および $X := \\{x_i \\mid i \\in W\\}$ は， $S(\\{x_1, \\ldots, x_n\\})$ の基底である．\nまた，前者に関しては，$a \\in \\mathbb{N}$ に対して， $c_1, \\ldots, c_n \\in \\{0, 1\\}$ を以下のように定めると， $ a = \\bigoplus_{i = 1}^{n} c_i y_i$ が成り立つ．\n$a_1 := a$ $a_{j + 1} := \\min(a_j,\\; a_j \\oplus y_j)$ ($j = 1, \\ldots, n$) $a_{j + 1} = a_j$ のとき，$c_j = 0$， $a_{j + 1} \u003c a_j$ のとき，$c_j = 1$． 証明 $y_i$ は，$x_i$ および $y_1, \\ldots, y_{i-1}$ の一部の和であるから， $x_i$ は，$y_1, \\ldots, y_i$ の一部の和である．すなわち， $\\{y_1, \\ldots, y_n\\}$ は，$\\{x_1, \\ldots, x_n\\}$ を生成する． したがって，$Y$ は$\\{x_1, \\ldots, x_n\\}$ を生成する．\n次に，$i, j \\in W$, $i \u003e j$ として，$t = \\text{MSB}(y_j)$ とすると， $y_i$ の第$t$ビットは 0 である． なぜなら，$z_{i, j}$ の第 $t$ ビットが 0 であっても 1 であっても， 最小値を作ることから，$z_{i, j+1}$ の第 $t$ ビットは 0 になる． この後の $k \u003e= j + 1$なる $z_{i, k}$においては，帰納法の仮定により， $y_{k-1}$ の第 $t$ ビットは 0 であるから，$z_{i, k}$ の第 $t$ ビットは 0のまま変化しない．\nこのことから，$\\{y_i \\mid i \\in W\\}$ は線形独立である． これらのいくつかの線形結合が 0 であるとし， その最も若い番号を $j$ とすると， 第 $\\text{MSB}(y_j)$ ビットを比較して，$y_j$ の係数が 0 であることがわかる． 以下同様である．\n従って，$Y$は， $S(\\{x_1, \\ldots, x_n\\})$ の基底となる．\nまた，$y_i = x_i \\oplus c_1 y_1 \\oplus \\cdots \\oplus c_{i-1} y_{i-1}$ ($c_j \\in \\{0, 1\\}$) と書けるから， $x_i = c_1 y_1 \\oplus \\cdots \\oplus c_{i-1} y_{i-1} \\oplus y_i$ である．つまり，$X$ は，基底 $Y$ から「基本変形」を繰り返して得られる集合 であるので，$X$も基底になる．(終)\n",
   "wordCount" : "360",
   "inLanguage": "en",
   "datePublished": "2021-10-22T14:03:51+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       XORに関する基底
     </h1>
-    <div class="post-meta">2021-10-22&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2021-10-22&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>自然数の集合 $\mathbb{N}$ を，XORを加算とする，
@@ -293,12 +291,12 @@ $x_i = c_1 y_1 \oplus \cdots \oplus c_{i-1} y_{i-1} \oplus y_i$
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>ABC224 参加記</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>Xor Query -- AtCoder Beginner Contest 223 H</span>
   </a>
@@ -328,36 +326,28 @@ $x_i = c_1 y_1 \oplus \cdots \oplus c_{i-1} y_{i-1} \oplus y_i$
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -411,12 +401,12 @@ $x_i = c_1 y_1 \oplus \cdots \oplus c_{i-1} y_{i-1} \oplus y_i$
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

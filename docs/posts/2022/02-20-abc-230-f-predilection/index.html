@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Predilection - Atcoder Beginner Contest 230 F | yamate11のブログ</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="解説ACです．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/" />
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.min.b535257201eea2fe205c0286311f7bd39206277a6dee7ecedadd2646a4ec9731.css" integrity="sha256-tTUlcgHuov4gXAKGMR9705IGJ3pt7n7O2t0mRqTslzE=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -18,8 +18,43 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.94.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
 <script>
     MathJax = {
       tex: {
@@ -50,8 +85,8 @@
 <meta property="og:description" content="解説ACです．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-20T18:49:32&#43;09:00" />
-<meta property="article:modified_time" content="2022-02-20T18:49:32&#43;09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2022-02-20T18:49:32+09:00" />
+<meta property="article:modified_time" content="2022-02-20T18:49:32+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Predilection - Atcoder Beginner Contest 230 F"/>
@@ -88,7 +123,7 @@
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 230 - ABC 230 F - Predilection の解法です． 解説ACです．\n問題概要 長さ$N$ の数列 $A$ が与えられる．次の操作を好きな回数行う．\n 数列の長さが2以上のとき，隣接する2つの値を，それらの和で置き換える．  0回以上の操作の結果得られる数列の種類数を mod 998244353 で求めよ．\n制約: $N \\leq 2 \\times 10^5$，$-10^9 \\leq A_i \\leq 10^9$\n問題へのリンク 解法 0-indexed で書く．\n$A_0, \\ldots, A_i$ から得られる数列の集合を $S_i$ とする． $S_{i}$ の要素は，$S_{i - 1}$ の要素 $p_0, \\ldots, p_m$ から， いずれかの手段で得られる．\n (A) 末尾に $A_{i}$ を追加して，$p_0, \\ldots, p_m, A_{i}$ とする． (B) 末尾の数に $A_{i}$ を加えて，$p_0, \\ldots, p_{m-1}, p_m + A_{i}$ とする．  このように作成したものが重複する場合を調べる． (A)どうし，(B)どうしは重複しない． (A) 型の $p_0, \\ldots, p_m, A_{i}$ と (B) 型の $q_0, \\ldots, q_{n-1}, q_n + A_{i}$ が一致する条件は， $m = n - 1$, $A_{i} = q_n + A_{i}$，$p_j = q_j$ ($j = 0, \\ldots, n - 1$) である． 逆に，$n  0$ かつ $q_n = 0$ であれば， $Q_1 = q_0, \\ldots, q_{n-1}, 0$ に対して (B) を適用した数列と， $Q_2 = q_0, \\ldots, q_{n-1}$ に対して (A) を適用した数列が一致する． また，$Q_1$ が $S_{i - 1}$ の要素であれば，$Q_2$ も $S_{i - 1}$ の要素である．\nしたがって，\n $S_i$ の要素数を $dp[i]$ $S_i$ の要素のうち，長さが2以上で末尾が0であるものの数を $f(i)$  とすれば，\n $dp[0] = 1$ $dp[i] = 2 \\times dp[i - 1] - f(i - 1)$  となる．$f(i)$ については，$A_k + A_{k + 1} + \\cdots + A_i = 0$， $0 $k_0(i)$ は，累積和を用いて $O(N\\log N)$ で計算できる． 全体の計算量は $O(N\\log N)$ となる．\n実装 ACコード ",
+  "articleBody": "AtCoder Beginner Contest 230 - ABC 230 F - Predilection の解法です． 解説ACです．\n問題概要 長さ$N$ の数列 $A$ が与えられる．次の操作を好きな回数行う．\n数列の長さが2以上のとき，隣接する2つの値を，それらの和で置き換える． 0回以上の操作の結果得られる数列の種類数を mod 998244353 で求めよ．\n制約: $N \\leq 2 \\times 10^5$，$-10^9 \\leq A_i \\leq 10^9$\n問題へのリンク 解法 0-indexed で書く．\n$A_0, \\ldots, A_i$ から得られる数列の集合を $S_i$ とする． $S_{i}$ の要素は，$S_{i - 1}$ の要素 $p_0, \\ldots, p_m$ から， いずれかの手段で得られる．\n(A) 末尾に $A_{i}$ を追加して，$p_0, \\ldots, p_m, A_{i}$ とする． (B) 末尾の数に $A_{i}$ を加えて，$p_0, \\ldots, p_{m-1}, p_m + A_{i}$ とする． このように作成したものが重複する場合を調べる． (A)どうし，(B)どうしは重複しない． (A) 型の $p_0, \\ldots, p_m, A_{i}$ と (B) 型の $q_0, \\ldots, q_{n-1}, q_n + A_{i}$ が一致する条件は， $m = n - 1$, $A_{i} = q_n + A_{i}$，$p_j = q_j$ ($j = 0, \\ldots, n - 1$) である． 逆に，$n \u003e 0$ かつ $q_n = 0$ であれば， $Q_1 = q_0, \\ldots, q_{n-1}, 0$ に対して (B) を適用した数列と， $Q_2 = q_0, \\ldots, q_{n-1}$ に対して (A) を適用した数列が一致する． また，$Q_1$ が $S_{i - 1}$ の要素であれば，$Q_2$ も $S_{i - 1}$ の要素である．\nしたがって，\n$S_i$ の要素数を $dp[i]$ $S_i$ の要素のうち，長さが2以上で末尾が0であるものの数を $f(i)$ とすれば，\n$dp[0] = 1$ $dp[i] = 2 \\times dp[i - 1] - f(i - 1)$ となる．$f(i)$ については，$A_k + A_{k + 1} + \\cdots + A_i = 0$， $0 \u003c k \\leq i$ となる $k$ が存在しなければ，$f(i) = 0$ である． 存在する場合には，そのような $k$ のうち最大のものを $k_0(i)$ として， $f(i) = dp[k_0(i) - 1]$ である．\n$k_0(i)$ は，累積和を用いて $O(N\\log N)$ で計算できる． 全体の計算量は $O(N\\log N)$ となる．\n実装 ACコード ",
   "wordCount" : "211",
   "inLanguage": "en",
   "datePublished": "2022-02-20T18:49:32+09:00",
@@ -124,56 +159,19 @@
     }
 
 </script>
-<noscript>
-    <style type="text/css">
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: #1d1e20;
-                --entry: #2e2e33;
-                --primary: rgba(255, 255, 255, 0.84);
-                --secondary: rgba(255, 255, 255, 0.56);
-                --tertiary: rgba(255, 255, 255, 0.16);
-                --content: rgba(255, 255, 255, 0.74);
-                --hljs-bg: #2e2e33;
-                --code-bg: #37383e;
-                --border: #333;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +185,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +214,7 @@
     <h1 class="post-title">
       Predilection - Atcoder Beginner Contest 230 F
     </h1>
-    <div class="post-meta">2022-02-20&nbsp;·&nbsp;yamate11
+    <div class="post-meta">2022-02-20&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>AtCoder Beginner Contest 230 - ABC 230 F - Predilection の解法です．
@@ -275,12 +273,12 @@ $f(i) = dp[k_0(i) - 1]$ である．</p>
   <footer class="post-footer">
 <nav class="paginav">
   <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">
-    <span class="title">« Prev Page</span>
+    <span class="title">« Prev</span>
     <br>
     <span>Balls in Boxes - Atcoder Beginner Contest 231 G</span>
   </a>
   <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">
-    <span class="title">Next Page »</span>
+    <span class="title">Next »</span>
     <br>
     <span>最大流・最小カット</span>
   </a>
@@ -310,36 +308,28 @@ $f(i) = dp[k_0(i) - 1]$ である．</p>
 
 </article>
     </main>
-    <footer class="footer">
-  <span>
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
-  </span>
-  <br/>
-  <span>
-    <a rel="license"
-       href="http://creativecommons.org/publicdomain/zero/1.0/">
-      <img src="https://licensebuttons.net/p/zero/1.0/80x15.png"
-           alt="CC0" style="display: inline;" />
-    </a>
-    CC0: 法律上可能な限りこのページの著作権および隣接する権利を放棄します．
-  </span>
-  <br/>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
-    <button class="top-link" id="top-link" type="button" accesskey="g">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-            <path d="M12 6H0l6-6z" />
-        </svg>
-    </button>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -393,12 +383,12 @@ $f(i) = dp[k_0(i) - 1]$ である．</p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 
