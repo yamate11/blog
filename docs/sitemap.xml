@@ -2,19 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yamate11.github.io/blog/posts/</loc>
+    <lastmod>2024-02-03T13:30:38+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2024-02-03T13:30:38+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2024/02-03-shakutori/</loc>
+    <lastmod>2024-02-03T13:30:38+09:00</lastmod>
+  </url><url>
     <loc>https://yamate11.github.io/blog/categories/</loc>
     <lastmod>2024-01-01T12:09:02+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/</loc>
     <lastmod>2024-01-01T12:09:02+09:00</lastmod>
   </url><url>
-    <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2024-01-01T12:09:02+09:00</lastmod>
-  </url><url>
     <loc>https://yamate11.github.io/blog/categories/topic/</loc>
-    <lastmod>2024-01-01T12:09:02+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/</loc>
     <lastmod>2024-01-01T12:09:02+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/</loc>

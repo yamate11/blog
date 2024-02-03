@@ -147,7 +147,8 @@ def edit_existing():
 
 def browser(url):
     try:
-        webbrowser.open(url)
+        webbrowser.get('wslview %s').open(url)
+        # webbrowser.open(url)
     except (OSError, MyExc) as e:
         print(str(e))
 
