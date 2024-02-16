@@ -6,8 +6,22 @@
     <description>Recent content in Tags on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Dec 2023 12:21:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Feb 2024 13:52:00 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gcd</title>
+      <link>https://yamate11.github.io/blog/tags/gcd/</link>
+      <pubDate>Wed, 14 Feb 2024 13:52:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/tags/gcd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>全方位木</title>
+      <link>https://yamate11.github.io/blog/tags/%E5%85%A8%E6%96%B9%E4%BD%8D%E6%9C%A8/</link>
+      <pubDate>Wed, 14 Feb 2024 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/tags/%E5%85%A8%E6%96%B9%E4%BD%8D%E6%9C%A8/</guid>
+      <description></description>
+    </item>
     <item>
       <title>セグメント木</title>
       <link>https://yamate11.github.io/blog/tags/%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E6%9C%A8/</link>
@@ -62,13 +76,6 @@
       <link>https://yamate11.github.io/blog/tags/iomanip/</link>
       <pubDate>Sun, 23 Oct 2022 00:50:36 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/tags/iomanip/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>全方位木</title>
-      <link>https://yamate11.github.io/blog/tags/%E5%85%A8%E6%96%B9%E4%BD%8D%E6%9C%A8/</link>
-      <pubDate>Wed, 17 Aug 2022 16:39:04 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/tags/%E5%85%A8%E6%96%B9%E4%BD%8D%E6%9C%A8/</guid>
       <description></description>
     </item>
     <item>

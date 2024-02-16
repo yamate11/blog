@@ -70,7 +70,7 @@ int main(/* int argc, char *argv[] */) {
 ## ジャッジプログラム
 
 デバッグするとなると，やはりジャッジプログラムが必要になると思われる．
-ジャッジプログラムを動作させるスクリプト interun を作ってある．
+ジャッジプログラムを動作させるスクリプト [interun](https://github.com/yamate11/compprog/blob/main/clib/tool/interun) を作ってある．
 この環境で動かすためには，ジャッジプログラムは次のように作成する．
 
 * 問題を標準入力から読み込む．
@@ -140,9 +140,10 @@ $ interrun < din_1.txt
 
 `cans`, `judge`, `a.log` の名前は interun のオプションで変更できる．
 
-## cmpNaive
+## cmpNaive (ランダムテスト)
 
-デバッグ時の cmpNaive では，解答プログラム cans と
+デバッグ時の [cmpNaive](https://github.com/yamate11/compprog/blob/main/clib/tool/cmpNaive) では，
+解答プログラム cans と
 ジャッジプログラム judge は別プロセスとの想定である．
 スレッド対応はしていない．
 
