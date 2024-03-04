@@ -167,10 +167,9 @@
     <p>自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので…
 使用法 値の型を DAT, 更新演算の型を OP とする．
 基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
-auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の設定 st.update(i, x); $i$ 番目の値として $x$ を設定する． 1点しか設定できないので，2引数であることに注意．
-値の取得 DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
-遅延セグメント木 関数 3つの関数を指定する．
-add は加法． $\verb!DAT! \times \verb!...</p>
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
+値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．...</p>
   </div>
   <footer class="entry-footer">2023-12-03&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to セグメント木ライブラリ" href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/"></a>

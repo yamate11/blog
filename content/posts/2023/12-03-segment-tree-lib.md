@@ -37,19 +37,25 @@ AtCoder Library にセグメント木はありますが，
   st.set_data(init_vec);
 ```
 
-#### 値の設定
+#### 値の代入 (1点)
 
-```
-  st.update(i, x);
+```cpp
+  st.set_single(i, x);
 ```
 
 $i$ 番目の値として $x$ を設定する．
-1点しか設定できないので，2引数であることに注意．
 
+#### 値の取得 (1点)
 
-#### 値の取得
-
+```cpp
+  st.get_single(i);
 ```
+
+$i$ 番目の値を取得する．
+
+#### 値の取得 (範囲)
+
+```cpp
   DAT x = st.query(il, ir);
   DAT x = st[i];   // これは，st.query(i, i + 1) と同じ
 ```
@@ -85,18 +91,38 @@ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
   st.set_data(init_vec);
 ```
 
-#### 値の設定
+#### 値の代入 (1点)
 
 ```cpp
-  st.update(il, ir, x);
+  st.set_single(i, x);
 ```
 
-#### 値の取得
+$i$ 番目の値として $x$ を設定する．これは代入であって，OP とは関係無いことに注意．
+
+
+#### 値の更新 (範囲)
+
+```cpp
+  st.update(il, ir, f);
+```
+
+半開区間 [il, ir) の各値 x を，apply(f, x) で更新する．
+
+#### 値の取得 (1点)
+
+```cpp
+  st.get_single(i);
+```
+
+$i$ 番目の値を取得する．
+
+#### 値の取得 (範囲)
 
 ```cpp
   DAT x = st.query(il, ir);
-  DAT x = st[i];   // st.query(i, i + 1) と同じ．
 ```
+
+$il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
 
 ## 設定例
 
@@ -209,7 +235,7 @@ DAT として，long long の対をとり，
 ## セグメント木の vector
 
 引数無しのコンストラクタが用意してあるので，
-正の長さを持つベクトルを宣言することもできる．
+正の長さを持つ vector<SegTree<...>> を宣言することもできる．
 その時に型を指定する必要があるが，
 `make_seg_tree` や `make_seg_tree_lazy` を使って一つインスタンスを
 作った上で `decltype` を利用するのが現実的だと思う:
@@ -226,6 +252,46 @@ DAT として，long long の対をとり，
 ベクトルの要素は同じ型を持たなければならないので，
 異なる加法関数などを用いる場合には，クロージャではうまくいかず，
 関数ポインタを用いる必要があるかもしれない．
+
+## ノードと添字の対応
+
+セグメント木自身を使用する際には不要だが，「セグメント木のような」構造を使用したいときに，
+以下の関数が役に立つ可能性がある．
+
+#### ノード $\to$ 添字の範囲
+
+メソッド range_of_node(i) で，ノード i が表現する半開区間 [lo, hi) を取得できる．
+
+```cpp
+  auto [lo, hi] = st.range_of_node(i);
+```
+
+このメソッドと同等のことを行う関数 segtree_range_of_node(ht, i) も定義されている．
+ht には，セグメント木の高さを指定する．init_vec のサイズを sz とすると，次のようになる:
+
+```cpp
+  unsigned height = countr_zero(bit_ceil((unsigned)sz)));
+  auto [lo, hi] = segtree_range_of_node(height, i);
+```
+
+#### 添字の範囲 $\to$ ノード
+
+メソッド nodes_for_range(lo, hi) で，半開区間 [lo, hi) をカバーするノードを vector<int> で取得できる．
+返り値中では，対応する半開区間が小さい順にノードが並んでいる．
+
+```cpp
+  auto vec = st.nodes_for_range(lo, hi);
+```  
+
+このメソッドと同等のことを行う関数 segtree_nodes_for_range(ht, lo, hi) も定義されている．
+ht には，セグメント木の高さを指定する．init_vec のサイズを sz とすると，次のようになる:
+
+```cpp
+  unsigned height = countr_zero(bit_ceil((unsigned)sz)));
+  auto vec = segtree_nodes_for_range(height, lo, hi);
+```
+
+
 
 ## コードへのリンク
 
