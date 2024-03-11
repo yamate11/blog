@@ -8,7 +8,7 @@
 <title>二分探索ライブラリ | yamate11のブログ</title>
 <meta name="keywords" content="">
 <meta name="description" content="自分用の 二分探索ライブラリ のメモです．
-使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．
+1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．
 signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsearch(auto check, INT yes, INT no) 引数 check &hellip; 判定関数．INT を受け取って bool を返す． yes &hellip; 真になる値 no &hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない
 ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は真． $t &lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は偽． $t &lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\text{yes})$ は真で，$P(\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．">
 <meta name="author" content="yamate11">
@@ -86,7 +86,7 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
 
 <meta property="og:title" content="二分探索ライブラリ" />
 <meta property="og:description" content="自分用の 二分探索ライブラリ のメモです．
-使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．
+1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．
 signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsearch(auto check, INT yes, INT no) 引数 check &hellip; 判定関数．INT を受け取って bool を返す． yes &hellip; 真になる値 no &hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない
 ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は真． $t &lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は偽． $t &lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\text{yes})$ は真で，$P(\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．" />
 <meta property="og:type" content="article" />
@@ -97,7 +97,7 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="二分探索ライブラリ"/>
 <meta name="twitter:description" content="自分用の 二分探索ライブラリ のメモです．
-使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．
+1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．
 signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsearch(auto check, INT yes, INT no) 引数 check &hellip; 判定関数．INT を受け取って bool を返す． yes &hellip; 真になる値 no &hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない
 ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は真． $t &lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は偽． $t &lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\text{yes})$ は真で，$P(\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．"/>
 
@@ -128,12 +128,12 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
   "@type": "BlogPosting",
   "headline": "二分探索ライブラリ",
   "name": "二分探索ライブラリ",
-  "description": "自分用の 二分探索ライブラリ のメモです．\n使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．\nsignature template \u0026lt;typename INT\u0026gt; requires integral\u0026lt;INT\u0026gt; INT binsearch(auto check, INT yes, INT no) 引数 check \u0026hellip; 判定関数．INT を受け取って bool を返す． yes \u0026hellip; 真になる値 no \u0026hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない\nある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は真． $t \u0026lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は偽． $t \u0026lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\\text{yes})$ は真で，$P(\\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．",
+  "description": "自分用の 二分探索ライブラリ のメモです．\n1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．\nsignature template \u0026lt;typename INT\u0026gt; requires integral\u0026lt;INT\u0026gt; INT binsearch(auto check, INT yes, INT no) 引数 check \u0026hellip; 判定関数．INT を受け取って bool を返す． yes \u0026hellip; 真になる値 no \u0026hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない\nある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は真． $t \u0026lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は偽． $t \u0026lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\\text{yes})$ は真で，$P(\\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．",
   "keywords": [
     
   ],
-  "articleBody": "自分用の 二分探索ライブラリ のメモです．\n使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．\nsignature template \u003ctypename INT\u003e requires integral\u003cINT\u003e INT binsearch(auto check, INT yes, INT no) 引数 check … 判定関数．INT を受け取って bool を返す． yes … 真になる値 no … 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない\nある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は真． $t \u003c x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は偽． $t \u003c x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\\text{yes})$ は真で，$P(\\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．\n返却値 binsearch(check, ...) が返す値 x について，\ncheck(x) は true を返す． yes \u003c no のとき，check(x + 1) は，false を返す． yes \u003e no のとき，check(x - 1) は，false を返す． 使用例: auto check = [](ll x) -\u003e bool { return x * x \u003c= 20000; } ll x = binsearch(check, 100LL, 200LL); // x \u003c- 141 // または，binsearch(check, 100, 200); INT の型は yes や no から推論される． 一応，不要なオーバーフローを起こさないよう，(yes + no) / 2 ではなく，no + (yes - no) / 2 と書いている．\n浮動小数点版 以下では，DOUBLE は，float, double, long double などを表す．\nsignature template \u003ctypename DOUBLE\u003e requires floating_point\u003cDOUBLE\u003e DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err); 引数 check … 判定関数．DOUBLE を受け取って bool を返す． yes … 真になる値 no … 偽になる値 err … 絶対誤差 制約 整数版と同じ\n返却値 binsearch(check, ...) が返す値 $x$ は，制約のところで述べた $t$ との絶対誤差が err 未満であるか， または，$t$ との絶対誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で $t$ に最も近い値である．したがって，check(x) が true を返す保証はない．\n実装 $\\lceil\\log_2 (| Y - N | / \\text{err})\\rceil + 1$ 回のループを回す． ここで，$Y$ と $N$ は，yes と no の引数で与える値．\n使用例:\nauto check = [](double x) -\u003e bool { return x * x \u003c= 2; } double x = binsearch(check, 1.0, 2.0, 1e-6); // x \u003c- 1.4142... ",
-  "wordCount" : "269",
+  "articleBody": "自分用の 二分探索ライブラリ のメモです．\n1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．\nsignature template \u003ctypename INT\u003e requires integral\u003cINT\u003e INT binsearch(auto check, INT yes, INT no) 引数 check … 判定関数．INT を受け取って bool を返す． yes … 真になる値 no … 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない\nある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は真． $t \u003c x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \\leq t$ である $x$ について，$P(x)$ は偽． $t \u003c x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\\text{yes})$ は真で，$P(\\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．\n返却値 binsearch(check, ...) が返す値 x について，\ncheck(x) は true を返す． yes \u003c no のとき，check(x + 1) は，false を返す． yes \u003e no のとき，check(x - 1) は，false を返す． 使用例: auto check = [](ll x) -\u003e bool { return x * x \u003c= 20000; } ll x = binsearch(check, 100LL, 200LL); // x \u003c- 141 // または，binsearch(check, 100, 200); INT の型は yes や no から推論される． 実装では，不要なオーバーフローを起こさないよう，(yes + no) / 2 ではなく，no + (yes - no) / 2 と書いている．\n2. 浮動小数点版 以下では，DOUBLE は，float, double, long double などを表す．\nsignature template \u003ctypename DOUBLE\u003e requires floating_point\u003cDOUBLE\u003e DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err, bool abs_only = false); 引数 check … 判定関数．DOUBLE を受け取って bool を返す． yes … 真になる値 no … 偽になる値 err … 誤差 abs_only … false (default) の場合には，相対誤差または絶対誤差が指定の値以下になる． true の場合には絶対誤差のみ． 制約 整数版と同じ\n返却値 binsearch(check, ...) が返す値 $x$ は，制約のところで述べた $t$ との誤差が err 未満であるか， または，$t$ との誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で $t$ に最も近い値である．したがって，check(x) が true を返す保証はない．\n実装 最大で $\\lceil\\log_2 (| Y - N | / \\text{err})\\rceil + 1$ 回のループを回す． ここで，$Y$ と $N$ は，yes と no の引数で与える値． ループ各回で，相対誤差をチェックする．\n使用例:\nauto check = [](double x) -\u003e bool { return x * x \u003c= 2; } double x = binsearch(check, 1.0, 2.0, 1e-6); // x \u003c- 1.4142... ",
+  "wordCount" : "283",
   "inLanguage": "en",
   "datePublished": "2024-02-19T17:44:50+09:00",
   "dateModified": "2024-02-19T17:44:50+09:00",
@@ -228,8 +228,7 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
   </header> 
   <div class="post-content"><p>自分用の <a href="https://github.com/yamate11/compprog/blob/main/clib/binsearch.cc" target="_blank">二分探索ライブラリ</a>
  のメモです．</p>
-<h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
-<h3 id="整数版">整数版<a hidden class="anchor" aria-hidden="true" href="#整数版">#</a></h3>
+<h2 id="1-整数版">1. 整数版<a hidden class="anchor" aria-hidden="true" href="#1-整数版">#</a></h2>
 <p>以下では，INT は，int, long long, unsigned int などを表す．</p>
 <h4 id="signature">signature<a hidden class="anchor" aria-hidden="true" href="#signature">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">template</span> <span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">INT</span><span style="color:#f92672">&gt;</span>
@@ -270,29 +269,32 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">x</span> <span style="color:#f92672">*</span> <span style="color:#111">x</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">20000</span><span style="color:#111">;</span> <span style="color:#111">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">binsearch</span><span style="color:#111">(</span><span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#ae81ff">100LL</span><span style="color:#111">,</span> <span style="color:#ae81ff">200LL</span><span style="color:#111">);</span> <span style="color:#75715e">//  x &lt;- 141
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// または，binsearch&lt;ll&gt;(check, 100, 200);   INT の型は yes や no から推論される．
-</span></span></span></code></pre></div><p>一応，不要なオーバーフローを起こさないよう，<code>(yes + no) / 2</code> ではなく，<code>no + (yes - no) / 2</code> と書いている．</p>
-<h3 id="浮動小数点版">浮動小数点版<a hidden class="anchor" aria-hidden="true" href="#浮動小数点版">#</a></h3>
+</span></span></span></code></pre></div><p>実装では，不要なオーバーフローを起こさないよう，<code>(yes + no) / 2</code> ではなく，<code>no + (yes - no) / 2</code> と書いている．</p>
+<h2 id="2-浮動小数点版">2. 浮動小数点版<a hidden class="anchor" aria-hidden="true" href="#2-浮動小数点版">#</a></h2>
 <p>以下では，DOUBLE は，float, double, long double などを表す．</p>
 <h4 id="signature-1">signature<a hidden class="anchor" aria-hidden="true" href="#signature-1">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">template</span> <span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">DOUBLE</span><span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#00a8c8">requires</span> <span style="color:#111">floating_point</span><span style="color:#f92672">&lt;</span><span style="color:#111">DOUBLE</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">DOUBLE</span> <span style="color:#111">binsearch</span><span style="color:#111">(</span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">yes</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">no</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">err</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">DOUBLE</span> <span style="color:#111">binsearch</span><span style="color:#111">(</span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">yes</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">no</span><span style="color:#111">,</span> <span style="color:#111">DOUBLE</span> <span style="color:#111">err</span><span style="color:#111">,</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">abs_only</span> <span style="color:#f92672">=</span> <span style="color:#111">false</span><span style="color:#111">);</span>
 </span></span></code></pre></div><h4 id="引数-1">引数<a hidden class="anchor" aria-hidden="true" href="#引数-1">#</a></h4>
 <ul>
 <li>check &hellip; 判定関数．DOUBLE を受け取って bool を返す．</li>
 <li>yes &hellip; 真になる値</li>
 <li>no &hellip; 偽になる値</li>
-<li>err &hellip; 絶対誤差</li>
+<li>err &hellip; 誤差</li>
+<li>abs_only &hellip; false (default) の場合には，相対誤差または絶対誤差が指定の値以下になる．
+true の場合には絶対誤差のみ．</li>
 </ul>
 <h4 id="制約-1">制約<a hidden class="anchor" aria-hidden="true" href="#制約-1">#</a></h4>
 <p>整数版と同じ</p>
 <h4 id="返却値-1">返却値<a hidden class="anchor" aria-hidden="true" href="#返却値-1">#</a></h4>
-<p><code>binsearch(check, ...)</code> が返す値 $x$ は，制約のところで述べた $t$ との絶対誤差が err 未満であるか，
-または，$t$ との絶対誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で
+<p><code>binsearch(check, ...)</code> が返す値 $x$ は，制約のところで述べた $t$ との誤差が err 未満であるか，
+または，$t$ との誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で
 $t$ に最も近い値である．したがって，<code>check(x)</code> が true を返す保証はない．</p>
 <h4 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h4>
-<p>$\lceil\log_2 (| Y - N | / \text{err})\rceil + 1$ 回のループを回す．
-ここで，$Y$ と $N$ は，yes と no の引数で与える値．</p>
+<p>最大で $\lceil\log_2 (| Y - N | / \text{err})\rceil + 1$ 回のループを回す．
+ここで，$Y$ と $N$ は，yes と no の引数で与える値．
+ループ各回で，相対誤差をチェックする．</p>
 <p>使用例:</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">check</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#00a8c8">double</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">x</span> <span style="color:#f92672">*</span> <span style="color:#111">x</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#00a8c8">double</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">binsearch</span><span style="color:#111">(</span><span style="color:#111">check</span><span style="color:#111">,</span> <span style="color:#ae81ff">1.0</span><span style="color:#111">,</span> <span style="color:#ae81ff">2.0</span><span style="color:#111">,</span> <span style="color:#ae81ff">1e-6</span><span style="color:#111">);</span> <span style="color:#75715e">// x &lt;- 1.4142...

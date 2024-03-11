@@ -11,9 +11,7 @@ categories: ["topic"]
 
 自分用の [二分探索ライブラリ](https://github.com/yamate11/compprog/blob/main/clib/binsearch.cc) のメモです．
 
-## 使用法
-
-### 整数版
+## 1. 整数版
 
 以下では，INT は，int, long long, unsigned int などを表す．
 
@@ -60,9 +58,9 @@ ll x = binsearch(check, 100LL, 200LL); //  x <- 141
 // または，binsearch<ll>(check, 100, 200);   INT の型は yes や no から推論される．
 ```
 
-一応，不要なオーバーフローを起こさないよう，`(yes + no) / 2` ではなく，`no + (yes - no) / 2` と書いている．
+実装では，不要なオーバーフローを起こさないよう，`(yes + no) / 2` ではなく，`no + (yes - no) / 2` と書いている．
 
-### 浮動小数点版
+## 2. 浮動小数点版
 
 以下では，DOUBLE は，float, double, long double などを表す．
 
@@ -71,7 +69,7 @@ ll x = binsearch(check, 100LL, 200LL); //  x <- 141
 ```cpp
 template <typename DOUBLE>
 requires floating_point<DOUBLE>
-DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err);
+DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err, bool abs_only = false);
 ```
 
 #### 引数
@@ -79,7 +77,9 @@ DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err);
 * check ... 判定関数．DOUBLE を受け取って bool を返す．
 * yes ... 真になる値
 * no ... 偽になる値
-* err ... 絶対誤差
+* err ... 誤差
+* abs_only ... false (default) の場合には，相対誤差または絶対誤差が指定の値以下になる．
+true の場合には絶対誤差のみ．
 
 #### 制約
 
@@ -87,15 +87,15 @@ DOUBLE binsearch(auto check, DOUBLE yes, DOUBLE no, DOUBLE err);
 
 #### 返却値
 
-`binsearch(check, ...)` が返す値 $x$ は，制約のところで述べた $t$ との絶対誤差が err 未満であるか，
-または，$t$ との絶対誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で
+`binsearch(check, ...)` が返す値 $x$ は，制約のところで述べた $t$ との誤差が err 未満であるか，
+または，$t$ との誤差が err 未満であるような DOUBLE で表現可能な値が無い場合には，表現可能な値で
 $t$ に最も近い値である．したがって，`check(x)` が true を返す保証はない．
 
 #### 実装
 
-$\lceil\log_2 (| Y - N | / \text{err})\rceil + 1$ 回のループを回す．
+最大で $\lceil\log_2 (| Y - N | / \text{err})\rceil + 1$ 回のループを回す．
 ここで，$Y$ と $N$ は，yes と no の引数で与える値．
-
+ループ各回で，相対誤差をチェックする．
 
 使用例:
 

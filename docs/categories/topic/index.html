@@ -165,7 +165,7 @@
   </header>
   <div class="entry-content">
     <p>自分用の 二分探索ライブラリ のメモです．
-使用法 整数版 以下では，INT は，int, long long, unsigned int などを表す．
+1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．
 signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsearch(auto check, INT yes, INT no) 引数 check … 判定関数．INT を受け取って bool を返す． yes … 真になる値 no … 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない
 ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は真． $t &lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は偽． $t &lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\text{yes})$ は真で，$P(\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．...</p>
   </div>
