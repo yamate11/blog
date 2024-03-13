@@ -165,7 +165,7 @@
   </header>
   <div class="entry-content">
     <p>自分用の木のライブラリのメモです．
-1. 使用法 </p>
+1. 典型的な使用法 ll N; cin &gt;&gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;](auto rF, ll nd) -&gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr....</p>
   </div>
   <footer class="entry-footer">2024-03-13&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 木ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/"></a>
