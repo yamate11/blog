@@ -6,8 +6,20 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Jun 2023 12:14:05 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2024 13:32:06 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC346-G Alone</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/</link>
+      <pubDate>Sun, 24 Mar 2024 13:32:06 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/</guid>
+      <description>ABC346-G Alone の解法です．典型だったのか．知らなかった&amp;hellip;.
+問題へのリンク ABC346-G Alone 問題概要 $A = (A_1, \dots, A_N)$ が与えられる． $1 \leq L \leq R \leq N$ で，$A_L, A_{L + 1}, \dots, A_R$ の中に1度だけ出現する数がある ような $(L, R)$ の組の数を答えよ．
+制約: $N \leq 2\times 10^5$, $1 \leq A_i \leq N$
+前提知識 辺が座標軸と平行な長方形 $N$ 個の頂点の座標が与えられた時， 被覆する図形の面積は，次の方法で $O(N \log N)$ で求められる．
+適宜座標圧縮する．頂点のx座標の小さい順にソートして平面走査する．ベクトル $S$ を用意する．
+左端頂点 $(x, y_1)$, $(x, y_2)$ が現れたら，$S[y_1], &amp;hellip;, S[y_2 - 1]$ に$1$を加える． 右端頂点 $(x, y_3)$, $(x, y_4)$ が現れたら，$S[y_3], &amp;hellip;, S[y_4 - 1]$ に$-1$を加える． $S[\min], &amp;hellip; S[\max]$ のうち，$0$ でないものの数を $t$ として，$\max - \min + 1 - t$ を答に加える． 愚直だと $\Omega(N^2)$ かかるが，次の lazy segment tree を使うと $O(N \log N)$ になる．</description>
+    </item>
     <item>
       <title>Return to 1 - Atcoder Beginner Contest 306 G</title>
       <link>https://yamate11.github.io/blog/posts/2023/06-18-abc306g/</link>
