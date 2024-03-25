@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>尺取り法のコーディング | yamate11のブログ</title>
+<meta name="keywords" content="">
+<meta name="description" content="前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x&rsquo;$，$y&rsquo; \leq y$ ならば，$P(x&rsquo;, y&rsquo;)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus .">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="尺取り法のコーディング" />
+<meta property="og:description" content="前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x&rsquo;$，$y&rsquo; \leq y$ ならば，$P(x&rsquo;, y&rsquo;)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-03T13:30:38+09:00" />
+<meta property="article:modified_time" content="2024-02-03T13:30:38+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="尺取り法のコーディング"/>
+<meta name="twitter:description" content="前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x&rsquo;$，$y&rsquo; \leq y$ ならば，$P(x&rsquo;, y&rsquo;)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus ."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "尺取り法のコーディング",
+      "item": "https://yamate11.github.io/blog/posts/2024/02-03-shakutori/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "尺取り法のコーディング",
+  "name": "尺取り法のコーディング",
+  "description": "前提 自然数 $N$ に対して，$\\bar{N} := \\{0, 1, \\dots, N - 1\\}$ とする． $x \\leq y$ なる $(x, y) \\in \\bar{N} \\times \\bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．\n$P(x, y)$ かつ $x \\leq x\u0026rsquo;$，$y\u0026rsquo; \\leq y$ ならば，$P(x\u0026rsquo;, y\u0026rsquo;)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\\bigoplus \\{ F(x, y) \\mid P(x, y) \\}$ を求めるのが問題． $\\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．\n考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y + 1)$ を調べる． 成り立たなかったら，次は $P(x + 1, y + 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \\oplus F(x + 1, y) \\oplus \\dots \\oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i \u0026gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i \u0026gt; j となる組に来る． // この場合は，単に j を増やす． j++; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i + 1, j) oplus .",
+  "keywords": [
+    
+  ],
+  "articleBody": "前提 自然数 $N$ に対して，$\\bar{N} := \\{0, 1, \\dots, N - 1\\}$ とする． $x \\leq y$ なる $(x, y) \\in \\bar{N} \\times \\bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．\n$P(x, y)$ かつ $x \\leq x’$，$y’ \\leq y$ ならば，$P(x’, y’)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\\bigoplus \\{ F(x, y) \\mid P(x, y) \\}$ を求めるのが問題． $\\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．\n考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y + 1)$ を調べる． 成り立たなかったら，次は $P(x + 1, y + 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \\oplus F(x + 1, y) \\oplus \\dots \\oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i \u003e j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i \u003e j となる組に来る． // この場合は，単に j を増やす． j++; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i + 1, j) oplus ... oplus F(j, j) の値を計算 ans = oplus(ans, v); // 答を更新 if (j == N) break; // 右が端に到達したらループを抜ける (a, b) = update_ab_yes(a, b, i, j); // a や b を更新．更新された (a, b) は，(i, j + 1) 用のもの j++; // 次は (i, j + 1) の処理 }else { // P(i, j) が成り立たなかったら (a, b) = update_ab_no(a, b, i, j); // a や b を更新．更新された (a, b) は，(i + 1, j) 用のもの i++; // 次は (i + 1, j) の処理 } } cout \u003c\u003c ans \u003c\u003c endl; 問題3 ABC 032 C - 列 $K$ と列 $(S_i)$ が与えられる．$S_i \\times S_{i + 1} \\times \\dots S_{j} \\leq K$ となる $(i, j)$ について，長さ $j - i + 1$ の最大値を求める．\nint main() { ll N, K; cin \u003e\u003e N \u003e\u003e K; vector S(N, 0LL); REP(i, 0, N) cin \u003e\u003e S[i]; // S[i] == 0 なる i がある場合には別扱い if (EXISTS(i, 0, N, S[i] == 0)) { cout \u003c\u003c N \u003c\u003c endl; return 0; } // ここから尺取り法 // P(i, j) は，S[i] * S[i + 1] * ... * S[j - 1] \u003c= K． // F(i, j) は，j - i // oplus は，max ll i = 0, j = 0; ll ans = 0; ll val = 1; // val は，S[i] * S[i + 1] * ... * S[j - 1] を保持する． while (true) { if (i \u003e j) { // この問題では，S[i] \u003e K のときにはこのケースが生じる． val = 1; // 次回の val j++; // 次回の j }else if (val \u003c= K) { // P(i, j) が成り立つとき ans = max(ans, j - i); if (j == N) break; val = val * S[j]; // 次回の val j++; // 次回の j }else { val = val / S[i]; // 次回の val i++; // 次回の i } } cout \u003c\u003c ans \u003c\u003c endl; return 0; } このコードでは，val に S[i] * S[i + 1] * ... * S[j] ではなく S[i] * S[i + 1] * ... * S[j - 1] を保持するようにしている． 前者にしてしまうと，(0, 0) に対して 1 でなく S[0] を与える必要があるので面倒．\n提出 問題4 ABC 038 C - 単調増加 int main() { ll N; cin \u003e\u003e N; vector A(N, 0LL); REP(i, 0, N) cin \u003e\u003e A[i]; // P(i, j) \u003c-\u003e A[i] \u003c A[i + 1] \u003c ... \u003c A[j] ll i = 0, j = 0; ll ans = 0; ll cond = true; while (true) { if (cond) { ans += j - i + 1; j++; if (j == N) break; cond = A[j - 1] \u003c A[j]; }else { i++; cond = i == j; } } cout \u003c\u003c ans \u003c\u003c endl; return 0; } 提出 問題5 ARC 022 B - 細長いお菓子 int main() { ll N; cin \u003e\u003e N; vector A(N, 0LL); REP(i, 0, N) cin \u003e\u003e A[i]; ll i = 0, j = 0; ll dup = -1; set\u003cll\u003e ss; ll ans = 0; while (true) { if (dup \u003c 0) { ans = max(ans, j - i); if (j == N) break; if (ss.contains(A[j])) dup = A[j]; else ss.insert(A[j]); j++; }else { if (A[i] == dup) dup = -1; else ss.erase(A[i]); i++; } } cout \u003c\u003c ans \u003c\u003c endl; return 0; } 提出 問題6 ABC 098D - Xor Sum 2 int main() { ll N; cin \u003e\u003e N; vector A(N, 0LL); for (int i = 0; i \u003c N; i++) { ll v; cin \u003e\u003e v; A[i] = v; } ll ans = 0; ll i = 0; ll j = 0; ll s = 0; ll t = 0; while (true) { if (s == t) { ans += j - i; if (j == N) break; s += A[j]; t ^= A[j]; j++; }else { s -= A[i]; t ^= A[i]; i++; } } cout \u003c\u003c ans \u003c\u003c endl; return 0; } 提出 問題8 JOI 2013 本選 C バウムクーヘン ",
+  "wordCount" : "806",
+  "inLanguage": "en",
+  "datePublished": "2024-02-03T13:30:38+09:00",
+  "dateModified": "2024-02-03T13:30:38+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2024/02-03-shakutori/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      尺取り法のコーディング
+    </h1>
+    <div class="post-meta">2024-02-03&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="前提">前提<a hidden class="anchor" aria-hidden="true" href="#前提">#</a></h2>
+<p>自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする．
+$x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する
+述語 $P(x, y)$ が，次を満たすとする．</p>
+<ul>
+<li>$P(x, y)$ かつ $x \leq x&rsquo;$，$y&rsquo; \leq y$ ならば，$P(x&rsquo;, y&rsquo;)$</li>
+</ul>
+<p>このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について，
+$\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題．
+$\oplus$ は，和や最小値や最大値など．
+ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$
+などから，少ない手間で求められるものとする．</p>
+<h2 id="考え方">考え方<a hidden class="anchor" aria-hidden="true" href="#考え方">#</a></h2>
+<ul>
+<li>1つの while ループで書く．</li>
+<li>$P(x, y)$ が成り立ったら，次は $P(x, y + 1)$ を調べる．
+成り立たなかったら，次は $P(x + 1, y + 1)$ を調べる．</li>
+<li>$P(x, y)$ が成り立ったら，
+$F(x, y) \oplus F(x + 1, y) \oplus \dots \oplus F(y, y)$
+を答えに加える．</li>
+</ul>
+<h2 id="擬似コード">擬似コード<a hidden class="anchor" aria-hidden="true" href="#擬似コード">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ll i = 0, j = 0;   // (i, j) を調べる．
+</span></span><span style="display:flex;"><span>ll ans = oplus の単位元;
+</span></span><span style="display:flex;"><span>ll a = 初期値, b = 初期値;   // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく．
+</span></span><span style="display:flex;"><span>                            // ここでは a, b とする．この位置で用意するのは，(0, 0) 用．
+</span></span><span style="display:flex;"><span>while (true) {   // 一つのループ
+</span></span><span style="display:flex;"><span>  if (i &gt; j)  {              // 例外的処理
+</span></span><span style="display:flex;"><span>    // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る．
+</span></span><span style="display:flex;"><span>    // この場合は，単に j を増やす．
+</span></span><span style="display:flex;"><span>    j++;
+</span></span><span style="display:flex;"><span>  }else if (calc_P(a, b))  { // P(i, j) が成り立ったら
+</span></span><span style="display:flex;"><span>    v = calc_val(a, b);      // F(i, j) oplus F(i + 1, j) oplus ... oplus F(j, j) の値を計算
+</span></span><span style="display:flex;"><span>    ans = oplus(ans, v);     // 答を更新
+</span></span><span style="display:flex;"><span>    if (j == N) break;       // 右が端に到達したらループを抜ける
+</span></span><span style="display:flex;"><span>    (a, b) = update_ab_yes(a, b, i, j);
+</span></span><span style="display:flex;"><span>                             // a や b を更新．更新された (a, b) は，(i, j + 1) 用のもの
+</span></span><span style="display:flex;"><span>    j++;                     // 次は (i, j + 1) の処理
+</span></span><span style="display:flex;"><span>  }else {                    // P(i, j) が成り立たなかったら
+</span></span><span style="display:flex;"><span>    (a, b) = update_ab_no(a, b, i, j);
+</span></span><span style="display:flex;"><span>                             // a や b を更新．更新された (a, b) は，(i + 1, j) 用のもの
+</span></span><span style="display:flex;"><span>    i++;                     // 次は (i + 1, j) の処理
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>cout &lt;&lt; ans &lt;&lt; endl;
+</span></span></code></pre></div><h2 id="問題3">問題3<a hidden class="anchor" aria-hidden="true" href="#問題3">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc032/tasks/abc032_c" target="_blank">ABC 032 C - 列</a>
+</p>
+<p>$K$ と列 $(S_i)$ が与えられる．$S_i \times S_{i + 1} \times \dots S_{j} \leq K$
+となる $(i, j)$ について，長さ $j - i + 1$ の最大値を求める．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">K</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">K</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">S</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">);</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">S</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// S[i] == 0 なる i がある場合には別扱い
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">EXISTS</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">S</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">))</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">N</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ここから尺取り法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// P(i, j) は，S[i] * S[i + 1] * ... * S[j - 1] &lt;= K．
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// F(i, j) は，j - i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// oplus は，max
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>   <span style="color:#75715e">// val は，S[i] * S[i + 1] * ... * S[j - 1] を保持する．
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">j</span><span style="color:#111">)</span> <span style="color:#111">{</span>   <span style="color:#75715e">// この問題では，S[i] &gt; K のときにはこのケースが生じる．
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>              <span style="color:#75715e">// 次回の val
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">;</span>                  <span style="color:#75715e">// 次回の j
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">val</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">K</span><span style="color:#111">)</span> <span style="color:#111">{</span>   <span style="color:#75715e">// P(i, j) が成り立つとき
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#111">max</span><span style="color:#111">(</span><span style="color:#111">ans</span><span style="color:#111">,</span> <span style="color:#111">j</span> <span style="color:#f92672">-</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">j</span> <span style="color:#f92672">==</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#111">val</span> <span style="color:#f92672">*</span> <span style="color:#111">S</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">];</span>     <span style="color:#75715e">// 次回の val
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">;</span>                  <span style="color:#75715e">// 次回の j
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#111">val</span> <span style="color:#f92672">/</span> <span style="color:#111">S</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>     <span style="color:#75715e">// 次回の val
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">;</span>                  <span style="color:#75715e">// 次回の i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>このコードでは，val に
+<code>S[i] * S[i + 1] * ... * S[j]</code> ではなく
+<code>S[i] * S[i + 1] * ... * S[j - 1]</code> を保持するようにしている．
+前者にしてしまうと，(0, 0) に対して 1 でなく S[0] を与える必要があるので面倒．</p>
+<p><a href="https://atcoder.jp/contests/abc032/submissions/49900000" target="_blank">提出</a>
+</p>
+<h2 id="問題4">問題4<a hidden class="anchor" aria-hidden="true" href="#問題4">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc038/tasks/abc038_c" target="_blank">ABC 038 C - 単調増加</a>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">A</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">);</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// P(i, j) &lt;-&gt; A[i] &lt; A[i + 1] &lt; ... &lt; A[j]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">cond</span> <span style="color:#f92672">=</span> <span style="color:#111">true</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">cond</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">ans</span> <span style="color:#f92672">+=</span> <span style="color:#111">j</span> <span style="color:#f92672">-</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">j</span> <span style="color:#f92672">==</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">cond</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">cond</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">==</span> <span style="color:#111">j</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p><a href="https://atcoder.jp/contests/abc038/submissions/49903053" target="_blank">提出</a>
+</p>
+<h2 id="問題5">問題5<a hidden class="anchor" aria-hidden="true" href="#問題5">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc022/tasks/arc022_2" target="_blank">ARC 022 B - 細長いお菓子</a>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">A</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">);</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">dup</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">ss</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">dup</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#111">max</span><span style="color:#111">(</span><span style="color:#111">ans</span><span style="color:#111">,</span> <span style="color:#111">j</span> <span style="color:#f92672">-</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">j</span> <span style="color:#f92672">==</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">ss</span><span style="color:#111">.</span><span style="color:#111">contains</span><span style="color:#111">(</span><span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">]))</span> <span style="color:#111">dup</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">else</span>                   <span style="color:#111">ss</span><span style="color:#111">.</span><span style="color:#111">insert</span><span style="color:#111">(</span><span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">]);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">==</span> <span style="color:#111">dup</span><span style="color:#111">)</span>       <span style="color:#111">dup</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">else</span>                   <span style="color:#111">ss</span><span style="color:#111">.</span><span style="color:#111">erase</span><span style="color:#111">(</span><span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p><a href="https://atcoder.jp/contests/arc022/submissions/49901735" target="_blank">提出</a>
+</p>
+<h2 id="問題6">問題6<a hidden class="anchor" aria-hidden="true" href="#問題6">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc098/tasks/arc098_b" target="_blank">ABC 098D - Xor Sum 2</a>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">N</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">A</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">ll</span> <span style="color:#111">v</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">v</span><span style="color:#111">;</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">v</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">s</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">t</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">s</span> <span style="color:#f92672">==</span> <span style="color:#111">t</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">ans</span> <span style="color:#f92672">+=</span> <span style="color:#111">j</span> <span style="color:#f92672">-</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">j</span> <span style="color:#f92672">==</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">s</span> <span style="color:#f92672">+=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">t</span> <span style="color:#f92672">^=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">s</span> <span style="color:#f92672">-=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">t</span> <span style="color:#f92672">^=</span> <span style="color:#111">A</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p><a href="https://atcoder.jp/contests/abc098/submissions/49898478" target="_blank">提出</a>
+</p>
+<h2 id="問題8">問題8<a hidden class="anchor" aria-hidden="true" href="#問題8">#</a></h2>
+<p><a href="https://atcoder.jp/contests/joi2014ho/tasks/joi2014ho3" target="_blank">JOI 2013 本選 C バウムクーヘン</a>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>全方位木ライブラリ</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Offline Dynamic Connectivity</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2024/02-03-shakutori/" data-title="尺取り法のコーディング">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

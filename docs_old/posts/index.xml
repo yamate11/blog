@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/posts/</link>
+    <description>Recent content in Posts on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 25 Mar 2024 08:01:49 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARC175-C Jumping Through Intervals</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/</link>
+      <pubDate>Mon, 25 Mar 2024 08:01:49 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/</guid>
+      <description>問題へのリンク 状況 コンテスト中解けず．ACまで結局3時間かかった．
+解説を読んで 「辞書順最小の良い整数列」を一度に求めようとしたので話を複雑にしてしまった．
+良い整数列を全部求める その中で辞書順最小のものを決める と考えるべきだった．
+[1] のように問題が与えられた時，[2] のように後ろから最適な場所をマークしていく． [3] の青線が，良い整数列の全部になる．この際，前の段階で「最適」とは言われなかったところも 良い整数列として現れていることに注意． もっとも下にある青線の列が答となる．</description>
+    </item>
+    <item>
+      <title>ABC346-G Alone</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/</link>
+      <pubDate>Sun, 24 Mar 2024 13:32:06 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/</guid>
+      <description>ABC346-G Alone の解法です．典型だったのか．知らなかった&amp;hellip;.
+問題へのリンク ABC346-G Alone 問題概要 $A = (A_1, \dots, A_N)$ が与えられる． $1 \leq L \leq R \leq N$ で，$A_L, A_{L + 1}, \dots, A_R$ の中に1度だけ出現する数がある ような $(L, R)$ の組の数を答えよ．
+制約: $N \leq 2\times 10^5$, $1 \leq A_i \leq N$
+前提知識 辺が座標軸と平行な長方形 $N$ 個の頂点の座標が与えられた時， 被覆する図形の面積は，次の方法で $O(N \log N)$ で求められる．
+適宜座標圧縮する．頂点のx座標の小さい順にソートして平面走査する．ベクトル $S$ を用意する．
+左端頂点 $(x, y_1)$, $(x, y_2)$ が現れたら，$S[y_1], &amp;hellip;, S[y_2 - 1]$ に$1$を加える． 右端頂点 $(x, y_3)$, $(x, y_4)$ が現れたら，$S[y_3], &amp;hellip;, S[y_4 - 1]$ に$-1$を加える． $S[\min], &amp;hellip; S[\max]$ のうち，$0$ でないものの数を $t$ として，$\max - \min + 1 - t$ を答に加える． 愚直だと $\Omega(N^2)$ かかるが，次の lazy segment tree を使うと $O(N \log N)$ になる．</description>
+    </item>
+    <item>
+      <title>木ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</link>
+      <pubDate>Wed, 13 Mar 2024 13:41:23 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</guid>
+      <description>自分用の木のライブラリのメモです．
+1. 典型的な使用法 ll N; cin &amp;gt;&amp;gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b &amp;gt;&amp;gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;amp;](auto rF, ll nd) -&amp;gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.</description>
+    </item>
+    <item>
+      <title>二分探索ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2024/02-19-binary-search/</link>
+      <pubDate>Mon, 19 Feb 2024 17:44:50 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/02-19-binary-search/</guid>
+      <description>自分用の 二分探索ライブラリ のメモです．
+1. 整数版 以下では，INT は，int, long long, unsigned int などを表す．
+signature template &amp;lt;typename INT&amp;gt; requires integral&amp;lt;INT&amp;gt; INT binsearch(auto check, INT yes, INT no) 引数 check &amp;hellip; 判定関数．INT を受け取って bool を返す． yes &amp;hellip; 真になる値 no &amp;hellip; 偽になる値 制約 check 関数は，以下のいずれかを満たす述語 $P(x)$ を，開区間 (yes, no) において実装したものでなければならない
+ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は真． $t &amp;lt; x$ である $x$ について，$P(x)$ は偽． ある $t$ が存在して， $x \leq t$ である $x$ について，$P(x)$ は偽． $t &amp;lt; x$ である $x$ について，$P(x)$ は真． 概念的には，$P(\text{yes})$ は真で，$P(\text{no})$ は偽でなければならない． ただし，実際には，check(yes) や check(no) は呼ばれない．</description>
+    </item>
+    <item>
+      <title>拡張ユークリッドアルゴリズム</title>
+      <link>https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/</link>
+      <pubDate>Wed, 14 Feb 2024 13:52:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/</guid>
+      <description>拡張ユークリッドアルゴリズムのメモ (といっても，Wikipedia を参照するだけ)
+参照先 Wikipediaの記事 ポイント 与えられた $a$, $b$ に対して，$g := \text{gcd}(a, b)$ と $sa + tb = g$ となる $s$，$t$ を求める． $a$, $b$ は正，負，0 いずれも可． ただし，$\text{gcd}(a, 0) = \text{gcd}(0, a) = a$ $|s| \leq \max(|a|, |b|)$，$|t| \leq \max(|a|, |b|)$ が成り立つ． $|a|$ や $|b|$ が 64 ビットで表せていれば，このアルゴリズムで得られる $|a|$，$|b|$ もそうなる． ($|sa|$ や $|tb|$ ははみ出すかもしれない) アルゴリズム概要 1 * a + 0 * b = a と，0 * a + 1 * b = b から始める． $s_i a + t_i b = z_i$ と $s_{i + 1} a + t_{i + 1} b = z_{i + 1}$ まで得られたとする． 右辺の割算 $z_i = p z_{i + 1} + q$ をする． ($i$ の式) $ - p \times (i + 1$ の式) を作って， $(s_i - p \, s_{i + 1}) a + (t_i - p \, t_{i + 1}) b = q$ を得る． 右辺が $g := \text{gcd}(a, b)$ になるまで繰り返す． なお，もう一回まわすと $s_{k + 1} a + t_{k + 1} b = 0$ になり，$|s_{k + 1}| = |a|/g$，$|t_{k + 1}| = |b|/g$ が成り立つ． コード util.</description>
+    </item>
+    <item>
+      <title>全方位木ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2022/08-17-rerooting/</link>
+      <pubDate>Wed, 14 Feb 2024 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/08-17-rerooting/</guid>
+      <description>全方位木ライブラリ使用法のメモ</description>
+    </item>
+    <item>
+      <title>尺取り法のコーディング</title>
+      <link>https://yamate11.github.io/blog/posts/2024/02-03-shakutori/</link>
+      <pubDate>Sat, 03 Feb 2024 13:30:38 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/02-03-shakutori/</guid>
+      <description>前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x&amp;rsquo;$，$y&amp;rsquo; \leq y$ ならば，$P(x&amp;rsquo;, y&amp;rsquo;)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y + 1)$ を調べる． 成り立たなかったら，次は $P(x + 1, y + 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x + 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &amp;gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &amp;gt; j となる組に来る． // この場合は，単に j を増やす． j++; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i + 1, j) oplus .</description>
+    </item>
+    <item>
+      <title>Offline Dynamic Connectivity</title>
+      <link>https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/</link>
+      <pubDate>Mon, 01 Jan 2024 12:09:02 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/</guid>
+      <description>オフライン動的連結ライブラリです</description>
+    </item>
+    <item>
+      <title>Undo付きUnionFind</title>
+      <link>https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/</link>
+      <pubDate>Mon, 01 Jan 2024 11:48:37 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/</guid>
+      <description>Undo付きUnionFindライブラリです．</description>
+    </item>
+    <item>
+      <title>誤りの記録</title>
+      <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
+      <pubDate>Sun, 24 Dec 2023 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
+      <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
+ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
+    </item>
+    <item>
+      <title>ローリングハッシュライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/</link>
+      <pubDate>Sat, 09 Dec 2023 16:28:56 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/</guid>
+      <description>ローリングハッシュライブラリの使い方についての自分用のメモです</description>
+    </item>
+    <item>
+      <title>セグメント木ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/</link>
+      <pubDate>Sun, 03 Dec 2023 12:21:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/</guid>
+      <description>自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&amp;hellip;
+使用法 値の型を DAT, 更新演算の型を OP とする．
+基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
+値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i + 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．</description>
+    </item>
+    <item>
+      <title>Bookmarks</title>
+      <link>https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/</link>
+      <pubDate>Sun, 12 Nov 2023 12:14:18 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/</guid>
+      <description>他サイトへのリンクを並べる
+Prüfer sequence プリューファー列 (ラベル付き木の列挙に使う) の紹介． ケイリーの公式 ($n$頂点のラベル付き木の個数は$n^{n-2}$) と， ラベル付き木のランダム生成の話が書いてある． </description>
+    </item>
+    <item>
+      <title>boost の多倍長計算</title>
+      <link>https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/</link>
+      <pubDate>Sun, 05 Nov 2023 16:37:09 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/</guid>
+      <description>AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &amp;lt;boost/multiprecision/cpp_int.hpp&amp;gt; // 整数を使う時 #include &amp;lt;boost/multiprecision/cpp_bin_float.hpp&amp;gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&amp;lt;typename T&amp;gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &amp;gt; 0) { if (b &amp;amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &amp;gt;&amp;gt;= 1; } return rv; } cpp_int solve() { string s; cin &amp;gt;&amp;gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo + 1) * (lo + 1); cpp_int th = power(cpp_int(100), s.</description>
+    </item>
+    <item>
+      <title>二重連結</title>
+      <link>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</link>
+      <pubDate>Tue, 05 Sep 2023 18:13:58 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/09-05-bridge/</guid>
+      <description>無向グラフの二重連結に関して，辺二重連結，橋，点二重連結，関節点，block-cut tree などに関するまとめです</description>
+    </item>
+    <item>
+      <title>Return to 1 - Atcoder Beginner Contest 306 G</title>
+      <link>https://yamate11.github.io/blog/posts/2023/06-18-abc306g/</link>
+      <pubDate>Sun, 18 Jun 2023 12:14:05 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/06-18-abc306g/</guid>
+      <description>ABC306G Return to 1 の解法です</description>
+    </item>
+    <item>
+      <title>約数の個数</title>
+      <link>https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/</link>
+      <pubDate>Sat, 03 Jun 2023 16:16:36 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/</guid>
+      <description>nまでの約数の個数の表と，求めるためのコード</description>
+    </item>
+    <item>
+      <title>K番目...</title>
+      <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
+      <pubDate>Thu, 01 Jun 2023 09:47:15 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
+      <description>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</description>
+    </item>
+    <item>
+      <title>ネストした vector の順序と性能</title>
+      <link>https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/</link>
+      <pubDate>Wed, 26 Apr 2023 00:18:06 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/</guid>
+      <description>ネストしたベクトルは，添字を並べる順序で性能が変わるが，どのように並べれば良いかはよくわからない．</description>
+    </item>
+    <item>
+      <title>インタラクティブ問題のデバッグ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/</link>
+      <pubDate>Fri, 21 Apr 2023 18:29:42 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/</guid>
+      <description>インタラクティブ問題のデバッグ方法</description>
+    </item>
+    <item>
+      <title>整数・実数の大小比較とfloor, ceil</title>
+      <link>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</link>
+      <pubDate>Thu, 23 Mar 2023 18:36:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/</guid>
+      <description>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
+公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
+$d \leq t \iff d \leq \lfloor t \rfloor$ $d &amp;lt; t \iff d &amp;lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &amp;lt; d \iff \lfloor t \rfloor &amp;lt; d$ 考え方 \begin{eqnarray*} d\leq t &amp;amp;\iff&amp;amp; t \in \{ t \mid d \leq t \} \\ &amp;amp;\iff&amp;amp; t \in \bigcup \{ [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ t \in [e, e+1) \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d+1, \ldots \} \\ &amp;amp;\iff&amp;amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}</description>
+    </item>
+    <item>
+      <title>素数以外の mod</title>
+      <link>https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/</link>
+      <pubDate>Sun, 12 Mar 2023 09:10:33 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/</guid>
+      <description>mod ライブラリで素数以外の法に関してできること</description>
+    </item>
+    <item>
+      <title>順列組合せ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</link>
+      <pubDate>Tue, 28 Feb 2023 17:14:24 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</guid>
+      <description>順列組合せ・重複ありなし ライブラリに関するメモです．</description>
+    </item>
+    <item>
+      <title>ダブリングライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2022/12-10-doubling/</link>
+      <pubDate>Sat, 10 Dec 2022 09:33:05 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/12-10-doubling/</guid>
+      <description>ダブリングを行うライブラリを書きました．自分用のメモです．
+できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $f^{r}(i)$ を，$r \in [0, R]$ と $i \in [0, N)$ に対して計算する．
+典型的には:
+$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r} m(f^{k}(i))$ を計算する．
+使用例 その1 ll R = 100000, N = 100000; auto f = [&amp;amp;](ll i) -&amp;gt; ll { return i * i % N; }; DoublingFRel d(R, N, f); ll r = 12345, i = 54321; cout &amp;lt;&amp;lt; d.</description>
+    </item>
+    <item>
+      <title>二項係数に関する公式</title>
+      <link>https://yamate11.github.io/blog/posts/2022/10-29-binom/</link>
+      <pubDate>Sat, 29 Oct 2022 20:14:03 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/10-29-binom/</guid>
+      <description>二項係数に関する公式です．</description>
+    </item>
+    <item>
+      <title>よく使う iomanip の modifier</title>
+      <link>https://yamate11.github.io/blog/posts/2022/10-23-ipmanip/</link>
+      <pubDate>Sun, 23 Oct 2022 00:50:36 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/10-23-ipmanip/</guid>
+      <description> setw(int n) 桁数を n にする setfill(char c) 余った場所を c で埋める． oct 8進にする hex 16進にする dec 10進にする fixed 固定小数点表示にする scientific 浮動小数点表示にする </description>
+    </item>
+    <item>
+      <title>インタラクティブな問題に対するソーススケルトン</title>
+      <link>https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/</link>
+      <pubDate>Sun, 07 Aug 2022 16:15:45 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/</guid>
+      <description>インタラクティブな問題がたまに出題される． 特別扱いする必要があるか，ということだが， 何も考えずに書いてしまうとデバッグが難しい，ということがあるので， やはり形式を整えておきたい感じである．
+先日の Codeforces R.812 (Div 2) Tournament Countdown で，TLE というめにあった． virtual base class を持つオブジェクトのメソッド呼び出しがあったりしたのが 良くなかったのではないかと思う．
+ということで，軽く実行できるようにしたい．
+ポイントとしては，ask() 関数と answer() 関数を用意する． これらで，問と答の入出力部分をラップする． 実装するときには，ask_i() と answer_i() という名前で書く． 通常はこちらを ask(), answer() として使い， 自動テストのと期には ask_judge(), answer_judge() に切り替える．
+典型的な実装はこんな感じ．二分探索数当てゲームを想定．
+bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); } ll ask_i(ll x) { cout &amp;lt;&amp;lt; &amp;#34;? &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; endl; string s; cin &amp;gt;&amp;gt; s; if (s == &amp;#34;SMALL&amp;#34;) return -1; else if (s == &amp;#34;LARGE&amp;#34;) return 1; else if (s == &amp;#34;EQUAL&amp;#34;) return 0; else assert(0); } void answer_i(ll x) { cout &amp;lt;&amp;lt; &amp;#34;!</description>
+    </item>
+    <item>
+      <title>燃やす埋める問題</title>
+      <link>https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/</link>
+      <pubDate>Sun, 10 Jul 2022 00:03:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/</guid>
+      <description>燃やす埋める問題についての記事です．
+動機 燃やす埋める問題については，一度エントリを書いた のですが，そこにはともかく理解したことを全部書いたので，コンテスト中に参照しても把握するのがたいへん，という状況になってしまっています．そこで，コンテスト中に思い出したい最小限のことだけまとめることにしました．
+考え方 問題文中に「$p$ のとき$b$を受け取る」という記載があったら，「先に $b$ を受け取る．$\neg p$ の時 $b$ を支払う」と読み替えて，すべて支払いをすると考える． グラフ全体の source ノードのラベルは True，sink ノードのラベルは False． ノード $p$ からノード $q$ への矢印に，重み $a$ がついているのは，「$p$が成り立つのに$q$が成り立たない場合，コスト $a$ を支払う」と読む． したがって，この図では，以下が表現されている $p_6$ が成り立って，$p_7$ が成り立たなかったら，$a_2$ 支払う． $p_1$ が成り立たなかったら，$a_5$ 支払う． $p_7$ が成り立ったら，$a_3$ 支払う． $p_8$ は成り立つ． $p_9$ は成り立たない． 最小カットが，コスト最小の真偽割当．図の赤線だと，$p_1, \ldots, p_6, p_8$ を真，$p_7, p_9$ を偽にする割当に相当し，この場合のコストは$a_2 + a_6$． 連言や選言のノードは，矢印を出せるか入れられるかが決まっている．下図を参照．不可の理由は，たとえば連言なら，$p$, $q$を真に，$p\land q$ を偽にできてしまうから．(矢印の根本を真にできてしまうと不当な利益がある．矢印の根本を偽にできても嬉しくない) したがって，「$p \land q$ なら，支払を行う」は，表現できない． しかし，$\neg q$ の方を表すノード $r$ を用意すれば， 「$p$ が成り立って $r$ が成り立たなければ，支払を行う」の形で表現できる． </description>
+    </item>
+    <item>
+      <title>Non-divisible Set - Atcoder Regular Contest 141 D</title>
+      <link>https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/</link>
+      <pubDate>Sat, 04 Jun 2022 18:12:34 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/06-04-arc141-d-nondivisible-set/</guid>
+      <description>解説ACです</description>
+    </item>
+    <item>
+      <title>Mo&#39;s algorithm メモ</title>
+      <link>https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/</link>
+      <pubDate>Thu, 19 May 2022 09:30:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/</guid>
+      <description>Mo&amp;rsquo;s algorithm のコンテスト用メモです</description>
+    </item>
+    <item>
+      <title>RBS - Educational Codeforces Round 115 F</title>
+      <link>https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/</link>
+      <pubDate>Thu, 19 May 2022 00:12:09 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/</guid>
+      <description>Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
+問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&amp;quot;()()()))&amp;quot;!) = 3$, $f(\verb!&amp;quot;(()())((&amp;quot;!) = 1$．
+$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
+制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
+解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
+$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &amp;lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．</description>
+    </item>
+    <item>
+      <title>Differ by K bits - Atcoder Regular Contest 138 D</title>
+      <link>https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/</link>
+      <pubDate>Thu, 14 Apr 2022 08:22:15 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/</guid>
+      <description>公式解説とは少しだけ異なる解法です</description>
+    </item>
+    <item>
+      <title>Small Multiple - Atcoder Beginner Contest 077 D</title>
+      <link>https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/</link>
+      <pubDate>Tue, 05 Apr 2022 09:58:31 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/04-05-abc-077-d-small-multiple/</guid>
+      <description>公式解説の行間を埋めました．</description>
+    </item>
+    <item>
+      <title>ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</title>
+      <link>https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/</link>
+      <pubDate>Tue, 22 Mar 2022 19:59:40 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/</guid>
+      <description>高速ゼータ変換について，自分用にまとめた記事です．</description>
+    </item>
+    <item>
+      <title>Prefix XORs - AtCoder Regular Contest 137 D</title>
+      <link>https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/</link>
+      <pubDate>Sun, 20 Mar 2022 00:57:31 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/</guid>
+      <description>AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．
+問題概要 長さ$N$の整数列 $A = (A_1, \ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \ldots, M$ について，$A(N, k)$ を求めよ．
+操作: 各$i = 1, 2, \ldots, N$ について， $A_i$ を同時に $A_1 \oplus A_2 \oplus \cdots \oplus A_i$ で置き換える．
+制約: $1 \leq N, M \leq 10^6$; $0 \leq A_i &amp;lt; 2^{30}$
+問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \in \{0, 1\}$ をとって， $A(i, k) = \bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \bigoplus_{m=1}^{i} b(i - m, k) A_m = \bigoplus \{ A_{i - j} \mid b(j, k) = 1; j = 0, \ldots, i-1 \}$ だから， 各 $k = 1, 2, \ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．</description>
+    </item>
+    <item>
+      <title>Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</title>
+      <link>https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/</link>
+      <pubDate>Sat, 05 Mar 2022 08:03:44 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/</guid>
+      <description>解説ACです．</description>
+    </item>
+    <item>
+      <title>Balls in Boxes - Atcoder Beginner Contest 231 G</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/</link>
+      <pubDate>Thu, 24 Feb 2022 10:06:13 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/</guid>
+      <description>解説ACです</description>
+    </item>
+    <item>
+      <title>Predilection - Atcoder Beginner Contest 230 F</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/</link>
+      <pubDate>Sun, 20 Feb 2022 18:49:32 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/</guid>
+      <description>解説ACです．</description>
+    </item>
+    <item>
+      <title>最大流・最小カット</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/</link>
+      <pubDate>Sun, 20 Feb 2022 06:32:36 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/</guid>
+      <description>最大流と最小カットについてのコンテスト用のまとめです</description>
+    </item>
+    <item>
+      <title>Cubic? - AtCoder Beginner Contest 238 G</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/</link>
+      <pubDate>Sun, 13 Feb 2022 11:48:45 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/</guid>
+      <description>ABC238G Cubic? の解法です．公式解説と同じです．</description>
+    </item>
+    <item>
+      <title>Zobrist Hashing</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/</link>
+      <pubDate>Sun, 13 Feb 2022 11:32:14 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/</guid>
+      <description>ABC238 G Cubic? を解くのに使うことができる Zobrist Hashing に関する記事です．</description>
+    </item>
+    <item>
+      <title>素因数分解に要する時間</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/</link>
+      <pubDate>Sun, 06 Feb 2022 12:02:43 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/</guid>
+      <description>素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました</description>
+    </item>
+    <item>
+      <title>Dilworthの定理, Konigの定理</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</link>
+      <pubDate>Wed, 02 Feb 2022 10:34:31 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</guid>
+      <description>ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．</description>
+    </item>
+    <item>
+      <title>Divide A Sequence - AtCoder Beginner Contest 234 G</title>
+      <link>https://yamate11.github.io/blog/posts/2022/01-09-divide-a-sequence/</link>
+      <pubDate>Sun, 09 Jan 2022 18:19:30 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/01-09-divide-a-sequence/</guid>
+      <description>方針にも実装にも時間がかかりました．</description>
+    </item>
+    <item>
+      <title>ABC231 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/12-11-abc231/</link>
+      <pubDate>Sat, 11 Dec 2021 23:01:16 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/12-11-abc231/</guid>
+      <description>パナソニックプログラミングコンテスト2021に参加して，ABCDEF 6完347位でした．A - Water Pressure / B - Election / C - Counting 2 / D - Neighbors / E - Minimal payments / F - Jealous Two</description>
+    </item>
+    <item>
+      <title>AtCoder Beginner Contest 221 H - Count Multiset</title>
+      <link>https://yamate11.github.io/blog/posts/2021/11-24-abc221-h-count-multiset/</link>
+      <pubDate>Wed, 24 Nov 2021 19:31:33 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/11-24-abc221-h-count-multiset/</guid>
+      <description>解説ACです．</description>
+    </item>
+    <item>
+      <title>ABC228 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/11-21-abc228/</link>
+      <pubDate>Sun, 21 Nov 2021 00:08:50 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/11-21-abc228/</guid>
+      <description>ABC228 (トヨタシステムズプログラミングコンテスト2021 AtCoder Beginner Contest 228) に参加して ABCDE5完 265位でした．A - On and Off / B - Takahashi&amp;rsquo;s Secret / C - Final Day / D - Linear Probing / E - Integer Sequence Fair / F - Stamp Game</description>
+    </item>
+    <item>
+      <title>ABC226 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/11-08-abc226/</link>
+      <pubDate>Mon, 08 Nov 2021 00:47:10 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/11-08-abc226/</guid>
+      <description>ABC226 に参加して，ABCDE5完 922位でした．冷えました． A - Round decimals;  B - Counting Arrays; C - Martial artist; D - Teleportation; E - Just one; F - Score of Permutations</description>
+    </item>
+    <item>
+      <title>String Cards - AtCoder Beginner Contest 225 F</title>
+      <link>https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/</link>
+      <pubDate>Wed, 03 Nov 2021 19:17:33 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/</guid>
+      <description>解法です．公式解説ほぼそのままです．</description>
+    </item>
+    <item>
+      <title>ABC225 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-31-abc225/</link>
+      <pubDate>Sun, 31 Oct 2021 10:24:27 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-31-abc225/</guid>
+      <description>AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ</description>
+    </item>
+    <item>
+      <title>Max Dot -- AtCoder Regular Contest 128 C</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/</link>
+      <pubDate>Fri, 29 Oct 2021 19:26:39 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/</guid>
+      <description>AtCoder Regular Contest 128 (ARC 128) C - Max Dot を解説ACしました． 公式解説より，多少行間が埋まっていると思います．
+問題概要 整数 $N, M, S$ と整数列 $A = (A_1, .., A_N)$ が与えられる． 次の条件を満たす非負実数列 $(x_1, &amp;hellip;, x_N)$ を作る:
+$0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $ $x_1 + x_2 + \cdots + x_N = S$ $\sum_{i=1}^{N} A_i x_i$ の最大値を求めよ．
+制約: $N \leq 5000$; $M,S,A_i \leq 10^6$; $S \leq NM$;
+問題へのリンク 解法 $x_0 := 0$ として，$y_i := x_{i+1} - x_i$ ($i = 0, \ldots, N-1$) とすると， 次のように言い換えられる:</description>
+    </item>
+    <item>
+      <title>ABC224 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-23-abc224/</link>
+      <pubDate>Sat, 23 Oct 2021 23:37:03 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-23-abc224/</guid>
+      <description>AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where +s Separate Digits / G - Roll or Increment</description>
+    </item>
+    <item>
+      <title>XORに関する基底</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/</link>
+      <pubDate>Fri, 22 Oct 2021 14:03:51 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/</guid>
+      <description>Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方</description>
+    </item>
+    <item>
+      <title>Xor Query -- AtCoder Beginner Contest 223 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/</link>
+      <pubDate>Thu, 21 Oct 2021 23:28:37 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-21-abc223-h-xor-query/</guid>
+      <description>AtCoder Beginner Contest 223 (ABC223) H - Xor Query の解法です．解説ACですが，基底は熨斗袋さんの方法で求めました．</description>
+    </item>
+    <item>
+      <title>ABC 223 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-17-abc223/</link>
+      <pubDate>Sun, 17 Oct 2021 23:33:52 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-17-abc223/</guid>
+      <description>AtCoder Beginner Contest 223 (ABC 223) に参加して， ABCDEFの6完92&#39;59&amp;quot; 259位でした．記録です．
+問題へのリンク A -	Exact Price cout &amp;lt;&amp;lt; (X &amp;gt; 0 and X % 100 == 0 ? &amp;quot;Yes\n&amp;quot; : &amp;quot;No\n&amp;quot;;
+B -	String Shifting 回数に制限はないので，全部左シフトだとして良いです． 0 回から S.size() - 1 回までの左シフトを順に作って， 辞書順最小と最大のものを作れば良いです．
+$O(N^3)$ のような気が一瞬してしまいましたが，そんなことはなくて $O(N^2)$ ですから間に合います．($N := $S.size())
+C -	Doukasen 公式解説 に載っている賢い解にびっくりしてしまいましたが，コンテストでは 次のように解きました．
+以下の(1),(2),(3)が成り立つ間，(4)を実行する．
+(1) 左の火が区間 i に時刻 p に入ろうとしている．
+(2) 右の火が区間 j に時刻 q に入ろうとしている．
+(3) i &amp;lt; j</description>
+    </item>
+    <item>
+      <title>222 -- AtCoder Beginner Contest 222 G</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</link>
+      <pubDate>Wed, 13 Oct 2021 21:25:49 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-13-abc222-g-222/</guid>
+      <description>エクサウィザーズプログラミングコンテスト2021 (AtCoder Beginner Contest 222 - ABC 222) G - 222 を解説ACしました．公式解説そのままですが，予備知識のところを self-contained になるように書きました．</description>
+    </item>
+    <item>
+      <title>木の直径</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/</link>
+      <pubDate>Sun, 10 Oct 2021 12:27:09 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/</guid>
+      <description>木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．</description>
+    </item>
+    <item>
+      <title>ABC 222 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-09-abc222/</link>
+      <pubDate>Sat, 09 Oct 2021 23:31:47 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-09-abc222/</guid>
+      <description>ABC222 に参加して，ABCDE 5完 498位でした．参加記です．</description>
+    </item>
+    <item>
+      <title>ABC 221 参加記</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-03-abc221/</link>
+      <pubDate>Sun, 03 Oct 2021 18:00:39 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-03-abc221/</guid>
+      <description>ABC221に参加して，ABCDEF 6完2ペナルティでした．その記録です．</description>
+    </item>
+    <item>
+      <title>桁DPのコーディング</title>
+      <link>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</link>
+      <pubDate>Fri, 01 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</guid>
+      <description>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</description>
+    </item>
+    <item>
+      <title>コーディングスタイル</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-23-coding-style/</link>
+      <pubDate>Thu, 23 Sep 2021 12:16:45 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/09-23-coding-style/</guid>
+      <description>自分のコーディングスタイルについてです</description>
+    </item>
+    <item>
+      <title>C&#43;&#43;言語・STLメモ</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/</link>
+      <pubDate>Mon, 20 Sep 2021 07:14:12 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/</guid>
+      <description>C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．</description>
+    </item>
+    <item>
+      <title>Red and Blue Lamps - AtCoder Beginner Contest 218 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/</link>
+      <pubDate>Mon, 13 Sep 2021 08:11:41 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/09-13-abc218-h-red-and-blue-lamps/</guid>
+      <description>公式解説にある貪欲法の証明を詳しく書きました．</description>
+    </item>
+    <item>
+      <title>Shapes -- AtCoder Beginner Contest 218 C</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/</link>
+      <pubDate>Sun, 12 Sep 2021 15:03:35 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/</guid>
+      <description>重実装への対処は，どうしたらよいのでしょうか?</description>
+    </item>
+    <item>
+      <title>Snuketoon - ABC217 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/09-05-abc217-h-snuketoon/</link>
+      <pubDate>Sun, 05 Sep 2021 10:44:32 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/09-05-abc217-h-snuketoon/</guid>
+      <description>slope trick というのは忘れていましたが，そもそもHまで到達しませんでした．この記事は公式解説そのままです．</description>
+    </item>
+    <item>
+      <title>「牛ゲー」</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/</link>
+      <pubDate>Mon, 30 Aug 2021 11:09:47 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/</guid>
+      <description>「牛ゲー」なる手法のまとめです</description>
+    </item>
+    <item>
+      <title>01Sequence - ABC216 G</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/</link>
+      <pubDate>Mon, 30 Aug 2021 10:09:03 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-30-abc216g-01sequence/</guid>
+      <description>公式解説とは違う (より効率の悪い) 方法で解きました．</description>
+    </item>
+    <item>
+      <title>Three Permutations - ABC 214 G</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/</link>
+      <pubDate>Fri, 27 Aug 2021 19:04:12 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-27-abc214g-three-permutations/</guid>
+      <description>調べた結果分かった解法を記述します．いろいろ勉強になりました．</description>
+    </item>
+    <item>
+      <title>Pass to Next - ARC 124 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-27-arc124e/</link>
+      <pubDate>Fri, 27 Aug 2021 14:51:59 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-27-arc124e/</guid>
+      <description>解けませんでした．解説を読んでも分からなかったので，自分なりの説明です．</description>
+    </item>
+    <item>
+      <title>Shorten ABC - AtCoder Regular Contest 110 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/</link>
+      <pubDate>Thu, 26 Aug 2021 06:08:51 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-26-shorten-abc/</guid>
+      <description>解説AC です．公式解説も皆さんの解説もたくさん参考にしています．</description>
+    </item>
+    <item>
+      <title>Snack - Atcoder Regular Contest 125 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-24-snack/</link>
+      <pubDate>Tue, 24 Aug 2021 17:57:58 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-24-snack/</guid>
+      <description>Atcoder Regular Contest 125 E Snack の解法です．公式解説そのままです．</description>
+    </item>
+    <item>
+      <title>Cabbage Master - Atcoder Beginner Contest 215 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/</link>
+      <pubDate>Mon, 23 Aug 2021 16:35:21 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/</guid>
+      <description>Atcoder Beginner Contest 215 (ABC215) H Cabbage Master に関する記事です．公式解説そのままですけれど，予備知識を一応書きました．</description>
+    </item>
+    <item>
+      <title>xor畳み込み</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</link>
+      <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</guid>
+      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</description>
+    </item>
+    <item>
+      <title>文字列，数値変換</title>
+      <link>https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/</link>
+      <pubDate>Fri, 20 Aug 2021 10:52:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/</guid>
+      <description>C++ での型の変換などのいろいろな変換方法です．</description>
+    </item>
+    <item>
+      <title>Random LIS - Atcoder Regular Contest 104 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-19-random-lis/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-19-random-lis/</guid>
+      <description>Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
+問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
+解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &amp;lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i + 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, .</description>
+    </item>
+    <item>
+      <title>vector&lt;vector&lt;*&gt;&gt; はあんまり速くない</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/</guid>
+      <description>発端 自分で書いた SCC (強連結成分分解) ライブラリを使っているのですが， これが，AC-library の SCC に比べて，4倍くらい遅いのです． どこが遅いのか調べてみたら，意外なところにもネックがありました．
+最初は，主に使っているアルゴリズムのせいだと思ったのです． 深さ優先探索を2回行うアルゴリズム (たとえばここ を参照) を使っていました． AC-library は，Tarjan のアルゴリズム を使っているようなので，合わせれば速くなるだろう，と思って 書きかえました．
+たしかに速くなったのですが，それでもまだAC-libraryより3倍ほど遅いです．
+vector&amp;lt;vector&amp;lt;*&amp;gt; &amp;gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
+int N, M; cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M; // N は頂点数, M は辺の数 vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; edges; for (int i = 0; i &amp;lt; M; i++) { int u, v; cin &amp;gt;&amp;gt; u &amp;gt;&amp;gt; v; // 0-indexed で入力されると仮定 edeges.emplace_back(u, v); } vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u].</description>
+    </item>
+    <item>
+      <title>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/</guid>
+      <description>JOI 2020/2021 二次予選 「イベント巡り (Event Hopping)」 に関する記事です． 公式解説 を読みきれなかったので&amp;hellip;.
+問題へのリンク https://atcoder.jp/contests/joi2021yo2/tasks/joi2021_yo2_c 解法 ちょっと不思議な感じで，小課題3 を (私の感覚では) 自然に解くと， それが満点解法にもなっているという&amp;hellip; (解説を読むまでわからなかったのですけれど)
+ソートして，$S_i$ が昇順になっているとします． ナイーブに考えると，次の DP になります．
+dp[i][j] := i番目のイベントに参加する直前までに参加したイベントの 回数が j であるような方法がある (True/False) 遷移としては，dp[i][j] = True となる j について，
+町 $P_i$ で行われるイベントで，時刻 $S_i + 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i + 1 + D + K(j + 1)$ 以降最も早いものを i2 として，
+dp[i1][j+1] := True dp[i2][j+1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．</description>
+    </item>
+    <item>
+      <title>Stroll - Atcoder Beginner Contest 213 H</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-11-stroll/</link>
+      <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-11-stroll/</guid>
+      <description>解けませんでした．オンライン・オフライン変換を調べて書きました．</description>
+    </item>
+    <item>
+      <title>距離: BFSとダイクストラ</title>
+      <link>https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/</link>
+      <pubDate>Mon, 09 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/</guid>
+      <description>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
+記法 ノードを表すデータ型を Node とする． int や long long や pair&amp;lt;int, int&amp;gt; など．
+ダイクストラ 前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化 priority_queue のメソッドは，push(), emplace(), pop(), top() など． using P = pair&amp;lt;ll, Node&amp;gt;; // 距離とノード priority_queue&amp;lt;P, vector&amp;lt;P&amp;gt;, greater&amp;lt;P&amp;gt;&amp;gt; pque; // 優先度付きキュー // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&amp;lt;ll&amp;gt; dist(N, LLONG_MAX); // 距離．始点以外は∞ // Node型 によっては，map&amp;lt;Node, ll&amp;gt; dist; など． dist[initial_node] = 0; // 始点の距離は0 ループ
+pque から取り出した (d, x) について， dist[x] &amp;lt; d なら，もっと良い d があって， それが既に取り出されている，ということなので，単に捨てる． そうでなければ (dist[x] == d ならば) この d が x への最短距離であることが確定した． x の 各隣接ノード y について，newd = x + δ(x, y) が y への距離の候補なので以下を行う． dist[y] &amp;lt;= newd なら，単に捨てる． そうでなければ，次を行う． dist[y] を newd に更新する． (newd, y) を pque に入れる． ゴール</description>
+    </item>
+    <item>
+      <title>Greedy Ant - キーエンスプログラミングコンテスト2021 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/</guid>
+      <description>キーエンスプログラミングコンテスト 2021 E - Greedy Ant に関する記事です．
+問題へのリンク https://atcoder.jp/contests/keyence2021/tasks/keyence2021 解法 公式解説 の通りではありますが，若干表現を変えます．
+すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
+初期化: // 蟻の初期位置を 2n + 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n + 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k += 1 while k &amp;gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r += 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r += 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．</description>
+    </item>
+    <item>
+      <title>policy-based data structure の tree</title>
+      <link>https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/</link>
+      <pubDate>Sat, 05 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/</guid>
+      <description>gcc (g++) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&amp;#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &amp;lt;ext/pb_ds/assoc_container.hpp&amp;gt; #include &amp;lt;ext/pb_ds/tree_policy.hpp&amp;gt; using namespace __gnu_pbds; 型の定義 例: pair&amp;lt;int, int&amp;gt; の集合 using pair_t = pair&amp;lt;int, int&amp;gt;; using ordered_set = tree&amp;lt; pair_t, null_type, less&amp;lt;pair_t&amp;gt;, rb_tree_tag, tree_order_statistics_node_update &amp;gt;; 例: string から int へのマップ using ordered_map = tree&amp;lt; string, int, less&amp;lt;string&amp;gt;, rb_tree_tag, tree_order_statistics_node_update &amp;gt;; 機能の呼び出し ordered_set os; os.</description>
+    </item>
+    <item>
+      <title>きたまさ法</title>
+      <link>https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/</link>
+      <pubDate>Fri, 30 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/</guid>
+      <description>きたまさ法に関する記事です． よすぽさんの記事 を参照して書きました．
+問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n + k} = d_{0} a_{n} + \cdots + d_{ k - 1 } a_{n + k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
+行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;amp;\cdots &amp;amp; \cdots &amp;amp; d_{ 0 } \\ 1 &amp;amp; &amp;amp; \Large{0} &amp;amp; 0 \\ &amp;amp; \ddots &amp;amp; &amp;amp; 0\\ \Large{0} &amp;amp; &amp;amp; 1 &amp;amp; 0 \\ \end{bmatrix} $$</description>
+    </item>
+    <item>
+      <title>binom(n, r) を小さい素数pに対して mod p で求める</title>
+      <link>https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/</guid>
+      <description>二項係数 binom(n, r) を，小さい素数 p に対して mod p で求める方法に関する記事です．
+観察 p = 3 に関していくつか書いてみると次のようになっている．
+0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:</description>
+    </item>
+    <item>
+      <title>Lagrange補間</title>
+      <link>https://yamate11.github.io/blog/posts/2021/04-22-lagrange/</link>
+      <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/04-22-lagrange/</guid>
+      <description>Lagrange補間に関する記事です．
+要約 $$ f(x) = \sum_{i = 0}^{k}\frac{ f(i) }{ (-1)^{k - i} \; i ! \; (k - i) ! } \cdot \frac{ 1 }{ x - i } \cdot \prod_{j=0}^{k} ( x - j ) $$
+詳細 \( k \) 次多項式 $f(x)$ について，$x = 0, \ldots, k$ の値が，$f(0) = v_0, \ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\( \Omega( k^3 ) \) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．
+$I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．</description>
+    </item>
+    <item>
+      <title>行列木定理</title>
+      <link>https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/</link>
+      <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/</guid>
+      <description>行列木定理についての記事です． これを使う問題が，第二回日本最強プログラマー学生選手権 の G - Spanning Tree として出題されました．
+定理 自己ループのない無向グラフ $G$ がある．頂点を $1, \ldots, N$ とする． 対称 $N\times N$ 行列 $A = (a_{ij})$ を，次で定める:
+$a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ辺の数} )$ このとき，A のすべての余因子は等しく，G の全域木の数と一致する．
+例 上のグラフでは，
+$$ A = \begin{bmatrix} 3 &amp;amp; -1 &amp;amp; 0 &amp;amp; -2 \\ -1 &amp;amp; 3 &amp;amp; -1 &amp;amp; -1 \\ 0 &amp;amp; -1 &amp;amp; 2 &amp;amp; -1 \\ -2 &amp;amp; -1 &amp;amp; -1 &amp;amp; 4 \end{bmatrix} $$</description>
+    </item>
+    <item>
+      <title>CodeForces Round #431 (Div.2) E - Goodbye Souvenir</title>
+      <link>https://yamate11.github.io/blog/posts/2021/01-18-goodbye-souvenir/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/01-18-goodbye-souvenir/</guid>
+      <description>CodeForces Round #431 (Div.2) E - Goodbye Souvenir についての記事です．
+問題へのリンク https://codeforces.com/contest/849/problem/E 経緯 Yoika さんが主催している Morningforces というバーチャルコンテスト で出て，解けませんでした． 公式解説 を読んだのですが，最後に出てくる座標圧縮云々がよく分かりませんでした．
+問題概要 整数列 $a = a_1, \ldots, a_k $ に対して，$m(a)$ を，$a$ に現れる各数 $x$ に対して，$x$ が最後に現れる位置と最初に現れる位置との差の総和として定義する．例えば，$m(1, 2, 3, 1, 3, 2, 1) = (7-1) + (6-2) + (5- 3) = 12$．最初に長さ n の整数列 a が与えられる．各要素は1以上n以下．次の2種類のクエリ (全部で$m$個) を処理せよ．$ 1 \leq n, m \leq 100,000$．
+p, x が与えられて，aのp番目の要素をxに書き換える． l, r が与えられて，$ m(a[l:r]) $ を求める． 解法 ということで，実装手段を除いては公式解説をなぞっています．</description>
+    </item>
+    <item>
+      <title>乱数の作り方</title>
+      <link>https://yamate11.github.io/blog/posts/2021/01-13-random/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/01-13-random/</guid>
+      <description>C++ での乱数の使い方のメモです．
+典型的なコード ll n; cin &amp;gt;&amp;gt; n; random_device rand_dev; mt19937 rng(rand_dev()); uniform_int_distribution&amp;lt;ll&amp;gt; dist(1, n); for (ll i = 0; i &amp;lt; 10; i++) cout &amp;lt;&amp;lt; dist(rng) &amp;lt;&amp;lt; &amp;#34; &amp;#34;; cout &amp;lt;&amp;lt; endl; クラス random_device マニュアル オブジェクトは乱数発生器．non-deterministic な乱数を生成する． operator() を実行すると，unsigned int の乱数が返り，状態が進む． 実行は高価である可能性がある． クラス mt19937 マニュアル 32bitメルセンヌツィッター乱数発生器 64bitメルセンヌツィッター乱数発生器 の mt19937_64 というクラスもある． o.operator() を実行すると，uint_fast32_t の乱数が返り，状態が進む． コンストラクタに seed を渡す． デフォルトコンストラクタは引数をとらず，seed = 5489u を用いる．したがって，次のように書けば，どの実行でも同じ値が生成される． mt19937 rng; クラス uniform_int_distribution マニュアル 乱数分布を一様分布とする．constructor に a, b を指定すると，a以上b以下の一様分布． T は int や ll など．デフォルトは int． operator() は，引数に乱数発生器を取り，一様分布を生成する． 他の乱数分布クラスとコンストラクタの例: uniform_real_distribution&amp;lt;double&amp;gt; dist1(a, b); normal_distribution&amp;lt;double&amp;gt; dist2(mean, stddev); </description>
+    </item>
+    <item>
+      <title>AtCoder Regular Contest 056 D - サケノミ</title>
+      <link>https://yamate11.github.io/blog/posts/2021/01-06-sakenomi/</link>
+      <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/01-06-sakenomi/</guid>
+      <description>AtCoder Regular Contest (ARC) 056 D - サケノミ についての記事です．
+問題へのリンク 状況 解けないだけではなく，答を見てもなかなかわからなかったので，整理するために書いています．下記を参考にしています．
+公式解説 kmjpさんのブログ 解法 時刻 $2j+1$ にドリンクを飲むような飲み方全部に関する，時刻 $2j+1$ 時点での美味しさの総和の最大値を $x(j)$ とする． 時刻 $2i$ に全部のグラスが空だったとき，半開区間 $(2i, 2j]$ に属する時刻に注がれるドリンクの美味しさの総和を $y(i, j)$ とすると， $x(j) = \max \{ x(i) + y(i, j) \mid i &amp;lt; j \} $ である．ここで，$z(i, j) = x(i) + y(i, j)$ と書くことにする．時刻 $j$ に注がれるドリンク全体の集合を $P$ とし，$ p \in P $ に対して時刻 $2j$ の一回前にドリンク $p$ が注がれる時刻を $l_p$ とする (時刻 j が初回なら，$l_p = 0$ とする)．すると，次が成り立つ．</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Dilworthの定理, Konigの定理 | yamate11のブログ</title>
+<meta name="keywords" content="Dilworth, Konig">
+<meta name="description" content="ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="Dilworthの定理, Konigの定理" />
+<meta property="og:description" content="ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-02T10:34:31+09:00" />
+<meta property="article:modified_time" content="2022-02-02T10:34:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dilworthの定理, Konigの定理"/>
+<meta name="twitter:description" content="ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dilworthの定理, Konigの定理",
+      "item": "https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dilworthの定理, Konigの定理",
+  "name": "Dilworthの定理, Konigの定理",
+  "description": "ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．",
+  "keywords": [
+    "Dilworth", "Konig"
+  ],
+  "articleBody": "趣旨 AtCoder Beginner Contest 237 (ABC237) Ex Hakata の 公式解説 に， Dilworth の定理を使って解ける，と書いてあるのですが， それを読んだだけでは (当然?) わからなかったので， (自分が) わかるように書こうという趣旨です．\n結局，この問題を解くには，次の事実が必要であると思います (言葉は下の方で定義しています)．\n命題1 順序集合 $(S, \u003c)$ の反鎖のサイズの最大値は，$|S| - m$ である． ここで $m$ は，$S$を左右に置いて，$s \u003c t$ の時に 左の$s$と右の$t$ を辺で結んだ二部グラフ における最大マッチングのサイズである．\nDilworth の定理だけではなく，König の定理も知っていると良い感じです．\n以下の記述 (定理の証明) は，Wikipedia の Dilworth’s theorem と Konig’s theorem に依っています．\n定義・記法 以下，順序とは，半順序のこと． 順序集合 $\\mathcal{S} = (S, \u003c)$ において，$C \\subseteq S$ が鎖であるとは， $C$の任意の2要素が比較可能であること． $A \\subseteq S$ が反鎖であるとは， $A$の任意の2要素が比較不能であること． $D \\subseteq 2^S$が鎖分割であるとは，$D$が$S$の分割であり (つまり，$C, C’ \\in D, C \\neq C’ \\implies C\\cap C’ = \\emptyset$ で，$\\bigcup D = S$)，$D$の要素がすべて鎖であること．\n2部グラフ $(L, R, E)$ ($L$と$R$が頂点の集合，$E\\subseteq L\\times R$ が辺の集合) において， $e = (l, r) \\in E$ に対して，$l$, $r$ をそれぞれ $e_L$, $e_R$ と書く． $M \\subseteq E$ がマッチングであるとは，以下が成り立つこと:\n$e, e’ \\in M, e \\neq e’ \\implies e_L \\neq e’_L, e_R \\neq e’_R$ $C \\subseteq L \\cup R$ が頂点被覆であるとは， 任意の$e\\in E$ に対して $e_L \\in C$ または $e_R \\in C$ となること．\n自明な事実 補題 $A$ が反鎖，$D$ が鎖分割ならば，$|A| \\leq |D|$．\n証明 $D$ の要素である鎖には，$A$ の要素はたかだか1つしか入れない．(終)\n補題 $M$ がマッチング，$C$ が頂点被覆ならば，$|M| \\leq |C|$．\n証明 $e \\in M$ に対し，$e_L \\in C$ または $e_R \\in C$ の成り立つ方を 対応させる写像 $M \\to C$ は単射である． (終)\n定理たち Dilworth の定理 $|A| = |D|$ となる反鎖$A$と鎖分割$D$が存在する． 上の補題と合わせて，このサイズが反鎖の最大サイズ，鎖分割の最小サイズである．\nKönig の定理 $|M| = |C|$ となるマッチング$M$と頂点被覆$C$が存在する． 上の補題と合わせて，このサイズが，マッチングの最大サイズ，頂点被覆の最小サイズである．\n相互証明 Dilworth の定理と König の定理の片方を仮定すると， 他方を証明することができる．\nKönig → Dilworth 順序集合 $(S, \u003c)$ が与えられたとする． 左右に$S$を置いて，右が大きい組合せを辺でつないだ二部グラフ，つまり， $(S\\times \\{0\\}, S\\times\\{1\\}, \\{((s, 0), (t, 1)) \\mid s \u003c t\\})$ を考える． 最大マッチング$M$と最小頂点被覆$C$を取る．König の定理より， $m = |M| = |C|$ として良い．\n$A$ を，$C$ に現れない頂点の集合とする．つまり， $A = \\{ s \\in S \\mid (s, 0) \\not\\in C, (s, 1) \\not\\in C\\}$． すると，$A$は反鎖であり，$|S| - |C| \\leq |A|$ である．\n$S$ に，$M$ によって導かれる有向グラフ $(S, \\{(s, t) \\mid ((s, 0), (t, 1)) \\in M\\})$ を考える． $M$がマッチングなので，このグラフの頂点の入次数，出次数はたかだか1である． また，$(S, \u003c)$ は順序集合だから，グラフにループは存在しない． したがって，入次数0の頂点から始めて，辺をたどれるだけたどって得られる 集合の全体を $D$ とすると，$D$ は，$S$ の鎖分割になり，$|D| = |S| - |M|$ である．\n以上まとめて，$|D| = |S| - m \\leq |A| \\leq |D|$ となるから， $|A| = |D| = |S| - m$ が得られた．(終)\nDilworth → König (この部分は，ABC237Ex には直接必要ではない)\n2部グラフ $(L, R, E)$ が与えられたとする．$S = L \\cup R$ として， 順序集合 $(S, E)$ を考える． 最大反鎖$A$と最小鎖分割$D$をとる． Dilworth の定理より，$|A| = |D|$ である． $D$ の要素は，単元集合であるか，辺を構成する2点であるかのいずれかである． 前者の集合を $D_1$, 後者の集合を $D_2$ とする．\n$D$は鎖分割であるから，$M = D_2$はマッチングとなる． $C = S \\setminus A$ とすると，$A$は反鎖であるから，$C$は頂点被覆である． $|M| = |C|$ となることを見るために，次を示す:\n$\\bigcup D_1 \\subseteq A$ $e\\in D_2$ に対し，$e_L \\in A$ と $e_R \\in A$ のうちちょうど一方が成り立つ $p = |\\bigcup D_1 \\setminus A|$ とする． $D_2$ の要素 $e$ については，$e$ は 鎖なので， $e_L \\in A$ と $e_R \\in A$ の両方は成り立たないが，両方とも成り立たない ものの数を $q$ とする．すると， $|D| = |A| \\leq (|D_1| - p) + (|D_2| - q) = |D| - (p + q) \\leq |D|$ であるから，$p = q = 0$ でなければならない．\nしたがって，$|A| = |D_1| + |D_2|$ であり，$|S| = |D_1| + 2 |D_2|$ とあわせて，$|C| = |S| - |A| = |D_2| = |M|$ が得られた．(終)\nKönig の定理の証明 二部グラフ$(L, R, E)$ の最大マッチング$M$をとる． $M_L := \\{ e_L \\mid e \\in M \\}$， $M_R := \\{ e_R \\mid e \\in M \\}$， $m := |M|$ とする．以下のように定義する．\n$L_0 := L \\setminus M_L$ $F_i := \\{ e \\in E \\setminus M \\mid e_L \\in L_0 \\}$ $R_i := \\{ e_R \\mid e \\in F_i \\}$ $G_i := \\{ e \\in M \\mid e_R \\in R_i \\}$ $L_{i + 1} := \\{ e_L \\mid e \\in G_i \\}$ $C := (L \\setminus \\bigcup_i L_i) \\cup \\bigcup_i R_i$ 主張1: C は頂点被覆である． $e \\in E$ を取り，$e_L \\not\\in C$ を 仮定し，$e_R \\in C$ を言えば良い．仮定より $e_L \\in L_i$ となる $i$ がとれる．\n$e \\in E \\setminus M$ のときには，$e_R \\in R_i \\subseteq C$ である． $e \\in M$ のときには，定義より $i \\neq 0$ である．したがって， $e’ \\in G_{i-1}$ なる $e’$ がとれて，$e_L = e’_L$ である． $e, e’ \\in M$ で $M$ はマッチングであるから， $e = e’$ となり，$e_R = e’R \\in R{i-1} \\subseteq C$ である． 主張2: $C \\subseteq M_L \\cup M_R$ $s \\in C \\cap L$ については， $C \\cap L = L \\setminus \\bigcup_i L_i \\subseteq L \\setminus L_i = M_L$ から従う． $s \\in C\\cap R = \\bigcup_i R_i$ について．$s \\not\\in M_R$ であると仮定する． $s \\in R_i$ とすると，$l_0, r_0, l_1, \\ldots, r_i = s$ なる$S$の 列が取れて，$(l_j, r_j) \\in E \\setminus M$, $(l_{j + 1}, r_j) \\in M$ となる． ここで，$M’ \\subseteq E$ を， $M’ = M \\setminus \\{(l_{j + 1}, r_j) \\mid j = 0, \\ldots i-1\\} \\cup \\{(l_j, r_j) \\mid j = 0, \\ldots, i\\}$ で定義すると， $M’$ はマッチングとなり，$|M’| = |M| + 1$ であるから，$M$ が最大マッチング であることに反する．したがって，$s \\in M_R$ でなければならない．\n主張3: $e \\in M$ ならば，$e_L \\not\\in C$ または $e_R \\not\\in C$ $e\\in M$ かつ $e_R \\in C$ とする．$e_R \\in R_i$ となる $i$ がとれる． すると，$e \\in G_i$ であり，したがって，$e_L \\in L_{i+1}$ である． ゆえに，$e_L \\not\\in C$.\n主張2,3より，$C \\to M$ への単射が構成できるので，$|C| \\leq |M|$． 従って補題より $|C| = |M|$ である．主張1と合わせて定理が証明された．(終)\n命題1の証明 König の定理 (いま証明した) を前提とすれば， 上記 König → Dilworth の証明から明らか．(終)\n",
+  "wordCount" : "734",
+  "inLanguage": "en",
+  "datePublished": "2022-02-02T10:34:31+09:00",
+  "dateModified": "2022-02-02T10:34:31+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Dilworthの定理, Konigの定理
+    </h1>
+    <div class="post-meta">2022-02-02&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="趣旨">趣旨<a hidden class="anchor" aria-hidden="true" href="#趣旨">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc237/tasks/abc237_h" target="_blank">AtCoder Beginner Contest 237 (ABC237) Ex Hakata</a>
+ の
+<a href="https://atcoder.jp/contests/abc237/editorial/3321" target="_blank">公式解説</a>
+ に，
+Dilworth の定理を使って解ける，と書いてあるのですが，
+それを読んだだけでは (当然?) わからなかったので，
+(自分が) わかるように書こうという趣旨です．</p>
+<p>結局，この問題を解くには，次の事実が必要であると思います
+(言葉は下の方で定義しています)．</p>
+<h4 id="命題1">命題1<a hidden class="anchor" aria-hidden="true" href="#命題1">#</a></h4>
+<blockquote>
+<p>順序集合 $(S, &lt;)$ の反鎖のサイズの最大値は，$|S| - m$ である．
+ここで $m$ は，$S$を左右に置いて，$s &lt; t$ の時に
+左の$s$と右の$t$ を辺で結んだ二部グラフ
+における最大マッチングのサイズである．</p>
+</blockquote>
+<p>Dilworth の定理だけではなく，König の定理も知っていると良い感じです．</p>
+<p>以下の記述 (定理の証明) は，Wikipedia の
+<a href="https://en.wikipedia.org/wiki/Dilworth%27s_theorem">Dilworth&rsquo;s theorem</a> と
+<a href="https://en.wikipedia.org/wiki/K%C5%91nig%27s_theorem_(graph_theory)">Konig&rsquo;s theorem</a>
+に依っています．</p>
+<h2 id="定義記法">定義・記法<a hidden class="anchor" aria-hidden="true" href="#定義記法">#</a></h2>
+<p>以下，順序とは，半順序のこと．
+順序集合 $\mathcal{S} = (S, &lt;)$ において，$C \subseteq S$ が鎖であるとは，
+$C$の任意の2要素が比較可能であること．
+$A \subseteq S$ が反鎖であるとは，
+$A$の任意の2要素が比較不能であること．
+$D \subseteq 2^S$が鎖分割であるとは，$D$が$S$の分割であり
+(つまり，$C, C&rsquo; \in D, C \neq C&rsquo; \implies C\cap C&rsquo; = \emptyset$
+で，$\bigcup D = S$)，$D$の要素がすべて鎖であること．</p>
+<p>2部グラフ $(L, R, E)$
+($L$と$R$が頂点の集合，$E\subseteq L\times R$ が辺の集合) において，
+$e = (l, r) \in E$ に対して，$l$, $r$ をそれぞれ $e_L$, $e_R$ と書く．
+$M \subseteq E$ がマッチングであるとは，以下が成り立つこと:</p>
+<ul>
+<li>$e, e&rsquo; \in M, e \neq e&rsquo; \implies e_L \neq e&rsquo;_L, e_R \neq e&rsquo;_R$</li>
+</ul>
+<p>$C \subseteq L \cup R$ が頂点被覆であるとは，
+任意の$e\in E$ に対して $e_L \in C$ または $e_R \in C$ となること．</p>
+<h2 id="自明な事実">自明な事実<a hidden class="anchor" aria-hidden="true" href="#自明な事実">#</a></h2>
+<h4 id="補題">補題<a hidden class="anchor" aria-hidden="true" href="#補題">#</a></h4>
+<blockquote>
+<p>$A$ が反鎖，$D$ が鎖分割ならば，$|A| \leq |D|$．</p>
+</blockquote>
+<h4 id="証明">証明<a hidden class="anchor" aria-hidden="true" href="#証明">#</a></h4>
+<p>$D$ の要素である鎖には，$A$ の要素はたかだか1つしか入れない．(終)</p>
+<h4 id="補題-1">補題<a hidden class="anchor" aria-hidden="true" href="#補題-1">#</a></h4>
+<blockquote>
+<p>$M$ がマッチング，$C$ が頂点被覆ならば，$|M| \leq |C|$．</p>
+</blockquote>
+<h4 id="証明-1">証明<a hidden class="anchor" aria-hidden="true" href="#証明-1">#</a></h4>
+<p>$e \in M$ に対し，$e_L \in C$ または $e_R \in C$ の成り立つ方を
+対応させる写像 $M \to C$ は単射である． (終)</p>
+<h2 id="定理たち">定理たち<a hidden class="anchor" aria-hidden="true" href="#定理たち">#</a></h2>
+<h4 id="dilworth-の定理">Dilworth の定理<a hidden class="anchor" aria-hidden="true" href="#dilworth-の定理">#</a></h4>
+<blockquote>
+<p>$|A| = |D|$ となる反鎖$A$と鎖分割$D$が存在する．
+上の補題と合わせて，このサイズが反鎖の最大サイズ，鎖分割の最小サイズである．</p>
+</blockquote>
+<h4 id="koumlnig-の定理">König の定理<a hidden class="anchor" aria-hidden="true" href="#koumlnig-の定理">#</a></h4>
+<blockquote>
+<p>$|M| = |C|$ となるマッチング$M$と頂点被覆$C$が存在する．
+上の補題と合わせて，このサイズが，マッチングの最大サイズ，頂点被覆の最小サイズである．</p>
+</blockquote>
+<h2 id="相互証明">相互証明<a hidden class="anchor" aria-hidden="true" href="#相互証明">#</a></h2>
+<p>Dilworth の定理と König の定理の片方を仮定すると，
+他方を証明することができる．</p>
+<h4 id="koumlnig--dilworth">König → Dilworth<a hidden class="anchor" aria-hidden="true" href="#koumlnig--dilworth">#</a></h4>
+<p>順序集合 $(S, &lt;)$ が与えられたとする．
+左右に$S$を置いて，右が大きい組合せを辺でつないだ二部グラフ，つまり，
+$(S\times \{0\}, S\times\{1\}, \{((s, 0), (t, 1)) \mid s &lt; t\})$
+を考える．
+最大マッチング$M$と最小頂点被覆$C$を取る．König の定理より，
+$m = |M| = |C|$ として良い．</p>
+<p>$A$ を，$C$ に現れない頂点の集合とする．つまり，
+$A = \{ s \in S \mid (s, 0) \not\in C, (s, 1) \not\in C\}$．
+すると，$A$は反鎖であり，$|S| - |C| \leq |A|$ である．</p>
+<p>$S$ に，$M$ によって導かれる有向グラフ
+$(S, \{(s, t) \mid ((s, 0), (t, 1)) \in M\})$ を考える．
+$M$がマッチングなので，このグラフの頂点の入次数，出次数はたかだか1である．
+また，$(S, &lt;)$ は順序集合だから，グラフにループは存在しない．
+したがって，入次数0の頂点から始めて，辺をたどれるだけたどって得られる
+集合の全体を $D$ とすると，$D$ は，$S$ の鎖分割になり，$|D| = |S| - |M|$
+である．</p>
+<p>以上まとめて，$|D| = |S| - m \leq |A| \leq |D|$ となるから，
+$|A| = |D| = |S| - m$ が得られた．(終)</p>
+<h4 id="dilworth--koumlnig">Dilworth → König<a hidden class="anchor" aria-hidden="true" href="#dilworth--koumlnig">#</a></h4>
+<p>(この部分は，ABC237Ex には直接必要ではない)</p>
+<p>2部グラフ $(L, R, E)$ が与えられたとする．$S = L \cup R$ として，
+順序集合 $(S, E)$ を考える．
+最大反鎖$A$と最小鎖分割$D$をとる．
+Dilworth の定理より，$|A| = |D|$ である．
+$D$ の要素は，単元集合であるか，辺を構成する2点であるかのいずれかである．
+前者の集合を $D_1$, 後者の集合を $D_2$ とする．</p>
+<p>$D$は鎖分割であるから，$M = D_2$はマッチングとなる．
+$C = S \setminus A$ とすると，$A$は反鎖であるから，$C$は頂点被覆である．
+$|M| = |C|$ となることを見るために，次を示す:</p>
+<ul>
+<li>$\bigcup D_1 \subseteq A$</li>
+<li>$e\in D_2$ に対し，$e_L \in A$ と $e_R \in A$ のうちちょうど一方が成り立つ</li>
+</ul>
+<p>$p = |\bigcup D_1 \setminus A|$ とする．
+$D_2$ の要素 $e$ については，$e$ は 鎖なので，
+$e_L \in A$ と $e_R \in A$ の両方は成り立たないが，両方とも成り立たない
+ものの数を $q$ とする．すると，
+$|D| = |A| \leq (|D_1| - p) + (|D_2| - q) = |D| - (p + q) \leq |D|$
+であるから，$p = q = 0$ でなければならない．</p>
+<p>したがって，$|A| = |D_1| + |D_2|$ であり，$|S| = |D_1| + 2 |D_2|$
+とあわせて，$|C| = |S| - |A| = |D_2| = |M|$ が得られた．(終)</p>
+<h2 id="koumlnig-の定理の証明">König の定理の証明<a hidden class="anchor" aria-hidden="true" href="#koumlnig-の定理の証明">#</a></h2>
+<p>二部グラフ$(L, R, E)$ の最大マッチング$M$をとる．
+$M_L := \{ e_L \mid e \in M \}$，
+$M_R := \{ e_R \mid e \in M \}$，
+$m := |M|$ とする．以下のように定義する．</p>
+<ul>
+<li>$L_0 := L \setminus M_L$</li>
+<li>$F_i := \{ e \in E \setminus M \mid e_L \in L_0 \}$</li>
+<li>$R_i := \{ e_R \mid e \in F_i \}$</li>
+<li>$G_i := \{ e \in M \mid e_R \in R_i \}$</li>
+<li>$L_{i + 1} := \{ e_L \mid e \in G_i \}$</li>
+<li>$C := (L \setminus \bigcup_i L_i) \cup \bigcup_i R_i$</li>
+</ul>
+<h5 id="主張1-c-は頂点被覆である">主張1: C は頂点被覆である．<a hidden class="anchor" aria-hidden="true" href="#主張1-c-は頂点被覆である">#</a></h5>
+<p>$e \in E$ を取り，$e_L \not\in C$ を
+仮定し，$e_R \in C$ を言えば良い．仮定より $e_L \in L_i$
+となる $i$ がとれる．</p>
+<ul>
+<li>$e \in E \setminus M$ のときには，$e_R \in R_i \subseteq C$ である．</li>
+<li>$e \in M$ のときには，定義より $i \neq 0$ である．したがって，
+$e&rsquo; \in G_{i-1}$ なる $e&rsquo;$ がとれて，$e_L = e&rsquo;_L$ である．
+$e, e&rsquo; \in M$ で $M$ はマッチングであるから，
+$e = e&rsquo;$ となり，$e_R = e&rsquo;<em>R \in R</em>{i-1} \subseteq C$
+である．</li>
+</ul>
+<h5 id="主張2-c-subseteq-m_l-cup-m_r">主張2: $C \subseteq M_L \cup M_R$<a hidden class="anchor" aria-hidden="true" href="#主張2-c-subseteq-m_l-cup-m_r">#</a></h5>
+<p>$s \in C \cap L$ については，
+$C \cap L = L \setminus \bigcup_i L_i \subseteq L \setminus L_i = M_L$
+から従う．
+$s \in C\cap R = \bigcup_i R_i$ について．$s \not\in M_R$ であると仮定する．
+$s \in R_i$ とすると，$l_0, r_0, l_1, \ldots, r_i = s$ なる$S$の
+列が取れて，$(l_j, r_j) \in E \setminus M$, $(l_{j + 1}, r_j) \in M$ となる．
+ここで，$M&rsquo; \subseteq E$ を，
+$M&rsquo; = M \setminus \{(l_{j + 1}, r_j) \mid j = 0, \ldots i-1\}
+\cup \{(l_j, r_j) \mid j = 0, \ldots, i\}$ で定義すると，
+$M&rsquo;$ はマッチングとなり，$|M&rsquo;| = |M| + 1$ であるから，$M$ が最大マッチング
+であることに反する．したがって，$s \in M_R$ でなければならない．</p>
+<h5 id="主張3-e-in-m-ならばe_l-notin-c-または-e_r-notin-c">主張3: $e \in M$ ならば，$e_L \not\in C$ または $e_R \not\in C$<a hidden class="anchor" aria-hidden="true" href="#主張3-e-in-m-ならばe_l-notin-c-または-e_r-notin-c">#</a></h5>
+<p>$e\in M$ かつ $e_R \in C$ とする．$e_R \in R_i$ となる $i$ がとれる．
+すると，$e \in G_i$ であり，したがって，$e_L \in L_{i+1}$ である．
+ゆえに，$e_L \not\in C$.</p>
+<p>主張2,3より，$C \to M$ への単射が構成できるので，$|C| \leq |M|$．
+従って補題より $|C| = |M|$ である．主張1と合わせて定理が証明された．(終)</p>
+<h2 id="命題1の証明">命題1の証明<a hidden class="anchor" aria-hidden="true" href="#命題1の証明">#</a></h2>
+<p>König の定理 (いま証明した) を前提とすれば，
+上記 König → Dilworth の証明から明らか．(終)</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/dilworth/">Dilworth</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/konig/">Konig</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>素因数分解に要する時間</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/01-09-divide-a-sequence/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Divide A Sequence - AtCoder Beginner Contest 234 G</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2022/02-02-dilworth-konig/" data-title="Dilworthの定理, Konigの定理">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

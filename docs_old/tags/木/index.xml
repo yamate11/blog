@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>木 on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/%E6%9C%A8/</link>
+    <description>Recent content in 木 on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 13 Mar 2024 13:41:23 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/%E6%9C%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>木ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</link>
+      <pubDate>Wed, 13 Mar 2024 13:41:23 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</guid>
+      <description>自分用の木のライブラリのメモです．
+1. 典型的な使用法 ll N; cin &amp;gt;&amp;gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b &amp;gt;&amp;gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;amp;](auto rF, ll nd) -&amp;gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.</description>
+    </item>
+    <item>
+      <title>木の直径</title>
+      <link>https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/</link>
+      <pubDate>Sun, 10 Oct 2021 12:27:09 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/</guid>
+      <description>木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．</description>
+    </item>
+  </channel>
+</rss>
