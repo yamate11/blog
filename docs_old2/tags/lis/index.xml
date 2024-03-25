@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LIS on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/lis/</link>
+    <description>Recent content in LIS on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 19 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/lis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Random LIS - Atcoder Regular Contest 104 E</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-19-random-lis/</link>
+      <pubDate>Thu, 19 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-19-random-lis/</guid>
+      <description>Atcoder Regular Contest 104 (ARC 104) E Random LIS に関する記事です．
+問題文へのリンク https://atcoder.jp/contests/arc104/tasks/arc104_e 経緯 過去問埋めで解いてみようとしましたが，全然わかりませんでした． 公式解説 を読んでもやっぱりわからず， けんちょんさんの解説 を読んで，なんとか理解することができました．
+解法 例えば，N = 4 として，数列 10 7 10 15 と数列 5 1 5 2000 は， 数値の差こそあれ，大小関係は同一である．これらを 1 0 1 2 というパターンとして 1つのグループとしてまとめることにする．以下を実行する．
+全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &amp;lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
+$\{0, 1\} \cup \{A_i + 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, .</description>
+    </item>
+  </channel>
+</rss>

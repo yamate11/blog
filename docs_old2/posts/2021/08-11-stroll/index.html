@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Stroll - Atcoder Beginner Contest 213 H | yamate11のブログ</title>
+<meta name="keywords" content="オンラインDP, オフラインDP, 分割統治DP, DP, 分割統治FFT, FFT">
+<meta name="description" content="解けませんでした．オンライン・オフライン変換を調べて書きました．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="Stroll - Atcoder Beginner Contest 213 H" />
+<meta property="og:description" content="解けませんでした．オンライン・オフライン変換を調べて書きました．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/08-11-stroll/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-11T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Stroll - Atcoder Beginner Contest 213 H"/>
+<meta name="twitter:description" content="解けませんでした．オンライン・オフライン変換を調べて書きました．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Stroll - Atcoder Beginner Contest 213 H",
+      "item": "https://yamate11.github.io/blog/posts/2021/08-11-stroll/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Stroll - Atcoder Beginner Contest 213 H",
+  "name": "Stroll - Atcoder Beginner Contest 213 H",
+  "description": "解けませんでした．オンライン・オフライン変換を調べて書きました．",
+  "keywords": [
+    "オンラインDP", "オフラインDP", "分割統治DP", "DP", "分割統治FFT", "FFT"
+  ],
+  "articleBody": "Atcoder Beginner Contest 213 (ABC-213) H - Stroll の解法です．\n問題へのリンク 解法 公式解説 を読んでもよくわからなかったのですが， Motsu_xeさんによる，オフライン・オンライン変換 の説明がわかりやすかったです． 以下の説明は，ほとんど，上の2つの記事に依っています．\n記法を定めます．\n$f(x, i) :=$ 地点$x$に距離$i$で到達する方法の数 $p(x, y, i) :=$ 地点 $x$ と地点 $y$ を結ぶ距離 $i$ の道の数 $X := \\{1, \\ldots, N\\}$ したがって，$f(1, T)$ が求める答です．次の関係が成り立ちます:\n$f(1, 0) = 1$ $f(y, 0) = 0\\quad(y \\neq 1)$ $f(x, i) = \\sum \\{ f(y, j) \\cdot p(x, y, i - j) \\mid y \\in X, j \\in [0, i) \\}$ 最後の式は，一見，畳み込みですが，右辺にも $f$ が出てきてしまうので， ただちには FFT に渡せません．ここを 分割統治FFTなる手法で求めようという趣旨であるようです．\nさらに記法です．上の最後の式を少しいじります．\n$ s(x, i, l, m) := \\sum \\{ f(y, j) \\cdot p(x, y, i - j) \\mid y \\in X, j \\in [l, m) \\}$ 見比べて，次が成り立ちます:\n$ f(x, i) = s(x, i, 0, i) $ DPで，dp[x, i] を計算していきます． 2つの手続き solve(l, r) と induce(l, m, r) を次のように定めます． a:b は，Python風に半開区間 [a,b) を表すものとします． 配列 v に対して，v[a:b] は，vの，添字a以上b未満の部分です．\nprocedure solve(l, r) { assume(forall i \\in [0,l), x \\in X. dp[x, i] == f(x, i)) assume(forall i \\in [l,r), x \\in X. dp[x, i] == s(x, i, 0, l)) if (l + 1 == r) return; m := floor((l + r) / 2); call solve(l, m); call induce(l, m, r); call solve(m, r); assert(forall i \\in [0,r), x \\in X. dp[x, i] == f(x, i)) } procedure induce(l, m, r) { assume(forall i \\in [0,m), x \\in X. dp[x, i] == f(x, i)) assert(forall i \\in [m,r), x \\in X. dp[x, i] == s(x, i, 0, l)) for (x,y such that p[x,y] is non-zero) { v1 = convolution(dp[x][l:m], p[x, y][0:r-l]) dp[y][m:r] += v1[m-l:r-l] v2 = convolution(dp[y][l:m], p[x, y][0:r-l]) dp[x][m:r] += v2[m-l:r-l] } assert(forall i \\in [0,m), x \\in X. dp[x, i] == f(x, i)) assert(forall i \\in [m,r), x \\in X. dp[x, i] == s(x, i, 1, m)) } $f(x, i) = s(x, i, 0, i)$ であることと， assume と assert の主張から， dp[x, i] == s(x, i, 0, g(i)) (for all x \\in X) となる関数 g が， solve と induce によって，以下のように変化することが分かります．\ninduce を実行する際に，dp[.][l:m] が f(.)[l:m] に一致しているので， (オフラインになって) ここに FFT が使える，ということになります．\n以下を実行すると，答が dp[1][T] に求められます．\nfor x in 1:(N+1) { dp[x, 0] := if x == 1 then 1 else 0 } solve(0, T + 1) 計算量については特に付け加えることはないので，参照している記事をご覧下さい．\nACコード https://atcoder.jp/contests/abc213/submissions/24966725 ",
+  "wordCount" : "351",
+  "inLanguage": "en",
+  "datePublished": "2021-08-11T00:00:00Z",
+  "dateModified": "2021-08-11T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/08-11-stroll/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Stroll - Atcoder Beginner Contest 213 H
+    </h1>
+    <div class="post-meta">2021-08-11&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>Atcoder Beginner Contest 213 (ABC-213) H - Stroll の解法です．</p>
+<h2 id="問題へのリンク">問題へのリンク<a hidden class="anchor" aria-hidden="true" href="#問題へのリンク">#</a></h2>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://atcoder.jp/contests/abc213/tasks/abc213_h" data-iframely-url="//cdn.iframe.ly/HurOZMX"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc213/editorial/2396" target="_blank">公式解説</a>
+
+を読んでもよくわからなかったのですが，
+<a href="https://motsu-xe.hatenablog.com/entry/2020/10/13/195949" target="_blank">Motsu_xeさんによる，オフライン・オンライン変換</a>
+
+の説明がわかりやすかったです．
+以下の説明は，ほとんど，上の2つの記事に依っています．</p>
+<p>記法を定めます．</p>
+<ul>
+<li>$f(x, i) :=$ 地点$x$に距離$i$で到達する方法の数</li>
+<li>$p(x, y, i) :=$ 地点 $x$ と地点 $y$ を結ぶ距離 $i$ の道の数</li>
+<li>$X := \{1, \ldots, N\}$</li>
+</ul>
+<p>したがって，$f(1, T)$ が求める答です．次の関係が成り立ちます:</p>
+<ul>
+<li>$f(1, 0) = 1$</li>
+<li>$f(y, 0) = 0\quad(y \neq 1)$</li>
+<li>$f(x, i) = \sum \{ f(y, j) \cdot p(x, y, i - j) \mid y \in X, j \in [0, i) \}$</li>
+</ul>
+<p>最後の式は，一見，畳み込みですが，右辺にも $f$ が出てきてしまうので，
+ただちには FFT に渡せません．ここを
+分割統治FFTなる手法で求めようという趣旨であるようです．</p>
+<p>さらに記法です．上の最後の式を少しいじります．</p>
+<ul>
+<li>$ s(x, i, l, m) := \sum \{ f(y, j) \cdot p(x, y, i - j) \mid y \in X, j \in [l, m) \}$</li>
+</ul>
+<p>見比べて，次が成り立ちます:</p>
+<ul>
+<li>$ f(x, i) = s(x, i, 0, i) $</li>
+</ul>
+<p>DPで，dp[x, i] を計算していきます．
+2つの手続き solve(l, r) と induce(l, m, r) を次のように定めます．
+<code>a:b</code> は，Python風に半開区間 <code>[a,b)</code> を表すものとします．
+配列 v に対して，v[a:b] は，vの，添字a以上b未満の部分です．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>procedure solve(l, r) {
+</span></span><span style="display:flex;"><span>    assume(forall i \in [0,l), x \in X.  dp[x, i] == f(x, i))
+</span></span><span style="display:flex;"><span>    assume(forall i \in [l,r), x \in X.  dp[x, i] == s(x, i, 0, l))
+</span></span><span style="display:flex;"><span>    if (l + 1 == r) return;
+</span></span><span style="display:flex;"><span>    m := floor((l + r) / 2);
+</span></span><span style="display:flex;"><span>    call solve(l, m);
+</span></span><span style="display:flex;"><span>    call induce(l, m, r);
+</span></span><span style="display:flex;"><span>    call solve(m, r);
+</span></span><span style="display:flex;"><span>    assert(forall i \in [0,r), x \in X.  dp[x, i] == f(x, i))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>procedure induce(l, m, r) {
+</span></span><span style="display:flex;"><span>    assume(forall i \in [0,m), x \in X.  dp[x, i] == f(x, i))
+</span></span><span style="display:flex;"><span>    assert(forall i \in [m,r), x \in X.  dp[x, i] == s(x, i, 0, l))
+</span></span><span style="display:flex;"><span>    for (x,y such that p[x,y] is non-zero) {
+</span></span><span style="display:flex;"><span>        v1 = convolution(dp[x][l:m], p[x, y][0:r-l])
+</span></span><span style="display:flex;"><span>        dp[y][m:r] += v1[m-l:r-l]
+</span></span><span style="display:flex;"><span>        v2 = convolution(dp[y][l:m], p[x, y][0:r-l])
+</span></span><span style="display:flex;"><span>        dp[x][m:r] += v2[m-l:r-l]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    assert(forall i \in [0,m), x \in X.  dp[x, i] == f(x, i))
+</span></span><span style="display:flex;"><span>    assert(forall i \in [m,r), x \in X.  dp[x, i] == s(x, i, 1, m))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>$f(x, i) = s(x, i, 0, i)$ であることと，
+assume と assert の主張から，
+<code>dp[x, i] == s(x, i, 0, g(i))</code> (for all x \in X) となる関数 g が，
+solve と induce によって，以下のように変化することが分かります．</p>
+<img src="fig1.png">
+<p>induce を実行する際に，dp[.][l:m] が f(.)[l:m] に一致しているので，
+(オフラインになって)
+ここに FFT が使える，ということになります．</p>
+<p>以下を実行すると，答が <code>dp[1][T]</code> に求められます．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>for x in 1:(N+1) { dp[x, 0] := if x == 1 then 1 else 0 }
+</span></span><span style="display:flex;"><span>solve(0, T + 1)
+</span></span></code></pre></div><p>計算量については特に付け加えることはないので，参照している記事をご覧下さい．</p>
+<h2 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc213/submissions/24966725" target="_blank">https://atcoder.jp/contests/abc213/submissions/24966725</a>
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3dp/">オンラインDP</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3dp/">オフラインDP</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E5%88%86%E5%89%B2%E7%B5%B1%E6%B2%BBdp/">分割統治DP</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/dp/">DP</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/%E5%88%86%E5%89%B2%E7%B5%B1%E6%B2%BBfft/">分割統治FFT</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/fft/">FFT</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>イベント巡り (Event Hopping) - JOI 2020/2021 二次予選</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/">
+    <span class="title">Next »</span>
+    <br>
+    <span>距離: BFSとダイクストラ</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2021/08-11-stroll/" data-title="Stroll - Atcoder Beginner Contest 213 H">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

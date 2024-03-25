@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>boost の多倍長計算 | yamate11のブログ</title>
+<meta name="keywords" content="多倍長">
+<meta name="description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s.">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="boost の多倍長計算" />
+<meta property="og:description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-05T16:37:09+09:00" />
+<meta property="article:modified_time" content="2023-11-05T16:37:09+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="boost の多倍長計算"/>
+<meta name="twitter:description" content="AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "boost の多倍長計算",
+      "item": "https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "boost の多倍長計算",
+  "name": "boost の多倍長計算",
+  "description": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include \u0026lt;boost/multiprecision/cpp_int.hpp\u0026gt; // 整数を使う時 #include \u0026lt;boost/multiprecision/cpp_bin_float.hpp\u0026gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplate\u0026lt;typename T\u0026gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b \u0026gt; 0) { if (b \u0026amp; 1LL) rv *= twoPow; twoPow *= twoPow; b \u0026gt;\u0026gt;= 1; } return rv; } cpp_int solve() { string s; cin \u0026gt;\u0026gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo + 1) * (lo + 1); cpp_int th = power(cpp_int(100), s.",
+  "keywords": [
+    "多倍長"
+  ],
+  "articleBody": "AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．\nヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)\n#include // 整数を使う時 #include // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．\n例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．\ntemplate\u003ctypename T\u003e T power(T a, ll b) { T twoPow = a; T rv = 1; while (b \u003e 0) { if (b \u0026 1LL) rv *= twoPow; twoPow *= twoPow; b \u003e\u003e= 1; } return rv; } cpp_int solve() { string s; cin \u003e\u003e s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo + 1) * (lo + 1); cpp_int th = power(cpp_int(100), s.size()); while (true) { cpp_int p = lo2 / th; cpp_int q1 = th * p; if (lo2 \u003c= q1 \u0026\u0026 q1 \u003c hi2) return p; cpp_int q2 = th * (p+1); if (lo2 \u003c= q2 \u0026\u0026 q2 \u003c hi2) return p+1; th /= 100; } } int main(int argc, char *argv[]) { ios_base::sync_with_stdio(false); cin.tie(nullptr); cout \u003c\u003c solve() \u003c\u003c endl; return 0; } 浮動小数点数 cpp_bin_floatなんちゃら，という型が使えます．\ncpp_bin_float_quad … 4倍精度浮動小数点数 (仮数113ビット，指数15ビット) cpp_bin_float_50 … 精度50桁 (十進で)．指数部は整数 (だいたい INT_MIN から INT_MAX まで．正確には少し狭い．) cpp_bin_float_100 … 精度100桁 (十進で)．指数部は上と同じ もっと必要な場合 (どんな場合だろうか?)，自分で定義できます．精度200桁で指数部に long long を使いたい場合:\nusing mydouble = number\u003ccpp_bin_float\u003c200, digit_base_10, void, long long\u003e\u003e; mydouble x = 10; cout \u003c\u003c setprecision(205); for (ll i = 0; i \u003c 32; i++) { x = x * x; cout \u003c\u003c x \u003c\u003c endl; } 例 こんなんでいいのかどうかわかりませんが，パナソニックプログラミングコンテスト2020 の C - Sqrt Inequality は，以下で通ります．\n#include #include using namespace std; using namespace boost::multiprecision; using mydouble = cpp_bin_float_100; int main(int argc, char *argv[]) { mydouble err(\"1e-80\"); mydouble a, b, c; cin \u003e\u003e a \u003e\u003e b \u003e\u003e c; cout \u003c\u003c (sqrt(a) + sqrt(b) + err \u003c sqrt(c) ? \"Yes\" : \"No\") \u003c\u003c endl; return 0; } ",
+  "wordCount" : "286",
+  "inLanguage": "en",
+  "datePublished": "2023-11-05T16:37:09+09:00",
+  "dateModified": "2023-11-05T16:37:09+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      boost の多倍長計算
+    </h1>
+    <div class="post-meta">2023-11-05&amp;nbsp;·&amp;nbsp;2020-03-16 (初版)&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>AtCoderでは C++ で boost が使えるので，多倍長計算をすることができます．</p>
+<h2 id="ヘッダ部分">ヘッダ部分<a hidden class="anchor" aria-hidden="true" href="#ヘッダ部分">#</a></h2>
+<p>先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_int.hpp&gt;</span><span style="color:#75715e">           </span><span style="color:#75715e">// 整数を使う時
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_bin_float.hpp&gt;</span><span style="color:#75715e">     </span><span style="color:#75715e">// 浮動小数点数を使う時
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">boost</span><span style="color:#f92672">::</span><span style="color:#111">multiprecision</span><span style="color:#111">;</span>
+</span></span></code></pre></div><h2 id="整数">整数<a hidden class="anchor" aria-hidden="true" href="#整数">#</a></h2>
+<p>多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．</p>
+<h3 id="例">例<a hidden class="anchor" aria-hidden="true" href="#例">#</a></h3>
+<p>「<a href="https://atcoder.jp/contests/arc057/tasks/arc057_c" target="_blank">AtCoder Regular Contest 057-C 2乗根</a>
+」を解いてみたコードです．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">T</span> <span style="color:#111">power</span><span style="color:#111">(</span><span style="color:#111">T</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">T</span> <span style="color:#111">twoPow</span> <span style="color:#f92672">=</span> <span style="color:#111">a</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">T</span> <span style="color:#111">rv</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">b</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">b</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1LL</span><span style="color:#111">)</span> <span style="color:#111">rv</span> <span style="color:#f92672">*=</span> <span style="color:#111">twoPow</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">twoPow</span> <span style="color:#f92672">*=</span> <span style="color:#111">twoPow</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">b</span> <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#111">rv</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">cpp_int</span> <span style="color:#75af00">solve</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">string</span> <span style="color:#111">s</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">s</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cpp_int</span> <span style="color:#111">lo</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">);</span>        <span style="color:#75715e">// 読み込んだ文字列をcpp_intに変換
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">cpp_int</span> <span style="color:#111">lo2</span> <span style="color:#f92672">=</span> <span style="color:#111">lo</span> <span style="color:#f92672">*</span> <span style="color:#111">lo</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cpp_int</span> <span style="color:#111">hi2</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">lo</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">(</span><span style="color:#111">lo</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cpp_int</span> <span style="color:#111">th</span> <span style="color:#f92672">=</span> <span style="color:#111">power</span><span style="color:#111">(</span><span style="color:#111">cpp_int</span><span style="color:#111">(</span><span style="color:#ae81ff">100</span><span style="color:#111">),</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">cpp_int</span> <span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">lo2</span> <span style="color:#f92672">/</span> <span style="color:#111">th</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">cpp_int</span> <span style="color:#111">q1</span> <span style="color:#f92672">=</span> <span style="color:#111">th</span> <span style="color:#f92672">*</span> <span style="color:#111">p</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">lo2</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">q1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">q1</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">hi2</span><span style="color:#111">)</span>  <span style="color:#00a8c8">return</span> <span style="color:#111">p</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">cpp_int</span> <span style="color:#111">q2</span> <span style="color:#f92672">=</span> <span style="color:#111">th</span> <span style="color:#f92672">*</span> <span style="color:#111">(</span><span style="color:#111">p</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">lo2</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">q2</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">q2</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">hi2</span><span style="color:#111">)</span>  <span style="color:#00a8c8">return</span> <span style="color:#111">p</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">th</span> <span style="color:#f92672">/=</span> <span style="color:#ae81ff">100</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[])</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ios_base</span><span style="color:#f92672">::</span><span style="color:#111">sync_with_stdio</span><span style="color:#111">(</span><span style="color:#111">false</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cin</span><span style="color:#111">.</span><span style="color:#111">tie</span><span style="color:#111">(</span><span style="color:#00a8c8">nullptr</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">solve</span><span style="color:#111">()</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><h2 id="浮動小数点数">浮動小数点数<a hidden class="anchor" aria-hidden="true" href="#浮動小数点数">#</a></h2>
+<p>cpp_bin_floatなんちゃら，という型が使えます．</p>
+<ul>
+<li><code>cpp_bin_float_quad</code> &hellip; 4倍精度浮動小数点数 (仮数113ビット，指数15ビット)</li>
+<li><code>cpp_bin_float_50</code> &hellip; 精度50桁 (十進で)．指数部は整数 (だいたい INT_MIN から INT_MAX まで．正確には少し狭い．)</li>
+<li><code>cpp_bin_float_100</code> &hellip; 精度100桁 (十進で)．指数部は上と同じ</li>
+</ul>
+<p>もっと必要な場合 (どんな場合だろうか?)，自分で定義できます．精度200桁で指数部に long long を使いたい場合:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">using</span> <span style="color:#111">mydouble</span> <span style="color:#f92672">=</span> <span style="color:#111">number</span><span style="color:#f92672">&lt;</span><span style="color:#111">cpp_bin_float</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">200</span><span style="color:#111">,</span> <span style="color:#111">digit_base_10</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span><span style="color:#111">,</span> <span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span><span style="color:#f92672">&gt;&gt;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">mydouble</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">setprecision</span><span style="color:#111">(</span><span style="color:#ae81ff">205</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">32</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span> <span style="color:#f92672">*</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">x</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><h3 id="例-1">例<a hidden class="anchor" aria-hidden="true" href="#例-1">#</a></h3>
+<p>こんなんでいいのかどうかわかりませんが，パナソニックプログラミングコンテスト2020 の
+<a href="https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_c" target="_blank">C - Sqrt Inequality</a>
+ は，以下で通ります．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;boost/multiprecision/cpp_bin_float.hpp&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">std</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">boost</span><span style="color:#f92672">::</span><span style="color:#111">multiprecision</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">using</span> <span style="color:#111">mydouble</span> <span style="color:#f92672">=</span> <span style="color:#111">cpp_bin_float_100</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[])</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">mydouble</span> <span style="color:#111">err</span><span style="color:#111">(</span><span style="color:#d88200">&#34;1e-80&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">mydouble</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#111">c</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">b</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">c</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">(</span><span style="color:#111">sqrt</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">sqrt</span><span style="color:#111">(</span><span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">err</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">sqrt</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">)</span> <span style="color:#f92672">?</span> <span style="color:#d88200">&#34;Yes&#34;</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#34;No&#34;</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E5%A4%9A%E5%80%8D%E9%95%B7/">多倍長</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Bookmarks</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
+    <span class="title">Next »</span>
+    <br>
+    <span>二重連結</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2023/11-05-boost-multi-prec/" data-title="boost の多倍長計算">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

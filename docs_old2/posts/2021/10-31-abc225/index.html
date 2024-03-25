@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ABC225 参加記 | yamate11のブログ</title>
+<meta name="keywords" content="">
+<meta name="description" content="AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2021/10-31-abc225/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="ABC225 参加記" />
+<meta property="og:description" content="AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2021/10-31-abc225/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-31T10:24:27+09:00" />
+<meta property="article:modified_time" content="2021-10-31T10:24:27+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ABC225 参加記"/>
+<meta name="twitter:description" content="AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -	Play Train / E - フ"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ABC225 参加記",
+      "item": "https://yamate11.github.io/blog/posts/2021/10-31-abc225/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ABC225 参加記",
+  "name": "ABC225 参加記",
+  "description": "AtCoder Beginner Contest 225 (ABC225) に参加して，ABCD 4完の 1004 位でした．冷えました．A - Distinct Strings / B - Star or Not / C - Calendar Validator / D -\tPlay Train / E - フ",
+  "keywords": [
+    
+  ],
+  "articleBody": "AtCoder Beginner Contest 225 (ABC225) に参加して， ABCD 4完の 1004 位でした．冷えました．\n問題へのリンク A -\tDistinct Strings 全部違えば6，2つ同じでもう一つが違えば3，全部同じなら1です．\nB -\tStar or Not 最初の2行で共通している頂点を見つけて (無ければ No)， 他の全部の行にその頂点が入っているかどうかチェックします．\nC -\tCalendar Validator 以下の条件をチェックします．\n行の先頭の値が 7 つずつ増える 行内では値が 1 つずつ増える 7 の倍数は，行末以外には現れない． D -\tPlay Train 各電車について，後と前の電車の番号を覚えておきます(無ければ-1)． クエリ1, 2 では O(1) で更新できます． クエリ3では，前の電車をたどって， 先頭に到達したら，そこから後の電車を順に出力していきます． 出力する電車の合計数が $10^6$ 以下なので，これで間に合います．\n「これで間に合う」ことに気づかず，他の方法を探し続けて 時間を浪費しました．\nE -\tフ 一応コードは時間内に書けたのですが，デバッグが間に合いませんでした．\n直観的には次のようにすればできます．\ni 番目の「フ」の下端と原点を結ぶ直線と，x軸とのなす角を b[i] とする． i 番目の「フ」の左端と原点を結ぶ直線と，x軸とのなす角を e[i] とする． すると，開区間 (b[i], e[i]) たちが交わらないようにたくさん取れ，という問題に なります．e[i] の昇順に並べ替えておいて，次のDPをします．\ndp[i] = i 番目の区間まで見たときに，重ならないようにとれる区間の数の最大値\ndp[i-1] まで決定したとすると， e[j] \u003c= b[i] なる最大の j を二分探索で取って， dp[i] := max(dp[j] + 1, dp[i-1]) で dp[i] が決定できます． dp[N] が求める答です．計算量は O(N log N)．\n実際には誤差が怖いので整数で計算します． 2つの半直線 (0,0) - (x1,y1) と (0,0) - (x2,y2) が x 軸となす角度の 大小だけ決定できれば良く，それは，x1 * y2 と y1 * x2 の大小を比較すれば わかります．\n大きく冷えました．来週頑張ります．\nyamate11さんのUNICORNプログラミングコンテスト2021(AtCoder Beginner Contest 225)での成績：1004位\nパフォーマンス：1425相当\nレーティング：1936→1894 (-42) :(#AtCoder #UNICORNプログラミングコンテスト2021(ABC225) https://t.co/5DrH4KnAj9\n— yamate11 (@_yamate11) October 30, 2021 ",
+  "wordCount" : "138",
+  "inLanguage": "en",
+  "datePublished": "2021-10-31T10:24:27+09:00",
+  "dateModified": "2021-10-31T10:24:27+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2021/10-31-abc225/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      ABC225 参加記
+    </h1>
+    <div class="post-meta">2021-10-31&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>AtCoder Beginner Contest 225 (ABC225) に参加して，
+ABCD 4完の 1004 位でした．冷えました．</p>
+<p><a href="https://atcoder.jp/contests/abc225/tasks" target="_blank">問題へのリンク</a>
+</p>
+<h2 id="a--distinct-strings">A -	Distinct Strings<a hidden class="anchor" aria-hidden="true" href="#a--distinct-strings">#</a></h2>
+<p>全部違えば6，2つ同じでもう一つが違えば3，全部同じなら1です．</p>
+<h2 id="b--star-or-not">B -	Star or Not<a hidden class="anchor" aria-hidden="true" href="#b--star-or-not">#</a></h2>
+<p>最初の2行で共通している頂点を見つけて (無ければ No)，
+他の全部の行にその頂点が入っているかどうかチェックします．</p>
+<h2 id="c--calendar-validator">C -	Calendar Validator<a hidden class="anchor" aria-hidden="true" href="#c--calendar-validator">#</a></h2>
+<p>以下の条件をチェックします．</p>
+<ul>
+<li>行の先頭の値が 7 つずつ増える</li>
+<li>行内では値が 1 つずつ増える</li>
+<li>7 の倍数は，行末以外には現れない．</li>
+</ul>
+<h2 id="d--play-train">D -	Play Train<a hidden class="anchor" aria-hidden="true" href="#d--play-train">#</a></h2>
+<p>各電車について，後と前の電車の番号を覚えておきます(無ければ-1)．
+クエリ1, 2 では O(1) で更新できます．
+クエリ3では，前の電車をたどって，
+先頭に到達したら，そこから後の電車を順に出力していきます．
+出力する電車の合計数が $10^6$ 以下なので，これで間に合います．</p>
+<p>「これで間に合う」ことに気づかず，他の方法を探し続けて
+時間を浪費しました．</p>
+<h2 id="e--フ">E -	フ<a hidden class="anchor" aria-hidden="true" href="#e--フ">#</a></h2>
+<p>一応コードは時間内に書けたのですが，デバッグが間に合いませんでした．</p>
+<p>直観的には次のようにすればできます．</p>
+<ul>
+<li>i 番目の「フ」の下端と原点を結ぶ直線と，x軸とのなす角を b[i] とする．</li>
+<li>i 番目の「フ」の左端と原点を結ぶ直線と，x軸とのなす角を e[i] とする．</li>
+</ul>
+<p>すると，開区間 (b[i], e[i]) たちが交わらないようにたくさん取れ，という問題に
+なります．e[i] の昇順に並べ替えておいて，次のDPをします．</p>
+<p>dp[i] = i 番目の区間まで見たときに，重ならないようにとれる区間の数の最大値</p>
+<p>dp[i-1] まで決定したとすると，
+e[j] &lt;= b[i] なる最大の j を二分探索で取って，
+dp[i] := max(dp[j] + 1, dp[i-1]) で dp[i] が決定できます．
+dp[N] が求める答です．計算量は O(N log N)．</p>
+<p>実際には誤差が怖いので整数で計算します．
+2つの半直線 (0,0) - (x1,y1) と (0,0) - (x2,y2) が x 軸となす角度の
+大小だけ決定できれば良く，それは，x1 * y2 と y1 * x2 の大小を比較すれば
+わかります．</p>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">大きく冷えました．来週頑張ります．<br><br>yamate11さんのUNICORNプログラミングコンテスト2021(AtCoder Beginner Contest 225)での成績：1004位<br>パフォーマンス：1425相当<br>レーティング：1936→1894 (-42) :(<a href="https://twitter.com/hashtag/AtCoder?src=hash&amp;ref_src=twsrc%5Etfw">#AtCoder</a> <a href="https://twitter.com/hashtag/UNICORN%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%882021?src=hash&amp;ref_src=twsrc%5Etfw">#UNICORNプログラミングコンテスト2021</a>(ABC225) <a href="https://t.co/5DrH4KnAj9">https://t.co/5DrH4KnAj9</a></p>&mdash; yamate11 (@_yamate11) <a href="https://twitter.com/_yamate11/status/1454449040372817929?ref_src=twsrc%5Etfw">October 30, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>String Cards - AtCoder Beginner Contest 225 F</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Max Dot -- AtCoder Regular Contest 128 C</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2021/10-31-abc225/" data-title="ABC225 参加記">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

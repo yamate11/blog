@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>セグメント木ライブラリ | yamate11のブログ</title>
+<meta name="keywords" content="セグメント木">
+<meta name="description" content="自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&hellip;
+使用法 値の型を DAT, 更新演算の型を OP とする．
+基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
+値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="セグメント木ライブラリ" />
+<meta property="og:description" content="自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&hellip;
+使用法 値の型を DAT, 更新演算の型を OP とする．
+基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
+値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-03T12:21:00+09:00" />
+<meta property="article:modified_time" content="2023-12-03T12:21:00+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="セグメント木ライブラリ"/>
+<meta name="twitter:description" content="自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&hellip;
+使用法 値の型を DAT, 更新演算の型を OP とする．
+基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
+値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i &#43; 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "セグメント木ライブラリ",
+      "item": "https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "セグメント木ライブラリ",
+  "name": "セグメント木ライブラリ",
+  "description": "自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので\u0026hellip;\n使用法 値の型を DAT, 更新演算の型を OP とする．\n基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:\nauto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．\n値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．\n値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i + 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．",
+  "keywords": [
+    "セグメント木"
+  ],
+  "articleBody": "自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので…\n使用法 値の型を DAT, 更新演算の型を OP とする．\n基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:\nauto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．\n値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．\n値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i + 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．\n遅延セグメント木 関数 3つの関数を指定する．\nadd は加法． $\\verb!DAT! \\times \\verb!DAT! \\to \\verb!DAT!$ comp は更新演算の合成． $\\verb!OP! \\times \\verb!OP! \\to \\verb!OP!$． comp(f, g) は，$f \\circ g$ を表す． apply は更新演算の適用．$\\verb!OP! \\times \\verb!DAT! \\to \\verb!DAT!$． 当然，apply と add の順序交換ができる必要がある．具体的には:\n$\\text{apply}(f, \\text{add}(x, y)) = \\text{add}(\\text{apply}(f, x), \\text{apply}(f, y))$ 作成 auto st = make_seg_tree_lazy(unit_dat, unit_op, add, comp, apply, init_vec); 分けても良い:\nauto st = make_seg_tree_lazy(unit_dat, unit_op, add, comp, apply); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．これは代入であって，OP とは関係無いことに注意．\n値の更新 (範囲) st.update(il, ir, f); 半開区間 [il, ir) の各値 x を，apply(f, x) で更新する．\n値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．\n値の取得 (範囲) DAT x = st.query(il, ir); $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．\n設定例 1点更新，区間和取得 auto st = make_seg_tree(0LL, plus\u003cll\u003e()); 1点更新，区間最小値取得 auto st = make_seg_tree(LLONG_MAX, [](ll x, ll y) { return min(x, y); }); std::min は，オーバーロードがあるので，そのまま名前で渡すわけにはいかない．\n区間加算，区間最小値取得 auto mymin = [](ll x, ll y) -\u003e ll { return min(x, y); }; auto st = make_seg_tree_lazy(LLONG_MAX, 0LL, mymin, plus\u003cll\u003e(), plus\u003cll\u003e()); apply と add は自然に順序交換ができる． オーバーフローしうる場合には， LLONG_MAX ではなく (ll)(1e18) などを用いる必要があるかもしれない． 区間代入，区間最小値取得 代入する値は optional で表す． nullptr が「何もしない」ことをあらわし，単位元となる．\nusing OP = optional\u003cll\u003e; auto mymin = [](ll x, ll y) -\u003e ll { return min(x, y); }; auto comp = [](OP f, OP g) -\u003e OP { return f ? f : g; }; auto appl = [](OP f, ll x) -\u003e ll { return f ? *f : x; }; auto st = make_seg_tree_lazy(LLONG_MAX, OP(), mymin, comp, appl); 区間代入，区間和取得 何も考えないと，add と apply の順序交換ができない． そこで， DAT として，long long の対をとり， 左に和を保持し，右には区間の長さを保持する． 右側は最初に設定したあとは変更されない． 加法演算としては，$\\text{add}((v_1, l_1), (v_2, l_2)) = (v_1 + v_2, l_1 + l_2)$ を 用いる． 更新演算適用は，長さ $l$ の区間に一斉に $f$ を代入することになるので， 結果は $fl$ となる．ただし，$f$ が nullptr の時は，なにもしない．\nusing DAT = pair\u003cll, ll\u003e; using OP = optional\u003cll\u003e; auto add = [](DAT x, DAT y) -\u003e DAT { return DAT(x.first + y.first, x.second + y.second); }; auto comp = [](OP f, OP g) -\u003e OP { return f ? f : g; }; auto appl = [](OP f, DAT x) -\u003e DAT { return f ? DAT(*f * x.second, x.second) : x; }; auto dat_init = vector\u003cDAT\u003e(); REP(i, 0, init_vec.size()) dat_init.emplace_back(init_vec[i], 1); auto st = make_seg_tree_lazy(DAT(), OP(), add, comp, appl, dat_init); 等差数列 (1次式) の代入・加算，区間和取得 DAT は，(和, 区間左端の添字，区間長)． 単位元は，適当に (-1, -1, -1) とか決めておく． モノイド加法は，$(v_1, i_1, l_1) + (v_2, i_2, l_2) = (v_1 + v_2, i_1, l_1 + l_2)$． ただし，単位元を左・右に足すときは，特別扱いとする． $i_1 + l_1 = i_2$ を仮定する．単位元を足すときを除いて，そういう演算しか出てこないはず． OP は，$(a, b)$． ただし，代入・加算する値が $v = ai + b$ ($v$ は値，$i$ は添字) であるとする． 単位元 加算のときには，$(0, 0)$ 代入のときには，適当に (INF, INF) とか決めておく． 合成 代入のときには，$f \\circ g = f$．ただし，単位元は別扱い． 加算のときには，$(a_1, b_1) \\circ (a_2, b_2) = (a_1 + a_2, b_1 + b_2)$ apply 下では，$w := 2(ai + b) + a(l - 1))l/2$ とする． 代入: $\\;\\text{apply}((a, b), (v, i, l)) = (w, i, l)$ $(a, b)$ が単位元のときには別扱い． 加算: $\\;\\text{apply}((a, b), (v, i, l)) = (w + v, i, l)$ 二分探索 チェック関数は次のように書く:\nauto check = [\u0026](DAT x) -\u003e bool { ...; }; 探索用に4つのメソッドが用意されている:\n範囲が広いほど check が成立しやすいときに使うメソッド: st.binsearch_r_from(check, x) check(st.query(x, y)) が成り立つ最小の y を返す． そのような y が無いときには，init_vec.size() + 1 を返す． st.binsearch_l_from(check, y) check(st.query(x, y)) が成り立つ最大の x を返す． そのような x が無いときには，-1 を返す． 範囲が狭いほど check が成立しやすいときに使うメソッド: st.binsearch_r_until(check, x) check(st.query(x, y)) が成り立つ最大の y を返す． そのような y が無いときには，x - 1 を返す． st.binsearch_l_until(check, y) check(st.query(x, y)) が成り立つ最小の x を返す． そのような x が無いときには，y + 1 を返す． セグメント木の vector 引数無しのコンストラクタが用意してあるので， 正の長さを持つ vector",
+  "wordCount" : "718",
+  "inLanguage": "en",
+  "datePublished": "2023-12-03T12:21:00+09:00",
+  "dateModified": "2023-12-03T12:21:00+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      セグメント木ライブラリ
+    </h1>
+    <div class="post-meta">2023-12-03&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p><a href="https://github.com/yamate11/compprog/blob/main/clib/segTree.cc" target="_blank">自作セグメント木ライブラリ</a>
+の使い方についての自分用のメモです．
+AtCoder Library にセグメント木はありますが，
+それができる前から使っていたものなので&hellip;</p>
+<h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
+<p>値の型を <code>DAT</code>, 更新演算の型を <code>OP</code> とする．</p>
+<h3 id="基本のセグメント木">基本のセグメント木<a hidden class="anchor" aria-hidden="true" href="#基本のセグメント木">#</a></h3>
+<h4 id="作成">作成<a hidden class="anchor" aria-hidden="true" href="#作成">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree</span><span style="color:#111">(</span><span style="color:#111">unit_dat</span><span style="color:#111">,</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#111">init_vec</span><span style="color:#111">);</span>
+</span></span></code></pre></div><ul>
+<li>unit_dat は，加法単位元</li>
+<li>add には，加法の演算を行う関数を指定する．
+関数ポインタ，クロージャ，関数オブジェクトが使える．</li>
+<li>init_vec は初期ベクトル</li>
+</ul>
+<p>初期ベクトル設定は，分けても良い:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree</span><span style="color:#111">(</span><span style="color:#111">unit_dat</span><span style="color:#111">,</span> <span style="color:#111">add</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">set_data</span><span style="color:#111">(</span><span style="color:#111">init_vec</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h4 id="値の代入-1点">値の代入 (1点)<a hidden class="anchor" aria-hidden="true" href="#値の代入-1点">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">set_single</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>$i$ 番目の値として $x$ を設定する．</p>
+<h4 id="値の取得-1点">値の取得 (1点)<a hidden class="anchor" aria-hidden="true" href="#値の取得-1点">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">get_single</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>$i$ 番目の値を取得する．</p>
+<h4 id="値の取得-範囲">値の取得 (範囲)<a hidden class="anchor" aria-hidden="true" href="#値の取得-範囲">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">DAT</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">query</span><span style="color:#111">(</span><span style="color:#111">il</span><span style="color:#111">,</span> <span style="color:#111">ir</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">DAT</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>   <span style="color:#75715e">// これは，st.query(i, i + 1) と同じ
+</span></span></span></code></pre></div><p>$il$ 以上 $ir$ 未満の値に add を適用した結果を返す．</p>
+<h3 id="遅延セグメント木">遅延セグメント木<a hidden class="anchor" aria-hidden="true" href="#遅延セグメント木">#</a></h3>
+<h4 id="関数">関数<a hidden class="anchor" aria-hidden="true" href="#関数">#</a></h4>
+<p>3つの関数を指定する．</p>
+<ul>
+<li>add は加法． $\verb!DAT! \times \verb!DAT! \to \verb!DAT!$</li>
+<li>comp は更新演算の合成． $\verb!OP! \times \verb!OP! \to \verb!OP!$．
+comp(f, g) は，$f \circ g$ を表す．</li>
+<li>apply は更新演算の適用．$\verb!OP! \times \verb!DAT! \to \verb!DAT!$．</li>
+</ul>
+<p>当然，apply と add の順序交換ができる必要がある．具体的には:</p>
+<ul>
+<li>$\text{apply}(f, \text{add}(x, y))
+= \text{add}(\text{apply}(f, x), \text{apply}(f, y))$</li>
+</ul>
+<h4 id="作成-1">作成<a hidden class="anchor" aria-hidden="true" href="#作成-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#111">unit_dat</span><span style="color:#111">,</span> <span style="color:#111">unit_op</span><span style="color:#111">,</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#111">comp</span><span style="color:#111">,</span> <span style="color:#111">apply</span><span style="color:#111">,</span> <span style="color:#111">init_vec</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>分けても良い:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#111">unit_dat</span><span style="color:#111">,</span> <span style="color:#111">unit_op</span><span style="color:#111">,</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#111">comp</span><span style="color:#111">,</span> <span style="color:#111">apply</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">set_data</span><span style="color:#111">(</span><span style="color:#111">init_vec</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h4 id="値の代入-1点-1">値の代入 (1点)<a hidden class="anchor" aria-hidden="true" href="#値の代入-1点-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">set_single</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>$i$ 番目の値として $x$ を設定する．これは代入であって，OP とは関係無いことに注意．</p>
+<h4 id="値の更新-範囲">値の更新 (範囲)<a hidden class="anchor" aria-hidden="true" href="#値の更新-範囲">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">update</span><span style="color:#111">(</span><span style="color:#111">il</span><span style="color:#111">,</span> <span style="color:#111">ir</span><span style="color:#111">,</span> <span style="color:#111">f</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>半開区間 [il, ir) の各値 x を，apply(f, x) で更新する．</p>
+<h4 id="値の取得-1点-1">値の取得 (1点)<a hidden class="anchor" aria-hidden="true" href="#値の取得-1点-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">get_single</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>$i$ 番目の値を取得する．</p>
+<h4 id="値の取得-範囲-1">値の取得 (範囲)<a hidden class="anchor" aria-hidden="true" href="#値の取得-範囲-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">DAT</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">query</span><span style="color:#111">(</span><span style="color:#111">il</span><span style="color:#111">,</span> <span style="color:#111">ir</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>$il$ 以上 $ir$ 未満の値に add を適用した結果を返す．</p>
+<h2 id="設定例">設定例<a hidden class="anchor" aria-hidden="true" href="#設定例">#</a></h2>
+<h4 id="1点更新区間和取得">1点更新，区間和取得<a hidden class="anchor" aria-hidden="true" href="#1点更新区間和取得">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree</span><span style="color:#111">(</span><span style="color:#ae81ff">0LL</span><span style="color:#111">,</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">());</span>
+</span></span></code></pre></div><h4 id="1点更新区間最小値取得">1点更新，区間最小値取得<a hidden class="anchor" aria-hidden="true" href="#1点更新区間最小値取得">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree</span><span style="color:#111">(</span><span style="color:#111">LLONG_MAX</span><span style="color:#111">,</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">y</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">min</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#111">);</span> <span style="color:#111">});</span>
+</span></span></code></pre></div><p>std::min は，オーバーロードがあるので，そのまま名前で渡すわけにはいかない．</p>
+<h4 id="区間加算区間最小値取得">区間加算，区間最小値取得<a hidden class="anchor" aria-hidden="true" href="#区間加算区間最小値取得">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">mymin</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">y</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">min</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#111">);</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#111">LLONG_MAX</span><span style="color:#111">,</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">,</span> <span style="color:#111">mymin</span><span style="color:#111">,</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">());</span>
+</span></span></code></pre></div><ul>
+<li>apply と add は自然に順序交換ができる．</li>
+<li>オーバーフローしうる場合には， LLONG_MAX ではなく <code>(ll)(1e18)</code> などを用いる必要があるかもしれない．</li>
+</ul>
+<h4 id="区間代入区間最小値取得">区間代入，区間最小値取得<a hidden class="anchor" aria-hidden="true" href="#区間代入区間最小値取得">#</a></h4>
+<p>代入する値は <code>optional&lt;ll&gt;</code> で表す．
+nullptr が「何もしない」ことをあらわし，単位元となる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">OP</span> <span style="color:#f92672">=</span> <span style="color:#111">optional</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">mymin</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">y</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">min</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#111">);</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">comp</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">OP</span> <span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#111">OP</span> <span style="color:#111">g</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">OP</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">f</span> <span style="color:#f92672">?</span> <span style="color:#111">f</span> <span style="color:#111">:</span> <span style="color:#111">g</span><span style="color:#111">;</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">appl</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">OP</span> <span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">f</span> <span style="color:#f92672">?</span> <span style="color:#f92672">*</span><span style="color:#111">f</span> <span style="color:#111">:</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#111">LLONG_MAX</span><span style="color:#111">,</span> <span style="color:#111">OP</span><span style="color:#111">(),</span> <span style="color:#111">mymin</span><span style="color:#111">,</span> <span style="color:#111">comp</span><span style="color:#111">,</span> <span style="color:#111">appl</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h4 id="区間代入区間和取得">区間代入，区間和取得<a hidden class="anchor" aria-hidden="true" href="#区間代入区間和取得">#</a></h4>
+<p>何も考えないと，add と apply の順序交換ができない．
+そこで，
+DAT として，long long の対をとり，
+左に和を保持し，右には区間の長さを保持する．
+右側は最初に設定したあとは変更されない．
+加法演算としては，$\text{add}((v_1, l_1), (v_2, l_2)) = (v_1 + v_2, l_1 + l_2)$ を
+用いる．
+更新演算適用は，長さ $l$ の区間に一斉に $f$ を代入することになるので，
+結果は $fl$ となる．ただし，$f$ が nullptr の時は，なにもしない．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">DAT</span> <span style="color:#f92672">=</span> <span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">OP</span> <span style="color:#f92672">=</span> <span style="color:#111">optional</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">add</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">DAT</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">DAT</span> <span style="color:#111">y</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">DAT</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">DAT</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">first</span> <span style="color:#f92672">+</span> <span style="color:#111">y</span><span style="color:#111">.</span><span style="color:#111">first</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">second</span> <span style="color:#f92672">+</span> <span style="color:#111">y</span><span style="color:#111">.</span><span style="color:#111">second</span><span style="color:#111">);</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">comp</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">OP</span> <span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#111">OP</span> <span style="color:#111">g</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">OP</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">f</span> <span style="color:#f92672">?</span> <span style="color:#111">f</span> <span style="color:#111">:</span> <span style="color:#111">g</span><span style="color:#111">;</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">appl</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">OP</span> <span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#111">DAT</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">DAT</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">f</span> <span style="color:#f92672">?</span> <span style="color:#111">DAT</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">f</span> <span style="color:#f92672">*</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">second</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">second</span><span style="color:#111">)</span> <span style="color:#f92672">:</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">dat_init</span> <span style="color:#f92672">=</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">DAT</span><span style="color:#f92672">&gt;</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">init_vec</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">())</span> <span style="color:#111">dat_init</span><span style="color:#111">.</span><span style="color:#111">emplace_back</span><span style="color:#111">(</span><span style="color:#111">init_vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">st</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#111">DAT</span><span style="color:#111">(),</span> <span style="color:#111">OP</span><span style="color:#111">(),</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#111">comp</span><span style="color:#111">,</span> <span style="color:#111">appl</span><span style="color:#111">,</span> <span style="color:#111">dat_init</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h4 id="等差数列-1次式-の代入加算区間和取得">等差数列 (1次式) の代入・加算，区間和取得<a hidden class="anchor" aria-hidden="true" href="#等差数列-1次式-の代入加算区間和取得">#</a></h4>
+<ul>
+<li>DAT は，(和, 区間左端の添字，区間長)．
+<ul>
+<li>単位元は，適当に (-1, -1, -1) とか決めておく．</li>
+<li>モノイド加法は，$(v_1, i_1, l_1) + (v_2, i_2, l_2) = (v_1 + v_2, i_1, l_1 + l_2)$．
+<ul>
+<li>ただし，単位元を左・右に足すときは，特別扱いとする．</li>
+<li>$i_1 + l_1 = i_2$ を仮定する．単位元を足すときを除いて，そういう演算しか出てこないはず．</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OP は，$(a, b)$．
+<ul>
+<li>ただし，代入・加算する値が $v = ai + b$ ($v$ は値，$i$ は添字) であるとする．</li>
+<li>単位元
+<ul>
+<li>加算のときには，$(0, 0)$</li>
+<li>代入のときには，適当に (INF, INF) とか決めておく．</li>
+</ul>
+</li>
+<li>合成
+<ul>
+<li>代入のときには，$f \circ g = f$．ただし，単位元は別扱い．</li>
+<li>加算のときには，$(a_1, b_1) \circ (a_2, b_2) = (a_1 + a_2, b_1 + b_2)$</li>
+</ul>
+</li>
+<li>apply
+<ul>
+<li>下では，$w := 2(ai + b) + a(l - 1))l/2$ とする．</li>
+<li>代入: $\;\text{apply}((a, b), (v, i, l)) = (w, i, l)$
+<ul>
+<li>$(a, b)$ が単位元のときには別扱い．</li>
+</ul>
+</li>
+<li>加算: $\;\text{apply}((a, b), (v, i, l)) = (w + v, i, l)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二分探索">二分探索<a hidden class="anchor" aria-hidden="true" href="#二分探索">#</a></h2>
+<p>チェック関数は次のように書く:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">check</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">DAT</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span> <span style="color:#111">...;</span> <span style="color:#111">};</span>
+</span></span></code></pre></div><p>探索用に4つのメソッドが用意されている:</p>
+<ul>
+<li>範囲が広いほど check が成立しやすいときに使うメソッド:
+<ul>
+<li><code>st.binsearch_r_from(check, x)</code>
+<ul>
+<li><code>check(st.query(x, y))</code> が成り立つ最小の y を返す．</li>
+<li>そのような y が無いときには，init_vec.size() + 1 を返す．</li>
+</ul>
+</li>
+<li><code>st.binsearch_l_from(check, y)</code>
+<ul>
+<li><code>check(st.query(x, y))</code> が成り立つ最大の x を返す．</li>
+<li>そのような x が無いときには，-1 を返す．</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>範囲が狭いほど check が成立しやすいときに使うメソッド:
+<ul>
+<li><code>st.binsearch_r_until(check, x)</code>
+<ul>
+<li><code>check(st.query(x, y))</code> が成り立つ最大の y を返す．</li>
+<li>そのような y が無いときには，x - 1 を返す．</li>
+</ul>
+</li>
+<li><code>st.binsearch_l_until(check, y)</code>
+<ul>
+<li><code>check(st.query(x, y))</code> が成り立つ最小の x を返す．</li>
+<li>そのような x が無いときには，y + 1 を返す．</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="セグメント木の-vector">セグメント木の vector<a hidden class="anchor" aria-hidden="true" href="#セグメント木の-vector">#</a></h2>
+<p>引数無しのコンストラクタが用意してあるので，
+正の長さを持つ vector&lt;SegTree&lt;&hellip;&raquo; を宣言することもできる．
+その時に型を指定する必要があるが，
+<code>make_seg_tree</code> や <code>make_seg_tree_lazy</code> を使って一つインスタンスを
+作った上で <code>decltype</code> を利用するのが現実的だと思う:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">sg1_t</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">make_seg_tree_lazy</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">()));</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">sg1_t</span><span style="color:#f92672">&gt;</span> <span style="color:#111">sg1</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">sg4</span> <span style="color:#f92672">=</span> <span style="color:#111">make_seg_tree</span><span style="color:#111">(</span><span style="color:#111">LLONG_MIN</span><span style="color:#111">,</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">y</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">max</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#111">);</span> <span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">sg4_t</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">sg4</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">sg4_t</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec4</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#111">sg4</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>ベクトルの要素は同じ型を持たなければならないので，
+異なる加法関数などを用いる場合には，クロージャではうまくいかず，
+関数ポインタを用いる必要があるかもしれない．</p>
+<h2 id="ノードと添字の対応">ノードと添字の対応<a hidden class="anchor" aria-hidden="true" href="#ノードと添字の対応">#</a></h2>
+<p>セグメント木自身を使用する際には不要だが，「セグメント木のような」構造を使用したいときに，
+以下の関数が役に立つ可能性がある．</p>
+<h4 id="ノード-to-添字の範囲">ノード $\to$ 添字の範囲<a hidden class="anchor" aria-hidden="true" href="#ノード-to-添字の範囲">#</a></h4>
+<p>メソッド range_of_node(i) で，ノード i が表現する半開区間 [lo, hi) を取得できる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">[</span><span style="color:#111">lo</span><span style="color:#111">,</span> <span style="color:#111">hi</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">range_of_node</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>このメソッドと同等のことを行う関数 segtree_range_of_node(ht, i) も定義されている．
+ht には，セグメント木の高さを指定する．init_vec のサイズを sz とすると，次のようになる:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">unsigned</span> <span style="color:#111">height</span> <span style="color:#f92672">=</span> <span style="color:#111">countr_zero</span><span style="color:#111">(</span><span style="color:#111">bit_ceil</span><span style="color:#111">((</span><span style="color:#00a8c8">unsigned</span><span style="color:#111">)</span><span style="color:#111">sz</span><span style="color:#111">)));</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">[</span><span style="color:#111">lo</span><span style="color:#111">,</span> <span style="color:#111">hi</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">segtree_range_of_node</span><span style="color:#111">(</span><span style="color:#111">height</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h4 id="添字の範囲-to-ノード">添字の範囲 $\to$ ノード<a hidden class="anchor" aria-hidden="true" href="#添字の範囲-to-ノード">#</a></h4>
+<p>メソッド nodes_for_range(lo, hi) で，半開区間 [lo, hi) をカバーするノードを vector<int> で取得できる．
+返り値中では，対応する半開区間が小さい順にノードが並んでいる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">vec</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">nodes_for_range</span><span style="color:#111">(</span><span style="color:#111">lo</span><span style="color:#111">,</span> <span style="color:#111">hi</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>このメソッドと同等のことを行う関数 segtree_nodes_for_range(ht, lo, hi) も定義されている．
+ht には，セグメント木の高さを指定する．init_vec のサイズを sz とすると，次のようになる:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">unsigned</span> <span style="color:#111">height</span> <span style="color:#f92672">=</span> <span style="color:#111">countr_zero</span><span style="color:#111">(</span><span style="color:#111">bit_ceil</span><span style="color:#111">((</span><span style="color:#00a8c8">unsigned</span><span style="color:#111">)</span><span style="color:#111">sz</span><span style="color:#111">)));</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">vec</span> <span style="color:#f92672">=</span> <span style="color:#111">segtree_nodes_for_range</span><span style="color:#111">(</span><span style="color:#111">height</span><span style="color:#111">,</span> <span style="color:#111">lo</span><span style="color:#111">,</span> <span style="color:#111">hi</span><span style="color:#111">);</span>
+</span></span></code></pre></div><h2 id="コードへのリンク">コードへのリンク<a hidden class="anchor" aria-hidden="true" href="#コードへのリンク">#</a></h2>
+<p><a href="https://github.com/yamate11/compprog/blob/main/clib/segTree.cc" target="_blank">GitHub へのリンク</a>
+</p>
+<p>keywords: segtree segment tree</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E6%9C%A8/">セグメント木</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>ローリングハッシュライブラリ</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/11-12-bookmarks/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Bookmarks</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2023/12-03-segment-tree-lib/" data-title="セグメント木ライブラリ">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

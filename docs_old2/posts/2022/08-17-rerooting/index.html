@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>全方位木ライブラリ | yamate11のブログ</title>
+<meta name="keywords" content="全方位木">
+<meta name="description" content="全方位木ライブラリ使用法のメモ">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="全方位木ライブラリ" />
+<meta property="og:description" content="全方位木ライブラリ使用法のメモ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-14T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-02-14T00:00:00+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="全方位木ライブラリ"/>
+<meta name="twitter:description" content="全方位木ライブラリ使用法のメモ"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "全方位木ライブラリ",
+      "item": "https://yamate11.github.io/blog/posts/2022/08-17-rerooting/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "全方位木ライブラリ",
+  "name": "全方位木ライブラリ",
+  "description": "全方位木ライブラリ使用法のメモ",
+  "keywords": [
+    "全方位木"
+  ],
+  "articleBody": "実装 tree.cc の関数 reroot()\nこのライブラリで解ける問題 木の各ノード $x$ に対して，子供から再帰的に値を計算する状況を考える．\n子供の値をまとめる演算は，可換モノイド $\\mathcal{M} = (M, \\oplus, e)$ の演算であるとする． 子供 $c$ から渡された値 $v_c \\in A$ を適宜変換して，$w_c = f(v_c, c, x) \\in M$ とした上で， モノイド演算を施して 値 $ w = \\bigoplus_c w_c \\in M$ を得て，さらにそれを適宜変換した $g(w, x)$ がこのノードの値 $v_x \\in A$ になる，という設定とする: $$ v_x = g\\left(\\bigoplus_c f(v_c, c, x), x\\right) $$ $g$ は単に $w$ を返すことも多い．\nここで問題となるのは，$x$ での値 $v_x$ を計算するには，$x$ を木全体の根と考える必要があるということだ． 愚直に行うと $\\Omega(|T|^2)$ かかってしまう．そこで，次のように計算を進める:\nまず，一つのノード $0$ を根として，DFS で，$v_0$ を計算する．この際，各ノード $x$ とその子 $d$ に対して， 次の2つを保存しておく． $l_{x, d} := \\bigoplus\\{f(v_c, c, x) \\mid c$ は，$x$ の子のうち，$d$ よりも左にあるもの $\\}$ $r_{x, d} := \\bigoplus\\{f(v_c, c, x) \\mid c$ は，$x$ の子のうち，$d$ よりも右にあるもの $\\}$ 次に，$0$ から DFS で降りていきながら各 $v_x$ を計算する． DFSがノード $x$ に来たとき，$x$ の子の $d$ について $v_d$ を計算する． $d$ を根と思ったときに，$x$ は $d$ の子になるわけだが，こう思ったときの $x$ の値は， $g(l_{x, d} \\oplus r_{x, d}, x)$ である．これを，$d$ に渡す． 渡された $d$ は，その値と，残り全部の子の値から，$v_d$ を計算することができる． 使用法 関数 reroot が用意されている．\ntemplate \u003ctypename M, typename A\u003e vector\u003cA\u003e reroot(Tree\u0026 tree, const M\u0026 unit, auto add, auto mod1, auto mod2) template parameter の M はモノイド，A は計算する値 以下の引数を与えて呼び出すと，各ノードにおける値 $v_x$ を，ベクトルに格納して返す． tree は，このファイルで定義されている木を表す構造体 Tree (以下では $T$ と書く) のオブジェクト unit は，モノイド演算の単位元 add は，モノイド演算 $\\oplus: M \\times M \\to M$ mod1 は，上の関数 $f: A \\times T \\times T \\to M$ mod2 は，上の関数 $g: M \\times T \\to A$ なお，$M = A$ で $g(m, x) = m$ のときには，次を使っても良い．\ntemplate \u003ctypename M\u003e vector\u003cM\u003e reroot(Tree\u0026 tree, const M\u0026 unit, auto add, auto mod1) 例題 ABC222F - Expensive Expense TBW これはシンプル 例題 ABC160F - Distributing Integers 木が与えられる．各頂点 $k$ につき，次の問題を解け\n頂点 $k$ に 1 を書き，残りの頂点には，既に書き込まれた頂点に 隣接する頂点に 2, 3, … の数を書く． このように書ける方法の数を$\\mod 10^9 + 7$ で求めよ． 全方位木を使うには，\n頂点を1つ固定した問題が，木DPで解けて， その木DPの際に，各ノードの処理がモノイド演算でできること が必要．ということで，まず，$k$ を固定した問題を 木DPで解く方法を考える．\n1 は根に書くと決まっている． 根の子供が，たとえば $c_1, c_2, c_3$ の3つだとして，それぞれを頂点とする部分木のサイズを $m_1, m_2, m_3$ とする． 2 ～ N を，この3つに割り振る方法を決める．すると，各部分木 $c$ で，割り振られた数を書く問題に なるが，それは，1 ～ $m_c$ を書く問題の答と一致する． 具体的には，上の場合，求める数を $h$ とすると，\n$$h(k) = \\binom{m_1 + m_2 + m_3}{m_1}h(c_1)\\binom{m_2 + m_3}{m_2}h(c_2)\\binom{m_3}{m_3}h(c_3) = (m_1 + m_2 + m_3)!\\frac{h(c_1)}{m_1!}\\frac{h(c_2)}{m_2!}\\frac{h(c_3)}{m_3!}$$\nとなる．$k$ 以外の一般のノード $n$ も同じように考えて，\n$$h(n) = \\left(\\sum m_c\\right)!\\prod\\frac{h(c)}{m_c!}$$\nということであるから，次のように考えれば良い:\n各ノードの値 $v_x \\in A ( = F_p \\times Z) $ は，$(h(x), m_x)$ とする．$m_x$ は，$x$ をトップとする部分木のサイズ $m_x$ は，最初に読んだときの tree 構造体の stsize を使ってはいけない．「部分木」というのは， reroot しながら，現在の根に対して定義されるものだから． モノイドは，$F_p \\times Z$．たまたま型は $A$ と同じだが，意味が違って，左は $h(c) / m_c!$ を表す． 右は $A$ と同じで $m_c$．\n演算は，左成分は積，右成分は和をとる． 関数 $f : A \\times T \\times T \\to M$ は，$f((w, m), n, c) := (w / m!, m)$ 関数 $g : M \\times T \\to A$ は，$g((w, m), n) := (m! w, m + 1)$．自分のノードが部分木サイズに加わるので， ここで $m$ から $m + 1$ に変わる． 例題 EDPC V Subtree 木と正整数 $M$ が与えられる． 全頂点を白黒に塗り分けるに塗り分け，任意の2つの異なる黒頂点a,bに関して， a から b へのパスが全部黒で塗られているようにする． 各頂点$v$について，上を満たして $v$ が黒く塗られる塗り方の数を $\\mod M$ で求めよ．\nここでは，白く塗られる塗り方の数も問われているものだと仮定して， 解を考える．\n3つの条件を考える．\nB(n): n は黒く塗られ，n の子孫は条件を満たす． W(n): n は白く塗られ，n の子孫は条件を満たす． A(n): n および n の子孫はすべて白く塗られている． ノードの集合Xについて，次のように定める．\nP(X): 全ての $c \\in X$ について B(c) または A(c) Q(X): 全ての $c \\in X$ について B(c) または W(c) であり， たかだか1つを除いて A(c) である． これらは，n が塗れるかどうかの条件に関係する． 具体的には，C(n) を，n の子供の集合として，次が成り立つ．\nn が黒く塗れるための条件は，P(C(n))． n が白く塗れるための条件は，Q(C(n))． $P(X)$, $Q(X)$, $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数を $\\alpha_1, \\beta_1, \\alpha_2, \\beta_2$ とするとき， $P(X \\cup \\{c\\})$, $Q(X \\cup \\{c\\})$, を満たす塗り方の数は $(\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$ である． そこで，\n$(\\alpha_1, \\beta_1) \\oplus (\\alpha_2, \\beta_2) := (\\alpha_1\\alpha_2, \\beta_1 + \\beta_2 - 1)$ で，モノイド演算を定義する．単位元は $(1, 1)$ である．\nまた，$c$ を黒，白で塗る方法の数を $\\alpha$, $\\beta$ とするとき， $P(\\{c\\})$, $Q(\\{c\\})$ を満たす塗り方の数は， $\\alpha + 1$, $\\alpha + \\beta$ である．そこで，\n$g((\\alpha, \\beta), n, c)) = (\\alpha + 1, \\alpha + \\beta)$ で，$g$ を定義する．\n",
+  "wordCount" : "520",
+  "inLanguage": "en",
+  "datePublished": "2024-02-14T00:00:00+09:00",
+  "dateModified": "2024-02-14T00:00:00+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2022/08-17-rerooting/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      全方位木ライブラリ
+    </h1>
+    <div class="post-meta">2024-02-14&amp;nbsp;·&amp;nbsp;2022-08-17T16:39:04&#43;09:00 (初版)&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
+<p><a href="https://github.com/yamate11/compprog/blob/main/clib/tree.cc" target="_blank">tree.cc</a>
+ の関数 <code>reroot()</code></p>
+<h2 id="このライブラリで解ける問題">このライブラリで解ける問題<a hidden class="anchor" aria-hidden="true" href="#このライブラリで解ける問題">#</a></h2>
+<p>木の各ノード $x$ に対して，子供から再帰的に値を計算する状況を考える．</p>
+<ul>
+<li>子供の値をまとめる演算は，可換モノイド $\mathcal{M} = (M, \oplus, e)$ の演算であるとする．</li>
+<li>子供 $c$ から渡された値 $v_c \in A$ を適宜変換して，$w_c = f(v_c, c, x) \in M$ とした上で，
+モノイド演算を施して 値 $ w = \bigoplus_c w_c  \in M$ を得て，さらにそれを適宜変換した
+$g(w, x)$ がこのノードの値 $v_x \in A$ になる，という設定とする:
+$$ v_x = g\left(\bigoplus_c f(v_c, c, x), x\right) $$</li>
+</ul>
+<p>$g$ は単に $w$ を返すことも多い．</p>
+<p>ここで問題となるのは，$x$ での値 $v_x$ を計算するには，$x$ を木全体の根と考える必要があるということだ．
+愚直に行うと $\Omega(|T|^2)$ かかってしまう．そこで，次のように計算を進める:</p>
+<ul>
+<li>まず，一つのノード $0$ を根として，DFS で，$v_0$ を計算する．この際，各ノード $x$ とその子 $d$ に対して，
+次の2つを保存しておく．
+<ul>
+<li>$l_{x, d} := \bigoplus\{f(v_c, c, x) \mid c$ は，$x$ の子のうち，$d$ よりも左にあるもの $\}$</li>
+<li>$r_{x, d} := \bigoplus\{f(v_c, c, x) \mid c$ は，$x$ の子のうち，$d$ よりも右にあるもの $\}$</li>
+</ul>
+</li>
+<li>次に，$0$ から DFS で降りていきながら各 $v_x$ を計算する．
+DFSがノード $x$ に来たとき，$x$ の子の $d$ について $v_d$ を計算する．
+<ul>
+<li>$d$ を根と思ったときに，$x$ は $d$ の子になるわけだが，こう思ったときの $x$ の値は，
+$g(l_{x, d} \oplus r_{x, d}, x)$ である．これを，$d$ に渡す．</li>
+<li>渡された $d$ は，その値と，残り全部の子の値から，$v_d$ を計算することができる．</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
+<p>関数 <code>reroot</code> が用意されている．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">template</span> <span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">M</span><span style="color:#111">,</span> <span style="color:#00a8c8">typename</span> <span style="color:#111">A</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">A</span><span style="color:#f92672">&gt;</span> <span style="color:#111">reroot</span><span style="color:#111">(</span><span style="color:#111">Tree</span><span style="color:#f92672">&amp;</span> <span style="color:#111">tree</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">M</span><span style="color:#f92672">&amp;</span> <span style="color:#111">unit</span><span style="color:#111">,</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">mod1</span><span style="color:#111">,</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">mod2</span><span style="color:#111">)</span>
+</span></span></code></pre></div><ul>
+<li>template parameter の <code>M</code> はモノイド，<code>A</code> は計算する値</li>
+<li>以下の引数を与えて呼び出すと，各ノードにおける値 $v_x$ を，ベクトルに格納して返す．
+<ul>
+<li><code>tree</code> は，このファイルで定義されている木を表す構造体 <code>Tree</code> (以下では $T$ と書く) のオブジェクト</li>
+<li><code>unit</code> は，モノイド演算の単位元</li>
+<li><code>add</code> は，モノイド演算 $\oplus: M \times M \to M$</li>
+<li><code>mod1</code> は，上の関数 $f: A \times T \times T \to M$</li>
+<li><code>mod2</code> は，上の関数 $g: M \times T \to A$</li>
+</ul>
+</li>
+</ul>
+<p>なお，$M = A$ で $g(m, x) = m$ のときには，次を使っても良い．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">template</span> <span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">M</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">M</span><span style="color:#f92672">&gt;</span> <span style="color:#111">reroot</span><span style="color:#111">(</span><span style="color:#111">Tree</span><span style="color:#f92672">&amp;</span> <span style="color:#111">tree</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">M</span><span style="color:#f92672">&amp;</span> <span style="color:#111">unit</span><span style="color:#111">,</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">add</span><span style="color:#111">,</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">mod1</span><span style="color:#111">)</span>
+</span></span></code></pre></div><h2 id="例題-abc222f---expensive-expensehttpsatcoderjpcontestsabc222tasksabc222_f">例題 <a href="https://atcoder.jp/contests/abc222/tasks/abc222_f" target="_blank">ABC222F - Expensive Expense</a>
+</h2>
+<ul>
+<li>TBW</li>
+<li>これはシンプル</li>
+</ul>
+<h2 id="例題-abc160f---distributing-integershttpsatcoderjpcontestsabc160tasksabc160_f">例題 <a href="https://atcoder.jp/contests/abc160/tasks/abc160_f" target="_blank">ABC160F - Distributing Integers</a>
+</h2>
+<blockquote>
+<p>木が与えられる．各頂点 $k$ につき，次の問題を解け</p>
+<ul>
+<li>頂点 $k$ に 1 を書き，残りの頂点には，既に書き込まれた頂点に
+隣接する頂点に 2, 3, &hellip; の数を書く．
+このように書ける方法の数を$\mod 10^9 + 7$ で求めよ．</li>
+</ul>
+</blockquote>
+<p>全方位木を使うには，</p>
+<ul>
+<li>頂点を1つ固定した問題が，木DPで解けて，</li>
+<li>その木DPの際に，各ノードの処理がモノイド演算でできること</li>
+</ul>
+<p>が必要．ということで，まず，$k$ を固定した問題を 木DPで解く方法を考える．</p>
+<ul>
+<li>1 は根に書くと決まっている．</li>
+<li>根の子供が，たとえば $c_1, c_2, c_3$ の3つだとして，それぞれを頂点とする部分木のサイズを
+$m_1, m_2, m_3$ とする．</li>
+<li>2 ～ N を，この3つに割り振る方法を決める．すると，各部分木 $c$ で，割り振られた数を書く問題に
+なるが，それは，1 ～ $m_c$ を書く問題の答と一致する．</li>
+</ul>
+<p>具体的には，上の場合，求める数を $h$ とすると，</p>
+<p>$$h(k) = \binom{m_1 + m_2 + m_3}{m_1}h(c_1)\binom{m_2 + m_3}{m_2}h(c_2)\binom{m_3}{m_3}h(c_3)
+= (m_1 + m_2 + m_3)!\frac{h(c_1)}{m_1!}\frac{h(c_2)}{m_2!}\frac{h(c_3)}{m_3!}$$</p>
+<p>となる．$k$ 以外の一般のノード $n$ も同じように考えて，</p>
+<p>$$h(n) = \left(\sum m_c\right)!\prod\frac{h(c)}{m_c!}$$</p>
+<p>ということであるから，次のように考えれば良い:</p>
+<ul>
+<li>各ノードの値 $v_x \in A ( = F_p \times Z) $ は，$(h(x), m_x)$ とする．$m_x$ は，$x$ をトップとする部分木のサイズ
+<ul>
+<li>$m_x$ は，最初に読んだときの tree 構造体の stsize を使ってはいけない．「部分木」というのは，
+reroot しながら，現在の根に対して定義されるものだから．</li>
+</ul>
+</li>
+<li>モノイドは，$F_p \times Z$．たまたま型は $A$ と同じだが，意味が違って，左は $h(c) / m_c!$ を表す．
+右は $A$ と同じで $m_c$．<br>
+演算は，左成分は積，右成分は和をとる．</li>
+<li>関数 $f : A \times T \times T \to M$ は，$f((w, m), n, c) := (w / m!, m)$</li>
+<li>関数 $g : M \times T \to A$ は，$g((w, m), n) := (m! w, m + 1)$．自分のノードが部分木サイズに加わるので，
+ここで $m$ から $m + 1$ に変わる．</li>
+</ul>
+<h2 id="例題-edpc-v-subtreehttpsatcoderjpcontestsdptasksdp_v">例題 <a href="https://atcoder.jp/contests/dp/tasks/dp_v" target="_blank">EDPC V Subtree</a>
+</h2>
+<blockquote>
+<p>木と正整数 $M$ が与えられる．
+全頂点を白黒に塗り分けるに塗り分け，任意の2つの異なる黒頂点a,bに関して，
+a から b へのパスが全部黒で塗られているようにする．
+各頂点$v$について，上を満たして $v$ が黒く塗られる塗り方の数を
+$\mod M$ で求めよ．</p>
+</blockquote>
+<img src="fig01.jpg" width="80%">
+<p>ここでは，白く塗られる塗り方の数も問われているものだと仮定して，
+解を考える．</p>
+<p>3つの条件を考える．</p>
+<ul>
+<li>B(n): n は黒く塗られ，n の子孫は条件を満たす．</li>
+<li>W(n): n は白く塗られ，n の子孫は条件を満たす．</li>
+<li>A(n): n および n の子孫はすべて白く塗られている．</li>
+</ul>
+<p>ノードの集合Xについて，次のように定める．</p>
+<ul>
+<li>P(X): 全ての $c \in X$ について B(c) または A(c)</li>
+<li>Q(X): 全ての $c \in X$ について B(c) または W(c) であり，
+たかだか1つを除いて A(c) である．</li>
+</ul>
+<p>これらは，n が塗れるかどうかの条件に関係する．
+具体的には，C(n) を，n の子供の集合として，次が成り立つ．</p>
+<ul>
+<li>n が黒く塗れるための条件は，P(C(n))．</li>
+<li>n が白く塗れるための条件は，Q(C(n))．</li>
+</ul>
+<p>$P(X)$,
+$Q(X)$,
+$P(\{c\})$,
+$Q(\{c\})$
+を満たす塗り方の数を
+$\alpha_1, \beta_1, \alpha_2, \beta_2$ とするとき，
+$P(X \cup \{c\})$,
+$Q(X \cup \{c\})$,
+を満たす塗り方の数は
+$(\alpha_1\alpha_2, \beta_1 + \beta_2 - 1)$ である．
+そこで，</p>
+<ul>
+<li>$(\alpha_1, \beta_1) \oplus (\alpha_2, \beta_2)
+:= (\alpha_1\alpha_2, \beta_1 + \beta_2 - 1)$</li>
+</ul>
+<p>で，モノイド演算を定義する．単位元は $(1, 1)$ である．</p>
+<p>また，$c$ を黒，白で塗る方法の数を
+$\alpha$, $\beta$ とするとき，
+$P(\{c\})$, $Q(\{c\})$ を満たす塗り方の数は，
+$\alpha + 1$, $\alpha + \beta$ である．そこで，</p>
+<ul>
+<li>$g((\alpha, \beta), n, c)) = (\alpha + 1, \alpha + \beta)$</li>
+</ul>
+<p>で，$g$ を定義する．</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/%E5%85%A8%E6%96%B9%E4%BD%8D%E6%9C%A8/">全方位木</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>拡張ユークリッドアルゴリズム</span>
+  </a>
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">
+    <span class="title">Next »</span>
+    <br>
+    <span>尺取り法のコーディング</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2022/08-17-rerooting/" data-title="全方位木ライブラリ">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/">拡張ユークリッドアルゴリズム</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/">全方位木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">尺取り法のコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/">Offline Dynamic Connectivity</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/">Undo付きUnionFind</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

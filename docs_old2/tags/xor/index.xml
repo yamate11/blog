@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xor on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/xor/</link>
+    <description>Recent content in xor on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 14 Apr 2022 08:22:15 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/xor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Differ by K bits - Atcoder Regular Contest 138 D</title>
+      <link>https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/</link>
+      <pubDate>Thu, 14 Apr 2022 08:22:15 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/</guid>
+      <description>公式解説とは少しだけ異なる解法です</description>
+    </item>
+    <item>
+      <title>xor畳み込み</title>
+      <link>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</link>
+      <pubDate>Mon, 23 Aug 2021 12:40:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/</guid>
+      <description>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</description>
+    </item>
+  </channel>
+</rss>
