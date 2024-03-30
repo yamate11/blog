@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>matrix on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/matrix/</link>
+    <description>Recent content in matrix on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 30 Mar 2024 15:29:16 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/matrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-30-matrix/</link>
+      <pubDate>Sat, 30 Mar 2024 15:29:16 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-30-matrix/</guid>
+      <description>自分用の 行列ライブラリ </description>
+    </item>
+  </channel>
+</rss>
