@@ -29,6 +29,9 @@ auto dfs = [&](auto rF, ll nd) -> void {
 dfs(dfs, root);
 ```
 
+辺に関する情報は，辺の番号を添字とするベクトルなどに確保しておくのが良い．
+上の weight を参照．
+
 #### 作成
 
 ノード 0, 1, ..., N-1 の木で，根が root のオブジェクトをつくる．
@@ -45,13 +48,84 @@ Tree tr(N, root);
 int add_edge(int x, int y);
 ```
 
-#### メンバ
+### データメンバ (public相当のもの)
 
 ```cpp
 int numNodes;   ... ノードの数
 int root;       ... 根
-vector<nbr_t> _nbr ... 後述
 ```
+
+* bool 型の static member に，use_stsize, use_depth, use_euler がある．既定値はどれも true.
+  false にすると，stsize(), depth(), euler_in(), euler_out() が使えなくなる代わりに多少速いと期待される．
+  あまり変わらないと思うが．  
+
+### メンバ関数
+
+#### parent
+
+```cpp
+int parent(int nd)
+```
+
+親のノードを返す．根の parent は -1．
+
+#### num_children, child, children
+
+```cpp
+int num_children(int nd)
+int child(int nd, int idx)
+auto children(int nd)
+```
+
+* `tr.num_children(nd)` は，ノード nd の子供の数を返す．
+* `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
+* `tr.children(nd)` は，nd の子供を渡るイタレータを返す．したがって，次のような使い方ができる:
+  * `for (int c : tr.children(nd) { ... }`
+
+#### parent_pe, child_pe, children_pe, child_edge, children_pe
+
+```cpp
+pe_t parent_pe(int nd)
+pe_t child_pe(int nd, int idx)
+int child_edge(int nd, int idx)
+auto children_pe(int nd)
+```
+
+* 構造体 `pe_t` は，int 型のメンバ `peer` と `edge` を持つ．
+  * `peer` ... ノード
+  * `edge` ... 辺の番号
+* `tr.parent_pe(nd)` は，nd の親と，nd からその親への辺の番号を返す．
+* `tr.child_pe(nd, idx)` は，nd の idx 番目の子供と，nd からその子供への辺の番号を返す．
+* `tr.parent_pe(nd).peer == tr.parent(nd)` などが成り立つ．
+* `tr.child_edge(nd, idx)` は，nd から，その idx 番目の子供への辺の番号を返す．
+  `tr.child_pe(nd).edge == tr.child_edge(nd)` が成り立つ．
+* `tr.children_pe(nd)` は，nd の子供に対する pe_t 構造体を渡るイタレータを返す．
+  次のように使える:
+  * `for (auto [cld_nd, cld_edge] : tr.children_pe(nd)) { ... }`
+  * `for (const pe_t& pe : tr.children_pe(nd)) { ... pe.peer ... pe.edge ... }`
+
+#### edge_idx, nodes_of_edge
+
+```cpp
+int edge_idx(int x, int y)
+pair<int, int> nodes_of_edges(int e)
+```
+
+`tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
+そのような辺が存在しないときには -1 を返す．`tr.edge_idx(x, y)` と `tr.edge_idx(y, x)` の値は等しい．
+
+`tr.nodes_of_edge(e)` は，番号が e である辺の両端のノードのペアを返す．第 1 要素は第 2 要素より小さい．
+
+
+#### depth, stsize
+
+```cpp
+int depth(int nd)
+int stsize(int nd)
+```
+
+`tr.depth(nd)` は，nd の深さを返す．rootの深さは 0 である．
+`tr.stsize(nd)` は，nd を頂点とする部分木のノード数を返す．nd が root のときには，`tr.numNodes` と同じ値になる．
 
 
 
@@ -60,8 +134,6 @@ vector<nbr_t> _nbr ... 後述
 
 * N - 1 本目の辺が追加されたとき (N = 1 なら，コンストラクタで) 親子のアクセスに必要な設定を行っている．
   change_root() が呼ばれたときには，ご破算になる．
-* stsize, depth, euler_* は，始めて該当する関数が呼ばれるときに、必要なデータを作成する．
-* いくつかの箇所で，非再帰で DFS を行っている．
 * 親子関係 (方向) について．
   * add_edge では，各ノード nd について，辺でつながっているノードと，辺のIDを，_nbr[nd].pe に格納する．
   * 全部の辺が追加されたら，DFS で，各ノード nd について，「nd の親が格納されている _nbr[nd].pe の添字」
@@ -77,6 +149,9 @@ vector<nbr_t> _nbr ... 後述
     (pe_t) を扱う．
 
 ## 3. 非再帰 DFS
+
+一時，非再帰 DFS で実装していたこともあったが，測定してみるとそれほど速くなるというわけでもないようなので，
+やめてしまった．以下の記述は残しておく．
 
 再帰で次のように書く場合を考える:
 
