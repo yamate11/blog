@@ -61,72 +61,126 @@ int root;       ... 根
 
 ### メンバ関数
 
-#### parent
-
-```cpp
-int parent(int nd)
-```
-
-親のノードを返す．根の parent は -1．
-
-#### num_children, child, children
+#### 親子関係
 
 ```cpp
 int num_children(int nd)
+int parent(int nd)
 int child(int nd, int idx)
 auto children(int nd)
-```
-
-* `tr.num_children(nd)` は，ノード nd の子供の数を返す．
-* `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
-* `tr.children(nd)` は，nd の子供を渡るイタレータを返す．したがって，次のような使い方ができる:
-  * `for (int c : tr.children(nd) { ... }`
-
-#### parent_pe, child_pe, children_pe, child_edge, children_pe
-
-```cpp
 pe_t parent_pe(int nd)
 pe_t child_pe(int nd, int idx)
-int child_edge(int nd, int idx)
 auto children_pe(int nd)
 ```
 
+* `tr.num_children(nd)` は，ノード nd の子供の数を返す．
+* `tr.parent(nd) は，nd の親のノードを返す．root の parent は -1．
+* `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
+* `tr.children(nd)` は，nd の子供を渡るイタレータを返す．したがって，次のような使い方ができる:
+  * `for (int c : tr.children(nd) { ... }`
 * 構造体 `pe_t` は，int 型のメンバ `peer` と `edge` を持つ．
   * `peer` ... ノード
   * `edge` ... 辺の番号
 * `tr.parent_pe(nd)` は，nd の親と，nd からその親への辺の番号を返す．
 * `tr.child_pe(nd, idx)` は，nd の idx 番目の子供と，nd からその子供への辺の番号を返す．
 * `tr.parent_pe(nd).peer == tr.parent(nd)` などが成り立つ．
-* `tr.child_edge(nd, idx)` は，nd から，その idx 番目の子供への辺の番号を返す．
-  `tr.child_pe(nd).edge == tr.child_edge(nd)` が成り立つ．
 * `tr.children_pe(nd)` は，nd の子供に対する pe_t 構造体を渡るイタレータを返す．
   次のように使える:
   * `for (auto [cld_nd, cld_edge] : tr.children_pe(nd)) { ... }`
   * `for (const pe_t& pe : tr.children_pe(nd)) { ... pe.peer ... pe.edge ... }`
 
-#### edge_idx, nodes_of_edge
+#### 辺とノードの対応
 
 ```cpp
 int edge_idx(int x, int y)
 pair<int, int> nodes_of_edges(int e)
 ```
 
-`tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
+* `tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
 そのような辺が存在しないときには -1 を返す．`tr.edge_idx(x, y)` と `tr.edge_idx(y, x)` の値は等しい．
+* `tr.nodes_of_edge(e)` は，番号が e である辺の両端のノードのペアを返す．第 1 要素は第 2 要素より小さい．
 
-`tr.nodes_of_edge(e)` は，番号が e である辺の両端のノードのペアを返す．第 1 要素は第 2 要素より小さい．
 
-
-#### depth, stsize
+#### 深さ，部分木のサイズ
 
 ```cpp
 int depth(int nd)
 int stsize(int nd)
 ```
 
-`tr.depth(nd)` は，nd の深さを返す．rootの深さは 0 である．
-`tr.stsize(nd)` は，nd を頂点とする部分木のノード数を返す．nd が root のときには，`tr.numNodes` と同じ値になる．
+* `tr.depth(nd)` は，nd の深さを返す．rootの深さは 0 である．
+* `tr.stsize(nd)` は，nd を頂点とする部分木のノード数を返す．nd が root のときには，`tr.numNodes` と同じ値になる．
 
+#### オイラーツアー
+
+```cpp
+int euler_in(int nd)
+int euler_out(int nd)
+pair<int, bool> euler_edge(int idx)
+```
+
+* オイラーツアーは，辺を DFS の順に辿ったものである．
+  * ただし，最初 (0番目) と最後  ($2 \times \text{numNodes} - 1$ 番目) は，
+    仮想的な点と root を結ぶ仮想的な辺を，それぞれ root に向かって，root から 辿るものとする．
+  * 仮想的な辺を含めると辺の数は numNodes となる．仮想的な辺の番号は，numNodes - 1 とする．
+    各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
+* `[e, b] = tr.euler_edge(k)` とすると，k 番目にたどられる辺の番号は e である．
+  `[x, y] = tr.nodes_of_edges(e)` とすると，~b` が false なら，e を x から y の方向に辿り，
+  `b` が true なら，e を y から x の方向に辿る．
+* ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
+  `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
+
+#### LCA
+
+```cpp
+int lca(int x, int y)
+```
+
+ノード x と y の Lowest Common Ancestor を返す．
+
+#### 2ノード間のパス
+
+```cpp
+vector<int> nnpath(int x, int y)
+```
+
+ノード x から y への経路を返す．`path = tr.nnpath(x, y)` とすると，
+`path` は `vector<int>` 型で，`path[0]` は x に等しく，`path.back() は y に等しく，
+`path[i]` と `path[i + 1]` の間には辺がある．
+
+#### 指定した深さの先祖
+
+```cpp
+int ancestorDep(int x, int dep)
+```
+
+ノード x の先祖であって，深さが dep であるものを返す．
+
+#### 直径
+
+```cpp
+tuple<int, int, int, int, int> diameter()
+```
+
+`[diam, nd0, nd1, ct0, ct1] = tr.diameter()` とすると，
+* diam は，直径．すなわち，もっとも長いパスに含まれる辺の数．すなわち，
+  もっとも長いパスに含まれるノードの数から 1 を引いたもの
+* nd0 と nd1 は，距離が直径に等しいような2ノード．
+* ct0 と ct1 は，nd0 と nd1 を結ぶ経路の中央のノード．
+  直径が偶数の時，ct0 と ct1 は等しい．
+  直径が奇数の時，ct0 が nd0 寄り，ct1 が nd1 寄り．
+
+#### 根の変更
+
+```cpp
+void change_root(int newRoot)
+```
+
+根を newRoot に変更する．
+
+### 全方位木
+
+[別記事](http://localhost:5080/blog/posts/2022/08-17-rerooting/) 参照
 
 
 
