@@ -6,8 +6,16 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Mar 2024 15:29:16 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 18 Apr 2024 21:36:37 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ポテンシャル付きUnionFind</title>
+      <link>https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/</link>
+      <pubDate>Thu, 18 Apr 2024 21:36:37 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/</guid>
+      <description>ポテンシャル付きUnionFindです．
+使用法 ソース </description>
+    </item>
     <item>
       <title>行列ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2024/03-30-matrix/</link>
