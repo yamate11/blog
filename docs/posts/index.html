@@ -180,7 +180,11 @@
   </header>
   <div class="entry-content">
     <p>ポテンシャル付きUnionFindです．
-使用法 ソース </p>
+使用法 UnionFind uf(N); // 普通のUnionFind (ポテンシャル無し) ld = uf.merge(a, b); // マージ．新しいリーダを返す ld = uf.leader(a); // リーダ ng = uf.num_groups(); // 全体のグループ数 ( == リーダの数) sz = uf.group_size(a); // a が属するグループのサイズ グループの要素のリストを得るためには，前処理として，GroupInfo を作る必要がある． これには，$O(N)$ かかる．
+auto gi = uf.group_info(); for (int i : gi.group(a)) cout &lt;&lt; i &lt;&lt; endl; // a が属するグループの要素の列挙 ポテンシャル付きにするためには，テンプレートパラメタで，ポテンシャルの型を渡す． (デフォルトの型は，UFDummyAlg なるものになっている)
+UnionFind&lt;ll&gt; uf1(N); UnionFind&lt;ftwo&gt; uf2(N); 必要があれば，零元，和，単項マイナスを渡すこともできる:
+UnionFind&lt;ll&gt; uf3(N, 0LL, plus&lt;ll&gt;(), negate&lt;ll&gt;()); ポテンシャル付きの時には，merge のときの第3引数に，ポテンシャルを渡さなければならない (省略不可)
+ld = uf....</p>
   </div>
   <footer class="entry-footer">2024-04-18&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ポテンシャル付きUnionFind" href="https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/"></a>
