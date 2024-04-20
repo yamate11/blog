@@ -53,11 +53,14 @@ ld = uf.merge(a, b, p);   // b を基準にした a のポテンシャルが p �
 ポテンシャルに矛盾がある時には，`nullopt` を返す．
 
 ```cpp
-int ld = uf.merge(a, b, p);
+int ld = uf.merge(a, b, p0);
 auto p = uf.pot(a);
 if (p) {
   cout << "The potential of " << a << " relative to " << ld << " is " << *p << endl;
+  assert(*uf.pot(a) - *uf.pot(b) == p0);
 } else {
+  // ここに来るのは，merge の前から矛盾していたときや，
+  // a と b が同じグループに属していて，*uf.pot(a) - *uf.pot(b) が p0 と等しくなかったとき
   cout << "Potential is undefined because of inconsistency." << endl;
 }
 ```
