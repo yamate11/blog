@@ -6,8 +6,15 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 18 Apr 2024 21:36:37 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2024 07:19:14 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>素数表</title>
+      <link>https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/</link>
+      <pubDate>Wed, 24 Apr 2024 07:19:14 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/</guid>
+      <description>1000までの素数表 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997, $10^9$ までの素数の分布 $n$ $10^n$ までの素数の数 1 4 2 25 3 168 4 1229 5 9592 6 78498 7 664579 8 5761455 9 50847534 </description>
+    </item>
     <item>
       <title>ポテンシャル付きUnionFind</title>
       <link>https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/</link>

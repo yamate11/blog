@@ -2,16 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yamate11.github.io/blog/posts/</loc>
+    <lastmod>2024-04-24T07:19:14+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2024-04-24T07:19:14+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/</loc>
+    <lastmod>2024-04-24T07:19:14+09:00</lastmod>
+  </url><url>
     <loc>https://yamate11.github.io/blog/categories/</loc>
     <lastmod>2024-04-18T21:36:37+09:00</lastmod>
   </url><url>
-    <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2024-04-18T21:36:37+09:00</lastmod>
-  </url><url>
     <loc>https://yamate11.github.io/blog/categories/topic/</loc>
-    <lastmod>2024-04-18T21:36:37+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/</loc>
     <lastmod>2024-04-18T21:36:37+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/</loc>
