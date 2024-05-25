@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "Dilworthの定理, Konigの定理"
-date: "2022-02-02T10:34:31+09:00"
+date: "2024-05-202T15:31:00+09:00"
 # date_init: "2022-02-02"
 tags: ["Dilworth", "Konig"]
 categories: ["topic"]
@@ -144,7 +144,12 @@ $|D| = |A| \leq (|D_1| - p) + (|D_2| - q) = |D| - (p + q) \leq |D|$
 したがって，$|A| = |D_1| + |D_2|$ であり，$|S| = |D_1| + 2 |D_2|$ 
 とあわせて，$|C| = |S| - |A| = |D_2| = |M|$ が得られた．(終)
 
-## K&ouml;nig の定理の証明
+## K&ouml;nig の定理の証明 (flow版)
+
+
+
+
+## K&ouml;nig の定理の証明 (flow でない版)
 
 二部グラフ$(L, R, E)$ の最大マッチング$M$をとる．
 $M_L := \\{ e_L \mid e \in M \\}$，

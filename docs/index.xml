@@ -6,8 +6,15 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Apr 2024 07:19:14 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2024 15:09:15 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC354-G Select Strings</title>
+      <link>https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/</link>
+      <pubDate>Wed, 22 May 2024 15:09:15 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/</guid>
+      <description>ABC354-G の解答とともに，関連する予備知識 (König の定理, Dilworth の定理) をまとめます</description>
+    </item>
     <item>
       <title>素数表</title>
       <link>https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/</link>
@@ -400,13 +407,6 @@ Powered by Hugo and PaperMod</description>
       <description>素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました</description>
     </item>
     <item>
-      <title>Dilworthの定理, Konigの定理</title>
-      <link>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</link>
-      <pubDate>Wed, 02 Feb 2022 10:34:31 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</guid>
-      <description>ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．</description>
-    </item>
-    <item>
       <title>Divide A Sequence - AtCoder Beginner Contest 234 G</title>
       <link>https://yamate11.github.io/blog/posts/2022/01-09-divide-a-sequence/</link>
       <pubDate>Sun, 09 Jan 2022 18:19:30 +0900</pubDate>
@@ -770,6 +770,13 @@ p, x が与えられて，aのp番目の要素をxに書き換える． l, r が
       <description>AtCoder Regular Contest (ARC) 056 D - サケノミ についての記事です．
 問題へのリンク 状況 解けないだけではなく，答を見てもなかなかわからなかったので，整理するために書いています．下記を参考にしています．
 公式解説 kmjpさんのブログ 解法 時刻 $2j+1$ にドリンクを飲むような飲み方全部に関する，時刻 $2j+1$ 時点での美味しさの総和の最大値を $x(j)$ とする． 時刻 $2i$ に全部のグラスが空だったとき，半開区間 $(2i, 2j]$ に属する時刻に注がれるドリンクの美味しさの総和を $y(i, j)$ とすると， $x(j) = \max \{ x(i) + y(i, j) \mid i &amp;lt; j \} $ である．ここで，$z(i, j) = x(i) + y(i, j)$ と書くことにする．時刻 $j$ に注がれるドリンク全体の集合を $P$ とし，$ p \in P $ に対して時刻 $2j$ の一回前にドリンク $p$ が注がれる時刻を $l_p$ とする (時刻 j が初回なら，$l_p = 0$ とする)．すると，次が成り立つ．</description>
+    </item>
+    <item>
+      <title>Dilworthの定理, Konigの定理</title>
+      <link>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/</guid>
+      <description>ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．</description>
     </item>
   </channel>
 </rss>
