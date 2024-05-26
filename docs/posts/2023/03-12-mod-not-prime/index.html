@@ -123,8 +123,8 @@
   "keywords": [
     "mod", "prime"
   ],
-  "articleBody": "mod ライブラリで素数以外の法に関してできることを書きます．\n制限なくできること 加算 減算 乗算 これらは，単に整数として演算した後に法で割って余りを求める (あるいはそれと同値なことをする) だけだから，できる．\n除算 $\\bmod M$ における $a/b$ というのは， 「$b$ にかけたら $a$ になる数」である．\nできる場合 $(b, M) = 1$ ならば，一意に存在する．\n(存在)$\\quad$ $bu + Mv = 1$ となる $u, v$ がとれるので，$x = au$ とすればよい． (一意性)$\\quad$ $bx \\equiv bx’ \\equiv a$ ならば， $b(x - x’) \\equiv 0$ だから，$x \\equiv x’$となる． 特に $M$ が素数ならば， $b\\not\\equiv 0 \\pmod M$ のとき，一意に存在する．\nできない場合 $(b, M) \\neq 1$ のときは，存在しないかもしれないし，複数あるかもしれない．\n例\n$2x \\equiv 3 \\pmod 4$ となる $x$ は存在しない． $2x \\equiv 2 \\pmod 4$ となる $x$ は， $x = 1$, $x = 3$ の2つがある． mod ライブラリでは，$(b, M) \\neq 1$ の時に $a/b$ を実行すると， 実行時エラーにしている．\n割り切れる除算 $a/b$ が整数になるとわかっている場合，$a/b \\bmod M$ を求めるのに， $r := a\\bmod bM$ を求めるという方法がある． $a = bMu + r$ とすると，$a/b = Mu + r/b$ であるから， $r/b$ は整数になるはずなので，普通に整数で割り算をすれば良い． $bM$ が大きな数になる可能性があって，int128 などが必要になるかもしれない．\n例題: ABC293-E (この方法による解説 )\n",
-  "wordCount" : "131",
+  "articleBody": "移動しました keywords: mod 素数 素数以外 法 除算 割算 整数\n",
+  "wordCount" : "9",
   "inLanguage": "en",
   "datePublished": "2023-03-12T09:10:33+09:00",
   "dateModified": "2023-03-12T09:10:33+09:00",
@@ -217,49 +217,9 @@
     <div class="post-meta">2023-03-12&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>mod ライブラリで素数以外の法に関してできることを書きます．</p>
-<h2 id="制限なくできること">制限なくできること<a hidden class="anchor" aria-hidden="true" href="#制限なくできること">#</a></h2>
-<ul>
-<li>加算</li>
-<li>減算</li>
-<li>乗算</li>
-</ul>
-<p>これらは，単に整数として演算した後に法で割って余りを求める
-(あるいはそれと同値なことをする) だけだから，できる．</p>
-<h2 id="除算">除算<a hidden class="anchor" aria-hidden="true" href="#除算">#</a></h2>
-<p>$\bmod M$ における $a/b$ というのは，
-「$b$ にかけたら $a$ になる数」である．</p>
-<h4 id="できる場合">できる場合<a hidden class="anchor" aria-hidden="true" href="#できる場合">#</a></h4>
-<p>$(b, M) = 1$ ならば，一意に存在する．</p>
-<ul>
-<li>(存在)$\quad$
-$bu + Mv = 1$ となる $u, v$ がとれるので，$x = au$ とすればよい．</li>
-<li>(一意性)$\quad$ $bx \equiv bx&rsquo; \equiv a$ ならば，
-$b(x - x&rsquo;) \equiv 0$ だから，$x \equiv x&rsquo;$となる．</li>
-</ul>
-<p>特に $M$ が素数ならば，
-$b\not\equiv 0 \pmod M$ のとき，一意に存在する．</p>
-<h4 id="できない場合">できない場合<a hidden class="anchor" aria-hidden="true" href="#できない場合">#</a></h4>
-<p>$(b, M) \neq 1$ のときは，存在しないかもしれないし，複数あるかもしれない．</p>
-<blockquote>
-<p>例</p>
-<ul>
-<li>$2x \equiv 3 \pmod 4$ となる $x$ は存在しない．</li>
-<li>$2x \equiv 2 \pmod 4$ となる $x$ は，
-$x = 1$, $x = 3$ の2つがある．</li>
-</ul>
-</blockquote>
-<p>mod ライブラリでは，$(b, M) \neq 1$ の時に $a/b$ を実行すると，
-実行時エラーにしている．</p>
-<h2 id="割り切れる除算">割り切れる除算<a hidden class="anchor" aria-hidden="true" href="#割り切れる除算">#</a></h2>
-<p>$a/b$ が整数になるとわかっている場合，$a/b \bmod M$ を求めるのに，
-$r := a\bmod bM$ を求めるという方法がある．
-$a = bMu + r$ とすると，$a/b = Mu + r/b$ であるから，
-$r/b$ は整数になるはずなので，普通に整数で割り算をすれば良い．
-$bM$ が大きな数になる可能性があって，int128 などが必要になるかもしれない．</p>
-<p>例題: <a href="https://atcoder.jp/contests/abc293/tasks/abc293_e" target="_blank">ABC293-E</a>
- (<a href="https://atcoder.jp/contests/abc293/editorial/5966" target="_blank">この方法による解説</a>
-)</p>
+  <div class="post-content"><p><a href="https://qiita.com/yamate11/items/b5c52e00ea577370fb9a" target="_blank">移動しました</a>
+</p>
+<p>keywords: mod 素数 素数以外 法 除算 割算 整数</p>
 
 
   </div>
