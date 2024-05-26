@@ -41,14 +41,20 @@ AtCoder Library にセグメント木はありますが，
 
 ```cpp
   st.set_single(i, x);
+  # または
+  st.rs(i) = x;
 ```
 
 $i$ 番目の値として $x$ を設定する．
 
+rs は，reference for substitution のつもり．
+これは，STSubst なるオブジェクトを作成して返す．
+STSubst オブジェクトには，代入演算子 = が再定義してあって，セグメント木の該当部分を更新するようになっている．
+
 #### 値の取得 (1点)
 
 ```cpp
-  st.get_single(i);
+  st.at(i);
 ```
 
 $i$ 番目の値を取得する．
@@ -57,7 +63,6 @@ $i$ 番目の値を取得する．
 
 ```cpp
   DAT x = st.query(il, ir);
-  DAT x = st[i];   // これは，st.query(i, i + 1) と同じ
 ```
 
 $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
@@ -95,6 +100,8 @@ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
 
 ```cpp
   st.set_single(i, x);
+  # または
+  st.rs(i) = x;
 ```
 
 $i$ 番目の値として $x$ を設定する．これは代入であって，OP とは関係無いことに注意．
@@ -111,7 +118,7 @@ $i$ 番目の値として $x$ を設定する．これは代入であって，OP
 #### 値の取得 (1点)
 
 ```cpp
-  st.get_single(i);
+  st.at(i);
 ```
 
 $i$ 番目の値を取得する．

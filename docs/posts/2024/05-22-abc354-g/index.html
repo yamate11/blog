@@ -123,8 +123,8 @@
   "keywords": [
     "Dilworth", "matching", "flow", "Konig"
   ],
-  "articleBody": "問題概要 英小文字からなる，長さ1以上の文字列 $S_1, \\dots, S_N$ と， 正の整数 $A_1, \\dots, A_N$ が与えられる． $T \\subseteq \\{1, 2, \\ldots, N\\}$ であって，$i, j \\in T$ で $S_i$ が $S_j$ の部分文字列となるような異なる $i, j$ が存在しないものについて， $\\sum \\{ A_i \\mid i \\in T\\} $ の最大値を求めよ．\n制約 $1 \\leq N \\leq 100$， $|S_1| + \\dots + |S_N| \\leq 5000$，$ 1 \\leq A_i \\leq 10^9$．\n問題へのリンク Keywords: Konig’s Theorem Koenig’s Theorem Dilworth’s Theorem マッチング matching flow フロー 最小カット antichain chain\n",
-  "wordCount" : "71",
+  "articleBody": "問題概要 英小文字からなる，長さ1以上の文字列 $S_1, \\dots, S_N$ と， 正の整数 $A_1, \\dots, A_N$ が与えられる． $T \\subseteq \\{1, 2, \\ldots, N\\}$ であって，$i, j \\in T$ で $S_i$ が $S_j$ の部分文字列となるような異なる $i, j$ が存在しないものについて， $\\sum \\{ A_i \\mid i \\in T\\} $ の最大値を求めよ．\n制約 $1 \\leq N \\leq 100$， $|S_1| + \\dots + |S_N| \\leq 5000$，$ 1 \\leq A_i \\leq 10^9$．\n問題へのリンク 状況 公式解説 を読んだのですが，よく理解できず．たとえば 「それぞれの重みの個数だけ頂点があると考えることで同じ問題に帰着する」 のがわかりませんでした．\n考えたところ，Dilworth の定理の Konig の定理経由の証明と， Konig の定理のフローを使った証明を組み合わせれば良いということがわかりました．\n前提 前に書いた記事 「Dilworth の定理，Konig の定理 」に必要事項があります．\n解法 問題文の「$T \\subseteq \\{1, 2, \\ldots, N\\}$ であって，$i, j \\in T$ で $S_i$ が $S_j$ の部分文字列となるような異なる $i, j$ が存在しない」ような $T$ を，反鎖と呼ぶことにする． 反鎖 $T$ であって，$T \\subsetneq T’$ となる反鎖 $T’$ が存在しないものを，極大反鎖と呼ぶことにする． 本問では，極大反鎖だけを考えれば十分である．\n$E := \\{(i, j) \\mid S_i$ は $S_j$ の部分文字列 $\\}$ とする． 愚直に行っても，$ S := \\sum_i |S_i| $ として， $E$ は $O(S^2)$ で決定できる． ノード $s$, $t$, $l_i$, $r_i$ ($i = 1, \\dots, N)$ を用意して， 次のような辺に容量のある有向グラフ $(G, R)$ を考える:\n$G = \\{s, t\\} \\cup \\{l_i \\mid i = 1, \\dots, N\\} \\cup \\{r_i \\mid i = 1, \\dots, N\\}$ $(s, l_i) \\in R$．容量は $A_i$． $(r_i, t) \\in R$．容量は $A_i$． $(i, j) \\in E$ のとき，$(l_i, r_j) \\in R$．容量は $\\infty$． Keywords: Konig’s Theorem Koenig’s Theorem Dilworth’s Theorem マッチング matching flow フロー 最小カット antichain chain\n",
+  "wordCount" : "194",
   "inLanguage": "en",
   "datePublished": "2024-05-22T15:09:15+09:00",
   "dateModified": "2024-05-22T15:09:15+09:00",
@@ -227,7 +227,32 @@ $\sum \{ A_i \mid i \in T\} $ の最大値を求めよ．</p>
 <p>$1 \leq N \leq 100$， $|S_1| + \dots + |S_N| \leq 5000$，$ 1 \leq A_i \leq 10^9$．</p>
 <p><a href="https://atcoder.jp/contests/abc354/tasks/abc354_g" target="_blank">問題へのリンク</a>
 </p>
-<h2 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h2>
+<h2 id="状況">状況<a hidden class="anchor" aria-hidden="true" href="#状況">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc354/editorial/10029" target="_blank">公式解説</a>
+ を読んだのですが，よく理解できず．たとえば
+「それぞれの重みの個数だけ頂点があると考えることで同じ問題に帰着する」
+のがわかりませんでした．</p>
+<p>考えたところ，Dilworth の定理の Konig の定理経由の証明と，
+Konig の定理のフローを使った証明を組み合わせれば良いということがわかりました．</p>
+<h2 id="前提">前提<a hidden class="anchor" aria-hidden="true" href="#前提">#</a></h2>
+<p>前に書いた記事
+「<a href="/blog/posts/2022/02-02-dilworth-konig/">Dilworth の定理，Konig の定理</a>
+」に必要事項があります．</p>
+<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
+<p>問題文の「$T \subseteq \{1, 2, \ldots, N\}$ であって，$i, j \in T$ で
+$S_i$ が $S_j$ の部分文字列となるような異なる $i, j$ が存在しない」ような $T$ を，反鎖と呼ぶことにする．
+反鎖 $T$ であって，$T \subsetneq T&rsquo;$ となる反鎖 $T&rsquo;$ が存在しないものを，極大反鎖と呼ぶことにする．
+本問では，極大反鎖だけを考えれば十分である．</p>
+<p>$E := \{(i, j) \mid S_i$ は $S_j$ の部分文字列 $\}$ とする．
+愚直に行っても，$ S := \sum_i |S_i| $ として， $E$ は $O(S^2)$ で決定できる．
+ノード $s$, $t$, $l_i$, $r_i$ ($i = 1, \dots, N)$ を用意して，
+次のような辺に容量のある有向グラフ $(G, R)$ を考える:</p>
+<ul>
+<li>$G = \{s, t\} \cup \{l_i \mid i = 1, \dots, N\} \cup \{r_i \mid i = 1, \dots, N\}$</li>
+<li>$(s, l_i) \in R$．容量は $A_i$．</li>
+<li>$(r_i, t) \in R$．容量は $A_i$．</li>
+<li>$(i, j) \in E$ のとき，$(l_i, r_j) \in R$．容量は $\infty$．</li>
+</ul>
 <p>Keywords: Konig&rsquo;s Theorem Koenig&rsquo;s Theorem Dilworth&rsquo;s Theorem マッチング matching flow フロー 最小カット antichain chain</p>
 
 

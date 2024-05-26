@@ -154,9 +154,10 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
       <description>自作セグメント木ライブラリ の使い方についての自分用のメモです． AtCoder Library にセグメント木はありますが， それができる前から使っていたものなので&amp;hellip;
 使用法 値の型を DAT, 更新演算の型を OP とする．
 基本のセグメント木 作成 auto st = make_seg_tree(unit_dat, add, init_vec); unit_dat は，加法単位元 add には，加法の演算を行う関数を指定する． 関数ポインタ，クロージャ，関数オブジェクトが使える． init_vec は初期ベクトル 初期ベクトル設定は，分けても良い:
-auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); $i$ 番目の値として $x$ を設定する．
-値の取得 (1点) st.get_single(i); $i$ 番目の値を取得する．
-値の取得 (範囲) DAT x = st.query(il, ir); DAT x = st[i]; // これは，st.query(i, i + 1) と同じ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．</description>
+auto st = make_seg_tree(unit_dat, add); st.set_data(init_vec); 値の代入 (1点) st.set_single(i, x); # または st.rs(i) = x; $i$ 番目の値として $x$ を設定する．
+rs は，reference for substitution のつもり． これは，STSubst なるオブジェクトを作成して返す． STSubst オブジェクトには，代入演算子 = が再定義してあって，セグメント木の該当部分を更新するようになっている．
+値の取得 (1点) st.at(i); $i$ 番目の値を取得する．
+値の取得 (範囲) DAT x = st.query(il, ir); $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．</description>
     </item>
     <item>
       <title>Bookmarks</title>
