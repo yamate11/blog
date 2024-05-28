@@ -93,7 +93,7 @@ auto hs = rh.hashes(s);
 
 引数は string で与える必要があり，`const char[]` ではうまくいかない．
 
-hs の型は適当な struct だが，意識しないで良いはず．
+hs の型は RollingHash::HashedValues である．
 (その主要部分は，`vector<u64>` 型で，サイズ `s.size() + 1` のベクトル)．
 
 #### ハッシュ値の計算
