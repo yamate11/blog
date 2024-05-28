@@ -94,7 +94,7 @@ auto hs = rh.hashes(s);
 引数は string で与える必要があり，`const char[]` ではうまくいかない．
 
 hs の型が必要な場合は `RollingHash::HashedValues` と書く．
-(その主要部分は，`vector<u64>` 型で，サイズ `s.size() + 1` のベクトル)．
+もしくは，`decltype(rh.hashes(string()))` とか．
 
 #### ハッシュ値の計算
 
