@@ -80,6 +80,8 @@ $\sum \\{ A_i \mid i \in L \\} + \sum \\{ A_i \mid i \in H \\}$，すなわち
 $f(\bar{N}) - f(B)$ である．
 したがって，$G$ のカットの最小容量を $M$ とすれば，$f(B') \leq f(B) \leq f(\bar{N}) - M$ が成り立つ．
 
+<img src="fig1.jpg" width="500px">
+
 次に，$G$ の最小容量 $M$ のカット $(S, T)$ をとる．ただし，$s \in S,\\; t \in T$．
 カット容量 $M$ は，$\sum \\{ A_i \mid l_i \in T \\} + \sum \\{ A_i \mid r_i \in S\\}$ であって，
 $(l_i, r_j) \in R$, $l_i \in S$, $r_j \in T$ となる $i, j$ は存在しない (さもないと
