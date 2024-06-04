@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | yamate11のブログ</title>
+<title>忘れやすい事項 | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - yamate11のブログ">
-<meta name="author" content="">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/">
+<meta name="description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
+二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) ">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -18,7 +19,6 @@
 <link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://yamate11.github.io/blog/posts/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -82,14 +82,18 @@
 
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:title" content="忘れやすい事項" />
+<meta property="og:description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
+二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-04T09:13:31+09:00" />
+<meta property="article:modified_time" content="2024-06-04T09:13:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="忘れやすい事項"/>
+<meta name="twitter:description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
+二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) "/>
 
 
 <script type="application/ld+json">
@@ -102,13 +106,52 @@
       "position":  1 ,
       "name": "Posts",
       "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "忘れやすい事項",
+      "item": "https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/"
     }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "忘れやすい事項",
+  "name": "忘れやすい事項",
+  "description": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) ",
+  "keywords": [
+    
+  ],
+  "articleBody": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) ",
+  "wordCount" : "9",
+  "inLanguage": "en",
+  "datePublished": "2024-06-04T09:13:31+09:00",
+  "dateModified": "2024-06-04T09:13:31+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -166,58 +209,61 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Posts
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">乱数の作り方
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>C&#43;&#43; での乱数の使い方のメモです．
-典型的なコード ll n; cin &gt;&gt; n; random_device rand_dev; mt19937 rng(rand_dev()); uniform_int_distribution&lt;ll&gt; dist(1, n); for (ll i = 0; i &lt; 10; i&#43;&#43;) cout &lt;&lt; dist(rng) &lt;&lt; &#34; &#34;; cout &lt;&lt; endl; クラス random_device マニュアル オブジェクトは乱数発生器．non-deterministic な乱数を生成する． operator() を実行すると，unsigned int の乱数が返り，状態が進む． 実行は高価である可能性がある． クラス mt19937 マニュアル 32bitメルセンヌツィッター乱数発生器 64bitメルセンヌツィッター乱数発生器 の mt19937_64 というクラスもある． o.operator() を実行すると，uint_fast32_t の乱数が返り，状態が進む． コンストラクタに seed を渡す． デフォルトコンストラクタは引数をとらず，seed = 5489u を用いる．したがって，次のように書けば，どの実行でも同じ値が生成される． mt19937 rng; クラス uniform_int_distribution マニュアル 乱数分布を一様分布とする．constructor に a, b を指定すると，a以上b以下の一様分布． T は int や ll など．デフォルトは int． operator() は，引数に乱数発生器を取り，一様分布を生成する． 他の乱数分布クラスとコンストラクタの例: uniform_real_distribution&lt;double&gt; dist1(a, b); normal_distribution&lt;double&gt; dist2(mean, stddev); </p>
-  </div>
-  <footer class="entry-footer">2021-01-13&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 乱数の作り方" href="https://yamate11.github.io/blog/posts/2021/01-13-random/"></a>
-</article>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      忘れやすい事項
+    </h1>
+    <div class="post-meta">2024-06-04&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>解法に詰まったとき，以下の方法が適用できないか，考えてみる．</p>
+<ul>
+<li>二分探索</li>
+<li>bit64倍高速化</li>
+<li>convolution</li>
+<li>CHT</li>
+<li>(期待値) = sum_i (i以上になる確率)</li>
+</ul>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">AtCoder Regular Contest 056 D - サケノミ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>AtCoder Regular Contest (ARC) 056 D - サケノミ についての記事です．
-問題へのリンク 状況 解けないだけではなく，答を見てもなかなかわからなかったので，整理するために書いています．下記を参考にしています．
-公式解説 kmjpさんのブログ 解法 時刻 $2j&#43;1$ にドリンクを飲むような飲み方全部に関する，時刻 $2j&#43;1$ 時点での美味しさの総和の最大値を $x(j)$ とする． 時刻 $2i$ に全部のグラスが空だったとき，半開区間 $(2i, 2j]$ に属する時刻に注がれるドリンクの美味しさの総和を $y(i, j)$ とすると， $x(j) = \max \{ x(i) &#43; y(i, j) \mid i &lt; j \} $ である．ここで，$z(i, j) = x(i) &#43; y(i, j)$ と書くことにする．時刻 $j$ に注がれるドリンク全体の集合を $P$ とし，$ p \in P $ に対して時刻 $2j$ の一回前にドリンク $p$ が注がれる時刻を $l_p$ とする (時刻 j が初回なら，$l_p = 0$ とする)．すると，次が成り立つ．...</p>
-  </div>
-  <footer class="entry-footer">2021-01-06&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to AtCoder Regular Contest 056 D - サケノミ" href="https://yamate11.github.io/blog/posts/2021/01-06-sakenomi/"></a>
-</article>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Dilworthの定理, Konigの定理
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>ABC237 Ex Hakata を解くのに必要だった Dilworth の定理他に関する記事です．</p>
   </div>
-  <footer class="entry-footer">yamate11</footer>
-  <a class="entry-link" aria-label="post link to Dilworthの定理, Konigの定理" href="https://yamate11.github.io/blog/posts/2022/02-02-dilworth-konig/"></a>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">
+    <span class="title">Next »</span>
+    <br>
+    <span>ABC354-G Select Strings</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2024/06-04-easy-to-forget/" data-title="忘れやすい事項">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">ABC354-G Select Strings</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/">素数表</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/">ポテンシャル付きUnionFind</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-30-matrix/">行列ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-25-arc175-c/">ARC175-C Jumping Through Intervals</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/">ABC346-G Alone</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/">二分探索ライブラリ</a>
+</p>
+
+
 </article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="https://yamate11.github.io/blog/posts/page/6/">
-      «&nbsp;Prev&nbsp;
-    </a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">
@@ -287,6 +333,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

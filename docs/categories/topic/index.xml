@@ -6,8 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 18 Apr 2024 21:36:37 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 04 Jun 2024 09:13:31 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>忘れやすい事項</title>
+      <link>https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/</link>
+      <pubDate>Tue, 04 Jun 2024 09:13:31 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/</guid>
+      <description>解法に詰まったとき，以下の方法が適用できないか，考えてみる．
+二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) </description>
+    </item>
     <item>
       <title>ポテンシャル付きUnionFind</title>
       <link>https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/</link>
