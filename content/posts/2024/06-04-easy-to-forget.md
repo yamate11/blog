@@ -14,7 +14,8 @@ categories: ["topic"]
 * 二分探索
 * bit64倍高速化
 * convolution
+* 半分全列挙
+* フロー
 * CHT
 * (期待値) = sum_i (i以上になる確率)
-* 半分全列挙
 

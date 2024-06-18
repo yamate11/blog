@@ -14,7 +14,7 @@
       <pubDate>Tue, 04 Jun 2024 09:13:31 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/</guid>
       <description>解法に詰まったとき，以下の方法が適用できないか，考えてみる．
-二分探索 bit64倍高速化 convolution CHT (期待値) = sum_i (i以上になる確率) 半分全列挙 </description>
+二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT (期待値) = sum_i (i以上になる確率) </description>
     </item>
     <item>
       <title>ABC354-G Select Strings</title>
