@@ -138,8 +138,8 @@ Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 
   "keywords": [
     
   ],
-  "articleBody": " $$ \\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r} $$\n言わずもがな．パスカルの三角形\n$$ \\binom{n}{r} = \\frac{n}{r} \\binom{n - 1}{r - 1} $$\n定理から明らか．\n$$ \\sum_{i = r}^{n} \\binom{i}{r} = \\binom{n + 1}{r + 1} $$\nHockey-stick identity. 次のように1を繰り返し適用． $\\binom{n + 1}{r + 1} = \\binom{n}{r} + \\binom{n}{r + 1} = \\binom{n}{r} + \\binom{n - 1}{r} + \\binom{n - 1}{r + 1} = \\binom{n}{r} + \\binom{n - 1}{r} + \\binom{n - 2}{r} + \\binom{n - 2}{r + 1} = \\dots$\n$$ \\binom{n + m}{r} = \\sum_{i = 0}^{r}\\binom{n}{i}\\binom{m}{r - i} $$\n$n + m$ から $r$ 取る組合せは，$n$ から $i$ 取って，$m$ から $r - i$ とる組合せで $i$ を動かしたもの．\n",
-  "wordCount" : "108",
+  "articleBody": " $$ \\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r} $$\n言わずもがな．パスカルの三角形\n$$ \\binom{n}{r} = \\frac{n}{r} \\binom{n - 1}{r - 1} $$\n定理から明らか．\n$$ \\sum_{i = r}^{n} \\binom{i}{r} = \\binom{n + 1}{r + 1} $$\nHockey-stick identity. 次のように1を繰り返し適用． $\\binom{n + 1}{r + 1} = \\binom{n}{r} + \\binom{n}{r + 1} = \\binom{n}{r} + \\binom{n - 1}{r} + \\binom{n - 1}{r + 1} = \\binom{n}{r} + \\binom{n - 1}{r} + \\binom{n - 2}{r} + \\binom{n - 2}{r + 1} = \\dots$\n$$ \\binom{n + m}{r} = \\sum_{i = 0}^{r}\\binom{n}{i}\\binom{m}{r - i} $$\n$n + m$ から $r$ 取る組合せは，$n$ から $i$ 取って，$m$ から $r - i$ とる組合せで $i$ を動かしたもの．\n$$ \\sum_{r = 0}^{n} r \\binom{n}{r} = n 2^{n - 1} $$\n左辺は，$\\sum_{r = 1}^{n} r \\binom{n}{r} = n \\sum_{r = 1}^{n} \\binom{n - 1}{r - 1} = n 2^{n - 1}$ と計算できる．\n",
+  "wordCount" : "141",
   "inLanguage": "en",
   "datePublished": "2024-06-21T18:42:07+09:00",
   "dateModified": "2024-06-21T18:42:07+09:00",
@@ -264,6 +264,14 @@ $\binom{n + 1}{r + 1} = \binom{n}{r} + \binom{n}{r + 1}
 \binom{n + m}{r} = \sum_{i = 0}^{r}\binom{n}{i}\binom{m}{r - i}
 $$</p>
 <p>$n + m$ から $r$ 取る組合せは，$n$ から $i$ 取って，$m$ から $r - i$ とる組合せで $i$ を動かしたもの．</p>
+<ol start="5">
+<li></li>
+</ol>
+<p>$$
+\sum_{r = 0}^{n} r \binom{n}{r} = n 2^{n - 1}
+$$</p>
+<p>左辺は，$\sum_{r = 1}^{n} r \binom{n}{r} = n \sum_{r = 1}^{n} \binom{n - 1}{r - 1} = n 2^{n - 1}$
+と計算できる．</p>
 
 
   </div>
