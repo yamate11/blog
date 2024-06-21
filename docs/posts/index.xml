@@ -6,8 +6,20 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 04 Jun 2024 09:13:31 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2024 18:42:07 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二項係数に関する公式</title>
+      <link>https://yamate11.github.io/blog/posts/2024/06-21-binomial/</link>
+      <pubDate>Fri, 21 Jun 2024 18:42:07 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/06-21-binomial/</guid>
+      <description>$$ \binom{n}{r} = \binom{n - 1}{r - 1} + \binom{n - 1}{r} $$
+言わずもがな．パスカルの三角形
+$$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
+定理から明らか．
+$$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n + 1}{r + 1} $$
+Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n + 1}{r + 1} = \binom{n}{r} + \binom{n}{r + 1} = \binom{n}{r} + \binom{n - 1}{r} + \binom{n - 1}{r + 1} = \binom{n}{r} + \binom{n - 1}{r} + \binom{n - 2}{r} + \binom{n - 2}{r + 1} = \dots$</description>
+    </item>
     <item>
       <title>忘れやすい事項</title>
       <link>https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/</link>
