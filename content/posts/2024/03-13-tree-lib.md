@@ -178,7 +178,7 @@ void change_root(int newRoot)
 
 根を newRoot に変更する．
 
-### 全方位木
+### 全方位木 (rerooting)
 
 [別記事](http://localhost:5080/blog/posts/2022/08-17-rerooting/) 参照
 
