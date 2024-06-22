@@ -76,7 +76,7 @@ auto children_pe(int nd)
 * `tr.num_children(nd)` は，ノード nd の子供の数を返す．
 * `tr.parent(nd) は，nd の親のノードを返す．root の parent は -1．
 * `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
-* `tr.children(nd)` は，nd の子供を渡るイタレータを返す．したがって，次のような使い方ができる:
+* `tr.children(nd)` は，nd の子供の集まりへの view を返す．したがって，次のような使い方ができる:
   * `for (int c : tr.children(nd) { ... }`
 * 構造体 `pe_t` は，int 型のメンバ `peer` と `edge` を持つ．
   * `peer` ... ノード
@@ -84,7 +84,7 @@ auto children_pe(int nd)
 * `tr.parent_pe(nd)` は，nd の親と，nd からその親への辺の番号を返す．
 * `tr.child_pe(nd, idx)` は，nd の idx 番目の子供と，nd からその子供への辺の番号を返す．
 * `tr.parent_pe(nd).peer == tr.parent(nd)` などが成り立つ．
-* `tr.children_pe(nd)` は，nd の子供に対する pe_t 構造体を渡るイタレータを返す．
+* `tr.children_pe(nd)` は，nd の子供に対する pe_t 構造体を渡る view を返す．
   次のように使える:
   * `for (auto [cld_nd, cld_edge] : tr.children_pe(nd)) { ... }`
   * `for (const pe_t& pe : tr.children_pe(nd)) { ... pe.peer ... pe.edge ... }`
