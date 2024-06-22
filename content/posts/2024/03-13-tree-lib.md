@@ -9,7 +9,7 @@ categories: ["topic"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
 ---
 
-自分用の木のライブラリのメモです．
+自分用の木のライブラリのメモです．ソースは[こちら](https://github.com/yamate11/compprog-clib/blob/master/tree.cc)．
 
 ## 1. 典型的な使用法
 

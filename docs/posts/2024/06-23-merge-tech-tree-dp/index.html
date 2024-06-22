@@ -5,16 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>RBS - Educational Codeforces Round 115 F | yamate11のブログ</title>
+<title>木DP &#43; マージテク | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
-問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
-$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
-制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
-解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
-$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．">
+<meta name="description" content="木DP と マージテクを使って解くときのコードスニペット">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -86,26 +81,16 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
 
 
 
-<meta property="og:title" content="RBS - Educational Codeforces Round 115 F" />
-<meta property="og:description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
-問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
-$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
-制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
-解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
-$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．" />
+<meta property="og:title" content="木DP &#43; マージテク" />
+<meta property="og:description" content="木DP と マージテクを使って解くときのコードスニペット" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-05-19T00:12:09+09:00" />
-<meta property="article:modified_time" content="2022-05-19T00:12:09+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-23T01:14:51+09:00" />
+<meta property="article:modified_time" content="2024-06-23T01:14:51+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="RBS - Educational Codeforces Round 115 F"/>
-<meta name="twitter:description" content="Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
-問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&quot;()()()))&quot;!) = 3$, $f(\verb!&quot;(()())((&quot;!) = 1$．
-$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
-制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
-解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
-$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．"/>
+<meta name="twitter:title" content="木DP &#43; マージテク"/>
+<meta name="twitter:description" content="木DP と マージテクを使って解くときのコードスニペット"/>
 
 
 <script type="application/ld+json">
@@ -122,8 +107,8 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "RBS - Educational Codeforces Round 115 F",
-      "item": "https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/"
+      "name": "木DP + マージテク",
+      "item": "https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"
     }
   ]
 }
@@ -132,24 +117,24 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "RBS - Educational Codeforces Round 115 F",
-  "name": "RBS - Educational Codeforces Round 115 F",
-  "description": "Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．\n問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \\in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\\verb!\u0026quot;()()()))\u0026quot;!) = 3$, $f(\\verb!\u0026quot;(()())((\u0026quot;!) = 1$．\n$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．\n制約: $ 1 \\leq n \\leq 20$，与えられる文字列の長さの和は $4\\times 10^5$ 以下． 制限時間3秒．\n解法 0-index で記述する． $\\bar{n} := \\{0, \\ldots, n-1\\}$ とする．\n$s \\in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \\in S$ で，全ての $i \u0026lt; |s|$ に対して $g(s) \\geq 0$ であるものの集合を $L$ と書く．$D := S \\setminus L$．",
+  "headline": "木DP + マージテク",
+  "name": "木DP \u002b マージテク",
+  "description": "木DP と マージテクを使って解くときのコードスニペット",
   "keywords": [
     
   ],
-  "articleBody": " Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．\n問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \\in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\\verb!\"()()()))\"!) = 3$, $f(\\verb!\"(()())((\"!) = 1$．\n$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．\n制約: $ 1 \\leq n \\leq 20$，与えられる文字列の長さの和は $4\\times 10^5$ 以下． 制限時間3秒．\n解法 0-index で記述する． $\\bar{n} := \\{0, \\ldots, n-1\\}$ とする．\n$s \\in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \\in S$ で，全ての $i \u003c |s|$ に対して $g(s) \\geq 0$ であるものの集合を $L$ と書く．$D := S \\setminus L$．\n$x \\subseteq \\bar{n}$ に対し， $\\{ s_i \\mid i \\in x \\}$ を並び替えて連結して得られる文字列 の集合を $P(x)$ と書く． $P(x)$ の要素 $s$ について，$g(s)$ の値は全て等しい．この値を $b(x)$ と書く． $\\newcommand{\\live}{\\text{live}}\\newcommand{\\dead}{\\text{dead}}$\n$\\live[ x ] := \\max \\{ f(s) \\mid s \\in P(x) \\cap L \\}$ $\\dead[ x ] := \\max \\{ f(s) \\mid s \\in P(x) \\cap D \\}$ ただし，$\\max \\varnothing = -\\infty$．\nすると，求める値は $\\max( \\text{live}[\\bar{n}], \\text{dead}[\\bar{n}] )$ である．\nこれをDPで求める．初期化:\n$\\live[ \\varnothing ] = 0$ $\\dead[ \\varnothing ] = -\\infty$ 遷移は次のようになる．\n$\\text{updMax}(\\dead[ x \\cup \\{k\\} ], \\dead[ x ])$ $b(x) + g(s_k) \u003c 0$ のとき， $\\text{updMax}(\\dead[x \\cup \\{k\\} ], \\live[ x ] + h(s_k, b(x)))$ $b(x) + g(s_k) \\geq 0$ のとき， $\\text{updMax}(\\live[x \\cup \\{k\\} ], \\live[ x ] + h(s_k, b(x)))$ ここで，$h(s, b)$ は，$s$ において $g(i) = -b$ かつ すべての $j \u003c i$ に対して $g(j) \\geq -b$ であるような $i$ の数であり， これらは前計算で求めておくことができる．\n計算量は $O(n2^n)$\n実装 ACコード ",
-  "wordCount" : "228",
+  "articleBody": "概要 木のノードのペアに関する計算を，全体で $O(N)$ で行いたい問題で， 木DP で，各ノードで，子ノードが作成した map から map を計算するというパターンがある． 最終的に map のサイズが $O(N)$ になる場合，何も考えないと全体で計算量が $O(N^2)$ になってしまうところ， マージテクを使って $O(N \\log N)$ ですまそう，という解法のコードスニペットを記述する．\n前提 木ライブラリ コードスニペット ",
+  "wordCount" : "25",
   "inLanguage": "en",
-  "datePublished": "2022-05-19T00:12:09+09:00",
-  "dateModified": "2022-05-19T00:12:09+09:00",
+  "datePublished": "2024-06-23T01:14:51+09:00",
+  "dateModified": "2024-06-23T01:14:51+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/"
+    "@id": "https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"
   },
   "publisher": {
     "@type": "Organization",
@@ -227,81 +212,30 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
   <header class="post-header">
     
     <h1 class="post-title">
-      RBS - Educational Codeforces Round 115 F
+      木DP &#43; マージテク
     </h1>
-    <div class="post-meta">2022-05-19&amp;nbsp;·&amp;nbsp;yamate11
+    <div class="post-meta">2024-06-23&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><!-- タイトルはキーワードがインデックスされないかもしれないので，
-     ここに書いておく -->
-<p>Educational Codeforces Round 115 F. RBS の解法です．
-解説ACです．</p>
-<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
-<p><a href="https://codeforces.com/contest/1598/problem/F" target="_blank">問題へのリンク</a>
+  <div class="post-content"><h2 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h2>
+<p>木のノードのペアに関する計算を，全体で $O(N)$ で行いたい問題で，
+木DP で，各ノードで，子ノードが作成した map から map を計算するというパターンがある．
+最終的に map のサイズが $O(N)$ になる場合，何も考えないと全体で計算量が $O(N^2)$ になってしまうところ，
+マージテクを使って $O(N \log N)$ ですまそう，という解法のコードスニペットを記述する．</p>
+<h2 id="前提">前提<a hidden class="anchor" aria-hidden="true" href="#前提">#</a></h2>
+<p><a href="../../2024/03-13-tree-lib/">木ライブラリ</a>
 </p>
-<p>文字 <code>(</code> と <code>)</code> のみからなる空でない文字列全体の集合を $S$ とする．
-$s \in S$ に対し，$s$ の空でない prefix であって，
-括弧の対応が取れているものの数を $f(s)$ と書くことにする．
-例えば $f(\verb!&quot;()()()))&quot;!) = 3$,
-$f(\verb!&quot;(()())((&quot;!) = 1$．</p>
-<p>$S$ の要素が $n$ 個与えられる．
-これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の
-最大値を求めよ．</p>
-<p>制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下．
-制限時間3秒．</p>
-<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
-<p>0-index で記述する．
-$\bar{n} := \{0, \ldots, n-1\}$ とする．</p>
-<p>$s \in S$ に対し，現れる <code>(</code> の数から <code>)</code> の数を引いたものを $g(s)$ と書く．
-$s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を
-$L$ と書く．$D := S \setminus L$．</p>
-<p>$x \subseteq \bar{n}$ に対し，
-$\{ s_i \mid i \in x \}$ を並び替えて連結して得られる文字列
-の集合を $P(x)$ と書く．
-$P(x)$ の要素 $s$ について，$g(s)$ の値は全て等しい．この値を $b(x)$ と書く．
-$\newcommand{\live}{\text{live}}\newcommand{\dead}{\text{dead}}$</p>
-<ul>
-<li>$\live[ x ] := \max \{ f(s) \mid s \in P(x) \cap L \}$</li>
-<li>$\dead[ x ] := \max \{ f(s) \mid s \in P(x) \cap D \}$</li>
-</ul>
-<p>ただし，$\max \varnothing = -\infty$．</p>
-<p>すると，求める値は $\max( \text{live}[\bar{n}], \text{dead}[\bar{n}] )$
-である．</p>
-<p>これをDPで求める．初期化:</p>
-<ul>
-<li>$\live[ \varnothing ] = 0$</li>
-<li>$\dead[ \varnothing ] = -\infty$</li>
-</ul>
-<p>遷移は次のようになる．</p>
-<ul>
-<li>$\text{updMax}(\dead[ x \cup \{k\} ], \dead[ x ])$</li>
-<li>$b(x) + g(s_k) &lt; 0$ のとき，
-$\text{updMax}(\dead[x \cup \{k\} ], \live[ x ] + h(s_k, b(x)))$</li>
-<li>$b(x) + g(s_k) \geq 0$ のとき，
-$\text{updMax}(\live[x \cup \{k\} ], \live[ x ] + h(s_k, b(x)))$</li>
-</ul>
-<p>ここで，$h(s, b)$ は，$s$ において $g(i) = -b$ かつ すべての
-$j &lt; i$ に対して $g(j) \geq -b$ であるような $i$ の数であり，
-これらは前計算で求めておくことができる．</p>
-<p>計算量は $O(n2^n)$</p>
-<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
-<p><a href="https://codeforces.com/contest/1598/submission/157580538" target="_blank">ACコード</a>
-</p>
-
+<h2 id="コードスニペット">コードスニペット<a hidden class="anchor" aria-hidden="true" href="#コードスニペット">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Mo&#39;s algorithm メモ</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/04-14-arc138-d-differ-by-k-bits/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/">
     <span class="title">Next »</span>
     <br>
-    <span>Differ by K bits - Atcoder Regular Contest 138 D</span>
+    <span>二項係数に関する公式</span>
   </a>
 </nav>
 
@@ -310,7 +244,7 @@ $j &lt; i$ に対して $g(j) \geq -b$ であるような $i$ の数であり，
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/05-19-ecf-115-f-rbs/" data-title="RBS - Educational Codeforces Round 115 F">
+<section id="isso-thread" data-isso-id="/blog/posts/2024/06-23-merge-tech-tree-dp/" data-title="木DP &#43; マージテク">
 </section>
 
 <p>Links to Recent Posts:

@@ -192,6 +192,18 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">木DP &#43; マージテク
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>木DP と マージテクを使って解くときのコードスニペット</p>
+  </div>
+  <footer class="entry-footer">2024-06-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 木DP &#43; マージテク" href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">二項係数に関する公式
     </h2>
   </header>
@@ -315,7 +327,7 @@ ld = uf....</p>
     </h2>
   </header>
   <div class="entry-content">
-    <p>自分用の木のライブラリのメモです．
+    <p>自分用の木のライブラリのメモです．ソースはこちら ．
 1. 典型的な使用法 ll N; cin &gt;&gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;](auto rF, ll nd) -&gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr....</p>
   </div>
   <footer class="entry-footer">2024-03-13&amp;nbsp;·&amp;nbsp;yamate11</footer>
@@ -386,18 +398,6 @@ $P(x, y)$ かつ $x \leq x’$，$y’ \leq y$ ならば，$P(x’, y’)$ こ�
   </div>
   <footer class="entry-footer">2024-01-01&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Offline Dynamic Connectivity" href="https://yamate11.github.io/blog/posts/2024/01-01-offline-dynamic-connectivity/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Undo付きUnionFind
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Undo付きUnionFindライブラリです．</p>
-  </div>
-  <footer class="entry-footer">2024-01-01&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Undo付きUnionFind" href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
