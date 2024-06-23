@@ -125,7 +125,7 @@ pair<int, bool> euler_edge(int idx)
   * 仮想的な辺を含めると辺の数は numNodes となる．仮想的な辺の番号は，numNodes - 1 とする．
     各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
 * `[e, b] = tr.euler_edge(k)` とすると，k 番目にたどられる辺の番号は e である．
-  `[x, y] = tr.nodes_of_edges(e)` とすると，~b` が false なら，e を x から y の方向に辿り，
+  `[x, y] = tr.nodes_of_edges(e)` とすると，`b` が false なら，e を x から y の方向に辿り，
   `b` が true なら，e を y から x の方向に辿る．
 * ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
   `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
@@ -171,6 +171,9 @@ tuple<int, int, int, int, int> diameter()
   直径が奇数の時，ct0 が nd0 寄り，ct1 が nd1 寄り．
 
 #### 重心
+
+重心とは，その頂点を根にしたときに，すべての隣接頂点の部分木サイズが全頂点数の半分以下である頂点のこと．
+木には重心が 1点または2点存在する．
 
 ```cpp
 pair<int, int> centroids()
