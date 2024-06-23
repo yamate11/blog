@@ -116,7 +116,7 @@ int stsize(int nd)
 ```cpp
 int euler_in(int nd)
 int euler_out(int nd)
-pair<int, bool> euler_edge(int idx)
+tuple<int, int, int> euler_edge(int idx)
 ```
 
 * オイラーツアーは，辺を DFS の順に辿ったものである．
@@ -124,9 +124,8 @@ pair<int, bool> euler_edge(int idx)
     仮想的な点と root を結ぶ仮想的な辺を，それぞれ root に向かって，root から 辿るものとする．
   * 仮想的な辺を含めると辺の数は numNodes となる．仮想的な辺の番号は，numNodes - 1 とする．
     各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
-* `[e, b] = tr.euler_edge(k)` とすると，k 番目にたどられる辺の番号は e である．
-  `[x, y] = tr.nodes_of_edges(e)` とすると，`b` が false なら，e を x から y の方向に辿り，
-  `b` が true なら，e を y から x の方向に辿る．
+* `[e, x, y] = tr.euler_edge(k)` とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
+  x から y の方向に辿られる．
 * ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
   `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
 
