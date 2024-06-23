@@ -170,6 +170,17 @@ tuple<int, int, int, int, int> diameter()
   直径が偶数の時，ct0 と ct1 は等しい．
   直径が奇数の時，ct0 が nd0 寄り，ct1 が nd1 寄り．
 
+#### 重心
+
+```cpp
+pair<int, int> centroids()
+```
+
+`[a, b] = tr.centroids()` とすると，
+* 重心が1点の時には，a に重心ノード番号が，b には -1 が設定される．
+* 重心が2点の時には，a, b に重心ノード番号が設定される．
+
+
 #### 根の変更
 
 ```cpp
