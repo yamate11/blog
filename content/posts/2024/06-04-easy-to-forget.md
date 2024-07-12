@@ -20,4 +20,4 @@ categories: ["topic"]
 * (期待値) = sum_i (i以上になる確率)
 * deque はランダムアクセスが O(1)
 * 区間 [a, b] を2次元平面の点 (a, b) で表現
-
+* 区間の問題を距離の問題に言い直して Dijkstra ([例題](https://atcoder.jp/contests/past202010-open/tasks/past202010_o))
