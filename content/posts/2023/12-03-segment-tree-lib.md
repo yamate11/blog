@@ -157,10 +157,6 @@ std::min は，オーバーロードがあるので，そのまま名前で渡�
 * apply と add は自然に順序交換ができる．
 * オーバーフローしうる場合には， LLONG_MAX ではなく `(ll)(1e18)` などを用いる必要があるかもしれない．
 
-#### 区間加算，1点取得
-
-imos法を使う方が良い．
-
 #### 区間代入，区間最小値取得
 
 代入する値は `optional<ll>` で表す．
@@ -196,6 +192,18 @@ DAT として，long long の対をとり，
   REP(i, 0, init_vec.size()) dat_init.emplace_back(init_vec[i], 1);
   auto st = make_seg_tree_lazy(DAT(), OP(), add, comp, appl, dat_init);
 ```
+
+#### 区間加算，1点取得
+
+上の区間加算・区間最小値取得で流用できる．Fp のような最小値を取れない場合には，
+区間加算・区間和代入で代用しても良いが，区間の長さをとったりして面倒．どうせモノイド計算は使わないので，
+ダミーでもよい:
+
+```cpp
+  auto st = make_seg_tree_lazy(Fp(0), Fp(0), plus<Fp>(), plus<Fp>(), plus<Fp>());
+```
+
+なお，imos法ですむ場合もある．
 
 #### 区間代入，1点取得
 
