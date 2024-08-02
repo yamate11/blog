@@ -196,7 +196,7 @@
 制約: $N \leq 2\times 10^5$, $1 \leq A_i \leq N$
 前提知識 辺が座標軸と平行な長方形 $N$ 個の頂点の座標が与えられた時， 被覆する図形の面積は，次の方法で $O(N \log N)$ で求められる．
 適宜座標圧縮する．頂点のx座標の小さい順にソートして平面走査する．ベクトル $S$ を用意する．
-左端頂点 $(x, y_1)$, $(x, y_2)$ が現れたら，$S[y_1], …, S[y_2 - 1]$ に$1$を加える． 右端頂点 $(x, y_3)$, $(x, y_4)$ が現れたら，$S[y_3], …, S[y_4 - 1]$ に$-1$を加える． $S[\min], … S[\max]$ のうち，$0$ でないものの数を $t$ として，$\max - \min &#43; 1 - t$ を答に加える． 愚直だと $\Omega(N^2)$ かかるが，次の lazy segment tree を使うと $O(N \log N)$ になる．...</p>
+左端頂点 $(x, y_1)$, $(x, y_2)$ が現れたら，$S[y_1], …, S[y_2 - 1]$ に$1$を加える． 右端頂点 $(x, y_3)$, $(x, y_4)$ が現れたら，$S[y_3], …, S[y_4 - 1]$ に$-1$を加える． $S[\min], … S[\max]$ のうち，$0$ であるものの数を $t$ として，$\max - \min &#43; 1 - t$ を答に加える． 愚直だと $\Omega(N^2)$ かかるが，次の lazy segment tree を使うと $O(N \log N)$ になる．...</p>
   </div>
   <footer class="entry-footer">2024-03-24&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC346-G Alone" href="https://yamate11.github.io/blog/posts/2024/03-24-abc346-g/"></a>
