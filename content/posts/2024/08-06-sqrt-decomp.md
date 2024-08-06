@@ -54,7 +54,7 @@ summary: "平方分割ライブラリを書きました"
   ```cpp
   srd.exec(lo, hi, fe, fb);
   ```
-  上に記述した順序で処理が実行される．
+  上に記述した順序で処理が実行される．(他にも引数が渡せる．下の説明を参照．)
 
 ## 使用例
 
@@ -110,11 +110,11 @@ summary: "平方分割ライブラリを書きました"
     }
 ```
 
-### 低レベルインタフェース
+### その他
 
-#### range_pos
+#### 範囲 range_pos
 
-もとの添字の範囲 `[lo, hi)` に対応するブロックは，`range_pos` で取得できる．
+もとの添字の範囲 `[lo, hi)` に対応するブロック番号やブロック内添字の範囲は，`range_pos` で取得できる．
 
 ```cpp
 auto [b0, l0, h0, b1, l1, h1] = range_pos(lo, hi);
@@ -129,36 +129,39 @@ auto [b0, l0, h0, b1, l1, h1] = range_pos(lo, hi);
   ブロック `b1` の要素範囲は，`[l1, h1)` である．
 * (したがって，いずれの場合も l1 には 0 が返される．冗長であるが，わかりやすさを優先した．)  
 
-#### exec_general
+#### exec
 
-上述のパターンに近いが，必ずしもループが1回と限らない場合には，`exec_general` が使える可能性がある．
-`exec` と同様に，二つの関数を定義する．
+上述のパターンに近いが，必ずしもループが1回と限らない場合には，
+`exec` にさらに関数を追加できる．
 
-* 両端のブロックの処理をする関数は，引数に，ブロック番号，ブロック内添字の下端，上端の3つを取る．
-  ```cpp
-  auto fe = [&](int b, int lo_i, int hi_i) -> void { ... };
-  ```
-* 中央のブロックの処理をする関数は，引数に，ブロック番号の下端，上端の2つを取る．
-  ```cpp
-  auto fb = [&](int lo_b, int hi_b) -> void { ... };
-  ```
-* 実行方法は次の通り:
-  ```cpp
-  srd.exec_general(lo, hi, fe, fb);
-  ```
-
-比較すると，`exec_general` は，`exec` より一般的であり，
 ```cpp
-srd.exec(lo, hi, fe, fb)
+  template<typename F0e = nullptr_t, typename F0c = nullptr_t,
+           typename F1e = nullptr_t, typename F1c = nullptr_t>
+  void exec(int lo, int hi, auto edge_body, auto core_body,
+            F0e edge_pre = nullptr, F0c core_pre = nullptr,
+            F1e edge_post = nullptr, F1c core_post = nullptr);
 ```
-は，次と同じことになる:
-```cpp
-auto fe2 = [&](int b, int lo_i, int hi_i) {
-  REP(i, lo_i, hi_i) fe(b, srd.data(b), i, srd.pos2idx(b, i));
-};
-auto fb2 = [&](int lo_b, int hi_b) {
-  REP(b, lo_b, hi_b) fb(b, srd.data(b));
-};
-srd.exec_general(lo, hi, fe2, fb2);
-```
+
+* 最初の4つの引数は，上で説明した．その後に4つの省略可能な引数がある．
+* edge_pre と edge_post (順序に注意) には，次の形式の関数を渡す
+  実行時には，引数には，端のブロック番号と対応するデータへの参照が渡される．
+  ```cpp
+  auto f = [&](ll b, S& s) -> void { ... };
+  ```
+* core_pre と core_post (順序に注意) には，次の形式の関数を渡す
+  ```cpp
+  auto f = [&]() -> void { ... };
+  ```
+* 実行される順序は次の通り
+  * 左端ブロックに対して edge_pre
+  * 左端の各要素に対して edge_core
+  * 左端ブロックに対して edge_post
+  * (中央ブロックが存在する場合) core_pre
+  * 中央の各ブロックに対して core_body
+  * (中央ブロックが存在する場合) core_post
+  * 右端ブロックに対して edge_pre
+  * 右端の各要素に対して edge_core
+  * 右端ブロックに対して edge_post
+* edge_body，edge_core も含め，実行が不要な場合には `nullptr` を渡せば良い．
+
 
