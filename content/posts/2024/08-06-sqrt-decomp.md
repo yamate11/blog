@@ -146,7 +146,7 @@ auto [b0, l0, h0, b1, l1, h1] = range_pos(lo, hi);
 * edge_pre と edge_post (順序に注意) には，次の形式の関数を渡す
   実行時には，引数には，端のブロック番号と対応するデータへの参照が渡される．
   ```cpp
-  auto f = [&](ll b, S& s) -> void { ... };
+  auto f = [&](int b, S& s) -> void { ... };
   ```
 * core_pre と core_post (順序に注意) には，次の形式の関数を渡す
   ```cpp
