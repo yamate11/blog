@@ -24,4 +24,4 @@ categories: ["topic"]
 * 積の和典型 ([ei1333の日記](https://ei1333.hateblo.jp/entry/2021/07/30/144201))
 * 集合のハッシュ．
   * [Zobrist Hashing](https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/) (有限集合の部分集合)
-  * 多重集合のハッシュ [例題](https://atcoder.jp/contests/abc367/tasks/abc367_f)
+  * 多重集合のハッシュ ([例題](https://atcoder.jp/contests/abc367/tasks/abc367_f))
