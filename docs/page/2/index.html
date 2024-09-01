@@ -170,6 +170,32 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">全方位木ライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>全方位木ライブラリ使用法のメモ</p>
+  </div>
+  <footer class="entry-footer">2024-02-14&amp;nbsp;·&amp;nbsp;2022-08-17T16:39:04&#43;09:00 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 全方位木ライブラリ" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">尺取り法のコーディング
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x’$，$y’ \leq y$ ならば，$P(x’, y’)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus ....</p>
+  </div>
+  <footer class="entry-footer">2024-02-03&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 尺取り法のコーディング" href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Offline Dynamic Connectivity
     </h2>
   </header>
@@ -342,32 +368,6 @@ template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b
   </div>
   <footer class="entry-footer">2023-04-21&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to インタラクティブ問題のデバッグ" href="https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">整数・実数の大小比較とfloor, ceil
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
-公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
-$d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$ 考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\ &amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ t \in [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}...</p>
-  </div>
-  <footer class="entry-footer">2023-03-23&amp;nbsp;·&amp;nbsp;2021-02-13 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 整数・実数の大小比較とfloor, ceil" href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">素数以外の mod
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>mod ライブラリで素数以外の法に関してできること</p>
-  </div>
-  <footer class="entry-footer">2023-03-12&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 素数以外の mod" href="https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

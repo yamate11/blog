@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Cubic? - AtCoder Beginner Contest 238 G | yamate11のブログ</title>
+<title>LIS - 最長増加部分列 | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="ABC238G Cubic? の解法です．公式解説と同じです．">
+<meta name="description" content="復元方法も含めた最長増加部分列に関するまとめ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -81,16 +81,16 @@
 
 
 
-<meta property="og:title" content="Cubic? - AtCoder Beginner Contest 238 G" />
-<meta property="og:description" content="ABC238G Cubic? の解法です．公式解説と同じです．" />
+<meta property="og:title" content="LIS - 最長増加部分列" />
+<meta property="og:description" content="復元方法も含めた最長増加部分列に関するまとめ" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-13T11:48:45+09:00" />
-<meta property="article:modified_time" content="2022-02-13T11:48:45+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-01T13:13:07+09:00" />
+<meta property="article:modified_time" content="2024-09-01T13:13:07+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Cubic? - AtCoder Beginner Contest 238 G"/>
-<meta name="twitter:description" content="ABC238G Cubic? の解法です．公式解説と同じです．"/>
+<meta name="twitter:title" content="LIS - 最長増加部分列"/>
+<meta name="twitter:description" content="復元方法も含めた最長増加部分列に関するまとめ"/>
 
 
 <script type="application/ld+json">
@@ -107,8 +107,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Cubic? - AtCoder Beginner Contest 238 G",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/"
+      "name": "LIS - 最長増加部分列",
+      "item": "https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/"
     }
   ]
 }
@@ -117,24 +117,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Cubic? - AtCoder Beginner Contest 238 G",
-  "name": "Cubic? - AtCoder Beginner Contest 238 G",
-  "description": "ABC238G Cubic? の解法です．公式解説と同じです．",
+  "headline": "LIS - 最長増加部分列",
+  "name": "LIS - 最長増加部分列",
+  "description": "復元方法も含めた最長増加部分列に関するまとめ",
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 238 - ABC 238 G - Cubic? の解法です． 公式解説 と本質的に同じです．\n問題概要 長さ$N$の数列$A$が与えられる．$Q$個の質問に答えよ\n$i$番目の質問: $L_i$, $R_i$ が与えられる．$A_{L_i} \\times \\cdots \\times A_{R_i}$ は立方数か? 制約: $N, Q \\leq 2\\times 10^5$, $A_i \\leq 10^6$\n問題へのリンク 経緯 コンテストでは，時間内には解けませんでした． 終了後に，Mo のアルゴリズムが適用できると気づいて，解けました． 公式解説を読んでみたら，ハッシュで解けると書いてありました． Twitter で，Zobrist Hash というものがあると 指摘されて いて，調べました．\n解法 全部の $A_i$ を素因数分解しておく (40msくらいでできる．別記事 参照)． これらの素因数分解に現れる素数全体の集合を $P$ とし， $S := \\{ (p, i) \\mid p \\in P \\textrm{, } i \\in \\{0, 1, 2\\} \\}$ とする． $S$ の Zobrist Hash $h$ を考える． Zobrist Hash については，別記事 参照．\n正の整数 $a$ に対して， $f(a) := \\{ (p, r \\bmod 3) \\mid p$ は素数で，$r = \\max\\{ r’ \\mid a \\mod p^{r’} = 0 \\}\\}$ とする． たとえば，$f(7^5\\times 13^{6} \\times 17^{40}) := \\{(7, 2), (17, 1)\\}$． そして， $B_i := f(A_1 \\times A_2 \\times \\cdots \\times A_i)$， $C_i := h(B_i)$ とする．\n$i$ 番目の質問には， $C_{L_i-1} = C_{R_i}$ であるかどうかを答える． 間違う確率はたかだか $QT / V$ (ここで，$T$ はテストケースの数， $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ に とっておけば十分小さい．\n実装 提出コード ",
-  "wordCount" : "150",
+  "articleBody": "1. 最長増加部分列問題 最長増加部分列問題 (LIS = Longest Increasing Subsequence) は，与えられた数列 $A = (a_1, a_2, \\dots, a_n)$ の部分列であって， 単調増加であるもののうち最長のもの，ないし，その長さを求める問題．\n2. 長さだけで良い場合 列 $B = (b_1, b_2, \\dots, b_m)$ を次のように構築する．\n2.1. 狭義単調列の場合 最初は，$B = ()$. $i = 1, 2, …, n$ の順に，次を実行． $a_i \\leq b_k$ となる最小の $k$ を二分探索で求める．(C++ なら，lower_bound が使える) このような $k$ が存在しない場合には，$a_i$ を $B$ に加える．($B$ の長さが 1 増える．) 存在する場合には，$b_k$ を $a_i$ で置き換える． ($a_i = b_k$ なら何もしないことになる) 作成された $B$ の長さが，求める長さになる． 途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_1, \\dots, a_i)$ の長さ $k$ の増加列の末項の最小値」 になっている．\n2.2. 広義単調列の場合 上とほぼ同じだが，条件「$a_i \\leq b_k$」を「$a_i \u003c b_k$」 に差し替える． C++ なら，upper_bound になる．\n3. 列を 1 つ求めたい場合 $B$ には，値だけでなく添字も合わせて格納する． さらに，各 $i = 1, 2, \\dots, n$ に対して， 「$a_i$ を含む増加列において，$a_i$ の一つ前の項の，もとの数列での添字」 を，$c_i$ として保存する．具体的な手順は以下の通り．\n最初は，$B = ()$. $i = 1, 2, …, n$ の順に，次を実行する． この時点で，$B = ((b_1, j_1), \\ldots, (b_m, j_m))$ であるとする． $a_i \\leq b_k$ となる (広義単調列なら，$a_i \u003c b_k$ となる) 最小の $k$ を二分探索で求める． このような $k$ が存在しない場合には，$(a_i, i)$ を $(b_{m + 1}, j_{m + 1})$ として $B$ に加える． $c_i := j_m$ とする．ただし，$m = 0$ の場合には，$c_i := 0$ とする． 存在する場合には，$(b_k, j_k)$ を $(a_i, i)$ で置き換える． $c_i := j_{k - 1}$ とする．ただし，$k = 1$ の場合には，$c_i := 0$ とする． 最終的に得られた $B$ を，$((b_1, j_1), \\ldots, (b_m, j_m))$ とする．1 つの LIS が，次の手順で求められる． 求める LIS の末項は，$b_m$ すなわち $a_{j_m}$ である． $a_{j}$ が LIS の項である時，$c_j \u003e 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = 0$ ならそれが初項である． 4. 適用可能な問題 ABC 369 F Gather Coins ",
+  "wordCount" : "216",
   "inLanguage": "en",
-  "datePublished": "2022-02-13T11:48:45+09:00",
-  "dateModified": "2022-02-13T11:48:45+09:00",
+  "datePublished": "2024-09-01T13:13:07+09:00",
+  "dateModified": "2024-09-01T13:13:07+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-13-abc238-g-cubic/"
+    "@id": "https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/"
   },
   "publisher": {
     "@type": "Organization",
@@ -212,71 +212,81 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Cubic? - AtCoder Beginner Contest 238 G
+      LIS - 最長増加部分列
     </h1>
-    <div class="post-meta">2022-02-13&amp;nbsp;·&amp;nbsp;yamate11
+    <div class="post-meta">2024-09-01&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>AtCoder Beginner Contest 238 - ABC 238 G - Cubic? の解法です．
-<a href="https://atcoder.jp/contests/abc238/editorial/3358" target="_blank">公式解説</a>
-
-と本質的に同じです．</p>
-<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
-<p>長さ$N$の数列$A$が与えられる．$Q$個の質問に答えよ</p>
+  <div class="post-content"><h2 id="1-最長増加部分列問題">1. 最長増加部分列問題<a hidden class="anchor" aria-hidden="true" href="#1-最長増加部分列問題">#</a></h2>
+<p>最長増加部分列問題 (LIS = Longest Increasing Subsequence) は，与えられた数列
+$A = (a_1, a_2, \dots, a_n)$
+の部分列であって，
+単調増加であるもののうち最長のもの，ないし，その長さを求める問題．</p>
+<h2 id="2-長さだけで良い場合">2. 長さだけで良い場合<a hidden class="anchor" aria-hidden="true" href="#2-長さだけで良い場合">#</a></h2>
+<p>列 $B = (b_1, b_2, \dots, b_m)$ を次のように構築する．</p>
+<h3 id="21-狭義単調列の場合">2.1. 狭義単調列の場合<a hidden class="anchor" aria-hidden="true" href="#21-狭義単調列の場合">#</a></h3>
 <ul>
-<li>$i$番目の質問: $L_i$, $R_i$ が与えられる．$A_{L_i} \times \cdots \times A_{R_i}$ は立方数か?</li>
+<li>最初は，$B = ()$.</li>
+<li>$i = 1, 2, &hellip;, n$ の順に，次を実行．
+<ul>
+<li>$a_i \leq b_k$ となる最小の $k$ を二分探索で求める．(C++ なら，<code>lower_bound</code> が使える)
+<ul>
+<li>このような $k$ が存在しない場合には，$a_i$ を $B$ に加える．($B$ の長さが 1 増える．)</li>
+<li>存在する場合には，$b_k$ を $a_i$ で置き換える．
+($a_i = b_k$ なら何もしないことになる)</li>
 </ul>
-<p>制約: $N, Q \leq 2\times 10^5$, $A_i \leq 10^6$</p>
-<p><a href="https://atcoder.jp/contests/abc238/tasks/abc238_g" target="_blank">問題へのリンク</a>
-</p>
-<h2 id="経緯">経緯<a hidden class="anchor" aria-hidden="true" href="#経緯">#</a></h2>
-<p>コンテストでは，時間内には解けませんでした．
-終了後に，Mo のアルゴリズムが適用できると気づいて，解けました．
-公式解説を読んでみたら，ハッシュで解けると書いてありました．
-Twitter で，Zobrist Hash というものがあると
-<a href="https://twitter.com/tatyam_prime/status/1489958194374115332" target="_blank">指摘されて</a>
-
-いて，調べました．</p>
-<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
-<p>全部の $A_i$ を素因数分解しておく
-(40msくらいでできる．<a href="../02-06-prime-factor-perf/">別記事</a>
- 参照)．
-これらの素因数分解に現れる素数全体の集合を $P$ とし，
-$S := \{ (p, i) \mid p \in P \textrm{, } i \in \{0, 1, 2\} \}$
-とする．
-$S$ の Zobrist Hash $h$ を考える．
-Zobrist Hash については，<a href="../02-13-zobrist-hash/">別記事</a>
- 参照．</p>
-<p>正の整数 $a$ に対して，
-$f(a) := \{ (p, r \bmod 3) \mid p$ は素数で，$r = \max\{ r&rsquo; \mid a \mod p^{r&rsquo;} = 0 \}\}$
-とする．
-たとえば，$f(7^5\times 13^{6} \times 17^{40}) := \{(7, 2), (17, 1)\}$．
-そして，
-$B_i := f(A_1 \times A_2 \times \cdots \times A_i)$，
-$C_i := h(B_i)$ とする．</p>
-<p>$i$ 番目の質問には，
-$C_{L_i-1} = C_{R_i}$ であるかどうかを答える．
-間違う確率はたかだか $QT / V$ (ここで，$T$ はテストケースの数，
-$V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ に
-とっておけば十分小さい．</p>
-<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
-<p><a href="https://atcoder.jp/contests/abc238/submissions/29252208" target="_blank">提出コード</a>
-</p>
+</li>
+</ul>
+</li>
+<li>作成された $B$ の長さが，求める長さになる．</li>
+</ul>
+<p>途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_1, \dots, a_i)$ の長さ $k$ の増加列の末項の最小値」
+になっている．</p>
+<h3 id="22-広義単調列の場合">2.2. 広義単調列の場合<a hidden class="anchor" aria-hidden="true" href="#22-広義単調列の場合">#</a></h3>
+<p>上とほぼ同じだが，条件「$a_i \leq b_k$」を「$a_i &lt; b_k$」 に差し替える．
+C++ なら，<code>upper_bound</code> になる．</p>
+<h2 id="3-列を-1-つ求めたい場合">3. 列を 1 つ求めたい場合<a hidden class="anchor" aria-hidden="true" href="#3-列を-1-つ求めたい場合">#</a></h2>
+<p>$B$ には，値だけでなく添字も合わせて格納する．
+さらに，各 $i = 1, 2, \dots, n$ に対して，
+「$a_i$ を含む増加列において，$a_i$ の一つ前の項の，もとの数列での添字」
+を，$c_i$ として保存する．具体的な手順は以下の通り．</p>
+<ul>
+<li>最初は，$B = ()$.</li>
+<li>$i = 1, 2, &hellip;, n$ の順に，次を実行する．
+<ul>
+<li>この時点で，$B = ((b_1, j_1), \ldots, (b_m, j_m))$ であるとする．</li>
+<li>$a_i \leq b_k$ となる  (広義単調列なら，$a_i &lt; b_k$ となる) 最小の $k$ を二分探索で求める．
+<ul>
+<li>このような $k$ が存在しない場合には，$(a_i, i)$ を $(b_{m + 1}, j_{m + 1})$ として $B$ に加える．
+$c_i := j_m$ とする．ただし，$m = 0$ の場合には，$c_i := 0$ とする．</li>
+<li>存在する場合には，$(b_k, j_k)$ を $(a_i, i)$ で置き換える．
+$c_i := j_{k - 1}$ とする．ただし，$k = 1$ の場合には，$c_i := 0$ とする．</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最終的に得られた $B$ を，$((b_1, j_1), \ldots, (b_m, j_m))$ とする．1 つの LIS が，次の手順で求められる．
+<ul>
+<li>求める LIS の末項は，$b_m$ すなわち $a_{j_m}$ である．</li>
+<li>$a_{j}$ が LIS の項である時，$c_j &gt; 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = 0$ ならそれが初項である．</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-適用可能な問題">4. 適用可能な問題<a hidden class="anchor" aria-hidden="true" href="#4-適用可能な問題">#</a></h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc369/tasks/abc369_f" target="_blank">ABC 369 F Gather Coins</a>
+</li>
+</ul>
 
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>最大流・最小カット</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">
     <span class="title">Next »</span>
     <br>
-    <span>素因数分解に要する時間</span>
+    <span>集合・多重集合のハッシュ</span>
   </a>
 </nav>
 
@@ -285,7 +295,7 @@ $V$ はハッシュ関数の値域のサイズ) であるから，$V = 2^{63}$ �
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-13-abc238-g-cubic/" data-title="Cubic? - AtCoder Beginner Contest 238 G">
+<section id="isso-thread" data-isso-id="/blog/posts/2024/09-01-lis-with-recovery/" data-title="LIS - 最長増加部分列">
 </section>
 
 <p>Links to Recent Posts:
