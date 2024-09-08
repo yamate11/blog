@@ -9,18 +9,16 @@ categories: ["topic"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
 ---
 
-<!-- タイトルはキーワードがインデックスされないかもしれないので，
-     ここに書いておく -->
-<!-- AtCoder *** Contest xxx - A*C xxx F - 問題タイトル の解法です．-->
-
-ダブリングを行うライブラリを書きました．自分用のメモです．
+ダブリングを行うライブラリを書きました．ソースは[こちら](https://github.com/yamate11/compprog-clib/blob/master/doubling.cc)．
 
 ## できること
 
 ### その1
 
 $f : [0, N) \to [0, N)$ が与えられた時，
-$f^{r}(i)$ を，$r \in [0, R]$ と $i \in [0, N)$ に対して計算する．
+$r \in [0, R]$ と $i \in [0, N)$ に対して
+$f^{r}(i)$ を
+計算する．
 
 典型的には:
 
@@ -32,51 +30,78 @@ $f^{r}(i)$ を，$r \in [0, R]$ と $i \in [0, N)$ に対して計算する．
 
 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて，
 $r, i$ に対して
-$\bigoplus_{k = 0}^{r} m(f^{k}(i))$ を計算する．
+$\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
 
-## 使用例
+## 使用法
 
 ### その1
 
-```cpp
-ll R = 100000, N = 100000;
-auto f = [&](ll i) -> ll { return i * i % N; };
-DoublingFRel d(R, N, f);
-ll r = 12345, i = 54321;
-cout << d.val(r, i) << endl;         // f^{r}(i)
-```
+* `DoublingFRel` オブジェクト `d` を作る．
+  * 上記 $R$，$N$，$f$ を `doubling_from_func` に与える．
+    ```cpp
+    ll R = 100000, N = 100000;
+    auto f = [&](ll i) -> ll { return (i * i) % N; };
+    auto d = doubling_from_func(R, N, f);
+    ```
+  * 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，`doubling_from_container` を用いる．
+    ```cpp
+    ll R = 100000, N = 100000;
+    vector<ll> vec(N);
+    REP(i, 0, N) vec[i] = ...;
+    auto d = doubling_from_container(R, N, vec);
+    ```  
+* 値 $f^r(i)$ は，`d.val(r, i)` で取得できる．
+  ```cpp
+  ll r = 12345, i = 54321;
+  cout << d.val(r, i) << endl;
+  ```
 
-内部テーブルには，$f^{r}(i)$ が，$i \in [0, N)$ と
+なお，内部テーブルには，$f^{r}(i)$ が，$i \in [0, N)$ と
 $r = 1, 2, 4, 8, \ldots$ に対して
 格納されている．
 
 ### その2
 
-```cpp
-struct M {
-  ll v;
-  M(ll v_ = LLONG_MIN) v(v_) {}
-  M operator+(const M& o) const { return M(max(v, o.v)); }
-};
+* `DoublingCum` オブジェクト `dc` を作る．
+  * マッピング $m$ を関数で指定するときには，`doubling_cum_from_func` を用いる．
+    * モノイド $M$ を，テンプレートパラメタとして指定する．
+    * 第1パラメタには，「その1」で説明した `DoublingFRel` オブジェクトを指定する．
+    * 第2パラメタには，マッピング $m$ を指定する．
+    ```cpp
+    ll R = 100000, N = 100000;
+    auto f = [&](ll i) -> ll { return i * i % N; };
+    auto d1 = doubling_from_func(R, N, f);
 
-ll R = 100000, N = 100000;
-auto f = [&](ll i) -> ll { return i * i % N; };
-auto m = [&](ll i) -> M { return M(i * i * i); };
+    struct M {
+      ll v;
+      M(ll v_ = LLONG_MIN) v(v_) {}
+      M operator+(const M& o) const { return M(max(v, o.v)); }
+    };
+    auto m = [&](ll i) -> M { return M(i * i * i); };
+    auto dc = doubling_cum_from_func(d1, m);
+    ```
+  * マッピング $m$ をベクトルなどのコンテナで指定したいときには，`doubling_cum_from_container` を用いる．
+    ```cpp
+    vector<ll> vec_m(N); ...;
+    auto dc = doubling_cum_from_container(d1, vec_m);
+    ```
+  * モノイド演算について，単位元が `T()` でなかったり，演算が `plus<T>()` でない場合には，
+    `doubling_cum_from_*` の第3, 4 パラメタで，単位元と演算を指定する．
+    ```cpp
+    auto m = [&](ll i) -> ll { return i * i * i; };
+    auto mymax = [](ll a, ll b) { return max(a, b); };
+    auto dc = doubling_cum_from_func(d1, m, LLONG_MIN, mymax);
+    ```
+* 値 $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ は，`dc.val(r, i)` で取得できる．
+  ```cpp
+  ll r = 12345, i = 54321;
+  cout << dc.val(r, i) << endl;
+  ```
 
-DoublingFRel d1(R, N, f);
-DoublingCum<M> d2(d1, m);
-ll r = 12345, i = 54321;
-cout << d2.val(r, i);  // \sum { m( f^{(j)}(i) ) | j = 0, 1, ..., r-1 }
-
-```
-
-内部テーブルには，
+なお，内部テーブルには，
 $m( f^{r}(i) )$ が，$i \in [0, N)$ と
 $r = 1, 2, 4, 8, \ldots$ に対して格納されている．
 
-普通の和を計算するのなら，struct M を定義する必要はない．
-ただし，`DoublingCum<ll>` のように，テンプレートパラメタを明示的に
-与える必要がある．
 
 
 keywords: doubling
