@@ -93,8 +93,8 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
 使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/12-10-doubling/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-12-10T09:33:05+09:00" />
-<meta property="article:modified_time" content="2022-12-10T09:33:05+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2024-09-08T12:50:00+09:00" />
+<meta property="article:modified_time" content="2024-09-08T12:50:00+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ダブリングライブラリ"/>
@@ -138,8 +138,8 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   "articleBody": "ダブリングを行うライブラリを書きました．ソースはこちら ．\nできること その1 $f : [0, N) \\to [0, N)$ が与えられた時， $r \\in [0, R]$ と $i \\in [0, N)$ に対して $f^{r}(i)$ を 計算する．\n典型的には:\n$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \\oplus)$ と $m: [0, N) \\to M$ が与えられて， $r, i$ に対して $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．\n使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [\u0026](ll i) -\u003e ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector\u003cll\u003e vec(N); REP(i, 0, N) vec[i] = ...; auto d = doubling_from_container(R, N, vec); 値 $f^r(i)$ は，d.val(r, i) で取得できる． ll r = 12345, i = 54321; cout \u003c\u003c d.val(r, i) \u003c\u003c endl; なお，内部テーブルには，$f^{r}(i)$ が，$i \\in [0, N)$ と $r = 1, 2, 4, 8, \\ldots$ に対して 格納されている．\nその2 DoublingCum オブジェクト dc を作る． マッピング $m$ を関数で指定するときには，doubling_cum_from_func を用いる． モノイド $M$ を，テンプレートパラメタとして指定する． 第1パラメタには，「その1」で説明した DoublingFRel オブジェクトを指定する． 第2パラメタには，マッピング $m$ を指定する． ll R = 100000, N = 100000; auto f = [\u0026](ll i) -\u003e ll { return i * i % N; }; auto d1 = doubling_from_func(R, N, f); struct M { ll v; M(ll v_ = LLONG_MIN) v(v_) {} M operator+(const M\u0026 o) const { return M(max(v, o.v)); } }; auto m = [\u0026](ll i) -\u003e M { return M(i * i * i); }; auto dc = doubling_cum_from_func(d1, m); マッピング $m$ をベクトルなどのコンテナで指定したいときには，doubling_cum_from_container を用いる． vector\u003cll\u003e vec_m(N); ...; auto dc = doubling_cum_from_container(d1, vec_m); モノイド演算について，単位元が T() でなかったり，演算が plus() でない場合には， doubling_cum_from_* の第3, 4 パラメタで，単位元と演算を指定する． auto m = [\u0026](ll i) -\u003e ll { return i * i * i; }; auto mymax = [](ll a, ll b) { return max(a, b); }; auto dc = doubling_cum_from_func(d1, m, LLONG_MIN, mymax); 値 $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ は，dc.val(r, i) で取得できる． ll r = 12345, i = 54321; cout \u003c\u003c dc.val(r, i) \u003c\u003c endl; なお，内部テーブルには， $m( f^{r}(i) )$ が，$i \\in [0, N)$ と $r = 1, 2, 4, 8, \\ldots$ に対して格納されている．\nkeywords: doubling\n",
   "wordCount" : "347",
   "inLanguage": "en",
-  "datePublished": "2022-12-10T09:33:05+09:00",
-  "dateModified": "2022-12-10T09:33:05+09:00",
+  "datePublished": "2024-09-08T12:50:00+09:00",
+  "dateModified": "2024-09-08T12:50:00+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -226,7 +226,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
     <h1 class="post-title">
       ダブリングライブラリ
     </h1>
-    <div class="post-meta">2022-12-10&amp;nbsp;·&amp;nbsp;yamate11
+    <div class="post-meta">2024-09-08&amp;nbsp;·&amp;nbsp;2022-12-10 (初版)&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>ダブリングを行うライブラリを書きました．ソースは<a href="https://github.com/yamate11/compprog-clib/blob/master/doubling.cc" target="_blank">こちら</a>
@@ -325,15 +325,10 @@ $r = 1, 2, 4, 8, \ldots$ に対して格納されている．</p>
       <li><a href="https://yamate11.github.io/blog/tags/%E3%83%80%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0/">ダブリング</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>順列組合せ</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">
     <span class="title">Next »</span>
     <br>
-    <span>二項係数に関する公式</span>
+    <span>LIS - 最長増加部分列</span>
   </a>
 </nav>
 
@@ -346,8 +341,9 @@ $r = 1, 2, 4, 8, \ldots$ に対して格納されている．</p>
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">LIS - 最長増加部分列</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">ダブリングライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">LIS - 最長増加部分列</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">集合・多重集合のハッシュ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/08-06-sqrt-decomp/">平方分割ライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/">木DP &#43; マージテク</a>
@@ -355,7 +351,6 @@ $r = 1, 2, 4, 8, \ldots$ に対して格納されている．</p>
   / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">ABC354-G Select Strings</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/04-24-number-of-primes/">素数表</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/">ポテンシャル付きUnionFind</a>
 </p>
 
 

@@ -6,12 +6,12 @@
     <description>Recent content in ダブリング on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 10 Dec 2022 09:33:05 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Sep 2024 12:50:00 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/tags/%E3%83%80%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ダブリングライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2022/12-10-doubling/</link>
-      <pubDate>Sat, 10 Dec 2022 09:33:05 +0900</pubDate>
+      <pubDate>Sun, 08 Sep 2024 12:50:00 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2022/12-10-doubling/</guid>
       <description>ダブリングを行うライブラリを書きました．ソースはこちら ．
 できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．

@@ -175,6 +175,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ダブリングライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ダブリングを行うライブラリを書きました．ソースはこちら ．
+できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
+典型的には:
+$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
+使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = ....</p>
+  </div>
+  <footer class="entry-footer">2024-09-08&amp;nbsp;·&amp;nbsp;2022-12-10 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to ダブリングライブラリ" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">LIS - 最長増加部分列
     </h2>
   </header>
@@ -366,19 +382,6 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
   </div>
   <footer class="entry-footer">2024-02-19&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 二分探索ライブラリ" href="https://yamate11.github.io/blog/posts/2024/02-19-binary-search/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">拡張ユークリッドアルゴリズム
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>拡張ユークリッドアルゴリズムのメモ (といっても，Wikipedia を参照するだけ)
-参照先 Wikipediaの記事 ポイント 与えられた $a$, $b$ に対して，$g := \text{gcd}(a, b)$ と $sa &#43; tb = g$ となる $s$，$t$ を求める． $a$, $b$ は正，負，0 いずれも可． ただし，$\text{gcd}(a, 0) = \text{gcd}(0, a) = a$ $|s| \leq \max(|a|, |b|)$，$|t| \leq \max(|a|, |b|)$ が成り立つ． $|a|$ や $|b|$ が 64 ビットで表せていれば，このアルゴリズムで得られる $|a|$，$|b|$ もそうなる． ($|sa|$ や $|tb|$ ははみ出すかもしれない) アルゴリズム概要 1 * a &#43; 0 * b = a と，0 * a &#43; 1 * b = b から始める． $s_i a &#43; t_i b = z_i$ と $s_{i &#43; 1} a &#43; t_{i &#43; 1} b = z_{i &#43; 1}$ まで得られたとする． 右辺の割算 $z_i = p z_{i &#43; 1} &#43; q$ をする． ($i$ の式) $ - p \times (i &#43; 1$ の式) を作って， $(s_i - p \, s_{i &#43; 1}) a &#43; (t_i - p \, t_{i &#43; 1}) b = q$ を得る． 右辺が $g := \text{gcd}(a, b)$ になるまで繰り返す． なお，もう一回まわすと $s_{k &#43; 1} a &#43; t_{k &#43; 1} b = 0$ になり，$|s_{k &#43; 1}| = |a|/g$，$|t_{k &#43; 1}| = |b|/g$ が成り立つ． コード util....</p>
-  </div>
-  <footer class="entry-footer">2024-02-14&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 拡張ユークリッドアルゴリズム" href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

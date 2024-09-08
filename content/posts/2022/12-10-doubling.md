@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "ダブリングライブラリ"
-date: "2022-12-10T09:33:05+09:00"
-# date_init: "2022-12-10"
+date: "2024-09-08T12:50:00+09:00"
+date_init: "2022-12-10"
 tags: ["ダブリング"]
 categories: ["topic"]
 # categories: ["solution"]
