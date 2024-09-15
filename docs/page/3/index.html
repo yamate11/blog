@@ -170,6 +170,18 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ネストした vector の順序と性能
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ネストしたベクトルは，添字を並べる順序で性能が変わるが，どのように並べれば良いかはよくわからない．</p>
+  </div>
+  <footer class="entry-footer">2023-04-26&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to ネストした vector の順序と性能" href="https://yamate11.github.io/blog/posts/2023/04-26-multi-dim-vect-order/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">インタラクティブ問題のデバッグ
     </h2>
   </header>
@@ -348,22 +360,6 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
   </div>
   <footer class="entry-footer">2022-03-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Prefix XORs - AtCoder Regular Contest 137 D
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．
-問題概要 長さ$N$の整数列 $A = (A_1, \ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \ldots, M$ について，$A(N, k)$ を求めよ．
-操作: 各$i = 1, 2, \ldots, N$ について， $A_i$ を同時に $A_1 \oplus A_2 \oplus \cdots \oplus A_i$ で置き換える．
-制約: $1 \leq N, M \leq 10^6$; $0 \leq A_i &lt; 2^{30}$
-問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \in \{0, 1\}$ をとって， $A(i, k) = \bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \bigoplus_{m=1}^{i} b(i - m, k) A_m = \bigoplus \{ A_{i - j} \mid b(j, k) = 1; j = 0, \ldots, i-1 \}$ だから， 各 $k = 1, 2, \ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．...</p>
-  </div>
-  <footer class="entry-footer">2022-03-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Prefix XORs - AtCoder Regular Contest 137 D" href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -170,6 +170,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Prefix XORs - AtCoder Regular Contest 137 D
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>AtCoder Regular Contest 137 D - Prefix XORs の解法です． コンテスト中に解いた方法 (実験結果から適当に求める) をベースに， 公式解説を参照して追加しました． リュカの定理の証明もWikipediaを見て書きました．
+問題概要 長さ$N$の整数列 $A = (A_1, \ldots, A_N)$ と整数 $M$ が与えられる． 下の操作を$k$回行ったあとの $A_i$ の値を $A(i, k)$ と書くことにする． $k = 1, 2, \ldots, M$ について，$A(N, k)$ を求めよ．
+操作: 各$i = 1, 2, \ldots, N$ について， $A_i$ を同時に $A_1 \oplus A_2 \oplus \cdots \oplus A_i$ で置き換える．
+制約: $1 \leq N, M \leq 10^6$; $0 \leq A_i &lt; 2^{30}$
+問題へのリンク 解法 実験 $A(i, k)$ は，$A_1, \ldots, A_i$ のいくつかのXORをとったものになる． そこで，$a(i, m, k) \in \{0, 1\}$ をとって， $A(i, k) = \bigoplus_{m=1}^{i} a(i,m,k) A_m$ と書く． 計算してみると分かるとおり，$a(i, m, k)$ は，$i - m$ と $k$ にしか 依存しない．そこで，$b(j, k) := a(j, 0, k)$ と書くことにする． $A(i, k) = \bigoplus_{m=1}^{i} b(i - m, k) A_m = \bigoplus \{ A_{i - j} \mid b(j, k) = 1; j = 0, \ldots, i-1 \}$ だから， 各 $k = 1, 2, \ldots, M$ について，$b(j, k) = 1$ となる $j$ を (高速に) 列挙できれば良い．...</p>
+  </div>
+  <footer class="entry-footer">2022-03-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to Prefix XORs - AtCoder Regular Contest 137 D" href="https://yamate11.github.io/blog/posts/2022/03-20-arc137-d-prefix-xors/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E
     </h2>
   </header>
@@ -338,18 +354,6 @@ $0 \leq x_1 \leq x_2 \leq \cdots \leq x_N \leq M $ $x_1 &#43; x_2 &#43; \cdots &
   </div>
   <footer class="entry-footer">2021-10-29&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Max Dot -- AtCoder Regular Contest 128 C" href="https://yamate11.github.io/blog/posts/2021/10-29-arc128c-max-dot/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">ABC224 参加記
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>AtCoder Beginner Contest 224 (ABC 224) に参加して，ABCDE 5完 415位でした．A - Tires / B - Mongeness / C - Triangle? / D - 8 Buzzle on Graph / E - Integers on Grid / F - Problem where &#43;s Separate Digits / G - Roll or Increment</p>
-  </div>
-  <footer class="entry-footer">2021-10-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to ABC224 参加記" href="https://yamate11.github.io/blog/posts/2021/10-23-abc224/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
