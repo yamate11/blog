@@ -136,5 +136,9 @@ f2.put(3, 10, 40);
 auto g = itv_apply(plus<ll>(), f1, f2);  // g は [0, 3) で 20, [3, 7) で 60, [7, 10) で 40
 ```
 
+### デバッグ
+
+itv_set の impl メンバが，実装本体の map<ll, T> を保持している．これを表示させると良い．
+
 
 keywords: interval 区間 
