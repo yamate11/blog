@@ -9,12 +9,11 @@
     <lastBuildDate>Sun, 15 Sep 2024 14:58:24 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>intervalSet ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2024/09-15-intervalset/</link>
       <pubDate>Sun, 15 Sep 2024 14:58:24 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2024/09-15-intervalset/</guid>
-      <description>階段関数 (区分的に定数である関数) を表現するライブラリ intervalSet の説明です． 名前が良くないが，今更帰るのも面倒なので．
-コード コードはこちら </description>
+      <description>階段関数を表現するライブラリ intervalSet の説明です．</description>
     </item>
     <item>
       <title>ダブリングライブラリ</title>
