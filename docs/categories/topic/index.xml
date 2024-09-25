@@ -6,8 +6,24 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 15 Sep 2024 14:58:24 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 26 Sep 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>誤りの記録</title>
+      <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
+      <pubDate>Thu, 26 Sep 2024 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
+      <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
+ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
+    </item>
     <item>
       <title>intervalSet ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2024/09-15-intervalset/</link>
@@ -143,22 +159,6 @@ signature template &amp;lt;typename INT&amp;gt; requires integral&amp;lt;INT&amp
       <pubDate>Mon, 01 Jan 2024 11:48:37 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/</guid>
       <description>Undo付きUnionFindライブラリです．</description>
-    </item>
-    <item>
-      <title>誤りの記録</title>
-      <link>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</link>
-      <pubDate>Sun, 24 Dec 2023 00:00:00 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/</guid>
-      <description>デバッグに失敗した，ないし，長時間かかった間違いの記録
-ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
-無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
-ABC279F BOX 2023/07/05 あさかつ
-タイプミス
-正:
-if (rx == -1 and ry == -1) { 誤:
-if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
-誤読．
-正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ</description>
     </item>
     <item>
       <title>ローリングハッシュライブラリ</title>
