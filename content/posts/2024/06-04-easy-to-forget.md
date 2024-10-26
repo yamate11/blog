@@ -17,6 +17,7 @@ categories: ["topic"]
 * 半分全列挙
 * フロー
 * CHT
+* trie
 * (期待値) = sum_i (i以上になる確率)
 * deque はランダムアクセスが O(1)
 * 区間 [a, b] を2次元平面の点 (a, b) で表現
