@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>setなどの比較関数 | yamate11のブログ</title>
+<title>比較関数 | yamate11のブログ</title>
 <meta name="keywords" content="comparator">
 <meta name="description" content="set, multiset, priority_queue などの比較関数の指定方法">
 <meta name="author" content="yamate11">
@@ -81,7 +81,7 @@
 
 
 
-<meta property="og:title" content="setなどの比較関数" />
+<meta property="og:title" content="比較関数" />
 <meta property="og:description" content="set, multiset, priority_queue などの比較関数の指定方法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/" /><meta property="article:section" content="posts" />
@@ -89,7 +89,7 @@
 <meta property="article:modified_time" content="2024-11-04T15:51:56+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="setなどの比較関数"/>
+<meta name="twitter:title" content="比較関数"/>
 <meta name="twitter:description" content="set, multiset, priority_queue などの比較関数の指定方法"/>
 
 
@@ -107,7 +107,7 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "setなどの比較関数",
+      "name": "比較関数",
       "item": "https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/"
     }
   ]
@@ -117,14 +117,14 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "setなどの比較関数",
-  "name": "setなどの比較関数",
+  "headline": "比較関数",
+  "name": "比較関数",
   "description": "set, multiset, priority_queue などの比較関数の指定方法",
   "keywords": [
     "comparator"
   ],
-  "articleBody": "set, multiset, priority_queue などでは，比較関数を指定することができる． この指定の仕方はなかなかに面倒であるように思う．\n降順 大きい順に要素を並べたい場合には，greater を指定すれば良い．\n例:\nset\u003cint, greater\u003cint\u003e\u003e xs; 注意:\nコンストラクタにはパラメタを渡す必要は無いが， 渡すのなら丸括弧でなく波括弧で渡す必要がある．\nset\u003cint, greater\u003cint\u003e\u003e xs{greater\u003cint\u003e()}; // OK set\u003cint, greater\u003cint\u003e\u003e xs(greater\u003cint\u003e()); // NG 丸括弧を使うと，「greater を返す関数を引数にとる関数 xs を宣言する」という 意味になるらしい．\nclosure f を比較関数として使う テンプレートパラメタとして decltype(f) を， コンストラクタのパラメタとして f を用いる．\n例:\nauto f = [](int a, int b) -\u003e bool { return a \u003e b; }; set\u003cint, decltype(f)\u003e xs{f}; 注意: コンストラクタに f を渡さないと，コンパイルエラーになる． decltype(f) (closure) のコンストラクタは削除されているということらしい．\n普通の関数 f を比較関数として使う テンプレートパラメタとして decltype(\u0026f) を， コンストラクタのパラメタとして f を用いる．\n例:\nbool f(int a, int b) { return a \u003e b; } ... set\u003cint, decltype(\u0026f)\u003e xs(f); // set xs(f); としても同じ 注意: テンプレートパラメタの \u0026 を忘れないこと．実際に渡される f は関数ポインタであるから， 関数のクラス delctype(f) ではなく， 関数ポインタのクラス decltype(\u0026f) になる，ということらしい．\n注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる． これは，decltype(f) から関数ポインタを作成するが，それが f で初期化されないから，ということらしい．\n",
-  "wordCount" : "119",
+  "articleBody": "set, multiset, priority_queue などでは，比較関数を指定することができる． また，vector の sort でも比較関数を指定することができる． この指定の仕方はなかなかに面倒であるように思う．\n1. set, multiset, priority_queue などの比較関数 1.1. 降順 大きい順に要素を並べたい場合には，greater を指定すれば良い．\n例:\nset\u003cint, greater\u003cint\u003e\u003e xs; 注意:\nコンストラクタにはパラメタを渡す必要は無いが， 渡すのなら丸括弧でなく波括弧で渡す必要がある．\nset\u003cint, greater\u003cint\u003e\u003e xs{greater\u003cint\u003e()}; // OK set\u003cint, greater\u003cint\u003e\u003e xs(greater\u003cint\u003e()); // NG 丸括弧を使うと，「greater を返す関数を引数にとる関数 xs を宣言する」という 意味になるらしい．\n1.2. closure f を比較関数として使う テンプレートパラメタとして decltype(f) を， コンストラクタのパラメタとして f を用いる．\n例:\nauto f = [](int a, int b) -\u003e bool { return a \u003e b; }; set\u003cint, decltype(f)\u003e xs{f}; 注意: コンストラクタに f を渡さないと，コンパイルエラーになる． decltype(f) (closure) のコンストラクタは削除されているということらしい．\n1.3. 普通の関数 f を比較関数として使う テンプレートパラメタとして decltype(\u0026f) を， コンストラクタのパラメタとして f を用いる．\n例:\nbool f(int a, int b) { return a \u003e b; } ... set\u003cint, decltype(\u0026f)\u003e xs(f); // set xs(f); としても同じ 注意: テンプレートパラメタの \u0026 を忘れないこと．実際に渡される f は関数ポインタであるから， 関数のクラス delctype(f) ではなく， 関数ポインタのクラス decltype(\u0026f) になる，ということらしい．\n注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる． これは，decltype(f) から関数ポインタを作成するが，それが f で初期化されないから，ということらしい．\n2. sort() での比較関数と，{lower|upper}_bound() 関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でも closure でも OK. lower_bound() や，upper_bound() の第4引数に，sort で使った比較関数を与えることで， その順序に関する二分探索を実行することができる．\nbool f(int a, int b) { return a \u003e b; } ... vector\u003cint\u003e vec; ... // 以下の3行はどれも同じ結果を与える: auto mycomp0 = greater\u003cint\u003e(); auto mycomp0 = f; auto mycomp0 = [](int a, int b) -\u003e bool { return a \u003e b; }; sort(vec.begin(), vec.end(), mycomp0); auto it = lower_bound(vec.begin(), vec.end(), x, mycomp0); ",
+  "wordCount" : "195",
   "inLanguage": "en",
   "datePublished": "2024-11-04T15:51:56+09:00",
   "dateModified": "2024-11-04T15:51:56+09:00",
@@ -212,14 +212,16 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      setなどの比較関数
+      比較関数
     </h1>
     <div class="post-meta">2024-11-04&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
   <div class="post-content"><p>set, multiset, priority_queue などでは，比較関数を指定することができる．
+また，vector の sort でも比較関数を指定することができる．
 この指定の仕方はなかなかに面倒であるように思う．</p>
-<h2 id="降順">降順<a hidden class="anchor" aria-hidden="true" href="#降順">#</a></h2>
+<h2 id="1-set-multiset-priority_queue-などの比較関数">1. set, multiset, priority_queue などの比較関数<a hidden class="anchor" aria-hidden="true" href="#1-set-multiset-priority_queue-などの比較関数">#</a></h2>
+<h3 id="11-降順">1.1. 降順<a hidden class="anchor" aria-hidden="true" href="#11-降順">#</a></h3>
 <p>大きい順に要素を並べたい場合には，<code>greater&lt;T&gt;</code> を指定すれば良い．</p>
 <p>例:</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">xs</span><span style="color:#111">;</span>
@@ -230,7 +232,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">xs</span><span style="color:#111">(</span><span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">());</span>   <span style="color:#75715e">// NG
 </span></span></span></code></pre></div><p>丸括弧を使うと，「greater<int> を返す関数を引数にとる関数 xs を宣言する」という
 意味になるらしい．</p>
-<h2 id="closure-f-を比較関数として使う">closure f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#closure-f-を比較関数として使う">#</a></h2>
+<h3 id="12-closure-f-を比較関数として使う">1.2. closure f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#12-closure-f-を比較関数として使う">#</a></h3>
 <p>テンプレートパラメタとして <code>decltype(f)</code> を，
 コンストラクタのパラメタとして <code>f</code> を用いる．</p>
 <p>例:</p>
@@ -238,7 +240,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">xs</span><span style="color:#111">{</span><span style="color:#111">f</span><span style="color:#111">};</span>
 </span></span></code></pre></div><p>注意: コンストラクタに <code>f</code> を渡さないと，コンパイルエラーになる．
 <code>decltype(f)</code> (closure) のコンストラクタは削除されているということらしい．</p>
-<h2 id="普通の関数-f-を比較関数として使う">普通の関数 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#普通の関数-f-を比較関数として使う">#</a></h2>
+<h2 id="13-普通の関数-f-を比較関数として使う">1.3. 普通の関数 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#13-普通の関数-f-を比較関数として使う">#</a></h2>
 <p>テンプレートパラメタとして <code>decltype(&amp;f)</code> を，
 コンストラクタのパラメタとして <code>f</code> を用いる．</p>
 <p>例:</p>
@@ -251,7 +253,23 @@
 関数ポインタのクラス <code>decltype(&amp;f)</code> になる，ということらしい．</p>
 <p>注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる．
 これは，<code>decltype(f)</code> から関数ポインタを作成するが，それが <code>f</code> で初期化されないから，ということらしい．</p>
-
+<h2 id="2-sort-での比較関数とlowerupper_bound">2. sort() での比較関数と，{lower|upper}_bound()<a hidden class="anchor" aria-hidden="true" href="#2-sort-での比較関数とlowerupper_bound">#</a></h2>
+<p>関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でも closure でも OK.
+lower_bound() や，upper_bound() の第4引数に，sort で使った比較関数を与えることで，
+その順序に関する二分探索を実行することができる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">bool</span> <span style="color:#75af00">f</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 以下の3行はどれも同じ結果を与える:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">mycomp0</span> <span style="color:#f92672">=</span> <span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">mycomp0</span> <span style="color:#f92672">=</span> <span style="color:#111">f</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">mycomp0</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">sort</span><span style="color:#111">(</span><span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">(),</span> <span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">end</span><span style="color:#111">(),</span> <span style="color:#111">mycomp0</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">it</span> <span style="color:#f92672">=</span> <span style="color:#111">lower_bound</span><span style="color:#111">(</span><span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">(),</span> <span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">end</span><span style="color:#111">(),</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">mycomp0</span><span style="color:#111">);</span>
+</span></span></code></pre></div>
 
   </div>
 
@@ -272,12 +290,12 @@
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2024/11-04-comparator-in-set-etc/" data-title="setなどの比較関数">
+<section id="isso-thread" data-isso-id="/blog/posts/2024/11-04-comparator-in-set-etc/" data-title="比較関数">
 </section>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">setなどの比較関数</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">誤りの記録</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/09-15-intervalset/">intervalSet ライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">ダブリングライブラリ</a>
