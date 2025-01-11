@@ -78,7 +78,7 @@ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
   comp(f, g) は，$f \circ g$ を表す．
 * apply は更新演算の適用．$\verb!OP! \times \verb!DAT! \to \verb!DAT!$．
 
-当然，apply と add の順序交換ができる必要がある．具体的には:
+当然，apply と add の順序交換ができる必要がある．つまり，以下が成り立つ必要がある．
 
 * $\text{apply}(f, \text{add}(x, y))
     = \text{add}(\text{apply}(f, x), \text{apply}(f, y))$
@@ -88,6 +88,8 @@ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
 ```cpp
   auto st = make_seg_tree_lazy(unit_dat, unit_op, add, comp, apply, init_vec);
 ```
+
+ここで，unit_dat は，(DAT, add) の単位元，unit_op は，(OP, comp) の単位元である．
 
 分けても良い:
 
