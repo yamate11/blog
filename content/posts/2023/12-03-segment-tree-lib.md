@@ -245,28 +245,45 @@ DAT として，long long の対をとり，
 
 ## 二分探索
 
-チェック関数は次のように書く:
+片方の端を固定して，もう片方の端を動かして，
+query() の返す値が，ある性質を満たす/満たさないの境界 (満たす方) を返す．
+4つのメソッドが用意されており，いずれも
+引数はチェック関数と固定する端の値．
+チェック関数は，v = query(x, y) の値を引数にして，成立/不成立 を返す:
 
 ```cpp
   auto check = [&](DAT x) -> bool { ...; };
 ```
 
-探索用に4つのメソッドが用意されている:
+* 4つのメソッドは，以下の通り．
+  * 名称の `l` / `r` は，動かす方の端を示す．
+  * 名称の `from` / `until` は，固定されている端からはじめて範囲を広げながら探索するときに，
+    あるところ「から/まで」なりたつ，という気持ちを表す．
 
-* 範囲が広いほど check が成立しやすいときに使うメソッド:
-  * `st.binsearch_r_from(check, x)`
-    * `check(st.query(x, y))` が成り立つ最小の y を返す．
-    * そのような y が無いときには，init_vec.size() + 1 を返す．
-  * `st.binsearch_l_from(check, y)`
-    * `check(st.query(x, y))` が成り立つ最大の x を返す．
-    * そのような x が無いときには，-1 を返す．
-* 範囲が狭いほど check が成立しやすいときに使うメソッド:
-  * `st.binsearch_r_until(check, x)`
-    * `check(st.query(x, y))` が成り立つ最大の y を返す．
-    * そのような y が無いときには，x - 1 を返す．
-  * `st.binsearch_l_until(check, y)`
-    * `check(st.query(x, y))` が成り立つ最小の x を返す．
-    * そのような x が無いときには，y + 1 を返す．
+* 左端を固定して右端を動かすメソッド
+  * 右端が右にあるほど (範囲が広いほど) 成立しやすい
+    * `st.binsearch_r_from(check, x)`
+      * `check(st.query(x, y))` が成り立つ最小の y を返す．
+      * そのような y が無いときには，init_vec.size() + 1 を返す．
+      * <img src="fig01.png" width="300px">
+  * 右端が左にあるほど (範囲が狭いほど) 成立しやすい
+    * `st.binsearch_r_until(check, x)`
+      * `check(st.query(x, y))` が成り立つ最大の y を返す．
+      * そのような y が無いときには，x - 1 を返す．
+      * <img src="fig03.png" width="300px">
+
+* 右端を固定して左端を動かすメソッド
+  * 左端が左にあるほど (範囲が広いほど) 成立しやすい
+    * `st.binsearch_l_from(check, y)`
+      * `check(st.query(x, y))` が成り立つ最大の x を返す．
+      * そのような x が無いときには，-1 を返す．
+      * <img src="fig02.png" width="300px">
+  * 左端が右にあるほど (範囲が狭いほど) 成立しやすい
+    * `st.binsearch_l_until(check, y)`
+      * `check(st.query(x, y))` が成り立つ最小の x を返す．
+      * そのような x が無いときには，y + 1 を返す．
+      * <img src="fig04.png" width="300px">
+
 
 ## デバッグ対応
 

@@ -43,6 +43,8 @@ $(97 * 200^2 + 98 * 200 + 99) \bmod 10007 = 6976$ である．
 にしたがって，mod = $2^{61} - 1$ にとっている．
 この数は素数であり，`rh_prime` という定数で参照できる．
 この mod を使うと，積が高速に計算できる．
+__ただし，mod の値は大きいので，オーバーフローに注意__．
+後述の 「mod $2^{61} - 1$ 演算」を参照．
 
 ## 使用法
 
@@ -51,14 +53,15 @@ $(97 * 200^2 + 98 * 200 + 99) \bmod 10007 = 6976$ である．
 ハッシュ値の計算は，次の段取りによる:
 
 * まず，RollingHash オブジェクト `rh` を作成する．
-* 文字列 `s` およびその部分文字列についてハッシュ値を計算したいとして，
-  `hs = rh.hashes(s);` によって，前計算をする．
-* ハッシュ値は次の通り:
-  * `s` のハッシュ値: `hs.get()`．
-  * `s` の位置 `i` から始まる長さ `k` の部分文字列のハッシュ値: `hs.get(i, k)`．
+* 文字列 `s` と，その部分列のハッシュ値が欲しい場合
+  * 前計算．`hs = rh.hashes(s);`
+  * ハッシュ値は，次のようにとれる．
+    * `s` のハッシュ値: `rh.get(hs)`．
+    * `s` の位置 `i` から始まる長さ `len` の部分文字列のハッシュ値: `rh.get(hs, i, len)`．
+* 文字列 `s` のハッシュ値のみがほしい場合
+  * `rh.hashvalue(s)`
     
-
-#### オブジェクトの生成
+#### RollingHash オブジェクトの生成
 
 通常は，次のようにする．
 
@@ -84,27 +87,32 @@ RollingHash rh(0, min_base);
 
 #### ハッシュ値の前計算
 
-指定した文字列，およびその部分文字列に対するハッシュ値を計算するための前計算を行い，
-その結果を格納したオブジェクトを得る．
+指定した文字列，およびその部分文字列に対するハッシュ値を計算するための前計算を行う，
 
 ```cpp
 string s = "Hello, world.";
-auto hs = rh.hashes(s);
+vector<u64> hs = rh.hashes(s);
 ```
+
+返り値 hs の長さは ssize(s) + 1 で，第 i 要素は，s.substr(0, i) に対するハッシュ値である．
 
 引数は string で与える必要があり，`const char[]` ではうまくいかない．
 
-hs の型が必要な場合は `RollingHash::HashedValues` と書く．
-もしくは，`decltype(rh.hashes(string()))` とか．
-
 #### ハッシュ値の計算
 
-s およびその部分文字列のハッシュ値は，前計算のオブジェクトから get メソッドで取得できる．
+s およびその部分文字列のハッシュ値は，get メソッドで取得できる．
+前計算の結果も与える必要がある．
 
 ```cpp
 auto hs = rh.hashes(s);
-u64 h0 = hs.get();                 // s 自身のハッシュ値
-u64 h1 = hs.get(start, len);       // s.substr(start, len) のハッシュ値
+u64 h0 = rh.get(hs);               // s 自身のハッシュ値． hs[ssize(s)] に等しい．
+u64 h1 = rh.get(hs, start, len);   // s.substr(start, len) のハッシュ値
+```
+
+部分文字列に興味が無いときには，前計算無しでハッシュ値を取得できる．
+
+```cpp
+u64 h0 = rh.hashvalue(s);
 ```
 
 #### 連結文字列のハッシュ値
@@ -113,8 +121,14 @@ u64 h1 = hs.get(start, len);       // s.substr(start, len) のハッシュ値
 s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:
 
 ```cpp
-u64 h = rh.hash_concat(h1, h2, s2.size());
+u64 h = rh.hash_concat(h1, h2, ssize(s2));
 ```
+
+s2 の長さが必要であることに注意．
+
+#### base 値の取得
+
+`rh.base_power(1)` で，base 値が取得できる．一般に，`rh.base_power(i)` は，$\text{base}^i$ を返す．
 
 #### 一般のベクトルに対するハッシュ
 
@@ -150,11 +164,21 @@ $a \times b \mod (2^{61} - 1)$ の値を計算することができる．
 ```cpp
 RollingHash rh;
 u64 a, b;
-rh_add(a, b);  // a + b
-rh_subt(a, b); // a - b
-rh_mul(a, b);  // a * b
-rh_prime - a;  // -a
+rh_add(a, b);  // a + b   mod (2^61 - 1)
+rh_subt(a, b); // a - b   mod (2^61 - 1)
+rh_mul(a, b);  // a * b   mod (2^61 - 1)
+rh_prime - a;  // -a      mod (2^61 - 1)
 ```
+
+### メモ -- 設計・実装上の注意点
+
+この方法だと，rh.get(hs, ss) というふうに，常に rh と hs の両方を意識しなくてはならないのが嫌な感じである．
+そこで，HashValues とかいうオブジェクトを作って，hvs = rh.hashes(s) は HashValues オブジェクトを返すようにして，
+HashValues オブジェクトに rh を格納してしまい，hvs.get(ss) というふうにすると，気持ちよいように思われる．
+しかし，これだと，HashValues の default constructor がうまく作れないので，vector<HashValues> が初期化できず，
+複数の文字列の部分列のハッシュ値が欲しいときに困る．
+
+
 
 ## keywords
 
