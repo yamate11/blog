@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">xs</span><span style="color:#111">{</span><span style="color:#111">f</span><span style="color:#111">};</span>
 </span></span></code></pre></div><p>注意: コンストラクタに <code>f</code> を渡さないと，コンパイルエラーになる．
 <code>decltype(f)</code> (closure) のコンストラクタは削除されているということらしい．</p>
-<h2 id="13-普通の関数-f-を比較関数として使う">1.3. 普通の関数 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#13-普通の関数-f-を比較関数として使う">#</a></h2>
+<h3 id="13-普通の関数-f-を比較関数として使う">1.3. 普通の関数 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#13-普通の関数-f-を比較関数として使う">#</a></h3>
 <p>テンプレートパラメタとして <code>decltype(&amp;f)</code> を，
 コンストラクタのパラメタとして <code>f</code> を用いる．</p>
 <p>例:</p>
