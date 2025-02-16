@@ -123,8 +123,8 @@
   "keywords": [
     
   ],
-  "articleBody": "1. 最長増加部分列問題 最長増加部分列問題 (LIS = Longest Increasing Subsequence) は，与えられた数列 $A = (a_0, a_1, \\dots, a_n)$ の部分列であって， 単調増加であるもののうち最長のもの，ないし，その長さを求める問題．\n2. 長さだけで良い場合 列 $B = (b_1, b_2, \\dots, b_m)$ を次のように構築する．\n2.1. 狭義単調列の場合 最初は，$B = ()$. $i = 1, 2, …, n$ の順に，次を実行． $a_i \\leq b_k$ となる最小の $k$ を二分探索で求める．(C++ なら，lower_bound が使える) このような $k$ が存在しない場合には，$a_i$ を $B$ に加える．($B$ の長さが 1 増える．) 存在する場合には，$b_k$ を $a_i$ で置き換える． ($a_i = b_k$ なら何もしないことになる) 作成された $B$ の長さが，求める長さになる． 途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_1, \\dots, a_i)$ の長さ $k$ の増加列の末項の最小値」 になっている．\n2.2. 広義単調列の場合 上とほぼ同じだが，条件「$a_i \\leq b_k$」を「$a_i \u003c b_k$」 に差し替える． C++ なら，upper_bound になる．\n3. 列を 1 つ求めたい場合 値を $B$ にいれて管理するだけではなく，その値に対応する添字も $J$ にいれて管理する． さらに，各 $i = 1, 2, \\dots, n$ に対して， 「$a_i$ を含む LIS における $a_i$ の一つ前の項の，もとの数列での添字」 を，$c_i$ として保存する．具体的な手順は以下の通り．\n最初は，$B = ()$，$J = ()$. $i = 1, 2, …, n$ の順に，次を実行する． この時点で，$B = (b_1, \\dots, b_m)$，$J = (j_1, \\dots, j_m)$ であるとする． $a_i \\leq b_k$ となる (広義単調列なら，$a_i \u003c b_k$ となる) 最小の $k$ を二分探索で求める． このような $k$ が存在しない場合には，$k := m + 1$ として， $B$ には，$a_i$ を加える． $J$ には，$i$ を加える． 存在する場合には， $b_k$ を $a_i$ で置き換える． $j_k$ を $i$ で置き換える． $c_i$ については， $k \u003e 1$ の場合には，$c_i := j_{k - 1}$ とする． $k = 1$ の場合には，$c_i := 0$ とする． 最終的に $B = (b_1, \\dots, b_m)$，$J = (j_1, \\dots, j_m)$ が得られたとする． 1 つの LIS が，次の手順で求められる． 求める LIS の末項は，$b_m$ すなわち $a_{j_m}$ である． $a_{j}$ が LIS の項である時，$c_j \u003e 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = 0$ ならそれが初項である． 4. 適用可能な問題 ABC 369 F Gather Coins ",
-  "wordCount" : "229",
+  "articleBody": "1. 最長増加部分列問題 最長増加部分列問題 (LIS = Longest Increasing Subsequence) は，与えられた数列 $A = (a_0, a_1, \\dots, a_{n - 1})$ の部分列であって， 単調増加であるもののうち最長のもの，ないし，その長さを求める問題．\n2. 長さだけで良い場合 列 $B = (b_0, b_1, \\dots, b_{m - 1})$ を次のように構築する．\n2.1. 狭義単調列の場合 最初は，$B = ()$. $i = 0, 1, …, n - 1$ の順に，次を実行． $a_i \\leq b_k$ となる最小の $k$ を二分探索で求める．C++ なら次のコード: k = lower_bound(ALL(B), a[i]) - B.begin(); このような $k$ が存在しない場合には，$a_i$ を $B$ に加える．($B$ の長さが 1 増える．) 存在する場合には，$b_k$ を $a_i$ で置き換える． ($a_i = b_k$ なら何もしないことになる) 作成された $B$ の長さが，求める長さになる． 途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_0, \\dots, a_i)$ の長さ $k$ の増加列の末項の最小値」 になっている．\n2.2. 広義単調列の場合 上とほぼ同じだが，条件「$a_i \\leq b_k$」を「$a_i \u003c b_k$」 に差し替える． C++ なら次のコード:\nk = upper_bound(ALL(B), a[i]) - B.begin(); 3. 列を 1 つ求めたい場合 上記の構築の場合，どの $a_i$ についても，「それが LIS に入るならば，その前の項が何であるか」は決まっている． これを記録していくようにする．\n$B$ と同時に，同じ長さの列 $J$ も作っていく．$b_k$ が，「$i$ まで見たときにもっとも効率の良い長さ $k$ の増加列の末項の値」であるのに対し，$j_k$ は，「$i$ まで見たときにもっとも効率の良い長さ $k$ の増加列の末項の $A$ における添字」である．すなわち，$a_{j_k} = b_k$ が成り立つ． (全体として) 長さ $n$ の配列 $C$ を作る．$c_i$ は，$a_i$ が LIS に入る場合の，1つ前の項の $A$ における添字である． 具体的な手順は以下の通り．\n最初は，$B = ()$，$J = ()$. $i = 0, 1, …, n - 1$ の順に，次を実行する． この時点で，$B = (b_0, \\dots, b_m)$，$J = (j_0, \\dots, j_m)$ であるとする． $a_i \\leq b_k$ となる (広義単調列なら，$a_i \u003c b_k$ となる) 最小の $k$ を二分探索で求める． このような $k$ が存在しない場合には， $B$ には，$a_i$ を加える． $J$ には，$i$ を加える． $k := m + 1$ とする．($B = ()$ の場合には，$m = -1$ と考えて，$k := 0$) 存在する場合には， $b_k$ を $a_i$ で置き換える． $j_k$ を $i$ で置き換える． $c_i$ については， $k \u003e 0$ の場合には，$c_i := j_{k - 1}$ とする． $k = 0$ の場合には，$c_i := -1$ とする． 最終的に $B = (b_1, \\dots, b_m)$，$J = (j_1, \\dots, j_m)$ が得られたとする． 1 つの LIS が，次の手順で求められる． 求める LIS の末項は，$b_m$ すなわち $a_{j_m}$ である． $a_{j}$ が LIS の項である時，$c_j \u003e 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = -1$ ならそれが初項である． 4. 適用可能な問題 ABC 369 F Gather Coins ",
+  "wordCount" : "271",
   "inLanguage": "en",
   "datePublished": "2024-09-01T13:13:07+09:00",
   "dateModified": "2024-09-01T13:13:07+09:00",
@@ -219,18 +219,19 @@
   </header> 
   <div class="post-content"><h2 id="1-最長増加部分列問題">1. 最長増加部分列問題<a hidden class="anchor" aria-hidden="true" href="#1-最長増加部分列問題">#</a></h2>
 <p>最長増加部分列問題 (LIS = Longest Increasing Subsequence) は，与えられた数列
-$A = (a_0, a_1, \dots, a_n)$
+$A = (a_0, a_1, \dots, a_{n - 1})$
 の部分列であって，
 単調増加であるもののうち最長のもの，ないし，その長さを求める問題．</p>
 <h2 id="2-長さだけで良い場合">2. 長さだけで良い場合<a hidden class="anchor" aria-hidden="true" href="#2-長さだけで良い場合">#</a></h2>
-<p>列 $B = (b_1, b_2, \dots, b_m)$ を次のように構築する．</p>
+<p>列 $B = (b_0, b_1, \dots, b_{m - 1})$ を次のように構築する．</p>
 <h3 id="21-狭義単調列の場合">2.1. 狭義単調列の場合<a hidden class="anchor" aria-hidden="true" href="#21-狭義単調列の場合">#</a></h3>
 <ul>
 <li>最初は，$B = ()$.</li>
-<li>$i = 1, 2, &hellip;, n$ の順に，次を実行．
+<li>$i = 0, 1, &hellip;, n - 1$ の順に，次を実行．
 <ul>
-<li>$a_i \leq b_k$ となる最小の $k$ を二分探索で求める．(C++ なら，<code>lower_bound</code> が使える)
-<ul>
+<li>$a_i \leq b_k$ となる最小の $k$ を二分探索で求める．C++ なら次のコード:
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">k</span> <span style="color:#f92672">=</span> <span style="color:#111">lower_bound</span><span style="color:#111">(</span><span style="color:#111">ALL</span><span style="color:#111">(</span><span style="color:#111">B</span><span style="color:#111">),</span> <span style="color:#111">a</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">])</span> <span style="color:#f92672">-</span> <span style="color:#111">B</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">();</span>
+</span></span></code></pre></div><ul>
 <li>このような $k$ が存在しない場合には，$a_i$ を $B$ に加える．($B$ の長さが 1 増える．)</li>
 <li>存在する場合には，$b_k$ を $a_i$ で置き換える．
 ($a_i = b_k$ なら何もしないことになる)</li>
@@ -240,27 +241,32 @@ $A = (a_0, a_1, \dots, a_n)$
 </li>
 <li>作成された $B$ の長さが，求める長さになる．</li>
 </ul>
-<p>途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_1, \dots, a_i)$ の長さ $k$ の増加列の末項の最小値」
+<p>途中の段階 ($a_i$ を処理したとき) の $b_k$ は，「$(a_0, \dots, a_i)$ の長さ $k$ の増加列の末項の最小値」
 になっている．</p>
 <h3 id="22-広義単調列の場合">2.2. 広義単調列の場合<a hidden class="anchor" aria-hidden="true" href="#22-広義単調列の場合">#</a></h3>
 <p>上とほぼ同じだが，条件「$a_i \leq b_k$」を「$a_i &lt; b_k$」 に差し替える．
-C++ なら，<code>upper_bound</code> になる．</p>
-<h2 id="3-列を-1-つ求めたい場合">3. 列を 1 つ求めたい場合<a hidden class="anchor" aria-hidden="true" href="#3-列を-1-つ求めたい場合">#</a></h2>
-<p>値を $B$ にいれて管理するだけではなく，その値に対応する添字も $J$ にいれて管理する．
-さらに，各 $i = 1, 2, \dots, n$ に対して，
-「$a_i$ を含む LIS における $a_i$ の一つ前の項の，もとの数列での添字」
-を，$c_i$ として保存する．具体的な手順は以下の通り．</p>
+C++ なら次のコード:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">k</span> <span style="color:#f92672">=</span> <span style="color:#111">upper_bound</span><span style="color:#111">(</span><span style="color:#111">ALL</span><span style="color:#111">(</span><span style="color:#111">B</span><span style="color:#111">),</span> <span style="color:#111">a</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">])</span> <span style="color:#f92672">-</span> <span style="color:#111">B</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">();</span>
+</span></span></code></pre></div><h2 id="3-列を-1-つ求めたい場合">3. 列を 1 つ求めたい場合<a hidden class="anchor" aria-hidden="true" href="#3-列を-1-つ求めたい場合">#</a></h2>
+<p>上記の構築の場合，どの $a_i$ についても，「それが LIS に入るならば，その前の項が何であるか」は決まっている．
+これを記録していくようにする．</p>
+<ul>
+<li>$B$ と同時に，同じ長さの列 $J$ も作っていく．$b_k$ が，「$i$ まで見たときにもっとも効率の良い長さ $k$ の増加列の末項の値」であるのに対し，$j_k$ は，「$i$ まで見たときにもっとも効率の良い長さ $k$ の増加列の末項の $A$ における添字」である．すなわち，$a_{j_k} = b_k$ が成り立つ．</li>
+<li>(全体として) 長さ $n$ の配列 $C$ を作る．$c_i$ は，$a_i$ が LIS に入る場合の，1つ前の項の $A$ における添字である．</li>
+</ul>
+<p>具体的な手順は以下の通り．</p>
 <ul>
 <li>最初は，$B = ()$，$J = ()$.</li>
-<li>$i = 1, 2, &hellip;, n$ の順に，次を実行する．
+<li>$i = 0, 1, &hellip;, n - 1$ の順に，次を実行する．
 <ul>
-<li>この時点で，$B = (b_1, \dots, b_m)$，$J = (j_1, \dots, j_m)$ であるとする．</li>
+<li>この時点で，$B = (b_0, \dots, b_m)$，$J = (j_0, \dots, j_m)$ であるとする．</li>
 <li>$a_i \leq b_k$ となる  (広義単調列なら，$a_i &lt; b_k$ となる) 最小の $k$ を二分探索で求める．
 <ul>
-<li>このような $k$ が存在しない場合には，$k := m + 1$ として，
+<li>このような $k$ が存在しない場合には，
 <ul>
 <li>$B$ には，$a_i$ を加える．</li>
 <li>$J$ には，$i$ を加える．</li>
+<li>$k := m + 1$ とする．($B = ()$ の場合には，$m = -1$ と考えて，$k := 0$)</li>
 </ul>
 </li>
 <li>存在する場合には，
@@ -273,8 +279,8 @@ C++ なら，<code>upper_bound</code> になる．</p>
 </li>
 <li>$c_i$ については，
 <ul>
-<li>$k &gt; 1$ の場合には，$c_i := j_{k - 1}$ とする．</li>
-<li>$k = 1$ の場合には，$c_i := 0$ とする．</li>
+<li>$k &gt; 0$ の場合には，$c_i := j_{k - 1}$ とする．</li>
+<li>$k = 0$ の場合には，$c_i := -1$ とする．</li>
 </ul>
 </li>
 </ul>
@@ -283,7 +289,7 @@ C++ なら，<code>upper_bound</code> になる．</p>
 1 つの LIS が，次の手順で求められる．
 <ul>
 <li>求める LIS の末項は，$b_m$ すなわち $a_{j_m}$ である．</li>
-<li>$a_{j}$ が LIS の項である時，$c_j &gt; 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = 0$ ならそれが初項である．</li>
+<li>$a_{j}$ が LIS の項である時，$c_j &gt; 0$ なら，その一つ前の項は $a_{c_j}$ である．$c_j = -1$ ならそれが初項である．</li>
 </ul>
 </li>
 </ul>
@@ -320,6 +326,7 @@ C++ なら，<code>upper_bound</code> になる．</p>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/">std::mapへの挿入と更新</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">誤りの記録</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/09-15-intervalset/">intervalSet ライブラリ</a>
@@ -328,7 +335,6 @@ C++ なら，<code>upper_bound</code> になる．</p>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">集合・多重集合のハッシュ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/08-06-sqrt-decomp/">平方分割ライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/">木DP &#43; マージテク</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/">二項係数に関する公式</a>
 </p>
 
 
