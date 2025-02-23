@@ -137,6 +137,8 @@ int lca(int x, int y)
 
 ノード x と y の Lowest Common Ancestor を返す．
 
+実装は euler tour + sparce table なので，前処理 $O(N \log N)$ で，クエリは $O(1)$．
+
 #### 2ノード間のパス
 
 ```cpp
@@ -146,14 +148,6 @@ vector<int> nnpath(int x, int y)
 ノード x から y への経路を返す．`path = tr.nnpath(x, y)` とすると，
 `path` は `vector<int>` 型で，`path[0]` は x に等しく，`path.back() は y に等しく，
 `path[i]` と `path[i + 1]` の間には辺がある．
-
-#### 指定した深さの先祖
-
-```cpp
-int ancestorDep(int x, int dep)
-```
-
-ノード x の先祖であって，深さが dep であるものを返す．
 
 #### 直径
 
