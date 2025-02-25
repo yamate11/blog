@@ -175,6 +175,18 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Shapes -- AtCoder Beginner Contest 218 C
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>重実装への対処は，どうしたらよいのでしょうか?</p>
+  </div>
+  <footer class="entry-footer">2021-09-12&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to Shapes -- AtCoder Beginner Contest 218 C" href="https://yamate11.github.io/blog/posts/2021/09-12-abc218-shapes/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Snuketoon - ABC217 H
     </h2>
   </header>
@@ -352,21 +364,6 @@ dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになり�
   </div>
   <footer class="entry-footer">2021-08-11&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Stroll - Atcoder Beginner Contest 213 H" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">距離: BFSとダイクストラ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>距離を求める際の，ダイクストラ, 0-1BFS, BFSのコーディング方法のまとめです．
-記法 ノードを表すデータ型を Node とする． int や long long や pair&lt;int, int&gt; など．
-ダイクストラ 前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化 priority_queue のメソッドは，push(), emplace(), pop(), top() など． using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞ // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0 ループ
-pque から取り出した (d, x) について， dist[x] &lt; d なら，もっと良い d があって， それが既に取り出されている，ということなので，単に捨てる． そうでなければ (dist[x] == d ならば) この d が x への最短距離であることが確定した． x の 各隣接ノード y について，newd = x &#43; δ(x, y) が y への距離の候補なので以下を行う． dist[y] &lt;= newd なら，単に捨てる． そうでなければ，次を行う． dist[y] を newd に更新する． (newd, y) を pque に入れる． ゴール...</p>
-  </div>
-  <footer class="entry-footer">2021-08-09&amp;nbsp;·&amp;nbsp;2021-07-03 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

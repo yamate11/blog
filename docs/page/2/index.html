@@ -170,6 +170,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">行列ライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>自分用の 行列ライブラリ のメモです．
+依存関係 AO.cc (Algebra Operations) に依存する．
+型 要素の型を T として，Matrix&lt;T&gt; が，行列の型になる． (実装上，これは，Mat&lt;AO_def&lt;T&gt;&gt; として定義されているが，使うときは気にしなくて良い)
+以下，要素の型を T とし，MyMat = Matrix&lt;T&gt; と定義されているものとする． mat は MyMat 型とする．
+構築子 MyMat(int dimI_, int dimJ_) … dimI_ 行 dimJ_ 列 の零行列 MyMat(int dimI_, int dimJ_, T t) … dimI_ 行 dimJ_ 列 の，要素の値がすべて t である行列 MyMat(int dimI_, int dimJ_, const vector&lt;T&gt;&amp; vec) … dimI_ 行，dimJ_ 列で，内部表現が vec である行列． 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector....</p>
+  </div>
+  <footer class="entry-footer">2024-03-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 行列ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-30-matrix/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">ARC175-C Jumping Through Intervals
     </h2>
   </header>
@@ -360,18 +376,6 @@ template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b
   </div>
   <footer class="entry-footer">2023-09-05&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 二重連結" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Return to 1 - Atcoder Beginner Contest 306 G
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>ABC306G Return to 1 の解法です</p>
-  </div>
-  <footer class="entry-footer">2023-06-18&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to Return to 1 - Atcoder Beginner Contest 306 G" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
