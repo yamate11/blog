@@ -123,8 +123,8 @@
   "keywords": [
     "xor", "畳み込み", "アダマール変換"
   ],
-  "articleBody": "xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \\oplus y$ は $x$ と $y$ の xor とする．\n$ Z_k = \\sum \\{ X_i Y_j \\mid i \\oplus j = k \\} $ 以下では，$Z = X * Y$ と書く．\nアダマール変換 長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される 1次変換である．\n$$ H_0 = 1 $$\n$$ H_{k + 1} = \\begin{bmatrix} H_k \u0026 H_k \\\\ H_k \u0026 -H_k \\end{bmatrix} $$\n本来は，正規化のために定数倍するが， ここでは，結果を整数にするためにそうしていない．\n$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．\n畳み込みとアダマール変換 以下が成り立つことが，計算することで容易に分かる．\n$$ (H_K X) (H_K Y) = H_K (X * Y) $$\nただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．\n$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$\nアダマール変換は，定義に従って $O(n \\log n)$ で計算できる．($n = 2^K$)\nメモリを賢く使って計算している例が kazuma8128's blog に載っている．\nこれを使える問題 ABC212 H Nim Counting ",
-  "wordCount" : "127",
+  "articleBody": "xor畳み込み 長さ $2^K$ の数列 $X$, $Y$ があるとき， これらのxor畳み込みを，以下を満たす長さ $2^K$ の列 $Z$ として定める． ただし，$x \\oplus y$ は $x$ と $y$ の xor とする．\n$ Z_k = \\sum \\{ X_i Y_j \\mid i \\oplus j = k \\} $ 以下では，$Z = X * Y$ と書く．\nアダマール変換 長さ $2^K$ の数列に作用するアダマール (Hadamard) 変換は，以下の行列 $H_K$ で定義される 1次変換である．\n$$ H_0 = 1 $$\n$$ H_{k + 1} = \\begin{bmatrix} H_k \u0026 H_k \\\\ H_k \u0026 -H_k \\end{bmatrix} $$\n本来は，正規化のために定数倍するが， ここでは，結果を整数にするためにそうしていない．\n$ H_k H_k = 2^k I $ が成り立つので，$(H_k)^{-1} = 2^{-k} H_k$ である．\n畳み込みとアダマール変換 以下が成り立つことが，計算することで容易に分かる．\n$$ (H_K X) (H_K Y) = H_K (X * Y) $$\nただし，左辺は，成分ごとの積．したがって，xor 畳み込みは，下のように計算できる．\n$$ X * Y = 2^{-K} H_K ((H_K X) (H_K Y)) $$\nアダマール変換は，定義に従って $O(n \\log n)$ で計算できる．($n = 2^K$)\nメモリを賢く使って計算している例が kazuma8128's blog に載っている．\nこれを使える問題 ABC212 H Nim Counting ",
+  "wordCount" : "129",
   "inLanguage": "en",
   "datePublished": "2021-08-23T12:40:00+09:00",
   "dateModified": "2021-08-23T12:40:00+09:00",
@@ -229,7 +229,7 @@
 </ul>
 <p>以下では，$Z = X * Y$ と書く．</p>
 <h2 id="アダマール変換">アダマール変換<a hidden class="anchor" aria-hidden="true" href="#アダマール変換">#</a></h2>
-<p>長さ $2^K$ の数列に作用するアダマール変換は，以下の行列 $H_K$ で定義される
+<p>長さ $2^K$ の数列に作用するアダマール (Hadamard) 変換は，以下の行列 $H_K$ で定義される
 1次変換である．</p>
 <p>$$
 H_0 = 1
@@ -289,6 +289,7 @@ $$</p>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/03-10-convolution/">畳み込み・ゼータ変換・メビウス変換</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/">WolframAlpha への入力</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/">std::mapへの挿入と更新</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
@@ -297,7 +298,6 @@ $$</p>
   / <a href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">ダブリングライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">LIS - 最長増加部分列</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">集合・多重集合のハッシュ</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/08-06-sqrt-decomp/">平方分割ライブラリ</a>
 </p>
 
 

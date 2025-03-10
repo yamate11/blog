@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>畳み込み・ゼータ変換・メビウス変換 | yamate11のブログ</title>
+<meta name="keywords" content="convolution">
+<meta name="description" content="畳み込みに関する諸情報">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/03-10-convolution/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="畳み込み・ゼータ変換・メビウス変換" />
+<meta property="og:description" content="畳み込みに関する諸情報" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/03-10-convolution/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-03-10T16:52:03+09:00" />
+<meta property="article:modified_time" content="2025-03-10T16:52:03+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="畳み込み・ゼータ変換・メビウス変換"/>
+<meta name="twitter:description" content="畳み込みに関する諸情報"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "畳み込み・ゼータ変換・メビウス変換",
+      "item": "https://yamate11.github.io/blog/posts/2025/03-10-convolution/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "畳み込み・ゼータ変換・メビウス変換",
+  "name": "畳み込み・ゼータ変換・メビウス変換",
+  "description": "畳み込みに関する諸情報",
+  "keywords": [
+    "convolution"
+  ],
+  "articleBody": "畳み込みやゼータ変換やメビウス変換に関する諸情報\n関連する問題 ABC393 E - GCD of Subset 素数ゼータ変換 ABC212 H - Nim Counting xor畳み込み この blog の中の記事 xor畳み込み ゼータ変換，メビウス変換 参考になる記事 色々な畳み込み (kazuma8128’s blog) … これを参考にしてライブラリを書いた． ゼータ変換・素数ゼータ変換について (tatyam) … 素数ゼータ変換についてわかりやすい説明 私用メモ: 畳み込めるものまとめ (noshi91のメモ) … たくさん表になっている 添え字 gcd での畳み込みで AGC038-C を解く (noshi91のメモ) 高速ゼータ変換の約数版 O(N log(log(N))) (noshi91のメモ) ",
+  "wordCount" : "45",
+  "inLanguage": "en",
+  "datePublished": "2025-03-10T16:52:03+09:00",
+  "dateModified": "2025-03-10T16:52:03+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2025/03-10-convolution/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      畳み込み・ゼータ変換・メビウス変換
+    </h1>
+    <div class="post-meta">2025-03-10&amp;nbsp;·&amp;nbsp;yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>畳み込みやゼータ変換やメビウス変換に関する諸情報</p>
+<h4 id="関連する問題">関連する問題<a hidden class="anchor" aria-hidden="true" href="#関連する問題">#</a></h4>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc393/tasks/abc393_e" target="_blank">ABC393 E - GCD of Subset</a>
+ 素数ゼータ変換</li>
+<li><a href="https://atcoder.jp/contests/abc212/tasks/abc212_h" target="_blank">ABC212 H - Nim Counting</a>
+ xor畳み込み</li>
+</ul>
+<h4 id="この-blog-の中の記事">この blog の中の記事<a hidden class="anchor" aria-hidden="true" href="#この-blog-の中の記事">#</a></h4>
+<ul>
+<li><a href="../2021/08-10-xor-conv/">xor畳み込み</a>
+</li>
+<li><a href="../2022/03-22-fast-zeta">ゼータ変換，メビウス変換</a>
+</li>
+</ul>
+<h4 id="参考になる記事">参考になる記事<a hidden class="anchor" aria-hidden="true" href="#参考になる記事">#</a></h4>
+<ul>
+<li><a href="https://kazuma8128.hatenablog.com/entry/2018/05/31/144519" target="_blank">色々な畳み込み</a>
+ (kazuma8128&rsquo;s blog) &hellip;
+これを参考にしてライブラリを書いた．</li>
+<li><a href="https://hackmd.io/@tatyam-prime/H1EhuQAt1x" target="_blank">ゼータ変換・素数ゼータ変換について</a>
+ (tatyam)
+&hellip; 素数ゼータ変換についてわかりやすい説明</li>
+<li><a href="https://noshi91.hatenablog.com/entry/2020/10/27/175112" target="_blank">私用メモ: 畳み込めるものまとめ</a>
+ (noshi91のメモ)
+&hellip; たくさん表になっている</li>
+<li><a href="https://noshi91.hatenablog.com/entry/2019/09/23/002445" target="_blank">添え字 gcd での畳み込みで AGC038-C を解く</a>
+ (noshi91のメモ)</li>
+<li><a href="https://noshi91.hatenablog.com/entry/2018/12/27/121649" target="_blank">高速ゼータ変換の約数版 O(N log(log(N)))</a>
+  (noshi91のメモ)</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/convolution/">convolution</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/">
+    <span class="title">Next »</span>
+    <br>
+    <span>WolframAlpha への入力</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2025/03-10-convolution/" data-title="畳み込み・ゼータ変換・メビウス変換">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/03-10-convolution/">畳み込み・ゼータ変換・メビウス変換</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/">WolframAlpha への入力</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/">std::mapへの挿入と更新</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
+  / <a href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">誤りの記録</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/09-15-intervalset/">intervalSet ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">ダブリングライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/">LIS - 最長増加部分列</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/">集合・多重集合のハッシュ</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

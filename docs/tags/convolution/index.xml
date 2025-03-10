@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>convolution on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/convolution/</link>
+    <description>Recent content in convolution on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 10 Mar 2025 16:52:03 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/convolution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>畳み込み・ゼータ変換・メビウス変換</title>
+      <link>https://yamate11.github.io/blog/posts/2025/03-10-convolution/</link>
+      <pubDate>Mon, 10 Mar 2025 16:52:03 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/03-10-convolution/</guid>
+      <description>畳み込みに関する諸情報</description>
+    </item>
+  </channel>
+</rss>
