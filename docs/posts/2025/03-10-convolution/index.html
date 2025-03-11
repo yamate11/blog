@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>畳み込み・ゼータ変換・メビウス変換 | yamate11のブログ</title>
 <meta name="keywords" content="convolution">
-<meta name="description" content="畳み込みに関する諸情報">
+<meta name="description" content="畳み込みやゼータ変換やメビウス変換に関するメモ">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/03-10-convolution/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
@@ -82,7 +82,7 @@
 
 
 <meta property="og:title" content="畳み込み・ゼータ変換・メビウス変換" />
-<meta property="og:description" content="畳み込みに関する諸情報" />
+<meta property="og:description" content="畳み込みやゼータ変換やメビウス変換に関するメモ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/03-10-convolution/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-03-10T16:52:03+09:00" />
@@ -90,7 +90,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="畳み込み・ゼータ変換・メビウス変換"/>
-<meta name="twitter:description" content="畳み込みに関する諸情報"/>
+<meta name="twitter:description" content="畳み込みやゼータ変換やメビウス変換に関するメモ"/>
 
 
 <script type="application/ld+json">
@@ -119,12 +119,12 @@
   "@type": "BlogPosting",
   "headline": "畳み込み・ゼータ変換・メビウス変換",
   "name": "畳み込み・ゼータ変換・メビウス変換",
-  "description": "畳み込みに関する諸情報",
+  "description": "畳み込みやゼータ変換やメビウス変換に関するメモ",
   "keywords": [
     "convolution"
   ],
-  "articleBody": "畳み込みやゼータ変換やメビウス変換に関する諸情報\n関連する問題 ABC393 E - GCD of Subset 素数ゼータ変換 ABC212 H - Nim Counting xor畳み込み この blog の中の記事 xor畳み込み ゼータ変換，メビウス変換 参考になる記事 色々な畳み込み (kazuma8128’s blog) … これを参考にしてライブラリを書いた． ゼータ変換・素数ゼータ変換について (tatyam) … 素数ゼータ変換についてわかりやすい説明 私用メモ: 畳み込めるものまとめ (noshi91のメモ) … たくさん表になっている 添え字 gcd での畳み込みで AGC038-C を解く (noshi91のメモ) 高速ゼータ変換の約数版 O(N log(log(N))) (noshi91のメモ) ",
-  "wordCount" : "45",
+  "articleBody": "畳み込みやゼータ変換やメビウス変換に関するメモ\n書いたライブラリ fastTransform.cc vector\u003cT\u003e xor_conv(vector\u003cT\u003e vec1, vector\u003cT\u003e vec2); vector\u003cT\u003e and_conv(vector\u003cT\u003e vec1, vector\u003cT\u003e vec2); vector\u003cT\u003e or_conv(vector\u003cT\u003e vec1, vector\u003cT\u003e vec2); これらは，{xor|and|or} convolution を返す． vec = xor_conv(vec1, vec2) だったら，vec[k] = \\sum {vec1[i] * vec2[j] | i ^ j = k} になる． vec1 や vec2 のサイズは，2の冪乗でなくてはならない．\nvoid xor_conv_dest(vector\u003cT\u003e\u0026 vec1, vector\u003cT\u003e\u0026 vec2); void and_conv_dest(vector\u003cT\u003e\u0026 vec1, vector\u003cT\u003e\u0026 vec2); void or_conv_dest(vector\u003cT\u003e\u0026 vec1, vector\u003cT\u003e\u0026 vec2); これらは，{xor|and|or} convolution を行う．結果は vec1 にセットされる． もとの vec1 と vec2 は両方破壊される． vec1 や vec2 のサイズは，2の冪乗でなくてはならない．\nvoid hadamard(vector\u003cT\u003e\u0026 vec); void inv_hadamard(vector\u003cT\u003e\u0026 vec); void zeta_upper(vector\u003cT\u003e\u0026 vec); void moebius_upper(vector\u003cT\u003e\u0026 vec); void zeta_lower(vector\u003cT\u003e\u0026 vec); void moebius_lower(vector\u003cT\u003e\u0026 vec); これらは，対応する変換を行う．上の畳み込みの関数の内部でも使用されている． 結果は vec にセットされ，元の値は破壊される． vec のサイズは，2の冪乗でなくてはならない． Hadamard 変換は，本来，自分自身が逆変換だが， 関数 hadamard では，定数倍して値が整数になるようにしているので， 定数倍だけ異なる逆変換 inv_hadamard がある．\nint trans_resize(vector\u003cT\u003e\u0026 x); x を，長さが2の冪乗になるように resize する．新しい長さを返す．\nint trans_resize(vector\u003cT\u003e\u0026 x, vector\u003cT\u003e\u0026 y); x と y を，長さが同じ2の累乗になるように resize する．新しい長さを返す．\n関連する問題 ABC393 E - GCD of Subset 素数ゼータ変換 ABC212 H - Nim Counting xor畳み込み この blog の中の記事 xor畳み込み ゼータ変換，メビウス変換 参考になる記事 色々な畳み込み (kazuma8128’s blog) … これを参考にしてライブラリを書いた． ゼータ変換・素数ゼータ変換について (tatyam) … 素数ゼータ変換についてわかりやすい説明 私用メモ: 畳み込めるものまとめ (noshi91のメモ) … たくさん表になっている 添え字 gcd での畳み込みで AGC038-C を解く (noshi91のメモ) 高速ゼータ変換の約数版 O(N log(log(N))) (noshi91のメモ) ",
+  "wordCount" : "165",
   "inLanguage": "en",
   "datePublished": "2025-03-10T16:52:03+09:00",
   "dateModified": "2025-03-10T16:52:03+09:00",
@@ -217,7 +217,38 @@
     <div class="post-meta">2025-03-10&amp;nbsp;·&amp;nbsp;yamate11
 </div>
   </header> 
-  <div class="post-content"><p>畳み込みやゼータ変換やメビウス変換に関する諸情報</p>
+  <div class="post-content"><p>畳み込みやゼータ変換やメビウス変換に関するメモ</p>
+<h4 id="書いたライブラリ">書いたライブラリ<a hidden class="anchor" aria-hidden="true" href="#書いたライブラリ">#</a></h4>
+<p><a href="https://github.com/yamate11/compprog-clib/blob/master/fastTransform.cc" target="_blank">fastTransform.cc</a>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">xor_conv</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">and_conv</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">or_conv</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>これらは，{xor|and|or} convolution を返す．
+<code>vec = xor_conv(vec1, vec2)</code> だったら，<code>vec[k] = \sum {vec1[i] * vec2[j] | i ^ j = k}</code> になる．
+<code>vec1</code> や <code>vec2</code> のサイズは，2の冪乗でなくてはならない．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">xor_conv_dest</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">and_conv_dest</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">or_conv_dest</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec1</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec2</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>これらは，{xor|and|or} convolution を行う．結果は <code>vec1</code> にセットされる．
+もとの <code>vec1</code> と <code>vec2</code> は両方破壊される．
+<code>vec1</code> や <code>vec2</code> のサイズは，2の冪乗でなくてはならない．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">hadamard</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">inv_hadamard</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">zeta_upper</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">moebius_upper</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">zeta_lower</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">moebius_lower</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>これらは，対応する変換を行う．上の畳み込みの関数の内部でも使用されている．
+結果は <code>vec</code> にセットされ，元の値は破壊される．
+<code>vec</code> のサイズは，2の冪乗でなくてはならない．
+Hadamard 変換は，本来，自分自身が逆変換だが，
+関数 <code>hadamard</code> では，定数倍して値が整数になるようにしているので，
+定数倍だけ異なる逆変換 <code>inv_hadamard</code> がある．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">int</span> <span style="color:#75af00">trans_resize</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">x</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>x を，長さが2の冪乗になるように resize する．新しい長さを返す．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">int</span> <span style="color:#75af00">trans_resize</span><span style="color:#111">(</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#111">y</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>x と y を，長さが同じ2の累乗になるように resize する．新しい長さを返す．</p>
 <h4 id="関連する問題">関連する問題<a hidden class="anchor" aria-hidden="true" href="#関連する問題">#</a></h4>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc393/tasks/abc393_e" target="_blank">ABC393 E - GCD of Subset</a>

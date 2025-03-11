@@ -23,7 +23,7 @@ $$
 \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1}
 $$
 
-定理から明らか．
+定義から明らか．
 
 3.
 
@@ -40,16 +40,25 @@ $\binom{n + 1}{r + 1} = \binom{n}{r} + \binom{n}{r + 1}
 4.
 
 $$
-\binom{n + m}{r} = \sum_{i = 0}^{r}\binom{n}{i}\binom{m}{r - i}
+\sum_{i = 0}^{r}\binom{n}{i}\binom{m}{r - i} = \binom{n + m}{r}
 $$
 
-$n + m$ から $r$ 取る組合せは，$n$ から $i$ 取って，$m$ から $r - i$ とる組合せで $i$ を動かしたもの．
+$|A| = n$, $|B| = m$ であるとき，$A$ と $B$ の排他和から $r$ 個取るのは，$A$ から $i$ 個取って $B$ から $r - i$ 個取ることになる．
+
 
 5.
+$$
+\sum_{i = 0}^{r}\binom{n}{i}\binom{m}{r + i} = \binom{n + m}{n + r}
+$$
+
+上と類似．左辺は $\sum_{i = 0}^{r}\binom{n}{n - i}\binom{m}{i + r}$ と書き直せる．
+$A$ と $B$ の排他和から $n + r$ 個取るときには，少なくとも $B$ から $r$ 個は取るので，$B$ から $i + r$ 個，$A$ から $n - i$ 個取ることになる．
+
+6.
 
 $$
 \sum_{r = 0}^{n} r \binom{n}{r} = n 2^{n - 1}
 $$
 
-左辺は，$\sum_{r = 1}^{n} r \binom{n}{r} = n \sum_{r = 1}^{n} \binom{n - 1}{r - 1} = n 2^{n - 1}$
-と計算できる．
+(左辺) $= \sum_{r = 1}^{n} r \binom{n}{r} = n \sum_{r = 1}^{n} \binom{n - 1}{r - 1} = n 2^{n - 1} =$ (右辺)
+

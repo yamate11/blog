@@ -13,7 +13,7 @@
       <link>https://yamate11.github.io/blog/posts/2025/03-10-convolution/</link>
       <pubDate>Mon, 10 Mar 2025 16:52:03 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2025/03-10-convolution/</guid>
-      <description>畳み込みに関する諸情報</description>
+      <description>畳み込みやゼータ変換やメビウス変換に関するメモ</description>
     </item>
     <item>
       <title>WolframAlpha への入力</title>
@@ -114,7 +114,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
       <description>$$ \binom{n}{r} = \binom{n - 1}{r - 1} + \binom{n - 1}{r} $$
 言わずもがな．パスカルの三角形
 $$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
-定理から明らか．
+定義から明らか．
 $$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n + 1}{r + 1} $$
 Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n + 1}{r + 1} = \binom{n}{r} + \binom{n}{r + 1} = \binom{n}{r} + \binom{n - 1}{r} + \binom{n - 1}{r + 1} = \binom{n}{r} + \binom{n - 1}{r} + \binom{n - 2}{r} + \binom{n - 2}{r + 1} = \dots$</description>
     </item>
