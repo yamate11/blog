@@ -6,8 +6,22 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 10 Mar 2025 16:52:03 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 21:06:08 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>積の和典型</title>
+      <link>https://yamate11.github.io/blog/posts/2025/03-30-sum-of-product/</link>
+      <pubDate>Sun, 30 Mar 2025 21:06:08 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/03-30-sum-of-product/</guid>
+      <description>ABC399-F Range Power Sum が， 積の和典型だとのことなので，関連記事へのリンクなど．
+リンク 積の和典型 - ei1333の日記 ABC399-F 問題概要 問題へのリンク $A = (A_1, \dots, A_N)$ が与えられる．次を mod 998244353 で求めよ:
+$$ \sum_{1 \leq l \leq r \leq N}\left( \sum_{l \leq i \leq r} A_i \right)^K $$
+制約: $N \leq 2\times 10^5$, $K \leq 10$．
+解法 (累積和で2項展開しても解けるが，それは置いといて&amp;hellip;) 以下， 公式解説 より．
+次のように言い換えられる．
+ボールが $A_i$ 個入った箱が一列に並んでいる． 箱の間に，2個の仕切りを入れる． 2つの仕切りの間にあるボールに，$1, 2, \ldots, K$ と書かれたラベルを1枚ずつ貼る 仕切りの入れ方とラベルの貼り方をセットで考えて，この方法の数が，求める答になる． DP で求める．
+dp[i][j][k] = (箱 i まで見て，仕切りを j 個入れていて，ラベルを k 枚貼るような方法の数)</description>
+    </item>
     <item>
       <title>畳み込み・ゼータ変換・メビウス変換</title>
       <link>https://yamate11.github.io/blog/posts/2025/03-10-convolution/</link>
