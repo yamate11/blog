@@ -23,9 +23,9 @@ $\text{binsearch}(\lambda t.\\; | \\{i : X_i \leq t \\} | \geq K,
 
 ```cpp
 auto check = [&](ll t) -> bool {
-  return "the number of i such that X[i] >= t";
+  return `the number of i such that X[i] >= t' >= K;
 };
-ll ans = binsearch_i<ll>(check, "max of X", "min of X" - 1);
+ll ans = binsearch_i<ll>(check, `max of X', `min of X' - 1);
 ```
 
 言い換えると，
@@ -36,9 +36,9 @@ $\text{binsearch}(\lambda t.\\; | \\{i : X_i < t \\} | < K,
 
 ```cpp
 auto check = [&](ll t) -> bool {
-  return "the number of i such that X[i] < t";
+  return (the number of i such that X[i] < t) < K;
 };
-ll ans = binsearch_i<ll>(check, "min of X", "max of X" + 1);
+ll ans = binsearch_i<ll>(check, `min of X', `max of X' + 1);
 ```
 
 ## ベクトル v の t 付近の要素
