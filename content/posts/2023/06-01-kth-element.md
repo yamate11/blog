@@ -23,7 +23,7 @@ $\text{binsearch}(\lambda t.\\; | \\{i : X_i \leq t \\} | \geq K,
 
 ```cpp
 auto check = [&](ll t) -> bool {
-  return `the number of i such that X[i] >= t' >= K;
+  return `the number of i such that X[i] <= t' >= K;
 };
 ll ans = binsearch_i<ll>(check, `max of X', `min of X' - 1);
 ```
@@ -36,7 +36,7 @@ $\text{binsearch}(\lambda t.\\; | \\{i : X_i < t \\} | < K,
 
 ```cpp
 auto check = [&](ll t) -> bool {
-  return (the number of i such that X[i] < t) < K;
+  return `the number of i such that X[i] < t' < K;
 };
 ll ans = binsearch_i<ll>(check, `min of X', `max of X' + 1);
 ```
@@ -44,24 +44,19 @@ ll ans = binsearch_i<ll>(check, `min of X', `max of X' + 1);
 ## ベクトル v の t 付近の要素
 
 $v$ の要素は整数型とする．
+整数型については，常に `upper_bound(*, t) == lower_bound(*, t + 1)` となるので，
+lower_bound だけを使うことにしても良い．
+
 
 基本は次のこと:
 
-> $v_i < t$ となる $i$ の個数は，
-> `lower_bound(ALL(v), t) - v.begin()` である．
+> * $v_i < t$ となる $i$ の個数は，
+>   `lower_bound(ALL(v), t) - v.begin()` である．
+> * $t \leq v_i$ となる $i$ の個数は，
+>   `v.end() - lower_bound(ALL(v), t)` である．
 
-$v_i \leq t$ については，$v_i < t + 1$ と言い換えれば良いし，
-$v_i > t$ や $v_i \geq t$ については，$|v|$ から引けば良い．
+$v_i \leq t$ や $t < v_i$ については，$v_i < t + 1$ や $t + 1 \leq v_i$ に言い換えれば良い．
 
-また，添字の値については次の通り．
-
-* $v_i < t$ となる最大の $i$ の値は，(上の個数 - 1) である．
-存在しない場合には当然 -1 になる．
-* $v_i \leq t$ となる最大の $i$ の値も同様．
-* $v_i > t$ となる最小の $i$ の値は，もちろん，
-  `upper_bound(ALL(v)) - v.begin()` である．
-* $v_i \geq t$ となる最小の $i$ の値は，もちろん，
-  `lower_bound(ALL(v)) - v.begin()` である．
 
 
 keywords: k-th element, binary search, lower_bound, upper_bound
