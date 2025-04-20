@@ -175,6 +175,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">二項係数に関する公式
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>$$ \binom{n}{r} = \binom{n - 1}{r - 1} &#43; \binom{n - 1}{r} $$
+言わずもがな．パスカルの三角形
+$$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
+定義から明らか．
+$$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n &#43; 1}{r &#43; 1} $$
+Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 2}{r} &#43; \binom{n - 2}{r &#43; 1} = \dots$...</p>
+  </div>
+  <footer class="entry-footer">2024-06-21&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to 二項係数に関する公式" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">忘れやすい事項
     </h2>
   </header>
@@ -364,18 +381,6 @@ $P(x, y)$ かつ $x \leq x’$，$y’ \leq y$ ならば，$P(x’, y’)$ こ�
   </div>
   <footer class="entry-footer">2024-01-01&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to Undo付きUnionFind" href="https://yamate11.github.io/blog/posts/2024/01-01-undo-union-fild/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">ローリングハッシュライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>ローリングハッシュライブラリの使い方についての自分用のメモです</p>
-  </div>
-  <footer class="entry-footer">2023-12-09&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to ローリングハッシュライブラリ" href="https://yamate11.github.io/blog/posts/2023/12-09-rolling-hash/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

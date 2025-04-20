@@ -175,6 +175,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ABC397 F - Variety Split Hard
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の整数列 $A = (A_0, \ldots, A_{N - 1})$ が与えられる． $A$ を 2箇所で区切って，3個の空でない連続する部分列に分解するとき， おのおのの部分列に含まれる数の種類数の和の最大値を求めよ．
+制約 $3 \leq N \leq 3\times10^5$，$1 \leq A_i \leq N$
+解 公式解説 略解．click to open $L_i := (A_0, \ldots, A_{i - 1})$ に含まれる種類数 $R_i := (A_i, \ldots, A_{N - 1})$ に含まれる種類数 $dp[i][j] := (A_0, \ldots, A_{j - 1})$ と $(A_j, \ldots, A_{i - 1})$ に含まれる種類数の和 ($j \in [0, i)$) とする．求める値は $\max_i (R_i &#43; \max_j(dp[i][j]))$．...</p>
+  </div>
+  <footer class="entry-footer">2025-04-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <a class="entry-link" aria-label="post link to ABC397 F - Variety Split Hard" href="https://yamate11.github.io/blog/posts/2025/04-20-ret-abc397-f/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Codeforces Round 1018 Div1&#43;2 E. Wonderful Teddy Bears
     </h2>
   </header>
@@ -373,23 +387,6 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   </div>
   <footer class="entry-footer">2024-06-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
   <a class="entry-link" aria-label="post link to 木DP &#43; マージテク" href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">二項係数に関する公式
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>$$ \binom{n}{r} = \binom{n - 1}{r - 1} &#43; \binom{n - 1}{r} $$
-言わずもがな．パスカルの三角形
-$$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
-定義から明らか．
-$$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n &#43; 1}{r &#43; 1} $$
-Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 2}{r} &#43; \binom{n - 2}{r &#43; 1} = \dots$...</p>
-  </div>
-  <footer class="entry-footer">2024-06-21&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 二項係数に関する公式" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
