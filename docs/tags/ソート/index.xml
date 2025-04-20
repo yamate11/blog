@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ソート on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/%E3%82%BD%E3%83%BC%E3%83%88/</link>
+    <description>Recent content in ソート on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Apr 2025 09:47:52 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/%E3%82%BD%E3%83%BC%E3%83%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Codeforces Round 1018 Div1&#43;2 E. Wonderful Teddy Bears</title>
+      <link>https://yamate11.github.io/blog/posts/2025/04-20-ret-cf1018-e/</link>
+      <pubDate>Sun, 20 Apr 2025 09:47:52 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/04-20-ret-cf1018-e/</guid>
+      <description>問題概要 問題へのリンク 長さ$N$の文字列 $S$ が与えられる．$S$ に現れる文字は B と P だけ． 次の操作によって，B を左に P を右に寄せ $S$ を BB...BPP...P という形にする． 操作の最小回数を求めよ．
+$S$ の長さ3の部分列をとり，その部分の B を左に，P を右に寄せる． つまり，1回の操作は，以下のいずれか:
+(あ) PPB $\to$ BPP (い) PBP $\to$ BPP (う) PBB $\to$ BBP (え) BPB $\to$ BBP 制約 $3 \leq N \leq 2\times10^5$
+解 tutorialへのリンク 略解．click to open 奇数番のみ，偶数番のみの列を考えると， 操作は，次のいずれかになっている:
+(ア) 奇数列の隣接入替，偶数列の隣接入替 (あ, う) (イ) 奇数列と偶数列の B, P の入替 (い，え) 全体としてみたときの転倒数を $r$ とする．(ア)では転倒数が2減り， (イ) では転倒数が1減る． 最終形を考えると，奇数列，偶数列の B, P の個数は決まっている． だから，(イ) の最低必要な回数 $x$ が決まる． 「最初に (イ) を $x$ 回行って，あとの操作はすべて (ア)」が実現できれば， それ以上回数は減らせない．</description>
+    </item>
+  </channel>
+</rss>
