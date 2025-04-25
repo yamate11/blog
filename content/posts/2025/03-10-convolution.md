@@ -86,3 +86,5 @@ x と y を，長さが同じ2の累乗になるように resize する．新し
   ... たくさん表になっている
 * [添え字 gcd での畳み込みで AGC038-C を解く](https://noshi91.hatenablog.com/entry/2019/09/23/002445) (noshi91のメモ)
 * [高速ゼータ変換の約数版 O(N log(log(N)))](https://noshi91.hatenablog.com/entry/2018/12/27/121649)  (noshi91のメモ)
+* [エラトステネスの篩の活用法を総特集！ 〜 高速素因数分解・メビウスの反転公式 〜](https://qiita.com/drken/items/3beb679e54266f20ab63#7-%E6%B4%BB%E7%94%A8%E4%BE%8B-4-%E9%AB%98%E9%80%9F%E3%83%A1%E3%83%93%E3%82%A6%E3%82%B9%E5%A4%89%E6%8F%9B%E3%81%A8%E7%B4%84%E6%95%B0%E7%B3%BB%E5%8C%85%E9%99%A4%E5%8E%9F%E7%90%86) (けんちょん)
+* [倍数変換・約数変換](https://nyaannyaan.github.io/library/multiplicative-function/divisor-multiple-transform.hpp.html)  (Nyaan's Library)
