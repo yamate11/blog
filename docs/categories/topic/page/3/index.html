@@ -166,7 +166,7 @@
   <div class="entry-content">
     <p>順列組合せ・重複ありなし ライブラリに関するメモです．</p>
   </div>
-  <footer class="entry-footer">2023-02-28&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2023-02-28   yamate11</footer>
   <a class="entry-link" aria-label="post link to 順列組合せ" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/"></a>
 </article>
 
@@ -178,7 +178,7 @@
   <div class="entry-content">
     <p>二項係数に関する公式です．</p>
   </div>
-  <footer class="entry-footer">2022-10-29&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-10-29   yamate11</footer>
   <a class="entry-link" aria-label="post link to 二項係数に関する公式" href="https://yamate11.github.io/blog/posts/2022/10-29-binom/"></a>
 </article>
 
@@ -190,7 +190,7 @@
   <div class="entry-content">
     <p> setw(int n) 桁数を n にする setfill(char c) 余った場所を c で埋める． oct 8進にする hex 16進にする dec 10進にする fixed 固定小数点表示にする scientific 浮動小数点表示にする </p>
   </div>
-  <footer class="entry-footer">2022-10-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-10-23   yamate11</footer>
   <a class="entry-link" aria-label="post link to よく使う iomanip の modifier" href="https://yamate11.github.io/blog/posts/2022/10-23-ipmanip/"></a>
 </article>
 
@@ -207,7 +207,7 @@
 典型的な実装はこんな感じ．二分探索数当てゲームを想定．
 bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll answer(ll x) { if (judge) answer_judge(x); else answer_i(x); } ll ask_i(ll x) { cout &lt;&lt; &#34;? &#34; &lt;&lt; x &lt;&lt; endl; string s; cin &gt;&gt; s; if (s == &#34;SMALL&#34;) return -1; else if (s == &#34;LARGE&#34;) return 1; else if (s == &#34;EQUAL&#34;) return 0; else assert(0); } void answer_i(ll x) { cout &lt;&lt; &#34;!...</p>
   </div>
-  <footer class="entry-footer">2022-08-07&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-08-07   yamate11</footer>
   <a class="entry-link" aria-label="post link to インタラクティブな問題に対するソーススケルトン" href="https://yamate11.github.io/blog/posts/2022/08-07-interactive-skelton/"></a>
 </article>
 
@@ -221,7 +221,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
 動機 燃やす埋める問題については，一度エントリを書いた のですが，そこにはともかく理解したことを全部書いたので，コンテスト中に参照しても把握するのがたいへん，という状況になってしまっています．そこで，コンテスト中に思い出したい最小限のことだけまとめることにしました．
 考え方 問題文中に「$p$ のとき$b$を受け取る」という記載があったら，「先に $b$ を受け取る．$\neg p$ の時 $b$ を支払う」と読み替えて，すべて支払いをすると考える． グラフ全体の source ノードのラベルは True，sink ノードのラベルは False． ノード $p$ からノード $q$ への矢印に，重み $a$ がついているのは，「$p$が成り立つのに$q$が成り立たない場合，コスト $a$ を支払う」と読む． したがって，この図では，以下が表現されている $p_6$ が成り立って，$p_7$ が成り立たなかったら，$a_2$ 支払う． $p_1$ が成り立たなかったら，$a_5$ 支払う． $p_7$ が成り立ったら，$a_3$ 支払う． $p_8$ は成り立つ． $p_9$ は成り立たない． 最小カットが，コスト最小の真偽割当．図の赤線だと，$p_1, \ldots, p_6, p_8$ を真，$p_7, p_9$ を偽にする割当に相当し，この場合のコストは$a_2 &#43; a_6$． 連言や選言のノードは，矢印を出せるか入れられるかが決まっている．下図を参照．不可の理由は，たとえば連言なら，$p$, $q$を真に，$p\land q$ を偽にできてしまうから．(矢印の根本を真にできてしまうと不当な利益がある．矢印の根本を偽にできても嬉しくない) したがって，「$p \land q$ なら，支払を行う」は，表現できない． しかし，$\neg q$ の方を表すノード $r$ を用意すれば， 「$p$ が成り立って $r$ が成り立たなければ，支払を行う」の形で表現できる． </p>
   </div>
-  <footer class="entry-footer">2022-07-10&amp;nbsp;·&amp;nbsp;2021-05-22 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-07-10   (初版 2021-05-22)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 燃やす埋める問題" href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/"></a>
 </article>
 
@@ -233,7 +233,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>Mo’s algorithm のコンテスト用メモです</p>
   </div>
-  <footer class="entry-footer">2022-05-19&amp;nbsp;·&amp;nbsp;2022-03-06 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-05-19   (初版 2022-03-06)   yamate11</footer>
   <a class="entry-link" aria-label="post link to Mo&#39;s algorithm メモ" href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/"></a>
 </article>
 
@@ -245,7 +245,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>高速ゼータ変換について，自分用にまとめた記事です．</p>
   </div>
-  <footer class="entry-footer">2022-03-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-03-22   yamate11</footer>
   <a class="entry-link" aria-label="post link to ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/"></a>
 </article>
 
@@ -257,7 +257,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>最大流と最小カットについてのコンテスト用のまとめです</p>
   </div>
-  <footer class="entry-footer">2022-02-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-02-20   yamate11</footer>
   <a class="entry-link" aria-label="post link to 最大流・最小カット" href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/"></a>
 </article>
 
@@ -269,7 +269,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>素因数分解に要する時間を，事前計算と個別の計算に分けて計測しました</p>
   </div>
-  <footer class="entry-footer">2022-02-06&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2022-02-06   yamate11</footer>
   <a class="entry-link" aria-label="post link to 素因数分解に要する時間" href="https://yamate11.github.io/blog/posts/2022/02-06-prime-factor-perf/"></a>
 </article>
 
@@ -281,7 +281,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>Z を，XORを加算とする，体 F2 = {0,1} 上のベクトル空間と見たときに，x_1, .., x_n ∈ Z が張る部分空間の基底の求め方</p>
   </div>
-  <footer class="entry-footer">2021-10-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-10-22   yamate11</footer>
   <a class="entry-link" aria-label="post link to XORに関する基底" href="https://yamate11.github.io/blog/posts/2021/10-22-basis-using-min/"></a>
 </article>
 
@@ -293,7 +293,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．</p>
   </div>
-  <footer class="entry-footer">2021-10-10&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-10-10   yamate11</footer>
   <a class="entry-link" aria-label="post link to 木の直径" href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/"></a>
 </article>
 
@@ -305,7 +305,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</p>
   </div>
-  <footer class="entry-footer">2021-10-01&amp;nbsp;·&amp;nbsp;2021-07-06 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-10-01   (初版 2021-07-06)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
 
@@ -317,7 +317,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>自分のコーディングスタイルについてです</p>
   </div>
-  <footer class="entry-footer">2021-09-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-09-23   yamate11</footer>
   <a class="entry-link" aria-label="post link to コーディングスタイル" href="https://yamate11.github.io/blog/posts/2021/09-23-coding-style/"></a>
 </article>
 
@@ -329,7 +329,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>C&#43;&#43;言語や，C&#43;&#43; Standard Template Library の書き方で，忘れやすいものをメモしておくページです．</p>
   </div>
-  <footer class="entry-footer">2021-09-20&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-09-20   yamate11</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;言語・STLメモ" href="https://yamate11.github.io/blog/posts/2021/09-20-cpp-syntax-misc/"></a>
 </article>
 
@@ -341,7 +341,7 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   <div class="entry-content">
     <p>「牛ゲー」なる手法のまとめです</p>
   </div>
-  <footer class="entry-footer">2021-08-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-30   yamate11</footer>
   <a class="entry-link" aria-label="post link to 「牛ゲー」" href="https://yamate11.github.io/blog/posts/2021/08-30-ushi-game/"></a>
 </article>
 <footer class="page-footer">

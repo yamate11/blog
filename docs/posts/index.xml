@@ -6,8 +6,15 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Apr 2025 20:23:54 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K番目...</title>
+      <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
+      <description>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</description>
+    </item>
     <item>
       <title>ARC196 B - Torus Loop</title>
       <link>https://yamate11.github.io/blog/posts/2025/04-24-ret-arc196-b/</link>
@@ -367,13 +374,6 @@ template&amp;lt;typename T&amp;gt; T power(T a, ll b) { T twoPow = a; T rv = 1; 
       <pubDate>Sat, 03 Jun 2023 16:16:36 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/</guid>
       <description>nまでの約数の個数の表と，求めるためのコード</description>
-    </item>
-    <item>
-      <title>K番目...</title>
-      <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
-      <pubDate>Thu, 01 Jun 2023 09:47:15 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
-      <description>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</description>
     </item>
     <item>
       <title>ネストした vector の順序と性能</title>

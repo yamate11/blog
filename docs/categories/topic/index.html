@@ -160,13 +160,25 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">K番目...
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</p>
+  </div>
+  <footer class="entry-footer">2025-04-26   (初版 2023-06-01)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to K番目..." href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">畳み込み・ゼータ変換・メビウス変換
     </h2>
   </header>
   <div class="entry-content">
     <p>畳み込みやゼータ変換やメビウス変換に関するメモ</p>
   </div>
-  <footer class="entry-footer">2025-03-10&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2025-03-10   yamate11</footer>
   <a class="entry-link" aria-label="post link to 畳み込み・ゼータ変換・メビウス変換" href="https://yamate11.github.io/blog/posts/2025/03-10-convolution/"></a>
 </article>
 
@@ -178,7 +190,7 @@
   <div class="entry-content">
     <p>WolframAlpha への入力方法のメモです</p>
   </div>
-  <footer class="entry-footer">2025-02-25&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2025-02-25   yamate11</footer>
   <a class="entry-link" aria-label="post link to WolframAlpha への入力" href="https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/"></a>
 </article>
 
@@ -198,7 +210,7 @@ if (mp.find(s) == mp.end()) mp[s] = t; 次のようにすれば 1回ですむ．
 mp.emplace(s, t); もともと s が有ったか無かったのかも知りたい場合や，s へのイタレータも欲しい場合には，次のようにする:
 auto [it, b] = mp.emplace(s, t); b には，挿入が行われたかどうかが設定されるので，b が false なら，もともとキー s が存在していたことがわかる．it は s へのイタレータ．...</p>
   </div>
-  <footer class="entry-footer">2025-02-14&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2025-02-14   yamate11</footer>
   <a class="entry-link" aria-label="post link to std::mapへの挿入と更新" href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/"></a>
 </article>
 
@@ -210,7 +222,7 @@ auto [it, b] = mp.emplace(s, t); b には，挿入が行われたかどうかが
   <div class="entry-content">
     <p>set, multiset, priority_queue などの比較関数の指定方法</p>
   </div>
-  <footer class="entry-footer">2024-11-04&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-11-04   yamate11</footer>
   <a class="entry-link" aria-label="post link to 比較関数" href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/"></a>
 </article>
 
@@ -231,7 +243,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 誤読．
 正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ...</p>
   </div>
-  <footer class="entry-footer">2024-09-26&amp;nbsp;·&amp;nbsp;2023-07-05T09:03:15&#43;09:00 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-09-26   (初版 2023-07-05)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 誤りの記録" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/"></a>
 </article>
 
@@ -243,7 +255,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   <div class="entry-content">
     <p>階段関数を表現するライブラリ intervalSet の説明です．</p>
   </div>
-  <footer class="entry-footer">2024-09-15&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-09-15   yamate11</footer>
   <a class="entry-link" aria-label="post link to intervalSet ライブラリ" href="https://yamate11.github.io/blog/posts/2024/09-15-intervalset/"></a>
 </article>
 
@@ -259,7 +271,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
 使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = ....</p>
   </div>
-  <footer class="entry-footer">2024-09-08&amp;nbsp;·&amp;nbsp;2022-12-10 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-09-08   (初版 2022-12-10)   yamate11</footer>
   <a class="entry-link" aria-label="post link to ダブリングライブラリ" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/"></a>
 </article>
 
@@ -271,7 +283,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   <div class="entry-content">
     <p>復元方法も含めた最長増加部分列に関するまとめ</p>
   </div>
-  <footer class="entry-footer">2024-09-01&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-09-01   yamate11</footer>
   <a class="entry-link" aria-label="post link to LIS - 最長増加部分列" href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/"></a>
 </article>
 
@@ -283,7 +295,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   <div class="entry-content">
     <p>集合のハッシュに関する記事です</p>
   </div>
-  <footer class="entry-footer">2024-08-26&amp;nbsp;·&amp;nbsp;2022-02-13T11:32:14&#43;09:00 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-08-26   (初版 2022-02-13)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 集合・多重集合のハッシュ" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"></a>
 </article>
 
@@ -295,7 +307,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   <div class="entry-content">
     <p>平方分割ライブラリを書きました</p>
   </div>
-  <footer class="entry-footer">2024-08-06&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-08-06   yamate11</footer>
   <a class="entry-link" aria-label="post link to 平方分割ライブラリ" href="https://yamate11.github.io/blog/posts/2024/08-06-sqrt-decomp/"></a>
 </article>
 
@@ -307,7 +319,7 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   <div class="entry-content">
     <p>木DP と マージテクを使って解くときのコードスニペット</p>
   </div>
-  <footer class="entry-footer">2024-06-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-06-23   yamate11</footer>
   <a class="entry-link" aria-label="post link to 木DP &#43; マージテク" href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"></a>
 </article>
 
@@ -324,7 +336,7 @@ $$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
 $$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n &#43; 1}{r &#43; 1} $$
 Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 2}{r} &#43; \binom{n - 2}{r &#43; 1} = \dots$...</p>
   </div>
-  <footer class="entry-footer">2024-06-21&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-06-21   yamate11</footer>
   <a class="entry-link" aria-label="post link to 二項係数に関する公式" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/"></a>
 </article>
 
@@ -337,7 +349,7 @@ Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 
     <p>解法に詰まったとき，以下の方法が適用できないか，考えてみる．
 二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) </p>
   </div>
-  <footer class="entry-footer">2024-06-04&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-06-04   yamate11</footer>
   <a class="entry-link" aria-label="post link to 忘れやすい事項" href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/"></a>
 </article>
 
@@ -354,24 +366,8 @@ UnionFind&lt;ll&gt; uf1(N); UnionFind&lt;ftwo&gt; uf2(N); 必要があれば，�
 UnionFind&lt;ll&gt; uf3(N, 0LL, plus&lt;ll&gt;(), negate&lt;ll&gt;()); ポテンシャル付きの時には，merge のときの第3引数に，ポテンシャルを渡さなければならない (省略不可)
 ld = uf....</p>
   </div>
-  <footer class="entry-footer">2024-04-18&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2024-04-18   yamate11</footer>
   <a class="entry-link" aria-label="post link to ポテンシャル付きUnionFind" href="https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">行列ライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>自分用の 行列ライブラリ のメモです．
-依存関係 AO.cc (Algebra Operations) に依存する．
-型 要素の型を T として，Matrix&lt;T&gt; が，行列の型になる． (実装上，これは，Mat&lt;AO_def&lt;T&gt;&gt; として定義されているが，使うときは気にしなくて良い)
-以下，要素の型を T とし，MyMat = Matrix&lt;T&gt; と定義されているものとする． mat は MyMat 型とする．
-構築子 MyMat(int dimI_, int dimJ_) … dimI_ 行 dimJ_ 列 の零行列 MyMat(int dimI_, int dimJ_, T t) … dimI_ 行 dimJ_ 列 の，要素の値がすべて t である行列 MyMat(int dimI_, int dimJ_, const vector&lt;T&gt;&amp; vec) … dimI_ 行，dimJ_ 列で，内部表現が vec である行列． 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector....</p>
-  </div>
-  <footer class="entry-footer">2024-03-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
-  <a class="entry-link" aria-label="post link to 行列ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-30-matrix/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

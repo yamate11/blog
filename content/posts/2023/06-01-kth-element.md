@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "K番目..."
-date: "2023-06-01T09:47:15+09:00"
-# date_init: "2023-06-01"
+date: "2025-04-26T00:00:00+09:00"
+date_init: "2023-06-01"
 tags: []
 categories: ["topic"]
 # categories: ["solution"]
@@ -12,7 +12,8 @@ summary: "K番目の要素の二分探索による求め方と，ベクトルの
 ## K 番目の要素 (non explicit)
 
 explicit ではない集合 $X$ の，小さい方から $K$ 番目の要素を，二分探索で求める．
-ただし，$1 \leq K \leq |X|$ とする．
+ただし，先頭を「1番目」の要素とする．
+$\text{binsearch}(P, a, b)$ が，「区間 $[a, x]$ または $[x, a]$ で $P$ が成り立ち，区間 $[x + 1, b]$ または $[b, x - 1]$ で $P$ が成り立たないような $x$ を返すものとする．
 
 $K$ 番目の要素は，
 「$X_i \leq t$ となる $i$ が $K$ 個以上となる最小の $t$」であるから，
@@ -28,7 +29,6 @@ auto check = [&](ll t) -> bool {
 ll ans = binsearch_i<ll>(check, `max of X', `min of X' - 1);
 ```
 
-言い換えると，
 「$X_i < t$ となる $i$ が $K$ 個未満となる最大の $t$」でもあるから，
 $\text{binsearch}(\lambda t.\\; | \\{i : X_i < t \\} | < K,
 \min(X), \max(X) + 1)$ 
@@ -40,6 +40,12 @@ auto check = [&](ll t) -> bool {
 };
 ll ans = binsearch_i<ll>(check, `min of X', `max of X' + 1);
 ```
+
+<img src="fig1.jpg" width="450px">
+
+0-indexed の場合 ($K$ 番目，というよりは，添字が $K$ である要素，という感じか) の絵は次のようになる．
+
+<img src="fig2.jpg" width="450px">
 
 ## ベクトル v の t 付近の要素
 

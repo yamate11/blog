@@ -181,7 +181,7 @@
   <div class="entry-content">
     <p>公式解説そのままですけれど，予備知識を一応書きました．</p>
   </div>
-  <footer class="entry-footer">2021-08-23&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-23   yamate11</footer>
   <a class="entry-link" aria-label="post link to Cabbage Master - Atcoder Beginner Contest 215 H" href="https://yamate11.github.io/blog/posts/2021/08-23-cabbage-master/"></a>
 </article>
 
@@ -193,7 +193,7 @@
   <div class="entry-content">
     <p>高速アダマール変換によって，xor畳み込みをする方法についての記事 (自分用のメモ) です．</p>
   </div>
-  <footer class="entry-footer">2021-08-23&amp;nbsp;·&amp;nbsp;2021-08-12 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-23   (初版 2021-08-12)   yamate11</footer>
   <a class="entry-link" aria-label="post link to xor畳み込み" href="https://yamate11.github.io/blog/posts/2021/08-10-xor-conv/"></a>
 </article>
 
@@ -205,7 +205,7 @@
   <div class="entry-content">
     <p>C&#43;&#43; での型の変換などのいろいろな変換方法です．</p>
   </div>
-  <footer class="entry-footer">2021-08-20&amp;nbsp;·&amp;nbsp;2021-02-07 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-20   (初版 2021-02-07)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 文字列，数値変換" href="https://yamate11.github.io/blog/posts/2021/02-07-int-string-trans/"></a>
 </article>
 
@@ -221,7 +221,7 @@
 全パターンを列挙する． 各パターンについて， LISの長さを求める． そのパターンに属する数列の数を数える． グループがいくつあるかは， Ordered Bell number として知られているということである．N = 6 の場合には，4683個． 丁寧に列挙することもできるであろうが，$6^6 = 46656$ であるから，0 から N-1 までの 数の N 個の並びから，不適なものを弾いても十分速い． 各グループに属する数列では，LIS の長さは同じであり，N &lt;= 6 だからこれを求めるのは容易である． 各グループに属する数列の数を求めるのが主要なタスクとなる．
 $\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして $p_0, p_1, ....</p>
   </div>
-  <footer class="entry-footer">2021-08-19&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-19   yamate11</footer>
   <a class="entry-link" aria-label="post link to Random LIS - Atcoder Regular Contest 104 E" href="https://yamate11.github.io/blog/posts/2021/08-19-random-lis/"></a>
 </article>
 
@@ -237,7 +237,7 @@ $\{0, 1\} \cup \{A_i &#43; 1\mid i = 1, \ldots, N\}$ を昇順にソートして
 vector&lt;vector&lt;*&gt; &gt; 部分に分けて測定してみたところ，どうも，グラフの情報を設定しているところも 遅い，ということが分かりました． こんな感じのコードなのですが:
 int N, M; cin &gt;&gt; N &gt;&gt; M; // N は頂点数, M は辺の数 vector&lt;pair&lt;int, int&gt;&gt; edges; for (int i = 0; i &lt; M; i&#43;&#43;) { int u, v; cin &gt;&gt; u &gt;&gt; v; // 0-indexed で入力されると仮定 edeges.emplace_back(u, v); } vector&lt;vector&lt;int&gt;&gt; fwd(N); // fwd[i] は，i から直接行ける頂点たち． // (1) for (auto [u, v] : edges) { fwd[u]....</p>
   </div>
-  <footer class="entry-footer">2021-08-16&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-16   yamate11</footer>
   <a class="entry-link" aria-label="post link to vector" href="https://yamate11.github.io/blog/posts/2021/08-15-perf-vect-vect/"></a>
 </article>
 
@@ -254,7 +254,7 @@ dp[i][j] := i番目のイベントに参加する直前までに参加したイ�
 町 $P_i$ で行われるイベントで，時刻 $S_i &#43; 1$ 以降最も早いものを i1 町 $3 - P_i$ で行われるイベントで， 時刻 $S_i &#43; 1 &#43; D &#43; K(j &#43; 1)$ 以降最も早いものを i2 として，
 dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになります．でも，これは $\Omega(N^2)$ なので，間に合いません．...</p>
   </div>
-  <footer class="entry-footer">2021-08-16&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-16   yamate11</footer>
   <a class="entry-link" aria-label="post link to イベント巡り (Event Hopping) - JOI 2020/2021 二次予選" href="https://yamate11.github.io/blog/posts/2021/08-16-event-hopping/"></a>
 </article>
 
@@ -266,7 +266,7 @@ dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになり�
   <div class="entry-content">
     <p>解けませんでした．オンライン・オフライン変換を調べて書きました．</p>
   </div>
-  <footer class="entry-footer">2021-08-11&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-11   yamate11</footer>
   <a class="entry-link" aria-label="post link to Stroll - Atcoder Beginner Contest 213 H" href="https://yamate11.github.io/blog/posts/2021/08-11-stroll/"></a>
 </article>
 
@@ -281,7 +281,7 @@ dp[i1][j&#43;1] := True dp[i2][j&#43;1] := True と設定することになり�
 ダイクストラ 前提: ノード間の距離δ(x,y)が全部非負 距離の候補を優先度付きキューに入れていく． あるノードがキューから初めて取り出されたときにそのノードへの距離が確定する． 使用するデータと初期化 priority_queue のメソッドは，push(), emplace(), pop(), top() など． using P = pair&lt;ll, Node&gt;; // 距離とノード priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pque; // 優先度付きキュー // 値 (d, x) は，ノードxへ，長さdのパスがあることを示す． pque.emplace(0, initial_node); // 始点をキューに vector&lt;ll&gt; dist(N, LLONG_MAX); // 距離．始点以外は∞ // Node型 によっては，map&lt;Node, ll&gt; dist; など． dist[initial_node] = 0; // 始点の距離は0 ループ
 pque から取り出した (d, x) について， dist[x] &lt; d なら，もっと良い d があって， それが既に取り出されている，ということなので，単に捨てる． そうでなければ (dist[x] == d ならば) この d が x への最短距離であることが確定した． x の 各隣接ノード y について，newd = x &#43; δ(x, y) が y への距離の候補なので以下を行う． dist[y] &lt;= newd なら，単に捨てる． そうでなければ，次を行う． dist[y] を newd に更新する． (newd, y) を pque に入れる． ゴール...</p>
   </div>
-  <footer class="entry-footer">2021-08-09&amp;nbsp;·&amp;nbsp;2021-07-03 (初版)&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-08-09   (初版 2021-07-03)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 距離: BFSとダイクストラ" href="https://yamate11.github.io/blog/posts/2021/07-03-bfs-dijkstra/"></a>
 </article>
 
@@ -296,7 +296,7 @@ pque から取り出した (d, x) について， dist[x] &lt; d なら，もっ
 すぬけ君が，蟻から遠い飴を取っても，蟻の行動には直ちには影響を与えません． そういう状況ではすぬけ君は「スキップ」することにして，後から蟻がその飴に近づいてきたとき (左右いずれかで蟻の最も近い飴になったとき) に取ることにしても，ゲームの意味が変わりません． つまり，次のようにゲームを言い変えることができます． (両端などの扱いはサボっています)
 初期化: // 蟻の初期位置を 2n &#43; 1 とする． l := n // 蟻に最も近い左の飴の位置が 2l r := n &#43; 1 // 蟻に最も近い右の飴の位置が 2r k := 0 // すぬけ君の「スキップ」回数 ループ: k &#43;= 1 while k &gt; 0: match すぬけ君の選択(): case なし: break case 左: すぬけ君が 2l の飴を取る; l -= 1 case 右: すぬけ君が 2r の飴を取る; r &#43;= 1 k -= 1 蟻が，2l, 2r の飴のおいしい方を取る 取った方に応じて l -= 1 または r &#43;= 1 そこで， f(l,r,k) を，「上記 while の先頭位置で，l,r,k がこの値である時に，すぬけ君がこのあと取る得点の最大値」として 定義します． 次の漸化式が書けます．...</p>
   </div>
-  <footer class="entry-footer">2021-07-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-07-22   yamate11</footer>
   <a class="entry-link" aria-label="post link to Greedy Ant - キーエンスプログラミングコンテスト2021 E" href="https://yamate11.github.io/blog/posts/2021/07-22-greedy-ant/"></a>
 </article>
 
@@ -310,7 +310,7 @@ pque から取り出した (d, x) について， dist[x] &lt; d なら，もっ
 リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
 x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os....</p>
   </div>
-  <footer class="entry-footer">2021-06-05&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-06-05   yamate11</footer>
   <a class="entry-link" aria-label="post link to policy-based data structure の tree" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/"></a>
 </article>
 
@@ -324,7 +324,7 @@ x を指定して，x より小さい要素がいくつあるか数える n を�
 問題設定 整数 $ d_0 , \ldots, d_{ k - 1 }$ と $a_0, \ldots, a_{k - 1}$ が与えられている． 漸化式 $ a_{n &#43; k} = d_{0} a_{n} &#43; \cdots &#43; d_{ k - 1 } a_{n &#43; k - 1}$ で定義される数列の $a_n$ を $O( k^2 \log n )$ で求める．
 行列 $$ A = \begin{bmatrix} d_{ k - 1 } &amp;\cdots &amp; \cdots &amp; d_{ 0 } \\ 1 &amp; &amp; \Large{0} &amp; 0 \\ &amp; \ddots &amp; &amp; 0\\ \Large{0} &amp; &amp; 1 &amp; 0 \\ \end{bmatrix} $$...</p>
   </div>
-  <footer class="entry-footer">2021-04-30&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-04-30   yamate11</footer>
   <a class="entry-link" aria-label="post link to きたまさ法" href="https://yamate11.github.io/blog/posts/2021/04-30-kitamasa/"></a>
 </article>
 
@@ -338,7 +338,7 @@ x を指定して，x より小さい要素がいくつあるか数える n を�
 観察 p = 3 に関していくつか書いてみると次のようになっている．
 0 1 1 1 1 2 1 2 1 10 1 0 0 1 11 1 1 0 1 1 12 1 2 1 1 2 1 20 1 0 0 2 0 0 1 21 1 1 0 2 2 0 1 1 22 1 2 1 2 1 2 1 2 1 100 1 0 0 0 0 0 0 0 0 1 101 1 1 0 0 0 0 0 0 0 1 1 102 1 2 1 0 0 0 0 0 0 1 2 1 110 1 0 0 1 0 0 0 0 0 1 0 0 1 111 1 1 0 1 1 0 0 0 0 1 1 0 1 1 112 1 2 1 1 2 1 0 0 0 1 2 1 1 2 1 120 1 0 0 2 0 0 1 0 0 1 0 0 2 0 0 1 こんな感じの構造になっている:...</p>
   </div>
-  <footer class="entry-footer">2021-04-27&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-04-27   yamate11</footer>
   <a class="entry-link" aria-label="post link to binom(n, r) を小さい素数pに対して mod p で求める" href="https://yamate11.github.io/blog/posts/2021/04-27-binom-mod/"></a>
 </article>
 
@@ -353,7 +353,7 @@ x を指定して，x より小さい要素がいくつあるか数える n を�
 詳細 \( k \) 次多項式 $f(x)$ について，$x = 0, \ldots, k$ の値が，$f(0) = v_0, \ldots, f(k) = v_k$ と分かっているときに， $f(x)$ (の各係数) を決める方法． 連立方程式を解く方法だと，逆行列を計算する必要があるから，\( \Omega( k^3 ) \) になってしまうが， Lagrange補間だと，$O(k^2)$ で済む．
 $I = \{0, \ldots, k\}$, $I_i = I \setminus \{ i \}$ とする．$i = 0, \ldots, k$ について，$k$ 次の多項式 $g_i(x)$ を， 次で定義する．...</p>
   </div>
-  <footer class="entry-footer">2021-04-22&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-04-22   yamate11</footer>
   <a class="entry-link" aria-label="post link to Lagrange補間" href="https://yamate11.github.io/blog/posts/2021/04-22-lagrange/"></a>
 </article>
 
@@ -369,7 +369,7 @@ $a_{ii} = $ 頂点$i$の出次数 $a_{ij} = - ( i \text{と} j \text{を結ぶ�
 例 上のグラフでは，
 $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; -1 \\ 0 &amp; -1 &amp; 2 &amp; -1 \\ -2 &amp; -1 &amp; -1 &amp; 4 \end{bmatrix} $$...</p>
   </div>
-  <footer class="entry-footer">2021-04-18&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-04-18   yamate11</footer>
   <a class="entry-link" aria-label="post link to 行列木定理" href="https://yamate11.github.io/blog/posts/2021/04-18-kirchhoff/"></a>
 </article>
 
@@ -384,7 +384,7 @@ $$ A = \begin{bmatrix} 3 &amp; -1 &amp; 0 &amp; -2 \\ -1 &amp; 3 &amp; -1 &amp; 
 問題概要 整数列 $a = a_1, \ldots, a_k $ に対して，$m(a)$ を，$a$ に現れる各数 $x$ に対して，$x$ が最後に現れる位置と最初に現れる位置との差の総和として定義する．例えば，$m(1, 2, 3, 1, 3, 2, 1) = (7-1) &#43; (6-2) &#43; (5- 3) = 12$．最初に長さ n の整数列 a が与えられる．各要素は1以上n以下．次の2種類のクエリ (全部で$m$個) を処理せよ．$ 1 \leq n, m \leq 100,000$．
 p, x が与えられて，aのp番目の要素をxに書き換える． l, r が与えられて，$ m(a[l:r]) $ を求める． 解法 ということで，実装手段を除いては公式解説をなぞっています．...</p>
   </div>
-  <footer class="entry-footer">2021-01-18&amp;nbsp;·&amp;nbsp;yamate11</footer>
+  <footer class="entry-footer">2021-01-18   yamate11</footer>
   <a class="entry-link" aria-label="post link to CodeForces Round #431 (Div.2) E - Goodbye Souvenir" href="https://yamate11.github.io/blog/posts/2021/01-18-goodbye-souvenir/"></a>
 </article>
 <footer class="page-footer">
