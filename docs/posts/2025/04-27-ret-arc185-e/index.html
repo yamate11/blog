@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>ARC185E - Adjacent GCD | yamate11のブログ</title>
-<meta name="keywords" content="GCD, ゼータ変換, オイラーのφ関数">
+<meta name="keywords" content="GCD, ゼータ変換, オイラーのφ関数, D畳み込み&#34;">
 <meta name="description" content="問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる． $m = 1, 2, \ldots, N$ に対して，次の問題を解け
 列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i &#43; 1})$ である． 制約 $1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$
 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \ldots, R_N$ として，
@@ -130,10 +130,10 @@ $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$"/>
   "name": "ARC185E - Adjacent GCD",
   "description": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$",
   "keywords": [
-    "GCD", "ゼータ変換", "オイラーのφ関数"
+    "GCD", "ゼータ変換", "オイラーのφ関数", "D畳み込み\""
   ],
-  "articleBody": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$\nであることがわかる． だから，$\\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j)$ が高速に求められれば良い． 以下，これを記述する．\n解1 (公式解説)．click to open 整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \\leq 5\\times10^5$ のとき，$|D(x)| \\leq 128$ である．\nオイラーの $\\varphi$関数 ($\\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う． $n = \\sum_{d \\in D(n)} \\varphi(d)$ が成り立つのであった．\n\\begin{align*} \\sum_j 2^j \\text{gcd}(A_i, A_j) \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(\\text{gcd}(A_i, A_j)) \\} \\\\ \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(A_i), d \\in D(A_j) \\} \\\\ \u0026 =\\sum_{d \\in D(A_i)} \\varphi(d) \\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0) \\end{align*}\n$\\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0)$ の部分は，各 $d$ に対する値を 全部持っていて，$i$ が 1増えるたびに更新すれば良い．更新箇所は $|D(A_i)|$ 箇所である．\n解2 (noshi91 のユーザ解説)．click to open GCD畳み込みを用いる． $h(n) = \\sum \\{ f(i)g(j) \\mid \\text{gcd}(i, j) = n \\}$， $F(n) = \\sum_{n|i} f(i)$， $G(n) = \\sum_{n|i} g(i)$， $H(n) = \\sum_{n|i} h(i)$ であるとき，$H(n) = F(n)G(n)$ が成り立つのであった．\ndef\nおそらく，解1と解2は同じ原理に依っているのだろうと思うが，まだ整理できていない．\n",
-  "wordCount" : "221",
+  "articleBody": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$\nであることがわかる． だから，$\\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j)$ が高速に求められれば良い． 以下，これを記述する．\n解1 (公式解説)．click to open 整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \\leq 5\\times10^5$ のとき，$|D(x)| \\leq 128$ である．\nオイラーの $\\varphi$関数 ($\\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う． $n = \\sum_{d \\in D(n)} \\varphi(d)$ が成り立つのであった．\n\\begin{align*} \\sum_j 2^j \\text{gcd}(A_i, A_j) \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(\\text{gcd}(A_i, A_j)) \\} \\\\ \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(A_i), d \\in D(A_j) \\} \\\\ \u0026 =\\sum_{d \\in D(A_i)} \\varphi(d) \\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0) \\end{align*}\n$\\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0)$ の部分は，各 $d$ に対する値を 全部持っていて，$i$ が 1増えるたびに更新すれば良い．更新箇所は $|D(A_i)|$ 箇所である．\n解2 (noshi91 のユーザ解説)．click to open GCD畳み込みが，約数ゼータ変換を行うと各点積になることを用いる．すなわち， $h(n) = \\sum \\{ f(p)g(q) \\mid \\text{gcd}(p, q) = n \\}$， $F(n) = \\sum_{n|p} f(p)$， $G(n) = \\sum_{n|p} g(p)$， $H(n) = \\sum_{n|p} h(p)$ であるとき，$H(n) = F(n)G(n)$ が成り立つのであった．\n求めるものは，$\\sum_n \\{ \\sum_j 2^j n \\mid \\textrm{gcd}(A_i, A_j) = n \\}$ と書けるので， 各 $n$ に対して，$\\sum \\{ 2^j \\mid \\textrm{gcd}(A_i, A_j) = n \\}$ が求められれば良いが，\n$f(i) = 1$，$f(p) = 0 (p \\neq i)$ $g(p) = \\sum \\{ 2^j \\mid A_j = p \\}$ とすると，$h(n) = \\sum \\{ 2^j \\mid \\textrm{gcd}(A_i, A_j) = n\\}$ となる．\nこれは，高速ゼータ変換，各点積，高速メビウス変換で計算できる． 素因数ごとに累積和とその反対の計算をする． 参照1 ， 参照2 おそらく，解1と解2は同じ原理に依っているのだろうと思うが，まだ整理できていない．\n",
+  "wordCount" : "278",
   "inLanguage": "en",
   "datePublished": "2025-04-27T13:50:34+09:00",
   "dateModified": "2025-04-27T13:50:34+09:00",
@@ -250,7 +250,7 @@ $m = 1, 2, \ldots, N$ に対して，次の問題を解け</p>
 だから，$\sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j)$ が高速に求められれば良い．
 以下，これを記述する．</p>
 <div>
-<details open>
+<details>
 <summary>解1 (公式解説)．click to open</summary>
 <p>整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \leq 5\times10^5$ のとき，$|D(x)| \leq 128$ である．</p>
 <p>オイラーの $\varphi$関数 ($\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う．
@@ -266,16 +266,28 @@ $n = \sum_{d \in D(n)} \varphi(d)$ が成り立つのであった．</p>
 </details>
 </div>
 <div>
-<details open>
+<details>
 <summary>解2 (noshi91 のユーザ解説)．click to open</summary>
-<p>GCD畳み込みを用いる．
-$h(n) = \sum \{ f(i)g(j) \mid \text{gcd}(i, j) = n \}$，
-$F(n) = \sum_{n|i} f(i)$，
-$G(n) = \sum_{n|i} g(i)$，
-$H(n) = \sum_{n|i} h(i)$
+<p>GCD畳み込みが，約数ゼータ変換を行うと各点積になることを用いる．すなわち，
+$h(n) = \sum \{ f(p)g(q) \mid \text{gcd}(p, q) = n \}$，
+$F(n) = \sum_{n|p} f(p)$，
+$G(n) = \sum_{n|p} g(p)$，
+$H(n) = \sum_{n|p} h(p)$
 であるとき，$H(n) = F(n)G(n)$
 が成り立つのであった．</p>
-<p>def</p>
+<p>求めるものは，$\sum_n \{ \sum_j 2^j n \mid \textrm{gcd}(A_i, A_j) = n \}$ と書けるので，
+各 $n$ に対して，$\sum \{ 2^j \mid \textrm{gcd}(A_i, A_j) = n \}$ が求められれば良いが，</p>
+<ul>
+<li>$f(i) = 1$，$f(p) = 0 (p \neq i)$</li>
+<li>$g(p) = \sum \{ 2^j \mid A_j = p \}$</li>
+</ul>
+<p>とすると，$h(n) = \sum \{ 2^j \mid \textrm{gcd}(A_i, A_j) = n\}$ となる．</p>
+<p>これは，高速ゼータ変換，各点積，高速メビウス変換で計算できる．
+素因数ごとに累積和とその反対の計算をする．
+<a href="https://hackmd.io/@tatyam-prime/H1EhuQAt1x" target="_blank">参照1</a>
+，
+<a href="https://qiita.com/drken/items/3beb679e54266f20ab63#8-%E6%B4%BB%E7%94%A8%E4%BE%8B-5%E6%B7%BB%E5%AD%97-gcd-%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF" target="_blank">参照2</a>
+</p>
 </details>
 </div>
 <p>おそらく，解1と解2は同じ原理に依っているのだろうと思うが，まだ整理できていない．</p>
@@ -288,6 +300,7 @@ $H(n) = \sum_{n|i} h(i)$
       <li><a href="https://yamate11.github.io/blog/tags/gcd/">gcd</a></li>
       <li><a href="https://yamate11.github.io/blog/tags/%E3%82%BC%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B/">ゼータ変換</a></li>
       <li><a href="https://yamate11.github.io/blog/tags/%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%CF%86%E9%96%A2%E6%95%B0/">オイラーのφ関数</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/d%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF/">D畳み込み&#34;</a></li>
     </ul>
 <nav class="paginav">
   <a class="next" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-cf-1021-1-b/">
