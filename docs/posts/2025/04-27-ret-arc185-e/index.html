@@ -7,7 +7,10 @@
 <meta name="robots" content="index, follow">
 <title>ARC185E - Adjacent GCD | yamate11のブログ</title>
 <meta name="keywords" content="GCD, ゼータ変換, オイラーのφ関数">
-<meta name="description" content="問題概要 問題へのリンク 制約 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク 略解．click to open ">
+<meta name="description" content="問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる． $m = 1, 2, \ldots, N$ に対して，次の問題を解け
+列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i &#43; 1})$ である． 制約 $1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$
+解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \ldots, R_N$ として，
+$$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
@@ -82,7 +85,10 @@
 
 
 <meta property="og:title" content="ARC185E - Adjacent GCD" />
-<meta property="og:description" content="問題概要 問題へのリンク 制約 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク 略解．click to open " />
+<meta property="og:description" content="問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる． $m = 1, 2, \ldots, N$ に対して，次の問題を解け
+列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i &#43; 1})$ である． 制約 $1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$
+解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \ldots, R_N$ として，
+$$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-04-27T13:50:34+09:00" />
@@ -90,7 +96,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ARC185E - Adjacent GCD"/>
-<meta name="twitter:description" content="問題概要 問題へのリンク 制約 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク 略解．click to open "/>
+<meta name="twitter:description" content="問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる． $m = 1, 2, \ldots, N$ に対して，次の問題を解け
+列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i &#43; 1})$ である． 制約 $1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$
+解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \ldots, R_N$ として，
+$$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$"/>
 
 
 <script type="application/ld+json">
@@ -119,12 +128,12 @@
   "@type": "BlogPosting",
   "headline": "ARC185E - Adjacent GCD",
   "name": "ARC185E - Adjacent GCD",
-  "description": "問題概要 問題へのリンク 制約 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク 略解．click to open ",
+  "description": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$",
   "keywords": [
     "GCD", "ゼータ変換", "オイラーのφ関数"
   ],
-  "articleBody": "問題概要 問題へのリンク 制約 解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク 略解．click to open ",
-  "wordCount" : "11",
+  "articleBody": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$\nであることがわかる． だから，$\\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j)$ が高速に求められれば良い． 以下，これを記述する．\n解1 (公式解説)．click to open 整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \\leq 5\\times10^5$ のとき，$|D(x)| \\leq 128$ である．\nオイラーの $\\varphi$関数 ($\\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う． $n = \\sum_{d \\in D(n)} \\varphi(d)$ が成り立つのであった．\n\\begin{align*} \\sum_j 2^j \\text{gcd}(A_i, A_j) \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(\\text{gcd}(A_i, A_j)) \\} \\\\ \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(A_i), d \\in D(A_j) \\} \\\\ \u0026 =\\sum_{d \\in D(A_i)} \\varphi(d) \\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0) \\end{align*}\n$\\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0)$ の部分は，各 $d$ に対する値を 全部持っていて，$i$ が 1増えるたびに更新すれば良い．更新箇所は $|D(A_i)|$ 箇所である．\n解2 (noshi91 のユーザ解説)．click to open GCD畳み込みを用いる． $h(n) = \\sum \\{ f(i)g(j) \\mid \\text{gcd}(i, j) = n \\}$， $F(n) = \\sum_{n|i} f(i)$， $G(n) = \\sum_{n|i} g(i)$， $H(n) = \\sum_{n|i} h(i)$ であるとき，$H(n) = F(n)G(n)$ が成り立つのであった．\ndef\nおそらく，解1と解2は同じ原理に依っているのだろうと思うが，まだ整理できていない．\n",
+  "wordCount" : "221",
   "inLanguage": "en",
   "datePublished": "2025-04-27T13:50:34+09:00",
   "dateModified": "2025-04-27T13:50:34+09:00",
@@ -220,7 +229,14 @@
   <div class="post-content"><h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
 <p><a href="https://atcoder.jp/contests/arc185/tasks/arc185_e" target="_blank">問題へのリンク</a>
 </p>
+<p>整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる．
+$m = 1, 2, \ldots, N$ に対して，次の問題を解け</p>
+<ul>
+<li>列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ．
+ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i + 1})$ である．</li>
+</ul>
 <h4 id="制約">制約<a hidden class="anchor" aria-hidden="true" href="#制約">#</a></h4>
+<p>$1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$</p>
 <h2 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h2>
 <ul>
 <li><a href="https://atcoder.jp/contests/arc185/editorial/11129" target="_blank">公式解説へのリンク</a>
@@ -228,9 +244,41 @@
 <li><a href="https://atcoder.jp/contests/arc185/editorial/11160" target="_blank">ユーザ解説 (noshi91) へのリンク</a>
 </li>
 </ul>
+<p>すこし考察すると，解を $R_1, \ldots, R_N$ として，</p>
+<p>$$ R_i = 2R_{i - 1} + \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$</p>
+<p>であることがわかる．
+だから，$\sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j)$ が高速に求められれば良い．
+以下，これを記述する．</p>
+<div>
 <details open>
-<summary>略解．click to open</summary>
+<summary>解1 (公式解説)．click to open</summary>
+<p>整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \leq 5\times10^5$ のとき，$|D(x)| \leq 128$ である．</p>
+<p>オイラーの $\varphi$関数 ($\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う．
+$n = \sum_{d \in D(n)} \varphi(d)$ が成り立つのであった．</p>
+<p>\begin{align*}
+\sum_j 2^j \text{gcd}(A_i, A_j)
+&amp; =\sum_j 2^j \sum \{ \varphi(d) \mid d \in D(\text{gcd}(A_i, A_j)) \} \\
+&amp; =\sum_j 2^j \sum \{ \varphi(d) \mid d \in D(A_i), d \in D(A_j) \} \\
+&amp; =\sum_{d \in D(A_i)} \varphi(d) \sum_j ( \texttt{if } d|A_j \texttt{ then } 2^j \texttt{ else } 0)
+\end{align*}</p>
+<p>$\sum_j ( \texttt{if } d|A_j \texttt{ then } 2^j \texttt{ else } 0)$ の部分は，各 $d$ に対する値を
+全部持っていて，$i$ が 1増えるたびに更新すれば良い．更新箇所は $|D(A_i)|$ 箇所である．</p>
 </details>
+</div>
+<div>
+<details open>
+<summary>解2 (noshi91 のユーザ解説)．click to open</summary>
+<p>GCD畳み込みを用いる．
+$h(n) = \sum \{ f(i)g(j) \mid \text{gcd}(i, j) = n \}$，
+$F(n) = \sum_{n|i} f(i)$，
+$G(n) = \sum_{n|i} g(i)$，
+$H(n) = \sum_{n|i} h(i)$
+であるとき，$H(n) = F(n)G(n)$
+が成り立つのであった．</p>
+<p>def</p>
+</details>
+</div>
+<p>おそらく，解1と解2は同じ原理に依っているのだろうと思うが，まだ整理できていない．</p>
 
 
   </div>
