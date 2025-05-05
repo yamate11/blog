@@ -160,6 +160,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ポテンシャル付きUnionFind
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ポテンシャル付きUnionFindです．
+使用法 UnionFind uf(N); // 普通のUnionFind (ポテンシャル無し) ld = uf.merge(a, b); // マージ．新しいリーダを返す ld = uf.leader(a); // リーダ ng = uf.num_groups(); // 全体のグループ数 ( == リーダの数) sz = uf.group_size(a); // a が属するグループのサイズ グループの要素のリストを得るためには，前処理として，GroupInfo を作る必要がある． これには，$O(N)$ かかる．
+auto gi = uf.group_info(); for (int i : gi.group(a)) cout &lt;&lt; i &lt;&lt; endl; // a が属するグループの要素の列挙 ポテンシャル付きにするためには，テンプレートパラメタで，ポテンシャルの型を渡す． (デフォルトの型は，UFDummyAlg なるものになっている)
+UnionFind&lt;ll&gt; uf1(N); UnionFind&lt;ftwo&gt; uf2(N); 必要があれば，零元，和，単項マイナスを渡すこともできる:
+UnionFind&lt;ll&gt; uf3(N, 0LL, plus&lt;ll&gt;(), negate&lt;ll&gt;()); ポテンシャル付きの時には，merge のときの第3引数に，ポテンシャルを渡さなければならない (省略不可)
+ld = uf....</p>
+  </div>
+  <footer class="entry-footer">2024-04-18   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ポテンシャル付きUnionFind" href="https://yamate11.github.io/blog/posts/2024/04-18-union-find-with-potential/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">行列ライブラリ
     </h2>
   </header>
@@ -344,20 +361,6 @@ template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b
   </div>
   <footer class="entry-footer">2023-04-21   yamate11</footer>
   <a class="entry-link" aria-label="post link to インタラクティブ問題のデバッグ" href="https://yamate11.github.io/blog/posts/2023/04-21-interactive-debug/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">整数・実数の大小比較とfloor, ceil
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．
-公式 $d \in \mathbb{Z}$，$t \in \mathbb{R}$ とする．
-$d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ $t \leq d \iff \lceil t \rceil \leq d$ $t &lt; d \iff \lfloor t \rfloor &lt; d$ 考え方 \begin{eqnarray*} d\leq t &amp;\iff&amp; t \in \{ t \mid d \leq t \} \\ &amp;\iff&amp; t \in \bigcup \{ [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ t \in [e, e&#43;1) \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; \bigvee \{ \lfloor t \rfloor = e \mid e = d, d&#43;1, \ldots \} \\ &amp;\iff&amp; d \leq \lfloor t \rfloor \hspace{20em} \end{eqnarray*}...</p>
-  </div>
-  <footer class="entry-footer">2023-03-23   (初版 2021-02-13)   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 整数・実数の大小比較とfloor, ceil" href="https://yamate11.github.io/blog/posts/2021/02-13-int-inequality-floor/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

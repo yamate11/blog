@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bellman-Ford on yamate11のブログ</title>
+    <link>https://yamate11.github.io/blog/tags/bellman-ford/</link>
+    <description>Recent content in Bellman-Ford on yamate11のブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 05 May 2025 09:58:16 +0900</lastBuildDate>
+    <atom:link href="https://yamate11.github.io/blog/tags/bellman-ford/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bellman-Ford, 牛ゲーライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/</link>
+      <pubDate>Mon, 05 May 2025 09:58:16 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/</guid>
+      <description>この組合せで適切かどうか分からないが，こう作った．
+ライブラリソース </description>
+    </item>
+  </channel>
+</rss>
