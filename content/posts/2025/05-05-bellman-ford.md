@@ -42,8 +42,6 @@ $C_j$ は負でも良い．移項すれば良いので，$x_{A_j} - x_{B_j} \geq
 
 ### Bellman-Ford
 
-辺の重みの総和は，$10^{18}$ 未満であること．
-
 ```cpp
   BellmanFord bf(3);      // 頂点数3
   bf.add_edge(0, 1,  5);  // 頂点0から1への重み5の辺
@@ -53,19 +51,22 @@ $C_j$ は負でも良い．移項すれば良いので，$x_{A_j} - x_{B_j} \geq
   else cout << "Negative loop detected." << endl;
 ```
 
-上のように実行する．
-負閉路があるときには，`run()` は false を返す．
-負閉路がないときには，true が返り，
-距離は，オブジェクトの dist メンバ (型は `vector<ll>`) に格納されている．
-到達できない点には $10^{18}$ 以上の値が設定される．
+* 頂点数をコンストラクタの引数にして，オブジェクトを作る．
+* `add_edge(from, to, weidht)` で，辺を指定する．
+  * `from` から `to` への向きの辺．重さが `weight`．
+* `run(from)` を実行する．
+  * 負閉路があるときには，false が返る．
+  * 負閉路がないときには，true が返り，
+    `from` からの距離が，オブジェクトの dist メンバ (型は `vector<ll>`) に格納されている．
+    到達できない点には $10^{18}$ 以上の値が設定される．
+* 辺の重みの総和は，$10^{18}$ 未満であることが必要．
 
 ### 牛ゲー
 
 ```cpp
   UshiGame ug(3);               // 変数の数は3
-  // 制約．add_constr*(from, to, lim) ... from を基準とした to の値の制約が val
-  ug.add_constrLE(0, 1, 5);     // x[1] - x[0] <= 5
-  ug.add_constrGE(1, 2, -4);    // x[2] - x[1] >= -4
+  ug.add_constrLE(0, 1, 5);     // 制約 x[1] - x[0] <= 5
+  ug.add_constrGE(1, 2, -4);    // 制約 x[2] - x[1] >= -4
   ...
   auto res = ug.getmax(0, 2);  // x[2] - x[0] を最大化する
   if (not res) cout << "infeasible\n";
@@ -73,4 +74,10 @@ $C_j$ は負でも良い．移項すれば良いので，$x_{A_j} - x_{B_j} \geq
   else cout << *res << endl;
 ```
 
-* 変数の数をコンストラクタの引数にして
+* 変数の数をコンストラクタの引数にして，オブジェクトを作る．
+* `add_constrLE(from, to, val)` または `add_constrGE(from, to, val)` で制約を指定する．
+  * 各々 `x[to] - x[from] <= val` と `x[to] - x[from] >= val` を意味する．
+* `x[from] - x[to]` の最大/最小値を求めるために，`getmax(from, to)` / `getmin(from, to)` を実行する．
+  * 返却値の型は `optional<ll>`
+  * 制約を満たせないときには，`nullopt` が返る．
+  * いくらでも大きく/小さくできるときには，$10^{18}$以上 / $-10^{18}$ 以下 の値が返る．
