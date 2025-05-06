@@ -85,8 +85,8 @@
 <meta property="og:description" content="set, multiset, priority_queue などの比較関数の指定方法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-11-04T15:51:56+09:00" />
-<meta property="article:modified_time" content="2024-11-04T15:51:56+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2025-05-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-05-06T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="比較関数"/>
@@ -123,11 +123,11 @@
   "keywords": [
     "comparator"
   ],
-  "articleBody": "set, multiset, priority_queue などでは，比較関数を指定することができる． また，vector の sort でも比較関数を指定することができる． この指定の仕方はなかなかに面倒であるように思う．\n1. set, multiset, priority_queue などの比較関数 1.1. 降順 大きい順に要素を並べたい場合には，greater を指定すれば良い．\n例:\nset\u003cint, greater\u003cint\u003e\u003e xs; 注意:\nコンストラクタにはパラメタを渡す必要は無いが， 渡すのなら丸括弧でなく波括弧で渡す必要がある．\nset\u003cint, greater\u003cint\u003e\u003e xs{greater\u003cint\u003e()}; // OK set\u003cint, greater\u003cint\u003e\u003e xs(greater\u003cint\u003e()); // NG 丸括弧を使うと，「greater を返す関数を引数にとる関数 xs を宣言する」という 意味になるらしい．\n1.2. closure f を比較関数として使う テンプレートパラメタとして decltype(f) を， コンストラクタのパラメタとして f を用いる．\n例:\nauto f = [](int a, int b) -\u003e bool { return a \u003e b; }; set\u003cint, decltype(f)\u003e xs{f}; 注意: コンストラクタに f を渡さないと，コンパイルエラーになる． decltype(f) (closure) のコンストラクタは削除されているということらしい．\n1.3. 普通の関数 f を比較関数として使う テンプレートパラメタとして decltype(\u0026f) を， コンストラクタのパラメタとして f を用いる．\n例:\nbool f(int a, int b) { return a \u003e b; } ... set\u003cint, decltype(\u0026f)\u003e xs(f); // set xs(f); としても同じ 注意: テンプレートパラメタの \u0026 を忘れないこと．実際に渡される f は関数ポインタであるから， 関数のクラス delctype(f) ではなく， 関数ポインタのクラス decltype(\u0026f) になる，ということらしい．\n注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる． これは，decltype(f) から関数ポインタを作成するが，それが f で初期化されないから，ということらしい．\n2. sort() での比較関数と，{lower|upper}_bound() 関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でも closure でも OK. lower_bound() や，upper_bound() の第4引数に，sort で使った比較関数を与えることで， その順序に関する二分探索を実行することができる．\nbool f(int a, int b) { return a \u003e b; } ... vector\u003cint\u003e vec; ... // 以下の3行はどれも同じ結果を与える: auto mycomp0 = greater\u003cint\u003e(); auto mycomp0 = f; auto mycomp0 = [](int a, int b) -\u003e bool { return a \u003e b; }; sort(vec.begin(), vec.end(), mycomp0); auto it = lower_bound(vec.begin(), vec.end(), x, mycomp0); ",
-  "wordCount" : "195",
+  "articleBody": "set, multiset, priority_queue などでは，比較関数を指定することができる． また，vector の sort でも比較関数を指定することができる． この指定の仕方はなかなかに面倒であるように思う．\n1. set, multiset, priority_queue などの比較関数 1.1. 降順 大きい順に要素を並べたい場合には，greater を指定すれば良い．\n例:\nset\u003cint, greater\u003cint\u003e\u003e xs; 注意:\nコンストラクタにはパラメタを渡す必要は無いが， 渡すのなら丸括弧でなく波括弧で渡す必要がある．\nset\u003cint, greater\u003cint\u003e\u003e xs{greater\u003cint\u003e()}; // OK set\u003cint, greater\u003cint\u003e\u003e xs(greater\u003cint\u003e()); // NG 丸括弧を使うと，「greater を返す関数を引数にとる関数 xs を宣言する」という 意味になるらしい．\n1.2. ラムダ式 f を比較関数として使う テンプレートパラメタとして decltype(f) を， コンストラクタのパラメタとして f を用いる．\n例:\nauto f = [](int a, int b) -\u003e bool { return a \u003e b; }; set\u003cint, decltype(f)\u003e xs{f}; 注意: コンストラクタに f を渡さないと，コンパイルエラーになる． decltype(f) (ラムダ式) のコンストラクタは削除されているということらしい．\n1.3. 普通の関数 f を比較関数として使う テンプレートパラメタとして decltype(\u0026f) を， コンストラクタのパラメタとして f を用いる．\n例:\nbool f(int a, int b) { return a \u003e b; } ... set\u003cint, decltype(\u0026f)\u003e xs(f); // set xs(f); としても同じ 注意: テンプレートパラメタの \u0026 を忘れないこと．実際に渡される f は関数ポインタであるから， 関数のクラス delctype(f) ではなく， 関数ポインタのクラス decltype(\u0026f) になる，ということらしい．\n注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる． これは，decltype(f) から関数ポインタを作成するが，それが f で初期化されないから，ということらしい．\n1.3.1 構造体で包む 何らかの事情で，引数のないコンストラクタを使いたい場合，構造体をつかう．\nstruct MyComp { bool operator()(int a, int b) const { return a \u003e b; } }; ... set\u003cint, MyComp\u003e xs; const 指定子を忘れないこと ローカル変数の値に依存した比較はできないように思われる． struct MyComp をローカルにすることはできるが，operator() の中でローカル変数にアクセスするとエラーに なるようだ． 「何らかの事情」の例として，vector",
+  "wordCount" : "233",
   "inLanguage": "en",
-  "datePublished": "2024-11-04T15:51:56+09:00",
-  "dateModified": "2024-11-04T15:51:56+09:00",
+  "datePublished": "2025-05-06T00:00:00Z",
+  "dateModified": "2025-05-06T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -214,7 +214,7 @@
     <h1 class="post-title">
       比較関数
     </h1>
-    <div class="post-meta">2024-11-04   yamate11
+    <div class="post-meta">2025-05-06   (初版 2024-11-04)   yamate11
 </div>
   </header> 
   <div class="post-content"><p>set, multiset, priority_queue などでは，比較関数を指定することができる．
@@ -232,14 +232,14 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">xs</span><span style="color:#111">(</span><span style="color:#111">greater</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#111">());</span>   <span style="color:#75715e">// NG
 </span></span></span></code></pre></div><p>丸括弧を使うと，「greater<int> を返す関数を引数にとる関数 xs を宣言する」という
 意味になるらしい．</p>
-<h3 id="12-closure-f-を比較関数として使う">1.2. closure f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#12-closure-f-を比較関数として使う">#</a></h3>
+<h3 id="12-ラムダ式-f-を比較関数として使う">1.2. ラムダ式 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#12-ラムダ式-f-を比較関数として使う">#</a></h3>
 <p>テンプレートパラメタとして <code>decltype(f)</code> を，
 コンストラクタのパラメタとして <code>f</code> を用いる．</p>
 <p>例:</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">};</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">xs</span><span style="color:#111">{</span><span style="color:#111">f</span><span style="color:#111">};</span>
 </span></span></code></pre></div><p>注意: コンストラクタに <code>f</code> を渡さないと，コンパイルエラーになる．
-<code>decltype(f)</code> (closure) のコンストラクタは削除されているということらしい．</p>
+<code>decltype(f)</code> (ラムダ式) のコンストラクタは削除されているということらしい．</p>
 <h3 id="13-普通の関数-f-を比較関数として使う">1.3. 普通の関数 f を比較関数として使う<a hidden class="anchor" aria-hidden="true" href="#13-普通の関数-f-を比較関数として使う">#</a></h3>
 <p>テンプレートパラメタとして <code>decltype(&amp;f)</code> を，
 コンストラクタのパラメタとして <code>f</code> を用いる．</p>
@@ -253,8 +253,23 @@
 関数ポインタのクラス <code>decltype(&amp;f)</code> になる，ということらしい．</p>
 <p>注意: コンストラクタに f を渡さないと，コンパイルは通るが，実行時エラー (SEGV) になる．
 これは，<code>decltype(f)</code> から関数ポインタを作成するが，それが <code>f</code> で初期化されないから，ということらしい．</p>
+<h4 id="131--構造体で包む">1.3.1  構造体で包む<a hidden class="anchor" aria-hidden="true" href="#131--構造体で包む">#</a></h4>
+<p>何らかの事情で，引数のないコンストラクタを使いたい場合，構造体をつかう．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">struct</span> <span style="color:#75af00">MyComp</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">bool</span> <span style="color:#75af00">operator</span><span style="color:#111">()(</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">set</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#111">MyComp</span><span style="color:#f92672">&gt;</span> <span style="color:#111">xs</span><span style="color:#111">;</span>
+</span></span></code></pre></div><ul>
+<li>const 指定子を忘れないこと</li>
+<li>ローカル変数の値に依存した比較はできないように思われる．
+<code>struct MyComp</code> をローカルにすることはできるが，<code>operator()</code> の中でローカル変数にアクセスするとエラーに
+なるようだ．</li>
+<li>「何らかの事情」の例として，<code>vector&lt;set&lt;int, MyComp&gt;&gt; vsi(n);</code> のようにしたい場合があるかと思ったが，
+<code>vector vsi(n, set&lt;int, decltype(&amp;f)&gt;{f});</code> とすれば不要だった．そういう事情はないかもしれない．</li>
+</ul>
 <h2 id="2-sort-での比較関数とlowerupper_bound">2. sort() での比較関数と，{lower|upper}_bound()<a hidden class="anchor" aria-hidden="true" href="#2-sort-での比較関数とlowerupper_bound">#</a></h2>
-<p>関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でも closure でも OK.
+<p>関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でもラムダ式でも OK.
 lower_bound() や，upper_bound() の第4引数に，sort で使った比較関数を与えることで，
 その順序に関する二分探索を実行することができる．</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">bool</span> <span style="color:#75af00">f</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">}</span>
@@ -278,15 +293,10 @@ lower_bound() や，upper_bound() の第4引数に，sort で使った比較関�
       <li><a href="https://yamate11.github.io/blog/tags/comparator/">comparator</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>std::mapへの挿入と更新</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/">
     <span class="title">Next »</span>
     <br>
-    <span>誤りの記録</span>
+    <span>Bellman-Ford, 牛ゲーライブラリ</span>
   </a>
 </nav>
 
@@ -299,8 +309,9 @@ lower_bound() や，upper_bound() の第4引数に，sort で使った比較関�
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/">Bellman-Ford, 牛ゲーライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/">Bellman-Ford, 牛ゲーライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/05-04-ret-abc404-g/">ABC404 G - Specified Range Sums</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/">ARC185E - Adjacent GCD</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-27-ret-cf-1021-1-b/">Codeforces R.1021 (Div.1) B. Baggage Claim</a>
@@ -308,7 +319,6 @@ lower_bound() や，upper_bound() の第4引数に，sort で使った比較関�
   / <a href="https://yamate11.github.io/blog/posts/2025/04-24-ret-arc196-b/">ARC196 B - Torus Loop</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-21-ret-arc196-a/">ARC196 A - Adjacent Delete</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-20-ret-abc397-f/">ABC397 F - Variety Split Hard</a>
-  / <a href="https://yamate11.github.io/blog/posts/2025/04-20-ret-cf1018-e/">Codeforces Round 1018 Div1&#43;2 E. Wonderful Teddy Bears</a>
 </p>
 
 

@@ -6,8 +6,15 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 05 May 2025 09:58:16 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>比較関数</title>
+      <link>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</link>
+      <pubDate>Tue, 06 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</guid>
+      <description>set, multiset, priority_queue などの比較関数の指定方法</description>
+    </item>
     <item>
       <title>Bellman-Ford, 牛ゲーライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/</link>
@@ -154,13 +161,6 @@ auto [it, b] = mp.insert_or_assign(s, t); b には，挿入が行われたかど
 if (mp.find(s) == mp.end()) mp[s] = t; 次のようにすれば 1回ですむ．
 mp.emplace(s, t); もともと s が有ったか無かったのかも知りたい場合や，s へのイタレータも欲しい場合には，次のようにする:
 auto [it, b] = mp.emplace(s, t); b には，挿入が行われたかどうかが設定されるので，b が false なら，もともとキー s が存在していたことがわかる．it は s へのイタレータ．</description>
-    </item>
-    <item>
-      <title>比較関数</title>
-      <link>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</link>
-      <pubDate>Mon, 04 Nov 2024 15:51:56 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</guid>
-      <description>set, multiset, priority_queue などの比較関数の指定方法</description>
     </item>
     <item>
       <title>誤りの記録</title>

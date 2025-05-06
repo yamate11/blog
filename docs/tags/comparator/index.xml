@@ -6,12 +6,12 @@
     <description>Recent content in comparator on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 04 Nov 2024 15:51:56 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/tags/comparator/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>比較関数</title>
       <link>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</link>
-      <pubDate>Mon, 04 Nov 2024 15:51:56 +0900</pubDate>
+      <pubDate>Tue, 06 May 2025 00:00:00 +0000</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/</guid>
       <description>set, multiset, priority_queue などの比較関数の指定方法</description>
     </item>

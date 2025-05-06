@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "比較関数"
-date: "2024-11-04T15:51:56+09:00"
-# date_init: "2024-11-04"
+date: "2025-05-06"
+date_init: "2024-11-04"
 tags: ["comparator"]
 categories: ["topic"]
 # categories: ["solution"]
@@ -39,7 +39,7 @@ set, multiset, priority_queue などでは，比較関数を指定すること�
 意味になるらしい．
 
 
-### 1.2. closure f を比較関数として使う
+### 1.2. ラムダ式 f を比較関数として使う
 
 テンプレートパラメタとして `decltype(f)` を，
 コンストラクタのパラメタとして `f` を用いる．
@@ -52,7 +52,7 @@ set, multiset, priority_queue などでは，比較関数を指定すること�
 ```
 
 注意: コンストラクタに `f` を渡さないと，コンパイルエラーになる．
-`decltype(f)` (closure) のコンストラクタは削除されているということらしい．
+`decltype(f)` (ラムダ式) のコンストラクタは削除されているということらしい．
 
 
 ### 1.3. 普通の関数 f を比較関数として使う
@@ -80,9 +80,28 @@ bool f(int a, int b) { return a > b; }
 これは，`decltype(f)` から関数ポインタを作成するが，それが `f` で初期化されないから，ということらしい．
 
 
+#### 1.3.1  構造体で包む
+
+何らかの事情で，引数のないコンストラクタを使いたい場合，構造体をつかう．
+
+```cpp
+struct MyComp {
+  bool operator()(int a, int b) const { return a > b; }
+};
+...
+  set<int, MyComp> xs;
+```
+
+* const 指定子を忘れないこと
+* ローカル変数の値に依存した比較はできないように思われる．
+  `struct MyComp` をローカルにすることはできるが，`operator()` の中でローカル変数にアクセスするとエラーに
+  なるようだ．
+* 「何らかの事情」の例として，`vector<set<int, MyComp>> vsi(n);` のようにしたい場合があるかと思ったが，
+  `vector vsi(n, set<int, decltype(&f)>{f});` とすれば不要だった．そういう事情はないかもしれない．
+
 ## 2. sort() での比較関数と，{lower|upper}_bound()
 
-関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でも closure でも OK.
+関数 sort() は，第3引数に比較関数を渡すことができる．普通の関数でもラムダ式でも OK.
 lower_bound() や，upper_bound() の第4引数に，sort で使った比較関数を与えることで，
 その順序に関する二分探索を実行することができる．
 
