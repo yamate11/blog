@@ -39,16 +39,16 @@ set, multiset, priority_queue などでは，比較関数を指定すること�
 意味になるらしい．
 
 
-### 1.2. ラムダ式 f を比較関数として使う
+### 1.2. ラムダ式 lf を比較関数として使う
 
-テンプレートパラメタとして `decltype(f)` を，
-コンストラクタのパラメタとして `f` を用いる．
+テンプレートパラメタとして `decltype(lf)` を，
+コンストラクタのパラメタとして `lf` を用いる．
 
 例:
 
 ```cpp
-  auto f = [](int a, int b) -> bool { return a > b; };
-  set<int, decltype(f)> xs{f};
+  auto lf = [](int a, int b) -> bool { return a > b; };
+  set<int, decltype(lf)> xs{lf};
 ```
 
 注意: コンストラクタに `f` を渡さないと，コンパイルエラーになる．
@@ -98,6 +98,33 @@ struct MyComp {
   なるようだ．
 * 「何らかの事情」の例として，`vector<set<int, MyComp>> vsi(n);` のようにしたい場合があるかと思ったが，
   `vector vsi(n, set<int, decltype(&f)>{f});` とすれば不要だった．そういう事情はないかもしれない．
+
+### 1.4 テンプレートパラメタを指定しない (上記共通)
+
+set のコンストラクタには，第1引数に initializer_list を，第2引数に Compare オブジェクトを指定するものがあるので，
+それを用いれば，テンプレートパラメタを指定しないですむ．
+
+```cpp
+  set xs(initializer_list<int>{}, greater<>{});
+  set xs(initializer_list<int>{}, f);
+  set xs(initializer_list<int>{}, lf);
+  set xs(initializer_list<int>{}, MyComp{});
+```
+
+initializer_list が空でなければ，そこも推論してもらえることもある．
+
+```cpp
+  set xs({0, 1, 2}, greater<>{});
+  set xs({0, 1, 2}, f);
+  set xs({0, 1, 2}, lf);
+  set xs({0, 1, 2}, MyComp{});
+```
+
+1.4 については，tatyamさんに教えていただきました
+([これ](https://x.com/tatyam_prime/status/1919652371182862488) と
+[これ](https://x.com/tatyam_prime/status/1919654295114269128))．
+ありがとうございました．
+
 
 ## 2. sort() での比較関数と，{lower|upper}_bound()
 
