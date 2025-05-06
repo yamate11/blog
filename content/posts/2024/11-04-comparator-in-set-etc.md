@@ -101,6 +101,11 @@ struct MyComp {
 
 ### 1.4 テンプレートパラメタを指定しない (上記共通)
 
+この節の内容については，tatyamさんに教えていただきました
+([これ](https://x.com/tatyam_prime/status/1919652371182862488) と
+[これ](https://x.com/tatyam_prime/status/1919654295114269128))．
+ありがとうございました．
+
 set のコンストラクタには，第1引数に initializer_list を，第2引数に Compare オブジェクトを指定するものがあるので，
 それを用いれば，テンプレートパラメタを指定しないですむ．
 
@@ -119,11 +124,6 @@ initializer_list が空でなければ，そこも推論してもらえること
   set xs({0, 1, 2}, lf);
   set xs({0, 1, 2}, MyComp{});
 ```
-
-1.4 については，tatyamさんに教えていただきました
-([これ](https://x.com/tatyam_prime/status/1919652371182862488) と
-[これ](https://x.com/tatyam_prime/status/1919654295114269128))．
-ありがとうございました．
 
 
 ## 2. sort() での比較関数と，{lower|upper}_bound()
