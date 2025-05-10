@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "忘れやすい事項"
-date: "2024-06-04T09:13:31+09:00"
-# date_init: "2024-06-04"
+date: "2025-05-10"
+date_init: "2024-06-04"
 tags: []
 categories: ["topic"]
 # categories: ["solution"]
@@ -16,6 +16,7 @@ categories: ["topic"]
 * convolution
 * 半分全列挙
 * フロー
+* 平方分割
 * CHT
 * trie
 * (期待値) = sum_i (i以上になる確率)
@@ -26,3 +27,5 @@ categories: ["topic"]
 * 集合のハッシュ．
   * [Zobrist Hashing](https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/) (有限集合の部分集合)
   * 多重集合のハッシュ ([例題](https://atcoder.jp/contests/abc367/tasks/abc367_f))
+
+

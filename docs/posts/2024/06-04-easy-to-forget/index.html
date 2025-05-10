@@ -8,7 +8,7 @@
 <title>忘れやすい事項 | yamate11のブログ</title>
 <meta name="keywords" content="">
 <meta name="description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
-二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ">
+二分探索 bit64倍高速化 convolution 半分全列挙 フロー 平方分割 CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
@@ -84,16 +84,16 @@
 
 <meta property="og:title" content="忘れやすい事項" />
 <meta property="og:description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
-二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) " />
+二分探索 bit64倍高速化 convolution 半分全列挙 フロー 平方分割 CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-06-04T09:13:31+09:00" />
-<meta property="article:modified_time" content="2024-06-04T09:13:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2025-05-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-05-10T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="忘れやすい事項"/>
 <meta name="twitter:description" content="解法に詰まったとき，以下の方法が適用できないか，考えてみる．
-二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) "/>
+二分探索 bit64倍高速化 convolution 半分全列挙 フロー 平方分割 CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) "/>
 
 
 <script type="application/ld+json">
@@ -122,15 +122,15 @@
   "@type": "BlogPosting",
   "headline": "忘れやすい事項",
   "name": "忘れやすい事項",
-  "description": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ",
+  "description": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution 半分全列挙 フロー 平方分割 CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ",
   "keywords": [
     
   ],
-  "articleBody": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution 半分全列挙 フロー CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ",
-  "wordCount" : "34",
+  "articleBody": "解法に詰まったとき，以下の方法が適用できないか，考えてみる．\n二分探索 bit64倍高速化 convolution 半分全列挙 フロー 平方分割 CHT trie (期待値) = sum_i (i以上になる確率) deque はランダムアクセスが O(1) 区間 [a, b] を2次元平面の点 (a, b) で表現 区間の問題を距離の問題に言い直して Dijkstra (例題 ) 積の和典型 集合のハッシュ． Zobrist Hashing (有限集合の部分集合) 多重集合のハッシュ (例題 ) ",
+  "wordCount" : "35",
   "inLanguage": "en",
-  "datePublished": "2024-06-04T09:13:31+09:00",
-  "dateModified": "2024-06-04T09:13:31+09:00",
+  "datePublished": "2025-05-10T00:00:00Z",
+  "dateModified": "2025-05-10T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -217,7 +217,7 @@
     <h1 class="post-title">
       忘れやすい事項
     </h1>
-    <div class="post-meta">2024-06-04   yamate11
+    <div class="post-meta">2025-05-10   (初版 2024-06-04)   yamate11
 </div>
   </header> 
   <div class="post-content"><p>解法に詰まったとき，以下の方法が適用できないか，考えてみる．</p>
@@ -227,6 +227,7 @@
 <li>convolution</li>
 <li>半分全列挙</li>
 <li>フロー</li>
+<li>平方分割</li>
 <li>CHT</li>
 <li>trie</li>
 <li>(期待値) = sum_i (i以上になる確率)</li>
@@ -251,15 +252,10 @@
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>二項係数に関する公式</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">
     <span class="title">Next »</span>
     <br>
-    <span>ABC354-G Select Strings</span>
+    <span>比較関数</span>
   </a>
 </nav>
 
@@ -273,6 +269,7 @@
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">比較関数</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/05-05-bellman-ford/">Bellman-Ford, 牛ゲーライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/05-04-ret-abc404-g/">ABC404 G - Specified Range Sums</a>
@@ -281,7 +278,6 @@
   / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目...</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-24-ret-arc196-b/">ARC196 B - Torus Loop</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/04-21-ret-arc196-a/">ARC196 A - Adjacent Delete</a>
-  / <a href="https://yamate11.github.io/blog/posts/2025/04-20-ret-abc397-f/">ABC397 F - Variety Split Hard</a>
 </p>
 
 
