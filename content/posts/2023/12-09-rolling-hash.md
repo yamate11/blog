@@ -96,7 +96,7 @@ vector<u64> hs = rh.hashes(s);
 
 返り値 hs の長さは ssize(s) + 1 で，第 i 要素は，s.substr(0, i) に対するハッシュ値である．
 
-引数は string で与える必要があり，`const char[]` ではうまくいかない．
+引数は string または `const char*`．
 
 #### ハッシュ値の計算
 
@@ -107,13 +107,16 @@ s およびその部分文字列のハッシュ値は，get メソッドで取�
 auto hs = rh.hashes(s);
 u64 h0 = rh.get(hs);               // s 自身のハッシュ値． hs[ssize(s)] に等しい．
 u64 h1 = rh.get(hs, start, len);   // s.substr(start, len) のハッシュ値
+u64 h2 = rh.get(hs, start);        // s.substr(start) のハッシュ値
 ```
 
-部分文字列に興味が無いときには，前計算無しでハッシュ値を取得できる．
+部分文字列に興味が無いときには，`hashvalue()` を使えば，前計算無しでハッシュ値を取得できる:
 
 ```cpp
 u64 h0 = rh.hashvalue(s);
 ```
+
+なお，空文字列のハッシュ値は 0 である．
 
 #### 連結文字列のハッシュ値
 
@@ -128,7 +131,7 @@ s2 の長さが必要であることに注意．
 
 #### base 値の取得
 
-`rh.base_power(1)` で，base 値が取得できる．一般に，`rh.base_power(i)` は，$\text{base}^i$ を返す．
+`rh.base_power(1)` で，base 値が取得できる．一般に，`rh.base_power(k)` は，$\text{base}^k$ を返す．
 
 #### 一般のベクトルに対するハッシュ
 
