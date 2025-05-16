@@ -152,12 +152,13 @@ std::min は，オーバーロードがあるので，そのまま名前で渡�
 #### 区間加算，区間最小値取得
 
 ```cpp
+  ll big = (1e18 など適当に大きな値);
   auto mymin = [](ll x, ll y) -> ll { return min(x, y); };
-  auto st = make_seg_tree_lazy(LLONG_MAX, 0LL, mymin, plus<ll>(), plus<ll>());
+  auto st = make_seg_tree_lazy(big, 0LL, mymin, plus<ll>(), plus<ll>());
 ```
 
 * apply と add は自然に順序交換ができる．
-* オーバーフローしうる場合には， LLONG_MAX ではなく `(ll)(1e18)` などを用いる必要があるかもしれない．
+* 単位元を LLONG_MAX にすると，たいていオーバーフローする．
 
 #### 区間代入，区間最小値取得
 
@@ -166,11 +167,14 @@ nullptr が「何もしない」ことをあらわし，単位元となる．
 
 ```cpp
   using OP = optional<ll>;
+  ll big = (1e18 や LLONG_MAX など適当に大きな値);
   auto mymin = [](ll x, ll y) -> ll { return min(x, y); };
   auto comp = [](OP f, OP g) -> OP { return f ? f : g; };
   auto appl = [](OP f, ll x) -> ll { return f ? *f : x; };
-  auto st = make_seg_tree_lazy(LLONG_MAX, OP(), mymin, comp, appl);
+  auto st = make_seg_tree_lazy(big, OP(), mymin, comp, appl);
 ```
+
+
 
 #### 区間代入，区間和取得
 
