@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Return to 1 - Atcoder Beginner Contest 306 G | yamate11のブログ</title>
+<title>Wavelet 行列ライブラリ | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="ABC306G Return to 1 の解法です">
+<meta name="description" content="Wavelet 行列ライブラリを書いた．
+使用法 vector&lt;ll&gt; vec{...}; WaveletMatrix wm(vec, -1); cout &lt;&lt; wm.kth_rank(10, 20) &lt;&lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec &hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax &hellip; 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -81,16 +82,18 @@
 
 
 
-<meta property="og:title" content="Return to 1 - Atcoder Beginner Contest 306 G" />
-<meta property="og:description" content="ABC306G Return to 1 の解法です" />
+<meta property="og:title" content="Wavelet 行列ライブラリ" />
+<meta property="og:description" content="Wavelet 行列ライブラリを書いた．
+使用法 vector&lt;ll&gt; vec{...}; WaveletMatrix wm(vec, -1); cout &lt;&lt; wm.kth_rank(10, 20) &lt;&lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec &hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax &hellip; 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/06-18-abc306g/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-18T12:14:05+09:00" />
-<meta property="article:modified_time" content="2023-06-18T12:14:05+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-05-17T11:23:05+09:00" />
+<meta property="article:modified_time" content="2025-05-17T11:23:05+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Return to 1 - Atcoder Beginner Contest 306 G"/>
-<meta name="twitter:description" content="ABC306G Return to 1 の解法です"/>
+<meta name="twitter:title" content="Wavelet 行列ライブラリ"/>
+<meta name="twitter:description" content="Wavelet 行列ライブラリを書いた．
+使用法 vector&lt;ll&gt; vec{...}; WaveletMatrix wm(vec, -1); cout &lt;&lt; wm.kth_rank(10, 20) &lt;&lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec &hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax &hellip; 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる "/>
 
 
 <script type="application/ld+json">
@@ -107,8 +110,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Return to 1 - Atcoder Beginner Contest 306 G",
-      "item": "https://yamate11.github.io/blog/posts/2023/06-18-abc306g/"
+      "name": "Wavelet 行列ライブラリ",
+      "item": "https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/"
     }
   ]
 }
@@ -117,24 +120,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Return to 1 - Atcoder Beginner Contest 306 G",
-  "name": "Return to 1 - Atcoder Beginner Contest 306 G",
-  "description": "ABC306G Return to 1 の解法です",
+  "headline": "Wavelet 行列ライブラリ",
+  "name": "Wavelet 行列ライブラリ",
+  "description": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u0026lt;ll\u0026gt; vec{...}; WaveletMatrix wm(vec, -1); cout \u0026lt;\u0026lt; wm.kth_rank(10, 20) \u0026lt;\u0026lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec \u0026hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax \u0026hellip; 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる ",
   "keywords": [
     
   ],
-  "articleBody": "Atcoder Beginner Contest 306 - ABC 306 G - Return to 1 の解法です．\n問題概要 問題へのリンク $N$ 頂点 $M$ 辺の有向グラフがある． 頂点 $1$ から辺をたどることをちょうど $10^{10^{100}}$ 回繰り返して 頂点 $1$ に戻ってくることが可能か判定せよ． テストケース $T$ 個．\n制約: $T \\leq 2 \\times 10^5$． $N$ の総和と $M$ の総和は $2 \\times 10^5$ 以下．\nコンテスト中の経緯 まず，強連結成分分解をして，頂点1を含む強連結成分のみを 考えれば良い．\n頂点 1 から出発して戻ってくるサイクルの長さ全部の集合を $C$， $C$ の最大公約数を $g$ とする． $10^{10^{100}}$ は十分大きいので， $g \\mid 10^{10^{100}}$ であることが， $10^{10^{100}}$ が $C$ の要素の非負整数倍の和で表せることと同値になる． $g \\mid 10^{10^{100}}$ は，もちろん， $g$ が $2$ と $5$ 以外の素因数を持たないことと同値である．\nということで，$g$ を求めれば良いのだが，$C$ は 巨大な集合なので直接には求められない． なんらかの $C$ の部分集合で，最大公約数が $g$ と等しくなるようなものを 求めるのだろうと思った．すべての辺について， それを使うサイクルは少なくとも 1 回は評価しないといけないであろうという ことで，根拠薄弱だが，次のような集合を取ってみることにした．\n$C’ := \\{ \\text{dist}(1, x) + 1 + \\text{dist}(y, 1) \\mid (x, y) $ はグラフの辺 $\\}$\nここで，$\\text{dist}(x, y)$ は，2頂点 $x$, $y$ 間の距離である． $\\text{GCD}(C’)$ が $2$ と $5$ 以外の素因数を持たないかどうかで Yes / No を答えるようにした．\nダメ元で提出してみたが，ジャッジが詰まっていて， コンテスト終了までに結果が返ってこなかった． 結局このつまりが原因で ABC306 は unrated になった． コンテスト終了後に TLE が帰ってきたが，最初の強連結成分分解で， 頂点 $1$ が単独成分になる場合の考慮漏れだった． これを直したら AC になった．\n証明 コンテスト後， 公式解説 を見たら，想定解法は上の解法と少し似ていた． それを読んでしばらく考えたところ，上の解法も正当であることがわかった．\n主張1 任意の辺 $(x, y)$ に対して， $g \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$．\n主張2 $a$ を正の整数とする． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ であれば， 頂点1からの任意のサイクルの長さは，$a$ の倍数である．\n主張1, 2 から，$C$ と $C’$ の公約数の集合が一致することがわかるので， $g = \\text{GCD}(C’)$ である．\n(主張1の証明) 頂点$1$から頂点$x$への最短パスと辺$(x, y)$ と 頂点 $y$ から頂点 $1$ への最短パスをつなぐと，長さ $\\text{dist}(1, x) + 1 + \\text{dist}(y, 1)$ のサイクルになる． $g$ はこういうものたちの公約数であった．(終)\n(主張2の証明) 正の整数 $a$ をとる． 任意の辺 $(x, y)$ に対して $a \\mid (\\text{dist}(1, x) + 1 + \\text{dist}(y, 1))$ と仮定する． このとき，$1 = x_1, x_2, x_3, \\ldots$ が頂点1を出発するパスであれば， $\\text{dist}(1, x_i) \\equiv i - 1 \\pmod a,\\quad \\text{dist}(x_i, 1) \\equiv 1 - i \\pmod a$ であることを帰納法で示す． これが示せれば，$x_k = 1$ であれば $k \\equiv 1 \\pmod a$ である． つまり，サイクルの長さは $a$ の倍数である．\n$i = 1$ は自明．$i$までOKとすると， 辺 $(x_i, x_{i + 1})$ に関して， $\\text{dist}(1, x_i) + 1 + \\text{dist}(x_{i + 1}, 1) \\equiv 0$ だから， 帰納法の仮定より $\\text{dist}(x_{i + 1}, 1) \\equiv i$．\n$\\text{dist}(1, x_{i + 1})$ については， もし $x_{i + 1} = 1$ なら $i \\equiv 0, \\quad\\text{dist}(1, x_{i + 1}) = 0 \\equiv i$ でOKなので，$x_{i + 1} \\neq 1$ とする．$x_{i + 1}$ から $1$ への 最短パス上で，$x_{i + 1}$ の隣の点を $y$ とすると， $0 \\equiv \\text{dist}(1, x_{i + 1}) + 1 + \\text{dist}(y, 1) \\equiv \\text{dist}(1, x_{i + 1}) + 1 + (i - 1)$ より， $\\text{dist}(1, x_{i + 1}) \\equiv i$．(終)\nまあ，証明はできたものの，公式解説の方法の方がずっと良い．\nACコード 提出したコード ",
-  "wordCount" : "360",
+  "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec, -1); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる ",
+  "wordCount" : "25",
   "inLanguage": "en",
-  "datePublished": "2023-06-18T12:14:05+09:00",
-  "dateModified": "2023-06-18T12:14:05+09:00",
+  "datePublished": "2025-05-17T11:23:05+09:00",
+  "dateModified": "2025-05-17T11:23:05+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2023/06-18-abc306g/"
+    "@id": "https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/"
   },
   "publisher": {
     "@type": "Organization",
@@ -212,110 +215,32 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Return to 1 - Atcoder Beginner Contest 306 G
+      Wavelet 行列ライブラリ
     </h1>
-    <div class="post-meta">2023-06-18   yamate11
+    <div class="post-meta">2025-05-17   yamate11
 </div>
   </header> 
-  <div class="post-content"><p>Atcoder Beginner Contest 306 - ABC 306 G - Return to 1 の解法です．</p>
-<h3 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h3>
-<p><a href="https://atcoder.jp/contests/abc306/tasks/abc306_g" target="_blank">問題へのリンク</a>
-</p>
-<p>$N$ 頂点 $M$ 辺の有向グラフがある．
-頂点 $1$ から辺をたどることをちょうど $10^{10^{100}}$ 回繰り返して
-頂点 $1$ に戻ってくることが可能か判定せよ．
-テストケース $T$ 個．</p>
-<p>制約: $T \leq 2 \times 10^5$．
-$N$ の総和と $M$ の総和は $2 \times 10^5$ 以下．</p>
-<h3 id="コンテスト中の経緯">コンテスト中の経緯<a hidden class="anchor" aria-hidden="true" href="#コンテスト中の経緯">#</a></h3>
-<p>まず，強連結成分分解をして，頂点1を含む強連結成分のみを
-考えれば良い．</p>
-<p>頂点 1 から出発して戻ってくるサイクルの長さ全部の集合を $C$，
-$C$ の最大公約数を $g$ とする．
-$10^{10^{100}}$ は十分大きいので，
-$g \mid 10^{10^{100}}$ であることが，
-$10^{10^{100}}$ が $C$ の要素の非負整数倍の和で表せることと同値になる．
-$g \mid 10^{10^{100}}$ は，もちろん，
-$g$ が $2$ と $5$ 以外の素因数を持たないことと同値である．</p>
-<p>ということで，$g$ を求めれば良いのだが，$C$ は
-巨大な集合なので直接には求められない．
-なんらかの $C$ の部分集合で，最大公約数が $g$ と等しくなるようなものを
-求めるのだろうと思った．すべての辺について，
-それを使うサイクルは少なくとも 1 回は評価しないといけないであろうという
-ことで，根拠薄弱だが，次のような集合を取ってみることにした．</p>
-<p>$C&rsquo; := \{ \text{dist}(1, x) + 1 + \text{dist}(y, 1) \mid (x, y) $
-はグラフの辺 $\}$</p>
-<p>ここで，$\text{dist}(x, y)$ は，2頂点 $x$, $y$ 間の距離である．
-$\text{GCD}(C&rsquo;)$ が $2$ と $5$ 以外の素因数を持たないかどうかで
-Yes / No を答えるようにした．</p>
-<p>ダメ元で提出してみたが，ジャッジが詰まっていて，
-コンテスト終了までに結果が返ってこなかった．
-結局このつまりが原因で ABC306 は unrated になった．
-コンテスト終了後に TLE が帰ってきたが，最初の強連結成分分解で，
-頂点 $1$ が単独成分になる場合の考慮漏れだった．
-これを直したら AC になった．</p>
-<h3 id="証明">証明<a hidden class="anchor" aria-hidden="true" href="#証明">#</a></h3>
-<p>コンテスト後，
-<a href="https://atcoder.jp/contests/abc306/editorial/6602" target="_blank">公式解説</a>
-
-を見たら，想定解法は上の解法と少し似ていた．
-それを読んでしばらく考えたところ，上の解法も正当であることがわかった．</p>
-<blockquote>
-<p><b>主張1</b>   任意の辺 $(x, y)$ に対して，
-$g \mid (\text{dist}(1, x) + 1 + \text{dist}(y, 1))$．</p>
-</blockquote>
-<blockquote>
-<p><b>主張2</b>  
-$a$ を正の整数とする．
-任意の辺 $(x, y)$ に対して
-$a \mid (\text{dist}(1, x) + 1 + \text{dist}(y, 1))$ であれば，
-頂点1からの任意のサイクルの長さは，$a$ の倍数である．</p>
-</blockquote>
-<p>主張1, 2 から，$C$ と $C&rsquo;$ の公約数の集合が一致することがわかるので，
-$g = \text{GCD}(C&rsquo;)$ である．</p>
-<p>(主張1の証明)  頂点$1$から頂点$x$への最短パスと辺$(x, y)$ と
-頂点 $y$ から頂点 $1$ への最短パスをつなぐと，長さ
-$\text{dist}(1, x) + 1 + \text{dist}(y, 1)$ のサイクルになる．
-$g$ はこういうものたちの公約数であった．(終)</p>
-<p>(主張2の証明)
-正の整数 $a$ をとる．
-任意の辺 $(x, y)$ に対して
-$a \mid (\text{dist}(1, x) + 1 + \text{dist}(y, 1))$ と仮定する．
-このとき，$1 = x_1, x_2, x_3, \ldots$ が頂点1を出発するパスであれば，
-$\text{dist}(1, x_i) \equiv i - 1 \pmod a,\quad
-\text{dist}(x_i, 1) \equiv 1 - i \pmod a$ であることを帰納法で示す．
-これが示せれば，$x_k = 1$ であれば $k \equiv 1 \pmod a$ である．
-つまり，サイクルの長さは $a$ の倍数である．</p>
-<p>$i = 1$ は自明．$i$までOKとすると，
-辺 $(x_i, x_{i + 1})$ に関して，
-$\text{dist}(1, x_i) + 1 + \text{dist}(x_{i + 1}, 1) \equiv 0$ だから，
-帰納法の仮定より
-$\text{dist}(x_{i + 1}, 1) \equiv i$．</p>
-<p>$\text{dist}(1, x_{i + 1})$ については，
-もし $x_{i + 1} = 1$ なら $i \equiv 0, \quad\text{dist}(1, x_{i + 1}) = 0 \equiv i$ でOKなので，$x_{i + 1} \neq 1$ とする．$x_{i + 1}$ から $1$ への
-最短パス上で，$x_{i + 1}$ の隣の点を $y$ とすると，
-$0 \equiv \text{dist}(1, x_{i + 1}) + 1 + \text{dist}(y, 1) \equiv
-\text{dist}(1, x_{i + 1}) + 1 + (i - 1)$ より，
-$\text{dist}(1, x_{i + 1}) \equiv i$．(終)</p>
-<p>まあ，証明はできたものの，公式解説の方法の方がずっと良い．</p>
-<h3 id="acコード">ACコード<a hidden class="anchor" aria-hidden="true" href="#acコード">#</a></h3>
-<p><a href="https://atcoder.jp/contests/abc306/submissions/42367729" target="_blank">提出したコード</a>
-</p>
+  <div class="post-content"><p>Wavelet 行列ライブラリを書いた．</p>
+<h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">{...};</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">WaveletMatrix</span> <span style="color:#75af00">wm</span><span style="color:#111">(</span><span style="color:#111">vec</span><span style="color:#111">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">wm</span><span style="color:#111">.</span><span style="color:#111">kth_rank</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#ae81ff">20</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span></code></pre></div><h3 id="コンストラクタ">コンストラクタ<a hidden class="anchor" aria-hidden="true" href="#コンストラクタ">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">WaveletMatrix</span> <span style="color:#75af00">wm</span><span style="color:#111">(</span><span style="color:#111">vec</span><span style="color:#111">,</span> <span style="color:#111">amax</span><span style="color:#111">);</span>
+</span></span></code></pre></div><ul>
+<li>vec &hellip; データを格納したベクトルなど．すべて非負整数であることが必要．</li>
+<li>amax &hellip; 「データがこの値を超えない」という値．<code>-1</code> を与えると，ライブラリの方で最大値を取ってくれる</li>
+</ul>
 
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/09-05-bridge/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>二重連結</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2023/06-03-num-divisors/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">
     <span class="title">Next »</span>
     <br>
-    <span>約数の個数</span>
+    <span>忘れやすい事項</span>
   </a>
 </nav>
 
@@ -324,7 +249,7 @@ $\text{dist}(1, x_{i + 1}) \equiv i$．(終)</p>
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2023/06-18-abc306g/" data-title="Return to 1 - Atcoder Beginner Contest 306 G">
+<section id="isso-thread" data-isso-id="/blog/posts/2025/05-17-wavelet-matrix-lib/" data-title="Wavelet 行列ライブラリ">
 </section>
 
 <p>Links to Recent Posts:
