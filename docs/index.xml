@@ -6,8 +6,15 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 17 May 2025 11:23:05 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 May 2025 18:33:52 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC349 G Palindrome Construction</title>
+      <link>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</link>
+      <pubDate>Sun, 18 May 2025 18:33:52 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</guid>
+      <description>問題へのリンク </description>
+    </item>
     <item>
       <title>Wavelet 行列ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/</link>

@@ -6,8 +6,15 @@
     <description>Recent content in retrospective on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 May 2025 23:58:21 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 May 2025 18:33:52 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/retrospective/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC349 G Palindrome Construction</title>
+      <link>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</link>
+      <pubDate>Sun, 18 May 2025 18:33:52 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</guid>
+      <description>問題へのリンク </description>
+    </item>
     <item>
       <title>ABC404 G - Specified Range Sums</title>
       <link>https://yamate11.github.io/blog/posts/2025/05-04-ret-abc404-g/</link>
