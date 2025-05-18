@@ -164,7 +164,11 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>問題へのリンク </p>
+    <p>概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．
+ユーザ解説 で紹介されている解法を読んだ．
+次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい
+merge(a, b, l) : $i \in [0, l)$ について，頂点 $a &#43; i$ と 頂点 $b &#43; i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．
+$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．...</p>
   </div>
   <footer class="entry-footer">2025-05-18   yamate11</footer>
   <a class="entry-link" aria-label="post link to ABC349 G Palindrome Construction" href="https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/"></a>

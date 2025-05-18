@@ -7,7 +7,11 @@
 <meta name="robots" content="index, follow">
 <title>ABC349 G Palindrome Construction | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="問題へのリンク ">
+<meta name="description" content="概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．
+ユーザ解説 で紹介されている解法を読んだ．
+次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい
+merge(a, b, l) : $i \in [0, l)$ について，頂点 $a &#43; i$ と 頂点 $b &#43; i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．
+$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
@@ -82,7 +86,11 @@
 
 
 <meta property="og:title" content="ABC349 G Palindrome Construction" />
-<meta property="og:description" content="問題へのリンク " />
+<meta property="og:description" content="概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．
+ユーザ解説 で紹介されている解法を読んだ．
+次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい
+merge(a, b, l) : $i \in [0, l)$ について，頂点 $a &#43; i$ と 頂点 $b &#43; i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．
+$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-05-18T18:33:52+09:00" />
@@ -90,7 +98,11 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC349 G Palindrome Construction"/>
-<meta name="twitter:description" content="問題へのリンク "/>
+<meta name="twitter:description" content="概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．
+ユーザ解説 で紹介されている解法を読んだ．
+次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい
+merge(a, b, l) : $i \in [0, l)$ について，頂点 $a &#43; i$ と 頂点 $b &#43; i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．
+$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．"/>
 
 
 <script type="application/ld+json">
@@ -119,12 +131,12 @@
   "@type": "BlogPosting",
   "headline": "ABC349 G Palindrome Construction",
   "name": "ABC349 G Palindrome Construction",
-  "description": "問題へのリンク ",
+  "description": "概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．\nユーザ解説 で紹介されている解法を読んだ．\n次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい\nmerge(a, b, l) : $i \\in [0, l)$ について，頂点 $a + i$ と 頂点 $b + i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．\n$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．",
   "keywords": [
     
   ],
-  "articleBody": "問題へのリンク ",
-  "wordCount" : "1",
+  "articleBody": "概要 問題へのリンク 公式解説 は，ちゃんと読んでいない．\nユーザ解説 で紹介されている解法を読んだ．\n次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい\nmerge(a, b, l) : $i \\in [0, l)$ について，頂点 $a + i$ と 頂点 $b + i$ の間に辺を結ぶ． leader(a) : 頂点 $a$ を含む連結成分の代表元を返す． この問題は，次のように解ける．\n$2N$ 頂点のグラフを考える． 気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの 各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ． これは，上の Range Parallel Unionfind の merge(a, b, l) でできる． 頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う． 回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能． そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく． ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．\nアルゴリズム1 ノード数$N$，クエリ数$Q$ として，時間計算量 $O((N + Q)\\log^2 N)$． こちらは，2つのクエリが混ざってきても良い．\n普通の UnionFind も使う．leader は，普通の leader を使う．\n各ノード $i$ が属する連結成分の代表元を $p(i)$ と書くことにする． $p$ のローリングハッシュを計算するセグメント木を用意する． merge(a, b, l) が来たときに，$p[a:a + l)$ と $p[b:b + l)$ が一致していれば何もしなくて良い． 一致していなければ，二分探索をして $p[a + i] \\neq p[b + i]$ である $i$ が見つけられる． $a + i$ と $b + i$ を (普通に) merge して，もともと小さかった連結成分の方の $p$ を更新する．\nアルゴリズム2 時間計算量 $(N \\alpha(N))$． こちらは，merge が全部すんでから leader が来るという前提．\n$a_k + i$ と $b_k + i$ の merge を，$l_k - i$ の大きい順に行う． つまり，残っている列の長い順に行っていく． すると，ある時点で $a_k + i$ と $b_k + i$ が同じ連結成分に属していたら， $j \u003e i$ に対する $a_k + j$ と $b_k + j$ の組は見る必要が無い． $a_k + i$ と $b_k + i$ が同じ連結成分になるのと同じ理由で，同じ連結成分に入っているはずである．\n",
+  "wordCount" : "180",
   "inLanguage": "en",
   "datePublished": "2025-05-18T18:33:52+09:00",
   "dateModified": "2025-05-18T18:33:52+09:00",
@@ -217,8 +229,53 @@
     <div class="post-meta">2025-05-18   yamate11
 </div>
   </header> 
-  <div class="post-content"><p><a href="">問題へのリンク</a>
+  <div class="post-content"><h3 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h3>
+<p><a href="https://atcoder.jp/contests/abc349/tasks/abc349_g" target="_blank">問題へのリンク</a>
 </p>
+<p><a href="https://atcoder.jp/contests/abc349/editorial/9782" target="_blank">公式解説</a>
+ は，ちゃんと読んでいない．</p>
+<p><a href="https://atcoder.jp/contests/abc349/editorial/9785" target="_blank">ユーザ解説</a>
+ で紹介されている解法を読んだ．</p>
+<p>次の2つのクエリを処理するものを，Range Parallel Unionfind (仮称) というらしい</p>
+<ul>
+<li><code>merge(a, b, l)</code> : $i \in [0, l)$ について，頂点 $a + i$ と 頂点 $b + i$ の間に辺を結ぶ．</li>
+<li><code>leader(a)</code> : 頂点 $a$ を含む連結成分の代表元を返す．</li>
+</ul>
+<p>この問題は，次のように解ける．</p>
+<ol>
+<li>$2N$ 頂点のグラフを考える．
+<ul>
+<li>気持ちは，前半が $S$ で，後半が $S$ を逆順にしたもの</li>
+</ul>
+</li>
+<li>各 $i$ に対して，回文になるために必要なところ (前半と後半を使う) を線で結ぶ．
+これは，上の Range Parallel Unionfind の <code>merge(a, b, l)</code> でできる．</li>
+<li>頂点 $i$ と $2*N - 1 - i$ を線で結ぶ．これは普通の Unionfind を使う．</li>
+<li>回文の一つ外側の文字どうしが同じ連結成分に入っていたら不可能．
+そうでなければ，辞書順最小のものを求めるために，貪欲に各連結成分の値を決めていく．</li>
+</ol>
+<p>ということで，Range Parallel Unionfind なるものができれば良い．2つ紹介されている．</p>
+<h3 id="アルゴリズム1">アルゴリズム1<a hidden class="anchor" aria-hidden="true" href="#アルゴリズム1">#</a></h3>
+<p>ノード数$N$，クエリ数$Q$ として，時間計算量 $O((N + Q)\log^2 N)$．
+こちらは，2つのクエリが混ざってきても良い．</p>
+<details>
+<p>普通の UnionFind も使う．<code>leader</code> は，普通の <code>leader</code> を使う．</p>
+<p>各ノード $i$ が属する連結成分の代表元を $p(i)$ と書くことにする．
+$p$ のローリングハッシュを計算するセグメント木を用意する．
+<code>merge(a, b, l)</code> が来たときに，$p[a:a + l)$ と $p[b:b + l)$ が一致していれば何もしなくて良い．
+一致していなければ，二分探索をして $p[a + i] \neq p[b + i]$ である $i$ が見つけられる．
+$a + i$ と $b + i$ を (普通に) merge して，もともと小さかった連結成分の方の $p$ を更新する．</p>
+</details>
+<h3 id="アルゴリズム2">アルゴリズム2<a hidden class="anchor" aria-hidden="true" href="#アルゴリズム2">#</a></h3>
+<p>時間計算量 $(N \alpha(N))$．
+こちらは，<code>merge</code> が全部すんでから <code>leader</code> が来るという前提．</p>
+<details>
+<p>$a_k + i$ と $b_k + i$ の merge を，$l_k - i$ の大きい順に行う．
+つまり，残っている列の長い順に行っていく．
+すると，ある時点で $a_k + i$ と $b_k + i$ が同じ連結成分に属していたら，
+$j &gt; i$ に対する $a_k + j$ と $b_k + j$ の組は見る必要が無い．
+$a_k + i$ と $b_k + i$ が同じ連結成分になるのと同じ理由で，同じ連結成分に入っているはずである．</p>
+</details>
 
 
   </div>
