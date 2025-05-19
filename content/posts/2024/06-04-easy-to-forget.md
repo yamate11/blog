@@ -19,6 +19,8 @@ categories: ["topic"]
 * 平方分割
 * CHT
 * trie
+* wavelet 行列
+* 行列累乗
 * (期待値) = sum_i (i以上になる確率)
 * deque はランダムアクセスが O(1)
 * 区間 [a, b] を2次元平面の点 (a, b) で表現
