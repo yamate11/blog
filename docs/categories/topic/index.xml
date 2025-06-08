@@ -13,7 +13,12 @@
       <link>https://yamate11.github.io/blog/posts/2025/06-08-stern-brocot/</link>
       <pubDate>Sun, 08 Jun 2025 23:26:34 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2025/06-08-stern-brocot/</guid>
-      <description>Stern Brocot Tree を扱うライブラリを書いた．</description>
+      <description>概要 Stern Brocot Tree を扱うライブラリを書いた．
+Stern Brocot Tree 連分数
+$$ a_0 + \cfrac{1}{a_1 + \cfrac{1}{\ddots a_{n - 1} + \cfrac{1}{a_n}}} $$
+を，$[a_0, a_1, \dots, a_n]$ と書く．各 $a_i$ は，非負整数．
+$x + 1 = x + \cfrac{1}{1}$ だから，$[a_0, a_1, \dots, a_n]$ と $[a_0, a_1, \dots, a_n - 1, 1]$ は同じ数を表す． これを除くと表現は一意になる．そこで，$[a_0, a_1, \dots, a_n]$ の表現では，$a_n \neq 1$ と約束する． 例外として，$1$ は，$[1]$ で表現する．
+連分数 $\alpha = [a_0, a_1, \dots, a_n]$ に対して， $u(\alpha) = [a_0, a_1, \dots, a_n + 1]$ と， $v(\alpha) = [a_0, a_1, \dots, a_n - 1, 2]$ を考える．これは，連分数最後のパートが</description>
     </item>
     <item>
       <title>Wavelet 行列ライブラリ</title>
