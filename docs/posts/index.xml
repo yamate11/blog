@@ -6,8 +6,15 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 May 2025 18:33:52 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jun 2025 23:26:34 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stern Brocot Tree (連分数)</title>
+      <link>https://yamate11.github.io/blog/posts/2025/06-08-stern-brocot/</link>
+      <pubDate>Sun, 08 Jun 2025 23:26:34 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/06-08-stern-brocot/</guid>
+      <description>Stern Brocot Tree を扱うライブラリを書いた．</description>
+    </item>
     <item>
       <title>ABC349 G Palindrome Construction</title>
       <link>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</link>
