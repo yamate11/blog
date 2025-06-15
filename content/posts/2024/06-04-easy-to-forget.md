@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "忘れやすい事項"
-date: "2025-05-10"
+date: "2025-06-15"
 date_init: "2024-06-04"
 tags: []
 categories: ["topic"]
@@ -19,7 +19,7 @@ categories: ["topic"]
 * 平方分割
 * CHT
 * trie
-* wavelet 行列
+* [wavelet 行列](https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/)
 * 行列累乗
 * (期待値) = sum_i (i以上になる確率)
 * deque はランダムアクセスが O(1)
