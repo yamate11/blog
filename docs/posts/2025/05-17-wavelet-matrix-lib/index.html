@@ -132,8 +132,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec, -1); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる データメンバ wm.N … データの個数 他にもあるが，使わないと思う．\nデータ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使いではない．\n出現回数 wm.rank(t, r); 区間 [0, r) に t が現れる回数を返す． t は非負整数であればよい． r は，wm.N 以下でなければならない． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r). k は意味がある値でなければならない．つまり，0 \u003c= k \u003c r - l が必要． 0 \u003c= l \u003c r \u003c= wm.N でなければならない． 出現回数 wm.range_freq(hi, l, r); wm.range_freq(lo, hi, l, r); 区間 [l, r) において各々，t \u003c hi または lo \u003c= t \u003c hi であるような要素 t の個数を返す． 0 \u003c= lo \u003c= hi でなければならない．(amax に関する制約は無い) 0 \u003c= l \u003c= r \u003c= wm.N でなければならない． ",
-  "wordCount" : "126",
+  "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec, -1); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる データメンバ wm.N … データの個数 他にもあるが，使わないと思う．\nデータ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使いではない．\n出現回数 wm.rank(t, r); 区間 [0, r) に t が現れる回数を返す． t は非負整数であればよい． r は，wm.N 以下でなければならない． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r). k は意味がある値でなければならない．つまり，0 \u003c= k \u003c r - l が必要． 0 \u003c= l \u003c r \u003c= wm.N でなければならない． 出現回数 wm.range_freq(hi, l, r); wm.range_freq(lo, hi, l, r); 区間 [l, r) において次を満たす要素 t の個数を返す． 上の呼出については，t \u003c hi 下の呼出については，lo \u003c= t \u003c hi 0 \u003c= lo \u003c= hi でなければならない．(amax に関する制約は無い) 0 \u003c= l \u003c= r \u003c= wm.N でなければならない． ",
+  "wordCount" : "125",
   "inLanguage": "en",
   "datePublished": "2025-05-17T11:23:05+09:00",
   "dateModified": "2025-05-17T11:23:05+09:00",
@@ -265,7 +265,12 @@
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">wm</span><span style="color:#111">.</span><span style="color:#111">range_freq</span><span style="color:#111">(</span><span style="color:#111">hi</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">,</span> <span style="color:#111">r</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">wm</span><span style="color:#111">.</span><span style="color:#111">range_freq</span><span style="color:#111">(</span><span style="color:#111">lo</span><span style="color:#111">,</span> <span style="color:#111">hi</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">,</span> <span style="color:#111">r</span><span style="color:#111">);</span>
 </span></span></code></pre></div><ul>
-<li>区間 <code>[l, r)</code> において各々，<code>t &lt; hi</code> または <code>lo &lt;= t &lt; hi</code> であるような要素 t の個数を返す．</li>
+<li>区間 <code>[l, r)</code> において次を満たす要素 t の個数を返す．
+<ul>
+<li>上の呼出については，<code>t &lt; hi</code></li>
+<li>下の呼出については，<code>lo &lt;= t &lt; hi</code></li>
+</ul>
+</li>
 <li><code>0 &lt;= lo &lt;= hi</code> でなければならない．(amax に関する制約は無い)</li>
 <li><code>0 &lt;= l &lt;= r &lt;= wm.N</code> でなければならない．</li>
 </ul>
