@@ -89,7 +89,7 @@ vector<ll> coeff;
 ```cpp
   SternBrocotNode()       // 1が設定される．
   SternBrocotNode(const vector<ll> coeff_)   // 引数の係数行列が設定される
-  SternBrocotNode(ll a, ll b)      // a/b が設定される．
+  SternBrocotNode(ll a, ll b)      // a/b が設定される．既約でなくても良い．
   SternBrocotNode& set(const vector<ll> coeff_)   // オブジェクトの値が変更される
   SternBrocotNode& set(ll a, ll b)        // オブジェクトの値が変更される
 ```

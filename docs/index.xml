@@ -6,8 +6,16 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 15 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jun 2025 10:51:24 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Trie ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/</link>
+      <pubDate>Sat, 28 Jun 2025 10:51:24 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/</guid>
+      <description>ポインタベースの Trie ライブラリ
+実装: ??</description>
+    </item>
     <item>
       <title>忘れやすい事項</title>
       <link>https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/</link>
