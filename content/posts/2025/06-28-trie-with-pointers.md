@@ -8,8 +8,8 @@ categories: ["topic"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
 ---
 
-ポインタベースの Trie ライブラリ
-???[ソース]()
+ポインタベースの Trie ライブラリ．
+[ソース](https://github.com/yamate11/compprog-clib/blob/master/trie.cc)
 
 ## 使用法
 
