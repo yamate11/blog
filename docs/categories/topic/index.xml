@@ -6,8 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Jun 2025 10:51:24 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>木ライブラリ</title>
+      <link>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</link>
+      <pubDate>Sun, 13 Jul 2025 00:00:00 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</guid>
+      <description>自分用の木のライブラリのメモです．ソースはこちら ．
+1. 典型的な使用法 ll N; cin &amp;gt;&amp;gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b &amp;gt;&amp;gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;amp;](auto rF, ll nd) -&amp;gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.</description>
+    </item>
     <item>
       <title>Trie ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/</link>
@@ -198,14 +206,6 @@ ld = uf.</description>
 型 要素の型を T として，Matrix&amp;lt;T&amp;gt; が，行列の型になる． (実装上，これは，Mat&amp;lt;AO_def&amp;lt;T&amp;gt;&amp;gt; として定義されているが，使うときは気にしなくて良い)
 以下，要素の型を T とし，MyMat = Matrix&amp;lt;T&amp;gt; と定義されているものとする． mat は MyMat 型とする．
 構築子 MyMat(int dimI_, int dimJ_) &amp;hellip; dimI_ 行 dimJ_ 列 の零行列 MyMat(int dimI_, int dimJ_, T t) &amp;hellip; dimI_ 行 dimJ_ 列 の，要素の値がすべて t である行列 MyMat(int dimI_, int dimJ_, const vector&amp;lt;T&amp;gt;&amp;amp; vec) &amp;hellip; dimI_ 行，dimJ_ 列で，内部表現が vec である行列． 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector.</description>
-    </item>
-    <item>
-      <title>木ライブラリ</title>
-      <link>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</link>
-      <pubDate>Wed, 13 Mar 2024 13:41:23 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/</guid>
-      <description>自分用の木のライブラリのメモです．ソースはこちら ．
-1. 典型的な使用法 ll N; cin &amp;gt;&amp;gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b &amp;gt;&amp;gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;amp;](auto rF, ll nd) -&amp;gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.</description>
     </item>
     <item>
       <title>二分探索ライブラリ</title>

@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "木ライブラリ"
-date: "2024-03-13T13:41:23+09:00"
-# date_init: "2024-03-13"
+date: "2025-07-13T00:00:00+09:00"
+date_init: "2024-03-13"
 tags: ["木"]
 categories: ["topic"]
 # categories: ["solution"]
@@ -68,9 +68,11 @@ int num_children(int nd)
 int parent(int nd)
 int child(int nd, int idx)
 auto children(int nd)
+auto neighbor(int nd)
 pe_t parent_pe(int nd)
 pe_t child_pe(int nd, int idx)
 auto children_pe(int nd)
+auto neighbor_pe(int nd)
 ```
 
 * `tr.num_children(nd)` は，ノード nd の子供の数を返す．
@@ -78,6 +80,7 @@ auto children_pe(int nd)
 * `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
 * `tr.children(nd)` は，nd の子供の集まりへの view を返す．したがって，次のような使い方ができる:
   * `for (int c : tr.children(nd) { ... }`
+* `tr.children(nd)` は，nd の子供と親の集まりへの view を返す．
 * 構造体 `pe_t` は，int 型のメンバ `peer` と `edge` を持つ．
   * `peer` ... ノード
   * `edge` ... 辺の番号
@@ -88,17 +91,24 @@ auto children_pe(int nd)
   次のように使える:
   * `for (auto [cld_nd, cld_edge] : tr.children_pe(nd)) { ... }`
   * `for (const pe_t& pe : tr.children_pe(nd)) { ... pe.peer ... pe.edge ... }`
+* `tr.neighbor_pe(nd)` は，nd の子供と親に対する pe_t 構造体を渡る view を返す．
 
 #### 辺とノードの対応
 
 ```cpp
 int edge_idx(int x, int y)
-pair<int, int> nodes_of_edges(int e)
+pair<int, int> nodes_of_edge(int e, int mode = 0)
 ```
 
 * `tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
 そのような辺が存在しないときには -1 を返す．`tr.edge_idx(x, y)` と `tr.edge_idx(y, x)` の値は等しい．
-* `tr.nodes_of_edge(e)` は，番号が e である辺の両端のノードのペアを返す．第 1 要素は第 2 要素より小さい．
+実装は unordered_map．はじめて edge_idx が呼ばれたときに unordered_map を作る．
+* `tr.nodes_of_edge(e, mode)` は，番号が e である辺の両端のノードのペアを返す．
+    * mode == 0 (デフォルト) のとき: 第 1 要素が親，第 2 要素が子
+    * mode == 1 のとき: 第 1 要素が子，第 2 要素が親
+    * mode == -1 のとき: 第 1 要素は第 2 要素より小さい．
+
+  向き (0/1) を dir に入れておけば，`auto [src, dest] = tr.nodes_of_edge(e, dir)` のように使える．
 
 
 #### 深さ，部分木のサイズ
