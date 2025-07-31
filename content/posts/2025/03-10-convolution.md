@@ -70,6 +70,7 @@ x と y を，長さが同じ2の累乗になるように resize する．新し
 
 * [ABC393 E - GCD of Subset](https://atcoder.jp/contests/abc393/tasks/abc393_e) 素数ゼータ変換
 * [ABC212 H - Nim Counting](https://atcoder.jp/contests/abc212/tasks/abc212_h) xor畳み込み
+* [PAST18 M - グループ分け](https://atcoder.jp/contests/past18-open/tasks/past18_m) 和集合畳み込み
 
 #### この blog の中の記事
 
