@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "行列ライブラリ"
-date: "2024-03-30T15:29:16+09:00"
-# date_init: "2024-03-30"
+date: "2025-08-09"
+date_init: "2024-03-30"
 tags: ["matrix"]
 categories: ["topic"]
 # categories: ["solution"]
@@ -13,27 +13,51 @@ categories: ["topic"]
 
 ### 依存関係
 
-AO.cc  (Algebra Operations) に依存する．
+AO.cc  (Algebra Operations) に依存する ... と思う (最近チェックしていない．ひょっとしたら違うかも)
 
 ### 型
 
 要素の型を `T` として，`Matrix<T>` が，行列の型になる．
-(実装上，これは，`Mat<AO_def<T>>` として定義されているが，使うときは気にしなくて良い)
 
 以下，要素の型を `T` とし，`MyMat = Matrix<T>` と定義されているものとする．
 `mat` は `MyMat` 型とする．
+
+### 使用法
+
+```cpp
+using MyMat = Matrix<ll>;
+MyMat mat1(n, m);
+REP(i, 0, n) REP(j, 0, m) cin >> mat1.at(i, j);
+MyMat cvec1(n, 1);
+REP(i, 0, n) cin >> cvec1.at(i, 0);
+auto cvec2 = mat1 * cvec1;
+REP(i, 0, n) cout << cvec2.at(i, 0) << " ";
+cout << endl;
+```
 
 ### 構築子
 
 * `MyMat(int dimI_, int dimJ_)` ... dimI_ 行 dimJ_ 列 の零行列
 * `MyMat(int dimI_, int dimJ_, T t)`  ... dimI_ 行 dimJ_ 列 の，要素の値がすべて `t` である行列
-* `MyMat(int dimI_, int dimJ_, const vector<T>& vec)`
-  ... dimI_ 行，dimJ_ 列で，内部表現が vec である行列．
-  内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector.
-  dimI_ と dimJ_ のどちらかは負の数にすることができて，その場合には計算される．
+* `MyMat(int dimI_, int dimJ_, const vector<T>& vec)` ... dimI_ 行，dimJ_ 列で，内部表現が vec である行列．
+   * 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector.
+   * dimI_ と dimJ_ のどちらかは負の数にすることができて，その場合には計算される．
 * `MyMat(int dimI_, int dimJ_, vector<T>&& vec)` ... 同上
 * `MyMat(initializer_list<initializer_list<T>> il)`  ... 自然に
 * `MyMat(const Part& cs)`  ... 構造体 Part については後述
+
+### その他，行列を作る関数
+
+* `MyMat::from_vvec(const vector<vector<T>>& vvec)`  ... 2次元ベクトルからMyMat 型行列を作成する．
+* `mat.rowVec(i)` ... 第 i 行目を表す MyMat 型行列
+* `mat.colVec(i)` ... 第 i 列目を表す MyMat 型行列
+
+### 要素へのアクセス
+
+* `mat.at(i, j)` ... (i, j) 要素の値
+* `mat.rs(i, j)` ... (i, j) 要素への代入
+  * rs は，実際，`MyMat&` を返すので，値も取れる．`mat.rs(i, j) += 1;` のようなコードも書ける．
+
 
 ### ベクトルと $(n, 1)$ 行列
 
@@ -54,13 +78,7 @@ AO.cc  (Algebra Operations) に依存する．
 そこで，何らかのオブジェクトを作って，「それと同じサイズの」零行列や単位行列が作れるようにしてある．
 
 * `mat.zero()` ... mat と同じサイズの零行列
-* `mat.unit()` ... mat と同じサイズの単位行列．行と列の大きさは一致していなければならない．
-
-### その他，行列を作る関数
-
-* `MyMat::from_vvec(const vector<vector<T>>& vvec)`  ... 2次元ベクトルからMyMat 型行列を作成する．
-* `mat.rowVec(i)` ... 第 i 行目を表す MyMat 型行列
-* `mat.colVec(i)` ... 第 i 列目を表す MyMat 型行列
+* `mat.unit()` ... mat と同じサイズの単位行列．mat の行と列の大きさは一致していなければならない．
 
 ### 小行列を表す構造体 Part
 
@@ -84,6 +102,7 @@ AO.cc  (Algebra Operations) に依存する．
 
 ### 掃き出し，逆行列，一次方程式，....
 
+* T が体になっていないときには，正しい結果にならなかったりコンパイルエラーになったりする．
 * `[rank, det] = mat.self_sweepout();`
   ... `mat` は，縦方向に掃き出したものに置き換えられる．`rank` はランク，`det` は行列式．
 * `[rank, det] = mat.sweepout();`
@@ -96,11 +115,28 @@ AO.cc  (Algebra Operations) に依存する．
   * 返り値 oo の型は `optional<pair<MyMat, vector<MyMat>>>`．
     * 解がない場合には，`oo` は，`nullopt`．
     * 解がある場合には，`oo = [sol, kernel]` として，`sol` は (1つの) 解．
-      `flag` が true の場合には，`kernel` は解空間の基底．
-      `flag` が false の場合には，`kernel` の値には意味が無い (計算が省略される)
+      `flag` が true の場合には，解空間を sol + V として，`kernel` は V の基底．
+      `flag` が false (デフォルト) の場合には，`kernel` の値には意味が無い (計算が省略される)
   * 注意: コンパイラが，linSolution の後ろに付ける "<" を不等号と誤認しないよう，次のように
     `.template` を書く必要があるかもしれない:
     * `auto opt1 = mat.template linSolution<true>(bs);`
+
+### max-plus, min-pus 代数
+
+行列と直接関係あるわけではないが，max-plus 代数は，次のように定義できる．(algOp ライブラリを使う)
+
+```cpp
+struct MaxPlusLL {
+  using value_type = ll;
+  static value_type zero(      const value_type& u)                      { return LLONG_MIN; }
+  static value_type one(       const value_type& u)                      { return 0; }
+  static value_type add(       const value_type& u, const value_type& v) { return max(u, v); }
+  static void       subst_mult(      value_type& u, const value_type& v) { u += v; }
+};
+using MMP = MyAlg<MaxPlusLL>;
+```
+
+こうしておけば，`Matrix<MMP>` によって，max-plus 代数の行列計算が実行できる．
 
 
 

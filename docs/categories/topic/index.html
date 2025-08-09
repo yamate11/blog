@@ -160,6 +160,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">行列ライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>自分用の 行列ライブラリ のメモです．
+依存関係 AO.cc (Algebra Operations) に依存する … と思う (最近チェックしていない．ひょっとしたら違うかも)
+型 要素の型を T として，Matrix&lt;T&gt; が，行列の型になる．
+以下，要素の型を T とし，MyMat = Matrix&lt;T&gt; と定義されているものとする． mat は MyMat 型とする．
+使用法 using MyMat = Matrix&lt;ll&gt;; MyMat mat1(n, m); REP(i, 0, n) REP(j, 0, m) cin &gt;&gt; mat1.at(i, j); MyMat cvec1(n, 1); REP(i, 0, n) cin &gt;&gt; cvec1.at(i, 0); auto cvec2 = mat1 * cvec1; REP(i, 0, n) cout &lt;&lt; cvec2.at(i, 0) &lt;&lt; &#34; &#34;; cout &lt;&lt; endl; 構築子 MyMat(int dimI_, int dimJ_) … dimI_ 行 dimJ_ 列 の零行列 MyMat(int dimI_, int dimJ_, T t) … dimI_ 行 dimJ_ 列 の，要素の値がすべて t である行列 MyMat(int dimI_, int dimJ_, const vector&lt;T&gt;&amp; vec) … dimI_ 行，dimJ_ 列で，内部表現が vec である行列． 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector....</p>
+  </div>
+  <footer class="entry-footer">2025-08-09   (初版 2024-03-30)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 行列ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-30-matrix/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">木ライブラリ
     </h2>
   </header>
@@ -362,18 +378,6 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   </div>
   <footer class="entry-footer">2024-09-08   (初版 2022-12-10)   yamate11</footer>
   <a class="entry-link" aria-label="post link to ダブリングライブラリ" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">LIS - 最長増加部分列
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>復元方法も含めた最長増加部分列に関するまとめ</p>
-  </div>
-  <footer class="entry-footer">2024-09-01   yamate11</footer>
-  <a class="entry-link" aria-label="post link to LIS - 最長増加部分列" href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
