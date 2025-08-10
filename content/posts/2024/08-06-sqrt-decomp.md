@@ -38,18 +38,18 @@ summary: "平方分割ライブラリを書きました"
 このパターンの場合には，次のように処理が書ける:
 
 * まず，両端のブロックを処理するための関数を書く．
-  関数は，ブロック番号，それに対応するデータへの参照，ブロック内添字，もとの添字
-  を引数に取り，この要素の処理内容を記述する．
+  関数は，元の添字とブロック番号を引数に取り，この要素の処理内容を記述する．
   ```cpp
-  auto fe = [&](int b, S& s, int i, int idx) -> void { .... };
+  auto fe = [&](int idx, int b) -> void { .... };
   ```
-  なお，`s == srd.data(b)`, `idx == srd.pos2idx(b, i)` という関係がある．
+  対応するデータにアクセスしたいときには，`srd.data(b)` を使う．
+  ブロック内添字が必要なときには `srd.idx2pos(idx).second` を使う．
 * 次に，中央のブロックを処理するための関数を書く．
   関数は，ブロック番号と，それに対応するデータへの参照を引数に取り，このブロックの処理内容を記述する．
   ```cpp
-  auto fb = [&](int b, S& s) -> void { .... };
+  auto fb = [&](int b) -> void { .... };
   ```
-  なお，`s == srd.data(b)` という関係がある．
+  対応するデータにアクセスしたいときには，`srd.data(b)` を使う．
 * 最後に，これらの関数を実行する．
   ```cpp
   srd.exec(lo, hi, fe, fb);
@@ -89,12 +89,13 @@ summary: "平方分割ライブラリを書きました"
       if (tp == MODIFY) {
         ll val; cin >> val;
         // まず，両端のブロックで行うべき処理を，関数として書く．
-        auto fe = [&](ll b, S& s, ll i, ll idx) {
+        auto fe = [&](ll idx, ll b) {
           A[idx] += a;
-          s.sum += a;
+          srd.data(b).sum += a;
         };
         // 次に，両端以外のブロックで行うべき処理を書く．
-        auto fb = [&](ll b, S& s) {
+        auto fb = [&](ll b) {
+          auto& s = srd.data(b);
           s.sum += a * srd.block_size(b);
           s.shift += a;
         };
@@ -102,8 +103,8 @@ summary: "平方分割ライブラリを書きました"
         srd.exec(lo, hi, fe, fb);      
       }else if (tp == ASK) {
         ll ret = 0;
-        auto fe = [&](ll b, S& s, ll i, ll idx) { ret += s.shift + A[idx]; };
-        auto fb = [&](ll b, S& s) { ret += s.sum; };
+        auto fe = [&](ll idx, ll b) { ret += srd.data(b).shift + A[idx]; };
+        auto fb = [&](ll b) { ret += srd.data(b).sum; };
         srd.exec(lo, hi, fe, fb);
         cout << ret << "\n";
       }
