@@ -175,6 +175,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">boost の多倍長計算
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>AtCoderでは C&#43;&#43; で boost が使えるので，多倍長計算をすることができます．
+ヘッダ部分 先頭付近に次のように書いておきます．(競技プログラミングなので，これで良いことにしてください．)
+#include &lt;boost/multiprecision/cpp_int.hpp&gt; // 整数を使う時 #include &lt;boost/multiprecision/cpp_bin_float.hpp&gt; // 浮動小数点数を使う時 using namespace boost::multiprecision; 整数 多倍長整数として，cpp_int というものが用意されています．普段 int とか long long と書くところを，cpp_int にすればOKです．コンストラクタには文字列も使えます．
+例 「AtCoder Regular Contest 057-C 2乗根 」を解いてみたコードです．
+template&lt;typename T&gt; T power(T a, ll b) { T twoPow = a; T rv = 1; while (b &gt; 0) { if (b &amp; 1LL) rv *= twoPow; twoPow *= twoPow; b &gt;&gt;= 1; } return rv; } cpp_int solve() { string s; cin &gt;&gt; s; cpp_int lo(s); // 読み込んだ文字列をcpp_intに変換 cpp_int lo2 = lo * lo; cpp_int hi2 = (lo &#43; 1) * (lo &#43; 1); cpp_int th = power(cpp_int(100), s....</p>
+  </div>
+  <footer class="entry-footer">2023-11-05   (初版 2020-03-16)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to boost の多倍長計算" href="https://yamate11.github.io/blog/posts/2023/11-05-boost-multi-prec/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">二重連結
     </h2>
   </header>
@@ -348,23 +364,6 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
   </div>
   <footer class="entry-footer">2022-05-19   (初版 2022-03-06)   yamate11</footer>
   <a class="entry-link" aria-label="post link to Mo&#39;s algorithm メモ" href="https://yamate11.github.io/blog/posts/2022/03-06-mo-s-algorithm/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">RBS - Educational Codeforces Round 115 F
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Educational Codeforces Round 115 F. RBS の解法です． 解説ACです．
-問題概要 問題へのリンク 文字 ( と ) のみからなる空でない文字列全体の集合を $S$ とする． $s \in S$ に対し，$s$ の空でない prefix であって， 括弧の対応が取れているものの数を $f(s)$ と書くことにする． 例えば $f(\verb!&#34;()()()))&#34;!) = 3$, $f(\verb!&#34;(()())((&#34;!) = 1$．
-$S$ の要素が $n$ 個与えられる． これらを並べ替えて連結して得られる文字列 $s$ について，$f(s)$ の 最大値を求めよ．
-制約: $ 1 \leq n \leq 20$，与えられる文字列の長さの和は $4\times 10^5$ 以下． 制限時間3秒．
-解法 0-index で記述する． $\bar{n} := \{0, \ldots, n-1\}$ とする．
-$s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(s)$ と書く． $s \in S$ で，全ての $i &lt; |s|$ に対して $g(s) \geq 0$ であるものの集合を $L$ と書く．$D := S \setminus L$．...</p>
-  </div>
-  <footer class="entry-footer">2022-05-19   yamate11</footer>
-  <a class="entry-link" aria-label="post link to RBS - Educational Codeforces Round 115 F" href="https://yamate11.github.io/blog/posts/2022/05-19-ecf-115-f-rbs/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

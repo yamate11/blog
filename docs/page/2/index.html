@@ -170,6 +170,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ARC196 A - Adjacent Delete
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 整数 $N$ と長さ $N$ の整数列 $A$ が与えられる．最初スコアは $0$ である． 次の操作を，$A$ の長さが $1$ 以下になるまで繰り返す:
+$A$の (その時点で) 隣接する2項を選び，どちらも削除する． 2項の差の絶対値がスコアに加算される． 得られるスコアの最大値を求めよ．
+制約 $2 \leq N \leq 3\times 10^5$，$1 \leq A_i \leq 10^9$
+解 公式解説へのリンク 略解．click to open $N$ が偶数の時 大きい方の半分をプラスに，小さい方の半分をマイナスにした和がスコアの上界． この上界が達成できる．
+$N$ が奇数の時 最後に残る1個を決めると，その左右それぞれで，上記偶数の時と同じ議論になる． 最後に残る1個を，左から順に全部調べる．</p>
+  </div>
+  <footer class="entry-footer">2025-04-21   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ARC196 A - Adjacent Delete" href="https://yamate11.github.io/blog/posts/2025/04-21-ret-arc196-a/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">ABC397 F - Variety Split Hard
     </h2>
   </header>
@@ -370,23 +386,6 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   </div>
   <footer class="entry-footer">2024-06-23   yamate11</footer>
   <a class="entry-link" aria-label="post link to 木DP &#43; マージテク" href="https://yamate11.github.io/blog/posts/2024/06-23-merge-tech-tree-dp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">二項係数に関する公式
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>$$ \binom{n}{r} = \binom{n - 1}{r - 1} &#43; \binom{n - 1}{r} $$
-言わずもがな．パスカルの三角形
-$$ \binom{n}{r} = \frac{n}{r} \binom{n - 1}{r - 1} $$
-定義から明らか．
-$$ \sum_{i = r}^{n} \binom{i}{r} = \binom{n &#43; 1}{r &#43; 1} $$
-Hockey-stick identity. 次のように1を繰り返し適用． $\binom{n &#43; 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 1}{r &#43; 1} = \binom{n}{r} &#43; \binom{n - 1}{r} &#43; \binom{n - 2}{r} &#43; \binom{n - 2}{r &#43; 1} = \dots$...</p>
-  </div>
-  <footer class="entry-footer">2024-06-21   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 二項係数に関する公式" href="https://yamate11.github.io/blog/posts/2024/06-21-binomial/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
