@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "忘れやすい事項"
-date: "2025-06-15"
+date: "2025-08-17"
 date_init: "2024-06-04"
 tags: []
 categories: ["topic"]
@@ -16,6 +16,7 @@ categories: ["topic"]
 * convolution
 * 半分全列挙
 * フロー
+* 燃やす埋める
 * 平方分割
 * CHT
 * trie
