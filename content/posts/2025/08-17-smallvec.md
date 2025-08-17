@@ -55,6 +55,8 @@ categories: ["topic"]
   * 格納できる値は，0 以上 256 未満の整数．
   * string をほとんどそのまま使っている．`<<` 演算子で，ベクトル風に出力されるところだけが違う．
 
+### ソース
 
+[ソース](https://github.com/yamate11/compprog-clib/blob/master/smallVec.cc)
 
 
