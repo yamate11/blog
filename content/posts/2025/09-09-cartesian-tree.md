@@ -69,11 +69,15 @@ CartesianTree ct2(vec, [](ll a, ll b) { return a > b; });
 
 ## メンバ
 
+### 根
+
 根は，メンバ root でアクセスする．
 
 ```cpp
 cout << ct0.root << endl;  // 2
 ```
+
+### 子
 
 左の子と右の子は，vector 型のメンバ left と right に格納されている．
 
@@ -85,28 +89,33 @@ cout << ct0.right[2] << endl; // 5
 * 子供が無いときには，left や right には $-1$ が格納される．
 * 最小値が2箇所以上にあるときには，どれかひとつが適当に選ばれる．
 
+### 親
+
+親は格納していないので，必要なら利用者が作る．
+
 ## 例
 
 スタックを使って最小値を処理していくようなコードは，Cartesian Tree で書けることが多いのではないかと思う．
 
 #### ABC189 C - Mandarin Orange
 
-よくある，「ヒストグラムにおさまる最大の四角形」を求める問題
+よくある「ヒストグラムにおさまる最大の四角形」を求める問題
 
 ```cpp
   // vector A に問題を読み込む．
-
+  CartesianTree ct(A);
   ll ans = 0;
-  auto dfs = [&](auto rF, ll lo, ll hi, ll x) -> void {
+  auto f = [&](auto rF, ll lo, ll hi, ll x) -> void {
     if (x < 0) return;
     updMax(ans, (hi - lo) * A[x]);
-    rF(rF, lo, x, cp.left[x]);
-    rF(rF, x + 1, hi, cp.right[x]);
+    rF(rF, lo,    x,  ct.left[x]);
+    rF(rF, x + 1, hi, ct.right[x]);
   };
-  dfs(dfs, 0, N, cp.root);
+  f(f, 0, N, ct.root);
   cout << ans << endl;
 ```
 
+#### 
 
 
 
