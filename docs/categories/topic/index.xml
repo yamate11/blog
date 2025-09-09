@@ -6,8 +6,15 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 17 Aug 2025 17:05:20 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 09 Sep 2025 14:49:47 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cartesian Tree</title>
+      <link>https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/</link>
+      <pubDate>Tue, 09 Sep 2025 14:49:47 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/</guid>
+      <description>Cartesian Tree のライブラリ</description>
+    </item>
     <item>
       <title>小さい整数のベクトルライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2025/08-17-smallvec/</link>

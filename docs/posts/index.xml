@@ -9,11 +9,11 @@
     <lastBuildDate>Tue, 09 Sep 2025 14:49:47 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>Cartesian Tree</title>
       <link>https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/</link>
       <pubDate>Tue, 09 Sep 2025 14:49:47 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/</guid>
-      <description> </description>
+      <description>Cartesian Tree のライブラリ</description>
     </item>
     <item>
       <title>小さい整数のベクトルライブラリ</title>
