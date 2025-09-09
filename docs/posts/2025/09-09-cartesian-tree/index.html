@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Predilection - Atcoder Beginner Contest 230 F | yamate11のブログ</title>
+<title>yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="解説ACです．">
+<meta name="description" content=" ">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -81,16 +81,16 @@
 
 
 
-<meta property="og:title" content="Predilection - Atcoder Beginner Contest 230 F" />
-<meta property="og:description" content="解説ACです．" />
+<meta property="og:title" content="" />
+<meta property="og:description" content=" " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-20T18:49:32+09:00" />
-<meta property="article:modified_time" content="2022-02-20T18:49:32+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-09-09T14:49:47+09:00" />
+<meta property="article:modified_time" content="2025-09-09T14:49:47+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Predilection - Atcoder Beginner Contest 230 F"/>
-<meta name="twitter:description" content="解説ACです．"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content=" "/>
 
 
 <script type="application/ld+json">
@@ -107,8 +107,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Predilection - Atcoder Beginner Contest 230 F",
-      "item": "https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/"
+      "name": "",
+      "item": "https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/"
     }
   ]
 }
@@ -117,24 +117,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Predilection - Atcoder Beginner Contest 230 F",
-  "name": "Predilection - Atcoder Beginner Contest 230 F",
-  "description": "解説ACです．",
+  "headline": "",
+  "name": "",
+  "description": " ",
   "keywords": [
     
   ],
-  "articleBody": "AtCoder Beginner Contest 230 - ABC 230 F - Predilection の解法です． 解説ACです．\n問題概要 長さ$N$ の数列 $A$ が与えられる．次の操作を好きな回数行う．\n数列の長さが2以上のとき，隣接する2つの値を，それらの和で置き換える． 0回以上の操作の結果得られる数列の種類数を mod 998244353 で求めよ．\n制約: $N \\leq 2 \\times 10^5$，$-10^9 \\leq A_i \\leq 10^9$\n問題へのリンク 解法 0-indexed で書く．\n$A_0, \\ldots, A_i$ から得られる数列の集合を $S_i$ とする． $S_{i}$ の要素は，$S_{i - 1}$ の要素 $p_0, \\ldots, p_m$ から， いずれかの手段で得られる．\n(A) 末尾に $A_{i}$ を追加して，$p_0, \\ldots, p_m, A_{i}$ とする． (B) 末尾の数に $A_{i}$ を加えて，$p_0, \\ldots, p_{m-1}, p_m + A_{i}$ とする． このように作成したものが重複する場合を調べる． (A)どうし，(B)どうしは重複しない． (A) 型の $p_0, \\ldots, p_m, A_{i}$ と (B) 型の $q_0, \\ldots, q_{n-1}, q_n + A_{i}$ が一致する条件は， $m = n - 1$, $A_{i} = q_n + A_{i}$，$p_j = q_j$ ($j = 0, \\ldots, n - 1$) である． 逆に，$n \u003e 0$ かつ $q_n = 0$ であれば， $Q_1 = q_0, \\ldots, q_{n-1}, 0$ に対して (B) を適用した数列と， $Q_2 = q_0, \\ldots, q_{n-1}$ に対して (A) を適用した数列が一致する． また，$Q_1$ が $S_{i - 1}$ の要素であれば，$Q_2$ も $S_{i - 1}$ の要素である．\nしたがって，\n$S_i$ の要素数を $dp[i]$ $S_i$ の要素のうち，長さが2以上で末尾が0であるものの数を $f(i)$ とすれば，\n$dp[0] = 1$ $dp[i] = 2 \\times dp[i - 1] - f(i - 1)$ となる．$f(i)$ については，$A_k + A_{k + 1} + \\cdots + A_i = 0$， $0 \u003c k \\leq i$ となる $k$ が存在しなければ，$f(i) = 0$ である． 存在する場合には，そのような $k$ のうち最大のものを $k_0(i)$ として， $f(i) = dp[k_0(i) - 1]$ である．\n$k_0(i)$ は，累積和を用いて $O(N\\log N)$ で計算できる． 全体の計算量は $O(N\\log N)$ となる．\n実装 ACコード ",
-  "wordCount" : "211",
+  "articleBody": " ",
+  "wordCount" : "0",
   "inLanguage": "en",
-  "datePublished": "2022-02-20T18:49:32+09:00",
-  "dateModified": "2022-02-20T18:49:32+09:00",
+  "datePublished": "2025-09-09T14:49:47+09:00",
+  "dateModified": "2025-09-09T14:49:47+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/"
+    "@id": "https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/"
   },
   "publisher": {
     "@type": "Organization",
@@ -212,75 +212,24 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Predilection - Atcoder Beginner Contest 230 F
+      
     </h1>
-    <div class="post-meta">2022-02-20   yamate11
+    <div class="post-meta">2025-09-09   yamate11
 </div>
   </header> 
-  <div class="post-content"><p>AtCoder Beginner Contest 230 - ABC 230 F - Predilection の解法です．
-解説ACです．</p>
-<h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
-<p>長さ$N$ の数列 $A$ が与えられる．次の操作を好きな回数行う．</p>
-<ul>
-<li>数列の長さが2以上のとき，隣接する2つの値を，それらの和で置き換える．</li>
-</ul>
-<p>0回以上の操作の結果得られる数列の種類数を mod 998244353 で求めよ．</p>
-<p>制約: $N \leq 2 \times 10^5$，$-10^9 \leq A_i \leq 10^9$</p>
-<p><a href="https://atcoder.jp/contests/abc230/tasks/abc230_f" target="_blank">問題へのリンク</a>
-</p>
-<h2 id="解法">解法<a hidden class="anchor" aria-hidden="true" href="#解法">#</a></h2>
-<p>0-indexed で書く．</p>
-<p>$A_0, \ldots, A_i$ から得られる数列の集合を $S_i$ とする．
-$S_{i}$ の要素は，$S_{i - 1}$ の要素 $p_0, \ldots, p_m$ から，
-いずれかの手段で得られる．</p>
-<ul>
-<li>(A) 末尾に $A_{i}$ を追加して，$p_0, \ldots, p_m, A_{i}$ とする．</li>
-<li>(B) 末尾の数に $A_{i}$ を加えて，$p_0, \ldots, p_{m-1}, p_m + A_{i}$ とする．</li>
-</ul>
-<p>このように作成したものが重複する場合を調べる．
-(A)どうし，(B)どうしは重複しない．
-(A) 型の $p_0, \ldots, p_m, A_{i}$ と
-(B) 型の $q_0, \ldots, q_{n-1}, q_n + A_{i}$ が一致する条件は，
-$m = n - 1$, $A_{i} = q_n + A_{i}$，$p_j = q_j$ ($j = 0, \ldots, n - 1$)
-である．
-逆に，$n &gt; 0$ かつ $q_n = 0$ であれば，
-$Q_1 = q_0, \ldots, q_{n-1}, 0$ に対して (B) を適用した数列と，
-$Q_2 = q_0, \ldots, q_{n-1}$ に対して (A) を適用した数列が一致する．
-また，$Q_1$ が $S_{i - 1}$ の要素であれば，$Q_2$ も $S_{i - 1}$ の要素である．</p>
-<p>したがって，</p>
-<ul>
-<li>$S_i$ の要素数を $dp[i]$</li>
-<li>$S_i$ の要素のうち，長さが2以上で末尾が0であるものの数を $f(i)$</li>
-</ul>
-<p>とすれば，</p>
-<ul>
-<li>$dp[0] = 1$</li>
-<li>$dp[i] = 2 \times dp[i - 1] - f(i - 1)$</li>
-</ul>
-<p>となる．$f(i)$ については，$A_k + A_{k + 1} + \cdots + A_i = 0$，
-$0 &lt; k \leq i$ となる $k$ が存在しなければ，$f(i) = 0$ である．
-存在する場合には，そのような $k$ のうち最大のものを $k_0(i)$ として，
-$f(i) = dp[k_0(i) - 1]$ である．</p>
-<p>$k_0(i)$ は，累積和を用いて $O(N\log N)$ で計算できる．
-全体の計算量は $O(N\log N)$ となる．</p>
-<h2 id="実装">実装<a hidden class="anchor" aria-hidden="true" href="#実装">#</a></h2>
-<p><a href="https://atcoder.jp/contests/abc230/submissions/29500924" target="_blank">ACコード</a>
-</p>
+  <div class="post-content"><!-- タイトルはキーワードがインデックスされないかもしれないので，
+     ここに書いておく -->
+<!-- AtCoder *** Contest xxx - A*C xxx F - 問題タイトル の解法です．-->
 
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Balls in Boxes - Atcoder Beginner Contest 231 G</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/02-20-maxflow-mincut/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/">
     <span class="title">Next »</span>
     <br>
-    <span>最大流・最小カット</span>
+    <span>小さい整数のベクトルライブラリ</span>
   </a>
 </nav>
 
@@ -289,7 +238,7 @@ $f(i) = dp[k_0(i) - 1]$ である．</p>
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2022/02-20-abc-230-f-predilection/" data-title="Predilection - Atcoder Beginner Contest 230 F">
+<section id="isso-thread" data-isso-id="/blog/posts/2025/09-09-cartesian-tree/" data-title="">
 </section>
 
 <p>Links to Recent Posts:
