@@ -50,16 +50,19 @@ __ただし，mod の値は大きいので，オーバーフローに注意__．
 
 以下，u64 は unsigned long long のこととする．
 
+ハッシュ値は，0 以上 $2^{61} - 1$ 未満の値を取る．`RHVal` という型が定義してあって，
+この型でハッシュ値を扱う．`u64` にキャストできる．
+
 ハッシュ値の計算は，次の段取りによる:
 
 * まず，RollingHash オブジェクト `rh` を作成する．
-* 文字列 `s` と，その部分列のハッシュ値が欲しい場合
-  * 前計算．`hs = rh.hashes(s);`
-  * ハッシュ値は，次のようにとれる．
-    * `s` のハッシュ値: `rh.get(hs)`．
-    * `s` の位置 `i` から始まる長さ `len` の部分文字列のハッシュ値: `rh.get(hs, i, len)`．
-* 文字列 `s` のハッシュ値のみがほしい場合
+* 文字列 `s` のハッシュ値のみがほしく，部分列に興味が無い場合
   * `rh.hashvalue(s)`
+* 文字列 `s` と，その部分列のハッシュ値が欲しい場合
+  * 前計算．`hs = rh.precomp(s);`
+  * ハッシュ値は，次のようにとれる．
+    * `s` のハッシュ値: `hs.get()`．
+    * `s` の位置 `i` から始まる長さ `len` の部分文字列のハッシュ値: `hs.get(i, len)`．
     
 #### RollingHash オブジェクトの生成
 
@@ -91,29 +94,31 @@ RollingHash rh(0, min_base);
 
 ```cpp
 string s = "Hello, world.";
-vector<u64> hs = rh.hashes(s);
+auto hs = rh.precomp(s);
 ```
-
-返り値 hs の長さは ssize(s) + 1 で，第 i 要素は，s.substr(0, i) に対するハッシュ値である．
 
 引数は string または `const char*`．
 
+返り値 `hs` は，`RollingHash::HashValues` 型のオブジェクトである．
+計算結果が直接欲しければ `hs.vs` に `vector<RHVal>` 型として格納されており，
+長さは ssize(s) + 1 で，第 `i` 要素は，`s.substr(0, i)` に対するハッシュ値である (が，直接扱う必要はたぶん無い)．
+
+
 #### ハッシュ値の計算
 
-s およびその部分文字列のハッシュ値は，get メソッドで取得できる．
-前計算の結果も与える必要がある．
+s およびその部分文字列のハッシュ値は，`HashValues` の get メソッドで取得できる．
 
 ```cpp
-auto hs = rh.hashes(s);
-u64 h0 = rh.get(hs);               // s 自身のハッシュ値． hs[ssize(s)] に等しい．
-u64 h1 = rh.get(hs, start, len);   // s.substr(start, len) のハッシュ値
-u64 h2 = rh.get(hs, start);        // s.substr(start) のハッシュ値
+auto hs = rh.precomp(s);
+RHVal h0 = hs.get();             // s 自身のハッシュ値． hs.vs[ssize(s)] に等しい．
+RHVal h1 = hs.get(start, len);   // s.substr(start, len) のハッシュ値
+RHVal h2 = hs.get(start);        // s.substr(start) のハッシュ値
 ```
 
-部分文字列に興味が無いときには，`hashvalue()` を使えば，前計算無しでハッシュ値を取得できる:
+部分文字列に興味が無いときには，`rh.hashvalue(s)` を使えば，前計算無しでハッシュ値を取得できる:
 
 ```cpp
-u64 h0 = rh.hashvalue(s);
+RHVal h0 = rh.hashvalue(s);
 ```
 
 なお，空文字列のハッシュ値は 0 である．
@@ -124,7 +129,7 @@ u64 h0 = rh.hashvalue(s);
 s1 と s2 を連結した文字列 s1 + s2 のハッシュ値 h は，次のように計算できる:
 
 ```cpp
-u64 h = rh.hash_concat(h1, h2, ssize(s2));
+RHVal h = rh.hash_concat(h1, h2, ssize(s2));
 ```
 
 s2 の長さが必要であることに注意．
@@ -146,7 +151,7 @@ auto rh = make_rolling_hash_gen<T>(0, min_base, conv);
 ```
 
 T の要素に対するハッシュ値が，
-T から u64 へのキャストで良い場合には，次のように定義することもできる．
+T から RHVal へのキャスト (u64へのキャスト) で良い場合には，次のように定義することもできる．
 
 ```cpp
 RollingHashGen<T, nullptr_t> rh(0, min_base);        
@@ -155,33 +160,10 @@ RollingHashGen<T, nullptr_t> rh(0, min_base);
 なお，上で述べた，文字列を対象とした RollingHash 型は，
 `RollingHashGen<char, nullptr_t>` の別名として定義されている．
 
-#### mod $2^{61} - 1$ 演算
+#### RHVal 型
 
-0 以上 $2^{61} - 1$ 未満の u64 型の a, b に対し，
-$a + b \mod (2^{61} - 1)$，
-$a - b \mod (2^{61} - 1)$，
-$a \times b \mod (2^{61} - 1)$ の値を計算することができる．
-ハッシュ値をセグメント木で計算する場合など，
-自前で計算が必要になったときには，これらの関数が有効であろう．
-
-```cpp
-RollingHash rh;
-u64 a, b;
-rh_add(a, b);  // a + b   mod (2^61 - 1)
-rh_subt(a, b); // a - b   mod (2^61 - 1)
-rh_mul(a, b);  // a * b   mod (2^61 - 1)
-rh_prime - a;  // -a      mod (2^61 - 1)
-```
-
-### メモ -- 設計・実装上の注意点
-
-この方法だと，rh.get(hs, ss) というふうに，常に rh と hs の両方を意識しなくてはならないのが嫌な感じである．
-そこで，HashValues とかいうオブジェクトを作って，hvs = rh.hashes(s) は HashValues オブジェクトを返すようにして，
-HashValues オブジェクトに rh を格納してしまい，hvs.get(ss) というふうにすると，気持ちよいように思われる．
-しかし，これだと，HashValues の default constructor がうまく作れないので，vector<HashValues> が初期化できず，
-複数の文字列の部分列のハッシュ値が欲しいときに困る．
-
-
+RHVal 型 には，加算，減算，乗算が定義されており，mod $2^{61} - 1$ で計算される．
+セグメント木などで自前の計算が必要なときに利用できるはずである．
 
 ## keywords
 
