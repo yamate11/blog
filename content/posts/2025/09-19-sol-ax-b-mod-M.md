@@ -1,6 +1,6 @@
 ---
 author: "yamate11"
-title: "方程式 ax \equiv b mod M の解"
+title: "方程式 ax \\equiv b mod M の解"
 date: "2025-09-19T10:08:49+09:00"
 # date_init: "2025-09-19"
 tags: []
