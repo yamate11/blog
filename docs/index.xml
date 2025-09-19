@@ -6,8 +6,16 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 09 Sep 2025 14:49:47 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 19 Sep 2025 10:08:49 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>方程式 ax quiv b mod M の解</title>
+      <link>https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/</link>
+      <pubDate>Fri, 19 Sep 2025 10:08:49 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/</guid>
+      <description>概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
+$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&amp;rsquo;g$， $b = b&amp;rsquo;g$， $M = M&amp;rsquo;g$ として，eGCD で，$a&amp;rsquo;s + M&amp;rsquo;t = 1$， $0 \leq s &amp;lt; M&amp;rsquo;$ となる $s, t$ を求める． $b&amp;rsquo;s \equiv x_0 \pmod{M&amp;rsquo;}$，$0 \leq x_0 &amp;lt; M&amp;rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 + M&amp;rsquo;, x_0 + 2M&amp;rsquo;, \dots, x_0 + (g-1)M&amp;rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．</description>
+    </item>
     <item>
       <title>Cartesian Tree</title>
       <link>https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/</link>

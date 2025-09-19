@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>順列組合せ | yamate11のブログ</title>
-<meta name="keywords" content="Perm">
-<meta name="description" content="順列組合せ・重複ありなし ライブラリに関するメモです．">
+<title>方程式 ax quiv b mod M の解 | yamate11のブログ</title>
+<meta name="keywords" content="">
+<meta name="description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
+$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -81,16 +82,18 @@
 
 
 
-<meta property="og:title" content="順列組合せ" />
-<meta property="og:description" content="順列組合せ・重複ありなし ライブラリに関するメモです．" />
+<meta property="og:title" content="方程式 ax quiv b mod M の解" />
+<meta property="og:description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
+$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-02-28T17:14:24+09:00" />
-<meta property="article:modified_time" content="2023-02-28T17:14:24+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-09-19T10:08:49+09:00" />
+<meta property="article:modified_time" content="2025-09-19T10:08:49+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="順列組合せ"/>
-<meta name="twitter:description" content="順列組合せ・重複ありなし ライブラリに関するメモです．"/>
+<meta name="twitter:title" content="方程式 ax quiv b mod M の解"/>
+<meta name="twitter:description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
+$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．"/>
 
 
 <script type="application/ld+json">
@@ -107,8 +110,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "順列組合せ",
-      "item": "https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/"
+      "name": "方程式 ax \u001bquiv b mod M の解",
+      "item": "https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/"
     }
   ]
 }
@@ -117,24 +120,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "順列組合せ",
-  "name": "順列組合せ",
-  "description": "順列組合せ・重複ありなし ライブラリに関するメモです．",
+  "headline": "方程式 ax \u001bquiv b mod M の解",
+  "name": "方程式 ax \u001bquiv b mod M の解",
+  "description": "概要 方程式 $ax \\equiv b \\pmod M$ の解は，次のように求められる． $g := (a, M)$ として，\n$g \\mid b$ でないとき: 解無し $g \\mid b$ であるとき: $a = a\u0026rsquo;g$， $b = b\u0026rsquo;g$， $M = M\u0026rsquo;g$ として，eGCD で，$a\u0026rsquo;s + M\u0026rsquo;t = 1$， $0 \\leq s \u0026lt; M\u0026rsquo;$ となる $s, t$ を求める． $b\u0026rsquo;s \\equiv x_0 \\pmod{M\u0026rsquo;}$，$0 \\leq x_0 \u0026lt; M\u0026rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 + M\u0026rsquo;, x_0 + 2M\u0026rsquo;, \\dots, x_0 + (g-1)M\u0026rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．",
   "keywords": [
-    "Perm"
+    
   ],
-  "articleBody": "移動しました keywords: 順列 組合せ Perm IntPerm IntComp IntDupPerm IntDupComb 重複 箱\n",
-  "wordCount" : "11",
+  "articleBody": "概要 方程式 $ax \\equiv b \\pmod M$ の解は，次のように求められる． $g := (a, M)$ として，\n$g \\mid b$ でないとき: 解無し $g \\mid b$ であるとき: $a = a’g$， $b = b’g$， $M = M’g$ として，eGCD で，$a’s + M’t = 1$， $0 \\leq s \u003c M’$ となる $s, t$ を求める． $b’s \\equiv x_0 \\pmod{M’}$，$0 \\leq x_0 \u003c M’$ となる $x_0$ をとると， 解は，$x_0, x_0 + M’, x_0 + 2M’, \\dots, x_0 + (g-1)M’$ の $g$ 個である． 証明 解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．\n後半．$x = x_0 + iM’$ とする．$a’s + M’t = 1$ から $a’b’s + M’b’t = b’$ なので， $ax = ax_0 + iaM’ = a’gb’s + ia’gM’ = g(b’ - M’b’t) + ia’gM’ = b - Mb’t + ia’M \\equiv b \\pmod M$\n関連問題 ABC423G ",
+  "wordCount" : "128",
   "inLanguage": "en",
-  "datePublished": "2023-02-28T17:14:24+09:00",
-  "dateModified": "2023-02-28T17:14:24+09:00",
+  "datePublished": "2025-09-19T10:08:49+09:00",
+  "dateModified": "2025-09-19T10:08:49+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/"
+    "@id": "https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/"
   },
   "publisher": {
     "@type": "Organization",
@@ -212,32 +215,38 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      順列組合せ
+      方程式 ax quiv b mod M の解
     </h1>
-    <div class="post-meta">2023-02-28   yamate11
+    <div class="post-meta">2025-09-19   yamate11
 </div>
   </header> 
-  <div class="post-content"><p><a href="https://qiita.com/yamate11/items/3a6c45d9a8b66e03b410" target="_blank">移動しました</a>
+  <div class="post-content"><h2 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h2>
+<p>方程式 $ax \equiv b \pmod M$ の解は，次のように求められる．
+$g := (a, M)$ として，</p>
+<ul>
+<li>$g \mid b$ でないとき: 解無し</li>
+<li>$g \mid b$ であるとき:
+$a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s + M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める．
+$b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt;  M&rsquo;$ となる $x_0$ をとると，
+解は，$x_0, x_0 + M&rsquo;, x_0 + 2M&rsquo;, \dots, x_0 + (g-1)M&rsquo;$ の $g$ 個である．</li>
+</ul>
+<h2 id="証明">証明<a hidden class="anchor" aria-hidden="true" href="#証明">#</a></h2>
+<p>解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．</p>
+<p>後半．$x = x_0 + iM&rsquo;$ とする．$a&rsquo;s + M&rsquo;t = 1$ から $a&rsquo;b&rsquo;s + M&rsquo;b&rsquo;t = b&rsquo;$ なので，
+$ax = ax_0 + iaM&rsquo; = a&rsquo;gb&rsquo;s + ia&rsquo;gM&rsquo; = g(b&rsquo; - M&rsquo;b&rsquo;t) + ia&rsquo;gM&rsquo; = b - Mb&rsquo;t + ia&rsquo;M \equiv b \pmod M$</p>
+<h2 id="関連問題">関連問題<a hidden class="anchor" aria-hidden="true" href="#関連問題">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc423/tasks/abc423_g" target="_blank">ABC423G</a>
 </p>
-<p>keywords: 順列 組合せ Perm IntPerm IntComp IntDupPerm IntDupComb 重複 箱</p>
 
 
   </div>
 
   <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://yamate11.github.io/blog/tags/perm/">Perm</a></li>
-    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>素数以外の mod</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">
     <span class="title">Next »</span>
     <br>
-    <span>二項係数に関する公式</span>
+    <span>Cartesian Tree</span>
   </a>
 </nav>
 
@@ -246,7 +255,7 @@
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2023/02-28-perm-dup/" data-title="順列組合せ">
+<section id="isso-thread" data-isso-id="/blog/posts/2025/09-19-sol-ax-b-mod-m/" data-title="方程式 ax quiv b mod M の解">
 </section>
 
 <p>Links to Recent Posts:
