@@ -151,7 +151,7 @@ $(x_i, y_i)$ と $(x_{i + 1}, y_{i + 1})$ の間に1つずつセルを挿入し�
 解 tutorialへのリンク 略解．click to open $P_i = (x_i, y_i)$ と書く．$\{|x_i - x_{i + 1}|, |y_i - y_{i + 1}|\}$ は， (1) $\{0, 2\}$ であるか，(2) $\{1, 1\}$ であるか，でなければならない． 間に入れる点は，(1) では1つに決まる．(2) では，2つの点のうちのどちらか．</description>
     </item>
     <item>
-      <title>K番目...</title>
+      <title>K番目の要素</title>
       <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
