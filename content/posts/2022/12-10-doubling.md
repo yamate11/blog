@@ -80,6 +80,10 @@ $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
   ```
   * 内部テーブル `dobj.tbl` の型も `vector<vector<pair<int, T>>>` になる．
 
+## 3. 実装上の注意
+
+* 以前は，内部テーブルを f 用の `vector<vector<int>>` と モノイド用の `vector<vector<T>>` の2つを
+  持っていた．性能バグだった．
 
 
 keywords: doubling
