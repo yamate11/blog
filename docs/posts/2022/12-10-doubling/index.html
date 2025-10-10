@@ -8,10 +8,10 @@
 <title>ダブリングライブラリ | yamate11のブログ</title>
 <meta name="keywords" content="ダブリング">
 <meta name="description" content="ダブリングを行うライブラリを書きました．ソースはこちら ．
-できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
-典型的には:
-$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
-使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = .">
+1. できること 1.1 基本用法 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
+1.2 追加用法 上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
+典型例:
+$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． 1.">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.cfdb0c3379ef447c9f679190e89f76ab7e6d5dc5b725c57799a66e44b92c2d56.css" integrity="sha256-z9sMM3nvRHyfZ5GQ6J92q35tXcW3JcV3maZuRLksLVY=" rel="preload stylesheet" as="style">
@@ -87,10 +87,10 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
 
 <meta property="og:title" content="ダブリングライブラリ" />
 <meta property="og:description" content="ダブリングを行うライブラリを書きました．ソースはこちら ．
-できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
-典型的には:
-$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
-使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = ." />
+1. できること 1.1 基本用法 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
+1.2 追加用法 上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
+典型例:
+$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2022/12-10-doubling/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-09-08T12:50:00+09:00" />
@@ -99,10 +99,10 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ダブリングライブラリ"/>
 <meta name="twitter:description" content="ダブリングを行うライブラリを書きました．ソースはこちら ．
-できること その1 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
-典型的には:
-$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．
-使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [&amp;](ll i) -&gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector&lt;ll&gt; vec(N); REP(i, 0, N) vec[i] = ."/>
+1. できること 1.1 基本用法 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
+1.2 追加用法 上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
+典型例:
+$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． 1."/>
 
 
 <script type="application/ld+json">
@@ -131,12 +131,12 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   "@type": "BlogPosting",
   "headline": "ダブリングライブラリ",
   "name": "ダブリングライブラリ",
-  "description": "ダブリングを行うライブラリを書きました．ソースはこちら ．\nできること その1 $f : [0, N) \\to [0, N)$ が与えられた時， $r \\in [0, R]$ と $i \\in [0, N)$ に対して $f^{r}(i)$ を 計算する．\n典型的には:\n$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \\oplus)$ と $m: [0, N) \\to M$ が与えられて， $r, i$ に対して $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．\n使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [\u0026amp;](ll i) -\u0026gt; ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector\u0026lt;ll\u0026gt; vec(N); REP(i, 0, N) vec[i] = .",
+  "description": "ダブリングを行うライブラリを書きました．ソースはこちら ．\n1. できること 1.1 基本用法 $f : [0, N) \\to [0, N)$ が与えられた時， $r \\in [0, R]$ と $i \\in [0, N)$ に対して $f^{r}(i)$ を 計算する．\n1.2 追加用法 上の $f$ とともに，モノイド $(M, \\oplus)$ と $m: [0, N) \\to M$ も与えられて， $r, i$ に対して $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．\n典型例:\n$i \\mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \\textrm{ if } r(i) \u0026lt; i \\textrm{ then } 1 \\textrm{ else } 0$ とすればよい． 1.",
   "keywords": [
     "ダブリング"
   ],
-  "articleBody": "ダブリングを行うライブラリを書きました．ソースはこちら ．\nできること その1 $f : [0, N) \\to [0, N)$ が与えられた時， $r \\in [0, R]$ と $i \\in [0, N)$ に対して $f^{r}(i)$ を 計算する．\n典型的には:\n$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい) 計算する その2 上の $f$ の他に，モノイド $(M, \\oplus)$ と $m: [0, N) \\to M$ が与えられて， $r, i$ に対して $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．\n使用法 その1 DoublingFRel オブジェクト d を作る． 上記 $R$，$N$，$f$ を doubling_from_func に与える． ll R = 100000, N = 100000; auto f = [\u0026](ll i) -\u003e ll { return (i * i) % N; }; auto d = doubling_from_func(R, N, f); 関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，doubling_from_container を用いる． ll R = 100000, N = 100000; vector\u003cll\u003e vec(N); REP(i, 0, N) vec[i] = ...; auto d = doubling_from_container(R, N, vec); 値 $f^r(i)$ は，d.val(r, i) で取得できる． ll r = 12345, i = 54321; cout \u003c\u003c d.val(r, i) \u003c\u003c endl; なお，内部テーブルには，$f^{r}(i)$ が，$i \\in [0, N)$ と $r = 1, 2, 4, 8, \\ldots$ に対して 格納されている．\nその2 DoublingCum オブジェクト dc を作る． マッピング $m$ を関数で指定するときには，doubling_cum_from_func を用いる． モノイド $M$ を，テンプレートパラメタとして指定する． 第1パラメタには，「その1」で説明した DoublingFRel オブジェクトを指定する． 第2パラメタには，マッピング $m$ を指定する． ll R = 100000, N = 100000; auto f = [\u0026](ll i) -\u003e ll { return i * i % N; }; auto d1 = doubling_from_func(R, N, f); struct M { ll v; M(ll v_ = LLONG_MIN) v(v_) {} M operator+(const M\u0026 o) const { return M(max(v, o.v)); } }; auto m = [\u0026](ll i) -\u003e M { return M(i * i * i); }; auto dc = doubling_cum_from_func(d1, m); マッピング $m$ をベクトルなどのコンテナで指定したいときには，doubling_cum_from_container を用いる． vector\u003cll\u003e vec_m(N); ...; auto dc = doubling_cum_from_container(d1, vec_m); モノイド演算について，単位元が T() でなかったり，演算が plus() でない場合には， doubling_cum_from_* の第3, 4 パラメタで，単位元と演算を指定する． auto m = [\u0026](ll i) -\u003e ll { return i * i * i; }; auto mymax = [](ll a, ll b) { return max(a, b); }; auto dc = doubling_cum_from_func(d1, m, LLONG_MIN, mymax); 値 $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ は，dc.val(r, i) で取得できる． ll r = 12345, i = 54321; cout \u003c\u003c dc.val(r, i) \u003c\u003c endl; なお，内部テーブルには， $m( f^{r}(i) )$ が，$i \\in [0, N)$ と $r = 1, 2, 4, 8, \\ldots$ に対して格納されている．\nkeywords: doubling\n",
-  "wordCount" : "347",
+  "articleBody": "ダブリングを行うライブラリを書きました．ソースはこちら ．\n1. できること 1.1 基本用法 $f : [0, N) \\to [0, N)$ が与えられた時， $r \\in [0, R]$ と $i \\in [0, N)$ に対して $f^{r}(i)$ を 計算する．\n1.2 追加用法 上の $f$ とともに，モノイド $(M, \\oplus)$ と $m: [0, N) \\to M$ も与えられて， $r, i$ に対して $\\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．\n典型例:\n$i \\mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \\textrm{ if } r(i) \u003c i \\textrm{ then } 1 \\textrm{ else } 0$ とすればよい． 1.3 計算量 前計算 $O(N \\log R)$ 各回の値の計算 $O(\\log R)$ 2. 使用法 2.1 基本用法だけの時 DoublingFRel オブジェクト dobj を作る． Doubling dobj(R, N, vecF); 関数 $f$ の値を，vector などの型を持つ vecF に用意しておく．長さは $N$． 値 $f^r(i)$ は，dobj.val(r, i) で取得できる． cout \u003c\u003c dobj.val(r, i) \u003c\u003c endl; 有効な範囲は，$0 \\leq r \\leq R$，$0 \\leq i \u003c N$． なお，$r = 2^k$ に対する $f^r(i)$ が，内部テーブル dobj.tbl[k][i] に格納されている． 2.2 追加用法も行う時 モノイド演算が，型 T の 加法 (operator +) であるときは， make_doubling_with_monoid を使って，dobj を作る．\nauto dobj = make_doubling_with_monoid\u003cT\u003e(R, N, vecF, vecM); R, N, vecF は，上と同じ． 関数 $m$ の値を，vector などの型を持つ vecM に格納しておく．長さは $N$． は省略できない． モノイド演算が T の加法でないときには，make_doubling_with_monoid_unit_add を使って dobj を作る．\nauto dobj = make_doubling_with_monoid_unit_add(R, N, vecF, vecM, unit, add); 単位元 unit は T 型．T はこの引数から推論される． 加法 add は T を 2 つ引数にとって呼べて T を返すもの． これらの場合，dobj.val(r, i) は，pair で $(f^r(i), \\bigoplus_{k = 0}^{r - 1} m(f^{k}(i)))$ を返す．\nauto [j, c] = dobj.val(r, i); cout \u003c\u003c \"f^r(i) is \" \u003c\u003c j \u003c\u003c \" and total cost is \" \u003c\u003c c \u003c\u003c endl; 内部テーブル dobj.tbl の型も vector",
+  "wordCount" : "243",
   "inLanguage": "en",
   "datePublished": "2024-09-08T12:50:00+09:00",
   "dateModified": "2024-09-08T12:50:00+09:00",
@@ -231,90 +231,78 @@ $N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または $N$ も $R$ �
   </header> 
   <div class="post-content"><p>ダブリングを行うライブラリを書きました．ソースは<a href="https://github.com/yamate11/compprog-clib/blob/master/doubling.cc" target="_blank">こちら</a>
 ．</p>
-<h2 id="できること">できること<a hidden class="anchor" aria-hidden="true" href="#できること">#</a></h2>
-<h3 id="その1">その1<a hidden class="anchor" aria-hidden="true" href="#その1">#</a></h3>
+<h2 id="1-できること">1. できること<a hidden class="anchor" aria-hidden="true" href="#1-できること">#</a></h2>
+<h3 id="11-基本用法">1.1 基本用法<a hidden class="anchor" aria-hidden="true" href="#11-基本用法">#</a></h3>
 <p>$f : [0, N) \to [0, N)$ が与えられた時，
 $r \in [0, R]$ と $i \in [0, N)$ に対して
 $f^{r}(i)$ を
 計算する．</p>
-<p>典型的には:</p>
-<ul>
-<li>$N$ は $10^5$ くらい，$R$ は $10^{18}$ くらい，または</li>
-<li>$N$ も $R$ も $10^5$ くらいだが，何回も (たとえば $10^5$回くらい)
-計算する</li>
-</ul>
-<h3 id="その2">その2<a hidden class="anchor" aria-hidden="true" href="#その2">#</a></h3>
-<p>上の $f$ の他に，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ が与えられて，
+<h3 id="12-追加用法">1.2 追加用法<a hidden class="anchor" aria-hidden="true" href="#12-追加用法">#</a></h3>
+<p>上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて，
 $r, i$ に対して
-$\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ を計算する．</p>
-<h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
-<h3 id="その1-1">その1<a hidden class="anchor" aria-hidden="true" href="#その1-1">#</a></h3>
+$\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．</p>
+<p>典型例:</p>
 <ul>
-<li><code>DoublingFRel</code> オブジェクト <code>d</code> を作る．
+<li>$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき，
+$f^r(i)$ の実行に要するコストを求める．</li>
+<li>$[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める．
 <ul>
-<li>上記 $R$，$N$，$f$ を <code>doubling_from_func</code> に与える．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">R</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">N</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">%</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">d</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_from_func</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">f</span><span style="color:#111">);</span>
-</span></span></code></pre></div></li>
-<li>関数 $f$ の代わりにベクトルなどのコンテナを与えたいときには，<code>doubling_from_container</code> を用いる．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">R</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">N</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">...;</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">d</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_from_container</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">vec</span><span style="color:#111">);</span>
-</span></span></code></pre></div></li>
+<li>この場合には，$m(i) := \textrm{ if } r(i) &lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい．</li>
 </ul>
 </li>
-<li>値 $f^r(i)$ は，<code>d.val(r, i)</code> で取得できる．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">r</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span><span style="color:#111">,</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">54321</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">r</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
-</span></span></code></pre></div></li>
 </ul>
-<p>なお，内部テーブルには，$f^{r}(i)$ が，$i \in [0, N)$ と
-$r = 1, 2, 4, 8, \ldots$ に対して
-格納されている．</p>
-<h3 id="その2-1">その2<a hidden class="anchor" aria-hidden="true" href="#その2-1">#</a></h3>
+<h3 id="13-計算量">1.3 計算量<a hidden class="anchor" aria-hidden="true" href="#13-計算量">#</a></h3>
 <ul>
-<li><code>DoublingCum</code> オブジェクト <code>dc</code> を作る．
-<ul>
-<li>マッピング $m$ を関数で指定するときには，<code>doubling_cum_from_func</code> を用いる．
-<ul>
-<li>モノイド $M$ を，テンプレートパラメタとして指定する．</li>
-<li>第1パラメタには，「その1」で説明した <code>DoublingFRel</code> オブジェクトを指定する．</li>
-<li>第2パラメタには，マッピング $m$ を指定する．</li>
+<li>前計算 $O(N \log R)$</li>
+<li>各回の値の計算 $O(\log R)$</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">R</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">,</span> <span style="color:#111">N</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">%</span> <span style="color:#111">N</span><span style="color:#111">;</span> <span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">d1</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_from_func</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">f</span><span style="color:#111">);</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">struct</span> <span style="color:#75af00">M</span> <span style="color:#111">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">v</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">M</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">v_</span> <span style="color:#f92672">=</span> <span style="color:#111">LLONG_MIN</span><span style="color:#111">)</span> <span style="color:#111">v</span><span style="color:#111">(</span><span style="color:#111">v_</span><span style="color:#111">)</span> <span style="color:#111">{}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">M</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">M</span><span style="color:#f92672">&amp;</span> <span style="color:#111">o</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">M</span><span style="color:#111">(</span><span style="color:#111">max</span><span style="color:#111">(</span><span style="color:#111">v</span><span style="color:#111">,</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">v</span><span style="color:#111">));</span> <span style="color:#111">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">m</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">M</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">M</span><span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span><span style="color:#111">);</span> <span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">dc</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_cum_from_func</span><span style="color:#111">(</span><span style="color:#111">d1</span><span style="color:#111">,</span> <span style="color:#111">m</span><span style="color:#111">);</span>
-</span></span></code></pre></div></li>
-<li>マッピング $m$ をベクトルなどのコンテナで指定したいときには，<code>doubling_cum_from_container</code> を用いる．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec_m</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">);</span> <span style="color:#111">...;</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">dc</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_cum_from_container</span><span style="color:#111">(</span><span style="color:#111">d1</span><span style="color:#111">,</span> <span style="color:#111">vec_m</span><span style="color:#111">);</span>
-</span></span></code></pre></div></li>
-<li>モノイド演算について，単位元が <code>T()</code> でなかったり，演算が <code>plus&lt;T&gt;()</code> でない場合には，
-<code>doubling_cum_from_*</code> の第3, 4 パラメタで，単位元と演算を指定する．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">m</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">](</span><span style="color:#111">ll</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ll</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">mymax</span> <span style="color:#f92672">=</span> <span style="color:#111">[](</span><span style="color:#111">ll</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#75af00">max</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">);</span> <span style="color:#111">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#00a8c8">auto</span> <span style="color:#111">dc</span> <span style="color:#f92672">=</span> <span style="color:#111">doubling_cum_from_func</span><span style="color:#111">(</span><span style="color:#111">d1</span><span style="color:#111">,</span> <span style="color:#111">m</span><span style="color:#111">,</span> <span style="color:#111">LLONG_MIN</span><span style="color:#111">,</span> <span style="color:#111">mymax</span><span style="color:#111">);</span>
-</span></span></code></pre></div></li>
+<h2 id="2-使用法">2. 使用法<a hidden class="anchor" aria-hidden="true" href="#2-使用法">#</a></h2>
+<h3 id="21-基本用法だけの時">2.1 基本用法だけの時<a hidden class="anchor" aria-hidden="true" href="#21-基本用法だけの時">#</a></h3>
+<ul>
+<li><code>DoublingFRel</code> オブジェクト <code>dobj</code> を作る．
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">Doubling</span> <span style="color:#75af00">dobj</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">vecF</span><span style="color:#111">);</span>
+</span></span></code></pre></div><ul>
+<li>関数 $f$ の値を，<code>vector&lt;ll&gt;</code> などの型を持つ <code>vecF</code> に用意しておく．長さは $N$．</li>
 </ul>
 </li>
-<li>値 $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ は，<code>dc.val(r, i)</code> で取得できる．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">r</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span><span style="color:#111">,</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">54321</span><span style="color:#111">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">dc</span><span style="color:#111">.</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">r</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
-</span></span></code></pre></div></li>
+<li>値 $f^r(i)$ は，<code>dobj.val(r, i)</code> で取得できる．
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">dobj</span><span style="color:#111">.</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">r</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span></code></pre></div><ul>
+<li>有効な範囲は，$0 \leq r \leq R$，$0 \leq i &lt; N$．</li>
+<li>なお，$r = 2^k$ に対する $f^r(i)$ が，内部テーブル <code>dobj.tbl[k][i]</code> に格納されている．</li>
 </ul>
-<p>なお，内部テーブルには，
-$m( f^{r}(i) )$ が，$i \in [0, N)$ と
-$r = 1, 2, 4, 8, \ldots$ に対して格納されている．</p>
+</li>
+</ul>
+<h3 id="22-追加用法も行う時">2.2 追加用法も行う時<a hidden class="anchor" aria-hidden="true" href="#22-追加用法も行う時">#</a></h3>
+<ul>
+<li>
+<p>モノイド演算が，型 <code>T</code> の 加法 (<code>operator +</code>) であるときは，
+<code>make_doubling_with_monoid&lt;T&gt;</code> を使って，<code>dobj</code> を作る．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">dobj</span> <span style="color:#f92672">=</span> <span style="color:#111">make_doubling_with_monoid</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">vecF</span><span style="color:#111">,</span> <span style="color:#111">vecM</span><span style="color:#111">);</span>
+</span></span></code></pre></div><ul>
+<li><code>R</code>, <code>N</code>, <code>vecF</code> は，上と同じ．</li>
+<li>関数 $m$ の値を，<code>vector&lt;T&gt;</code> などの型を持つ <code>vecM</code> に格納しておく．長さは $N$．</li>
+<li><code>&lt;T&gt;</code> は省略できない．</li>
+</ul>
+</li>
+<li>
+<p>モノイド演算が <code>T</code> の加法でないときには，<code>make_doubling_with_monoid_unit_add</code> を使って <code>dobj</code> を作る．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">dobj</span> <span style="color:#f92672">=</span> <span style="color:#111">make_doubling_with_monoid_unit_add</span><span style="color:#111">(</span><span style="color:#111">R</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">vecF</span><span style="color:#111">,</span> <span style="color:#111">vecM</span><span style="color:#111">,</span> <span style="color:#111">unit</span><span style="color:#111">,</span> <span style="color:#111">add</span><span style="color:#111">);</span>
+</span></span></code></pre></div><ul>
+<li>単位元 <code>unit</code> は <code>T</code> 型．<code>T</code> はこの引数から推論される．</li>
+<li>加法 <code>add</code> は <code>T</code> を 2 つ引数にとって呼べて <code>T</code> を返すもの．</li>
+</ul>
+</li>
+<li>
+<p>これらの場合，<code>dobj.val(r, i)</code> は，<code>pair&lt;int, T&gt;</code> で $(f^r(i), \bigoplus_{k = 0}^{r - 1} m(f^{k}(i)))$
+を返す．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#111">c</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">dobj</span><span style="color:#111">.</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">r</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34;f^r(i) is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">j</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#d88200">&#34; and total cost is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">c</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span></code></pre></div><ul>
+<li>内部テーブル <code>dobj.tbl</code> の型も <code>vector&lt;vector&lt;pair&lt;int, T&gt;&gt;&gt;</code> になる．</li>
+</ul>
+</li>
+</ul>
 <p>keywords: doubling</p>
 
 
