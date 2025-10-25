@@ -192,6 +192,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">整数の桁
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>整数の桁を扱うライブラリです．ソースはこちら ．
+使用法 digit_util du; // base == 10 digit_util du1(3); // base == 3 digit_util du2(16); // base == 16 du.pow(3) // 1000 du.pow(18) // 1000000000000000000 du.pow_size() // 19, meaning du.pow(i) is valid for i from 0 to 18 du.width(5678) // 4, meaning 5678 has 4 digits du.width(0) // Error. width(n) is defined only for n &gt; 0. du.nd_min(3) // 100, the least number whose width is 3. su.nd_max(4) // 9999, the maximum number whose width is 4....</p>
+  </div>
+  <footer class="entry-footer">2025-10-25   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 整数の桁" href="https://yamate11.github.io/blog/posts/2025/10-25-digit-util/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">方程式 ax \equiv b mod M の解
     </h2>
   </header>
@@ -390,21 +403,6 @@ $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$...<
   </div>
   <footer class="entry-footer">2025-04-27   yamate11</footer>
   <a class="entry-link" aria-label="post link to ARC185E - Adjacent GCD" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Codeforces R.1021 (Div.1) B. Baggage Claim
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>問題概要 問題へのリンク 整数 $n$, $m$, $k$ と，長さ $k &#43; 1$ の整数の組の列 $((x_1, y_1), (x_2, y_2), \dots, (x_{k &#43; 1}, y_{k &#43; 1}))$ が $(x_i, y_i)$ は，サイズ $n\times m$ のグリッドのセルの座標であり，重複は無い．
-$(x_i, y_i)$ と $(x_{i &#43; 1}, y_{i &#43; 1})$ の間に1つずつセルを挿入して， 縦横につながった単純パスを作る方法の数 (作れなければ $0$) を mod $10^9 &#43; 7$ で求めよ．
-制約 $1 \leq n, m \leq 1000$， $nm \geq 3$，$1 \leq k \leq \lfloor (nm - 1) / 2 \rfloor$
-解 tutorialへのリンク 略解．click to open $P_i = (x_i, y_i)$ と書く．$\{|x_i - x_{i &#43; 1}|, |y_i - y_{i &#43; 1}|\}$ は， (1) $\{0, 2\}$ であるか，(2) $\{1, 1\}$ であるか，でなければならない． 間に入れる点は，(1) では1つに決まる．(2) では，2つの点のうちのどちらか．...</p>
-  </div>
-  <footer class="entry-footer">2025-04-27   yamate11</footer>
-  <a class="entry-link" aria-label="post link to Codeforces R.1021 (Div.1) B. Baggage Claim" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-cf-1021-1-b/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

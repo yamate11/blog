@@ -160,6 +160,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">整数の桁
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>整数の桁を扱うライブラリです．ソースはこちら ．
+使用法 digit_util du; // base == 10 digit_util du1(3); // base == 3 digit_util du2(16); // base == 16 du.pow(3) // 1000 du.pow(18) // 1000000000000000000 du.pow_size() // 19, meaning du.pow(i) is valid for i from 0 to 18 du.width(5678) // 4, meaning 5678 has 4 digits du.width(0) // Error. width(n) is defined only for n &gt; 0. du.nd_min(3) // 100, the least number whose width is 3. su.nd_max(4) // 9999, the maximum number whose width is 4....</p>
+  </div>
+  <footer class="entry-footer">2025-10-25   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 整数の桁" href="https://yamate11.github.io/blog/posts/2025/10-25-digit-util/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">方程式 ax \equiv b mod M の解
     </h2>
   </header>
@@ -348,26 +361,6 @@ $x_{A_j} - x_{B_j} \leq C_j$ $\quad(j = 1, \ldots, m)$ $C_j$ は負でも良い�
   </div>
   <footer class="entry-footer">2025-02-25   yamate11</footer>
   <a class="entry-link" aria-label="post link to WolframAlpha への入力" href="https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">std::mapへの挿入と更新
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>std::map に「挿入か更新をする」ときの idiom をすぐに忘れてしまうのでメモしておく．
-std::map&lt;S, T&gt; mp; と宣言されているとする．
-1. 無条件で，s の値を t にする 通常は次で良い:
-mp[s] = t; もともと s が有ったか無かったのかも知りたい場合や，s へのイタレータも欲しい場合には，次のようにする:
-auto [it, b] = mp.insert_or_assign(s, t); b には，挿入が行われたかどうかが設定されるので，b が false なら，もともとキー s が存在していたことがわかる．it は s へのイタレータ．
-2. キー s が無ければ，値を t にする． 次のように書くと，s の探索が2回走ってしまう．
-if (mp.find(s) == mp.end()) mp[s] = t; 次のようにすれば 1回ですむ．
-mp.emplace(s, t); もともと s が有ったか無かったのかも知りたい場合や，s へのイタレータも欲しい場合には，次のようにする:
-auto [it, b] = mp.emplace(s, t); b には，挿入が行われたかどうかが設定されるので，b が false なら，もともとキー s が存在していたことがわかる．it は s へのイタレータ．...</p>
-  </div>
-  <footer class="entry-footer">2025-02-14   yamate11</footer>
-  <a class="entry-link" aria-label="post link to std::mapへの挿入と更新" href="https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

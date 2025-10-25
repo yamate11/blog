@@ -6,8 +6,16 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Sep 2025 10:08:49 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 25 Oct 2025 16:28:31 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整数の桁</title>
+      <link>https://yamate11.github.io/blog/posts/2025/10-25-digit-util/</link>
+      <pubDate>Sat, 25 Oct 2025 16:28:31 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/10-25-digit-util/</guid>
+      <description>整数の桁を扱うライブラリです．ソースはこちら ．
+使用法 digit_util du; // base == 10 digit_util du1(3); // base == 3 digit_util du2(16); // base == 16 du.pow(3) // 1000 du.pow(18) // 1000000000000000000 du.pow_size() // 19, meaning du.pow(i) is valid for i from 0 to 18 du.width(5678) // 4, meaning 5678 has 4 digits du.width(0) // Error. width(n) is defined only for n &amp;gt; 0. du.nd_min(3) // 100, the least number whose width is 3. su.nd_max(4) // 9999, the maximum number whose width is 4.</description>
+    </item>
     <item>
       <title>方程式 ax \equiv b mod M の解</title>
       <link>https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/</link>
@@ -177,7 +185,7 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
 1. できること 1.1 基本用法 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
 1.2 追加用法 上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
 典型例:
-$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &amp;lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． 1.</description>
+$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &amp;lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． tree の先祖-子孫パス上の辺の重みの最大値を求める 1.</description>
     </item>
     <item>
       <title>LIS - 最長増加部分列</title>
