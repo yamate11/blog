@@ -175,6 +175,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ARC185E - Adjacent GCD
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \ldots, A_N)$ が与えられる． $m = 1, 2, \ldots, N$ に対して，次の問題を解け
+列 $(A_1, \dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \ldots, B_k)$ のスコアは，$\displaystyle\sum_{i = 1}^{k-1} \textrm{gcd}(B_i, B_{i &#43; 1})$ である． 制約 $1\leq N \leq 5\times10^{5}$，$1 \leq A_i \leq 10^5$
+解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \ldots, R_N$ として，
+$$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$...</p>
+  </div>
+  <footer class="entry-footer">2025-04-27   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ARC185E - Adjacent GCD" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Codeforces R.1021 (Div.1) B. Baggage Claim
     </h2>
   </header>
@@ -388,18 +403,6 @@ $i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかか
   </div>
   <footer class="entry-footer">2024-09-08   (初版 2022-12-10)   yamate11</footer>
   <a class="entry-link" aria-label="post link to ダブリングライブラリ" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">LIS - 最長増加部分列
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>復元方法も含めた最長増加部分列に関するまとめ</p>
-  </div>
-  <footer class="entry-footer">2024-09-01   yamate11</footer>
-  <a class="entry-link" aria-label="post link to LIS - 最長増加部分列" href="https://yamate11.github.io/blog/posts/2024/09-01-lis-with-recovery/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
