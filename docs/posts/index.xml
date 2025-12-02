@@ -6,8 +6,20 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 22 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Dec 2025 20:00:25 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文字列をソートするときの計算量</title>
+      <link>https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/</link>
+      <pubDate>Tue, 02 Dec 2025 20:00:25 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/</guid>
+      <description>文字列のリスト $(s_i \mid i &amp;lt; N)$ をソートする場合の時間計算量についての雑多なまとめ． $S := \sum_i |s_i|$ とする．
+1. 辞書順ソート 2つの文字列 $s$, $t$ の比較は，$O(\min(|s|, |t|))$ でできると仮定する． もちろん，全体の計算量が $O(SN \log N)$ であるとはいえる．
+1.1 一般 一般のソートアルゴリズムについては，それ以上のことはあまり言えないらしい．
+1.2 マージソート 1.2.1 計算量 マージソートならば，計算量は $O(S \log N)$ になる． 全体で $\log N$ 段のマージを行うわけだが，各段の 長さ $L \to 2L$ のマージを考えると， 毎回1つずつが処理されてマージ済の方に送られるのだが，この処理は， どちらの文字列の長さについてもそれ以下のコストで行えるので，とくに，マージ済の方に送られる文字列の 長さ以下のコストである．したがって，このマージにかかるコストは $2L$ 以下であり，つまり， この段のコストは $S$ 以下である．
+1.2.2 実装 もちろんマージソートを書いても良いわけではあるが， ABC354-B の解説「文字列をソートする計算量について」 によると，C++ の std::stable_sort は，マージソートで実装されていることが多いそうである．
+2. 連結最小 $\sigma = (s_i \mid i &amp;lt; N)$ を任意の順序で連結したときの (辞書順による) 最小のものを求める，という典型問題がある． 関係する問題には，次がある:</description>
+    </item>
     <item>
       <title>二項係数に関する公式</title>
       <link>https://yamate11.github.io/blog/posts/2022/10-29-binom/</link>

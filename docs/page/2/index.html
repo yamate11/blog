@@ -170,6 +170,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ABC404 G - Specified Range Sums
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 整数 $N$，$M$ と列$L$，$R$，$S$ が与えられる． $M$個の制約 $$\sum\{ A_j \mid j = L_i, \dots, R_i \} = S_i$$ を満たす長さ $N$ の正の整数の列 $A$ が存在するかどうか判定し， 存在する場合には $A$ の総和の最小値を求めよ．
+制約 $1 \leq N, M \leq 4000$，$1 \leq S_i \leq 10^9$
+解 公式解説 略解．click to open 牛ゲー．累積和 $B_i := \sum\{A_j \mid 0 \leq j &lt; i\}$ に関して，次を解けば良い．
+次の条件の下で，$B_{N &#43; 1} - B_{1}$ を最小化する $B_{i &#43; 1} - B_i \geq 1$ $B_{R_{i} &#43; 1} - B_{L_i} \geq S_i$ $B_{R_{i} &#43; 1} - B_{L_i} \leq S_i$ </p>
+  </div>
+  <footer class="entry-footer">2025-05-04   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ABC404 G - Specified Range Sums" href="https://yamate11.github.io/blog/posts/2025/05-04-ret-abc404-g/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">ARC185E - Adjacent GCD
     </h2>
   </header>
@@ -382,22 +397,6 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   </div>
   <footer class="entry-footer">2024-09-15   yamate11</footer>
   <a class="entry-link" aria-label="post link to intervalSet ライブラリ" href="https://yamate11.github.io/blog/posts/2024/09-15-intervalset/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">ダブリングライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>ダブリングを行うライブラリを書きました．ソースはこちら ．
-1. できること 1.1 基本用法 $f : [0, N) \to [0, N)$ が与えられた時， $r \in [0, R]$ と $i \in [0, N)$ に対して $f^{r}(i)$ を 計算する．
-1.2 追加用法 上の $f$ とともに，モノイド $(M, \oplus)$ と $m: [0, N) \to M$ も与えられて， $r, i$ に対して $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
-典型例:
-$i \mapsto f(i)$ を1回実行するごとに $m(i)$ だけのコストがかかるとき， $f^r(i)$ の実行に要するコストを求める． $[0..N-1]$ が円環状に並んでいる．$f^r(i)$ の実行で何周するか求める． この場合には，$m(i) := \textrm{ if } r(i) &lt; i \textrm{ then } 1 \textrm{ else } 0$ とすればよい． tree の先祖-子孫パス上の辺の重みの最大値を求める 1....</p>
-  </div>
-  <footer class="entry-footer">2024-09-08   (初版 2022-12-10)   yamate11</footer>
-  <a class="entry-link" aria-label="post link to ダブリングライブラリ" href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
