@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "順列組合せ"
-date: "2023-02-28T17:14:24+09:00"
-# date_init: "2023-02-28"
+date: 2025-12-05
+date_init: 2023-02-28
 tags: [Perm]
 categories: ["topic"]
 # categories: ["solution"]

@@ -170,6 +170,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">尺取り法のコーディング
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前提 自然数 $N$ に対して，$\bar{N} := \{0, 1, \dots, N - 1\}$ とする． $x \leq y$ なる $(x, y) \in \bar{N} \times \bar{N}$ に対する 述語 $P(x, y)$ が，次を満たすとする．
+$P(x, y)$ かつ $x \leq x’$，$y’ \leq y$ ならば，$P(x’, y’)$ このとき，やはり $(x, y)$ に対して定まる値 $F(x, y)$ について， $\bigoplus \{ F(x, y) \mid P(x, y) \}$ を求めるのが問題． $\oplus$ は，和や最小値や最大値など． ここで，$P(x, y)$ は，$P(x - 1, y)$ や $P(x, y - 1)$ などから，少ない手間で求められるものとする．
+考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus ....</p>
+  </div>
+  <footer class="entry-footer">2024-02-03   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 尺取り法のコーディング" href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Offline Dynamic Connectivity
     </h2>
   </header>
@@ -335,18 +349,6 @@ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ 
   </div>
   <footer class="entry-footer">2023-03-12   yamate11</footer>
   <a class="entry-link" aria-label="post link to 素数以外の mod" href="https://yamate11.github.io/blog/posts/2023/03-12-mod-not-prime/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">順列組合せ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>順列組合せ・重複ありなし ライブラリに関するメモです．</p>
-  </div>
-  <footer class="entry-footer">2023-02-28   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 順列組合せ" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/"></a>
 </article>
 
 <article class="post-entry"> 
