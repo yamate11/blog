@@ -1,0 +1,25 @@
+/* 1password拡張機能バグのためのワークアラウンド */
+.highlight pre,
+.highlight pre code,
+pre[class*="language-"],
+pre[class*="language-"] > code {
+  display: block !important;
+}
+
+
+.highlight pre code span.token,
+pre[class*="language-"] > code span.token {
+  display: inline !important;
+}
+
+
+.highlight pre code,
+pre[class*="language-"] > code {
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+.highlight pre,
+pre[class*="language-"] {
+  overflow-x: auto;
+}

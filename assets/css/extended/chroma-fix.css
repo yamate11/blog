@@ -1,0 +1,8 @@
+/* Hugo/Chroma が各行に付ける <span style="display:flex"> を無効化 */
+.post-content pre code > span[style*="display:flex"]{
+  display: block !important;
+}
+
+.post-content{
+  min-width: 0;
+}

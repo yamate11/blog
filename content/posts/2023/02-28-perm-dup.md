@@ -9,6 +9,11 @@ categories: ["topic"]
 summary: "順列組合せ・重複ありなし ライブラリに関するメモです．" 
 ---
 
+```cpp
+a = b;
+```
+
+
 競技プログラミング用の，順列組合せ (重複有り無し) を生成する自作 C++ ライブラリ Perm の使用法です．[ソースコードはここ](https://github.com/yamate11/compprog-clib/blob/master/perm.cc) にあります．
 
 ## struct
