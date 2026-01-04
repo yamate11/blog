@@ -3,21 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://yamate11.github.io/blog/categories/</loc>
-    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
   </url><url>
-    <loc>https://yamate11.github.io/blog/tags/perm/</loc>
-    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+    <loc>https://yamate11.github.io/blog/tags/map/</loc>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2026/01-04-map-performance/</loc>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/performance/</loc>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/</loc>
-    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/categories/topic/</loc>
-    <lastmod>2025-12-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/unordered_map/</loc>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2026-01-04T11:37:54+09:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/tags/perm/</loc>
     <lastmod>2025-12-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</loc>
@@ -145,9 +157,6 @@
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2025/02-25-wolframalpha-input/</loc>
     <lastmod>2025-02-25T09:43:25+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/tags/map/</loc>
-    <lastmod>2025-02-14T13:39:25+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2025/02-14-map-insert-assign/</loc>
     <lastmod>2025-02-14T13:39:25+09:00</lastmod>

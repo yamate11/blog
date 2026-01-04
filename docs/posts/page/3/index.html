@@ -175,6 +175,27 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">誤りの記録
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>デバッグに失敗した，ないし，長時間かかった間違いの記録
+ABC212E Safety Journey 問題へのリンク 2023/07/05 あさかつ
+無向グラフが，完全グラフからM本の辺を除いたものとして与えられている． 除く辺は $(u, v)$ の形で与えられている． dp[i][j] = (i 回の繰返し後，頂点 j に到達できる方法の数) という DP で， 全体から 除いた辺の分を引く． $(u, v)$ と $(v, u)$ の両方を引かなければならないところ， $(u, v)$ しか引かなかった．
+ABC279F BOX 2023/07/05 あさかつ
+タイプミス
+正:
+if (rx == -1 and ry == -1) { 誤:
+if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
+誤読．
+正: 木の好きな頂点を選んで出発できる 誤: 木の根から出発する ABC222E Red and Blue Tree 2023/08/02 あさかつ...</p>
+  </div>
+  <footer class="entry-footer">2024-09-26   (初版 2023-07-05)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 誤りの記録" href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">intervalSet ライブラリ
     </h2>
   </header>
@@ -366,18 +387,6 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
   <footer class="entry-footer">2024-02-14   yamate11</footer>
   <a class="entry-link" aria-label="post link to 拡張ユークリッドアルゴリズム" href="https://yamate11.github.io/blog/posts/2024/02-14-extended-gcd/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">全方位木ライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>全方位木ライブラリ使用法のメモ</p>
-  </div>
-  <footer class="entry-footer">2024-02-14   (初版 2022-08-17)   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 全方位木ライブラリ" href="https://yamate11.github.io/blog/posts/2022/08-17-rerooting/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://yamate11.github.io/blog/posts/page/2/">
@@ -390,7 +399,7 @@ signature template &lt;typename INT&gt; requires integral&lt;INT&gt; INT binsear
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>&copy; 2026 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

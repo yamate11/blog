@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>map と unordered_map の性能 | yamate11のブログ</title>
+<meta name="keywords" content="map, unordered_map, performance">
+<meta name="description" content="競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.b334d8aab9c863b865674ce0769c7693f7b133634ab08bd1292371b5888d1b37.css" integrity="sha256-szTYqrnIY7hlZ0zgdpx2k/exM2NKsIvRKSNxtYiNGzc=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="map と unordered_map の性能" />
+<meta property="og:description" content="競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-01-04T11:37:54+09:00" />
+<meta property="article:modified_time" content="2026-01-04T11:37:54+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="map と unordered_map の性能"/>
+<meta name="twitter:description" content="競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "map と unordered_map の性能",
+      "item": "https://yamate11.github.io/blog/posts/2026/01-04-map-performance/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "map と unordered_map の性能",
+  "name": "map と unordered_map の性能",
+  "description": "競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．",
+  "keywords": [
+    "map", "unordered_map", "performance"
+  ],
+  "articleBody": "競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．\n0. おおざっぱな結論: $2^{18}$ くらいなら多分大丈夫．$2^{20}$ あるとあぶない．$2^{22}$ だと多分無理．\n1. 測定1 以下，ll で，long long int を表す．\n1.1 測定方法 $N = 2^{18}$ から $N = 2^{22}$ までについて，2倍ずつ， $0$ から $10^{18}$ くらいまでからとった一様乱数を長さ $N$ の vector vec に入れておいて， 測定対象 $o$ に対し，o[vec[i]] = i; を，$i \\in [0, N)$ に対して実行し，トータルの時間を計る． (コードは下に貼ってある．)\n1.2 測定対象 map unordered_map safe_umap unordered_map に，比較的安全と思われるハッシュ関数を指定したもの safe_umap PBDS の gp_hash_table に，上と同じハッシュ関数を指定したもの 1.3 測定結果 $2^{18}$ $2^{19}$ $2^{20}$ $2^{21}$ $2^{22}$ map 116 321 805 2093 4914 unordered_map 45 146 411 997 2253 safe_umap 55 182 462 1080 2405 safe_umap 46 100 198 421 859 単位 ms．2秒間隔で10回実行して，平均を取った． ローカルマシンで実行している．AtCoder の「コードテスト」の方がおおむね速い (が，安定しない)． 「コードテスト」での所要時間は，この表の50%から100%程度．\n2. 測定2 mapなどのキーとして，少し複雑なものを指定してみた． 具体的には，vector で，要素が小さく(6まで)長さも短い(10)ものを使ってみた (こういうのがときどき出てくると思う)． unordered_map に入れるにはハッシュ関数が必要だが，上のハッシュ関数をベースにしている．詳細はコード参照． また，これを軽くする目的で前に書いた2つの型(後述)を使う場合とも比較した (今まで比較してなかったのはひどいという話もある)．\n2.1 測定方法 $N = 2^{18}$ から $N = 2^{22}$ までについて，4倍ずつ， $1$ から $6$ からとった10個の一様乱数からなる列を$N$個とり，vector vec に入れておいて， 測定対象 $o$ に対し，o[vec[i]] = i; を，$i \\in [0, N)$ に対して実行し，トータルの時間を計る．\n2.2 測定対象 map",
+  "wordCount" : "541",
+  "inLanguage": "en",
+  "datePublished": "2026-01-04T11:37:54+09:00",
+  "dateModified": "2026-01-04T11:37:54+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2026/01-04-map-performance/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      map と unordered_map の性能
+    </h1>
+    <div class="post-meta">2026-01-04   yamate11
+</div>
+  </header> 
+  <div class="post-content"><p>競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．</p>
+<h2 id="0-おおざっぱな結論">0. おおざっぱな結論:<a hidden class="anchor" aria-hidden="true" href="#0-おおざっぱな結論">#</a></h2>
+<p>$2^{18}$ くらいなら多分大丈夫．$2^{20}$ あるとあぶない．$2^{22}$ だと多分無理．</p>
+<h2 id="1-測定1">1. 測定1<a hidden class="anchor" aria-hidden="true" href="#1-測定1">#</a></h2>
+<p>以下，ll で，long long int を表す．</p>
+<h3 id="11-測定方法">1.1 測定方法<a hidden class="anchor" aria-hidden="true" href="#11-測定方法">#</a></h3>
+<p>$N = 2^{18}$ から $N = 2^{22}$ までについて，2倍ずつ，
+$0$ から $10^{18}$ くらいまでからとった一様乱数を長さ $N$ の <code>vector&lt;ll&gt; vec</code> に入れておいて，
+測定対象 $o$ に対し，<code>o[vec[i]] = i;</code> を，$i \in [0, N)$ に対して実行し，トータルの時間を計る．
+(コードは下に貼ってある．)</p>
+<h3 id="12-測定対象">1.2 測定対象<a hidden class="anchor" aria-hidden="true" href="#12-測定対象">#</a></h3>
+<ul>
+<li><code>map&lt;ll, ll&gt;</code></li>
+<li><code>unordered_map&lt;ll, ll&gt;</code></li>
+<li><code>safe_umap&lt;ll, ll, false&gt;</code>
+<ul>
+<li><code>unordered_map</code> に，比較的安全と思われるハッシュ関数を指定したもの</li>
+</ul>
+</li>
+<li><code>safe_umap&lt;ll, ll, true&gt;</code>
+<ul>
+<li>PBDS の <code>gp_hash_table</code> に，上と同じハッシュ関数を指定したもの</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-測定結果">1.3 測定結果<a hidden class="anchor" aria-hidden="true" href="#13-測定結果">#</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">$2^{18}$</th>
+<th style="text-align:right">$2^{19}$</th>
+<th style="text-align:right">$2^{20}$</th>
+<th style="text-align:right">$2^{21}$</th>
+<th style="text-align:right">$2^{22}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map&lt;ll, ll&gt;</code></td>
+<td style="text-align:right">116</td>
+<td style="text-align:right">321</td>
+<td style="text-align:right">805</td>
+<td style="text-align:right">2093</td>
+<td style="text-align:right">4914</td>
+</tr>
+<tr>
+<td><code>unordered_map&lt;ll, ll&gt;</code></td>
+<td style="text-align:right">45</td>
+<td style="text-align:right">146</td>
+<td style="text-align:right">411</td>
+<td style="text-align:right">997</td>
+<td style="text-align:right">2253</td>
+</tr>
+<tr>
+<td><code>safe_umap&lt;ll, ll, false&gt;</code></td>
+<td style="text-align:right">55</td>
+<td style="text-align:right">182</td>
+<td style="text-align:right">462</td>
+<td style="text-align:right">1080</td>
+<td style="text-align:right">2405</td>
+</tr>
+<tr>
+<td><code>safe_umap&lt;ll, ll, true&gt;</code></td>
+<td style="text-align:right">46</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">198</td>
+<td style="text-align:right">421</td>
+<td style="text-align:right">859</td>
+</tr>
+</tbody>
+</table>
+<p>単位 ms．2秒間隔で10回実行して，平均を取った．
+ローカルマシンで実行している．AtCoder の「コードテスト」の方がおおむね速い (が，安定しない)．
+「コードテスト」での所要時間は，この表の50%から100%程度．</p>
+<h2 id="2-測定2">2. 測定2<a hidden class="anchor" aria-hidden="true" href="#2-測定2">#</a></h2>
+<p>mapなどのキーとして，少し複雑なものを指定してみた．
+具体的には，<code>vector&lt;int&gt;</code> で，要素が小さく(6まで)長さも短い(10)ものを使ってみた (こういうのがときどき出てくると思う)．
+unordered_map に入れるにはハッシュ関数が必要だが，上のハッシュ関数をベースにしている．詳細はコード参照．
+また，これを軽くする目的で前に書いた2つの型(後述)を使う場合とも比較した (今まで比較してなかったのはひどいという話もある)．</p>
+<h3 id="21-測定方法">2.1 測定方法<a hidden class="anchor" aria-hidden="true" href="#21-測定方法">#</a></h3>
+<p>$N = 2^{18}$ から $N = 2^{22}$ までについて，4倍ずつ，
+$1$ から $6$ からとった10個の一様乱数からなる列を$N$個とり，<code>vector&lt;T&gt; vec</code> に入れておいて，
+測定対象 $o$ に対し，<code>o[vec[i]] = i;</code> を，$i \in [0, N)$ に対して実行し，トータルの時間を計る．</p>
+<h3 id="22-測定対象">2.2 測定対象<a hidden class="anchor" aria-hidden="true" href="#22-測定対象">#</a></h3>
+<ul>
+<li><code>map&lt;vector&lt;int&gt;, int&gt;</code></li>
+<li><code>unordered_map&lt;vector&lt;int&gt;, int, H1&gt;</code>
+<ul>
+<li>H1 は上述のハッシュ関数</li>
+</ul>
+</li>
+<li><code>unordered_map&lt;small_vector_u64&lt;3&gt;, int, H2&gt;</code>
+<ul>
+<li>データを unsigned long long int に 3 ビットずつ押し込んだもの．</li>
+</ul>
+</li>
+<li><code>unordered_map&lt;small_vector_string, int, H3&gt;</code>
+<ul>
+<li>データを string に格納したもの</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-測定結果">2.3 測定結果<a hidden class="anchor" aria-hidden="true" href="#23-測定結果">#</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">$2^{18}$</th>
+<th style="text-align:right">$2^{20}$</th>
+<th style="text-align:right">$2^{22}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map&lt;vector&lt;int&gt;, int&gt;</code></td>
+<td style="text-align:right">201</td>
+<td style="text-align:right">1223</td>
+<td style="text-align:right">7392</td>
+</tr>
+<tr>
+<td><code>unordered_map&lt;vector&lt;int&gt;, int, H1&gt;</code></td>
+<td style="text-align:right">112</td>
+<td style="text-align:right">653</td>
+<td style="text-align:right">3282</td>
+</tr>
+<tr>
+<td><code>unordered_map&lt;small_vector_u64&lt;3&gt;, int, H2&gt;</code></td>
+<td style="text-align:right">57</td>
+<td style="text-align:right">466</td>
+<td style="text-align:right">2419</td>
+</tr>
+<tr>
+<td><code>unordered_map&lt;small_vector_string, int, H3&gt;</code></td>
+<td style="text-align:right">75</td>
+<td style="text-align:right">538</td>
+<td style="text-align:right">2736</td>
+</tr>
+</tbody>
+</table>
+<p>単位 ms．2秒間隔で10回実行して，平均を取った．</p>
+<p>がんばってデータ構造を作った甲斐はあまりなくて，単にハッシュ関数を定義しさえすれば良かったことがわかる．</p>
+<h2 id="3-測定用コード">3. 測定用コード<a hidden class="anchor" aria-hidden="true" href="#3-測定用コード">#</a></h2>
+<h3 id="測定1">測定1<a hidden class="anchor" aria-hidden="true" href="#測定1">#</a></h3>
+<p>主要部分のみ．全体は<a href="https://gist.github.com/yamate11/e3fad0581adedf61a2b2dd38e660cbe2#file-map_unordered_map_1-cc" target="_blank">こちら</a>
+．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">random_device</span> <span style="color:#111">the_random_device</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">mt19937_64</span> <span style="color:#111">rng</span><span style="color:#111">(</span><span style="color:#111">the_random_device</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">uniform_int_distribution</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#111">ll</span><span style="color:#111">)(</span><span style="color:#ae81ff">1e18</span><span style="color:#111">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">N</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1LL</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">rng</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">map</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">unordered_map</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp2</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">safe_umap</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">false</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp3</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">safe_umap</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">true</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp4</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t0</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp1</span><span style="color:#111">[</span><span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t1</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp2</span><span style="color:#111">[</span><span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t2</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp3</span><span style="color:#111">[</span><span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t3</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp4</span><span style="color:#111">[</span><span style="color:#111">vec</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t4</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cerr</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp1</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp2</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp3</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp4</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t1</span> <span style="color:#f92672">-</span> <span style="color:#111">t0</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t2</span> <span style="color:#f92672">-</span> <span style="color:#111">t1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t3</span> <span style="color:#f92672">-</span> <span style="color:#111">t2</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t4</span> <span style="color:#f92672">-</span> <span style="color:#111">t3</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><h3 id="測定2">測定2<a hidden class="anchor" aria-hidden="true" href="#測定2">#</a></h3>
+<p>主要部分のみ．全体は<a href="https://gist.github.com/yamate11/e3fad0581adedf61a2b2dd38e660cbe2#file-map_unordered_map_2-cc" target="_blank">こちら</a>
+．</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">random_device</span> <span style="color:#111">the_random_device</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">mt19937_64</span> <span style="color:#111">rng</span><span style="color:#111">(</span><span style="color:#111">the_random_device</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">int</span> <span style="color:#111">len</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">const</span> <span style="color:#111">ll</span> <span style="color:#111">vmin</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">const</span> <span style="color:#111">ll</span> <span style="color:#111">vmax</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">uniform_int_distribution</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">vmin</span><span style="color:#111">,</span> <span style="color:#111">vmax</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">constexpr</span> <span style="color:#111">ll</span> <span style="color:#111">nbit</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">assert</span><span style="color:#111">(</span><span style="color:#111">vmax</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">nbit</span><span style="color:#111">)</span> <span style="color:#111">and</span> <span style="color:#111">nbit</span> <span style="color:#f92672">*</span> <span style="color:#111">len</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">64</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">using</span> <span style="color:#111">svu</span> <span style="color:#f92672">=</span> <span style="color:#111">small_vector_u64</span><span style="color:#f92672">&lt;</span><span style="color:#111">nbit</span><span style="color:#f92672">&gt;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">int</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#111">cin</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">int</span> <span style="color:#111">N</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">vec1</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">vi</span><span style="color:#111">(</span><span style="color:#111">len</span><span style="color:#111">));</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">len</span><span style="color:#111">)</span> <span style="color:#111">vec1</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#111">j</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">dist</span><span style="color:#111">(</span><span style="color:#111">rng</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">vec3</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">svu</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">len</span><span style="color:#111">)</span> <span style="color:#111">vec3</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#111">j</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">vec1</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">vector</span> <span style="color:#111">vec4</span><span style="color:#111">(</span><span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">small_vector_string</span><span style="color:#111">(</span><span style="color:#111">len</span><span style="color:#111">));</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">len</span><span style="color:#111">)</span> <span style="color:#111">vec4</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#111">j</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">vec1</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#111">j</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">map</span><span style="color:#f92672">&lt;</span><span style="color:#111">vi</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp1</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">unordered_map</span><span style="color:#f92672">&lt;</span><span style="color:#111">vi</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#111">safe_custom_hash</span><span style="color:#f92672">&lt;</span><span style="color:#111">vi</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">mp2</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">safe_umap</span><span style="color:#f92672">&lt;</span><span style="color:#111">svu</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp3</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">safe_umap</span><span style="color:#f92672">&lt;</span><span style="color:#111">small_vector_string</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">mp4</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t0</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp1</span><span style="color:#111">[</span><span style="color:#111">vec1</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t1</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp2</span><span style="color:#111">[</span><span style="color:#111">vec1</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t2</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp3</span><span style="color:#111">[</span><span style="color:#111">vec3</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t3</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">REP</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">mp4</span><span style="color:#111">[</span><span style="color:#111">vec4</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">double</span> <span style="color:#111">t4</span> <span style="color:#f92672">=</span> <span style="color:#111">get_time_sec</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cerr</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp1</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp2</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp3</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">ssize</span><span style="color:#111">(</span><span style="color:#111">mp4</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t1</span> <span style="color:#f92672">-</span> <span style="color:#111">t0</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t2</span> <span style="color:#f92672">-</span> <span style="color:#111">t1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t3</span> <span style="color:#f92672">-</span> <span style="color:#111">t2</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">t4</span> <span style="color:#f92672">-</span> <span style="color:#111">t3</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yamate11.github.io/blog/tags/map/">map</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/unordered_map/">unordered_map</a></li>
+      <li><a href="https://yamate11.github.io/blog/tags/performance/">performance</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">
+    <span class="title">Next »</span>
+    <br>
+    <span>順列組合せ</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2026/01-04-map-performance/" data-title="map と unordered_map の性能">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">順列組合せ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/">文字列をソートするときの計算量</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">二項係数に関する公式</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/10-25-digit-util/">整数の桁</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/">方程式 ax \equiv b mod M の解</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/">小さい整数のベクトルライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2026 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
