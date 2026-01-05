@@ -12,7 +12,7 @@ $P(x, y)$ かつ $x \leq x&rsquo;$，$y&rsquo; \leq y$ ならば，$P(x&rsquo;, 
 考え方 1つの while ループで書く． $P(x, y)$ が成り立ったら，次は $P(x, y &#43; 1)$ を調べる． 成り立たなかったら，次は $P(x &#43; 1, y &#43; 1)$ を調べる． $P(x, y)$ が成り立ったら， $F(x, y) \oplus F(x &#43; 1, y) \oplus \dots \oplus F(y, y)$ を答えに加える． 擬似コード ll i = 0, j = 0; // (i, j) を調べる． ll ans = oplus の単位元; ll a = 初期値, b = 初期値; // F(i, j) や P(i, j) を計算するのに必要な値を用意しておく． // ここでは a, b とする．この位置で用意するのは，(0, 0) 用． while (true) { // 一つのループ if (i &gt; j) { // 例外的処理 // P(i, i) が成り立たないことがある場合，このアルゴリズムは，i &gt; j となる組に来る． // この場合は，単に j を増やす． j&#43;&#43;; }else if (calc_P(a, b)) { // P(i, j) が成り立ったら v = calc_val(a, b); // F(i, j) oplus F(i &#43; 1, j) oplus .">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2024/02-03-shakutori/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.b334d8aab9c863b865674ce0769c7693f7b133634ab08bd1292371b5888d1b37.css" integrity="sha256-szTYqrnIY7hlZ0zgdpx2k/exM2NKsIvRKSNxtYiNGzc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -432,8 +432,9 @@ $F(x, y) \oplus F(x + 1, y) \oplus \dots \oplus F(y, y)$
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">順列組合せ</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/">文字列をソートするときの計算量</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">二項係数に関する公式</a>
@@ -441,7 +442,6 @@ $F(x, y) \oplus F(x + 1, y) \oplus \dots \oplus F(y, y)$
   / <a href="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/">方程式 ax \equiv b mod M の解</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/">小さい整数のベクトルライブラリ</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
 </p>
 
 

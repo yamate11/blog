@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://yamate11.github.io/blog/categories/topic/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.b334d8aab9c863b865674ce0769c7693f7b133634ab08bd1292371b5888d1b37.css" integrity="sha256-szTYqrnIY7hlZ0zgdpx2k/exM2NKsIvRKSNxtYiNGzc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -160,6 +160,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">燃やす埋める問題
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>燃やす埋める問題についての記事です．
+動機 燃やす埋める問題については，一度エントリを書いた のですが，そこにはともかく理解したことを全部書いたので，コンテスト中に参照しても把握するのがたいへん，という状況になってしまっています．そこで，コンテスト中に思い出したい最小限のことだけまとめることにしました．
+考え方 問題文中に「$p$ のとき$b$を受け取る」という記載があったら，「先に $b$ を受け取る．$\neg p$ の時 $b$ を支払う」と読み替えて，すべて支払いをすると考える． グラフ全体の source ノードのラベルは True，sink ノードのラベルは False． ノード $p$ からノード $q$ への矢印に，重み $a$ がついているのは，「$p$が成り立つのに$q$が成り立たない場合，コスト $a$ を支払う」と読む． したがって，この図では，以下が表現されている $p_6$ が成り立って，$p_7$ が成り立たなかったら，$a_2$ 支払う． $p_1$ が成り立たなかったら，$a_5$ 支払う． $p_7$ が成り立ったら，$a_3$ 支払う． $p_8$ は成り立つ． $p_9$ は成り立たない． 最小カットが，コスト最小の真偽割当．図の赤線だと，$p_1, \ldots, p_6, p_8$ を真，$p_7, p_9$ を偽にする割当に相当し，この場合のコストは$a_2 &#43; a_6$． 連言や選言のノードは，矢印を出せるか入れられるかが決まっている．下図を参照．不可の理由は，たとえば連言なら，$p$, $q$を真に，$p\land q$ を偽にできてしまうから．(矢印の根本を真にできてしまうと不当な利益がある．矢印の根本を偽にできても嬉しくない) したがって，「$p \land q$ なら，支払を行う」は，表現できない． しかし，$\neg q$ の方を表すノード $r$ を用意すれば， 「$p$ が成り立って $r$ が成り立たなければ，支払を行う」の形で表現できる． </p>
+  </div>
+  <footer class="entry-footer">2022-07-10   (初版 2021-05-22)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 燃やす埋める問題" href="https://yamate11.github.io/blog/posts/2021/05-22-burn-bury/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Mo&#39;s algorithm メモ
     </h2>
   </header>
@@ -228,18 +242,6 @@
   </div>
   <footer class="entry-footer">2021-10-10   yamate11</footer>
   <a class="entry-link" aria-label="post link to 木の直径" href="https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">桁DPのコーディング
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</p>
-  </div>
-  <footer class="entry-footer">2021-10-01   (初版 2021-07-06)   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 

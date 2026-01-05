@@ -10,7 +10,7 @@
 <meta name="description" content="ポインタベースの Trie ライブラリ． ソース 使用法 auto root = new Trie&lt;26, &#39;a&#39;&gt;(); auto p1 = root-&gt;insert(&#34;abcde&#34;); // 挿入 auto p2 = root-&gt;search(&#34;abc&#34;); // 存在しないので p2 == nullptr auto p3 = root-&gt;search(&#34;abcde&#34;); // 存在するので，p3 == p1 auto p4 = root-&gt;get_node(&#34;abc&#34;); // 存在に関係無くノードを取る assert(p3-&gt;reside); // そのノードは存在ノードか? assert(not p4-&gt;reside); root-&gt;insert(&#34;abab&#34;); assert(root-&gt;size_st == 2) // 部分木に存在する数 p3-&gt;erase(); // 削除 assert(not p3-&gt;reside); assert(p4-&gt;size_st == 1); インタフェース テンプレートパラメタ template &lt; int bt_size, // 文字種 char from, // 最初の文字 typename User = monostate, // ユーザデータの型 typename S = string, // 管理するデータの型．string とか vector&lt;char&gt; とか bool compact = 2 &lt; bt_size, // 省メモリ型 bool has_offset = true // オフセットの管理方法 &gt; struct Trie { bt_size &hellip; 文字種．小文字の文字列なら 26, 01列なら 2 など． from &hellip; 最初の文字．小文字なら &#39;a&#39;, 01文字列なら &#39;0&#39;，整数の01列なら 0 など． User &hellip; ユーザデータの型．引数無しで構築できなければならない．省略値は monostate で，これは，何も要素を持たない構造体． S &hellip; この trie で管理するデータの型．たいてい string だろうけれど，vector&lt;int&gt; とかでも可．ただし，値は from から from &#43; bt_size までで，char の範囲に入っていること． compact &hellip; たとえば全ノードに長さ26のベクトルを持たせるというのはちょっと無駄なので，ここを true にすると，もう少し領域を節約する．ただし，少しは遅くなる (そんなには遅くないと思う) ので，false にすると，固定長 array になる． has_offset &hellip; ノードに，何文字目であるかを持たせるかどうか．これはノードごと 4 バイトしか違わないので，いつでも true でも良かったか&hellip;.">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.b334d8aab9c863b865674ce0769c7693f7b133634ab08bd1292371b5888d1b37.css" integrity="sha256-szTYqrnIY7hlZ0zgdpx2k/exM2NKsIvRKSNxtYiNGzc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
@@ -346,8 +346,9 @@ p に node の子供が，c にはその子供が表す文字が，順に設定�
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/">順列組合せ</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/">文字列をソートするときの計算量</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">二項係数に関する公式</a>
@@ -355,7 +356,6 @@ p に node の子供が，c にはその子供が表す文字が，順に設定�
   / <a href="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/">方程式 ax \equiv b mod M の解</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/">小さい整数のベクトルライブラリ</a>
-  / <a href="https://yamate11.github.io/blog/posts/2024/06-04-easy-to-forget/">忘れやすい事項</a>
 </p>
 
 

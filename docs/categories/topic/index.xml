@@ -6,8 +6,15 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Jan 2026 11:37:54 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 05 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>桁DPのコーディング</title>
+      <link>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</link>
+      <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</guid>
+      <description>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</description>
+    </item>
     <item>
       <title>map と unordered_map の性能</title>
       <link>https://yamate11.github.io/blog/posts/2026/01-04-map-performance/</link>
@@ -449,13 +456,6 @@ bool judge = false; ll ask(ll x) { return judge ? ask_judge(x) : ask_i(x); } ll 
       <pubDate>Sun, 10 Oct 2021 12:27:09 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2021/10-10-tree-diameter/</guid>
       <description>木の直径についての記事です．今週 (2021/10/09) と先週に引き続いて，AtCoder Beginner Contest に木の直径に関する問題が出たので，基本事項をまとめました．</description>
-    </item>
-    <item>
-      <title>桁DPのコーディング</title>
-      <link>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</link>
-      <pubDate>Fri, 01 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2021/07-06-digitdp/</guid>
-      <description>桁DPのコーディングに関する記事です．N 以下の整数で，ある条件を満たすものを数えます．opt さんの記事をもとにしています．</description>
     </item>
     <item>
       <title>コーディングスタイル</title>

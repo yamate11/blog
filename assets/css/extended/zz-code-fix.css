@@ -1,4 +1,5 @@
 /* 1password拡張機能バグのためのワークアラウンド */
+/*
 .highlight pre,
 .highlight pre code,
 pre[class*="language-"],
@@ -23,3 +24,4 @@ pre[class*="language-"] > code {
 pre[class*="language-"] {
   overflow-x: auto;
 }
+*/
