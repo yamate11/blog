@@ -25,21 +25,12 @@ while (ip.get()) {
 
 以下の struct がある．名前がおかしいのは歴史的理由による．
 
-* IntPerm      順列
-* IntComb      組合せ
-* IntDupPerm   重複順列
-* IntDupComb   重複組合せ
-* IntDirProd   直積
-* IntPartition 分割数
-
-## constructor
-
 ```cpp
-IntPerm ip(m, n);         // m から n 取る順列
-IntComp ic(m, n);         // m から n 取る組合せ
-IntDupPerm idp(m, n);     // m から n 取る重複順列
-IntDupComb idc(m, n);     // m から n 取る重複組合せ
-IntDirProd did(vector<int>{{m1, m2, ...}})   // [0:m1) × [0:m2) × ...
+IntPerm ip(m, n);         // [0:m) から n 個とる順列
+IntComb ic(m, n);         // [0:m) から n 個とる組合せ
+IntDupPerm idp(m, n);     // [0:m) から n 個とる重複順列
+IntDupComb idc(m, n);     // [0:m) から n 個とる重複組合せ
+IntDirProd idi(vector<int>{{m1, m2, ...}}) // 直積 [0:m1) × [0:m2) × ...
 IntPartition part(m)      // m の分割
 ```
 
@@ -48,9 +39,8 @@ IntPartition part(m)      // m の分割
 
 #### IntPerm(m, n)
 
-* m から n とる順列
+* $[0, m)$ から $n$ 個とる順列．全部で $m! / (m - n)!$ 個．
 * $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れないものを列挙する．
-* 個数は，$m! / (m - n)!$
 * たとえば `IntPerm(4, 2)` は，次を生成する:
   ```text
   [0,1], [0,2], [0,3], [0,4], [1,0], [1,1], [1,2], [1,3],
@@ -59,9 +49,8 @@ IntPartition part(m)      // m の分割
 
 #### IntComb(m, n)
 
-* m から n とる組合せ
+* $[0, m)$ から $n$ 個とる組合せ．全部で $\displaystyle\binom{m}{n}$ 個．
 * $[0, m)$ からなる長さ $n$ のリストで，同じ数がたかだか1回しか現れず，昇順ソートされているものを列挙する．
-* 個数は，$\displaystyle\binom{m}{n}$．
 * たとえば，`IntComb(4, 2)` は，次を生成する:
   ```text
   [0,1], [0,2], [0,3], [0,4], [1,2], [1,3], [2,3]
@@ -69,9 +58,8 @@ IntPartition part(m)      // m の分割
 
 #### IntDupPerm(m, n)
 
-* m から n 取る重複順列
+* $[0, m)$ から $n$ 個とる重複順列．全部で $m^n$ 個．
 * $[0, m)$ からなる長さ $n$ のリストを列挙する．
-* 個数は，$m^n$．
 * たとえば `idp(3, 2)` は，次を生成する:
   ```text
   [0,0], [0,1], [0,2], [1,0], [1,1], [1,2], [2,0], [2,1], [2,2]
@@ -79,33 +67,33 @@ IntPartition part(m)      // m の分割
 
 #### IntDupComb(m, n)
 
-* m から n とる重複組合せ
+* $[0, m)$ から $n$ 個とる重複組合せ．全部で $\displaystyle\binom{m + n - 1}{n}$ 個．
+  * あるいは，$n$ 個のボールを $m$ 個の箱に入れる方法．
+    箱ごとのボールの数の組合せの列挙は，<a href="#ボールと箱の重複組合せ">後述してある</a>．
 * $[0, m)$ からなる長さ $n$ のリストで，昇順ソートされているものを列挙する．
-* 個数は，$\displaystyle\binom{m + n - 1}{n}$．(n 個のボールと m - 1 本の仕切り)
 * たとえば `idc(4, 2)` は，次を生成する:
 
 ```
 [0,0], [0,1], [0,2], [0,3], [1,1], [1,2], [1,3], [2,2], [2,3], [3,3]
 ```
 
-後述の「ボールと箱の重複組合せ」も参照のこと．
-
 #### IntDirProd(vector{m1, m2, ...})
 
-$[0, m_1) \times [0, m_2) \times \dots$ の要素を列挙する．
-たとえば，`IntDirProd(vector{1, 2, 3})` は，次を生成する:
-
-```
-[0,0,0],[0,0,1],[0,0,2],[0,1,0],[0,1,1],[0,1,2]
-```
+* 直積 $[0, m_1) \times [0, m_2) \times \dots \times [0, m_n]$．全部で $\prod_{i=1}^{n} m_i$ 個．
+* 上の直積の要素を列挙する．
+* たとえば，`IntDirProd(vector{1, 2, 3})` は，次を生成する:
+  ```
+  [0,0,0],[0,0,1],[0,0,2],[0,1,0],[0,1,1],[0,1,2]
+  ```
 
 #### IntPartition(n)
 
-分割を生成する．たとえば，`IntPartition(5)` は，次を生成する．
-
-```
-[[1,1,1,1,1],[1,1,1,2],[1,1,3],[1,2,2],[1,4],[2,3],[5]]
-```
+* $n$ の分割．
+* $n$ の分割の要素を列挙する．
+* たとえば，`IntPartition(5)` は，次を生成する．
+  ```
+  [[1,1,1,1,1], [1,1,1,2], [1,1,3], [1,2,2], [1,4], [2,3], [5]]
+  ```
 
 
 ## 生成
@@ -177,6 +165,19 @@ while (idc.get()) {
   REP(i, 0, n) numBalls[idc.at(i)]++;
   //  箱 j にはボールが numBalls[j] 個入っている
 }
+```
+
+#### Python での計算
+
+考察時に，だいたいのサイズを知りたいことがある．Python では次のように計算できる．
+
+```python
+from math import factorial, perm, comb 
+print(perm(m, n))         # IntPerm(m, n)
+print(comb(m, n))         # IntComb(m, n)
+print(m ** n)             # IntDupPerm(m, n)
+print(comb(m + n - 1, n)) # IntDupComb(m, n)
+print(factorial(n))       # n!
 ```
 
 #### 分割数
