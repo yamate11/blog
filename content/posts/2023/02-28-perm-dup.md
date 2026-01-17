@@ -197,4 +197,5 @@ p(61) = 1121505 (1.1E6)
 p(77) = 10619863 (1.1E7)
 ```
 
-キーワード: binom
+キーワード: permutation, combination, duplicate permutation, duplicate combination, binom, partition, direct product
+
