@@ -27,7 +27,7 @@ categories: ["topic"]
   auto p2 = root->search("abc");    // 要素ではないので p2 == nullptr
   auto p3 = root->search("abcde");  // 要素なので，p3 == p1
   auto p4 = root->get_node("abc");  // 要素かどうかに関係なくノードを取る
-    // ノードがないときには nullptr が返るが，この場合，"abcde" ノードがあるので，"abc" ノードもある．
+    // ノードがないときには nullptr が返るが，この場合 "abcde" ノードがあるので "abc" ノードもある
   assert(p3->reside);               // p3が表す文字列は要素である．
   assert(not p4->reside);           // p4が表す文字列は要素でない．
   root->insert("abab");
