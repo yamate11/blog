@@ -24,6 +24,9 @@ categories: ["topic"]
   small_vector_u64<4> vec1;   // 4ビットずつ使用．長さは 64 / bits (この場合は 64/4 = 16) に固定
                               // 初期値は全要素が0
   vec1[0] = 3; vec1[1] = 15; vec1[2] = 20;
+  small_vector_u64<4> vec1{3, 15, 20}; // 上と同じになる．
+  small_vector_u64<4> vec1(vector{3, 15, 20}, 3);
+        // 上と同じになる．第1引数は operator[] を持つこと．第2引数に長さを与える
   cout << vec1[0] - vec1[2] << endl;
   cerr << vec1 << endl;       // << は定義済
   cerr << vec1.show(3);       // "[3, 15, 20]"．長さを引数で指定．省略すると 64/bits
@@ -38,6 +41,8 @@ categories: ["topic"]
   small_vector_string vec2(3);   // 長さを指定．省略すると長さ0．
                                  // 初期値は全要素が0
   vec2[0] = 3; vec2[1] = 15; vec2[2] = 20;
+  small_vector_string vec2{3, 15, 20};  // 上と同じ
+  small_vector_string vec2(vector{3, 15, 20}, 3);  // small_vector_u64 と同じ注意
   cout << vec2[0] - vec2[2] << endl;
   cerr << vec2 << endl;       // << は定義済
 
