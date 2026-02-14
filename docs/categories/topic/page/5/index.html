@@ -160,6 +160,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">policy-based data structure の tree
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>gcc (g&#43;&#43;) の policy-based data structure の中にある tree (の競技プログラミングでの利用) に関する記事です．
+リンク Policy-based Data Structure (GCC online docs) Codeforces admant&#39;s blog まとめ 以下の操作ができる set や map
+x を指定して，x より小さい要素がいくつあるか数える n を指定して，n 番目に小さい要素へのイテレータを取得する 先頭部分 #include &lt;ext/pb_ds/assoc_container.hpp&gt; #include &lt;ext/pb_ds/tree_policy.hpp&gt; using namespace __gnu_pbds; 型の定義 例: pair&lt;int, int&gt; の集合 using pair_t = pair&lt;int, int&gt;; using ordered_set = tree&lt; pair_t, null_type, less&lt;pair_t&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 例: string から int へのマップ using ordered_map = tree&lt; string, int, less&lt;string&gt;, rb_tree_tag, tree_order_statistics_node_update &gt;; 機能の呼び出し ordered_set os; os....</p>
+  </div>
+  <footer class="entry-footer">2021-06-05   yamate11</footer>
+  <a class="entry-link" aria-label="post link to policy-based data structure の tree" href="https://yamate11.github.io/blog/posts/2021/06-05-policy-based-ds/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">きたまさ法
     </h2>
   </header>
