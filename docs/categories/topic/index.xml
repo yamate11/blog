@@ -6,8 +6,15 @@
     <description>Recent content in topic on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 12 Feb 2026 09:28:52 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 22 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/topic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>順列組合せ</title>
+      <link>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</link>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</guid>
+      <description>順列組合せ・重複ありなし ライブラリに関するメモです．</description>
+    </item>
     <item>
       <title>数表など</title>
       <link>https://yamate11.github.io/blog/posts/2026/02-12-order-of-sizes/</link>
@@ -28,13 +35,6 @@
       <pubDate>Sun, 04 Jan 2026 11:37:54 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2026/01-04-map-performance/</guid>
       <description>競技プログラミング用に，map と unordered_map がどの程度のサイズまで使えるかを測定した．</description>
-    </item>
-    <item>
-      <title>順列組合せ</title>
-      <link>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</link>
-      <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/</guid>
-      <description>順列組合せ・重複ありなし ライブラリに関するメモです．</description>
     </item>
     <item>
       <title>文字列をソートするときの計算量</title>
