@@ -229,7 +229,7 @@ void change_root(int newRoot)
   for (auto [u, v] : es) { cc.add(u); cc.add(v); }
   Tree tr(cc.size());  // 必要なら tr(cc.size(), cc.c(root)); など．
   for (auto [u, v] : es) { tr.add_edge(cc.c(u), cc.c(v)); }
-  // nd の子供をプリントするなら:
+  // たとえば，nd の子供をプリントするなら:
   for (ll cld : tr.children(cc.c(nd))) cout << cc.d(cld) << "\n";
 
 ```
