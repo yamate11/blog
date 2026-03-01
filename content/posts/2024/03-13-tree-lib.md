@@ -102,7 +102,7 @@ pair<int, int> nodes_of_edge(int e, int mode = 0)
 
 * `tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
 そのような辺が存在しないときには -1 を返す．`tr.edge_idx(x, y)` と `tr.edge_idx(y, x)` の値は等しい．
-実装は unordered_map．はじめて edge_idx が呼ばれたときに unordered_map を作る．
+実装は，「x の親が y」か「y の親が x」になっているかどうかを調べている．
 * `tr.nodes_of_edge(e, mode)` は，番号が e である辺の両端のノードのペアを返す．
     * mode == 0 (デフォルト) のとき: 第 1 要素が親，第 2 要素が子
     * mode == 1 のとき: 第 1 要素が子，第 2 要素が親
