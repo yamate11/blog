@@ -219,7 +219,23 @@ void change_root(int newRoot)
     get_peer が true のときには，子供のノード (peer) を扱う．false のときには，子供のノードと辺のペア
     (pe_t) を扱う．
 
-## 3. 非再帰 DFS
+## 3. ノードが 0..N-1 でないとき
+
+座標圧縮を使うのが便利．次のような感じ:
+
+```cpp
+  vector<pll> es; // {(20, 42319), (42319, 35), (20, 6612), (6612, 488)} のように辺が入っているとする．
+  CoordCompr cc;
+  for (auto [u, v] : es) { cc.add(u); cc.add(v); }
+  Tree tr(cc.size());  // 必要なら tr(cc.size(), cc.c(root)); など．
+  for (auto [u, v] : es) { tr.add_edge(cc.c(u), cc.c(v)); }
+  // nd の子供をプリントするなら:
+  for (ll cld : tr.children(cc.c(nd))) cout << cc.d(cld) << "\n";
+
+```
+
+
+## 4. 非再帰 DFS
 
 一時，非再帰 DFS で実装していたこともあったが，測定してみるとそれほど速くなるというわけでもないようなので，
 やめてしまった．以下の記述は残しておく．
