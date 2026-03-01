@@ -224,7 +224,7 @@ void change_root(int newRoot)
 座標圧縮を使うのが便利．次のような感じ:
 
 ```cpp
-  vector<pll> es; // {(20, 42319), (42319, 35), (20, 6612), (6612, 488)} のように辺が入っているとする．
+  vector<pll> es; // {(20, 42319), (42319, 35), (20, 6612)} のように辺が入っているとする．
   CoordCompr cc;
   for (auto [u, v] : es) { cc.add(u); cc.add(v); }
   Tree tr(cc.size());  // 必要なら tr(cc.size(), cc.c(root)); など．
