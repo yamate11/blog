@@ -288,6 +288,17 @@ query() の返す値が，ある性質を満たす/満たさないの境界 (満
       * そのような x が無いときには，y + 1 を返す．
       * <img src="fig04.png" width="300px">
 
+### よく使う例
+
+$\\{0, \dots, N - 1\\}$ の部分集合の，$k$ 番目に小さい要素を求める．
+`make_seg_tree(0LL, plus<ll>())` で作られるセグメント木に，特性集合を載せておけば，
+次のコードで求められる:
+
+```cpp
+  auto check = [&k](ll val) -> bool { return val < k; }; // 最小要素は k = 1．
+                   // 最小要素が k = 0 になっているときには，return val <= k;．
+  ans = st.binsearch_r_until(check, 0);
+```
 
 ## デバッグ対応
 
@@ -298,7 +309,7 @@ vector<DAT> vec_view();   // 要素のベクトルを返す
 ## セグメント木の vector
 
 引数無しのコンストラクタが用意してあるので，
-正の長さを持つ vector<SegTree<...>> を宣言することもできる．
+正の長さを持つ `vector<SegTree<...>>` を宣言することもできる．
 その時に型を指定する必要があるが，
 `make_seg_tree` や `make_seg_tree_lazy` を使って一つインスタンスを
 作った上で `decltype` を利用するのが現実的だと思う:
