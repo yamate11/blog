@@ -10,6 +10,7 @@ categories: ["topic"]
 ---
 
 ポテンシャル付きUnionFindです．
+実装は[こちら](https://github.com/yamate11/compprog/blob/main/clib/UnionFind.cc)．
 
 ## 使用法
 
@@ -43,14 +44,16 @@ UnionFind<ftwo> uf2(N);
 UnionFind<ll> uf3(N, 0LL, plus<ll>(), negate<ll>());
 ```
 
-ポテンシャル付きの時には，merge のときの第3引数に，ポテンシャルを渡さなければならない (省略不可)
+ポテンシャル付きの時には，merge のときの第3引数に，ポテンシャルを渡さなければならない (省略不可)．
+merge の返却値は，ポテンシャルが無いときと同じで，リーダである．
 
 ```cpp
 ld = uf.merge(a, b, p);   // b を基準にした a のポテンシャルが p である．p の型は T
 ```
 
-ポテンシャルの値は，pot メソッドで取る．これの返り値型は，`optional<T>` で，
-ポテンシャルに矛盾がある時には，`nullopt` を返す．
+ポテンシャルの値は，pot メソッドで取る．これの返り値型は，`optional<T>` である．
+そのグループ内で矛盾があってポテンシャルが定義できない時には，`nullopt` を返す．
+(他のグループで矛盾していても，そのグループで矛盾が無ければ `nullopt` にはならない．)
 
 ```cpp
 int ld = uf.merge(a, b, p0);
@@ -65,9 +68,13 @@ if (p) {
 }
 ```
 
+ポテンシャルは一意に決まるとは限らない．
+merge の時にリーダとなるほうのグループのポテンシャルの値は (矛盾しなければ) そのまま保たれる．
+他方のグループのポテンシャルの値が，調整される．
+
 ## ソース
 
-[ソース](https://github.com/yamate11/compprog/blob/main/clib/UnionFind.cc)
+
 
 
 キーワード: potential
