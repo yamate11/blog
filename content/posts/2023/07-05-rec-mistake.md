@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "誤りの記録"
-date: "2024-09-26T00:00:00+09:00"
+date: "2026-04-02T00:00:00+09:00"
 date_init: "2023-07-05T09:03:15+09:00"
 tags: []
 categories: ["topic"]
