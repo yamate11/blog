@@ -123,8 +123,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Cartesian Tree のライブラリを書いた．\n使用法 vector\u003cll\u003e vec{80, 90, 20, 50, 50, 40} CartesianTree ct(vec); // CartesianTree ct(vec, less()); ... same // CartesianTree ct(vec, [](ll a, ll b) { return a \u003c b; }); ... same assert(ct.root == 2); // vec[2] is the least element assert(ct.left[2] == 0); // least in vec[0:2] is vec[0] assert(ct.left[0] == -1); // \"no such element\" is expressed by -1 assert(ct.right[2] == 5); assert(ct.left[5] == 3 or ct.left[5] == 4); // either of tied element can be chosen 定義 要素がすべて異なる列 $A = (a_1, \\ldots, a_n)$ に対して，$A$ の Cartesian Tree $T$ は， 次のように構成される二分木である．\n$T$ のノードは，$1, 2, \\dots, n$ である． 区間 $[a, b]$ に対する 部分木 $T’$ を，次のように定義する． 空区間 に対する $T’$ は，空である． $[a, b]$ における $A$ の最小値を $a_r$ とするとき，$T’$ の根は $a_r$ である． $[a, r - 1]$ に対する木の根を $p$, $[r + 1, b]$ に対する木の根を $q$ とするとき， $r$ の左の子は $p$ であり, $r$ の右の子は $q$ である． 区間 $[1, n]$ に対する $T’$ を $T$ とする． 要素がかならずしもすべて異ならない列に対しても，値が等しい要素に適当に序列を付けて， Cartesian Tree を考えることとする．\nコンストラクタ 普通は，ベクトルなどをコンストラクタの引数にする．\nvector\u003cll\u003e vec{80, 90, 20, 50, 50, 40}; CartesianTree ct0(vec); 引数のないコンストラクタもある． その場合には，メンバ build() にベクトルなどを与える． ベクトルなどの型をあらかじめテンプレート引数で与えておく必要がある．\nCartesianTree\u003cvector\u003cint\u003e\u003e cp; cp.build(vector\u003cint\u003e{4, 1, 5}); 「小さい」の定義は，コンストラクタで与えることができる．\nvector\u003cll\u003e vec{80, 90, 20, 50, 50, 40}; CartesianTree ct1(vec, greater\u003cll\u003e()); CartesianTree ct2(vec, [](ll a, ll b) { return a \u003e b; }); メンバ 根 根は，メンバ root でアクセスする．\ncout \u003c\u003c ct0.root \u003c\u003c endl; // 2 子 左の子と右の子は，vector 型のメンバ left と right に格納されている．\ncout \u003c\u003c ct0.left[2] \u003c\u003c endl; // 0 cout \u003c\u003c ct0.right[2] \u003c\u003c endl; // 5 子供が無いときには，left や right には $-1$ が格納される． 最小値が2箇所以上にあるときには，どれかひとつが適当に選ばれる． 親 親は格納していないので，必要なら利用者が作る．\n例 スタックを使って最小値を処理していくようなコードは，Cartesian Tree で書けることが多いのではないかと思う．\nABC189 C - Mandarin Orange よくある「ヒストグラムにおさまる最大の四角形」を求める問題\n// vector A に問題を読み込む． CartesianTree ct(A); ll ans = 0; auto f = [\u0026](auto rF, ll lo, ll hi, ll x) -\u003e void { if (x \u003c 0) return; updMax(ans, (hi - lo) * A[x]); rF(rF, lo, x, ct.left[x]); rF(rF, x + 1, hi, ct.right[x]); }; f(f, 0, N, ct.root); cout \u003c\u003c ans \u003c\u003c endl; keywords: stack histogram\n",
-  "wordCount" : "309",
+  "articleBody": "Cartesian Tree のライブラリを書いた．\n使用法 vector\u003cll\u003e vec{80, 90, 20, 50, 50, 40} CartesianTree ct(vec); // CartesianTree ct(vec, less()); ... same // CartesianTree ct(vec, [](ll a, ll b) { return a \u003c b; }); ... same assert(ct.root == 2); // vec[2] is the least element assert(ct.left[2] == 0); // least in vec[0:2] is vec[0] assert(ct.left[0] == -1); // \"no such element\" is expressed by -1 assert(ct.right[2] == 5); assert(ct.left[5] == 3 or ct.left[5] == 4); // either of tied element can be chosen 定義 要素がすべて異なる列 $A = (a_1, \\ldots, a_n)$ に対して，$A$ の Cartesian Tree $T$ は， 次のように構成される二分木である．\n$T$ のノードは，$1, 2, \\dots, n$ である． 区間 $[a, b]$ に対する 部分木 $T’$ を，次のように定義する． 空区間 に対する $T’$ は，空である． $T’$ の根は，$[a, b]$ における $A$ の最小値を与える要素 $r$ である． $[a, r - 1]$ に対する木の根を $p$, $[r + 1, b]$ に対する木の根を $q$ とするとき， $r$ の左の子は $p$ であり, $r$ の右の子は $q$ である． 区間 $[1, n]$ に対する $T’$ を $T$ とする． 要素がかならずしもすべて異ならない列に対しても，値が等しい要素に適当に序列を付けて， Cartesian Tree を考えることとする． このライブラリの実装では，右側 (番号が大きい方) の要素が小さいものとして扱っている．\nコンストラクタ 普通は，ベクトルなどをコンストラクタの引数にする．\nvector\u003cll\u003e vec{80, 90, 20, 50, 50, 40}; CartesianTree ct0(vec); 引数のないコンストラクタもある． その場合には，メンバ build() にベクトルなどを与える． ベクトルなどの型をあらかじめテンプレート引数で与えておく必要がある．\nCartesianTree\u003cvector\u003cint\u003e\u003e cp; cp.build(vector\u003cint\u003e{4, 1, 5}); 「小さい」の定義は，コンストラクタで与えることができる．\nvector\u003cll\u003e vec{80, 90, 20, 50, 50, 40}; CartesianTree ct1(vec, greater\u003cll\u003e()); CartesianTree ct2(vec, [](ll a, ll b) { return a \u003e b; }); メンバ 根 根は，メンバ root でアクセスする．\ncout \u003c\u003c ct0.root \u003c\u003c endl; // 2 子 左の子と右の子は，vector 型のメンバ left と right に格納されている．\ncout \u003c\u003c ct0.left[2] \u003c\u003c endl; // 0 cout \u003c\u003c ct0.right[2] \u003c\u003c endl; // 5 子供が無いときには，left や right には $-1$ が格納される． 最小値が2箇所以上にあるときには，どれかひとつが適当に選ばれる． 親 親は格納していないので，必要なら利用者が作る．\n例 スタックを使って最小値を処理していくようなコードは，Cartesian Tree で書けることが多いのではないかと思う．\nABC189 C - Mandarin Orange よくある「ヒストグラムにおさまる最大の四角形」を求める問題\n// vector A に問題を読み込む． CartesianTree ct(A); ll ans = 0; auto f = [\u0026](auto rF, ll lo, ll hi, ll x) -\u003e void { if (x \u003c 0) return; updMax(ans, (hi - lo) * A[x]); rF(rF, lo, x, ct.left[x]); rF(rF, x + 1, hi, ct.right[x]); }; f(f, 0, N, ct.root); cout \u003c\u003c ans \u003c\u003c endl; 自分より大きい，もっとも近くにある要素 配列 H[0], …, H[N - 1] の各添字 i について，l \u003c i \u003c r，H[l] \u003e H[i] \u003c H[r] であって，j = l + 1, .., i - 1, i + 1, .., r - 1 については，H[j] \u003c= H[i] であるような l =: L[i], r =: R[i] を求める．(無いときには -1 と N)．\nCartesian Tree を 逆順 (greater() を指定する) に作っておく．\nH に同じ値がないときには簡単．\nL[ct.root] = -1, R[ct.root] = N． L[ct.left[i]] = L[i], R[ct.left[i]] = i, L[ct.right[i]] = i, R[ct.right[i]] = R[i]． H に同じ値がありうる場合．下のようになるが，多分，Cartesian Tree を使わずに直接計算した方が無難．\nL[ct.root] = -1, R[ct.root] = N． ct.right[i] は，必ず値が下がる． L[ct.right[i]] = i． R については，i の parent p と i の値が同じかどうかによる． p と i の値が同じ時には，(i は p の左の子であって) R[ct.right[i]] = p そうでない時には，R[ct.right[i]] = R[i] ct.left[i] について ct.left[i] と i の値が同じであれば，L[ct.left[i]] = L[i], R[ct.left[i]] = R[i] そうでなければ，L[ct.left[i]] = L[i], R[ct.left[i]] = i． keywords: stack histogram\n",
+  "wordCount" : "438",
   "inLanguage": "en",
   "datePublished": "2025-09-09T14:49:47+09:00",
   "dateModified": "2025-09-09T14:49:47+09:00",
@@ -236,7 +236,7 @@
 <li>区間 $[a, b]$ に対する 部分木 $T&rsquo;$ を，次のように定義する．
 <ul>
 <li>空区間 に対する $T&rsquo;$ は，空である．</li>
-<li>$[a, b]$ における $A$ の最小値を $a_r$ とするとき，$T&rsquo;$ の根は $a_r$ である．</li>
+<li>$T&rsquo;$ の根は，$[a, b]$ における $A$ の最小値を与える要素 $r$ である．</li>
 <li>$[a, r - 1]$ に対する木の根を $p$, $[r + 1, b]$ に対する木の根を $q$ とするとき，
 $r$ の左の子は $p$ であり, $r$ の右の子は $q$ である．</li>
 </ul>
@@ -244,7 +244,8 @@ $r$ の左の子は $p$ であり, $r$ の右の子は $q$ である．</li>
 <li>区間 $[1, n]$ に対する $T&rsquo;$ を $T$ とする．</li>
 </ul>
 <p>要素がかならずしもすべて異ならない列に対しても，値が等しい要素に適当に序列を付けて，
-Cartesian Tree を考えることとする．</p>
+Cartesian Tree を考えることとする．
+このライブラリの実装では，右側 (番号が大きい方) の要素が小さいものとして扱っている．</p>
 <h2 id="コンストラクタ">コンストラクタ<a hidden class="anchor" aria-hidden="true" href="#コンストラクタ">#</a></h2>
 <p>普通は，ベクトルなどをコンストラクタの引数にする．</p>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">{</span><span style="color:#ae81ff">80</span><span style="color:#111">,</span> <span style="color:#ae81ff">90</span><span style="color:#111">,</span> <span style="color:#ae81ff">20</span><span style="color:#111">,</span> <span style="color:#ae81ff">50</span><span style="color:#111">,</span> <span style="color:#ae81ff">50</span><span style="color:#111">,</span> <span style="color:#ae81ff">40</span><span style="color:#111">};</span>        
@@ -287,7 +288,41 @@ Cartesian Tree を考えることとする．</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">};</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">f</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">N</span><span style="color:#111">,</span> <span style="color:#111">ct</span><span style="color:#111">.</span><span style="color:#111">root</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">cout</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#111">endl</span><span style="color:#111">;</span>
-</span></span></code></pre></div><h4 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h4>
+</span></span></code></pre></div><h4 id="自分より大きいもっとも近くにある要素">自分より大きい，もっとも近くにある要素<a hidden class="anchor" aria-hidden="true" href="#自分より大きいもっとも近くにある要素">#</a></h4>
+<p>配列 H[0], &hellip;, H[N - 1] の各添字 i について，l &lt; i &lt; r，H[l] &gt; H[i] &lt; H[r] であって，j = l + 1, .., i - 1, i + 1, .., r - 1 については，H[j] &lt;= H[i] であるような l =: L[i], r =: R[i]  を求める．(無いときには -1 と N)．</p>
+<p>Cartesian Tree を 逆順 (greater<ll>() を指定する) に作っておく．</p>
+<ul>
+<li>
+<p>H に同じ値がないときには簡単．</p>
+<ul>
+<li>L[ct.root] = -1, R[ct.root] = N．</li>
+<li>L[ct.left[i]] = L[i], R[ct.left[i]] = i, L[ct.right[i]] = i, R[ct.right[i]] = R[i]．</li>
+</ul>
+</li>
+<li>
+<p>H に同じ値がありうる場合．下のようになるが，多分，Cartesian Tree を使わずに直接計算した方が無難．</p>
+<ul>
+<li>L[ct.root] = -1, R[ct.root] = N．</li>
+<li>ct.right[i] は，必ず値が下がる．
+<ul>
+<li>L[ct.right[i]] = i．</li>
+<li>R については，i の parent p と i の値が同じかどうかによる．
+<ul>
+<li>p と i の値が同じ時には，(i は p の左の子であって) R[ct.right[i]] = p</li>
+<li>そうでない時には，R[ct.right[i]] = R[i]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ct.left[i] について
+<ul>
+<li>ct.left[i] と i の値が同じであれば，L[ct.left[i]] = L[i], R[ct.left[i]] = R[i]</li>
+<li>そうでなければ，L[ct.left[i]] = L[i], R[ct.left[i]] = i．</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p>keywords: stack histogram</p>
 
 
