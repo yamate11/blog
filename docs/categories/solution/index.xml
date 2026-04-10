@@ -6,8 +6,18 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 May 2024 15:09:15 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2026 13:37:14 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARC212 C - ABS Ball</title>
+      <link>https://yamate11.github.io/blog/posts/2026/04-10-arc212-c/</link>
+      <pubDate>Fri, 10 Apr 2026 13:37:14 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2026/04-10-arc212-c/</guid>
+      <description>AtCoder Regular Contest 212 - ARC212 C - ABS Ball の解法です． shobonvip さんによるユーザ解説 そのままみたいなものですが， 式の導出のところを多めに書きました．
+問題概要 $N$ 個の区別できない白いボールと，$M$ 個の区別できる箱がある． 「各ボールを赤・青どちらかの色に塗っていずれかの箱に入れる」方法それぞれに対して， $i$ 番目の箱に入った赤，青のボールの数を $a_i$, $b_i$ として $\prod_{1 \leq i \leq M} | a_i - b_i |$ を計算した場合の総和を mod 998244353 で求めよ．
+制約: $1 \leq N \leq 10^7$， $1 \leq M \leq 10^7$
+問題へのリンク 解 $a + b = n$ である非負整数 $(a, b)$ についての $|b - a|$ の和を $c_n$ と書くことにすると， 冪級数 $f = \sum_n c_n x^n$ を使って，求める答が $[x^N] f^M$ と表せることに注意する．</description>
+    </item>
     <item>
       <title>ABC354-G Select Strings</title>
       <link>https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/</link>
