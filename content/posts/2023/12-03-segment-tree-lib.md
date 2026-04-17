@@ -13,6 +13,10 @@ categories: ["topic"]
 AtCoder Library にセグメント木はありますが，
 それができる前から使っていたものなので...
 
+#### 関連
+
+[永続セグメント木ライブラリ](https://github.com/yamate11/compprog/blob/main/clib/persSegTree.cc)
+
 ## 使用法
 
 値の型を `DAT`, 更新演算の型を `OP` とする．
