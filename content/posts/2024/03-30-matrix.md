@@ -164,7 +164,7 @@ struct MinPlusLL {
 using MP = MyAlg<MinPlusLL>;
 ```
 
-これで，MP が min-plus の型になる．(MinPlusLL は，演算を定義した型．MP が実際の型)
+これで，MP が min-plus の型になる．(MinPlusLL は，演算を定義する型．MP が実際にデータを格納する型)
 
 次のように行列計算ができる:
 
