@@ -161,21 +161,21 @@ struct MinPlusLL {
   static value_type add(       const value_type& u, const value_type& v) { return min(u, v); }
   static void       subst_mult(      value_type& u, const value_type& v) { u += v; }
 };
-using MMP = MyAlg<MinPlusLL>;
+using MP = MyAlg<MinPlusLL>;
 ```
 
-これで，MMP が min-plus の型になる．(MinPlusLL は，演算を定義した型．MMP が実際の型)
+これで，MP が min-plus の型になる．(MinPlusLL は，演算を定義した型．MP が実際の型)
 
 次のように行列計算ができる:
 
 ```cpp
-  using Mat = Matrix<MMP>;
+  using Mat = Matrix<MP>;
   Mat some(2, 2);   // 2行2列の行列．全要素 0．(long long の既定値が 0 だから)
   Mat zero = some.zero();  // 零行列．全部の要素が mpll_big で埋められている．
   Mat unit = some.one();   // 単位行列．対角要素は 0 (min-plus の単位元)，他は mpll_big．
   Mat mat{{p, q}, {r, s}};
-  vector<MMP> vec{t, u};
-  vector<MMP> result = mat * vec;   // (m,n)行列 × (n,1)行列は，Matrix * vector でできる．
+  vector<MP> vec{t, u};
+  vector<MP> result = mat * vec;   // (m,n)行列 × (n,1)行列は，Matrix * vector でできる．
 ```
 
 
