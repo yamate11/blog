@@ -27,30 +27,44 @@ AO.cc  (Algebra Operations) に依存する ... と思う (最近チェックし
 ```cpp
 using MyMat = Matrix<ll>;
 MyMat mat1(n, m);
-REP(i, 0, n) REP(j, 0, m) cin >> mat1.at(i, j);
+REP(i, 0, n) REP(j, 0, m) cin >> mat1.rs(i, j);
 MyMat cvec1(n, 1);
-REP(i, 0, n) cin >> cvec1.at(i, 0);
+REP(i, 0, n) cin >> cvec1.rs(i, 0);
 auto cvec2 = mat1 * cvec1;
 REP(i, 0, n) cout << cvec2.at(i, 0) << " ";
 cout << endl;
 ```
 
-### 構築子
+### 行列を作る
 
-* `MyMat(int dimI_, int dimJ_)` ... dimI_ 行 dimJ_ 列 の零行列
-* `MyMat(int dimI_, int dimJ_, T t)`  ... dimI_ 行 dimJ_ 列 の，要素の値がすべて `t` である行列
-* `MyMat(int dimI_, int dimJ_, const vector<T>& vec)` ... dimI_ 行，dimJ_ 列で，内部表現が vec である行列．
-   * 内部表現は，$a_{00}, a_{01}, \dots, a_{10}, a_{11}, \dots a_{mn}$ の順に並べた1次元 vector.
-   * dimI_ と dimJ_ のどちらかは負の数にすることができて，その場合には計算される．
-* `MyMat(int dimI_, int dimJ_, vector<T>&& vec)` ... 同上
-* `MyMat(initializer_list<initializer_list<T>> il)`  ... 自然に
-* `MyMat(const Part& cs)`  ... 構造体 Part については後述
-
-### その他，行列を作る関数
-
-* `MyMat::from_vvec(const vector<vector<T>>& vvec)`  ... 2次元ベクトルからMyMat 型行列を作成する．
-* `mat.rowVec(i)` ... 第 i 行目を表す MyMat 型行列
-* `mat.colVec(i)` ... 第 i 列目を表す MyMat 型行列
+* m 行 n 列の零行列
+  ```cpp
+  MyMat mat(m, n);
+  ```
+* 各要素を指定したものにする．
+  ```cpp
+  MyMat mat(m, n);
+  REP(i, 0, m) REP(j, 0, n) mat.rs(i, j) = i * n + j;
+  ```
+* initializer list
+  ```cpp
+  MyMat mat{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  ```
+* vector<vector<ll>> から
+  ```cpp
+  vector<vector<ll>> v{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  auto mat = MyMat::from_vvec(v);
+  ```
+* 要素を1列に並べた長さ m * n の1次元配列 (先に横) v を持っている．
+  (特に m = 1 や n = 1 のとき有用)
+  ```cpp
+  MyMat mat(m, n, move(v));  //  mat(m, -1, v) や mat(-1, n, v) でも良い．
+  ```
+* 既にある m × n 行列の i 行目を取り出した 1× n 行列や，j 列目を取り出した m × 1 行列
+  ```cpp
+  MyMat row_3 = mat.rowVec(3);
+  MyMat col_2 = mat.colVec(2);  
+  ```
 
 ### 要素へのアクセス
 
@@ -58,18 +72,17 @@ cout << endl;
 * `mat.rs(i, j)` ... (i, j) 要素への代入
   * rs は，実際，`MyMat&` を返すので，値も取れる．`mat.rs(i, j) += 1;` のようなコードも書ける．
 
-
 ### ベクトルと $(n, 1)$ 行列
 
-* 長さ n のベクトル vec を，MyMat オブジェクトに変換するときには，
+* ベクトル → 行列: 長さ n のベクトル vec を，MyMat オブジェクトに変換するときには，
   * 縦長 (n, 1) 行列とみるときには，`MyMat m = MyMat(n, 1, vec)` もしくは
   `MyMat m = MyMat(-1, 1, vec)` とすればよい．
-  * 横花 (1, n) 行列とみるときには，`MyMat m = MyMat(1, n, vec)` もしくは
+  * 横長 (1, n) 行列とみるときには，`MyMat m = MyMat(1, n, vec)` もしくは
   `MyMat m = MyMat(1, -1, vec)` とすればよい．
-* (n, 1) 行列 もしくは (1, n) 行列を表す MyMat 型のオブジェクト `mat` を `vector<T>` に変換するときには，
+* 行列 → ベクトル: (n, 1) 行列 もしくは (1, n) 行列を表す MyMat 型のオブジェクト `mat` を `vector<T>` に変換するときには，
   `mat.mem` を取れば良い．
 
-ただし，$(n, n)$ 行列と$(n, 1)$ 縦ベクトルの積を作るときには，
+ただし，$(m, n)$ 行列 (`Matrix<T>`) と$(n, 1)$ ベクトル (`vector<T>`) の積を `vector<T>` で得たいときには，
 `MyMat * vector<T>` のオーバーライドを使う方が簡単である．下の「演算」を参照．
 
 ### 零行列，単位行列
@@ -82,8 +95,12 @@ cout << endl;
 
 ### 小行列を表す構造体 Part
 
-* 構築子:  `Part(const Mat& mat_, int i_size_ = -1, int j_size_ = -1, int i_0_ = 0, int j_0_ = 0)`;
-  mat_ の小行列．左上は `(i_0_, j_0_)` で，サイズが `(i_size_, j_size_)`．
+* 構築子:
+  ```cpp
+  Part(const Mat& mat, int i_size = -1, int j_size = -1, int i_0 = 0, int j_0 = 0)`;
+  ```
+  mat の小行列．サイズが `(i_size, j_size)`で，左上が `(i_0, j_0)` ．
+  サイズの -1 は，mat と同じサイズを意味する．
 * Mat のメンバ関数
   * `mat.part(i_size, j_size, i0, j0)` ... `Part(mat, i_size, j_size, i0, j0)` と同じ．
   * `mat.memcopy(part, i_1, j_1)` ... `part` が表す小行列を，行列 `mat` の中の，左上 `(i_1, j_1)` の部分に埋め込む
@@ -91,7 +108,7 @@ cout << endl;
 ### 演算
 
 * `+`, `-`, `*`, `+=`, `-=`, `*=` をサポートする．
-* 累乗: `mat.matpower(x)` ... mat の x 乗．正方行列に限る．
+* 累乗: `power(mat, x)` を使えば良い．`mat.matpower(x)` もあるが，単に `power(mat, x)` を呼んでいる．
 * `*` のオーバーライドで，MyMat と vector<T> のこの順の掛け算は，結果を vector<T> にとれるようにしてある．
   * 例: `auto v = Matrix<ll>{{1, 2}, {3, 4}} * vector<ll>{1, 1};` とすれば，`v` は `vector<ll>{3, 7}` に等しい．
 
@@ -104,22 +121,22 @@ cout << endl;
 
 * T が体になっていないときには，正しい結果にならなかったりコンパイルエラーになったりする．
 * `[rank, det] = mat.self_sweepout();`
-  ... `mat` は，縦方向に掃き出したものに置き換えられる．`rank` はランク，`det` は行列式．
+  ... 縦方向への掃き出しを行い，`mat` は掃き出したものに置き換えられる．`rank` はランク，`det` は行列式．
 * `[rank, det] = mat.sweepout();`
-  ... `mat` は変化しない．(掃き出した結果の行列は捨てられる)．`rank` はランク，`det` は行列式．
+  ... 同上だが，`mat` は変化しない．掃き出した結果の行列は捨てられる．ランクや行列式を得るための関数．
 * `omat = mat.inv();`
   ... 逆行列．`omat` の型は `optional<MyMat>` で，逆行列が存在しないときは `nullopt`．
 * `mat.determinant()` ... 行列式
-* `oo = mat.linSolution<flag>(bs);`
+* `oo = mat.linSolution(bs);`
   * 一次方程式 `mat * X = bs` を解く．`bs` の型は `MyMat`．
-  * 返り値 oo の型は `optional<pair<MyMat, vector<MyMat>>>`．
+  * 返り値 `oo` の型は `optional<MyMat>`．
     * 解がない場合には，`oo` は，`nullopt`．
-    * 解がある場合には，`oo = [sol, kernel]` として，`sol` は (1つの) 解．
-      `flag` が true の場合には，解空間を sol + V として，`kernel` は V の基底．
-      `flag` が false (デフォルト) の場合には，`kernel` の値には意味が無い (計算が省略される)
-  * 注意: コンパイラが，linSolution の後ろに付ける "<" を不等号と誤認しないよう，次のように
-    `.template` を書く必要があるかもしれない:
-    * `auto opt1 = mat.template linSolution<true>(bs);`
+    * 解がある場合には，`*oo` が (1つの) 解を表す．
+* `oo = mat.linSolution_ex(bs);`
+  * 上と同じだが，返り値 `oo` の型は `optional<pair<Matrix, vector<Matrix>>>`．
+    * 解がない場合には，`oo` は，`nullopt`．
+    * 解がある場合には，`[sol, kernel]` を `*oo` として，`sol` は (1つの) 解．
+      解空間を sol + V として，`kernel` は V の基底．
 
 ### max-plus, min-pus 代数
 
