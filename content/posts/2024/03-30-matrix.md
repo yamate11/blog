@@ -87,11 +87,20 @@ cout << endl;
 
 ### 零行列，単位行列
 
-型には行列のサイズが含まれないので，これらを static member function として定義することは難しい．
-そこで，何らかのオブジェクトを作って，「それと同じサイズの」零行列や単位行列が作れるようにしてある．
+零行列は，構築子で作れる:
 
-* `mat.zero()` ... mat と同じサイズの零行列
-* `mat.unit()` ... mat と同じサイズの単位行列．mat の行と列の大きさは一致していなければならない．
+```cpp
+MyMat mat_zero(4, 3);  // 4行3列の零行列
+```
+
+型には行列のサイズが含まれないので，これらを static member function として定義することは難しい．
+何らかのオブジェクトを作って，「それと同じサイズの」零行列や単位行列が作れるようにしてある．
+
+```cpp
+MyMat some_matrix = ....; // some_matrix は4行4列の行列とする．
+MyMat mat_44_zero = some_matrix.zero();  // 4行4列の零行列
+MyMat mat_44_one  = some_matrix.one();   // 4行4列の単位行列．some_matrix は正方行列でなければならない．
+```
 
 ### 小行列を表す構造体 Part
 
@@ -155,7 +164,19 @@ struct MinPlusLL {
 using MMP = MyAlg<MinPlusLL>;
 ```
 
-こうしておけば，`Matrix<MMP>` によって，min-plus 代数の行列計算が実行できる．
+これで，MMP が min-plus の型になる．(MinPlusLL は，演算を定義した型．MMP が実際の型)
+
+次のように行列計算ができる:
+
+```cpp
+  using Mat = Matrix<MMP>;
+  Mat some(2, 2);   // 2行2列の行列．全要素 0．(long long の既定値が 0 だから)
+  Mat zero = some.zero();  // 零行列．全部の要素が mpll_big で埋められている．
+  Mat unit = some.one();   // 単位行列．対角要素は 0 (min-plus の単位元)，他は mpll_big．
+  Mat mat{{p, q}, {r, s}};
+  vector<MMP> vec{t, u};
+  vector<MMP> result = mat * vec;   // (m,n)行列 × (n,1)行列は，Matrix * vector でできる．
+```
 
 
 
