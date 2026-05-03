@@ -33,11 +33,11 @@ using namespace __gnu_pbds;
 #### 例: pair<int, int> の集合
 
 ```cpp
-using pair_t = pair<int, int>;
-using ordered_set = tree<
-  pair_t,
+using elem_t = pair<int, int>;   // ここを，要素の型にする
+using pbds_set = tree<
+  elem_t,
   null_type,
-  less<pair_t>,
+  less<elem_t>,
   rb_tree_tag,
   tree_order_statistics_node_update
   >;
@@ -46,10 +46,12 @@ using ordered_set = tree<
 #### 例: string から int へのマップ
 
 ```cpp
-using ordered_map = tree<
-  string,
-  int,
-  less<string>,
+using key_t = string;           // ここを，キーの型にする
+using val_t = int;              // ここを，値の型にする
+using pbds_map = tree<
+  key_t,
+  val_t,
+  less<key_t>,
   rb_tree_tag,
   tree_order_statistics_node_update
 >;
@@ -82,5 +84,5 @@ using ordered_map = tree<
 
 ## 注意
 
-* 必ずしも速くないらしい．Fenwick tree なり segment tree の倍くらい遅いというレポートがある
+* 必ずしも速くないらしい．Fenwick tree や segment tree の倍くらい遅いというレポートがある
 * multiset や multimap に相当する機能はない ([リンク](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures_design.html#concepts.associative_semantics.multi))

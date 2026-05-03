@@ -123,21 +123,25 @@ cout << endl;
 
 ### max-plus, min-pus 代数
 
-行列と直接関係あるわけではないが，max-plus 代数は，次のように定義できる．(algOp ライブラリを使う)
+行列と直接関係あるわけではないが，min-plus 代数は，次のように定義できる．
+(algOp ライブラリを使う．matrix ライブラリは algOp を要求しているので特に何もしなくて良い)
 
 ```cpp
-struct MaxPlusLL {
+struct MinPlusLL {
   using value_type = ll;
-  static value_type zero(      const value_type& u)                      { return LLONG_MIN; }
+  static constexpr ll mpll_big = 1LL << 60;
+  static value_type zero(      const value_type& u)                      { return mpll_big; }
   static value_type one(       const value_type& u)                      { return 0; }
-  static value_type add(       const value_type& u, const value_type& v) { return max(u, v); }
+  static value_type add(       const value_type& u, const value_type& v) { return min(u, v); }
   static void       subst_mult(      value_type& u, const value_type& v) { u += v; }
 };
-using MMP = MyAlg<MaxPlusLL>;
+using MMP = MyAlg<MinPlusLL>;
 ```
 
-こうしておけば，`Matrix<MMP>` によって，max-plus 代数の行列計算が実行できる．
+こうしておけば，`Matrix<MMP>` によって，min-plus 代数の行列計算が実行できる．
 
 
 
+
+Keywords: minplus maxplus tropical semiring
 
