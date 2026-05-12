@@ -33,58 +33,96 @@ $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ も計算する．
   * この場合には，$m(i) := \textrm{ if } r(i) < i \textrm{ then } 1 \textrm{ else } 0$ とすればよい．
 * tree の先祖-子孫パス上の辺の重みの最大値を求める
 
-### 1.3 計算量
+### 1.3 二分探索
+
+$P$ を $M$上の単調な述語として，$i$ に対して
+$P(\bigoplus_{k = 0}^{r - 1} m(f^{k}(i)))$ が成り立つ最大/最小の $r$ を求める．
+
+
+### 1.4 計算量
 
 * 前計算 $O(N \log R)$
 * 各回の値の計算 $O(\log R)$
+* 二分探索 $O(\log R)$
 
 ## 2. 使用法
 
+`Doubling` オブジェクト `dobj` を作って使う．
+
+
 ### 2.1 基本用法だけの時
 
-* `DoublingFRel` オブジェクト `dobj` を作る．
-  ```cpp
-    Doubling dobj(R, N, vecF);
-  ```
-  * 関数 $f$ の値を，`vector<ll>` などの型を持つ `vecF` に用意しておく．長さは $N$．
-* 値 $f^r(i)$ は，`dobj.val(r, i)` で取得できる．
-  ```cpp
-    cout << dobj.val(r, i) << endl;
-  ```
-  * 有効な範囲は，$0 \leq r \leq R$，$0 \leq i < N$．
-  * なお，$r = 2^k$ に対する $f^r(i)$ が，内部テーブル `dobj.tbl[k][i]` に格納されている．
 
+#### オブジェクトの作成
+
+関数 make_doubling を用いて，オブジェクトを作成する．
+
+```cpp
+vector<int> vecF(N); ...  // vecF[i] が関数 f(i) の値になるようにする． vector<ll> でも可．
+auto dobj = make_doubling(R, vecF);
+```
+
+R は，$f^r$ を計算する $r$ の最大値以上に取る．等しくとも良い．
+
+オブジェクトを作成すると，内部テーブルの `dobj.f_tbl[k][i]` に，$f^{2^k}(i)$ の値が格納される．
+
+#### 値の取得
+
+メンバ関数 f_val を用いて，値が取得できる．
+
+```cpp
+  int x = dobj.f_val(r, i);  // f^r(i) の値
+```
 
 ### 2.2 追加用法も行う時
 
-* モノイド演算が，型 `T` の 加法 (`operator +`) であるときは，
-  `make_doubling_with_monoid<T>` を使って，`dobj` を作る．
-  ```cpp
-    auto dobj = make_doubling_with_monoid<T>(R, N, vecF, vecM);
-  ```
-  * `R`, `N`, `vecF` は，上と同じ．
-  * 関数 $m$ の値を，`vector<T>` などの型を持つ `vecM` に格納しておく．長さは $N$．
-  * `<T>` は省略できない．
+#### オブジェクトの作成
 
-* モノイド演算が `T` の加法でないときには，`make_doubling_with_monoid_unit_add` を使って `dobj` を作る．
-  ```cpp
-    auto dobj = make_doubling_with_monoid_unit_add(R, N, vecF, vecM, unit, add);
-  ```
-  * 単位元 `unit` は `T` 型．`T` はこの引数から推論される．
-  * 加法 `add` は `T` を 2 つ引数にとって呼べて `T` を返すもの．
+関数 make_doubling に，マッピング $m$，モノイド単位元，モノイド演算も与える．
 
-* これらの場合，`dobj.val(r, i)` は，`pair<int, T>` で $(f^r(i), \bigoplus_{k = 0}^{r - 1} m(f^{k}(i)))$
-  を返す．
-  ```cpp
-    auto [j, c] = dobj.val(r, i);
-    cout << "f^r(i) is " << j << " and total cost is " << c << endl;
-  ```
-  * 内部テーブル `dobj.tbl` の型も `vector<vector<pair<int, T>>>` になる．
+```cpp
+vector<int> vecF(N); ...  // 同上
+vector<T>   vecM(N); ...  // vecM[i] がマッピング m(i) の値になるようにする．
+T unit = ...;             // モノイド単位元
+auto prod = [](const T& a, const T& b) -> T { ... };  // モノイド演算
+auto dobj = make_doubling(R, vecF, vecM, unit, prod);
+```
 
-## 3. 実装上の注意
+よく使うケースとしては，`make_doubling(R, vecF, vecM, 0LL, plus<ll>())` など．
 
-* 以前は，内部テーブルを f 用の `vector<vector<int>>` と モノイド用の `vector<vector<T>>` の2つを
-  持っていた．性能バグだった．
+内部テーブルの `dobj.t_tbl[k][i]` に，$\bigoplus_{j = 0}^{2^k - 1} m(f^{j}(i))$ の値が格納される．
+
+#### 値の取得
+
+メンバ関数 val_pair で，$f^r(i)$ と $\bigoplus_{k = 0}^{r - 1} m(f^{k}(i))$ の値のペアが取得できる．
+片方のみで良いときには，f_val, t_val も使える．
+
+```cpp
+  auto [idx, val] = dobj.val_pair(r, i);
+  int idx2 = dobj.f_val(r, i);      // idx == idx2
+  T val2 = dobj.t_val(r, i);        // val == val2
+```
+
+### 2.3. 二分探索
+
+メンバ関数 binsearh_lo と binsearch_hi がある．
+$P$ を $M$ 上の述語とする．
+$P'(r, i) := P(\bigoplus_{k = 0}^{r - 1} m(f^{k}(i)))$ として，これが $r$ について単調であるとする．
+
+* binsearch_lo:  述語 $P'$ が，r が小さい時に成り立つ場合，成り立つ最大の r を求める．
+* binsearch_hi:  述語 $P'$ が，r が大きい時に成り立つ場合，成り立つ最大の r を求める．
+
+```cpp
+  auto check0 = [&](T t) -> bool { /* P0(t) が成り立つとき true を返す */ };        
+  ...
+  ll r0 = binsearch_lo(check0, i);  // P0'(r, i) が成り立つ最大の r
+  ll r1 = binsearch_hi(check1, i);  // P1'(r, i) が成り立つ最小の r
+```
+
+述語を成り立たせる $r$ が存在しないときには，binsearch_lo は -1 を，binsearch_hi は R + 1 を返す．
+
+どちらのメンバ関数も，省略可能な引数 lo (既定値 0) と hi (既定値は -1 だが，これは R を意味する) を持っていて，
+指定するとその範囲で探索が行われる．単調性もその範囲で保証すれば良い．
 
 
 keywords: doubling

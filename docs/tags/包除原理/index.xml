@@ -6,8 +6,20 @@
     <description>Recent content in 包除原理 on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 05 Mar 2022 08:03:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 May 2026 18:32:25 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/tags/%E5%8C%85%E9%99%A4%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>包除原理</title>
+      <link>https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/</link>
+      <pubDate>Mon, 04 May 2026 18:32:25 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/</guid>
+      <description>何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?
+$x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く．
+定理の言明 $U$ は集合とする．各 $i = 0, \ldots, n-1$ に対して $A_i \subseteq U$ が定められている時， $$ \biggl|\bigcup_{i \in \overline{n}} A_i\biggr| = \sum \left\{ (-1)^{|X| + 1} \biggl|\bigcap_{i \in X} A_i\biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \setminus \{ \emptyset \} \right\} $$
+証明は，このブログの中だと ここ にある．
+使う問題 ABC456-G Count Holidays 問題へのリンク 次の部分問題を包除原理で解いている:
+正整数 $n$ と $k$ が与えられる． 集合 $\bar{n}$ の部分集合 $X$ について，$p(X)$ を，$X$ に含まれる区間の長さの最大値とする． つまり，$i, i + 1, \dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である． $p(X) \leq k$ であるような $X \subseteq \bar{n}$ の個数を，mod 998244353 で求めよ． 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．</description>
+    </item>
     <item>
       <title>Baby Ehab Plays with Permutations - Codeforces Round 717 (Div.2) E</title>
       <link>https://yamate11.github.io/blog/posts/2022/03-05-cf-717-2-e/</link>
