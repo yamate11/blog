@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換"
-date: "2022-03-22T19:59:40+09:00"
-# date_init: "2022-03-22"
+date: "2026-05-20"
+date_init: "2022-03-22"
 tags: ["ゼータ変換", "高速ゼータ変換"]
 categories: ["topic"]
 # categories: ["solution"]

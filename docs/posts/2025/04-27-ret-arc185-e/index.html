@@ -91,8 +91,8 @@ $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$">
 $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2025-04-27T13:50:34+09:00" />
-<meta property="article:modified_time" content="2025-04-27T13:50:34+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2026-05-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-05-20T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ARC185E - Adjacent GCD"/>
@@ -135,8 +135,8 @@ $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$"/>
   "articleBody": "問題概要 問題へのリンク 整数 $N$ と，長さ $N$ の正の整数列 $(A_1, \\ldots, A_N)$ が与えられる． $m = 1, 2, \\ldots, N$ に対して，次の問題を解け\n列 $(A_1, \\dots, A_m)$ の空でない部分列のスコアの総和を 998244353 で割ったあまりを求めよ． ただし，列 $(B_1, \\ldots, B_k)$ のスコアは，$\\displaystyle\\sum_{i = 1}^{k-1} \\textrm{gcd}(B_i, B_{i + 1})$ である． 制約 $1\\leq N \\leq 5\\times10^{5}$，$1 \\leq A_i \\leq 10^5$\n解 公式解説へのリンク ユーザ解説 (noshi91) へのリンク すこし考察すると，解を $R_1, \\ldots, R_N$ として，\n$$ R_i = 2R_{i - 1} + \\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j) $$\nであることがわかる． だから，$\\sum_{j = 1}^{i - 1} 2^j \\textrm{gcd}(A_i, A_j)$ が高速に求められれば良い． 以下，これを記述する．\n解1 (公式解説) 整数 $x$ の約数の集合を $D(x)$ と書くことにする．$x \\leq 5\\times10^5$ のとき，$|D(x)| \\leq 128$ である．\nオイラーの $\\varphi$関数 ($\\varphi(x)$ は，$x$ と互いに素である $x$ 以下の整数の個数) を使う． $n = \\sum_{d \\in D(n)} \\varphi(d)$ が成り立つのであった．\n\\begin{align*} \\sum_j 2^j \\text{gcd}(A_i, A_j) \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(\\text{gcd}(A_i, A_j)) \\} \\\\ \u0026 =\\sum_j 2^j \\sum \\{ \\varphi(d) \\mid d \\in D(A_i), d \\in D(A_j) \\} \\\\ \u0026 =\\sum_{d \\in D(A_i)} \\varphi(d) \\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0) \\end{align*}\n$\\sum_j ( \\texttt{if } d|A_j \\texttt{ then } 2^j \\texttt{ else } 0)$ の部分は，各 $d$ に対する値を 全部持っていて，$i$ が 1増えるたびに更新すれば良い．更新箇所は $|D(A_i)|$ 箇所である．\n解2 (noshi91 のユーザ解説) GCD畳み込みが，約数ゼータ変換を行うと各点積になることを用いる．すなわち， $h(n) = \\sum \\{ f(p)g(q) \\mid \\text{gcd}(p, q) = n \\}$， $F(n) = \\sum_{n|p} f(p)$， $G(n) = \\sum_{n|p} g(p)$， $H(n) = \\sum_{n|p} h(p)$ であるとき，$H(n) = F(n)G(n)$ が成り立つのであった． 意味を考えると， 最大公約数が $n$ の倍数であるような $p$ と $q$ (つまり，$n$ を公約数に持つ $p$ と $q$) に対する $f(p)$ と $g(q)$ の積の総和は，$n$ の倍数 $p$ に対する $f(p)$ の和と $n$ の倍数 $q$ に対する $g(q)$ の和の積になる，ということだから．\n求めるものは，$\\sum_n n \\sum \\{2^j \\mid \\textrm{gcd}(A_i, A_j) = n,\\; j \u003c i\\}$ と書けるので， 各 $n$ に対して，$\\sum \\{ 2^j \\mid \\textrm{gcd}(A_i, A_j) = n,\\; j \u003c i \\}$ が求められれば良い．\n$f(p) = \\texttt{if } p = A_i \\texttt{ then } 1 \\texttt{ else } 0$ $g(p) = \\sum \\{ 2^j \\mid j \u003c i, A_j = p \\}$ とすると， $h(n) = \\sum \\{ f(p)g(q) \\mid \\text{gcd}(p, q) = n \\} = \\sum \\{ 2^j \\mid \\textrm{gcd}(A_i, A_j) = n, \\; j \u003c i\\}$ となる．\nこれは，高速ゼータ変換，各点積，高速メビウス変換で計算できる． 素因数ごとに(上から下に向かった)累積和とその反対の計算をする． 参照1 ， 参照2 $i - 1$ まで計算が終わっているとき，$i$ の計算を考える． $G$ の各点の値は計算しておくとして，これが変化するのは $A_{i - 1}$ の約数の点のみである． $F$ は，$A_i$ の約数の点のみが 1 で他は 0 だから，$H$ の計算 (および $G$ の更新) に要する手間は $|D(A_i)| + |D(A_{i - 1})|$ 程度である．$H$ から $h$ の計算は， 「$xp^r$ と $xp^{r + 1}$ の値の差で$xp^r$ の値を置き換える」ことなので，これも，$A_i$ の約数の点のみで行えば良い．\n",
   "wordCount" : "370",
   "inLanguage": "en",
-  "datePublished": "2025-04-27T13:50:34+09:00",
-  "dateModified": "2025-04-27T13:50:34+09:00",
+  "datePublished": "2026-05-20T00:00:00Z",
+  "dateModified": "2026-05-20T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -223,7 +223,7 @@ $$ R_i = 2R_{i - 1} &#43; \sum_{j = 1}^{i - 1} 2^j \textrm{gcd}(A_i, A_j) $$"/>
     <h1 class="post-title">
       ARC185E - Adjacent GCD
     </h1>
-    <div class="post-meta">2025-04-27   yamate11
+    <div class="post-meta">2026-05-20   yamate11
 </div>
   </header> 
   <div class="post-content"><h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
@@ -318,15 +318,10 @@ $|D(A_i)| + |D(A_{i - 1})|$ 程度である．$H$ から $h$ の計算は，
       <li><a href="https://yamate11.github.io/blog/tags/gcd%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF/">GCD畳み込み</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2025/05-04-ret-abc404-g/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>ABC404 G - Specified Range Sums</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-cf-1021-1-b/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">
     <span class="title">Next »</span>
     <br>
-    <span>Codeforces R.1021 (Div.1) B. Baggage Claim</span>
+    <span>ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</span>
   </a>
 </nav>
 
@@ -339,7 +334,9 @@ $|D(A_i)| + |D(A_{i - 1})|$ 程度である．$H$ から $h$ の計算は，
 </section>
 
 <p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/">ARC185E - Adjacent GCD</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
   / <a href="https://yamate11.github.io/blog/posts/2022/12-10-doubling/">ダブリングライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/04-10-arc212-c/">ARC212 C - ABS Ball</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/07-05-rec-mistake/">誤りの記録</a>
@@ -347,8 +344,6 @@ $|D(A_i)| + |D(A_{i - 1})|$ 程度である．$H$ から $h$ の計算は，
   / <a href="https://yamate11.github.io/blog/posts/2026/02-12-order-of-sizes/">数表など</a>
   / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
-  / <a href="https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/">文字列をソートするときの計算量</a>
-  / <a href="https://yamate11.github.io/blog/posts/2022/10-29-binom/">二項係数に関する公式</a>
 </p>
 
 
