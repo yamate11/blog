@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "包除原理"
-date: "2026-05-04T18:32:25+09:00"
+date: "2040-12-31"
 # date_init: "2026-05-04"
 tags: ["包除原理"]
 categories: ["topic"]
