@@ -191,7 +191,11 @@ x から y へのパスを構成するオイラーツアーの添字区間列を
     else if (...) {  // パス u-v に関する更新
       ll u, v; cin >> u >> v; u--; v--;   
       for (auto [l, r] : tr.hl_path(u, v)) {
-        st.update(l, r, ....);  // 区間 [l, r) を更新
+        if (r >= 0) { // heavy edge の列 l, l+1, ..., r-1
+          st.update(l, r, ....);  // 区間 [l, r) を更新
+        }else {       // light edge l
+          st.rs(l) = ....;
+        }
       }
     ...
     else if (...) {  // ノード nd に関する問合せ
