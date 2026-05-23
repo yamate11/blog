@@ -55,6 +55,12 @@ ll numNodes;   ... ノードの数
 ll root;       ... 根
 ```
 
+他に，`vector<vector<pe_t>> _nbr` があり，隣接ノード情報を格納している．
+型 `pe_t` は，隣接ノード番号と辺の番号を持つ．
+配列 `_nbr[nd]` に，`nd` の隣接ノード情報が格納されているわけだが，
+`nd != root` のときには，`_nbr[nd].back()` に親が格納されている．
+また，HL 分解を行うと，`_nbr[nd][0]` に，heavy child/edge が格納されるようになる．
+
 ### メンバ関数
 
 #### 親子関係
@@ -134,6 +140,69 @@ tuple<ll, ll, ll> euler_edge(ll idx)
   x から y の方向に辿られる．
 * ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
   `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
+
+#### HL分解
+
+`heavy_head()` や `hl_path()` を呼ぶと HL 分解が行われる．
+具体的には，配列 `_nbr[nd]` の順序が入れ替わって，`_nbr[hd][0]` に heavy edge が来るようになる．
+したがって，オイラーツアーと併用するときには，HL分解を先に実施しなければならない．
+逆順になってしまったときにはエラーが報告される．
+
+Tree の3番目のコンストラクタ引数が `use_hl_decomp` という bool 型のものになっている．
+これに true を与えると，親子の決定などの直後に HL 分解が行われるので安全．
+もしくは，`add_edge()` が終わったところで `tr._set_heavy()` を呼んでも良い．
+
+```cpp
+ll heavy_head(ll nd)
+```
+
+heavy edge のみを通って到達できるもっとも低い先祖を返す．
+nd = root のときや，nd の親との辺が light edge のときには，nd 自身を返す．
+
+```cpp
+vector<pair<ll, ll>> hl_path(ll x, ll y)
+```
+
+x から y へのパスを構成するオイラーツアーの添字区間列を返す．より正確には以下の通り
+
+* x = y のときには，空ベクトルが返される．
+* そうでないとき．x と y の LCA を a とする．
+  * `vector<pair<ll, ll>> vx` を次のように構成する:
+    * x = a のときには，空ベクトル
+    * そうでないときには，a から x へのパスを，heavy edge の連続部分と，light edge に分割する
+      * light edge e については，e のオイラーツアーでの添字を i として，
+        `(i, -1)` を vx に追加する．
+      * heavy edge e1, ..., ek については，
+        これらのオイラーツアーでの添字は半開区間 [i1, i2) をなす．vx に `(i1, i2)` を追加する．
+  * `vector<pair<ll, ll>> vy` も同様に構成する．
+  * vx と vy を連結したものを返す．(vx と vy のうち，小さい添字を格納しているものを先にする)
+
+典型的な使用法は以下のようになる (のではないかと思う):
+
+```cpp
+  Tree tr(N, 0, true);  // 第3引数を true にしておくと安全
+  ...
+  // オイラーツアーに合わせてサイズ 2*N のセグメント木を作る
+  vector<T> data_init(2 * N, ....);
+  st = make_seg_tree_lazy( ...., data_init);
+  ...
+  REP(_q, 0, Q) { // クエリ処理
+    ...
+    else if (...) {  // パス u-v に関する更新
+      ll u, v; cin >> u >> v; u--; v--;   
+      for (auto [l, r] : tr.hl_path(u, v)) {
+        st.update(l, r, ....);  // 区間 [l, r) を更新
+      }
+    ...
+    else if (...) {  // ノード nd に関する問合せ
+      ll nd; cin >> nd; nd--;
+      // ノード nd に関して，その親との間の辺を見れば良いのだったら
+      ll e_idx = tr.euler_in(nd);
+      ... st.at(e_idx) ...
+  }
+```
+
+
 
 #### LCA
 
