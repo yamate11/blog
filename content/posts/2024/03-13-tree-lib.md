@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "木ライブラリ"
-date: "2025-07-13T00:00:00+09:00"
+date: "2026-05-23"
 date_init: "2024-03-13"
 tags: ["木"]
 categories: ["topic"]
@@ -45,43 +45,39 @@ Tree tr(N, root);
 戻り値は，辺のID．(0, 1, 2, ... の順で返る)
 
 ```cpp
-int add_edge(int x, int y);
+ll add_edge(ll x, ll y);
 ```
 
 ### データメンバ (public相当のもの)
 
 ```cpp
-int numNodes;   ... ノードの数
-int root;       ... 根
+ll numNodes;   ... ノードの数
+ll root;       ... 根
 ```
-
-* bool 型の static member に，use_stsize, use_depth, use_euler がある．既定値はどれも true.
-  false にすると，stsize(), depth(), euler_in(), euler_out() が使えなくなる代わりに多少速いと期待される．
-  あまり変わらないと思うが．  
 
 ### メンバ関数
 
 #### 親子関係
 
 ```cpp
-int num_children(int nd)
-int parent(int nd)
-int child(int nd, int idx)
-auto children(int nd)
-auto neighbor(int nd)
-pe_t parent_pe(int nd)
-pe_t child_pe(int nd, int idx)
-auto children_pe(int nd)
-auto neighbor_pe(int nd)
+ll num_children(ll nd)
+ll parent(ll nd)
+ll child(ll nd, ll idx)
+auto children(ll nd)
+auto neighbor(ll nd)
+pe_t parent_pe(ll nd)
+pe_t child_pe(ll nd, ll idx)
+auto children_pe(ll nd)
+auto neighbor_pe(ll nd)
 ```
 
 * `tr.num_children(nd)` は，ノード nd の子供の数を返す．
 * `tr.parent(nd) は，nd の親のノードを返す．root の parent は -1．
 * `tr.child(nd, idx)` は，ノード nd の idx 番目の子供を帰す．idx は，0 以上 tr.num_children(nd) 以下．
 * `tr.children(nd)` は，nd の子供の集まりへの view を返す．したがって，次のような使い方ができる:
-  * `for (int c : tr.children(nd) { ... }`
+  * `for (ll c : tr.children(nd) { ... }`
 * `tr.children(nd)` は，nd の子供と親の集まりへの view を返す．
-* 構造体 `pe_t` は，int 型のメンバ `peer` と `edge` を持つ．
+* 構造体 `pe_t` は，ll 型のメンバ `peer` と `edge` を持つ．
   * `peer` ... ノード
   * `edge` ... 辺の番号
 * `tr.parent_pe(nd)` は，nd の親と，nd からその親への辺の番号を返す．
@@ -96,8 +92,8 @@ auto neighbor_pe(int nd)
 #### 辺とノードの対応
 
 ```cpp
-int edge_idx(int x, int y)
-pair<int, int> nodes_of_edge(int e, int mode = 0)
+ll edge_idx(ll x, ll y)
+pair<ll, ll> nodes_of_edge(ll e, ll mode = 0)
 ```
 
 * `tr.edge_idx(x, y)` は，ノード x と y を結ぶ辺の番号を返す．
@@ -114,8 +110,8 @@ pair<int, int> nodes_of_edge(int e, int mode = 0)
 #### 深さ，部分木のサイズ
 
 ```cpp
-int depth(int nd)
-int stsize(int nd)
+ll depth(ll nd)
+ll stsize(ll nd)
 ```
 
 * `tr.depth(nd)` は，nd の深さを返す．rootの深さは 0 である．
@@ -124,9 +120,9 @@ int stsize(int nd)
 #### オイラーツアー
 
 ```cpp
-int euler_in(int nd)
-int euler_out(int nd)
-tuple<int, int, int> euler_edge(int idx)
+ll euler_in(ll nd)
+ll euler_out(ll nd)
+tuple<ll, ll, ll> euler_edge(ll idx)
 ```
 
 * オイラーツアーは，辺を DFS の順に辿ったものである．
@@ -142,27 +138,35 @@ tuple<int, int, int> euler_edge(int idx)
 #### LCA
 
 ```cpp
-int lca(int x, int y)
+ll lca(ll x, ll y)
 ```
 
 ノード x と y の Lowest Common Ancestor を返す．
 
-実装は euler tour + sparce table なので，前処理 $O(N \log N)$ で，クエリは $O(1)$．
+実装: x と y から親をたどって，ただし，heavy edge ではheavy headまで跳んで，みつけている．
+
+#### 深さ d の位置の先祖
+
+```cpp
+ll ancestor_at_depth(ll x, ll dp)
+```
+
+深さ d の位置の先祖を返す．lca と同じように heavy head を使っている．
 
 #### 2ノード間のパス
 
 ```cpp
-vector<int> nnpath(int x, int y)
+vector<ll> nnpath(ll x, ll y)
 ```
 
 ノード x から y への経路を返す．`path = tr.nnpath(x, y)` とすると，
-`path` は `vector<int>` 型で，`path[0]` は x に等しく，`path.back() は y に等しく，
+`path` は `vector<ll>` 型で，`path[0]` は x に等しく，`path.back() は y に等しく，
 `path[i]` と `path[i + 1]` の間には辺がある．
 
 #### 直径
 
 ```cpp
-tuple<int, int, int, int, int> diameter()
+tuple<ll, ll, ll, ll, ll> diameter()
 ```
 
 `[diam, nd0, nd1, ct0, ct1] = tr.diameter()` とすると，
@@ -179,7 +183,7 @@ tuple<int, int, int, int, int> diameter()
 木には重心が 1点または2点存在する．
 
 ```cpp
-pair<int, int> centroids()
+pair<ll, ll> centroids()
 ```
 
 `[a, b] = tr.centroids()` とすると，
@@ -190,7 +194,7 @@ pair<int, int> centroids()
 #### 根の変更
 
 ```cpp
-void change_root(int newRoot)
+void change_root(ll newRoot)
 ```
 
 根を newRoot に変更する．
