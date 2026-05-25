@@ -129,6 +129,10 @@ ll stsize(ll nd)
 ll euler_in(ll nd)
 ll euler_out(ll nd)
 tuple<ll, ll, ll> euler_edge(ll idx)
+  // 以下の関数で，euler_edge(idx) の3要素それぞれが取得できる
+  ll euler_edge_edge(ll idx)
+  ll euler_edge_from(ll idx)
+  ll euler_edge_to(ll idx) 
 ```
 
 * オイラーツアーは，辺を DFS の順に辿ったものである．
@@ -138,6 +142,8 @@ tuple<ll, ll, ll> euler_edge(ll idx)
     各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
 * `[e, x, y] = tr.euler_edge(k)` とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
   x から y の方向に辿られる．
+  e, x, y それぞれは，`tr.euler_edge_edge(k)`, `tr.euler_edge_from(k)`, `tr.euler_edge_to(k)` で
+  取得できる．
 * ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
   `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
 
@@ -169,11 +175,7 @@ x から y へのパスを構成するオイラーツアーの添字区間列を
 * そうでないとき．x と y の LCA を a とする．
   * `vector<pair<ll, ll>> vx` を次のように構成する:
     * x = a のときには，空ベクトル
-    * そうでないときには，a から x へのパスを，heavy edge の連続部分と，light edge に分割する
-      * light edge e については，e のオイラーツアーでの添字を i として，
-        `(i, -1)` を vx に追加する．
-      * heavy edge e1, ..., ek については，
-        これらのオイラーツアーでの添字は半開区間 [i1, i2) をなす．vx に `(i1, i2)` を追加する．
+    * そうでないときには，a から x へのパス上の各辺 (下向き) を，オイラーツアー添字の半開区間 $[s_i, e_i)$ に分割し，これらを全部集めたものを vx とする．(各半開区間は，light edge の後ろに 0 個以上の heavy edge が続く．ただし，先頭の半開区間だけは，light edge がないかもしれない．半開区間の数は $\log(\textrm{numNodes})$ 以下．
   * `vector<pair<ll, ll>> vy` も同様に構成する．
   * vx と vy を連結したものを返す．(vx と vy のうち，小さい添字を格納しているものを先にする)
 
@@ -191,11 +193,7 @@ x から y へのパスを構成するオイラーツアーの添字区間列を
     else if (...) {  // パス u-v に関する更新
       ll u, v; cin >> u >> v; u--; v--;   
       for (auto [l, r] : tr.hl_path(u, v)) {
-        if (r >= 0) { // heavy edge の列 l, l+1, ..., r-1
-          st.update(l, r, ....);  // 区間 [l, r) を更新
-        }else {       // light edge l
-          st.rs(l) = ....;
-        }
+        st.update(l, r, ...);  // 区間 [l, r) を更新
       }
     ...
     else if (...) {  // ノード nd に関する問合せ
