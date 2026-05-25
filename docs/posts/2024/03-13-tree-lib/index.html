@@ -321,11 +321,11 @@ root は省略可で，その場合は 0 が根になる．</p>
 <h4 id="オイラーツアー">オイラーツアー<a hidden class="anchor" aria-hidden="true" href="#オイラーツアー">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_in</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd</span><span style="color:#111">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_out</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">tuple</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">euler_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 以下の関数で，euler_edge(idx) の3要素それぞれが取得できる
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">ll</span> <span style="color:#111">euler_edge_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_edge_from</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_edge_to</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span> 
+</span></span><span style="display:flex;"><span><span style="color:#111">tuple</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">euler_elem</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 以下の関数で，euler_elem(idx) の3要素それぞれが取得できる
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_from</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_to</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span> 
 </span></span></code></pre></div><ul>
 <li>オイラーツアーは，辺を DFS の順に辿ったものである．
 <ul>
@@ -335,9 +335,9 @@ root は省略可で，その場合は 0 が根になる．</p>
 各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．</li>
 </ul>
 </li>
-<li><code>[e, x, y] = tr.euler_edge(k)</code> とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
+<li><code>[e, x, y] = tr.euler_elem(k)</code> とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
 x から y の方向に辿られる．
-e, x, y それぞれは，<code>tr.euler_edge_edge(k)</code>, <code>tr.euler_edge_from(k)</code>, <code>tr.euler_edge_to(k)</code> で
+e, x, y それぞれは，<code>tr.euler_elem_edge(k)</code>, <code>tr.euler_elem_from(k)</code>, <code>tr.euler_elem_to(k)</code> で
 取得できる．</li>
 <li>ノード <code>nd</code> とその親 <code>p</code> を結ぶ辺は，<code>tr.euler_in(nd)</code> 番目に，p から nd 方向に辿られ，
 <code>tr.euler_out(nd)</code> 番目に，nd から p 方向に辿られる．</li>

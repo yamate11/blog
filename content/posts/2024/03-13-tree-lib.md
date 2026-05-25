@@ -128,11 +128,11 @@ ll stsize(ll nd)
 ```cpp
 ll euler_in(ll nd)
 ll euler_out(ll nd)
-tuple<ll, ll, ll> euler_edge(ll idx)
-  // 以下の関数で，euler_edge(idx) の3要素それぞれが取得できる
-  ll euler_edge_edge(ll idx)
-  ll euler_edge_from(ll idx)
-  ll euler_edge_to(ll idx) 
+tuple<ll, ll, ll> euler_elem(ll idx)
+  // 以下の関数で，euler_elem(idx) の3要素それぞれが取得できる
+  ll euler_elem_edge(ll idx)
+  ll euler_elem_from(ll idx)
+  ll euler_elem_to(ll idx) 
 ```
 
 * オイラーツアーは，辺を DFS の順に辿ったものである．
@@ -140,9 +140,9 @@ tuple<ll, ll, ll> euler_edge(ll idx)
     仮想的な点と root を結ぶ仮想的な辺を，それぞれ root に向かって，root から 辿るものとする．
   * 仮想的な辺を含めると辺の数は numNodes となる．仮想的な辺の番号は，numNodes - 1 とする．
     各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
-* `[e, x, y] = tr.euler_edge(k)` とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
+* `[e, x, y] = tr.euler_elem(k)` とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
   x から y の方向に辿られる．
-  e, x, y それぞれは，`tr.euler_edge_edge(k)`, `tr.euler_edge_from(k)`, `tr.euler_edge_to(k)` で
+  e, x, y それぞれは，`tr.euler_elem_edge(k)`, `tr.euler_elem_from(k)`, `tr.euler_elem_to(k)` で
   取得できる．
 * ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
   `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
