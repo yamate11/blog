@@ -103,8 +103,9 @@ int main() {
   REP(i, 0, N) vec[i] = dist(rng);
   map<ll, ll> mp1;
   unordered_map<ll, ll> mp2;
-  safe_umap<ll, ll, false> mp3;
-  safe_umap<ll, ll, true> mp4;
+  safe_umap<ll, ll> mp3;
+  gp_hash_table<ll, ll> mp4;
+  boost::unordered_flat_map<ll, ll, safe_custom_hash<ll>> mp5;
   double t0 = get_time_sec();
   REP(i, 0, N) { mp1[vec[i]] = i; }
   double t1 = get_time_sec();
@@ -114,11 +115,14 @@ int main() {
   double t3 = get_time_sec();
   REP(i, 0, N) { mp4[vec[i]] = i; }
   double t4 = get_time_sec();
-  cerr << ssize(mp1) + ssize(mp2) + ssize(mp3) + ssize(mp4) << endl;
+  REP(i, 0, N) { mp5[vec[i]] = i; }
+  double t5 = get_time_sec();
+  cerr << ssize(mp1) + ssize(mp2) + ssize(mp3) + ssize(mp4) + ssize(mp5) << endl;
   cout << t1 - t0 << endl;
   cout << t2 - t1 << endl;
   cout << t3 - t2 << endl;
   cout << t4 - t3 << endl;
+  cout << t5 - t4 << endl;
 }
 ```
 
