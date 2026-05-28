@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "map と unordered_map の性能"
-date: "2026-01-04T11:37:54+09:00"
+date: "2026-05-28"
 # date_init: "2026-01-04"
 tags: [map, unordered_map, performance]
 categories: ["topic"]
@@ -30,19 +30,19 @@ $0$ から $10^{18}$ くらいまでからとった一様乱数を長さ $N$ の
 
 * `map<ll, ll>`
 * `unordered_map<ll, ll>`
-* `safe_umap<ll, ll, false>`
-  * `unordered_map` に，比較的安全と思われるハッシュ関数を指定したもの
-* `safe_umap<ll, ll, true>`
-  * PBDS の `gp_hash_table` に，上と同じハッシュ関数を指定したもの
+* `unordered_<ll, ll>` に，比較的安全と思われるハッシュ関数を指定したもの
+* PBDS の `gp_hash_table<ll, ll>` に，上と同じハッシュ関数を指定したもの
+* boost の `unordered_flat_map<ll, ll>` に，上と同じハッシュ関数を指定したもの
 
 ### 1.3 測定結果
 
 |   | $2^{18}$ | $2^{19}$ | $2^{20}$ | $2^{21}$ | $2^{22}$ |
 |---|---:|---:|---:|---:|---:|
-| `map<ll, ll>`              | 116 | 321 | 805 | 2093 | 4914 |
-| `unordered_map<ll, ll>`    | 45  | 146 | 411 |  997 | 2253 |
-| `safe_umap<ll, ll, false>` | 55  | 182 | 462 | 1080 | 2405 |
-| `safe_umap<ll, ll, true>`  | 46  | 100 | 198 |  421 |  859 |
+| `map<ll, ll>`                                | 89  | 296 | 786 | 2122 | 5470 |
+| `unordered_map<ll, ll>`                      | 22  |  88 | 260 |  655 | 1517 |
+| `unordered_map<ll, ll>` + 別のハッシュ       | 30  | 115 | 302 |  738 | 1648 |
+| `gp_hash_table<ll, ll>` + 別のハッシュ       | 31  |  64 | 131 |  264 |  537 |
+| `unordered_flat_map<ll, ll>` + 別のハッシュ  | 10  |  20 |  40 |   86 |  189 |
 
 
 単位 ms．2秒間隔で10回実行して，平均を取った．
@@ -81,7 +81,7 @@ $1$ から $6$ からとった10個の一様乱数からなる列を$N$個とり
 | `unordered_map<small_vector_u64<3>, int, H2>` |  57 |  466 | 2419 |
 | `unordered_map<small_vector_string, int, H3>` |  75 |  538 | 2736 |
 
-単位 ms．2秒間隔で10回実行して，平均を取った．
+単位 ms．2秒間隔で10回実行して，平均を取った．(1節の測定とは別のマシン)
 
 がんばってデータ構造を作った甲斐はあまりなくて，単にハッシュ関数を定義しさえすれば良かったことがわかる．
 
