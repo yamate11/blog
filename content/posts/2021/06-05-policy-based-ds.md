@@ -32,12 +32,14 @@ using namespace __gnu_pbds;
 
 #### 例: pair<int, int> の集合
 
+注意: multiset ではない．multiset は PBDS にはない．multiset を使いたいときには pair の set で第2要素でユニークにすることを検討．
+
 ```cpp
-using elem_t = pair<int, int>;   // ここを，要素の型にする
+using elem_tp = pair<int, int>;   // ここを，要素の型にする
 using pbds_set = tree<
-  elem_t,
+  elem_tp,
   null_type,
-  less<elem_t>,
+  less<elem_tp>,
   rb_tree_tag,
   tree_order_statistics_node_update
   >;
@@ -46,16 +48,18 @@ using pbds_set = tree<
 #### 例: string から int へのマップ
 
 ```cpp
-using key_t = string;           // ここを，キーの型にする
-using val_t = int;              // ここを，値の型にする
+using key_tp = string;           // ここを，キーの型にする
+using val_tp = int;              // ここを，値の型にする
 using pbds_map = tree<
-  key_t,
-  val_t,
-  less<key_t>,
+  key_tp,
+  val_tp,
+  less<key_tp>,
   rb_tree_tag,
   tree_order_statistics_node_update
 >;
 ```
+
+注意: `key_t` は `<sys/types.h>` で使われていて衝突する．
 
 ## 機能の呼び出し
 
