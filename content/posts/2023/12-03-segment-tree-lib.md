@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "セグメント木ライブラリ"
-date: "2023-12-03T12:21:00+09:00"
-# date_init: "2023-12-03"
+date: "2026-06-03"
+date_init: "2023-12-03T12:21:00+09:00"
 tags: ['セグメント木']
 categories: ["topic"]
 # categories: ["solution"]
@@ -314,17 +314,14 @@ vector<DAT> vec_view();   // 要素のベクトルを返す
 
 引数無しのコンストラクタが用意してあるので，
 正の長さを持つ `vector<SegTree<...>>` を宣言することもできる．
-その時に型を指定する必要があるが，
-`make_seg_tree` や `make_seg_tree_lazy` を使って一つインスタンスを
-作った上で `decltype` を利用するのが現実的だと思う:
+`make_seg_tree` や `make_seg_tree_lazy` を使って，テーブル長 0 のインスタンスをひとつ作った上で，
+型は `decltype` を利用し，初期値にそのインスタンスを指定するのが良い．
+初期値を指定しないと，たとえば unit が初期化されなかったりする．
 
 ```cpp
-  using sg1_t = decltype(make_seg_tree_lazy(0, 0, plus<int>(), plus<int>(), plus<int>()));
-  vector<sg1_t> sg1(10);
-
-  auto sg4 = make_seg_tree(LLONG_MIN, [](ll x, ll y) -> ll { return max(x, y); });
-  using sg4_t = decltype(sg4);
-  vector<sg4_t> vec4(2, sg4);
+  auto sgt_zero = make_seg_tree(1LL << 60, [](ll x, ll y) { return min(x, y); });
+  vector<decltype(sg_zero)> vec_seg(20, sgt_zero);
+  REP(i, 0, 20) vec2_seg[i].set_data(....);
 ```
 
 ベクトルの要素は同じ型を持たなければならないので，
