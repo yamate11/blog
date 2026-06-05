@@ -9,13 +9,13 @@ categories: ["topic"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
 ---
 
-[自作セグメント木ライブラリ](https://github.com/yamate11/compprog/blob/main/clib/segTree.cc)の使い方についての自分用のメモです．
+[自作セグメント木ライブラリ](https://github.com/yamate11/compprog-clib/blob/master/segTree.cc)の使い方についての自分用のメモです．
 AtCoder Library にセグメント木はありますが，
 それができる前から使っていたものなので...
 
 #### 関連
 
-[永続セグメント木ライブラリ](https://github.com/yamate11/compprog/blob/main/clib/persSegTree.cc)
+[永続セグメント木ライブラリ](https://github.com/yamate11/compprog-clib/blob/master/persSegTree.cc)
 
 ## 使用法
 
