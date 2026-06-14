@@ -160,6 +160,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">小さい整数のベクトルライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>小さい整数のベクトルの実装2種:
+small_vector_u64&lt;bits&gt; … unsigned long long の中にビットを分けて格納 small_vector_string … string の各文字に格納 ベクトル自身を safe_umap (unordered_map.cc) などのキーに使える．
+使用法 small_vector_u64&lt;bits&gt; small_vector_u64&lt;4&gt; vec1; // 4ビットずつ使用．長さは 64 / bits (この場合は 64/4 = 16) に固定 // 初期値は全要素が0 vec1[0] = 3; vec1[1] = 15; vec1[2] = 20; small_vector_u64&lt;4&gt; vec1{3, 15, 20}; // 上と同じになる． small_vector_u64&lt;4&gt; vec1(vector{3, 15, 20}, 3); // 上と同じになる．第1引数は operator[] を持つこと．第2引数に長さを与える cout &lt;&lt; vec1[0] - vec1[2] &lt;&lt; endl; cerr &lt;&lt; vec1 &lt;&lt; endl; // &lt;&lt; は定義済 cerr &lt;&lt; vec1....</p>
+  </div>
+  <footer class="entry-footer">2025-08-17   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 小さい整数のベクトルライブラリ" href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">忘れやすい事項
     </h2>
   </header>
@@ -352,18 +366,6 @@ auto [it, b] = mp.emplace(s, t); b には，挿入が行われたかどうかが
   </div>
   <footer class="entry-footer">2024-08-26   (初版 2022-02-13)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 集合・多重集合のハッシュ" href="https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">平方分割ライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>平方分割ライブラリを書きました</p>
-  </div>
-  <footer class="entry-footer">2024-08-06   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 平方分割ライブラリ" href="https://yamate11.github.io/blog/posts/2024/08-06-sqrt-decomp/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

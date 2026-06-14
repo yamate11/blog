@@ -6,8 +6,19 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>包除原理</title>
+      <link>https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/</link>
+      <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/</guid>
+      <description>何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?
+記法:
+$x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く． 全体集合が文脈から自明なとき，集合 $A$ の補集合を $A^{\text{C}}$ と書く． 集合 $A$ の冪集合を $\mathcal{P}(A)$ と書く． 定理の言明 $U$ を集合とする．各 $i \in \bar{n}$ に対して $A_i \subseteq U$ が定められている時， $$ \biggl|\bigcup_{i \in \overline{n}} A_i\biggr| = \sum \left\{ (-1)^{|X| + 1} \biggl|\bigcap_{i \in X} A_i\biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \setminus \{ \varnothing \} \right\} $$
+証明は，このブログの中だと ここ にある．
+補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\varnothing$ である場合も入っていて $\bigcap_{i\in \varnothing} {A_i}^{\text{C}} = U$ であることにも注意．</description>
+    </item>
     <item>
       <title>セグメント木ライブラリ</title>
       <link>https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/</link>
