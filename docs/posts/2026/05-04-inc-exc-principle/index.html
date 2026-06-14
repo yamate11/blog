@@ -135,8 +135,8 @@ $x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く． 
   "keywords": [
     "包除原理"
   ],
-  "articleBody": "何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?\n記法:\n$x \\in \\mathbb{N}$ に対して $\\bar{x} := \\{0, 1, \\ldots, x-1\\}$ と書く． 全体集合が文脈から自明なとき，集合 $A$ の補集合を $A^{\\text{C}}$ と書く． 集合 $A$ の冪集合を $\\mathcal{P}(A)$ と書く． 定理の言明 $U$ を集合とする．各 $i \\in \\bar{n}$ に対して $A_i \\subseteq U$ が定められている時， $$ \\biggl|\\bigcup_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X| + 1} \\biggl|\\bigcap_{i \\in X} A_i\\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\setminus \\{ \\varnothing \\} \\right\\} $$\n証明は，このブログの中だと ここ にある．\n補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\\varnothing$ である場合も入っていて $\\bigcap_{i\\in \\varnothing} {A_i}^{\\text{C}} = U$ であることにも注意．\n$$ \\biggl|\\bigcap_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {A_i}^{\\text{C}} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $$\n使う問題 ABC456-G Count Holidays 問題へのリンク 次の部分問題を包除原理で解いている:\n正整数 $n$ と $k$ が与えられる． 集合 $\\bar{n}$ の部分集合 $X$ について，$p(X)$ を，$X$ に含まれる区間の長さの最大値とする． つまり，$i, i + 1, \\dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である． $p(X) \\leq k$ であるような $X \\subseteq \\bar{n}$ の個数を，mod 998244353 で求めよ． 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．\n解 TBW\nABC462-G Completely Wrong 問題へのリンク 長さ $N$ の整数列 $C$, $G$ で，$1 \\leq C_i \\leq N$，$1 \\leq G_i \\leq N$ であるものが与えられる． $1, 2, \\dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 blog記事参照 0-index とする． $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い．ここからまだたいへんだが，FPS で頑張る．\n$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ とする． $\\bigcap_{i \\in X} {S_i}$ の要素 $P$ というのは， すべての $i \\in X$ について，$C_j = G_i$ となっている $j$ たちのどれかを選ぶものである．\n数を決めないと考えにくいので， 列 $d_0, \\dots, d_{N - 1}$ であって， 各 $i$ について $0 \\leq d_i$，$d_i \\leq E_i$，$d_i \\leq H_i$ となるようなものを考える． このような列 $d$ の全体を $D$ とする．\n$X \\subseteq \\bar{N}$ であって，$|X \\cap (G^{-1}(i))| = d_i$ であるようなものをとる．\n$|X| = \\sum_i d_i$ である． このような $X$ は，$\\prod_{i} \\binom{H_i}{d_i}$ 個ある． $P \\in \\bigcap_{j \\in X} {S_j}$ であるための条件は，$X\\cap (G^{-1}(i))$ の各要素 j について， $C_{P_j} = i$ であることである． このような $P$ は，$\\prod_{i} \\binom{E_i}{d_i} \\times (N - \\sum_i d_i)! $ 個ある． (各 $i$ について $\\binom{E_i}{d_i}$ 個で，$j \\in X^{\\text{C}}$ なる $j$ については，残りのどこに行っても良い) 反対に $X \\subseteq \\bar{N}$ について $d’(i) := |X \\cap (G^{-1}(i))|$ と定義すれば，\n$0 \\leq d’(i) \\leq H_i$ である $\\bigcap_{i \\in X} S_i \\neq \\varnothing$ であれば $d’(i) \\leq E_i$ である． したがって，$d \\in D$ に対する次の値の和を計算すれば，求める値になる: $(-1)^{\\sum_i d_i}(N - \\sum_i{d_i})! \\prod_i \\binom{H_i}{d_i}\\binom{E_i}{d_i}$ これは，次のように書き直せる: $\\prod_i(-1)^{d_i}\\binom{H_i}{d_i}\\binom{E_i}{d_i}(N - \\sum_i{d_i})!$ 多項式 $f_i$ を，$f_i := \\sum_j (-1)^j\\binom{H_i}{j}\\binom{E_i}{j}\nkeywords: inclusion exclusion principle\n",
-  "wordCount" : "379",
+  "articleBody": "何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?\n記法:\n$x \\in \\mathbb{N}$ に対して $\\bar{x} := \\{0, 1, \\ldots, x-1\\}$ と書く． 全体集合が文脈から自明なとき，集合 $A$ の補集合を $A^{\\text{C}}$ と書く． 集合 $A$ の冪集合を $\\mathcal{P}(A)$ と書く． 定理の言明 $U$ を集合とする．各 $i \\in \\bar{n}$ に対して $A_i \\subseteq U$ が定められている時， $$ \\biggl|\\bigcup_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X| + 1} \\biggl|\\bigcap_{i \\in X} A_i\\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\setminus \\{ \\varnothing \\} \\right\\} $$\n証明は，このブログの中だと ここ にある．\n補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\\varnothing$ である場合も入っていて $\\bigcap_{i\\in \\varnothing} {A_i}^{\\text{C}} = U$ であることにも注意．\n$$ \\biggl|\\bigcap_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {A_i}^{\\text{C}} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $$\n使う問題 ABC456-G Count Holidays 問題へのリンク 次の部分問題を包除原理で解いている:\n正整数 $n$ と $k$ が与えられる． 集合 $\\bar{n}$ の部分集合 $X$ について，$p(X)$ を，$X$ に含まれる区間の長さの最大値とする． つまり，$i, i + 1, \\dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である． $p(X) \\leq k$ であるような $X \\subseteq \\bar{n}$ の個数を，mod 998244353 で求めよ． 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．\n解 TBW\nABC462-G Completely Wrong 問題へのリンク 長さ $N$ の整数列 $C$, $G$ で，$1 \\leq C_i \\leq N$，$1 \\leq G_i \\leq N$ であるものが与えられる． $1, 2, \\dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 blog記事参照 keywords: inclusion exclusion principle\n",
+  "wordCount" : "191",
   "inLanguage": "en",
   "datePublished": "2026-06-14T00:00:00Z",
   "dateModified": "2026-06-14T00:00:00Z",
@@ -289,45 +289,8 @@ $m - 1$ 個ないし $m$ 個
 $1, 2, \dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を
 mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
 <h4 id="解-1">解<a hidden class="anchor" aria-hidden="true" href="#解-1">#</a></h4>
-<p><a href="">blog記事参照</a>
+<p><a href="../06-14-abc462-g/">blog記事参照</a>
 </p>
-<p>0-index とする．
-$S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$
-なので，包除原理により
-$ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $
-を求めれば良い．ここからまだたいへんだが，FPS で頑張る．</p>
-<p>$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ とする．
-$\bigcap_{i \in X} {S_i}$ の要素 $P$ というのは，
-すべての $i \in X$ について，$C_j = G_i$ となっている $j$ たちのどれかを選ぶものである．</p>
-<p>数を決めないと考えにくいので，
-列 $d_0, \dots, d_{N - 1}$ であって，
-各 $i$ について $0 \leq d_i$，$d_i \leq E_i$，$d_i \leq H_i$ となるようなものを考える．
-このような列 $d$ の全体を $D$ とする．</p>
-<ul>
-<li>
-<p>$X \subseteq \bar{N}$ であって，$|X \cap (G^{-1}(i))| = d_i$ であるようなものをとる．</p>
-<ul>
-<li>$|X| = \sum_i d_i$ である．</li>
-<li>このような $X$ は，$\prod_{i} \binom{H_i}{d_i}$ 個ある．</li>
-<li>$P \in \bigcap_{j \in X} {S_j}$ であるための条件は，$X\cap (G^{-1}(i))$ の各要素 j について，
-$C_{P_j} = i$ であることである．
-このような $P$ は，$\prod_{i} \binom{E_i}{d_i} \times (N - \sum_i d_i)! $ 個ある．
-(各 $i$ について $\binom{E_i}{d_i}$ 個で，$j \in X^{\text{C}}$ なる $j$ については，残りのどこに行っても良い)</li>
-</ul>
-</li>
-<li>
-<p>反対に $X \subseteq \bar{N}$ について $d&rsquo;(i) := |X \cap (G^{-1}(i))|$ と定義すれば，</p>
-<ul>
-<li>$0 \leq d&rsquo;(i) \leq H_i$ である</li>
-<li>$\bigcap_{i \in X} S_i \neq \varnothing$  であれば $d&rsquo;(i) \leq E_i$ である．</li>
-</ul>
-</li>
-</ul>
-<p>したがって，$d \in D$ に対する次の値の和を計算すれば，求める値になる:
-$(-1)^{\sum_i d_i}(N - \sum_i{d_i})! \prod_i \binom{H_i}{d_i}\binom{E_i}{d_i}$
-これは，次のように書き直せる:
-$\prod_i(-1)^{d_i}\binom{H_i}{d_i}\binom{E_i}{d_i}(N - \sum_i{d_i})!$
-多項式 $f_i$ を，$f_i := \sum_j (-1)^j\binom{H_i}{j}\binom{E_i}{j}</p>
 <p>keywords: inclusion exclusion principle</p>
 
 

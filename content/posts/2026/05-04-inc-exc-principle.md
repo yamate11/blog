@@ -83,41 +83,7 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
 
 #### 解
 
-[blog記事参照]()
-
-0-index とする．
-$S_i := \\{ P \mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$
-なので，包除原理により
-$ \sum \left\\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \\;\middle|\\; X \in \mathcal{P}(\bar{n}) \right\\} $
-を求めれば良い．ここからまだたいへんだが，FPS で頑張る．
-
-$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ とする．
-$\bigcap_{i \in X} {S_i}$ の要素 $P$ というのは，
-すべての $i \in X$ について，$C_j = G_i$ となっている $j$ たちのどれかを選ぶものである．
-
-数を決めないと考えにくいので，
-列 $d_0, \dots, d_{N - 1}$ であって，
-各 $i$ について $0 \leq d_i$，$d_i \leq E_i$，$d_i \leq H_i$ となるようなものを考える．
-このような列 $d$ の全体を $D$ とする．
-
-* $X \subseteq \bar{N}$ であって，$|X \cap (G^{-1}(i))| = d_i$ であるようなものをとる．
-    * $|X| = \sum_i d_i$ である．
-    * このような $X$ は，$\prod_{i} \binom{H_i}{d_i}$ 個ある．
-    * $P \in \bigcap_{j \in X} {S_j}$ であるための条件は，$X\cap (G^{-1}(i))$ の各要素 j について，
-      $C_{P_j} = i$ であることである．
-      このような $P$ は，$\prod_{i} \binom{E_i}{d_i} \times (N - \sum_i d_i)! $ 個ある．
-      (各 $i$ について $\binom{E_i}{d_i}$ 個で，$j \in X^{\text{C}}$ なる $j$ については，残りのどこに行っても良い)
-
-* 反対に $X \subseteq \bar{N}$ について $d'(i) := |X \cap (G^{-1}(i))|$ と定義すれば，
-  * $0 \leq d'(i) \leq H_i$ である
-  * $\bigcap_{i \in X} S_i \neq \varnothing$  であれば $d'(i) \leq E_i$ である．
-
-したがって，$d \in D$ に対する次の値の和を計算すれば，求める値になる:
-$(-1)^{\sum_i d_i}(N - \sum_i{d_i})! \prod_i \binom{H_i}{d_i}\binom{E_i}{d_i}$
-これは，次のように書き直せる:
-$\prod_i(-1)^{d_i}\binom{H_i}{d_i}\binom{E_i}{d_i}(N - \sum_i{d_i})!$
-多項式 $f_i$ を，$f_i := \sum_j (-1)^j\binom{H_i}{j}\binom{E_i}{j} 
-
+[blog記事参照](../06-14-abc462-g/)
 
 
 keywords: inclusion exclusion principle
