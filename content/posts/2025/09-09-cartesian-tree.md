@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "Cartesian Tree"
-date: "2025-09-09T14:49:47+09:00"
-# date_init: "2025-09-09"
+date: "2026-06-23"
+date_init: "2025-09-09"
 tags: []
 categories: ["topic"]
 # categories: ["solution"]
@@ -15,14 +15,18 @@ Cartesian Tree のライブラリを書いた．
 
 ```cpp
     vector<ll> vec{80, 90, 20, 50, 50, 40}
-    CartesianTree ct(vec);
-    // CartesianTree ct(vec, less<ll>()); ... same
-    // CartesianTree ct(vec, [](ll a, ll b) { return a < b; }); ... same
+    auto ct = make_cartesian_tree(vec);
     assert(ct.root == 2);     // vec[2] is the least element
     assert(ct.left[2] == 0);  // least in vec[0:2] is vec[0]
     assert(ct.left[0] == -1); // "no such element" is expressed by -1
     assert(ct.right[2] == 5);
-    assert(ct.left[5] == 3 or ct.left[5] == 4);  // either of tied element can be chosen
+    assert(ct.left[5] == 3 or ct.left[5] == 4);  // either of the tied elements can be chosen
+
+    auto ct2 = make_cartesian_tree(vec, greater<ll>()); // root = idx of greatest element
+    auto ct3 = make_cartesian_tree(vec, comp);
+                // comp is (const T&, const T&) -> bool, where T is the value type fo vec
+    auto ct4 = make_cartesian_tree_comp_index(vec, comp); //
+                // comp is (int i, int j) -> bool.  Convenient for specifying tie break.
 ```
 
 ## 定義
@@ -42,30 +46,48 @@ Cartesian Tree のライブラリを書いた．
 Cartesian Tree を考えることとする．
 このライブラリの実装では，右側 (番号が大きい方) の要素が小さいものとして扱っている．
 
-## コンストラクタ
+小さい順でなく大きい順にしたり，タイブレークを明示したりすることもできる．下記参照．
 
-普通は，ベクトルなどをコンストラクタの引数にする．
+## オブジェクトの作成
 
-```cpp
-vector<ll> vec{80, 90, 20, 50, 50, 40};        
-CartesianTree ct0(vec);
-```
-
-引数のないコンストラクタもある．
-その場合には，メンバ build() にベクトルなどを与える．
-ベクトルなどの型をあらかじめテンプレート引数で与えておく必要がある．
-
-```cpp
-CartesianTree<vector<int>> cp;
-cp.build(vector<int>{4, 1, 5});
-```
-
-「小さい」の定義は，コンストラクタで与えることができる．
+構造体名は CartesianTree であるが，通常は，作成関数 make_cartesian_tree を利用するのが便利．
+普通は，ベクトルなどを引数として与える．
 
 ```cpp
 vector<ll> vec{80, 90, 20, 50, 50, 40};        
-CartesianTree ct1(vec, greater<ll>());
-CartesianTree ct2(vec, [](ll a, ll b) { return a > b; });
+auto ct0 = make_cartesian_tree(vec);
+```
+
+第2引数に比較関数を与えることができる．
+
+```cpp
+auto ct1 = make_cartesian_tree(vec, greater<ll>());
+auto ct2 = make_cartesian_tree(vec, [](ll a, ll b) { return a > b; });
+```
+
+上の作成関数で指定する比較関数の引数は，ベクトルなどの value_type であるが，
+添字を引数にしたい場合には，作成関数 make_cartesian_tree_comp_index を用いる．
+
+```cpp
+auto ct3 = make_cartesian_tree_comp_index(vec, [](ll i, ll j) -> {
+             if (vec[i] != vec[j]) return vec[i] < vec[j];
+             else return i < j;
+           });
+```
+
+上の例では，値が等しいときには左側を優先して取るようにしている．
+
+配列などを作成するときのために，引数のないコンストラクタもある．
+その場合には，メンバ関数 build() でベクトルなどを与える．
+以下のテンプレート引数を明示的に設定する必要があるかもしれない:
+
+* `typename Ctn`: データとして与えるコンテナの型．`vector<ll>` など．
+* `typename Comp`: 比較関数の型．デフォルトは `less<typename Ctn::value_type>`
+* `bool comp_arg_index`: 比較関数の引数が `typename Ctn::value_type` であるか (`false`) 添字型 (`ll` など) であるか (`true`)．デフォルトは `false`
+
+```cpp
+vector<CartesianTree<vector<ll>, greater<ll>, false>> ct(10);
+for (ll i = 0; i < 10; i++) ct[i].build(vec[i], greater<ll>());
 ```
 
 ## メンバ
@@ -88,15 +110,26 @@ cout << ct0.right[2] << endl; // 5
 ```
 
 * 子供が無いときには，left や right には $-1$ が格納される．
-* 最小値が2箇所以上にあるときには，どれかひとつが適当に選ばれる．
 
 ### 親
 
-親は格納していないので，必要なら利用者が作る．
+親は vector 型のメンバ parent に格納されている．
+
+```cpp
+cout << ct0.parent[0] << " " << ct0.parent[5] << endl; // 2 2
+```
+
+* `parent[root]` の値は -1 である．
+
+## スタック処理との関係
+
+スタックを使って 最小値/最大値 を処理していくようなコードは，Cartesian Tree を使うと簡潔になることが多いと思う．
+実際，H に関する Cartesian Tree を構築するときに使用しているスタックについて，添字 i を処理したときの値が
+st = (s[0], s[1], ..., s[k]) (s[k] = i) であるとする．
+これは，i = s[k] から始めて，i' < i; H[i'] < H[i] となる最大の i' = s[k - 1] を順にとっていくものになっているので，
+できあがった Cartesian Tree で，根に向かうパスで，右の枝を辿るときの親を並べると得られる．
 
 ## 例
-
-スタックを使って最小値を処理していくようなコードは，Cartesian Tree で書けることが多いのではないかと思う．
 
 #### ABC189 C - Mandarin Orange
 
@@ -125,17 +158,9 @@ Cartesian Tree を 逆順 (greater<ll>() を指定する) に作っておく．
   * L[ct.root] = -1, R[ct.root] = N．
   * L[ct.left[i]] = L[i], R[ct.left[i]] = i, L[ct.right[i]] = i, R[ct.right[i]] = R[i]．
 
-* H に同じ値がありうる場合．下のようになるが，多分，Cartesian Tree を使わずに直接計算した方が無難．
-  * L[ct.root] = -1, R[ct.root] = N．
-  * ct.right[i] は，必ず値が下がる．
-    * L[ct.right[i]] = i．
-    * R については，i の parent p と i の値が同じかどうかによる．
-      * p と i の値が同じ時には，(i は p の左の子であって) R[ct.right[i]] = p
-      * そうでない時には，R[ct.right[i]] = R[i]
-  * ct.left[i] について
-    * ct.left[i] と i の値が同じであれば，L[ct.left[i]] = L[i], R[ct.left[i]] = R[i]
-    * そうでなければ，L[ct.left[i]] = L[i], R[ct.left[i]] = i．
-
+* H に同じ値がありうる場合．L と R を別々に求める．
+  * L を求めるときには，比較関数を「H が等しい時には右 (添字の大きい方) を優先」にする．
+  * R を求めるときには，比較関数を「H が等しい時には左 (添字の小さい方) を優先」にする．
 
 
 
