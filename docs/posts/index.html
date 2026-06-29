@@ -175,6 +175,24 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ARC223-D Xpectation of Cards in Hand with Laboratory
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．
+左から順にカードを見る．
+それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a &#43; K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．
+制約 $A \geq 1, B \geq 1$ $1 \leq K \leq A &#43; B \leq 10^7$ 解 次のように言い換えられる:
+下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．
+赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a &#43; K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．
+$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\binom{a &#43; b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．...</p>
+  </div>
+  <footer class="entry-footer">2026-06-29   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ARC223-D Xpectation of Cards in Hand with Laboratory" href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Cartesian Tree
     </h2>
   </header>
@@ -372,23 +390,6 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   </div>
   <footer class="entry-footer">2026-01-05   (初版 2021-07-06)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 桁DPのコーディング" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">文字列をソートするときの計算量
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>文字列のリスト $(s_i \mid i &lt; N)$ をソートする場合の時間計算量についての雑多なまとめ． $S := \sum_i |s_i|$ とする．
-1. 辞書順ソート 2つの文字列 $s$, $t$ の比較は，$O(\min(|s|, |t|))$ でできると仮定する． もちろん，全体の計算量が $O(SN \log N)$ であるとはいえる．
-1.1 一般 一般のソートアルゴリズムについては，それ以上のことはあまり言えないらしい．
-1.2 マージソート 1.2.1 計算量 マージソートならば，計算量は $O(S \log N)$ になる． 全体で $\log N$ 段のマージを行うわけだが，各段の 長さ $L \to 2L$ のマージを考えると， 毎回1つずつが処理されてマージ済の方に送られるのだが，この処理は， どちらの文字列の長さについてもそれ以下のコストで行えるので，とくに，マージ済の方に送られる文字列の 長さ以下のコストである．したがって，このマージにかかるコストは $2L$ 以下であり，つまり， この段のコストは $S$ 以下である．
-1.2.2 実装 もちろんマージソートを書いても良いわけではあるが， ABC354-B の解説「文字列をソートする計算量について」 によると，C&#43;&#43; の std::stable_sort は，マージソートで実装されていることが多いそうである．
-2. 連結最小 $\sigma = (s_i \mid i &lt; N)$ を任意の順序で連結したときの (辞書順による) 最小のものを求める，という典型問題がある． 関係する問題には，次がある:...</p>
-  </div>
-  <footer class="entry-footer">2025-12-02   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 文字列をソートするときの計算量" href="https://yamate11.github.io/blog/posts/2025/12-02-sort-strings/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

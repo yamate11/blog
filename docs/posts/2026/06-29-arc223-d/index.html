@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ARC223-D Xpectation of Cards in Hand with Laboratory | yamate11のブログ</title>
+<meta name="keywords" content="">
+<meta name="description" content="問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．
+左から順にカードを見る．
+それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a &#43; K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．
+制約 $A \geq 1, B \geq 1$ $1 \leq K \leq A &#43; B \leq 10^7$ 解 次のように言い換えられる:
+下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．
+赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a &#43; K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．
+$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\binom{a &#43; b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="ARC223-D Xpectation of Cards in Hand with Laboratory" />
+<meta property="og:description" content="問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．
+左から順にカードを見る．
+それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a &#43; K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．
+制約 $A \geq 1, B \geq 1$ $1 \leq K \leq A &#43; B \leq 10^7$ 解 次のように言い換えられる:
+下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．
+赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a &#43; K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．
+$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\binom{a &#43; b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-06-29T16:20:31+09:00" />
+<meta property="article:modified_time" content="2026-06-29T16:20:31+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ARC223-D Xpectation of Cards in Hand with Laboratory"/>
+<meta name="twitter:description" content="問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．
+左から順にカードを見る．
+それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a &#43; K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．
+制約 $A \geq 1, B \geq 1$ $1 \leq K \leq A &#43; B \leq 10^7$ 解 次のように言い換えられる:
+下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．
+赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a &#43; K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．
+$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\binom{a &#43; b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ARC223-D Xpectation of Cards in Hand with Laboratory",
+      "item": "https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ARC223-D Xpectation of Cards in Hand with Laboratory",
+  "name": "ARC223-D Xpectation of Cards in Hand with Laboratory",
+  "description": "問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．\n左から順にカードを見る．\nそれまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a + K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．\n制約 $A \\geq 1, B \\geq 1$ $1 \\leq K \\leq A + B \\leq 10^7$ 解 次のように言い換えられる:\n下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．\n赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a + K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．\n$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\\binom{a + b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．",
+  "keywords": [
+    
+  ],
+  "articleBody": "問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．\n左から順にカードを見る．\nそれまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a + K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．\n制約 $A \\geq 1, B \\geq 1$ $1 \\leq K \\leq A + B \\leq 10^7$ 解 次のように言い換えられる:\n下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．\n赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a + K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．\n$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\\binom{a + b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．\nそれまでに直線を触るものについて，触った後の部分を直線 $b = a - K$ で折り返す (図の紫色の点線)． これは，$(0, 0)$ から紫の二重丸 $(a - 1, b)$ へのパスになる．\n逆に$(0, 0)$ から $(a - 1, b)$ へのパスは，必ず直線 $b = a - K$ に触る．初めて触った点以降を折り返すと， $(0, 0)$ から $(a, b - 1)$ へのパスで，直線に触るものになる．\nしたがって，求める数は，$\\binom{a + b - 1}{a} - \\binom{a + b - 1}{a - 1}$ で求められる．\n補足 カタラン数の求め方と同様．\nかんプリン氏のウェブサイトの記事 「グリッドの最短経路の数え上げまとめ 」に， いろいろな問題に対する数え上げが載っている．\n",
+  "wordCount" : "150",
+  "inLanguage": "en",
+  "datePublished": "2026-06-29T16:20:31+09:00",
+  "dateModified": "2026-06-29T16:20:31+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      ARC223-D Xpectation of Cards in Hand with Laboratory
+    </h1>
+    <div class="post-meta">2026-06-29   yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p><a href="https://atcoder.jp/contests/arc223/tasks/arc223_d" target="_blank">問題へのリンク</a>
+</p>
+<p>種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる．
+正整数 $K$ が与えられる．</p>
+<p>左から順にカードを見る．</p>
+<ul>
+<li>それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする．
+$b = a + K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む．</li>
+<li>最後のカードまで見た場合には，スコア $B$ を得て終了する．</li>
+</ul>
+<p>スコアの期待値を求めよ．</p>
+<h4 id="制約">制約<a hidden class="anchor" aria-hidden="true" href="#制約">#</a></h4>
+<ul>
+<li>$A \geq 1, B \geq 1$</li>
+<li>$1 \leq K \leq A + B \leq 10^7$</li>
+</ul>
+<h2 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h2>
+<p>次のように言い換えられる:</p>
+<p>下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ．
+赤い丸のいずれか最初に到達した点の b 座標をスコアとする．</p>
+<img src="fig01.jpg" width=30%>
+<p>赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a + K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．)
+$(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが，
+これだと考えにくい．</p>
+<img src="fig02.jpg" width=40%>
+<p>$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって，
+$(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ．
+パスは $\binom{a + b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．</p>
+<p>それまでに直線を触るものについて，触った後の部分を直線 $b = a - K$ で折り返す (図の紫色の点線)．
+これは，$(0, 0)$ から紫の二重丸 $(a - 1, b)$ へのパスになる．</p>
+<p>逆に$(0, 0)$ から $(a - 1, b)$ へのパスは，必ず直線 $b = a - K$ に触る．初めて触った点以降を折り返すと，
+$(0, 0)$ から $(a, b - 1)$ へのパスで，直線に触るものになる．</p>
+<p>したがって，求める数は，$\binom{a + b - 1}{a} - \binom{a + b - 1}{a - 1}$ で求められる．</p>
+<h2 id="補足">補足<a hidden class="anchor" aria-hidden="true" href="#補足">#</a></h2>
+<p>カタラン数の求め方と同様．</p>
+<p>かんプリン氏のウェブサイトの記事
+「<a href="https://kanpurin.hatenablog.com/entry/2021/09/15/220913" target="_blank">グリッドの最短経路の数え上げまとめ</a>
+」に，
+いろいろな問題に対する数え上げが載っている．</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Cartesian Tree</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2026/06-29-arc223-d/" data-title="ARC223-D Xpectation of Cards in Hand with Laboratory">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">ARC223-D Xpectation of Cards in Hand with Laboratory</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/">ABC462-G Completely Wrong</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
+  / <a href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">セグメント木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">map と unordered_map の性能</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/">ARC185E - Adjacent GCD</a>
+  / <a href="https://yamate11.github.io/blog/posts/2022/03-22-fast-zeta/">ゼータ変換，メビウス変換，高速ゼータ変換, 高速メビウス変換</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2026 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

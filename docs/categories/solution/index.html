@@ -160,6 +160,24 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ARC223-D Xpectation of Cards in Hand with Laboratory
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>問題概要 問題へのリンク 種類AのカードがA枚，種類BのカードがB枚ある．一列にランダムに並べる． 正整数 $K$ が与えられる．
+左から順にカードを見る．
+それまでに見た種類Aのカードの枚数を $a$，種類Bのカードの枚数を $b$ とする． $b = a &#43; K$ であれば，スコア $b$ を得て終了する．そうでなければ次のカードに進む． 最後のカードまで見た場合には，スコア $B$ を得て終了する． スコアの期待値を求めよ．
+制約 $A \geq 1, B \geq 1$ $1 \leq K \leq A &#43; B \leq 10^7$ 解 次のように言い換えられる:
+下図のグリッドで，左下隅から右上隅に (上か右に) 進むパスをランダムに選ぶ． 赤い丸のいずれか最初に到達した点の b 座標をスコアとする．
+赤丸 $(a, b)$ に最初に到達するパスを数えられれば良い．$b = a &#43; K$ に乗っている赤丸で考える．(右上隅の赤丸も同様．) $(0, 0)$ から $(a, b)$ へのパスの数から，これらのパスで $(a, b)$ より早く直線を触わるものの数を引けば良いが， これだと考えにくい．
+$(0, 0)$ から $(a, b)$ へのパスでそれまでに直線を触らないものは，緑の二重丸 $(a, b - 1)$ を通る．したがって， $(0, 0)$ から $(a, b - 1)$ へのパスで，それまでに直線を触らないものを数えても同じ． パスは $\binom{a &#43; b - 1}{a}$ だけあるので，これらのうち，それまでに直線を触ってしまうものを数えて引けば良い．...</p>
+  </div>
+  <footer class="entry-footer">2026-06-29   yamate11</footer>
+  <a class="entry-link" aria-label="post link to ARC223-D Xpectation of Cards in Hand with Laboratory" href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">ABC462-G Completely Wrong
     </h2>
   </header>
@@ -347,18 +365,6 @@ $s \in S$ に対し，現れる ( の数から ) の数を引いたものを $g(
   </div>
   <footer class="entry-footer">2022-02-24   yamate11</footer>
   <a class="entry-link" aria-label="post link to Balls in Boxes - Atcoder Beginner Contest 231 G" href="https://yamate11.github.io/blog/posts/2022/02-24-abc-231-g-balls-in-boxes/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Predilection - Atcoder Beginner Contest 230 F
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>解説ACです．</p>
-  </div>
-  <footer class="entry-footer">2022-02-20   yamate11</footer>
-  <a class="entry-link" aria-label="post link to Predilection - Atcoder Beginner Contest 230 F" href="https://yamate11.github.io/blog/posts/2022/02-20-abc-230-f-predilection/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
