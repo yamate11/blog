@@ -5,12 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>方程式 ax \equiv b mod M の解 | yamate11のブログ</title>
+<title>尺取り法について | yamate11のブログ</title>
 <meta name="keywords" content="">
-<meta name="description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
-$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．">
+<meta name="description" content="概要 いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．
+ポインタは常に左から右に動かす．戻らない． 性質が成り立つ境界が2つあるわけだが， どちらの境界でも，静止状態では，ポインタは右側を指すようにする． ポインタが境界の左側を指していたときのなんらかの値が欲しいときには， それをどこかに記録しておく． Rationale
+戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽． ポインタを進めてみないと性質が成り立つかどうかわからないということがある． 左側の時の値が欲しい場合は，おそらく，少ない． keywords: two pointers two-pointer technique">
 <meta name="author" content="yamate11">
-<link rel="canonical" href="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/06-30-two-pointer/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
@@ -82,18 +83,20 @@ $g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g
 
 
 
-<meta property="og:title" content="方程式 ax \equiv b mod M の解" />
-<meta property="og:description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
-$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．" />
+<meta property="og:title" content="尺取り法について" />
+<meta property="og:description" content="概要 いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．
+ポインタは常に左から右に動かす．戻らない． 性質が成り立つ境界が2つあるわけだが， どちらの境界でも，静止状態では，ポインタは右側を指すようにする． ポインタが境界の左側を指していたときのなんらかの値が欲しいときには， それをどこかに記録しておく． Rationale
+戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽． ポインタを進めてみないと性質が成り立つかどうかわからないということがある． 左側の時の値が欲しい場合は，おそらく，少ない． keywords: two pointers two-pointer technique" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2025-09-19T10:08:49+09:00" />
-<meta property="article:modified_time" content="2025-09-19T10:08:49+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/06-30-two-pointer/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-06-30T13:47:37+09:00" />
+<meta property="article:modified_time" content="2026-06-30T13:47:37+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="方程式 ax \equiv b mod M の解"/>
-<meta name="twitter:description" content="概要 方程式 $ax \equiv b \pmod M$ の解は，次のように求められる． $g := (a, M)$ として，
-$g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s &#43; M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める． $b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt; M&rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 &#43; M&rsquo;, x_0 &#43; 2M&rsquo;, \dots, x_0 &#43; (g-1)M&rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b &#43; kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．"/>
+<meta name="twitter:title" content="尺取り法について"/>
+<meta name="twitter:description" content="概要 いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．
+ポインタは常に左から右に動かす．戻らない． 性質が成り立つ境界が2つあるわけだが， どちらの境界でも，静止状態では，ポインタは右側を指すようにする． ポインタが境界の左側を指していたときのなんらかの値が欲しいときには， それをどこかに記録しておく． Rationale
+戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽． ポインタを進めてみないと性質が成り立つかどうかわからないということがある． 左側の時の値が欲しい場合は，おそらく，少ない． keywords: two pointers two-pointer technique"/>
 
 
 <script type="application/ld+json">
@@ -110,8 +113,8 @@ $g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "方程式 ax \\equiv b mod M の解",
-      "item": "https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/"
+      "name": "尺取り法について",
+      "item": "https://yamate11.github.io/blog/posts/2026/06-30-two-pointer/"
     }
   ]
 }
@@ -120,24 +123,24 @@ $g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "方程式 ax \\equiv b mod M の解",
-  "name": "方程式 ax \\equiv b mod M の解",
-  "description": "概要 方程式 $ax \\equiv b \\pmod M$ の解は，次のように求められる． $g := (a, M)$ として，\n$g \\mid b$ でないとき: 解無し $g \\mid b$ であるとき: $a = a\u0026rsquo;g$， $b = b\u0026rsquo;g$， $M = M\u0026rsquo;g$ として，eGCD で，$a\u0026rsquo;s + M\u0026rsquo;t = 1$， $0 \\leq s \u0026lt; M\u0026rsquo;$ となる $s, t$ を求める． $b\u0026rsquo;s \\equiv x_0 \\pmod{M\u0026rsquo;}$，$0 \\leq x_0 \u0026lt; M\u0026rsquo;$ となる $x_0$ をとると， 解は，$x_0, x_0 + M\u0026rsquo;, x_0 + 2M\u0026rsquo;, \\dots, x_0 + (g-1)M\u0026rsquo;$ の $g$ 個である． 証明 解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．",
+  "headline": "尺取り法について",
+  "name": "尺取り法について",
+  "description": "概要 いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．\nポインタは常に左から右に動かす．戻らない． 性質が成り立つ境界が2つあるわけだが， どちらの境界でも，静止状態では，ポインタは右側を指すようにする． ポインタが境界の左側を指していたときのなんらかの値が欲しいときには， それをどこかに記録しておく． Rationale\n戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽． ポインタを進めてみないと性質が成り立つかどうかわからないということがある． 左側の時の値が欲しい場合は，おそらく，少ない． keywords: two pointers two-pointer technique",
   "keywords": [
     
   ],
-  "articleBody": "概要 方程式 $ax \\equiv b \\pmod M$ の解は，次のように求められる． $g := (a, M)$ として，\n$g \\mid b$ でないとき: 解無し $g \\mid b$ であるとき: $a = a’g$， $b = b’g$， $M = M’g$ として，eGCD で，$a’s + M’t = 1$， $0 \\leq s \u003c M’$ となる $s, t$ を求める． $b’s \\equiv x_0 \\pmod{M’}$，$0 \\leq x_0 \u003c M’$ となる $x_0$ をとると， 解は，$x_0, x_0 + M’, x_0 + 2M’, \\dots, x_0 + (g-1)M’$ の $g$ 個である． 証明 解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．\n後半．$x = x_0 + iM’$ とする．$a’s + M’t = 1$ から $a’b’s + M’b’t = b’$ なので， $ax = ax_0 + iaM’ = a’gb’s + ia’gM’ = g(b’ - M’b’t) + ia’gM’ = b - Mb’t + ia’M \\equiv b \\pmod M$\n関連問題 ABC423G ",
-  "wordCount" : "128",
+  "articleBody": "概要 いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．\nポインタは常に左から右に動かす．戻らない． 性質が成り立つ境界が2つあるわけだが， どちらの境界でも，静止状態では，ポインタは右側を指すようにする． ポインタが境界の左側を指していたときのなんらかの値が欲しいときには， それをどこかに記録しておく． Rationale\n戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽． ポインタを進めてみないと性質が成り立つかどうかわからないということがある． 左側の時の値が欲しい場合は，おそらく，少ない． keywords: two pointers two-pointer technique\n",
+  "wordCount" : "16",
   "inLanguage": "en",
-  "datePublished": "2025-09-19T10:08:49+09:00",
-  "dateModified": "2025-09-19T10:08:49+09:00",
+  "datePublished": "2026-06-30T13:47:37+09:00",
+  "dateModified": "2026-06-30T13:47:37+09:00",
   "author":{
     "@type": "Person",
     "name": "yamate11"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://yamate11.github.io/blog/posts/2025/09-19-sol-ax-b-mod-m/"
+    "@id": "https://yamate11.github.io/blog/posts/2026/06-30-two-pointer/"
   },
   "publisher": {
     "@type": "Organization",
@@ -215,43 +218,76 @@ $g \mid b$ でないとき: 解無し $g \mid b$ であるとき: $a = a&rsquo;g
   <header class="post-header">
     
     <h1 class="post-title">
-      方程式 ax \equiv b mod M の解
+      尺取り法について
     </h1>
-    <div class="post-meta">2025-09-19   yamate11
+    <div class="post-meta">2026-06-30   yamate11
 </div>
   </header> 
-  <div class="post-content"><h2 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h2>
-<p>方程式 $ax \equiv b \pmod M$ の解は，次のように求められる．
-$g := (a, M)$ として，</p>
+  <div class="post-content"><h3 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h3>
+<p>いくつか実装の選択肢があるので迷ってしまうが，次のように決めておくと良いかもしれない．</p>
 <ul>
-<li>$g \mid b$ でないとき: 解無し</li>
-<li>$g \mid b$ であるとき:
-$a = a&rsquo;g$， $b = b&rsquo;g$， $M = M&rsquo;g$ として，eGCD で，$a&rsquo;s + M&rsquo;t = 1$， $0 \leq s &lt; M&rsquo;$ となる $s, t$ を求める．
-$b&rsquo;s \equiv x_0 \pmod{M&rsquo;}$，$0 \leq x_0 &lt;  M&rsquo;$ となる $x_0$ をとると，
-解は，$x_0, x_0 + M&rsquo;, x_0 + 2M&rsquo;, \dots, x_0 + (g-1)M&rsquo;$ の $g$ 個である．</li>
+<li>ポインタは常に左から右に動かす．戻らない．</li>
+<li>性質が成り立つ境界が2つあるわけだが，
+どちらの境界でも，静止状態では，ポインタは右側を指すようにする．</li>
+<li>ポインタが境界の左側を指していたときのなんらかの値が欲しいときには，
+それをどこかに記録しておく．</li>
 </ul>
-<h2 id="証明">証明<a hidden class="anchor" aria-hidden="true" href="#証明">#</a></h2>
-<p>解があるとすると，$ax = b + kM$ と書けるから，$b = ax - kM$ は，$g$ の倍数．</p>
-<p>後半．$x = x_0 + iM&rsquo;$ とする．$a&rsquo;s + M&rsquo;t = 1$ から $a&rsquo;b&rsquo;s + M&rsquo;b&rsquo;t = b&rsquo;$ なので，
-$ax = ax_0 + iaM&rsquo; = a&rsquo;gb&rsquo;s + ia&rsquo;gM&rsquo; = g(b&rsquo; - M&rsquo;b&rsquo;t) + ia&rsquo;gM&rsquo; = b - Mb&rsquo;t + ia&rsquo;M \equiv b \pmod M$</p>
-<h2 id="関連問題">関連問題<a hidden class="anchor" aria-hidden="true" href="#関連問題">#</a></h2>
-<p><a href="https://atcoder.jp/contests/abc423/tasks/abc423_g" target="_blank">ABC423G</a>
-</p>
+<p>Rationale</p>
+<ul>
+<li>戻すというのは常には可能ではないかもしれない．決して戻さないと決めておいた方が楽．</li>
+<li>ポインタを進めてみないと性質が成り立つかどうかわからないということがある．</li>
+<li>左側の時の値が欲しい場合は，おそらく，少ない．</li>
+</ul>
+<!--
+
+### 状況設定
+
+$l \leq r$ なる整数 $l, r$ について定義されている述語 $P(l, r)$ で，次を満たすものを考える:
+
+* $P(l, r)$ かつ $r \leq r'$ ならば $P(l, r')$
+* $P(l, r)$ かつ $l' \leq l$ ならば $P(l', r)$
+
+区間 $[l, r)$ に関する述語と見たとき，広いところの方が成り立ちやすい，ということ．
+$\neg P$ を考えれば，狭いところの方が成り立ちやすい述語も扱える．
+
+### 実装上の諸問題
+
+非負整数列 $A_0, \dots, A_{N - 1}$ が与えられて，$\sum \\{ A_i \mid i \in [l, r) \\} \geq K$ となる区間 $[l, r)$ の数を知りたいとする．
+$S$ を $A$ の累積和とする．
+
+```cpp
+ll ans = 0;
+ll r = 0;
+for (ll l = 0; l < N; l++) {
+    while (r <= N and S[r] - S[l] < K) r++;
+    ans += N + 1 - r;
+}
+```
+
+反対向きに $\sum \\{ A_i \mid i \in [l, r) \\} \leq K$ となる区間の数が知りたい場合，
+
+```cpp
+ll ans = 0;
+ll r = 0;
+for (ll l = 0; l < N; l++) {
+    while (r + 1 <= N and S[r + 1] - S[l] < K) r++;
+    if (r + 1 > N) break;
+    ans += r - l;
+}
+```
+
+-->
+<p>keywords: two pointers two-pointer technique</p>
 
 
   </div>
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2025/10-25-digit-util/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>整数の桁</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2025/08-17-smallvec/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">
     <span class="title">Next »</span>
     <br>
-    <span>小さい整数のベクトルライブラリ</span>
+    <span>ARC223-D Xpectation of Cards in Hand with Laboratory</span>
   </a>
 </nav>
 
@@ -260,7 +296,7 @@ $ax = ax_0 + iaM&rsquo; = a&rsquo;gb&rsquo;s + ia&rsquo;gM&rsquo; = g(b&rsquo; -
 <script src="https://y1.is-trm.net/isso/js/embed.min.js"
      data-isso="https://y1.is-trm.net/isso/">
 </script>
-<section id="isso-thread" data-isso-id="/blog/posts/2025/09-19-sol-ax-b-mod-m/" data-title="方程式 ax \equiv b mod M の解">
+<section id="isso-thread" data-isso-id="/blog/posts/2026/06-30-two-pointer/" data-title="尺取り法について">
 </section>
 
 <p>Links to Recent Posts:
