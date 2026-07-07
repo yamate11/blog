@@ -127,8 +127,9 @@ ll stsize(ll nd)
 #### オイラーツアー
 
 ```cpp
-ll euler_in(ll nd)
-ll euler_out(ll nd)
+ll euler_idx_in(ll nd)
+ll euler_idx_out(ll nd)
+ll euler_idx_edge(ll e, ll mode = 0)
 tuple<ll, ll, ll> euler_elem(ll idx)
   // 以下の関数で，euler_elem(idx) の3要素それぞれが取得できる
   ll euler_elem_edge(ll idx)
@@ -141,12 +142,39 @@ tuple<ll, ll, ll> euler_elem(ll idx)
     仮想的な点と root を結ぶ仮想的な辺を，それぞれ root に向かって，root から 辿るものとする．
   * 仮想的な辺を含めると辺の数は numNodes となる．仮想的な辺の番号は，numNodes - 1 とする．
     各辺が2回ずつ辿られるので，辿られる回数は ($2 \times \text{numNodes}$) である．
-* `[e, x, y] = tr.euler_elem(k)` とすると，k 番目にたどられる辺は x と y を結ぶ番号 e のものであり，
-  x から y の方向に辿られる．
-  e, x, y それぞれは，`tr.euler_elem_edge(k)`, `tr.euler_elem_from(k)`, `tr.euler_elem_to(k)` で
-  取得できる．
-* ノード `nd` とその親 `p` を結ぶ辺は，`tr.euler_in(nd)` 番目に，p から nd 方向に辿られ，
-  `tr.euler_out(nd)` 番目に，nd から p 方向に辿られる．
+* オイラーツアーの添字 `k` から，その辺などの情報を得るには，`tr.euler_elem(k)` を用いる．
+  `[nd, b] = tr.euler_elem(k)` とすると，k 番目にたどられる辺はノード nd とその親を結ぶ番号ものであり，
+  b = 0 なら親から nd へ，b = 1 なら nd から親にたどられる．
+
+  各成分は，以下のメンバ関数で直接取得できる．
+
+    * `tr.euler_elem_edge(k)`: 辺の番号 e
+    * `tr.euler_elem_from(k)`: 辺の始点ノード x
+    * `tr.euler_elem_to(k)` : 辺の終点ノード y
+
+  
+* 番号 e を持つ辺のオイラーツアーでの添字は，`tr.euler_idx_edge(e, mode)` で得られる．
+  * mode == 0 (デフォルト) : 親から子に辿られるときの添字
+  * mode == 1 : 子から親に辿られるときの添字
+  * mode == 2 : 小さいノードから大きいノードに辿られるときの添字
+* ノード `nd` とその親を結ぶ辺のオイラーツアーでの添字は，次のメンバ関数で得られる．
+  * `tr.euler_idx_in(nd)` : 親から nd への方向
+  * `tr.euler_idx_out(nd)` : nd から親への方向
+
+オイラーツアーを辺でなくノードに注目して行うときには，
+(2倍かかって無駄だが) そのノードに入る辺がそのノードを表現すると考える．
+
+* ノード nd から，オイラーツアーの添字を得るには，上の関数をそのまま使えば良い．
+  ```cpp
+  ll euler_idx_in(ll nd)
+  ```
+* オイラーツアーの添字 `k` からノードを得るには，次を使っても良い．
+  該当するノードが無い場合 (葉から根の方向に向かう辺の場合) には，`-1` を返す．
+  ```cpp
+  ll euler_elem_node_only(ll idx)
+  ```
+
+
 
 #### HL分解
 
