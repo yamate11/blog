@@ -127,7 +127,7 @@
     "木"
   ],
   "articleBody": "自分用の木のライブラリのメモです．ソースはこちら ．\n1. 典型的な使用法 ll N; cin \u003e\u003e N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin \u003e\u003e a \u003e\u003e b \u003e\u003e w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [\u0026](auto rF, ll nd) -\u003e void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.children_pe(nd)) { ... nd ... cld ... weight[e] ... } }; dfs(dfs, root); 辺に関する情報は，辺の番号を添字とするベクトルなどに確保しておくのが良い． 上の weight を参照．\n作成 ノード 0, 1, …, N-1 の木で，根が root のオブジェクトをつくる． root は省略可で，その場合は 0 が根になる． Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にすると，HL分解を行う．\nTree tr(N, root, use_hl_decomp); 次のメンバ関数を N - 1 回呼んで辺を定義する．N - 1 回呼ばれると，内部で使用する値を計算しに行く． 戻り値は，辺のID．(0, 1, 2, … の順で返る)\nll add_edge(ll x, ll y); データメンバ (public相当のもの) ll numNodes; ... ノードの数 ll root; ... 根 他に，vector",
-  "wordCount" : "1208",
+  "wordCount" : "1289",
   "inLanguage": "en",
   "datePublished": "2026-05-23T00:00:00Z",
   "dateModified": "2026-05-23T00:00:00Z",
@@ -295,12 +295,16 @@ Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にする
 </ul>
 <h4 id="辺とノードの対応">辺とノードの対応<a hidden class="anchor" aria-hidden="true" href="#辺とノードの対応">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">edge_idx</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">y</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">edge_idx</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">x</span><span style="color:#111">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">nodes_of_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">e</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">mode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
 </span></span></code></pre></div><ul>
 <li>
 <p><code>tr.edge_idx(x, y)</code> は，ノード x と y を結ぶ辺の番号を返す．
 そのような辺が存在しないときには -1 を返す．<code>tr.edge_idx(x, y)</code> と <code>tr.edge_idx(y, x)</code> の値は等しい．
 実装は，「x の親が y」か「y の親が x」になっているかどうかを調べている．</p>
+</li>
+<li>
+<p><code>tr.edge_idx(x)</code> は，ノード x とその親を結ぶ辺の番号を返す．x がルートのときには -1 を返す．</p>
 </li>
 <li>
 <p><code>tr.nodes_of_edge(e, mode)</code> は，番号が e である辺の両端のノードのペアを返す．</p>
@@ -322,12 +326,14 @@ Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にする
 <h4 id="オイラーツアー">オイラーツアー<a hidden class="anchor" aria-hidden="true" href="#オイラーツアー">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_idx_in</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd</span><span style="color:#111">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_idx_out</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_idx_nodes</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd1</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">nd2</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">mode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_idx_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">e</span><span style="color:#111">,</span> <span style="color:#111">ll</span> <span style="color:#111">mode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#111">tuple</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">euler_elem</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 以下の関数で，euler_elem(idx) の3要素それぞれが取得できる
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_from</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">ll</span> <span style="color:#111">euler_elem_to</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span> 
+</span></span><span style="display:flex;"><span><span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#00a8c8">bool</span><span style="color:#f92672">&gt;</span> <span style="color:#111">euler_elem</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_node</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_peer</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_from</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_to</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span> 
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_edge</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
 </span></span></code></pre></div><ul>
 <li>
 <p>オイラーツアーは，辺を DFS の順に辿ったものである．</p>
@@ -339,42 +345,65 @@ Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にする
 </ul>
 </li>
 <li>
+<p>ノード nd とその親 (ルートの場合には仮想的な点) とを結ぶ辺の，オイラーツアーでの添字 (辿られる順番) は，
+<code>euler_idx_in(nd)</code> と <code>euler_idx_out(nd)</code> で得られる．前者は nd に向かうもの，後者は nd から戻るもの．</p>
+</li>
+<li>
 <p>オイラーツアーの添字 <code>k</code> から，その辺などの情報を得るには，<code>tr.euler_elem(k)</code> を用いる．
-<code>[nd, b] = tr.euler_elem(k)</code> とすると，k 番目にたどられる辺はノード nd とその親を結ぶ番号ものであり，
-b = 0 なら親から nd へ，b = 1 なら nd から親にたどられる．</p>
-<p>各成分は，以下のメンバ関数で直接取得できる．</p>
+<code>[nd, b] = tr.euler_elem(k)</code> とすると，k 番目にたどられる辺は:</p>
 <ul>
-<li><code>tr.euler_elem_edge(k)</code>: 辺の番号 e</li>
-<li><code>tr.euler_elem_from(k)</code>: 辺の始点ノード x</li>
-<li><code>tr.euler_elem_to(k)</code> : 辺の終点ノード y</li>
+<li>ノード nd とその親を結ぶ</li>
+<li>b = 0 なら親から nd へ，b = 1 なら nd から親にたどられる</li>
 </ul>
 </li>
 <li>
-<p>番号 e を持つ辺のオイラーツアーでの添字は，<code>tr.euler_idx_edge(e, mode)</code> で得られる．</p>
+<p>euler_idx_* と euler_elem は，次の関係にある．</p>
 <ul>
-<li>mode == 0 (デフォルト) : 親から子に辿られるときの添字</li>
-<li>mode == 1 : 子から親に辿られるときの添字</li>
-<li>mode == 2 : 小さいノードから大きいノードに辿られるときの添字</li>
+<li><code>tr.euler_elem(tr.euler_idx_in(nd))  == [nd, 0]</code></li>
+<li><code>tr.euler_elem(tr.euler_idx_out(nd)) == [nd, 1]</code></li>
 </ul>
 </li>
 <li>
-<p>ノード <code>nd</code> とその親を結ぶ辺のオイラーツアーでの添字は，次のメンバ関数で得られる．</p>
+<p>euler_idx_* のサービス関数:</p>
 <ul>
-<li><code>tr.euler_idx_in(nd)</code> : 親から nd への方向</li>
-<li><code>tr.euler_idx_out(nd)</code> : nd から親への方向</li>
+<li><code>tr.euler_idx_nodes(ll nd1, ll nd2, ll mode = 0)</code> : nd1 と nd2 を結ぶ辺の添字．
+root と仮想的な点の組合せには対応していない．
+<ul>
+<li>mode = 0: 親から子に向かう</li>
+<li>mode = 1: 子から親に向かう</li>
+<li>mode = 2: nd1 から nd2 に向かう</li>
+</ul>
+</li>
+<li><code>tr.euler_idx_edge(ll e, ll mode = 0)</code> : 番号 e の辺．
+仮想的な辺には対応していない．
+<ul>
+<li>mode = 0: 親から子に向かう</li>
+<li>mode = 1: 子から親に向かう</li>
+<li>mode = 2: 小さい番号を持つノードから大きい番号を持つノードに向かう</li>
 </ul>
 </li>
 </ul>
-<p>オイラーツアーを辺でなくノードに注目して行うときには，
-(2倍かかって無駄だが) そのノードに入る辺がそのノードを表現すると考える．</p>
+</li>
+<li>
+<p>euler_elem のサービス関数</p>
 <ul>
-<li>ノード nd から，オイラーツアーの添字を得るには，上の関数をそのまま使えば良い．
+<li><code>tr.euler_elem_node(k)</code>: k 番目にたどる辺が結ぶノードのうち，子供の方．</li>
+<li><code>tr.euler_elem_peer(k)</code>: k 番目にたどる辺が結ぶノードのうち，親の方．</li>
+<li><code>tr.euler_elem_from(k)</code>: k 番目にたどる辺が結ぶノードのうち，元の方</li>
+<li><code>tr.euler_elem_to(k)</code>: k 番目にたどる辺が結ぶノードのうち，先の方</li>
+<li><code>tr.euler_elem_edge(k)</code>: k 番目にたどる辺のid</li>
+</ul>
+</li>
+</ul>
+<h5 id="ノードに関するオイラーツアー">ノードに関するオイラーツアー<a hidden class="anchor" aria-hidden="true" href="#ノードに関するオイラーツアー">#</a></h5>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_idx_in</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">nd</span><span style="color:#111">)</span>
-</span></span></code></pre></div></li>
-<li>オイラーツアーの添字 <code>k</code> からノードを得るには，次を使っても良い．
-該当するノードが無い場合 (葉から根の方向に向かう辺の場合) には，<code>-1</code> を返す．
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_node_only</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
-</span></span></code></pre></div></li>
+</span></span><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#111">euler_elem_node_only</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+</span></span></code></pre></div><p>オイラーツアーを辺でなくノードに注目して行うときには，
+(2倍かかって無駄だが) ノードとその親とを結ぶ辺のうち，ノードに向かう向きを持つものが，ノードを表していると考える．</p>
+<ul>
+<li>ノード nd から，オイラーツアーの添字を得るには，辺の時と同じ関数 <code>euler_idx_in(nd)</code> を使えば良い．</li>
+<li>オイラーツアーの添字 <code>k</code> からノードを得るには，<code>euler_elem_node_only(k)</code> を使うことができる．
+該当するノードが無い場合 (葉から根の方向に向かう辺の場合) には，<code>-1</code> を返す．</li>
 </ul>
 <h4 id="hl分解">HL分解<a hidden class="anchor" aria-hidden="true" href="#hl分解">#</a></h4>
 <p><code>heavy_head()</code> や <code>hl_path()</code> を呼ぶと HL 分解が行われる．
