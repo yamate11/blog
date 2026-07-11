@@ -192,6 +192,18 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Trie ライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ポインタベースの Trie ライブラリ． ソース ポイント ポインタと new で実装．Trie という構造体がノードを表す． 実装上，ノードは増やすだけで，削除はしない． (template parameter で指定する) 3つのモードがある．これらのモードは，メンバ関数 insert / erase / search の振舞に影響する TRIE_SET_SINGLE … set に相当 TRIE_SET_MULTI … multiset に相当 TRIE_SET_NONE … どちらにも該当しない ノードに格納するユーザデータを定義できる (user というフィールドがある) 使用法 using MyTrie = Trie&lt;26, &#39;a&#39;, TRIE_SET_SINGLE&gt;; // 文字種類数，先頭文字，モード MyTrie* root = new MyTrie; // Trie の作成． MyTrie* p1 = root-&gt;insert(&#34;abcde&#34;); // 挿入．必要なノードを作ると同時に，「要素」としても登録． MyTrie* p2 = root-&gt;search(&#34;abc&#34;); // 要素ではないので p2 == nullptr MyTrie* p3 = root-&gt;search(&#34;abcde&#34;); // 要素なので，p3 == p1 MyTrie* p4 = root-&gt;get_node(&#34;abc&#34;); // 要素かどうかに関係なくノードを取る // ノードがないときには nullptr が返るが，この場合は，p4 == p2 になる． assert(p3-&gt;reside == 1); // p3が表す文字列は要素である． assert(p4-&gt;reside == 0); // p4が表す文字列は要素でない． root-&gt;insert(&#34;abab&#34;); root-&gt;insert(&#34;abab&#34;); // いまは SINGLE なので，何も起こらない assert(root-&gt;size_st == 2) // 部分木に存在する要素の数． p3-&gt;erase(); // 要素としての削除．葉であってもノードは削除しない． assert(p3-&gt;reside == 0); assert(p4-&gt;size_st == 1); // 文字列 s の全prefixを処理するループ // 長い方から: for (MyTrie* p = root-&gt;get_node(s); p; p = p-&gt;parent) // ....</p>
+  </div>
+  <footer class="entry-footer">2026-07-11   (初版 2025-06-28)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to Trie ライブラリ" href="https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">尺取り法について
     </h2>
   </header>
@@ -400,18 +412,6 @@ if (rx == -1 and ry == 1) { ARC164B 2023/07/09 コンテスト
   </div>
   <footer class="entry-footer">2026-02-22   (初版 2023-02-28)   yamate11</footer>
   <a class="entry-link" aria-label="post link to 順列組合せ" href="https://yamate11.github.io/blog/posts/2023/02-28-perm-dup/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">数表など
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>いろいろな数のだいたいの大きさ，その他</p>
-  </div>
-  <footer class="entry-footer">2026-02-12   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 数表など" href="https://yamate11.github.io/blog/posts/2026/02-12-order-of-sizes/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

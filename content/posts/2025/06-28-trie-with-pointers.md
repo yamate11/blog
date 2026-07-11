@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "Trie ライブラリ"
-date: "2025-06-28T10:51:24+09:00"
-# date_init: "2025-06-28"
+date: "2026-07-11"
+date_init: "2025-06-28T10:51:24+09:00"
 tags: ["trie"]
 categories: ["topic"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
@@ -14,42 +14,38 @@ categories: ["topic"]
 ## ポイント
 
 * ポインタと new で実装．Trie という構造体がノードを表す．
-* 実装上のノードは増やす一方で，削除はしない．
-* 「そのノードに要素があるか」と「そのノード以下の部分木に存在する要素の数」は，自動で取れる．
-  * ノードに存在する要素数は 0/1．__マルチセットではない__．
-  * その他の操作をしたければ，自分で定義する．(user というフィールドが Trie 構造体にある)
+* 実装上，ノードは増やすだけで，削除はしない．
+* (template parameter で指定する) 3つのモードがある．これらのモードは，メンバ関数 insert / erase / search の振舞に影響する
+  * TRIE_SET_SINGLE ... set に相当
+  * TRIE_SET_MULTI ... multiset に相当
+  * TRIE_SET_NONE ... どちらにも該当しない
+* ノードに格納するユーザデータを定義できる  (user というフィールドがある)
 
 ## 使用法
 
 ```cpp
-  auto root = new Trie<26, 'a'>();
-  auto p1 = root->insert("abcde");  // 挿入．必要なノードを作ると同時に，「要素」としても登録．
-  auto p2 = root->search("abc");    // 要素ではないので p2 == nullptr
-  auto p3 = root->search("abcde");  // 要素なので，p3 == p1
-  auto p4 = root->get_node("abc");  // 要素かどうかに関係なくノードを取る
-    // ノードがないときには nullptr が返るが，この場合 "abcde" ノードがあるので "abc" ノードもある
-  assert(p3->reside);               // p3が表す文字列は要素である．
-  assert(not p4->reside);           // p4が表す文字列は要素でない．
+  using MyTrie = Trie<26, 'a', TRIE_SET_SINGLE>;  // 文字種類数，先頭文字，モード
+  MyTrie* root = new MyTrie;           // Trie の作成．
+  MyTrie* p1 = root->insert("abcde");  // 挿入．必要なノードを作ると同時に，「要素」としても登録．
+  MyTrie* p2 = root->search("abc");    // 要素ではないので p2 == nullptr
+  MyTrie* p3 = root->search("abcde");  // 要素なので，p3 == p1
+  MyTrie* p4 = root->get_node("abc");  // 要素かどうかに関係なくノードを取る
+    // ノードがないときには nullptr が返るが，この場合は，p4 == p2 になる．
+  assert(p3->reside == 1);          // p3が表す文字列は要素である．
+  assert(p4->reside == 0);          // p4が表す文字列は要素でない．
   root->insert("abab");
-  assert(root->size_st == 2)        // 部分木に存在する要素の数．マルチセットでないことに注意
+  root->insert("abab");             // いまは SINGLE なので，何も起こらない
+  assert(root->size_st == 2)        // 部分木に存在する要素の数．
   p3->erase();                      // 要素としての削除．葉であってもノードは削除しない．
-  assert(not p3->reside);
+  assert(p3->reside == 0);
   assert(p4->size_st == 1);
 
-  // p1 から root まで辿るループ
-  for (auto p = p1; p; p = p->parent) { /* p に対する処理を書く */ }
-
   // 文字列 s の全prefixを処理するループ
-  for (auto [p, i] = make_pair(root, 0); true; p = p->get_child_val(s[i++], true)) {
-    /* 長さ i の prefix に対する処理を書く */
-    if (i == ssize(s)) break;
-  }
-
-  // 文字列 s のprefixのうち，要素になっているものを処理するループ
-  for (auto [p, i] = make_pair(root, 0); p; p = p->get_child_val(s[i++])) {
-    if (p->reside) { /* 長さ i の prefix に対する処理を書く */ }
-    if (i == ssize(s)) break;
-  }
+  // 長い方から:
+  for (MyTrie* p = root->get_node(s); p; p = p->parent) // ...;
+  // 短い方から:
+  MyTrie* p = root; int i = 0;
+  for (; i <= ssize(s); p = p->get_child_val(s[i++], true) // ...;
 ```
 
 ## インタフェース
@@ -58,21 +54,23 @@ categories: ["topic"]
 
 ```cpp
 template <
-  int bt_size,                 // 文字種
+  int bt_size,                 // 文字種類数
   char from,                   // 最初の文字
+  int mode,                    // モード (TRIE_SET_SINGLE, TRIE_SET_MULTI, TRIE_SET_NONE)
   typename User = monostate,   // ユーザデータの型
   typename S = string,         // 管理するデータの型．string とか vector<char> とか
-  bool compact = 2 < bt_size,  // 省メモリ型
+  bool compact = ...,          // 省メモリ型 (下記参照)
   bool has_offset = true       // オフセットの管理方法
 >
 struct Trie {
 ```
 
-* `bt_size` ... 文字種．小文字の文字列なら `26`, 01列なら `2` など．
+* `bt_size` ... 文字種類数．小文字の文字列なら `26`, 01列なら `2` など．
 * `from` ... 最初の文字．小文字なら `'a'`, 01文字列なら `'0'`，整数の01列なら `0` など．
+* `mode` ... TRIE_SET_SINGLE, TRIE_SET_MULTI, TRIE_SET_NONE のいずれか．
 * `User` ... ユーザデータの型．引数無しで構築できなければならない．省略値は `monostate` で，これは，何も要素を持たない構造体．
 * `S` ... この trie で管理するデータの型．たいてい string だろうけれど，`vector<int>` とかでも可．ただし，値は from から from + bt_size までで，char の範囲に入っていること．
-* `compact` ... たとえば全ノードに長さ26のベクトルを持たせるというのはちょっと無駄なので，ここを true にすると，もう少し領域を節約する．ただし，少しは遅くなる (そんなには遅くないと思う)．false にすると，固定長 array になる．
+* `compact` ... たとえば全ノードに長さ26のベクトルを持たせるというのは無駄なので，ここを true にすると，もう少し領域を節約する．ただし，少し遅くなる (そんなには遅くないと思う)．false にすると，固定長 array になる．デフォルトは，文字種類数が8以上63以下のとき true．文字種類数が64以上あると，true では機能しない．また，文字種類数が4未満のときには Trie のサイズ自体が false の方が小さい．
 * `has_offset` ... ノードに，何文字目であるかを持たせるかどうか．これはノードごと 4 バイトしか違わないので，いつでも true でも良かったか....
 
 ### コンストラクタ
