@@ -107,9 +107,9 @@ incr_* の中で，なにかのデータを管理して，それを
 
 ## 例題
 
-### 問題3
+### ABC032-C
 
-[ABC 032 C - 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)
+[ABC032-C - 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)
 
 $K$ と列 $(S_i)$ が与えられる．$S_i \times S_{i + 1} \times \dots S_{j} \leq K$
 となる $(i, j)$ について，長さ $j - i + 1$ の最大値を求める．
@@ -141,6 +141,64 @@ $K$ と列 $(S_i)$ が与えられる．$S_i \times S_{i + 1} \times \dots S_{j}
   cout << ans << endl;
 ```
 
+### ABC369-C
+
+[ABC369-C - Count Arithmetic Subarrays](https://atcoder.jp/contests/abc369/tasks/abc369_c)
+
+$[l, r]$ で，$A_l, A_{l + 1}, \dots, A_r$ が等差数列となるものを数える．
+
+```cpp
+  ll ans = 0;
+  ll j = 0;
+  for (ll i = 0; i < N; i++) {
+    auto sat = [&]() -> bool {
+      if (N <= j) return false;
+      if (j <= i + 1) return true;
+      return (A[i + 1] - A[i] == A[j] - A[j - 1]);
+    };
+    while (sat()) j++;
+    ans += j - i;
+  }
+  cout << ans << endl;
+```
+
+### ARC022-B
+
+[ARC022-B - 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)
+
+```cpp
+  ll lim = 1e5 + 1;
+  vector B(lim, false);
+  ll dup = -1;
+  
+  ll ans = 0;
+  ll j = 0;
+  for (ll i = 0; i < N; ) {
+    auto cond = [&]() -> bool {
+      if (j >= N + 1) return false;
+      if (j <= i) return true;
+      return dup < 0;
+    };
+    auto inc_j = [&]() -> void {
+      if (++j > N) return;
+      if (B[A[j - 1]]) {
+        dup = A[j - 1];
+      }else {
+        B[A[j - 1]] = true;
+      }
+    };
+    auto inc_i = [&]() -> void {
+      if (A[i] == dup) dup = -1;
+      else B[A[i]] = false;
+      i++;
+    };
+
+    while (cond()) inc_j();
+    ans = max(ans, j - 1 - i);
+    inc_i();
+  }
+  cout << ans << endl;
+```
 
 
 ----
