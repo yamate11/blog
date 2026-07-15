@@ -166,13 +166,16 @@ $[l, r]$ で，$A_l, A_{l + 1}, \dots, A_r$ が等差数列となるものを数
 
 [ARC022-B - 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)
 
+$A_l, A_{l + 1}, \dots, A_r$ に重複が無い $[l, r]$ について，$r - l + 1$ の最大値．
+
+
 ```cpp
   ll lim = 1e5 + 1;
-  vector B(lim, false);
-  ll dup = -1;
-  
+  vector B(lim, false);   // B[a] = true <-> 範囲内に a が入っている
+  ll dup = -1;            // 範囲内で重複している要素．なければ -1．
+                          //   そういうものはたかだか1つ．
   ll ans = 0;
-  ll j = 0;
+  ll j = 0;         // 半開区間 [i, j) で考える．
   for (ll i = 0; i < N; ) {
     auto cond = [&]() -> bool {
       if (j >= N + 1) return false;
@@ -181,20 +184,17 @@ $[l, r]$ で，$A_l, A_{l + 1}, \dots, A_r$ が等差数列となるものを数
     };
     auto inc_j = [&]() -> void {
       if (++j > N) return;
-      if (B[A[j - 1]]) {
-        dup = A[j - 1];
-      }else {
-        B[A[j - 1]] = true;
-      }
+      if (ll a = A[j - 1]; B[a]) dup = a;
+      else                       B[a] = true;
     };
     auto inc_i = [&]() -> void {
       if (A[i] == dup) dup = -1;
-      else B[A[i]] = false;
+      else             B[A[i]] = false;
       i++;
     };
 
     while (cond()) inc_j();
-    ans = max(ans, j - 1 - i);
+    ans = max(ans, j - 1 - i);   // [i, j - 1) が条件を満たす
     inc_i();
   }
   cout << ans << endl;
