@@ -85,5 +85,12 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
 
 [blog記事参照](../06-14-abc462-g/)
 
+### AWC0113-E アレルギー検査
+
+どちらかというと，包除原理よりゼータ変換のところが本質だが，まあ，一応．
+
+[blog記事参照](../07-16-awc0113-e)
+
+
 
 keywords: inclusion exclusion principle
