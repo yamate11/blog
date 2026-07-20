@@ -2,7 +2,7 @@
 author: "yamate11"
 title: "桁DPのコーディング"
 date_init: "2021-07-06"
-date: "2026-01-05"
+date: "2026-07-20"
 tags: []
 categories: ["topic"]
 draft: false
@@ -73,7 +73,8 @@ N 以下の整数で，ある条件を満たすものを数えます．
 string x; cin >> x;   // x は文字列で読むことにする．
 
 // dp[i] を tbl で，dp[i - 1] を prev で表す
-vector tbl_init(2, vector(2, vector(??, vector(??, 0LL))));   // eq, az, v1, v2,...
+vector tbl_init(2, vector(2, vector(??, vector(??, (T)0))));   // eq, az, v1, v2,...．
+                                                               // 型Tを間違えないように...
 auto tbl = tbl_init;
 
 tbl[1][1][??][??] = 1   // 初期状態は，eq=1, az=1
@@ -87,8 +88,21 @@ for (char ct : x) {
       if (eq and d > t) continue;  // 「大きいと決まった」
       int new_eq = eq and d == t;
       int new_az = az and d == 0;
+      /* 単純な場合はこうだが， */
       int new_v1 = ....;
       int new_v2 = ....;
+      /* 左端の桁に関してこんなコードになることも良くある:
+         int new_v1, new_v2;
+         if (new_az) {          // ずっと 0 が続いている
+           new_v1 = new_v2 = ...;
+         }else if (az) {        // 今回初めて 0 以外が現れた
+           new_v1 = ...;
+           new_v2 = ...;
+         }else {                // 上から2桁め以降
+           new_v1 = ...;
+           new_v2 = ...;
+         }
+       */
       tbl[new_eq][new_az][new_v1][new_v2] += prev[eq][az][v1][v2];  }}}
 ```
 
