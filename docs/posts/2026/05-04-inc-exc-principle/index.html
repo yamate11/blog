@@ -93,8 +93,8 @@ $x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く． 
 補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\varnothing$ である場合も入っていて $\bigcap_{i\in \varnothing} {A_i}^{\text{C}} = U$ であることにも注意．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2026-06-14T00:00:00+00:00" />
-<meta property="article:modified_time" content="2026-06-14T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2026-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-08-19T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="包除原理"/>
@@ -135,11 +135,11 @@ $x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く． 
   "keywords": [
     "包除原理"
   ],
-  "articleBody": "何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?\n記法:\n$x \\in \\mathbb{N}$ に対して $\\bar{x} := \\{0, 1, \\ldots, x-1\\}$ と書く． 全体集合が文脈から自明なとき，集合 $A$ の補集合を $A^{\\text{C}}$ と書く． 集合 $A$ の冪集合を $\\mathcal{P}(A)$ と書く． 定理の言明 $U$ を集合とする．各 $i \\in \\bar{n}$ に対して $A_i \\subseteq U$ が定められている時， $$ \\biggl|\\bigcup_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X| + 1} \\biggl|\\bigcap_{i \\in X} A_i\\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\setminus \\{ \\varnothing \\} \\right\\} $$\n証明は，このブログの中だと ここ にある．\n補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\\varnothing$ である場合も入っていて $\\bigcap_{i\\in \\varnothing} {A_i}^{\\text{C}} = U$ であることにも注意．\n$$ \\biggl|\\bigcap_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {A_i}^{\\text{C}} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $$\n使う問題 ABC456-G Count Holidays 問題へのリンク 次の部分問題を包除原理で解いている:\n正整数 $n$ と $k$ が与えられる． 集合 $\\bar{n}$ の部分集合 $X$ について，$p(X)$ を，$X$ に含まれる区間の長さの最大値とする． つまり，$i, i + 1, \\dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である． $p(X) \\leq k$ であるような $X \\subseteq \\bar{n}$ の個数を，mod 998244353 で求めよ． 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．\n解 TBW\nABC462-G Completely Wrong 問題へのリンク 長さ $N$ の整数列 $C$, $G$ で，$1 \\leq C_i \\leq N$，$1 \\leq G_i \\leq N$ であるものが与えられる． $1, 2, \\dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 blog記事参照 AWC0113-E アレルギー検査 どちらかというと，包除原理よりゼータ変換のところが本質だが，まあ，一応．\nblog記事参照 keywords: inclusion exclusion principle\n",
-  "wordCount" : "195",
+  "articleBody": "何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?\n記法:\n$x \\in \\mathbb{N}$ に対して $\\bar{x} := \\{0, 1, \\ldots, x-1\\}$ と書く． 全体集合が文脈から自明なとき，集合 $A$ の補集合を $A^{\\text{C}}$ と書く． 集合 $A$ の冪集合を $\\mathcal{P}(A)$ と書く． 定理の言明 $U$ を集合とする．各 $i \\in \\bar{n}$ に対して $A_i \\subseteq U$ が定められている時， $$ \\biggl|\\bigcup_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X| + 1} \\biggl|\\bigcap_{i \\in X} A_i\\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\setminus \\{ \\varnothing \\} \\right\\} $$\n証明は，このブログの中だと ここ にある．\n補集合を考えることによって，次が得られる． 偶奇による符号が反転していることに注意． $X$ が $\\varnothing$ である場合も入っていて $\\bigcap_{i\\in \\varnothing} {A_i}^{\\text{C}} = U$ であることにも注意．\n$$ \\biggl|\\bigcap_{i \\in \\overline{n}} A_i\\biggr| = \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {A_i}^{\\text{C}} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $$\n使う問題 ABC172-E NEQ 問題へのリンク 本質的には次を解けば良い: $\\bar{M}$ から $N$ 個取って1列に並べた列 $A_0, \\dots, A_{N - 1}$ であって， すべての $i \\in \\bar{N}$ について $A_{i} \\neq i$ であるものの数を求めよ．\n解 完全順列 (攪乱順列) の数を求める問題とほぼ同じ．包除原理を使う，と思いさえすれば多分解ける． $\\bar{n}$ から $r$ 個とる順列の数を $P(n, r)$ と書くとして，次が答．\n$$ P(M, N) - \\sum_{k = 1}^{N} (-1)^{k - 1} \\binom{N}{k} P(M - k, N - k) $$\nABC456-G Count Holidays 問題へのリンク 次の部分問題を包除原理で解いている:\n正整数 $n$ と $k$ が与えられる． 集合 $\\bar{n}$ の部分集合 $X$ について，$p(X)$ を，$X$ に含まれる区間の長さの最大値とする． つまり，$i, i + 1, \\dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である． $p(X) \\leq k$ であるような $X \\subseteq \\bar{n}$ の個数を，mod 998244353 で求めよ． 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．\n解 TBW\nABC462-G Completely Wrong 問題へのリンク 長さ $N$ の整数列 $C$, $G$ で，$1 \\leq C_i \\leq N$，$1 \\leq G_i \\leq N$ であるものが与えられる． $1, 2, \\dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 blog記事参照 AWC0113-E アレルギー検査 どちらかというと，包除原理よりゼータ変換のところが本質だが，まあ，一応．\nblog記事参照 keywords: inclusion exclusion principle\n",
+  "wordCount" : "247",
   "inLanguage": "en",
-  "datePublished": "2026-06-14T00:00:00Z",
-  "dateModified": "2026-06-14T00:00:00Z",
+  "datePublished": "2026-08-19T00:00:00Z",
+  "dateModified": "2026-08-19T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -226,7 +226,7 @@ $x \in \mathbb{N}$ に対して $\bar{x} := \{0, 1, \ldots, x-1\}$ と書く． 
     <h1 class="post-title">
       包除原理
     </h1>
-    <div class="post-meta">2026-06-14   yamate11
+    <div class="post-meta">2026-08-19   (初版 2026-05-04)   yamate11
 </div>
   </header> 
   <div class="post-content"><p>何のページになるか良く分からないが，希望としては，包除原理を使う問題を集めたい?</p>
@@ -252,6 +252,17 @@ $X$ が $\varnothing$ である場合も入っていて $\bigcap_{i\in \varnothi
 \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {A_i}^{\text{C}} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $$</p>
 </blockquote>
 <h2 id="使う問題">使う問題<a hidden class="anchor" aria-hidden="true" href="#使う問題">#</a></h2>
+<h3 id="abc172-e-neq">ABC172-E NEQ<a hidden class="anchor" aria-hidden="true" href="#abc172-e-neq">#</a></h3>
+<p><a href="https://atcoder.jp/contests/abc456/tasks/abc172_e" target="_blank">問題へのリンク</a>
+</p>
+<p>本質的には次を解けば良い:
+$\bar{M}$ から $N$ 個取って1列に並べた列 $A_0, \dots, A_{N - 1}$ であって，
+すべての $i \in \bar{N}$ について $A_{i} \neq i$ であるものの数を求めよ．</p>
+<h4 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h4>
+<p>完全順列 (攪乱順列) の数を求める問題とほぼ同じ．包除原理を使う，と思いさえすれば多分解ける．
+$\bar{n}$ から $r$ 個とる順列の数を $P(n, r)$ と書くとして，次が答．</p>
+<p>$$ P(M, N) - \sum_{k = 1}^{N} (-1)^{k - 1} \binom{N}{k} P(M - k, N - k)
+$$</p>
 <h3 id="abc456-g-count-holidays">ABC456-G Count Holidays<a hidden class="anchor" aria-hidden="true" href="#abc456-g-count-holidays">#</a></h3>
 <p><a href="https://atcoder.jp/contests/abc456/tasks/abc456_g" target="_blank">問題へのリンク</a>
 </p>
@@ -261,7 +272,7 @@ $X$ が $\varnothing$ である場合も入っていて $\bigcap_{i\in \varnothi
 つまり，$i, i + 1, \dots, i + j - 1$ がすべて $X$ の要素になるような $i$ が存在するような $j$ の最大値である．
 $p(X) \leq k$ であるような $X \subseteq \bar{n}$ の個数を，mod 998244353 で求めよ．
 時間計算量 $O(n/k)$．ただし，必要な階乗などは前計算してあって $O(1)$ で得られるとする．</p>
-<h4 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h4>
+<h4 id="解-1">解<a hidden class="anchor" aria-hidden="true" href="#解-1">#</a></h4>
 <p>TBW</p>
 <!--
 $p(X) \geq k + 1$ なる $X$ の個数を数えて $2^n$ から引けば良い．
@@ -288,7 +299,7 @@ $m - 1$ 個ないし $m$ 個
 <p>長さ $N$ の整数列 $C$, $G$ で，$1 \leq C_i \leq N$，$1 \leq G_i \leq N$ であるものが与えられる．
 $1, 2, \dots, N$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を
 mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
-<h4 id="解-1">解<a hidden class="anchor" aria-hidden="true" href="#解-1">#</a></h4>
+<h4 id="解-2">解<a hidden class="anchor" aria-hidden="true" href="#解-2">#</a></h4>
 <p><a href="../06-14-abc462-g/">blog記事参照</a>
 </p>
 <h3 id="awc0113-e-アレルギー検査">AWC0113-E アレルギー検査<a hidden class="anchor" aria-hidden="true" href="#awc0113-e-アレルギー検査">#</a></h3>
@@ -305,15 +316,10 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
       <li><a href="https://yamate11.github.io/blog/tags/%E5%8C%85%E9%99%A4%E5%8E%9F%E7%90%86/">包除原理</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>ABC462-G Completely Wrong</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">
     <span class="title">Next »</span>
     <br>
-    <span>セグメント木ライブラリ</span>
+    <span>桁DPのコーディング</span>
   </a>
 </nav>
 
@@ -327,6 +333,7 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
 
 <p>Links to Recent Posts:
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
   / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/07-16-awc0113-e/">AWC0113-E アレルギー検査</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/">Trie ライブラリ</a>
@@ -334,7 +341,6 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
   / <a href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">ARC223-D Xpectation of Cards in Hand with Laboratory</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/">ABC462-G Completely Wrong</a>
-  / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">セグメント木ライブラリ</a>
 </p>
 

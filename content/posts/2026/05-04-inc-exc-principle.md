@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "包除原理"
-date: "2026-06-14"
-# date_init: "2026-05-04"
+date: "2026-08-19"
+date_init: "2026-05-04"
 tags: ["包除原理"]
 categories: ["topic"]
 # categories: ["solution"]
@@ -36,6 +36,23 @@ $X$ が $\varnothing$ である場合も入っていて $\bigcap_{i\in \varnothi
 
 
 ## 使う問題
+
+### ABC172-E NEQ
+
+[問題へのリンク](https://atcoder.jp/contests/abc456/tasks/abc172_e)
+
+本質的には次を解けば良い: 
+$\bar{M}$ から $N$ 個取って1列に並べた列 $A_0, \dots, A_{N - 1}$ であって，
+すべての $i \in \bar{N}$ について $A_{i} \neq i$ であるものの数を求めよ．
+
+#### 解
+
+完全順列 (攪乱順列) の数を求める問題とほぼ同じ．包除原理を使う，と思いさえすれば多分解ける．
+$\bar{n}$ から $r$ 個とる順列の数を $P(n, r)$ と書くとして，次が答．
+
+$$ P(M, N) - \sum_{k = 1}^{N} (-1)^{k - 1} \binom{N}{k} P(M - k, N - k)
+$$
+
 
 ### ABC456-G Count Holidays
 
