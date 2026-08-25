@@ -52,7 +52,7 @@ $\sigma = (s_i \mid i < N)$ を任意の順序で連結したときの (辞書�
 なお，$s \prec t \iff s^\infty < t^\infty$ が成り立つ．
 
 この順序で $\sigma$ をソートして連結したものが，求めるものになる．
-忘れていたが，以前[証明を書いた](http://localhost:5080/blog/posts/2021/11-03-abc225-f-string-cards/) ようだ
+忘れていたが，以前[証明を書いた](http://yamate11.github.io/blog/posts/2021/11-03-abc225-f-string-cards/) ようだ
 (頑張って書いたのはABC225-Fの解法で，この証明はまあ簡単)．
 
 このソートは，マージソートを使ったとしても，$O(S \log N)$ では済まない (らしい．ABC434-F でたくさん TLE を出した)．
