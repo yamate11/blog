@@ -6,8 +6,15 @@
     <description>Recent content in Posts on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K番目の要素</title>
+      <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
+      <pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
+      <description>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</description>
+    </item>
     <item>
       <title>包除原理</title>
       <link>https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/</link>
@@ -316,13 +323,6 @@ $x_{A_j} - x_{B_j} \leq C_j$ $\quad(j = 1, \ldots, m)$ $C_j$ は負でも良い�
 $(x_i, y_i)$ と $(x_{i + 1}, y_{i + 1})$ の間に1つずつセルを挿入して， 縦横につながった単純パスを作る方法の数 (作れなければ $0$) を mod $10^9 + 7$ で求めよ．
 制約 $1 \leq n, m \leq 1000$， $nm \geq 3$，$1 \leq k \leq \lfloor (nm - 1) / 2 \rfloor$
 解 tutorialへのリンク 略解．click to open $P_i = (x_i, y_i)$ と書く．$\{|x_i - x_{i + 1}|, |y_i - y_{i + 1}|\}$ は， (1) $\{0, 2\}$ であるか，(2) $\{1, 1\}$ であるか，でなければならない． 間に入れる点は，(1) では1つに決まる．(2) では，2つの点のうちのどちらか．</description>
-    </item>
-    <item>
-      <title>K番目の要素</title>
-      <link>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</link>
-      <pubDate>Sat, 26 Apr 2025 00:00:00 +0900</pubDate>
-      <guid>https://yamate11.github.io/blog/posts/2023/06-01-kth-element/</guid>
-      <description>K番目の要素の二分探索による求め方と，ベクトルのt付近の要素</description>
     </item>
     <item>
       <title>ARC196 B - Torus Loop</title>

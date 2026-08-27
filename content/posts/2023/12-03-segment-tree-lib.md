@@ -7,6 +7,8 @@ tags: ['セグメント木']
 categories: ["topic"]
 # categories: ["solution"]
 # summary: "要約を書いておく．ここには問題タイトル等は不要" 
+showtoc: true
+tocopen: true
 ---
 
 [自作セグメント木ライブラリ](https://github.com/yamate11/compprog-clib/blob/master/segTree.cc)の使い方についての自分用のメモです．

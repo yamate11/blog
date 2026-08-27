@@ -234,7 +234,99 @@ rs は，reference for substitution のつもり． これは，STSubst なる�
     </h1>
     <div class="post-meta">2026-06-03   (初版 2023-12-03)   yamate11
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul><ul>
+                <li>
+                    <a href="#%e9%96%a2%e9%80%a3" aria-label="関連">関連</a></li></ul>
+                    </ul>
+                    
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e6%b3%95" aria-label="使用法">使用法</a><ul>
+                        
+                <li>
+                    <a href="#%e5%9f%ba%e6%9c%ac%e3%81%ae%e3%82%bb%e3%82%b0%e3%83%a1%e3%83%b3%e3%83%88%e6%9c%a8" aria-label="基本のセグメント木">基本のセグメント木</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%9c%e6%88%90" aria-label="作成">作成</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e4%bb%a3%e5%85%a5-1%e7%82%b9" aria-label="値の代入 (1点)">値の代入 (1点)</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e5%8f%96%e5%be%97-1%e7%82%b9" aria-label="値の取得 (1点)">値の取得 (1点)</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e5%8f%96%e5%be%97-%e7%af%84%e5%9b%b2" aria-label="値の取得 (範囲)">値の取得 (範囲)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%81%85%e5%bb%b6%e3%82%bb%e3%82%b0%e3%83%a1%e3%83%b3%e3%83%88%e6%9c%a8" aria-label="遅延セグメント木">遅延セグメント木</a><ul>
+                        
+                <li>
+                    <a href="#%e9%96%a2%e6%95%b0" aria-label="関数">関数</a></li>
+                <li>
+                    <a href="#%e4%bd%9c%e6%88%90-1" aria-label="作成">作成</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e4%bb%a3%e5%85%a5-1%e7%82%b9-1" aria-label="値の代入 (1点)">値の代入 (1点)</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e6%9b%b4%e6%96%b0-%e7%af%84%e5%9b%b2" aria-label="値の更新 (範囲)">値の更新 (範囲)</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e5%8f%96%e5%be%97-1%e7%82%b9-1" aria-label="値の取得 (1点)">値の取得 (1点)</a></li>
+                <li>
+                    <a href="#%e5%80%a4%e3%81%ae%e5%8f%96%e5%be%97-%e7%af%84%e5%9b%b2-1" aria-label="値の取得 (範囲)">値の取得 (範囲)</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%a8%ad%e5%ae%9a%e4%be%8b" aria-label="設定例">設定例</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#1%e7%82%b9%e6%9b%b4%e6%96%b0%e5%8c%ba%e9%96%93%e5%92%8c%e5%8f%96%e5%be%97" aria-label="1点更新，区間和取得">1点更新，区間和取得</a></li>
+                <li>
+                    <a href="#1%e7%82%b9%e6%9b%b4%e6%96%b0%e5%8c%ba%e9%96%93%e6%9c%80%e5%b0%8f%e5%80%a4%e5%8f%96%e5%be%97" aria-label="1点更新，区間最小値取得">1点更新，区間最小値取得</a></li>
+                <li>
+                    <a href="#%e5%8c%ba%e9%96%93%e5%8a%a0%e7%ae%97%e5%8c%ba%e9%96%93%e6%9c%80%e5%b0%8f%e5%80%a4%e5%8f%96%e5%be%97" aria-label="区間加算，区間最小値取得">区間加算，区間最小値取得</a></li>
+                <li>
+                    <a href="#%e5%8c%ba%e9%96%93%e4%bb%a3%e5%85%a5%e5%8c%ba%e9%96%93%e6%9c%80%e5%b0%8f%e5%80%a4%e5%8f%96%e5%be%97" aria-label="区間代入，区間最小値取得">区間代入，区間最小値取得</a></li>
+                <li>
+                    <a href="#%e5%8c%ba%e9%96%93%e4%bb%a3%e5%85%a5%e5%8c%ba%e9%96%93%e5%92%8c%e5%8f%96%e5%be%97" aria-label="区間代入，区間和取得">区間代入，区間和取得</a></li>
+                <li>
+                    <a href="#%e5%8c%ba%e9%96%93%e5%8a%a0%e7%ae%971%e7%82%b9%e5%8f%96%e5%be%97" aria-label="区間加算，1点取得">区間加算，1点取得</a></li>
+                <li>
+                    <a href="#%e5%8c%ba%e9%96%93%e4%bb%a3%e5%85%a51%e7%82%b9%e5%8f%96%e5%be%97" aria-label="区間代入，1点取得">区間代入，1点取得</a></li>
+                <li>
+                    <a href="#%e7%ad%89%e5%b7%ae%e6%95%b0%e5%88%97-1%e6%ac%a1%e5%bc%8f-%e3%81%ae%e4%bb%a3%e5%85%a5%e5%8a%a0%e7%ae%97%e5%8c%ba%e9%96%93%e5%92%8c%e5%8f%96%e5%be%97" aria-label="等差数列 (1次式) の代入・加算，区間和取得">等差数列 (1次式) の代入・加算，区間和取得</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%88%86%e6%8e%a2%e7%b4%a2" aria-label="二分探索">二分探索</a><ul>
+                        
+                <li>
+                    <a href="#%e3%82%88%e3%81%8f%e4%bd%bf%e3%81%86%e4%be%8b" aria-label="よく使う例">よく使う例</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e3%83%87%e3%83%90%e3%83%83%e3%82%b0%e5%af%be%e5%bf%9c" aria-label="デバッグ対応">デバッグ対応</a></li>
+                <li>
+                    <a href="#%e3%82%bb%e3%82%b0%e3%83%a1%e3%83%b3%e3%83%88%e6%9c%a8%e3%81%ae-vector" aria-label="セグメント木の vector">セグメント木の vector</a></li>
+                <li>
+                    <a href="#%e3%83%8e%e3%83%bc%e3%83%89%e3%81%a8%e6%b7%bb%e5%ad%97%e3%81%ae%e5%af%be%e5%bf%9c" aria-label="ノードと添字の対応">ノードと添字の対応</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#%e3%83%8e%e3%83%bc%e3%83%89-to-%e6%b7%bb%e5%ad%97%e3%81%ae%e7%af%84%e5%9b%b2" aria-label="ノード $\to$ 添字の範囲">ノード $\to$ 添字の範囲</a></li>
+                <li>
+                    <a href="#%e6%b7%bb%e5%ad%97%e3%81%ae%e7%af%84%e5%9b%b2-to-%e3%83%8e%e3%83%bc%e3%83%89" aria-label="添字の範囲 $\to$ ノード">添字の範囲 $\to$ ノード</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#%e3%82%b3%e3%83%bc%e3%83%89%e3%81%b8%e3%81%ae%e3%83%aa%e3%83%b3%e3%82%af" aria-label="コードへのリンク">コードへのリンク</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><p><a href="https://github.com/yamate11/compprog-clib/blob/master/segTree.cc" target="_blank">自作セグメント木ライブラリ</a>
 の使い方についての自分用のメモです．
 AtCoder Library にセグメント木はありますが，
@@ -554,6 +646,7 @@ ht には，セグメント木の高さを指定する．init_vec のサイズ�
 </section>
 
 <p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目の要素</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
   / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
@@ -563,7 +656,6 @@ ht には，セグメント木の高さを指定する．init_vec のサイズ�
   / <a href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">ARC223-D Xpectation of Cards in Hand with Laboratory</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/09-09-cartesian-tree/">Cartesian Tree</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/">ABC462-G Completely Wrong</a>
-  / <a href="https://yamate11.github.io/blog/posts/2023/12-03-segment-tree-lib/">セグメント木ライブラリ</a>
 </p>
 
 
