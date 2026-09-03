@@ -8,7 +8,7 @@
 <title>ABC462-G Completely Wrong | yamate11のブログ</title>
 <meta name="keywords" content="">
 <meta name="description" content="ほぼ公式解説のコピーです．
-問題概要 問題へのリンク 以下では 0-index とする．
+問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
 解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．">
 <meta name="author" content="yamate11">
@@ -86,7 +86,7 @@
 
 <meta property="og:title" content="ABC462-G Completely Wrong" />
 <meta property="og:description" content="ほぼ公式解説のコピーです．
-問題概要 問題へのリンク 以下では 0-index とする．
+問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
 解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．" />
 <meta property="og:type" content="article" />
@@ -97,7 +97,7 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ABC462-G Completely Wrong"/>
 <meta name="twitter:description" content="ほぼ公式解説のコピーです．
-問題概要 問題へのリンク 以下では 0-index とする．
+問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
 解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．"/>
 
@@ -128,12 +128,12 @@
   "@type": "BlogPosting",
   "headline": "ABC462-G Completely Wrong",
   "name": "ABC462-G Completely Wrong",
-  "description": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u0026lt; N$，$0 \\leq G_i \u0026lt; N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．",
+  "description": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u0026lt; N$，$0 \\leq G_i \u0026lt; N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．",
   "keywords": [
     
   ],
-  "articleBody": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u003c N$，$0 \\leq G_i \u003c N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．\n数を決めないと考えにくいので，$X \\subseteq \\bar{N}$ に対して，$d_i := |X \\cap G^{-1}(i)|$ とする． いくつの $i$ を $G$ で指定されたところから選ぶか，ということであるから， $\\bigcap_{i \\in X} S_i \\neq \\varnothing$ となるためには，$d_i \\leq |C^{-1}(i)|$ でなければならない． また，当然，$d_i \\leq |G^{-1}(i)|$ である． そこで，$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ と書いて， $D := \\{ d \\mid 0 \\leq d_i, d_i \\leq E_i, d_i \\leq H_i \\}$ として， 各 $d \\in D$ について，$|X \\cap G^{-1}(i)| = d_i$ となる $X$ についての $(-1)^{|X|} |\\bigcap_{i \\in X} {S_i} |$ の和を求めることにする．\n$|X| = \\sum_i d_i$ である． このような $X$ は，$\\prod_{i} \\binom{H_i}{d_i}$ 個ある． $P \\in \\bigcap_{j \\in X} {S_j}$ であるための条件は，$X\\cap (G^{-1}(i))$ の各要素 j について， $C_{P_j} = i$ であることである． このような $P$ は，$\\prod_{i} \\binom{E_i}{d_i}d_i! \\times (N - \\sum_i d_i)! $ 個ある． (各 $i$ について $\\binom{E_i}{d_i}d_i!$ 個で，$j \\in X^{\\text{C}}$ なる $j$ については，残りのどこに行っても良い) したがって，$d \\in D$ に対する次の値の和を計算すれば，求める値になる: $(-1)^{\\sum_i d_i}(N - \\sum_i{d_i})! \\prod_i \\binom{H_i}{d_i}\\binom{E_i}{d_i}d_i!$．\n多項式 $f_i(X)$ を，$f_i(X) := \\sum_j \\binom{H_i}{j}\\binom{E_i}{j}j! X^j $ で定義する． 次数は，$\\min(H_i, E_i)$ である． 多項式 $f(X)$ を，$f := \\prod_{i = 0}^{N - 1} f_i$ で定義すれば，求める値は $\\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f)$ である． 多項式の積は，次数の小さいものからまとめていくことで，$O(N \\log^2 N)$ で計算できる．\n",
-  "wordCount" : "243",
+  "articleBody": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u003c N$，$0 \\leq G_i \u003c N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．\n数を決めないと考えにくいので，$X \\subseteq \\bar{N}$ に対して，$d_i := |X \\cap G^{-1}(i)|$ とする． いくつの $i$ を $G$ で指定されたところから選ぶか，ということであるから， $\\bigcap_{i \\in X} S_i \\neq \\varnothing$ となるためには，$d_i \\leq |C^{-1}(i)|$ でなければならない． また，当然，$d_i \\leq |G^{-1}(i)|$ である． そこで，$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ と書いて， $D := \\{ d \\mid 0 \\leq d_i, d_i \\leq E_i, d_i \\leq H_i \\}$ として， 各 $d \\in D$ について，$|X \\cap G^{-1}(i)| = d_i$ となる $X$ についての $(-1)^{|X|} |\\bigcap_{i \\in X} {S_i} |$ の和を求めることにする．\n$|X| = \\sum_i d_i$ である． このような $X$ は，$\\prod_{i} \\binom{H_i}{d_i}$ 個ある． $P \\in \\bigcap_{j \\in X} {S_j}$ であるための条件は，$X\\cap (G^{-1}(i))$ の各要素 j について， $C_{P_j} = i$ であることである． このような $P$ は，$\\prod_{i} \\binom{E_i}{d_i}d_i! \\times (N - \\sum_i d_i)! $ 個ある． (各 $i$ について $\\binom{E_i}{d_i}d_i!$ 個で，$j \\in X^{\\text{C}}$ なる $j$ については，残りのどこに行っても良い) したがって，$d \\in D$ に対する次の値の和を計算すれば，求める値になる: $(-1)^{\\sum_i d_i}(N - \\sum_i{d_i})! \\prod_i \\binom{H_i}{d_i}\\binom{E_i}{d_i}d_i!$．\n多項式 $f_i(X)$ を，$f_i(X) := \\sum_j \\binom{H_i}{j}\\binom{E_i}{j}j! X^j $ で定義する． 次数は，$\\min(H_i, E_i)$ である． 多項式 $f(X)$ を，$f := \\prod_{i = 0}^{N - 1} f_i$ で定義すれば，求める値は $\\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f)$ である． 多項式の積は，次数の小さいものからまとめていくことで，$O(N \\log^2 N)$ で計算できる．\n",
+  "wordCount" : "244",
   "inLanguage": "en",
   "datePublished": "2026-06-14T13:29:40+09:00",
   "dateModified": "2026-06-14T13:29:40+09:00",
@@ -230,7 +230,7 @@
 <h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
 <p><a href="https://atcoder.jp/contests/abc462/tasks/abc462_g" target="_blank">問題へのリンク</a>
 </p>
-<p>以下では 0-index とする．</p>
+<p>以下では 0-based index とする．</p>
 <p>長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる．
 $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を
 mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
