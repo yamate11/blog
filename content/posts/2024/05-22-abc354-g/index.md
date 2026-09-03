@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "ABC354-G Select Strings"
-date: "2024-05-22T15:09:15+09:00"
-# date_init: "2024-05-22"
+date: "2026-09-03"
+date_init: "2024-05-22"
 tags: ["Dilworth", "matching", "flow", "Konig"]
 # categories: ["topic"]
 categories: ["solution"]
@@ -39,7 +39,7 @@ Konig の定理のフローを使った証明を組み合わせれば良いと�
 前に書いた記事
 「[Dilworth の定理，Konig の定理](/blog/posts/2022/02-02-dilworth-konig/)」に必要事項があります．
 
-## 解法
+## 解法1
 
 $\bar{N} := \\{1, 2, \dots, N\\}$ と書く．
 また，$a$ が $b$ の部分文字列の時に $a \preceq b$，真の部分文字列の時には $a \prec b$ と書くことにする．
@@ -95,6 +95,64 @@ $\geq g(T, T) + g(T, S) + g(S, S) = f(\bar{N}) - g(S, T)
 = f(\bar{N}) - f(B)$．すなわち，$f(B) \geq f(\bar{N}) - M$．
 
 以上合わせて，$G$ の最大流を $M$ として，求める答は $f(\bar{N}) - M$ である．
+
+## 解法2
+
+あとから解法1を読んでみると，「燃やす埋める」に近いような気がしてくる．
+実際，以下に記述するように，燃やす埋めるで解くことができる．
+
+#### 考察1
+
+命題 $T(i)$ を，「文字列 $S_i$ が極大反鎖 $T$ に属する」ということを意図すると，
+これに関する条件は，
+
+* $S_i \prec S_j$ のとき，$T(i) \implies \neg T(j)$
+
+になってしまう．右側が $T(j)$ だったら良いが，否定がついているので，このままでは「燃やす埋める」に乗らない．
+
+#### 考察2
+
+命題を2つ増やしてみる．
+
+* $T(i)$: 文字列 $S_i$ が，極大反鎖 $T$ に属する．
+* $L(i)$: $S_j \in T$ が存在して，$S_i \prec S_j$
+* $H(i)$: $S_j \in T$ が存在して，$S_j \prec S_i$
+
+自然に条件を書くと:
+
+* (1) $S_i \prec S_j$ のとき，$T(i) \implies H(j)$
+* (2) $S_i \prec S_j$ のとき，$T(j) \implies L(i)$
+
+(1) は良いが，(2) はこのままでは乗らない．対偶を取ってみる:
+
+* (2') $S_i \prec S_j$ のとき，$\neg L(i) \implies \neg T(j)$．
+
+ここで考えてみるに，(極大反鎖を扱っているので) $\neg L(i)$ というのは，$T(i) \lor H(i)$ を意味するから，
+$S_i \prec S_j$ だったら，$H(j)$ が成り立つことになる:
+
+* (2'') $S_i \prec S_j$ のとき，$\neg L(i) \implies H(j)$．
+
+そして，こう書くと，(2'') は，(1) を含んでいる．
+「$T(i)$ が成り立ったら $A_i$ 受け取る」という部分は，
+「$L(i)$か$H(i)$が成り立ったら $A_i$ 支払う」で代用することができる．
+
+$\neg L$ を $\hat{L}$ と書くことにすると，次のように，燃やす埋めるで定式化ができそうである．
+
+* (a) $S_i \prec S_j$ のとき，$\hat{L}(i)$ が成り立つのに $H(j)$ が成り立たないならば，$\infty$ 支払う．
+* (b) $\hat{L}(i)$ が成り立たなかったら (つまり，$L(i)$ が成り立ったら)，$A_i$ 支払う．
+* (c) $H(i)$ が成り立ったら，$A_i$ 支払う．
+
+#### 確認
+
+実際，$\bar{N}$ 上の述語 $\hat{L}$ と $H$ が，$S_i \prec S_j \land \hat{L}(i) \implies H(j)$ を満たすとすると，
+$T := \\{ S_i \in \bar{N} \mid \hat{L}(i) \land \neg H(i) \\}$ は，反鎖になる．
+
+
+
+
+
+
+
 
 
 Keywords: Konig's Theorem Koenig's Theorem Dilworth's Theorem マッチング matching flow フロー 最小カット antichain chain
