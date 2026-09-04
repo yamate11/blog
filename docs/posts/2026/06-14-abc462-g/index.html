@@ -10,7 +10,7 @@
 <meta name="description" content="ほぼ公式解説のコピーです．
 問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
-解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．">
+解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \subseteq \bar{N} \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="ほぼ公式解説のコピーです．
 問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
-解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．" />
+解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \subseteq \bar{N} \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/06-14-abc462-g/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2026-06-14T13:29:40+09:00" />
@@ -99,7 +99,7 @@
 <meta name="twitter:description" content="ほぼ公式解説のコピーです．
 問題概要 問題へのリンク 以下では 0-based index とする．
 長さ $N$ の整数列 $C$, $G$ で，$0 \leq C_i &lt; N$，$0 \leq G_i &lt; N$ であるものが与えられる． $0, 1, \dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．
-解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．"/>
+解 $S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$ なので，包除原理により $ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \subseteq \bar{N} \right\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．"/>
 
 
 <script type="application/ld+json">
@@ -128,12 +128,12 @@
   "@type": "BlogPosting",
   "headline": "ABC462-G Completely Wrong",
   "name": "ABC462-G Completely Wrong",
-  "description": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u0026lt; N$，$0 \\leq G_i \u0026lt; N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．",
+  "description": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u0026lt; N$，$0 \\leq G_i \u0026lt; N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\subseteq \\bar{N} \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．",
   "keywords": [
     
   ],
-  "articleBody": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u003c N$，$0 \\leq G_i \u003c N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\in \\mathcal{P}(\\bar{n}) \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．\n数を決めないと考えにくいので，$X \\subseteq \\bar{N}$ に対して，$d_i := |X \\cap G^{-1}(i)|$ とする． いくつの $i$ を $G$ で指定されたところから選ぶか，ということであるから， $\\bigcap_{i \\in X} S_i \\neq \\varnothing$ となるためには，$d_i \\leq |C^{-1}(i)|$ でなければならない． また，当然，$d_i \\leq |G^{-1}(i)|$ である． そこで，$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ と書いて， $D := \\{ d \\mid 0 \\leq d_i, d_i \\leq E_i, d_i \\leq H_i \\}$ として， 各 $d \\in D$ について，$|X \\cap G^{-1}(i)| = d_i$ となる $X$ についての $(-1)^{|X|} |\\bigcap_{i \\in X} {S_i} |$ の和を求めることにする．\n$|X| = \\sum_i d_i$ である． このような $X$ は，$\\prod_{i} \\binom{H_i}{d_i}$ 個ある． $P \\in \\bigcap_{j \\in X} {S_j}$ であるための条件は，$X\\cap (G^{-1}(i))$ の各要素 j について， $C_{P_j} = i$ であることである． このような $P$ は，$\\prod_{i} \\binom{E_i}{d_i}d_i! \\times (N - \\sum_i d_i)! $ 個ある． (各 $i$ について $\\binom{E_i}{d_i}d_i!$ 個で，$j \\in X^{\\text{C}}$ なる $j$ については，残りのどこに行っても良い) したがって，$d \\in D$ に対する次の値の和を計算すれば，求める値になる: $(-1)^{\\sum_i d_i}(N - \\sum_i{d_i})! \\prod_i \\binom{H_i}{d_i}\\binom{E_i}{d_i}d_i!$．\n多項式 $f_i(X)$ を，$f_i(X) := \\sum_j \\binom{H_i}{j}\\binom{E_i}{j}j! X^j $ で定義する． 次数は，$\\min(H_i, E_i)$ である． 多項式 $f(X)$ を，$f := \\prod_{i = 0}^{N - 1} f_i$ で定義すれば，求める値は $\\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f)$ である． 多項式の積は，次数の小さいものからまとめていくことで，$O(N \\log^2 N)$ で計算できる．\n",
-  "wordCount" : "244",
+  "articleBody": "ほぼ公式解説のコピーです．\n問題概要 問題へのリンク 以下では 0-based index とする．\n長さ $N$ の整数列 $C$, $G$ で，$0 \\leq C_i \u003c N$，$0 \\leq G_i \u003c N$ であるものが与えられる． $0, 1, \\dots, N - 1$ の順列 $P$ で，すべての $i$ について $C_{P_i} \\neq G_i$ となるものの個数を mod 998244353 で求めよ．$1 \\leq N \\leq 2\\times 10^5$．\n解 $S_i := \\{ P \\mid C_{P_i} = G_i \\}$ とすれば，求めるものは $\\bigcap_{i \\in \\bar{N}} {S_i}^{\\text{C}}$ なので，包除原理により $ \\sum \\left\\{ (-1)^{|X|} \\biggl|\\bigcap_{i \\in X} {S_i} \\biggr| \\;\\middle|\\; X \\subseteq \\bar{N} \\right\\} $ を求めれば良い． 包除原理についてはこのblogの記事 参照．\nこれは，$X \\subseteq \\bar{N}$ に対して，$X$ 上では選んだ色 ($C_{P_i}$) が指定された色 ($G_i$) と一致している ($X$の外ではどうなっていても良い) ような選び方 ($P$ の数) を数える，ということである． 当然，各$X$について愚直に数えていては間に合わないので，$X$を適当にグルーピングして， そのグループに属する $X$ 全体に対する $P$ の数をまとめて数えることになる．\n各色 $a$ ごとに，その色が $C$ と $G$ に現れる回数を $c(a)$, $g(a)$ と書くことにする． つまり，$c(a) = |C^{-1}(a)|,\\; g(a) = |G^{-1}(a)|$ (実際，$c$ と $g$ が問題の本質で，これらが一致する $C$，$G$ に対する問題の答は同一である)． 各色ごとに，その色を一致させる場所の数を定める関数 $d : \\bar{N} \\to \\bar{N}$ を考える． 色 $a$ に対して $d(a)$ 個の場所で，選んだ色と指定された色を一致させたい，ということであるから， $d(a) \\leq \\min(c(a), g(a))$ となるような $d$ だけが意味を持つ． そのようなそれぞれの $d$ に対して，$|X \\cap G^{-1}(a)| = d(a)$ となる $X$ を，$d$ に対応するグループとする．\n$d$ に対して，そのような $X$ の数は，$\\prod_{a} \\binom{g(a)}{d(a)}$ 個ある． $X$ 上で，選んだ色と指定された色が一致するような $P$ の数は， $(\\prod_{a} \\binom{c(a)}{d(a)}d(a)!) \\times (N - \\sum_a d(a))!$ 個である． $|X| = \\sum_a d(a)$ であるから，結局，各 $d$ に対する，次の値の和を計算すれば良いことになる:\n$$(-1)^{\\sum_a d(a)}(N - \\sum_a d(a))! \\prod_a \\binom{g(a)}{d(a)}\\binom{c(a)}{d(a)} d(a)!$$\n次数 $\\min(c(i), g(i))$ の多項式 $f_i(X)$ を，$f_i(X) := \\sum_j \\binom{g(i)}{j} \\binom{c(i)}{j} j! X^j$ で 定義し，$f := \\prod_{i = 0}^{N - 1} f_i$ とすると，求める値は，次のものになる:\n$$\\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f) $$\n多項式の積は，次数の小さいものからまとめていくことで，$O(N \\log^2 N)$ で計算できる．\n",
+  "wordCount" : "219",
   "inLanguage": "en",
   "datePublished": "2026-06-14T13:29:40+09:00",
   "dateModified": "2026-06-14T13:29:40+09:00",
@@ -237,33 +237,32 @@ mod 998244353 で求めよ．$1 \leq N \leq 2\times 10^5$．</p>
 <h2 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h2>
 <p>$S_i := \{ P \mid C_{P_i} = G_i \}$ とすれば，求めるものは $\bigcap_{i \in \bar{N}} {S_i}^{\text{C}}$
 なので，包除原理により
-$ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \in \mathcal{P}(\bar{n}) \right\} $
+$ \sum \left\{ (-1)^{|X|} \biggl|\bigcap_{i \in X} {S_i} \biggr| \;\middle|\; X \subseteq \bar{N} \right\} $
 を求めれば良い．
 包除原理については<a href="../05-04-inc-exc-principle/">このblogの記事</a>
  参照．</p>
-<p>数を決めないと考えにくいので，$X \subseteq \bar{N}$ に対して，$d_i := |X \cap G^{-1}(i)|$ とする．
-いくつの $i$ を $G$ で指定されたところから選ぶか，ということであるから，
-$\bigcap_{i \in X} S_i \neq \varnothing$ となるためには，$d_i \leq |C^{-1}(i)|$ でなければならない．
-また，当然，$d_i \leq |G^{-1}(i)|$ である．
-そこで，$E_i := | C^{-1}(i) |$，$H_i := | G^{-1}(i) |$ と書いて，
-$D := \{ d \mid 0 \leq d_i, d_i \leq E_i, d_i \leq H_i \}$ として，
-各 $d \in D$ について，$|X \cap G^{-1}(i)| = d_i$ となる $X$ についての
-$(-1)^{|X|} |\bigcap_{i \in X} {S_i} |$ の和を求めることにする．</p>
+<p>これは，$X \subseteq \bar{N}$ に対して，$X$ 上では選んだ色 ($C_{P_i}$) が指定された色 ($G_i$) と一致している
+($X$の外ではどうなっていても良い) ような選び方 ($P$ の数) を数える，ということである．
+当然，各$X$について愚直に数えていては間に合わないので，$X$を適当にグルーピングして，
+そのグループに属する $X$ 全体に対する $P$ の数をまとめて数えることになる．</p>
+<p>各色 $a$ ごとに，その色が $C$ と $G$ に現れる回数を $c(a)$, $g(a)$ と書くことにする．
+つまり，$c(a) = |C^{-1}(a)|,\; g(a) = |G^{-1}(a)|$
+(実際，$c$ と $g$ が問題の本質で，これらが一致する $C$，$G$ に対する問題の答は同一である)．
+各色ごとに，その色を一致させる場所の数を定める関数 $d : \bar{N} \to \bar{N}$ を考える．
+色 $a$ に対して $d(a)$ 個の場所で，選んだ色と指定された色を一致させたい，ということであるから，
+$d(a) \leq \min(c(a), g(a))$ となるような $d$ だけが意味を持つ．
+そのようなそれぞれの $d$ に対して，$|X \cap G^{-1}(a)| = d(a)$ となる $X$ を，$d$ に対応するグループとする．</p>
 <ul>
-<li>$|X| = \sum_i d_i$ である．</li>
-<li>このような $X$ は，$\prod_{i} \binom{H_i}{d_i}$ 個ある．</li>
-<li>$P \in \bigcap_{j \in X} {S_j}$ であるための条件は，$X\cap (G^{-1}(i))$ の各要素 j について，
-$C_{P_j} = i$ であることである．
-このような $P$ は，$\prod_{i} \binom{E_i}{d_i}d_i! \times (N - \sum_i d_i)! $ 個ある．
-(各 $i$ について $\binom{E_i}{d_i}d_i!$ 個で，$j \in X^{\text{C}}$ なる $j$ については，残りのどこに行っても良い)</li>
+<li>$d$ に対して，そのような $X$ の数は，$\prod_{a} \binom{g(a)}{d(a)}$ 個ある．</li>
+<li>$X$ 上で，選んだ色と指定された色が一致するような $P$ の数は，
+$(\prod_{a} \binom{c(a)}{d(a)}d(a)!) \times (N - \sum_a d(a))!$ 個である．</li>
 </ul>
-<p>したがって，$d \in D$ に対する次の値の和を計算すれば，求める値になる:
-$(-1)^{\sum_i d_i}(N - \sum_i{d_i})! \prod_i \binom{H_i}{d_i}\binom{E_i}{d_i}d_i!$．</p>
-<p>多項式 $f_i(X)$ を，$f_i(X) := \sum_j \binom{H_i}{j}\binom{E_i}{j}j! X^j $ で定義する．
-次数は，$\min(H_i, E_i)$ である．
-多項式 $f(X)$ を，$f := \prod_{i = 0}^{N - 1} f_i$ で定義すれば，求める値は
-$\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f)$ である．
-多項式の積は，次数の小さいものからまとめていくことで，$O(N \log^2 N)$ で計算できる．</p>
+<p>$|X| = \sum_a d(a)$ であるから，結局，各 $d$ に対する，次の値の和を計算すれば良いことになる:</p>
+<p>$$(-1)^{\sum_a d(a)}(N - \sum_a d(a))! \prod_a \binom{g(a)}{d(a)}\binom{c(a)}{d(a)} d(a)!$$</p>
+<p>次数 $\min(c(i), g(i))$ の多項式 $f_i(X)$ を，$f_i(X) := \sum_j \binom{g(i)}{j} \binom{c(i)}{j} j! X^j$ で
+定義し，$f := \prod_{i = 0}^{N - 1} f_i$ とすると，求める値は，次のものになる:</p>
+<p>$$\sum_{k = 0}^{N} (-1)^k (N - k)! ([X^k]f) $$</p>
+<p>多項式の積は，次数の小さいものからまとめていくことで，$O(N \log^2 N)$ で計算できる．</p>
 
 
   </div>

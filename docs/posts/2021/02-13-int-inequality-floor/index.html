@@ -130,7 +130,7 @@ $d \leq t \iff d \leq \lfloor t \rfloor$ $d &lt; t \iff d &lt; \lceil t \rceil$ 
     
   ],
   "articleBody": "経緯 よく考えればもちろん作れるのだけれど，すぐ間違うのでメモをしておきます．\n公式 $d \\in \\mathbb{Z}$，$t \\in \\mathbb{R}$ とする．\n$d \\leq t \\iff d \\leq \\lfloor t \\rfloor$ $d \u003c t \\iff d \u003c \\lceil t \\rceil$ $t \\leq d \\iff \\lceil t \\rceil \\leq d$ $t \u003c d \\iff \\lfloor t \\rfloor \u003c d$ 考え方 \\begin{eqnarray*} d\\leq t \u0026\\iff\u0026 t \\in \\{ t \\mid d \\leq t \\} \\\\ \u0026\\iff\u0026 t \\in \\bigcup \\{ [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\bigvee \\{ t \\in [e, e+1) \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 \\bigvee \\{ \\lfloor t \\rfloor = e \\mid e = d, d+1, \\ldots \\} \\\\ \u0026\\iff\u0026 d \\leq \\lfloor t \\rfloor \\hspace{20em} \\end{eqnarray*}\n同様に，\n\\begin{eqnarray*} d",
-  "wordCount" : "348",
+  "wordCount" : "338",
   "inLanguage": "en",
   "datePublished": "2023-03-23T18:36:00+09:00",
   "dateModified": "2023-03-23T18:36:00+09:00",
@@ -270,13 +270,13 @@ $ab$ が long long に収まらないかもしれない，
 $ab \leq c \iff a \leq c/b \iff a \leq \lfloor c/b \rfloor$
 などとして，判定すれば良い．</p>
 <p>なお，この目的のためには，GCC の拡張
-__builtin_smulll_overflow も使える (Signed - MULtiplication - Long Long)．
+__builtin_mul_overflow も使える．
 形式は，</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">bool</span> <span style="color:#111">__builtin_smulll_overflow</span><span style="color:#111">(</span><span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span><span style="color:#f92672">*</span> <span style="color:#111">res</span><span style="color:#111">)</span>
-</span></span></code></pre></div><p>で，<code>a * b</code> が long long でオーバーフローする時は true が返る．
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">bool</span> <span style="color:#111">__builtin_mul_overflow</span><span style="color:#111">(</span><span style="color:#111">type1</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">type2</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#111">type3</span><span style="color:#f92672">*</span> <span style="color:#111">res</span><span style="color:#111">)</span>
+</span></span></code></pre></div><p>で，<code>a * b</code> が type3 でオーバーフローする時は true が返る．
 オーバーフローしない時には false が返り，<code>*res</code> に積が設定される．
 たとえば上記の判定は:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span> <span style="color:#111">ab</span><span style="color:#111">;</span> <span style="color:#111">not</span> <span style="color:#75af00">__builtin_smulll_overflow</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">ab</span><span style="color:#111">)</span> <span style="color:#111">and</span> <span style="color:#111">ab</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">c</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#00a8c8">long</span> <span style="color:#00a8c8">long</span> <span style="color:#111">ab</span><span style="color:#111">;</span> <span style="color:#111">not</span> <span style="color:#75af00">__builtin_mul_overflow</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">ab</span><span style="color:#111">)</span> <span style="color:#111">and</span> <span style="color:#111">ab</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">c</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">...</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">}</span>
 </span></span></code></pre></div><p>などと実現できる．</p>

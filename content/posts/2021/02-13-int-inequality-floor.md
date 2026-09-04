@@ -66,19 +66,19 @@ $ab \leq c \iff a \leq c/b \iff a \leq \lfloor c/b \rfloor$
 などとして，判定すれば良い．
 
 なお，この目的のためには，GCC の拡張
-__builtin_smulll_overflow も使える (Signed - MULtiplication - Long Long)．
+__builtin_mul_overflow も使える．
 形式は，
 
 ```cpp
-bool __builtin_smulll_overflow(long long a, long long b, long long* res)
+bool __builtin_mul_overflow(type1 a, type2 b, type3* res)
 ```
 
-で，`a * b` が long long でオーバーフローする時は true が返る．
+で，`a * b` が type3 でオーバーフローする時は true が返る．
 オーバーフローしない時には false が返り，`*res` に積が設定される．
 たとえば上記の判定は:
 
 ```cpp
-if (long long ab; not __builtin_smulll_overflow(a, b, &ab) and ab <= c) {
+if (long long ab; not __builtin_mul_overflow(a, b, &ab) and ab <= c) {
   ...
 }
 ```
