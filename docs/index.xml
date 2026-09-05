@@ -6,8 +6,18 @@
     <description>Recent content on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 09:59:03 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cmpNaive (judge) 実行前確認方法メモ</title>
+      <link>https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/</link>
+      <pubDate>Sat, 05 Sep 2026 09:59:03 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/</guid>
+      <description>メモ
+cmpNaive の judge バージョンを使おうとしているとき，実行前に，din_*.txt でテストをする方法．
+{ cat din_1.txt; ./cans &amp;lt; din_1.txt; } | ./cans naive 複数あるなら:
+for f in din_*.txt; do echo $f; { cat $f; ./cans &amp;lt; $f; } | ./cans naive ; done </description>
+    </item>
     <item>
       <title>ABC354-G Select Strings</title>
       <link>https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/</link>
