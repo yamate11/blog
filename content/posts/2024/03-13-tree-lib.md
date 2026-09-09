@@ -331,6 +331,19 @@ pair<ll, vector<ll>> centroid_decomp();
 * `c` によって分割される各部分木の重心を $d_1, \dots, d_k$ とすると，`vec[`$d_k$`] = c` となっている．
 * 以下同様に，`vec[e] = d` であるとき，`e` は，`d` によって分割される部分木のうちのひとつの重心である．
 
+__注意__: structured binding は，`auto [c, vec] = centroid_decomp();` のようにする．
+これはだいたい次の意味になる:
+
+```cpp
+  auto tmp = centroid_decomp();
+  auto& c = tmp.first;
+  auto& vec = tmp.second;
+```
+
+`centroid_decomp()` は値を返すので，`auto& [c, vec] = centroid_decomp()` とすることはできない (し，する必要がない)．
+
+
+
 #### 根の変更
 
 ```cpp
