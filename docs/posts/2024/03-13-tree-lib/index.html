@@ -127,7 +127,7 @@
     "木"
   ],
   "articleBody": "自分用の木のライブラリのメモです．ソースはこちら ．\n1. 典型的な使用法 ll N; cin \u003e\u003e N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin \u003e\u003e a \u003e\u003e b \u003e\u003e w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [\u0026](auto rF, ll nd) -\u003e void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.children_pe(nd)) { ... nd ... cld ... weight[e] ... } }; dfs(dfs, root); 辺に関する情報は，辺の番号を添字とするベクトルなどに確保しておくのが良い． 上の weight を参照．\n作成 ノード 0, 1, …, N-1 の木で，根が root のオブジェクトをつくる． root は省略可で，その場合は 0 が根になる． Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にすると，HL分解を行う．\nTree tr(N, root, use_hl_decomp); 次のメンバ関数を N - 1 回呼んで辺を定義する．N - 1 回呼ばれると，内部で使用する値を計算しに行く． 戻り値は，辺のID．(0, 1, 2, … の順で返る)\nll add_edge(ll x, ll y); データメンバ (public相当のもの) ll numNodes; ... ノードの数 ll root; ... 根 他に，vector",
-  "wordCount" : "1289",
+  "wordCount" : "1324",
   "inLanguage": "en",
   "datePublished": "2026-05-23T00:00:00Z",
   "dateModified": "2026-05-23T00:00:00Z",
@@ -483,11 +483,20 @@ heavy edge かもしれない．</li>
 <h4 id="重心">重心<a hidden class="anchor" aria-hidden="true" href="#重心">#</a></h4>
 <p>重心とは，その頂点を根にしたときに，すべての隣接頂点の部分木サイズが全頂点数の半分以下である頂点のこと．
 木には重心が 1点または2点存在する．</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">ll</span><span style="color:#f92672">&gt;</span> <span style="color:#111">centroids</span><span style="color:#111">()</span>
-</span></span></code></pre></div><p><code>[a, b] = tr.centroids()</code> とすると，</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">ll</span> <span style="color:#75af00">centroid</span><span style="color:#111">();</span>
+</span></span></code></pre></div><p><code>c = tr.centroid();</code> とすると，<code>c</code> は，重心のうちの一つになる．</p>
 <ul>
-<li>重心が1点の時には，a に重心ノード番号が，b には -1 が設定される．</li>
-<li>重心が2点の時には，a, b に重心ノード番号が設定される．</li>
+<li><code>2 * tr.stsize(c) == tr.numNodes</code> の場合には，もう一つの重心は，<code>tr.parent(c)</code> である．</li>
+<li>そうでない場合は，<code>2 * tr.stsize(c) &gt; tr.numNodes</code> であり，重心は <code>c</code> のみである．</li>
+</ul>
+<h4 id="重心分解">重心分解<a hidden class="anchor" aria-hidden="true" href="#重心分解">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">pair</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#111">,</span> <span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">centroid_decomp</span><span style="color:#111">();</span>
+</span></span></code></pre></div><p><code>auto [c, vec] = tr.centroid_decomp();</code> とすると，重心分解が行われる．
+<code>vec</code> が，分解によって得られる木を与える．すなわち:</p>
+<ul>
+<li><code>c</code> は，木全体の重心である．</li>
+<li><code>c</code> によって分割される各部分木の重心を $d_1, \dots, d_k$ とすると，<code>vec[</code>$d_k$<code>] = c</code> となっている．</li>
+<li>以下同様に，<code>vec[e] = d</code> であるとき，<code>e</code> は，<code>d</code> によって分割される部分木のうちのひとつの重心である．</li>
 </ul>
 <h4 id="根の変更">根の変更<a hidden class="anchor" aria-hidden="true" href="#根の変更">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#111">change_root</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">newRoot</span><span style="color:#111">)</span>

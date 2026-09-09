@@ -312,13 +312,24 @@ tuple<ll, ll, ll, ll, ll> diameter()
 木には重心が 1点または2点存在する．
 
 ```cpp
-pair<ll, ll> centroids()
+ll centroid();
 ```
 
-`[a, b] = tr.centroids()` とすると，
-* 重心が1点の時には，a に重心ノード番号が，b には -1 が設定される．
-* 重心が2点の時には，a, b に重心ノード番号が設定される．
+`c = tr.centroid();` とすると，`c` は，重心のうちの一つになる．
+* `2 * tr.stsize(c) == tr.numNodes` の場合には，もう一つの重心は，`tr.parent(c)` である．
+* そうでない場合は，`2 * tr.stsize(c) > tr.numNodes` であり，重心は `c` のみである．
 
+#### 重心分解
+
+```cpp
+pair<ll, vector<ll>> centroid_decomp();
+```
+
+`auto [c, vec] = tr.centroid_decomp();` とすると，重心分解が行われる．
+`vec` が，分解によって得られる木を与える．すなわち:
+* `c` は，木全体の重心である．
+* `c` によって分割される各部分木の重心を $d_1, \dots, d_k$ とすると，`vec[`$d_k$`] = c` となっている．
+* 以下同様に，`vec[e] = d` であるとき，`e` は，`d` によって分割される部分木のうちのひとつの重心である．
 
 #### 根の変更
 
