@@ -127,7 +127,7 @@
     "木"
   ],
   "articleBody": "自分用の木のライブラリのメモです．ソースはこちら ．\n1. 典型的な使用法 ll N; cin \u003e\u003e N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin \u003e\u003e a \u003e\u003e b \u003e\u003e w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [\u0026](auto rF, ll nd) -\u003e void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.children_pe(nd)) { ... nd ... cld ... weight[e] ... } }; dfs(dfs, root); 辺に関する情報は，辺の番号を添字とするベクトルなどに確保しておくのが良い． 上の weight を参照．\n作成 ノード 0, 1, …, N-1 の木で，根が root のオブジェクトをつくる． root は省略可で，その場合は 0 が根になる． Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にすると，HL分解を行う．\nTree tr(N, root, use_hl_decomp); 次のメンバ関数を N - 1 回呼んで辺を定義する．N - 1 回呼ばれると，内部で使用する値を計算しに行く． 戻り値は，辺のID．(0, 1, 2, … の順で返る)\nll add_edge(ll x, ll y); データメンバ (public相当のもの) ll numNodes; ... ノードの数 ll root; ... 根 他に，vector",
-  "wordCount" : "1354",
+  "wordCount" : "1360",
   "inLanguage": "en",
   "datePublished": "2026-05-23T00:00:00Z",
   "dateModified": "2026-05-23T00:00:00Z",
@@ -503,7 +503,8 @@ heavy edge かもしれない．</li>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span> <span style="color:#111">tmp</span> <span style="color:#f92672">=</span> <span style="color:#111">centroid_decomp</span><span style="color:#111">();</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">tmp</span><span style="color:#111">.</span><span style="color:#111">first</span><span style="color:#111">;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">vec</span> <span style="color:#f92672">=</span> <span style="color:#111">tmp</span><span style="color:#111">.</span><span style="color:#111">second</span><span style="color:#111">;</span>
-</span></span></code></pre></div><p><code>centroid_decomp()</code> は値を返すので，<code>auto&amp; [c, vec] = centroid_decomp()</code> とすることはできない (し，する必要がない)．</p>
+</span></span></code></pre></div><p><code>centroid_decomp()</code> は値を返す (表現 centroid_decomp() は prvalue) ので，
+<code>auto&amp; [c, vec] = centroid_decomp()</code> とすることはできない (し，する必要がない)．</p>
 <h4 id="根の変更">根の変更<a hidden class="anchor" aria-hidden="true" href="#根の変更">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#00a8c8">void</span> <span style="color:#111">change_root</span><span style="color:#111">(</span><span style="color:#111">ll</span> <span style="color:#111">newRoot</span><span style="color:#111">)</span>
 </span></span></code></pre></div><p>根を newRoot に変更する．</p>

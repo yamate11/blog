@@ -340,7 +340,8 @@ __注意__: structured binding は，`auto [c, vec] = centroid_decomp();` のよ
   auto& vec = tmp.second;
 ```
 
-`centroid_decomp()` は値を返すので，`auto& [c, vec] = centroid_decomp()` とすることはできない (し，する必要がない)．
+`centroid_decomp()` は値を返す (表現 centroid_decomp() は prvalue) ので，
+`auto& [c, vec] = centroid_decomp()` とすることはできない (し，する必要がない)．
 
 
 
