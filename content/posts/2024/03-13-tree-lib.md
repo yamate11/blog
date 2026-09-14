@@ -1,7 +1,7 @@
 ---
 author: "yamate11"
 title: "木ライブラリ"
-date: "2026-05-23"
+date: "2026-09-14"
 date_init: "2024-03-13"
 tags: ["木"]
 categories: ["topic"]

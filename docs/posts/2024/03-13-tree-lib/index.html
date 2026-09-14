@@ -87,8 +87,8 @@
 1. 典型的な使用法 ll N; cin &gt;&gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;](auto rF, ll nd) -&gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2026-05-23T00:00:00+00:00" />
-<meta property="article:modified_time" content="2026-05-23T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2026-09-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-09-14T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="木ライブラリ"/>
@@ -129,8 +129,8 @@
   "articleBody": "自分用の木のライブラリのメモです．ソースはこちら ．\n1. 典型的な使用法 ll N; cin \u003e\u003e N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin \u003e\u003e a \u003e\u003e b \u003e\u003e w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [\u0026](auto rF, ll nd) -\u003e void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr.children_pe(nd)) { ... nd ... cld ... weight[e] ... } }; dfs(dfs, root); 辺に関する情報は，辺の番号を添字とするベクトルなどに確保しておくのが良い． 上の weight を参照．\n作成 ノード 0, 1, …, N-1 の木で，根が root のオブジェクトをつくる． root は省略可で，その場合は 0 が根になる． Bool 値の use_hl_decomp も省略可 (省略時は false) で，true にすると，HL分解を行う．\nTree tr(N, root, use_hl_decomp); 次のメンバ関数を N - 1 回呼んで辺を定義する．N - 1 回呼ばれると，内部で使用する値を計算しに行く． 戻り値は，辺のID．(0, 1, 2, … の順で返る)\nll add_edge(ll x, ll y); データメンバ (public相当のもの) ll numNodes; ... ノードの数 ll root; ... 根 他に，vector",
   "wordCount" : "1360",
   "inLanguage": "en",
-  "datePublished": "2026-05-23T00:00:00Z",
-  "dateModified": "2026-05-23T00:00:00Z",
+  "datePublished": "2026-09-14T00:00:00Z",
+  "dateModified": "2026-09-14T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -217,7 +217,7 @@
     <h1 class="post-title">
       木ライブラリ
     </h1>
-    <div class="post-meta">2026-05-23   (初版 2024-03-13)   yamate11
+    <div class="post-meta">2026-09-14   (初版 2024-03-13)   yamate11
 </div>
   </header> 
   <div class="post-content"><p>自分用の木のライブラリのメモです．ソースは<a href="https://github.com/yamate11/compprog-clib/blob/master/tree.cc" target="_blank">こちら</a>
@@ -592,15 +592,10 @@ get_peer が true のときには，子供のノード (peer) を扱う．false 
       <li><a href="https://yamate11.github.io/blog/tags/%E6%9C%A8/">木</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>map と unordered_map の性能</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2025/04-27-ret-arc185-e/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/">
     <span class="title">Next »</span>
     <br>
-    <span>ARC185E - Adjacent GCD</span>
+    <span>cmpNaive (judge) 実行前確認方法メモ</span>
   </a>
 </nav>
 
@@ -613,8 +608,9 @@ get_peer が true のときには，子供のノード (peer) を扱う．false 
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/">cmpNaive (judge) 実行前確認方法メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/">cmpNaive (judge) 実行前確認方法メモ</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">ABC354-G Select Strings</a>
   / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目の要素</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
@@ -622,7 +618,6 @@ get_peer が true のときには，子供のノード (peer) を扱う．false 
   / <a href="https://yamate11.github.io/blog/posts/2026/07-16-awc0113-e/">AWC0113-E アレルギー検査</a>
   / <a href="https://yamate11.github.io/blog/posts/2025/06-28-trie-with-pointers/">Trie ライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/06-30-two-pointer/">尺取り法について</a>
-  / <a href="https://yamate11.github.io/blog/posts/2026/06-29-arc223-d/">ARC223-D Xpectation of Cards in Hand with Laboratory</a>
 </p>
 
 

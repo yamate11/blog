@@ -192,6 +192,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">木ライブラリ
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>自分用の木のライブラリのメモです．ソースはこちら ．
+1. 典型的な使用法 ll N; cin &gt;&gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;](auto rF, ll nd) -&gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr....</p>
+  </div>
+  <footer class="entry-footer">2026-09-14   (初版 2024-03-13)   yamate11</footer>
+  <a class="entry-link" aria-label="post link to 木ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">cmpNaive (judge) 実行前確認方法メモ
     </h2>
   </header>
@@ -373,19 +386,6 @@ rs は，reference for substitution のつもり． これは，STSubst なる�
   </div>
   <footer class="entry-footer">2026-05-28   (初版 2026-01-04)   yamate11</footer>
   <a class="entry-link" aria-label="post link to map と unordered_map の性能" href="https://yamate11.github.io/blog/posts/2026/01-04-map-performance/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">木ライブラリ
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>自分用の木のライブラリのメモです．ソースはこちら ．
-1. 典型的な使用法 ll N; cin &gt;&gt; N; Tree tr(N, root); // ノード数 N, 根は root． vector weight(N - 1, 0LL); REP(i, 0, N - 1) { ll a, b, w; cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; a--; b--; // 0-indexed. ll e = tr.add_edge(u, v); weight[e] = w; } auto dfs = [&amp;](auto rF, ll nd) -&gt; void { for (ll cld = tr.children(nd)) { ... } for (auto [cld, e] = tr....</p>
-  </div>
-  <footer class="entry-footer">2026-05-23   (初版 2024-03-13)   yamate11</footer>
-  <a class="entry-link" aria-label="post link to 木ライブラリ" href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/"></a>
 </article>
 
 <article class="post-entry"> 
