@@ -344,7 +344,6 @@ __注意__: structured binding は，`auto [c, vec] = centroid_decomp();` のよ
 `auto& [c, vec] = centroid_decomp()` とすることはできない (し，する必要がない)．
 
 
-
 #### 根の変更
 
 ```cpp
