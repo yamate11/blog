@@ -11,6 +11,10 @@ summary: "Cartesian Tree のライブラリ"
 
 Cartesian Tree のライブラリを書いた．
 
+## ソース
+
+https://github.com/yamate11/compprog-clib/blob/master/cartesianTree.cc
+
 ## 使用法
 
 ```cpp
@@ -65,7 +69,7 @@ auto ct1 = make_cartesian_tree(vec, greater<ll>());
 auto ct2 = make_cartesian_tree(vec, [](ll a, ll b) { return a > b; });
 ```
 
-上の作成関数で指定する比較関数の引数は，ベクトルなどの value_type であるが，
+上の例の作成関数で指定している比較関数の引数の型は，ベクトルなどの value_type である．
 添字を引数にしたい場合には，作成関数 make_cartesian_tree_comp_index を用いる．
 
 ```cpp
@@ -75,7 +79,9 @@ auto ct3 = make_cartesian_tree_comp_index(vec, [](ll i, ll j) -> {
            });
 ```
 
-上の例では，値が等しいときには左側を優先して取るようにしている．
+この例では，値が等しいときには左側を優先して取るようになる．
+make_cartesian_tree_comp_index では，引数 vec にはあまり意味は無く，
+vec.size() しか見ていない．本来，第1引数はサイズであるべきだろうが，まあ気にしないことにする．
 
 配列などを作成するときのために，引数のないコンストラクタもある．
 その場合には，メンバ関数 build() でベクトルなどを与える．
