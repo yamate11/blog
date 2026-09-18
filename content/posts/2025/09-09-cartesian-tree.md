@@ -30,7 +30,7 @@ https://github.com/yamate11/compprog-clib/blob/master/cartesianTree.cc
     auto ct3 = make_cartesian_tree(vec, comp);
                 // comp is (const T&, const T&) -> bool, where T is the value type fo vec
     auto ct4 = make_cartesian_tree_comp_index(vec, comp); //
-                // comp is (int i, int j) -> bool.  Convenient for specifying tie break.
+                // comp is (int i, int j) -> bool.  Convenient when specifying tie break.
 ```
 
 ## 定義
