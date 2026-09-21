@@ -13,7 +13,7 @@
       <link>https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/</link>
       <pubDate>Mon, 21 Sep 2026 16:29:16 +0900</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/</guid>
-      <description>SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies&amp;lt;MyMatrix&amp;gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.</description>
+      <description>SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus&amp;lt;ll&amp;gt;(), 0LL); auto sw = make_swag(multiplies&amp;lt;MyMatrix&amp;gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.</description>
     </item>
   </channel>
 </rss>

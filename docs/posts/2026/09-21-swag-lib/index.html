@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>SWAG | yamate11のブログ</title>
 <meta name="keywords" content="swag">
-<meta name="description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.">
+<meta name="description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus&lt;ll&gt;(), 0LL); auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.">
 <meta name="author" content="yamate11">
 <link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
@@ -82,7 +82,7 @@
 
 
 <meta property="og:title" content="SWAG" />
-<meta property="og:description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw." />
+<meta property="og:description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus&lt;ll&gt;(), 0LL); auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2026-09-21T16:29:16+09:00" />
@@ -90,7 +90,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SWAG"/>
-<meta name="twitter:description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw."/>
+<meta name="twitter:description" content="SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus&lt;ll&gt;(), 0LL); auto sw = make_swag(multiplies&lt;MyMatrix&gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw."/>
 
 
 <script type="application/ld+json">
@@ -119,12 +119,12 @@
   "@type": "BlogPosting",
   "headline": "SWAG",
   "name": "SWAG",
-  "description": "SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies\u0026lt;MyMatrix\u0026gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.",
+  "description": "SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus\u0026lt;ll\u0026gt;(), 0LL); auto sw = make_swag(multiplies\u0026lt;MyMatrix\u0026gt;(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.",
   "keywords": [
     "swag"
   ],
-  "articleBody": "SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw = make_swag(multiplies\u003cMyMatrix\u003e(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.back(); // the back element auto vec = sw.vec_view(); // list the elements for debugging ",
-  "wordCount" : "85",
+  "articleBody": "SWAG のライブラリを書きました．ソースはこちら 使用法 auto sw1 = make_swag(plus\u003cll\u003e(), 0LL); auto sw = make_swag(multiplies\u003cMyMatrix\u003e(), MyMatrix{{1,0},{0,1}}); // operator and its unit element. // operator should be associative. sw.push(obj1); // push obj1 into the queue sw.pop(); // pop the front element T v = sw.get_val(); // calculate the aggregated value e1 `op` e2 `op` ... `op` en // where e1 is the front and en is the back T a = sw.front(); // the front element T b = sw.back(); // the back element auto vec = sw.vec_view(); // list the elements for debugging メモ SWAG = Sliding Window AGgregation 結合法則を満たす (実装の都合上単位元も持つ) 演算 機能: queue に push queue から pop queue の要素全体に演算を適用 (fold)．入れた順に左から 計算量: push, pop, 演算適用とも，ならし $O(1)$． 4本のスタック (要素と値，後ろ半分と前半分) で実現． ",
+  "wordCount" : "117",
   "inLanguage": "en",
   "datePublished": "2026-09-21T16:29:16+09:00",
   "dateModified": "2026-09-21T16:29:16+09:00",
@@ -220,7 +220,8 @@
   <div class="post-content"><p>SWAG のライブラリを書きました．<a href="https://github.com/yamate11/compprog-clib/blob/master/swag.cc" target="_blank">ソースはこちら</a>
 </p>
 <h2 id="使用法">使用法<a hidden class="anchor" aria-hidden="true" href="#使用法">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">auto</span> <span style="color:#111">sw</span> <span style="color:#f92672">=</span> <span style="color:#111">make_swag</span><span style="color:#111">(</span><span style="color:#111">multiplies</span><span style="color:#f92672">&lt;</span><span style="color:#111">MyMatrix</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#111">MyMatrix</span><span style="color:#111">{{</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">0</span><span style="color:#111">},{</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span><span style="color:#ae81ff">1</span><span style="color:#111">}});</span>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#00a8c8">auto</span> <span style="color:#111">sw1</span> <span style="color:#f92672">=</span> <span style="color:#111">make_swag</span><span style="color:#111">(</span><span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#111">ll</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#ae81ff">0LL</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">auto</span> <span style="color:#111">sw</span> <span style="color:#f92672">=</span> <span style="color:#111">make_swag</span><span style="color:#111">(</span><span style="color:#111">multiplies</span><span style="color:#f92672">&lt;</span><span style="color:#111">MyMatrix</span><span style="color:#f92672">&gt;</span><span style="color:#111">(),</span> <span style="color:#111">MyMatrix</span><span style="color:#111">{{</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">0</span><span style="color:#111">},{</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span><span style="color:#ae81ff">1</span><span style="color:#111">}});</span>
 </span></span><span style="display:flex;"><span>              <span style="color:#75715e">// operator and its unit element.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              <span style="color:#75715e">// operator should be associative.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">sw</span><span style="color:#111">.</span><span style="color:#111">push</span><span style="color:#111">(</span><span style="color:#111">obj1</span><span style="color:#111">);</span>   <span style="color:#75715e">// push obj1 into the queue
@@ -230,7 +231,21 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">T</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">sw</span><span style="color:#111">.</span><span style="color:#111">front</span><span style="color:#111">();</span>   <span style="color:#75715e">// the front element
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">T</span> <span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#111">sw</span><span style="color:#111">.</span><span style="color:#111">back</span><span style="color:#111">();</span>    <span style="color:#75715e">// the back element
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#00a8c8">auto</span> <span style="color:#111">vec</span> <span style="color:#f92672">=</span> <span style="color:#111">sw</span><span style="color:#111">.</span><span style="color:#111">vec_view</span><span style="color:#111">();</span>  <span style="color:#75715e">// list the elements for debugging
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><h2 id="メモ">メモ<a hidden class="anchor" aria-hidden="true" href="#メモ">#</a></h2>
+<ul>
+<li>SWAG = Sliding Window AGgregation</li>
+<li>結合法則を満たす (実装の都合上単位元も持つ) 演算</li>
+<li>機能:
+<ul>
+<li>queue に push</li>
+<li>queue から pop</li>
+<li>queue の要素全体に演算を適用 (fold)．入れた順に左から</li>
+</ul>
+</li>
+<li>計算量: push, pop, 演算適用とも，ならし $O(1)$．</li>
+<li>4本のスタック (要素と値，後ろ半分と前半分) で実現．</li>
+</ul>
+
 
   </div>
 
