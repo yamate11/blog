@@ -6,8 +6,21 @@
     <description>Recent content in solution on yamate11のブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 15:56:14 +0900</lastBuildDate>
     <atom:link href="https://yamate11.github.io/blog/categories/solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ABC481-G Half-Baked</title>
+      <link>https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/</link>
+      <pubDate>Mon, 26 Oct 2026 15:56:14 +0900</pubDate>
+      <guid>https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/</guid>
+      <description>問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \leq N \leq 1.2 \times 10^5$
+$i = 1, \dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \leq A_i &amp;lt; B_i &amp;lt; 998244353$
+$i = 1, \dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \dots, N$ について，小さい方から $k$ 番目の数の期待値を $\text{mod } 998244353$ で求める．
+解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．
+$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．
+この $C_j$ が，期待値にどれだけ寄与するか考える．
+$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j&amp;rsquo; = 1, \dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i &amp;lt; B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j + 1$ 番目から $a_j + b_j + 1$ 番目のいずれかになる． $a_j + 1 + t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\displaystyle\frac{1}{2^{b_j + 1}}\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\displaystyle \frac{1}{2} [x^k] x^{a_j} (\frac{1}{2} (x + 1))^{b_j}$ なので， $\displaystyle \frac{1}{2} [x^k] \sum_{j = 1}^{2N} x^{a_j} (\frac{1}{2} (x + 1))^{b_j}$ を求めれば良い．</description>
+    </item>
     <item>
       <title>ABC354-G Select Strings</title>
       <link>https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/</link>

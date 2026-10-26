@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ABC481-G Half-Baked | yamate11のブログ</title>
+<meta name="keywords" content="">
+<meta name="description" content="問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \leq N \leq 1.2 \times 10^5$
+$i = 1, \dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \leq A_i &lt; B_i &lt; 998244353$
+$i = 1, \dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \dots, N$ について，小さい方から $k$ 番目の数の期待値を $\text{mod } 998244353$ で求める．
+解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．
+$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．
+この $C_j$ が，期待値にどれだけ寄与するか考える．
+$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j&rsquo; = 1, \dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i &lt; B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j &#43; 1$ 番目から $a_j &#43; b_j &#43; 1$ 番目のいずれかになる． $a_j &#43; 1 &#43; t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\displaystyle\frac{1}{2^{b_j &#43; 1}}\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\displaystyle \frac{1}{2} [x^k] x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ なので， $\displaystyle \frac{1}{2} [x^k] \sum_{j = 1}^{2N} x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ を求めれば良い．">
+<meta name="author" content="yamate11">
+<link rel="canonical" href="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.1cabf4e726658e01b1c2e572f9b0a2552b24879e5b5a7c16f47a20dc97b59fd4.css" integrity="sha256-HKv05yZljgGxwuVy&#43;bCiVSskh55bWnwW9Hog3Je1n9Q=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yamate11.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yamate11.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yamate11.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yamate11.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yamate11.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true,
+        tags: "ams",
+        autoload: {
+          color: [],
+          colorV2: ['color']
+        },
+        packages: {'[+]': ['noerrors']}
+      },
+      chtml: {
+        matchFontHeight: false,
+          
+
+      },
+      loader: {
+        load: ['[tex]/noerrors']
+      }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+
+
+<meta property="og:title" content="ABC481-G Half-Baked" />
+<meta property="og:description" content="問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \leq N \leq 1.2 \times 10^5$
+$i = 1, \dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \leq A_i &lt; B_i &lt; 998244353$
+$i = 1, \dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \dots, N$ について，小さい方から $k$ 番目の数の期待値を $\text{mod } 998244353$ で求める．
+解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．
+$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．
+この $C_j$ が，期待値にどれだけ寄与するか考える．
+$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j&rsquo; = 1, \dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i &lt; B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j &#43; 1$ 番目から $a_j &#43; b_j &#43; 1$ 番目のいずれかになる． $a_j &#43; 1 &#43; t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\displaystyle\frac{1}{2^{b_j &#43; 1}}\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\displaystyle \frac{1}{2} [x^k] x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ なので， $\displaystyle \frac{1}{2} [x^k] \sum_{j = 1}^{2N} x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ を求めれば良い．" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-10-26T15:56:14+09:00" />
+<meta property="article:modified_time" content="2026-10-26T15:56:14+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ABC481-G Half-Baked"/>
+<meta name="twitter:description" content="問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \leq N \leq 1.2 \times 10^5$
+$i = 1, \dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \leq A_i &lt; B_i &lt; 998244353$
+$i = 1, \dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \dots, N$ について，小さい方から $k$ 番目の数の期待値を $\text{mod } 998244353$ で求める．
+解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．
+$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．
+この $C_j$ が，期待値にどれだけ寄与するか考える．
+$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j&rsquo; = 1, \dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i &lt; B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j &#43; 1$ 番目から $a_j &#43; b_j &#43; 1$ 番目のいずれかになる． $a_j &#43; 1 &#43; t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\displaystyle\frac{1}{2^{b_j &#43; 1}}\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\displaystyle \frac{1}{2} [x^k] x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ なので， $\displaystyle \frac{1}{2} [x^k] \sum_{j = 1}^{2N} x^{a_j} (\frac{1}{2} (x &#43; 1))^{b_j}$ を求めれば良い．"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yamate11.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ABC481-G Half-Baked",
+      "item": "https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ABC481-G Half-Baked",
+  "name": "ABC481-G Half-Baked",
+  "description": "問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \\leq N \\leq 1.2 \\times 10^5$\n$i = 1, \\dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \\leq A_i \u0026lt; B_i \u0026lt; 998244353$\n$i = 1, \\dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \\dots, N$ について，小さい方から $k$ 番目の数の期待値を $\\text{mod } 998244353$ で求める．\n解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．\n$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \\ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．\nこの $C_j$ が，期待値にどれだけ寄与するか考える．\n$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j\u0026rsquo; = 1, \\dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i \u0026lt; B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j + 1$ 番目から $a_j + b_j + 1$ 番目のいずれかになる． $a_j + 1 + t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\\displaystyle\\frac{1}{2^{b_j + 1}}\\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\\displaystyle \\frac{1}{2} [x^k] x^{a_j} (\\frac{1}{2} (x + 1))^{b_j}$ なので， $\\displaystyle \\frac{1}{2} [x^k] \\sum_{j = 1}^{2N} x^{a_j} (\\frac{1}{2} (x + 1))^{b_j}$ を求めれば良い．",
+  "keywords": [
+    
+  ],
+  "articleBody": "問題概要 問題へのリンク 整数 $N$ が与えられる． $1 \\leq N \\leq 1.2 \\times 10^5$\n$i = 1, \\dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \\leq A_i \u003c B_i \u003c 998244353$\n$i = 1, \\dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき， $k = 1, \\dots, N$ について，小さい方から $k$ 番目の数の期待値を $\\text{mod } 998244353$ で求める．\n解 以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．\n$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \\ldots, C_{2N}$ とする． 同じ大きさのものがあっても，適当にタイブレークをする．\nこの $C_j$ が，期待値にどれだけ寄与するか考える．\n$1/2$ の確率で選ばれない．このときの寄与は $0$． $1/2$ の確率で選ばれる． $j’ = 1, \\dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個， $A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする． $A_i \u003c B_i$ なので，逆のパターンはない． すると，$C_j$ は，選ばれたものの列で，$a_j + 1$ 番目から $a_j + b_j + 1$ 番目のいずれかになる． $a_j + 1 + t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると) $\\displaystyle\\frac{1}{2^{b_j + 1}}\\binom{b_j}{t}$ である． 期待値への寄与は，この確率に $C_j$ をかけたものになる． 多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は， $\\displaystyle \\frac{1}{2} [x^k] x^{a_j} (\\frac{1}{2} (x + 1))^{b_j}$ なので， $\\displaystyle \\frac{1}{2} [x^k] \\sum_{j = 1}^{2N} x^{a_j} (\\frac{1}{2} (x + 1))^{b_j}$ を求めれば良い．\n$f(l, r) = \\sum_{j = l}^{r} x^{a_j} (\\frac{1}{2} (x + 1))^{b_j}$ と書いて分割統治で求める．次が重要な観察である．\n$a_j \\leq a_{j + 1} \\leq a_j + 1$ $b_j - 1 \\leq b_{j + 1} \\leq b_j + 1$ したがって，$f(l, r)$ を計算するとき，共通因数をくくって $\\sum_{j = l}^{r} x^{a_j} (\\frac{1}{2} (x + 1))^{b_j} = x^a (\\frac{1}{2} (x + 1))^b \\sum_{j = l}^{r} x^{a’_j} (\\frac{1}{2} (x + 1))^{b’_j}$ とすれば，$a’_j, b’_j \\leq r - l + 1$ であるし， $a, b \\leq 2(r - l + 1)$ である． したがって，全体の計算が $O(N \\log^2{N})$ で実行できる．\n",
+  "wordCount" : "222",
+  "inLanguage": "en",
+  "datePublished": "2026-10-26T15:56:14+09:00",
+  "dateModified": "2026-10-26T15:56:14+09:00",
+  "author":{
+    "@type": "Person",
+    "name": "yamate11"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yamate11のブログ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yamate11.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yamate11.github.io/blog/" accesskey="h" title="yamate11のブログ (Alt + H)">yamate11のブログ</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yamate11.github.io/blog/archives/" title="記事一覧">
+                    <span>記事一覧</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/search/" title="検索 (Alt &#43; /)" accesskey=/>
+                    <span>検索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yamate11.github.io/blog/pages/about/" title="筆者">
+                    <span>筆者</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      ABC481-G Half-Baked
+    </h1>
+    <div class="post-meta">2026-10-26   yamate11
+</div>
+  </header> 
+  <div class="post-content"><h2 id="問題概要">問題概要<a hidden class="anchor" aria-hidden="true" href="#問題概要">#</a></h2>
+<p><a href="https://atcoder.jp/contests/abc481/tasks/abc481_g" target="_blank">問題へのリンク</a>
+</p>
+<p>整数 $N$ が与えられる． $1 \leq N \leq 1.2 \times 10^5$</p>
+<p>$i = 1, \dots, N$ に対して，整数 $A_i, B_i$ が与えられる．$1 \leq A_i &lt; B_i &lt; 998244353$</p>
+<p>$i = 1, \dots, N$ に対して，$A_i, B_i$ のうち一つを独立ランダムに選び，選んだものを昇順に並べるとき，
+$k = 1, \dots, N$ について，小さい方から $k$ 番目の数の期待値を $\text{mod } 998244353$ で求める．</p>
+<h2 id="解">解<a hidden class="anchor" aria-hidden="true" href="#解">#</a></h2>
+<p>以下，公式解説と2つのユーザ解説の内容をまとめたものを書く．</p>
+<p>$A_i, B_i$ の全部を小さい順に並べて長さ $2N$ の列 $C_1, \ldots, C_{2N}$ とする．
+同じ大きさのものがあっても，適当にタイブレークをする．</p>
+<p>この $C_j$ が，期待値にどれだけ寄与するか考える．</p>
+<ul>
+<li>$1/2$ の確率で選ばれない．このときの寄与は $0$．</li>
+<li>$1/2$ の確率で選ばれる．
+<ul>
+<li>$j&rsquo; = 1, \dots, j - 1$ の中に，$A_i, B_i$ が両方入っている $i$ が $a_j$個，
+$A_i$ は入っているが $B_i$ は入っていないような $i$ が $b_j$個あったとする．
+$A_i &lt; B_i$ なので，逆のパターンはない．</li>
+<li>すると，$C_j$ は，選ばれたものの列で，$a_j + 1$ 番目から $a_j + b_j + 1$ 番目のいずれかになる．
+$a_j + 1 + t$ 番目になる確率は，($C_j$ 自体が選ばれる確率 $1/2$ も合わせると)
+$\displaystyle\frac{1}{2^{b_j + 1}}\binom{b_j}{t}$ である．
+期待値への寄与は，この確率に $C_j$ をかけたものになる．</li>
+</ul>
+</li>
+</ul>
+<p>多項式で書くと，$k$ 番目の数の期待値への $C_j$ の寄与は，
+$\displaystyle \frac{1}{2} [x^k] x^{a_j} (\frac{1}{2} (x + 1))^{b_j}$ なので，
+$\displaystyle \frac{1}{2} [x^k] \sum_{j = 1}^{2N} x^{a_j} (\frac{1}{2} (x + 1))^{b_j}$ を求めれば良い．</p>
+<p>$f(l, r) = \sum_{j = l}^{r} x^{a_j} (\frac{1}{2} (x + 1))^{b_j}$
+と書いて分割統治で求める．次が重要な観察である．</p>
+<ul>
+<li>$a_j \leq a_{j + 1} \leq a_j + 1$</li>
+<li>$b_j - 1 \leq b_{j + 1} \leq b_j + 1$</li>
+</ul>
+<p>したがって，$f(l, r)$ を計算するとき，共通因数をくくって
+$\sum_{j = l}^{r} x^{a_j} (\frac{1}{2} (x + 1))^{b_j}
+= x^a (\frac{1}{2} (x + 1))^b  \sum_{j = l}^{r} x^{a&rsquo;_j} (\frac{1}{2} (x + 1))^{b&rsquo;_j}$
+とすれば，$a&rsquo;_j, b&rsquo;_j \leq r - l + 1$ であるし，
+$a, b \leq 2(r - l + 1)$ である．
+したがって，全体の計算が $O(N \log^2{N})$ で実行できる．</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/">
+    <span class="title">Next »</span>
+    <br>
+    <span>SWAG</span>
+  </a>
+</nav>
+
+  </footer><p>コメントをどうぞ</p>
+
+<script src="https://y1.is-trm.net/isso/js/embed.min.js"
+     data-isso="https://y1.is-trm.net/isso/">
+</script>
+<section id="isso-thread" data-isso-id="/blog/posts/2026/10-26-abc481-g/" data-title="ABC481-G Half-Baked">
+</section>
+
+<p>Links to Recent Posts:
+  / <a href="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/">ABC481-G Half-Baked</a>
+  / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/">SWAG</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/">cmpNaive (judge) 実行前確認方法メモ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2024/05-22-abc354-g/">ABC354-G Select Strings</a>
+  / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目の要素</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
+  / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/07-16-awc0113-e/">AWC0113-E アレルギー検査</a>
+</p>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2026 <a href="https://yamate11.github.io/blog/">yamate11のブログ</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
