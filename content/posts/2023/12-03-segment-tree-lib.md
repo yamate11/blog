@@ -150,17 +150,19 @@ $il$ 以上 $ir$ 未満の値に add を適用した結果を返す．
 #### 1点更新，区間最小値取得
 
 ```cpp
-  auto st = make_seg_tree(LLONG_MAX, [](ll x, ll y) { return min(x, y); });
+  auto st = make_seg_tree(LLONG_MAX, min2());
 ```
 
-std::min は，オーバーロードがあるので，そのまま名前で渡すわけにはいかない．
+std::max と std::min は，2変数のバージョンの他に，オーバーロードがあるので，そのまま渡すことができない．
+そこで，このライブラリの中に，`struct max2` と `struct min2` が定義してある．
+これらのオブジェクトを指定することで，2変数の最大値演算と最小値演算が使用できる
+(2変数の関数だと，型を明示的に指定しないとコンパイルが通らないので，struct にしてある)．
 
 #### 区間加算，区間最小値取得
 
 ```cpp
   ll big = (1e18 など適当に大きな値);
-  auto mymin = [](ll x, ll y) -> ll { return min(x, y); };
-  auto st = make_seg_tree_lazy(big, 0LL, mymin, plus<ll>(), plus<ll>());
+  auto st = make_seg_tree_lazy(big, 0LL, min2(), plus<ll>(), plus<ll>());
 ```
 
 * apply と add は自然に順序交換ができる．
@@ -174,10 +176,9 @@ nullptr が「何もしない」ことをあらわし，単位元となる．
 ```cpp
   using OP = optional<ll>;
   ll big = (1e18 や LLONG_MAX など適当に大きな値);
-  auto mymin = [](ll x, ll y) -> ll { return min(x, y); };
   auto comp = [](OP f, OP g) -> OP { return f ? f : g; };
   auto appl = [](OP f, ll x) -> ll { return f ? *f : x; };
-  auto st = make_seg_tree_lazy(big, OP(), mymin, comp, appl);
+  auto st = make_seg_tree_lazy(big, OP(), min2(), comp, appl);
 ```
 
 
@@ -321,7 +322,7 @@ vector<DAT> vec_view();   // 要素のベクトルを返す
 初期値を指定しないと，たとえば unit が初期化されなかったりする．
 
 ```cpp
-  auto sgt_zero = make_seg_tree(1LL << 60, [](ll x, ll y) { return min(x, y); });
+  auto sgt_zero = make_seg_tree(1LL << 60, min2());
   vector<decltype(sg_zero)> vec_seg(20, sgt_zero);
   REP(i, 0, 20) vec2_seg[i].set_data(....);
 ```
