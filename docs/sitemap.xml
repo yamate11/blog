@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yamate11.github.io/blog/categories/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/categories/topic/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yamate11.github.io/blog/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/</loc>
     <lastmod>2026-10-26T15:56:14+09:00</lastmod>
   </url><url>
-    <loc>https://yamate11.github.io/blog/categories/</loc>
-    <lastmod>2026-10-26T15:56:14+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/posts/</loc>
-    <lastmod>2026-10-26T15:56:14+09:00</lastmod>
-  </url><url>
     <loc>https://yamate11.github.io/blog/categories/solution/</loc>
-    <lastmod>2026-10-26T15:56:14+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/</loc>
     <lastmod>2026-10-26T15:56:14+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/swag/</loc>
@@ -24,9 +30,6 @@
     <lastmod>2026-09-21T16:29:16+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/</loc>
-    <lastmod>2026-09-21T16:29:16+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/categories/topic/</loc>
     <lastmod>2026-09-21T16:29:16+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/%E6%9C%A8/</loc>
@@ -178,9 +181,6 @@
   </url><url>
     <loc>https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/</loc>
     <lastmod>2025-05-18T18:33:52+09:00</lastmod>
-  </url><url>
-    <loc>https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/</loc>
-    <lastmod>2025-05-17T11:23:05+09:00</lastmod>
   </url><url>
     <loc>https://yamate11.github.io/blog/tags/comparator/</loc>
     <lastmod>2025-05-06T00:00:00+00:00</lastmod>

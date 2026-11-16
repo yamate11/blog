@@ -1,8 +1,8 @@
 ---
 author: "yamate11"
 title: "Wavelet 行列ライブラリ"
-date: "2025-05-17T11:23:05+09:00"
-# date_init: "2025-05-17"
+date: "2026-11-16"
+date_init: "2025-05-17"
 tags: []
 categories: ["topic"]
 # categories: ["solution"]

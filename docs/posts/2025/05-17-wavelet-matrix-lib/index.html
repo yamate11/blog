@@ -91,8 +91,8 @@
 出現回数 wm.rank(t, r); 区間 [0, r) に t が現れる回数を返す． t は非負整数であればよい． r は，wm.N 以下でなければならない． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2025-05-17T11:23:05+09:00" />
-<meta property="article:modified_time" content="2025-05-17T11:23:05+09:00" /><meta property="og:site_name" content="yamate11のブログ" />
+<meta property="article:published_time" content="2026-11-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-11-16T00:00:00+00:00" /><meta property="og:site_name" content="yamate11のブログ" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Wavelet 行列ライブラリ"/>
@@ -135,8 +135,8 @@
   "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec, -1); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる データメンバ wm.N … データの個数 他にもあるが，使わないと思う．\nデータ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使いではない．\n出現回数 wm.rank(t, r); 区間 [0, r) に t が現れる回数を返す． t は非負整数であればよい． r は，wm.N 以下でなければならない． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r). k は意味がある値でなければならない．つまり，0 \u003c= k \u003c r - l が必要． 0 \u003c= l \u003c r \u003c= wm.N でなければならない． 出現回数 wm.range_freq(hi, l, r); wm.range_freq(lo, hi, l, r); 区間 [l, r) において次を満たす要素 t の個数を返す． 上の呼出については，t \u003c hi 下の呼出については，lo \u003c= t \u003c hi 0 \u003c= lo \u003c= hi でなければならない．(amax に関する制約は無い) 0 \u003c= l \u003c= r \u003c= wm.N でなければならない． ",
   "wordCount" : "125",
   "inLanguage": "en",
-  "datePublished": "2025-05-17T11:23:05+09:00",
-  "dateModified": "2025-05-17T11:23:05+09:00",
+  "datePublished": "2026-11-16T00:00:00Z",
+  "dateModified": "2026-11-16T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "yamate11"
@@ -223,7 +223,7 @@
     <h1 class="post-title">
       Wavelet 行列ライブラリ
     </h1>
-    <div class="post-meta">2025-05-17   yamate11
+    <div class="post-meta">2026-11-16   (初版 2025-05-17)   yamate11
 </div>
   </header> 
   <div class="post-content"><p>Wavelet 行列ライブラリを書いた．</p>
@@ -280,15 +280,10 @@
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://yamate11.github.io/blog/posts/2025/05-18-ret-abc349-g/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>ABC349 G Palindrome Construction</span>
-  </a>
-  <a class="next" href="https://yamate11.github.io/blog/posts/2024/11-04-comparator-in-set-etc/">
+  <a class="next" href="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/">
     <span class="title">Next »</span>
     <br>
-    <span>比較関数</span>
+    <span>ABC481-G Half-Baked</span>
   </a>
 </nav>
 
@@ -301,8 +296,9 @@
 </section>
 
 <p>Links to Recent Posts:
-  / <a href="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/">ABC481-G Half-Baked</a>
   / <a href="https://yamate11.github.io/blog/posts/">Posts</a>
+  / <a href="https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/">Wavelet 行列ライブラリ</a>
+  / <a href="https://yamate11.github.io/blog/posts/2026/10-26-abc481-g/">ABC481-G Half-Baked</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/09-21-swag-lib/">SWAG</a>
   / <a href="https://yamate11.github.io/blog/posts/2024/03-13-tree-lib/">木ライブラリ</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/09-05-cmpnaive-run-memo/">cmpNaive (judge) 実行前確認方法メモ</a>
@@ -310,7 +306,6 @@
   / <a href="https://yamate11.github.io/blog/posts/2023/06-01-kth-element/">K番目の要素</a>
   / <a href="https://yamate11.github.io/blog/posts/2026/05-04-inc-exc-principle/">包除原理</a>
   / <a href="https://yamate11.github.io/blog/posts/2021/07-06-digitdp/">桁DPのコーディング</a>
-  / <a href="https://yamate11.github.io/blog/posts/2026/07-16-awc0113-e/">AWC0113-E アレルギー検査</a>
 </p>
 
 
