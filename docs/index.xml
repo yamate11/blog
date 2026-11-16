@@ -14,9 +14,9 @@
       <pubDate>Mon, 16 Nov 2026 00:00:00 +0000</pubDate>
       <guid>https://yamate11.github.io/blog/posts/2025/05-17-wavelet-matrix-lib/</guid>
       <description>Wavelet 行列ライブラリを書いた．
-使用法 vector&amp;lt;ll&amp;gt; vec{...}; WaveletMatrix wm(vec, -1); cout &amp;lt;&amp;lt; wm.kth_rank(10, 20) &amp;lt;&amp;lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec &amp;hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax &amp;hellip; 「データがこの値を超えない」という値．-1 を与えると，ライブラリの方で最大値を取ってくれる データメンバ wm.N &amp;hellip; データの個数 他にもあるが，使わないと思う．
-データ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使いではない．
-出現回数 wm.rank(t, r); 区間 [0, r) に t が現れる回数を返す． t は非負整数であればよい． r は，wm.N 以下でなければならない． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r).</description>
+使用法 vector&amp;lt;ll&amp;gt; vec{...}; WaveletMatrix wm(vec); cout &amp;lt;&amp;lt; wm.kth_rank(10, 20) &amp;lt;&amp;lt; endl; コンストラクタ WaveletMatrix wm(vec, amax); vec &amp;hellip; データを格納したベクトルなど．すべて非負整数であることが必要． amax &amp;hellip; 「データがこの値を超えない」という値．-1 (省略値) を指定すると，ライブラリの方で最大値を取ってくれる． データメンバ wm.N &amp;hellip; データの個数 他にもあるが，使わないと思う．
+データ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使い途はない．
+出現回数 (指定値) wm.rank(t, r); wm.rank(t, l, r); 値 t が現れる回数を返す． 上の呼出については，区間 [0, r) に t が現れる回数． 下の呼出については，区間 [l, r) に t が現れる回数． t が負の時には (そういうものは現れ得ないから) 0 を返す． [0, r) や [l, r) の [0, wm.N) の外にある部分は無視される． wm.</description>
     </item>
     <item>
       <title>ABC481-G Half-Baked</title>
