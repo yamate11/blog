@@ -132,8 +132,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 (省略値) を指定すると，ライブラリの方で最大値を取ってくれる． データメンバ wm.N … データの個数 他にもあるが，使わないと思う．\nデータ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使い途はない．\n出現回数 (指定値) wm.rank(t, r); wm.rank(t, l, r); 値 t が現れる回数を返す． 上の呼出については，区間 [0, r) に t が現れる回数． 下の呼出については，区間 [l, r) に t が現れる回数． t が負の時には (そういうものは現れ得ないから) 0 を返す． [0, r) や [l, r) の [0, wm.N) の外にある部分は無視される． wm.range(t, t + 1, l, r) と同じ値になる (が，こちらが基本なので残してある)． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-indexed. たとえば最小値は kth_smallest(0, l, r). [l, r) の [0, wm.N) の外にある部分は無視される． k は意味がある値でなければならない．つまり，普通は 0 \u003c= k \u003c r - l が必要． 範囲指定が怪しいときには 0 \u003c= k \u003c min(wm.N, r) - max(l, 0) が必要． 出現回数 (指定範囲) wm.range_freq(hi, l, r); wm.range_freq(lo, hi, l, r); 区間 [l, r) において次を満たす要素 t の個数を返す． 上の呼出については，t \u003c hi 下の呼出については，lo \u003c= t \u003c hi [lo, hi) と [0, amax) の共通部分が無いときには 0 を返す．たとえば [-10, -1) や [7, 3) など． [l, r) と [0, wm.N) の共通部分が無いときには 0 を返す． ",
-  "wordCount" : "173",
+  "articleBody": "Wavelet 行列ライブラリを書いた．\n使用法 vector\u003cll\u003e vec{...}; WaveletMatrix wm(vec); cout \u003c\u003c wm.kth_rank(10, 20) \u003c\u003c endl; コンストラクタ WaveletMatrix wm(vec, amax); vec … データを格納したベクトルなど．すべて非負整数であることが必要． amax … 「データがこの値を超えない」という値．-1 (省略値) を指定すると，ライブラリの方で最大値を取ってくれる． データメンバ wm.N … データの個数 他にもあるが，使わないと思う．\nデータ値の取得 wm.access(i); i 番目の値を取得する．vec[i] と同じになるはずなので，あまり使い途はない．\n出現回数 (指定値) wm.rank(t, r); wm.rank(t, l, r); 値 t が現れる回数を返す． 上の呼出については，区間 [0, r) に t が現れる回数． 下の呼出については，区間 [l, r) に t が現れる回数． t が負の時には (そういうものは現れ得ないから) 0 を返す． [0, r) や [l, r) の [0, wm.N) の外にある部分は無視される． wm.range(t, t + 1, l, r) と同じ値になる． k番目 wm.kth_smallest(k, l, r); wm.kth_largest(k, l, r); 区間 [l, r) で，k 番目に小さい / 大きい 値を返す． k は 0-based. たとえば最小値は kth_smallest(0, l, r). [l, r) の [0, wm.N) の外にある部分は無視される． k は意味がある値でなければならない．つまり，普通は 0 \u003c= k \u003c r - l が必要． 範囲指定が怪しいときには 0 \u003c= k \u003c min(wm.N, r) - max(l, 0) が必要． 出現回数 (指定範囲) wm.range_freq(hi, l, r); wm.range_freq(lo, hi, l, r); 区間 [l, r) において次を満たす要素 t の個数を返す． 上の呼出については，t \u003c hi 下の呼出については，lo \u003c= t \u003c hi [lo, hi) と [0, amax) の共通部分が無いときには 0 を返す．たとえば [-10, -1) や [7, 3) など． [l, r) と [0, wm.N) の共通部分が無いときには 0 を返す． ",
+  "wordCount" : "172",
   "inLanguage": "en",
   "datePublished": "2026-11-16T00:00:00Z",
   "dateModified": "2026-11-16T00:00:00Z",
@@ -257,14 +257,14 @@
 </li>
 <li><code>t</code> が負の時には (そういうものは現れ得ないから) 0 を返す．</li>
 <li><code>[0, r)</code> や <code>[l, r)</code> の <code>[0, wm.N)</code> の外にある部分は無視される．</li>
-<li><code>wm.range(t, t + 1, l, r)</code> と同じ値になる (が，こちらが基本なので残してある)．</li>
+<li><code>wm.range(t, t + 1, l, r)</code> と同じ値になる．</li>
 </ul>
 <h3 id="k番目">k番目<a hidden class="anchor" aria-hidden="true" href="#k番目">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#111">wm</span><span style="color:#111">.</span><span style="color:#111">kth_smallest</span><span style="color:#111">(</span><span style="color:#111">k</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">,</span> <span style="color:#111">r</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">wm</span><span style="color:#111">.</span><span style="color:#111">kth_largest</span><span style="color:#111">(</span><span style="color:#111">k</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">,</span> <span style="color:#111">r</span><span style="color:#111">);</span>
 </span></span></code></pre></div><ul>
 <li>区間 <code>[l, r)</code> で，<code>k</code> 番目に小さい / 大きい 値を返す．</li>
-<li><code>k</code> は 0-indexed.  たとえば最小値は <code>kth_smallest(0, l, r)</code>.</li>
+<li><code>k</code> は 0-based.  たとえば最小値は <code>kth_smallest(0, l, r)</code>.</li>
 <li><code>[l, r)</code> の <code>[0, wm.N)</code> の外にある部分は無視される．</li>
 <li><code>k</code> は意味がある値でなければならない．つまり，普通は <code>0 &lt;= k &lt; r - l</code> が必要．
 範囲指定が怪しいときには <code>0 &lt;= k &lt; min(wm.N, r) - max(l, 0)</code> が必要．</li>
